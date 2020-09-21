@@ -5,13 +5,26 @@ import { Link } from 'gatsby'
 import ReactTooltip from 'react-tooltip'
 
 // local components
-import { InfoTooltip, Selectpicker } from '../../common'
+import { InfoTooltip, Selectpicker, FloatButton } from '../../common'
+import FilterSection from './content/FilterSection/FilterSection'
 
 // local assets and styling
 import styles from './options.module.scss'
 
 export const Options = ({ orderBy, setOrderBy, ...props }) => {
   // STATE // -------------------------------------------------------------- //
+  // show/hide additional filter sections
+  const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
+
+  // CONSTANTS // ---------------------------------------------------------- //
+  // define filter section component data
+  const filterSectionData = [{}, {}, {}]
+  // get filter sections
+  const filterSections = filterSectionData.map((d, i) => {
+    return (
+      <FilterSection {...{ key: i, hide: i > 0 && !showAdditionalFilters }} />
+    )
+  })
 
   // EFFECT HOOKS // ------------------------------------------------------- //
 
@@ -47,6 +60,15 @@ export const Options = ({ orderBy, setOrderBy, ...props }) => {
           }}
         />
       </div>
+      {filterSections}
+      <FloatButton
+        {...{
+          label: `${
+            showAdditionalFilters ? 'Hide' : 'Show'
+          } additional filters`,
+          onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
+        }}
+      />
     </div>
   )
 }

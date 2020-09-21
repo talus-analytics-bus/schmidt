@@ -17,6 +17,7 @@ import StickyHeader from './StickyHeader/StickyHeader.js'
 import SearchBar from './SearchBar/SearchBar.js'
 import PrimaryButton from './PrimaryButton/PrimaryButton.js'
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js'
+import FloatButton from './FloatButton/FloatButton.js'
 export {
   Legend,
   Selectpicker,
@@ -37,4 +38,5 @@ export {
   SearchBar,
   PrimaryButton,
   LoadingSpinner,
+  FloatButton,
 }
