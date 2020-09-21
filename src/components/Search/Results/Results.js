@@ -8,14 +8,38 @@ import { InfoTooltip } from '../../common'
 // local assets and styling
 import styles from './results.module.scss'
 
+// local components
+import { SearchBar, Paginator, CardList } from '../../common'
+
 export const Results = ({ page, ...props }) => {
-  // EFFECT HOOKS // --------------------------------------------------------//
+  // STATE // -------------------------------------------------------------- //
+  // current page and pagesize of paginator
+  const [curPage, setCurPage] = useState(1)
+  const [pagesize, setPagesize] = useState(5)
+
+  // EFFECT HOOKS // ------------------------------------------------------- //
 
   /**
    * Return JSX for search results that shows the search bar, results,
    * pagination controls, items per page controls
    */
-  return <div>Results placeholder</div>
+  return (
+    <div>
+      <SearchBar />
+      <Paginator
+        {...{
+          curPage,
+          setCurPage,
+          nTotalRecords: 10,
+          pagesize,
+          setPagesize,
+          noun: 'item',
+          nouns: 'items',
+        }}
+      />
+      <CardList />
+    </div>
+  )
 }
 
 export default Results

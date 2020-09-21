@@ -11,7 +11,10 @@ import FloatMenu from './FloatMenu/FloatMenu.js'
 import InfoTooltip from './InfoTooltip/InfoTooltip.js'
 import OptionsMenu from './OptionsMenu/OptionsMenu.js'
 import Table from './Table/Table.js'
+import Paginator from './Paginator/Paginator.js'
+import CardList from './CardList/CardList.js'
 import StickyHeader from './StickyHeader/StickyHeader.js'
+import SearchBar from './SearchBar/SearchBar.js'
 import PrimaryButton from './PrimaryButton/PrimaryButton.js'
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js'
 export {
@@ -28,7 +31,10 @@ export {
   InfoTooltip,
   OptionsMenu,
   Table,
+  Paginator,
+  CardList,
   StickyHeader,
+  SearchBar,
   PrimaryButton,
   LoadingSpinner,
 }
