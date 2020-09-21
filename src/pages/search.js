@@ -1,7 +1,14 @@
+// 3rd party components
 import React, { useState, useEffect } from 'react'
 
+// local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
+import Results from '../components/Search/Results/Results'
+import Options from '../components/Search/Options/Options'
+
+// styles and assets
+import styles from '../components/Search/search.module.scss'
 
 const Search = ({ setPage }) => {
   // EFFECT HOOKS
@@ -12,7 +19,10 @@ const Search = ({ setPage }) => {
   return (
     <Layout page={'search'}>
       <SEO title="Search results" />
-      <h1 style={{ textAlign: 'center' }}>Search results</h1>
+      <div className={styles.search}>
+        <Options />
+        <Results />
+      </div>
     </Layout>
   )
 }

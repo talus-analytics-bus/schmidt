@@ -13,12 +13,14 @@ import '../../assets/styles/global.scss'
 import './reset.css'
 
 import Nav from './Nav/Nav'
+import Footer from './Footer/Footer'
 
 const Layout = ({ children, page }) => {
   return (
     <div className={styles.layout}>
       <Nav page={page} />
       {children}
+      <Footer />
     </div>
   )
 }
