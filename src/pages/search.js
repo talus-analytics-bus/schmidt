@@ -11,6 +11,11 @@ import Options from '../components/Search/Options/Options'
 import styles from '../components/Search/search.module.scss'
 
 const Search = ({ setPage }) => {
+  // STATE
+  // order by parameters
+  const [orderBy, setOrderBy] = useState('date')
+  const [isDesc, setIsDesc] = useState(true)
+
   // EFFECT HOOKS
   // on initial page load, set current page
   // useEffect(() => console.log('search'), [])
@@ -20,7 +25,7 @@ const Search = ({ setPage }) => {
     <Layout page={'search'}>
       <SEO title="Search results" />
       <div className={styles.search}>
-        <Options />
+        <Options {...{ orderBy, setOrderBy, isDesc, setIsDesc }} />
         <Results />
       </div>
     </Layout>
