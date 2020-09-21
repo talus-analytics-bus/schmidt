@@ -12,15 +12,20 @@ import styles from './cardlist.module.scss'
  */
 export const CardList = ({ cardData = [], ...props }) => {
   // CONSTANTS
+
   // define cards
-  const cards = cardData.map(
-    ({ id, type_of_record, title, date, authors, key_topics }) => {
-      return <Card />
-    }
-  )
+  const cards =
+    cardData !== null
+      ? cardData.map(
+          ({ id, type_of_record, title, date, authors, key_topics }) => {
+            return <Card />
+          }
+        )
+      : null
 
   // JSX
-  if (cards.length === 0) return <div>No items found</div>
+  if (cards === null) return null
+  else if (cards.length === 0) return <div>No items found</div>
   else return <div className={styles.cardList}>{cards}</div>
 }
 

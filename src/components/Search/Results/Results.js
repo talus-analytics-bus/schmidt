@@ -11,11 +11,20 @@ import styles from './results.module.scss'
 // local components
 import { SearchBar, Paginator, CardList } from '../../common'
 
-export const Results = ({ searchText, setSearchText, ...props }) => {
+export const Results = ({
+  searchData,
+  curPage,
+  setCurPage,
+  pagesize,
+  setPagesize,
+  searchText,
+  setSearchText,
+  ...props
+}) => {
   // STATE // -------------------------------------------------------------- //
-  // current page and pagesize of paginator
-  const [curPage, setCurPage] = useState(1)
-  const [pagesize, setPagesize] = useState(5)
+  // CONSTANTS // ---------------------------------------------------------- //
+  // show paginator if card data loaded
+  const showPaginator = searchData !== null
 
   // EFFECT HOOKS // ------------------------------------------------------- //
 
@@ -26,18 +35,22 @@ export const Results = ({ searchText, setSearchText, ...props }) => {
   return (
     <div className={styles.results}>
       <SearchBar {...{ searchText, setSearchText }} />
-      <Paginator
-        {...{
-          curPage,
-          setCurPage,
-          nTotalRecords: 10,
-          pagesize,
-          setPagesize,
-          noun: 'item',
-          nouns: 'items',
-        }}
-      />
-      <CardList {...{ cardData: [{}, {}, {}] }} />
+      {showPaginator && (
+        <>
+          <Paginator
+            {...{
+              curPage,
+              setCurPage,
+              nTotalRecords: searchData.total,
+              pagesize,
+              setPagesize,
+              noun: 'item',
+              nouns: 'items',
+            }}
+          />
+          <CardList {...{ cardData: searchData.data }} />
+        </>
+      )}
     </div>
   )
 }
