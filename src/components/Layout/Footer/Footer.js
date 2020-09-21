@@ -20,43 +20,33 @@ import georgetown from '../../../assets/images/georgetown.png'
 const Footer = () => {
   return (
     <div className={styles.footerContainer}>
-      {
-        // <div className={styles.mainLogo}>
-        //   <a href="/">
-        //     <img
-        //       className={styles.siteLogo}
-        //       src={logo}
-        //       alt={'Pandemic Repository logo'}
-        //     ></img>
-        //   </a>
-        // </div>
-      }
-      <div className={styles.logos}>
-        <a href={'https://schmidtfutures.com/'} target="_blank">
-          <img
-            className={styles.schmidt}
-            src={schmidt}
-            alt={'Schmidt Futures logo'}
-          ></img>
-        </a>
-        <a href={'https://ghss.georgetown.edu/'} target="_blank">
-          <img
-            className={styles.georgetown}
-            src={georgetown}
-            alt={
-              'Georgetown Center for Global Health Science and Security logo'
-            }
-          ></img>
-        </a>
-        <a href={'https://talusanalytics.com/'} target="_blank">
-          <img
-            className={styles.talus}
-            src={talus}
-            alt={'Talus Analytics logo'}
-          ></img>
-        </a>
+      <div className={styles.footer}>
+        <div className={styles.logos}>
+          <a href={'https://schmidtfutures.com/'} target="_blank">
+            <img
+              className={styles.schmidt}
+              src={schmidt}
+              alt={'Schmidt Futures logo'}
+            ></img>
+          </a>
+          <a href={'https://ghss.georgetown.edu/'} target="_blank">
+            <img
+              className={styles.georgetown}
+              src={georgetown}
+              alt={
+                'Georgetown Center for Global Health Science and Security logo'
+              }
+            ></img>
+          </a>
+          <a href={'https://talusanalytics.com/'} target="_blank">
+            <img
+              className={styles.talus}
+              src={talus}
+              alt={'Talus Analytics logo'}
+            ></img>
+          </a>
+        </div>
       </div>
-      <div></div>
     </div>
   )
 }

@@ -3,21 +3,32 @@
 .footerContainer {
   width: 100%;
   border-top: 2px $soft-blue solid;
+  .footer {
+    // standard: max width of screen is 1300px
+    // center content in that view
+    // TODO pull up in scope to master SCSS file
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
 
-  .logos {
-    display: flex;
-    flex-flow: row;
-    justify-content: flex-end;
-
-    a {
+    .logos {
       display: flex;
-      img {
-        height: 80px;
+      flex-flow: row;
+      justify-content: flex-end;
+
+      a {
+        display: flex;
+        img {
+          height: 80px;
+        }
       }
-    }
-    img {
-      max-width: 100%;
-      padding: 20px 10px;
+      img {
+        max-width: 100%;
+        padding: 20px 10px;
+        &:last-child {
+          padding-right: 0;
+        }
+      }
     }
   }
 }
