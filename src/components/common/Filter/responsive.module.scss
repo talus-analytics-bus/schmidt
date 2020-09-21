@@ -1,0 +1,25 @@
+@import '../../../assets/styles/vars.scss';
+
+@media #{$phone-narrow} {
+  .filter {
+    font-size: 0.9rem;
+    &,
+    .filterButton {
+      min-width: unset !important;
+    }
+    .numbers {
+      display: none;
+    }
+    .input .filterMenu {
+      &:not(.dateRange) {
+        width: 250px;
+        min-width: unset;
+      }
+    }
+  }
+  .filter:not(:last-child) {
+    .filterButton {
+      border-right: none;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../../assets/styles/vars.scss';
+@media #{$phone} {
+  h1 {
+    font-size: 1.75rem;
+    padding: 10px 5% 0 5%;
+    margin-bottom: 0;
+  }
+  .stickyHeaderWrapper {
+    padding: 0 5%;
+    .stickyHeader {
+      padding: 10px 0;
+      .countryName {
+        font-size: 1.4rem;
+      }
+      a {
+        font-size: 0.9rem;
+        right: 5%;
+        span {
+          padding-bottom: 0px;
+        }
+        img {
+          width: 12px;
+          height: 11px;
+        }
+      }
+      .stickyFooter {
+        .logo {
+          width: 150px;
+        }
+        height: 60px;
+        border-width: 6px;
+      }
+    }
+  }
+  &.active {
+    .stickyHeader {
+      a {
+        bottom: 75px;
+      }
+    }
+  }
+}
+@media #{$phone-narrow} {
+  .stickyHeaderWrapper {
+    .stickyHeader {
+      img {
+        height: 40px;
+      }
+      .select {
+        display: none;
+      }
+      .stickyFooter {
+        .logo {
+          width: 120px;
+        }
+        height: 40px;
+        border-width: 4px;
+      }
+    }
+    &.active {
+      .stickyHeader {
+        a {
+          bottom: 50px;
+        }
+      }
+    }
+  }
+}

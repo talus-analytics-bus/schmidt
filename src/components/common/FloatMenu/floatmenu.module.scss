@@ -1,0 +1,23 @@
+@import '../../../assets/styles/vars.scss';
+.wrapper {
+  position: absolute;
+  left: 0px;
+  top: 10px;
+
+  .control {
+    z-index: 0;
+    cursor: pointer;
+  }
+  .content {
+    z-index: 2;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

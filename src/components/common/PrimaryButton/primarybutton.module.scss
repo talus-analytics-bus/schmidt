@@ -1,0 +1,26 @@
+@import '../../../assets/styles/vars.scss';
+.wrapper {
+  width: max-content;
+  a {
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  .button {
+    color: white;
+    @include btn-primary();
+    padding: 10px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+
+    i {
+      position: relative;
+      margin-right: 5px;
+      left: -3px;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@import '../../../assets/styles/vars.scss';
+
+.infoTooltipContainer {
+  > div,
+  > span {
+    max-width: 415px;
+  }
+}
+
+[class*='__react_component_tooltip'] {
+  &[class*='type-light'] {
+    background-color: none;
+    font-size: 0.9rem;
+    opacity: 1 !important;
+    display: flex;
+    flex-flow: column;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.29);
+    -webkit-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.29);
+    padding: 10px;
+
+    z-index: 10000;
+    p:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    // do not use default padding amount with certain tooltips
+    &[id='scaleTip'],
+    &[id='statusTip'] {
+      padding: 0;
+    }
+    @media #{$phone} {
+      &[id='aboutThisMapTooltip'] {
+        background: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}
+.wide {
+  max-width: 600px !important;
+  p:not(:last-child) {
+    margin: 0;
+  }
+}
+.infoTooltip {
+  display: inline-flex;
+  margin: 0 5px;
+  position: relative;
+  pointer-events: all;
+
+  div + ul {
+    margin-top: 5px;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+
+  img {
+    $size: 15px;
+    height: $size;
+    width: $size;
+    top: 2px;
+    position: relative;
+    cursor: default;
+  }
+}
+
+@import './plugins.module.scss';
+@import './responsive.module.scss';

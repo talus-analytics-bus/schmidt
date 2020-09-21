@@ -1,0 +1,77 @@
+@import '../../../assets/styles/vars.scss';
+
+.style {
+  .name {
+    // max-width: 370px;
+    > div {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 600;
+    }
+  }
+  .content {
+    .entry {
+      margin-right: auto;
+      .quantized {
+        $border-radius: 5px;
+        font-family: 'Raleway', serif;
+        font-weight: bold;
+        grid-gap: 0;
+        // &.notRounded {
+        //   * .rect {
+        //     border-radius: 0 !important;
+        //   }
+        // }
+        :not(:first-child) {
+          text-transform: uppercase;
+          margin: 0;
+        }
+
+        &:not(.labelsRight) {
+          align-items: center;
+          > :first-child,
+          > :nth-child(2) {
+            .rect {
+              height: 35px !important;
+              padding: 5px;
+              margin-right: 10px;
+            }
+            .label {
+              text-align: unset;
+              text-transform: none;
+              // max-width: 15ch;
+              text-align: center;
+              font-size: 0.8rem;
+            }
+          }
+          > :first-child {
+            .rect {
+              border: 1px solid gray;
+            }
+          }
+        }
+
+        > :nth-child(3) .rect {
+          border-radius: $border-radius 0 0 $border-radius;
+        }
+        > :last-child .rect {
+          border-radius: 0 $border-radius $border-radius 0;
+        }
+        .rect {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:not(.labelsRight) {
+            height: 30px !important;
+          }
+        }
+        .label {
+          // white-space: nowrap;
+          margin: 5px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

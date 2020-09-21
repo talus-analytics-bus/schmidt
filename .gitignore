@@ -1,0 +1,11 @@
+# Shell scripts
+sh
+
+# Build
+public
+
+# Node
+node_modules
+
+# Gatsby cache
+.cache

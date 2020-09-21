@@ -1,0 +1,25 @@
+@import '../../../assets/styles/vars.scss';
+
+.footerContainer {
+  width: 100%;
+  border-top: 1px #333 solid;
+
+  .logos {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+
+    a {
+      display: flex;
+      img {
+        height: 80px;
+      }
+    }
+    img {
+      max-width: 100%;
+      padding: 20px 10px;
+    }
+  }
+}
+
+@import './responsive.module.scss';

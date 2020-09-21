@@ -1,0 +1,18 @@
+@import '../../../assets/styles/vars.scss';
+
+@media #{$phone} {
+  .infoTooltipContainer {
+    max-width: 50vw !important;
+  }
+  .mobileContainer {
+    max-width: 90vw !important;
+    position: fixed;
+    left: 5vw;
+    background: #fff;
+    padding: 10px;
+    @include boxShadow();
+  }
+  .hideOnMobile {
+    left: -50% !important;
+  }
+}

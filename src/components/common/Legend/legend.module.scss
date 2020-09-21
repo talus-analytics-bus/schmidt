@@ -1,0 +1,127 @@
+@import '../../../assets/styles/vars.scss';
+
+.style {
+  display: flex;
+  flex-flow: column;
+  background-color: white;
+  width: max-content;
+  padding: 5px;
+  margin: 5px;
+  @include spaceItemsVert(10px);
+  .name {
+    // max-width: 420px;
+    font-size: 1rem;
+  }
+  .content {
+    display: flex;
+    @include spaceItemsHoriz(30px);
+    justify-content: center;
+    width: 100%;
+    .entry {
+      width: 100%;
+      $height: 20px;
+      .symbols {
+        display: flex;
+        border: 1px solid #ccc;
+        & + .labels {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      .circle {
+        height: $height;
+        width: $height;
+        border-radius: 50%;
+      }
+      .gradientBar {
+        height: $height;
+        min-width: 200px;
+        max-width: 100%;
+      }
+      .shapeSeries {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &,
+        & + .labels {
+          display: flex;
+          justify-content: space-between;
+          margin: 0 auto;
+          width: 150px;
+        }
+      }
+      .quantized {
+        display: grid;
+        // @include spaceItemsHoriz(2px);
+        .rect {
+          width: 3 * $height;
+          &.labelsInside {
+            width: auto;
+            height: auto;
+            padding: 5px 10px;
+            .label {
+              margin: unset;
+            }
+          }
+          &.labelsRight {
+            $size: 15px;
+            width: $size;
+            height: $size;
+            margin: 0;
+          }
+        }
+        .label {
+          text-align: center;
+          margin-left: -100%;
+          margin-right: -100%;
+        }
+        &.labelsRight {
+          > div {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: flex-start;
+            align-items: center;
+            :first-child {
+              margin-right: 3px;
+            }
+          }
+          .label {
+            font-family: 'Open Sans', serif;
+            margin: unset;
+            text-align: left;
+          }
+        }
+      }
+      .rect {
+        height: $height;
+        width: $height * 2;
+        &.skinny {
+          width: $height;
+        }
+        &.hatched {
+          background: repeating-linear-gradient(
+            -45deg,
+            #bfbfbf,
+            #bfbfbf,
+            1px,
+            #fff 1px,
+            #fff 6px
+          );
+          border: 1px solid #bfbfbf;
+        }
+      }
+    }
+  }
+  &.mapboxLegend {
+    background-color: white;
+    border: none;
+
+    // position: relative;
+    // display: flex;
+    // justify-content: center;
+    // width: 100%;
+  }
+}
+@import './plugins.module.scss';
+@import './responsive.module.scss';

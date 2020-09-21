@@ -1,0 +1,110 @@
+@import '../../assets/styles/vars.scss';
+
+@media screen and (max-width: 1200px) {
+  .choicesRow {
+    column-gap: 40px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .choicesRow {
+    column-gap: 10px;
+    .choice {
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 975px) {
+  .choicesRow {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+  }
+  .choice:not(:first-child) {
+    margin-top: 50px;
+  }
+}
+@media #{$phone} {
+  .main {
+    .choice:first-child {
+      h1 {
+        white-space: nowrap;
+      }
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      max-width: 80%;
+    }
+    .explainer {
+      font-size: 1.1rem;
+    }
+    .findContainer {
+      margin-top: 8vw;
+    }
+    .compareContainer {
+      margin-top: 2vw;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+    button {
+      font-size: 1.1rem;
+      height: 40px;
+    }
+    .iconContainer {
+      background-color: $teal;
+      width: 50px;
+      height: 50px;
+    }
+    .pinIcon {
+      width: 16px;
+    }
+    .flagIcon {
+      width: 18px;
+    }
+    .globeIcon {
+      width: 25px;
+    }
+    .mainLogo {
+      max-width: 40%;
+      margin: 6vw 0;
+    }
+  }
+  .cornerBox {
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media #{$phone-narrow} {
+  .main {
+    p {
+      font-size: 1rem;
+      line-height: 1.7rem;
+      max-width: 70%;
+    }
+    .explainer {
+      font-size: 1rem;
+      margin: 14vw 0 14vw 0;
+    }
+    .findContainer {
+      margin-top: 15vw;
+    }
+    .compareContainer {
+      margin-top: 9vw;
+    }
+    .mainLogo {
+      max-width: 70%;
+      margin: 10vw 0;
+    }
+    .choicesRow {
+      margin: 20px 0;
+    }
+  }
+  .cornerBox {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,88 @@
+@import '../../assets/styles/vars.scss';
+$icon-size: 60px;
+$vertical-spacing: 60px;
+
+.main {
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // max-width: 1440px;
+  @include gradientLanding();
+  p {
+    max-width: 90%;
+    width: 50rem;
+    font-size: 1.87rem;
+    text-align: center;
+    line-height: 3.2rem;
+    color: #333;
+  }
+  button {
+    @include btn-primary();
+    height: 60px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    width: 200px;
+  }
+}
+.cornerBox {
+  position: absolute;
+  right: 0;
+  background-color: $soft-blue;
+  color: $navy-blue;
+  padding: 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: 160px;
+}
+.mainLogo {
+  height: 160px;
+  margin: $vertical-spacing 0;
+}
+.choicesRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 80px;
+  margin: $vertical-spacing 0;
+}
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-family: 'rawline';
+    font-size: 2.1rem;
+    font-weight: 500;
+    margin: 10px 0 20px 0;
+  }
+}
+.iconContainer {
+  background-color: $teal;
+  width: $icon-size;
+  height: $icon-size;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include boxShadow();
+}
+.pinIcon {
+  width: 20px;
+}
+.flagIcon {
+  width: 24px;
+}
+.globeIcon {
+  width: 35px;
+}
+.explainer {
+  font-size: 1.3rem;
+  margin: 40px 0 80px 0;
+  text-align: center;
+  max-width: 80%;
+}
+
+@import './homepage-responsive.module.scss';

@@ -1,0 +1,75 @@
+@import '../../../assets/styles/vars.scss';
+
+.radioToggle {
+  max-width: 200px;
+  select {
+    // max-width: 90%;
+  }
+  > div {
+    // font-weight: bold;
+    margin-bottom: 5px;
+  }
+  form {
+    display: flex;
+    flex-flow: column;
+    margin-left: 10px;
+  }
+  span:last-child label {
+    margin-bottom: 0;
+  }
+  label {
+    font-weight: normal;
+    color: black;
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+
+    &[disabled] {
+      pointer-events: none;
+      input,
+      & {
+        color: gray !important;
+      }
+    }
+  }
+  input {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  &.disabled {
+    pointer-events: none;
+    color: gray;
+    input,
+    label {
+      color: gray;
+    }
+  }
+
+  // Horizontal version
+  &.horizontal {
+    display: flex;
+    flex-flow: row;
+    max-width: unset;
+    > div {
+      display: flex;
+      flex-flow: row;
+      white-space: nowrap;
+    }
+    form {
+      display: flex;
+      flex-flow: row;
+      label {
+        padding: 0 10px;
+        width: max-content;
+      }
+    }
+    &.right {
+      margin-left: auto !important;
+    }
+    &.left {
+      margin-right: auto !important;
+    }
+  }
+}
