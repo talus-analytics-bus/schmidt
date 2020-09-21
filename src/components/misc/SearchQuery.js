@@ -25,6 +25,7 @@ const SearchQuery = async ({
   params.append('pagesize', pagesize)
   params.append('explain_results', explain_results)
   params.append('search_text', search_text)
+  params.append('order_by', order_by)
 
   // prepare request
   const req = await axios.post(

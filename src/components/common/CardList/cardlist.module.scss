@@ -1,7 +1,7 @@
 @import '../../../assets/styles/vars.scss';
 .cardList {
-  background-color: lightgreen;
+  // background-color: lightgreen;
   width: 100%;
   @include spaceItemsVert(20px);
-  padding: 10px;
+  padding: 10px 0;
 }

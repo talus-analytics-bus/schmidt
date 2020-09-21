@@ -1,5 +1,7 @@
 .results {
-  background-color: pink;
-  border: 1px solid red;
-  margin-top: 20px;
+  // background-color: pink;
+  // border: 1px solid red;
+  margin-top: 20px !important; // TODO elegantly
+  display: flex;
+  flex-flow: column;
 }

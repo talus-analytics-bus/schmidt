@@ -166,35 +166,32 @@ export const Paginator = ({
 
   return (
     <div className={styles.paginator}>
-      <div className={styles.leftSide}>
-        <div className={styles.pagesizePicker}>
-          <label>Page size</label>
-          <select
-            value={pagesize}
-            onChange={e => {
-              const v = e.target.value
-              setPagesize(v)
-            }}
-          >
-            {pagesizeOptions.map(d => (
-              <option value={d.value}>{d.label}</option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.rowNumberTracker}>
-          Showing {comma(curPage * pagesize - pagesize + 1)} to{' '}
-          {comma(Math.min(curPage * pagesize, nTotalRecords))} of{' '}
-          {comma(nTotalRecords)} {nTotalRecords !== 1 ? nouns : noun}
-        </div>
+      <div className={styles.pageButtons}>
+        {firstButton}
+        {prevButton}
+        {middleButtons}
+        {nextButton}
+        {lastButton}
       </div>
-      <div className={styles.rightSide}>
-        <div className={styles.pageButtons}>
-          {firstButton}
-          {prevButton}
-          {middleButtons}
-          {nextButton}
-          {lastButton}
-        </div>
+
+      <div className={styles.pagesizePicker}>
+        <select
+          value={pagesize}
+          onChange={e => {
+            const v = e.target.value
+            setPagesize(v)
+          }}
+        >
+          {pagesizeOptions.map(d => (
+            <option value={d.value}>{d.label}</option>
+          ))}
+        </select>
+        <label>items per page</label>
+      </div>
+      <div className={styles.rowNumberTracker}>
+        Showing {comma(curPage * pagesize - pagesize + 1)} to{' '}
+        {comma(Math.min(curPage * pagesize, nTotalRecords))} of{' '}
+        {comma(nTotalRecords)} {nTotalRecords !== 1 ? nouns : noun}
       </div>
     </div>
   )

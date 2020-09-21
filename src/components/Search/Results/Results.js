@@ -26,6 +26,12 @@ export const Results = ({
   // show paginator if card data loaded
   const showPaginator = searchData !== null
 
+  // define start / end result numbers
+  // Showing {comma(curPage * pagesize - pagesize + 1)} to{' '}
+  // {comma(Math.min(curPage * pagesize, nTotalRecords))} of{' '}
+  // {comma(nTotalRecords)} {nTotalRecords !== 1 ? nouns : noun}
+  const start = curPage * pagesize - pagesize + 1
+
   // EFFECT HOOKS // ------------------------------------------------------- //
 
   /**
@@ -48,7 +54,7 @@ export const Results = ({
               nouns: 'items',
             }}
           />
-          <CardList {...{ cardData: searchData.data }} />
+          <CardList {...{ start, cardData: searchData.data }} />
         </>
       )}
     </div>

@@ -42,7 +42,8 @@ const Search = ({ setPage }) => {
       filters: {}, // TODO filters
       order_by: orderBy,
       is_desc: isDesc,
-      explain_results: true,
+      explain_results: false,
+      // explain_results: true,
     })
     console.log(results)
     setSearchData(results.data)
@@ -52,7 +53,7 @@ const Search = ({ setPage }) => {
   // when filters or search text change, get updated search data
   useEffect(() => {
     getData()
-  }, [searchText, pagesize, curPage])
+  }, [searchText, pagesize, curPage, orderBy])
 
   // JSX
   return (

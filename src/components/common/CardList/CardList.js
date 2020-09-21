@@ -4,23 +4,31 @@ import React, { useState } from 'react'
 // local components
 import { Card } from '../'
 
+// local utility functions
+import { comma } from '../../misc/Util'
+
 // assets and styles
 import styles from './cardlist.module.scss'
 
 /**
  * @method CardList
  */
-export const CardList = ({ cardData = [], ...props }) => {
+export const CardList = ({ start, cardData = [], ...props }) => {
   // CONSTANTS
-
   // define cards
   const cards =
     cardData !== null
-      ? cardData.map(
-          ({ id, type_of_record, title, date, authors, key_topics }) => {
-            return <Card />
-          }
-        )
+      ? cardData.map(({ ...cardProps }, i) => {
+          return (
+            <Card
+              {...{
+                key: cardProps.id,
+                resultNumber: comma(start + i),
+                ...cardProps,
+              }}
+            />
+          )
+        })
       : null
 
   // JSX

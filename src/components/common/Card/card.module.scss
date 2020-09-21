@@ -1,4 +1,55 @@
+@import '../../../assets/styles/vars.scss';
 .card {
-  background-color: lightblue;
+  background-color: #f7f7f7;
+  // background-color: lightblue;
+  // border: 1px solid #333;
   width: 100%;
+  display: flex;
+  flex-flow: row;
+  min-height: 200px;
+  padding: 10px;
+  @include spaceItemsHoriz(20px);
+  &:first-child {
+    border: 1px solid #333;
+    @include boxShadow();
+  }
+  .col:last-child {
+    width: 100%;
+  }
+  .thumbnail {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    img {
+      border: 1px solid #365194;
+      max-height: 100px;
+      max-width: 100px;
+    }
+  }
+  .resultNumber {
+    font-family: 'rawline', serif;
+    font-weight: bold;
+  }
+  .main {
+    width: 100%;
+    .type {
+      text-transform: uppercase;
+      font-family: 'rawline', serif;
+    }
+    .title {
+      max-width: 88%;
+      font-size: 1.5rem;
+      color: #4682b4;
+      line-height: 1.25;
+    }
+  }
+  .detailsAndActions {
+    display: flex;
+    @include spaceItemsHoriz(20px);
+    margin-top: 10px;
+    align-items: center;
+    > div {
+      max-width: 200px;
+    }
+  }
 }

@@ -1,5 +1,24 @@
+@import '../../../assets/styles/vars.scss';
 .searchBar {
+  margin-left: auto;
   input {
-    border: 2px solid green;
+    font-family: 'rawline', serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-left: auto;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 2px solid $soft-blue;
+    width: 450px;
+    margin-bottom: 10px;
+    &:active,
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      font-style: italic;
+      color: gray;
+      font-weight: normal;
+    }
   }
 }
