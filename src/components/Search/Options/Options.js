@@ -11,7 +11,13 @@ import FilterSection from './content/FilterSection/FilterSection'
 // local assets and styling
 import styles from './options.module.scss'
 
-export const Options = ({ orderBy, setOrderBy, ...props }) => {
+export const Options = ({
+  orderBy,
+  setOrderBy,
+  searchText,
+  setSearchText,
+  ...props
+}) => {
   // STATE // -------------------------------------------------------------- //
   // show/hide additional filter sections
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
@@ -26,6 +32,12 @@ export const Options = ({ orderBy, setOrderBy, ...props }) => {
     )
   })
 
+  // FUNCTIONS // ------------------------------------------------------- //
+  // handle start over
+  const onStartOver = () => {
+    // set search text to be blank
+    setSearchText('')
+  }
   // EFFECT HOOKS // ------------------------------------------------------- //
 
   /**
@@ -34,7 +46,7 @@ export const Options = ({ orderBy, setOrderBy, ...props }) => {
   return (
     <div className={styles.options}>
       <h2>Refine search</h2>
-      <button>Start over</button>
+      <button onClick={onStartOver}>Start over</button>
       <div>
         Sort results by:{' '}
         <Selectpicker

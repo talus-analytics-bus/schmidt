@@ -16,6 +16,9 @@ const Search = ({ setPage }) => {
   const [orderBy, setOrderBy] = useState('date')
   const [isDesc, setIsDesc] = useState(true)
 
+  // search bar text
+  const [searchText, setSearchText] = useState('')
+
   // EFFECT HOOKS
   // on initial page load, set current page
   // useEffect(() => console.log('search'), [])
@@ -25,8 +28,17 @@ const Search = ({ setPage }) => {
     <Layout page={'search'}>
       <SEO title="Search results" />
       <div className={styles.search}>
-        <Options {...{ orderBy, setOrderBy, isDesc, setIsDesc }} />
-        <Results />
+        <Options
+          {...{
+            orderBy,
+            setOrderBy,
+            isDesc,
+            setIsDesc,
+            searchText,
+            setSearchText,
+          }}
+        />
+        <Results {...{ searchText, setSearchText }} />
       </div>
     </Layout>
   )

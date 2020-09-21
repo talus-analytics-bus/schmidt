@@ -11,7 +11,7 @@ import styles from './results.module.scss'
 // local components
 import { SearchBar, Paginator, CardList } from '../../common'
 
-export const Results = ({ page, ...props }) => {
+export const Results = ({ searchText, setSearchText, ...props }) => {
   // STATE // -------------------------------------------------------------- //
   // current page and pagesize of paginator
   const [curPage, setCurPage] = useState(1)
@@ -25,7 +25,7 @@ export const Results = ({ page, ...props }) => {
    */
   return (
     <div className={styles.results}>
-      <SearchBar />
+      <SearchBar {...{ searchText, setSearchText }} />
       <Paginator
         {...{
           curPage,
