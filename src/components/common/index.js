@@ -13,6 +13,7 @@ import OptionsMenu from './OptionsMenu/OptionsMenu.js'
 import Table from './Table/Table.js'
 import Paginator from './Paginator/Paginator.js'
 import CardList from './CardList/CardList.js'
+import Card from './Card/Card.js'
 import StickyHeader from './StickyHeader/StickyHeader.js'
 import SearchBar from './SearchBar/SearchBar.js'
 import PrimaryButton from './PrimaryButton/PrimaryButton.js'
@@ -33,6 +34,7 @@ export {
   OptionsMenu,
   Table,
   Paginator,
+  Card,
   CardList,
   StickyHeader,
   SearchBar,

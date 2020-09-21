@@ -32,7 +32,7 @@ export const Options = ({ orderBy, setOrderBy, ...props }) => {
    * Return JSX for search options including filters, reset, order by
    */
   return (
-    <div>
+    <div className={styles.options}>
       <h2>Refine search</h2>
       <button>Start over</button>
       <div>

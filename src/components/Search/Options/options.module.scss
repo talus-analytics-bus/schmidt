@@ -1,4 +1,6 @@
-.results {
+@import '../../../assets/styles/vars.scss';
+.options {
   background-color: pink;
   border: 1px solid red;
+  border-right: 2px $soft-blue solid;
 }

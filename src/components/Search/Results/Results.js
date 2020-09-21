@@ -24,7 +24,7 @@ export const Results = ({ page, ...props }) => {
    * pagination controls, items per page controls
    */
   return (
-    <div>
+    <div className={styles.results}>
       <SearchBar />
       <Paginator
         {...{
@@ -37,7 +37,7 @@ export const Results = ({ page, ...props }) => {
           nouns: 'items',
         }}
       />
-      <CardList />
+      <CardList {...{ cardData: [{}, {}, {}] }} />
     </div>
   )
 }

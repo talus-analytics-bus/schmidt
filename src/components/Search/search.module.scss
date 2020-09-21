@@ -15,8 +15,20 @@
   // for large screens show search on the right and options on the left
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 400px 1fr;
 
   // for small screens show search on top, options as collapsible modal
   // TODO
+
+  // space out the left and right sections consistently
+  > div {
+    margin: 0 20px;
+    &:first-child {
+      margin: 0;
+      padding-right: 20px;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
