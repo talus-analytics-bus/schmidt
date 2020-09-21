@@ -18,7 +18,6 @@ const Layout = ({ children, page }) => {
   return (
     <div className={styles.layout}>
       <Nav page={page} />
-      {/* <main>{children}</main> */}
       {children}
     </div>
   )
