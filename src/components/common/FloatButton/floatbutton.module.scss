@@ -1,2 +1,18 @@
+@import '../../../assets/styles/vars.scss';
 .floatButton {
+  color: #333;
+  font-family: 'rawline', serif;
+  background-color: $light-gray;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  @include boxShadowStrong();
+  &.on {
+    i {
+      transform: rotate(180deg);
+    }
+  }
 }
