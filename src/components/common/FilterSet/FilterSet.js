@@ -32,6 +32,8 @@ const FilterSet = ({
   vertical = false,
   ...props
 }) => {
+  console.log('filterDefs')
+  console.log(filterDefs)
   const [activeFilter, setActiveFilter] = useState(null)
   const [show, setShow] = useState(true)
   const filterGroups = []

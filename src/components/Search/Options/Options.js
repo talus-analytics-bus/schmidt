@@ -35,27 +35,50 @@ export const Options = ({
   const filterDefs = {
     key_topics: {
       field: 'key_topics',
+      key: 'key_topics',
       label: 'Topic areas',
       choices: [],
     },
-    authors: {
-      field: 'author.id',
-      label: 'Authoring organizations',
+    author_types: {
+      field: 'author.type_of_authoring_organization',
+      key: 'author_types',
+      label: 'Authoring organization types',
       choices: [],
     },
+    authors: {
+      field: 'authors',
+      key: 'authors',
+      label: 'Authoring organizations',
+      choices: [],
+      // subsections: [
+      //   {
+      //     field: 'author_types',
+      //     key: 'author.type_of_authoring_organization',
+      //     label: 'Types',
+      //     choices: [],
+      //   },
+      //   { field: 'authors', key: 'author.id', label: 'Names', choices: [] },
+      // ],
+    },
   }
+
+  // get list of keys of filters
+  const filterKeys = Object.keys(filterDefs)
 
   // define icon names to use for each section
   const iconNamesByField = {
     key_topics: 'device_hub',
     authors: 'person',
+    author_types: 'apartment',
   }
 
   // define filter section component data
   // TODO link to a filterset and filters
   const filterSectionData = []
   if (showFilterSections) {
-    for (const [field, valueCounts] of Object.entries(filterCounts)) {
+    filterKeys.forEach(field => {
+      // for (const [field, valueCounts] of Object.entries(filterCounts)) {
+      const valueCounts = filterCounts[field]
       const curFilterSectionData = {
         label: field, // TODO pretty,
         field,
@@ -76,6 +99,9 @@ export const Options = ({
       // definition object
       const filterHasDefinition = filterDefs[field] !== undefined
       if (filterHasDefinition) {
+        // if a filter has subsections, get choices for each subsection
+        const filterHasSubsections = filterDefs[field].subsections !== undefined
+
         filterDefs[field].choices = curFilterSectionData.choices
 
         // add any "missing" values
@@ -93,10 +119,8 @@ export const Options = ({
         // append this def data to the overall list of filter sections
         filterSectionData.push(curFilterSectionData)
       }
-    }
+    })
   }
-  console.log('filterSectionData')
-  console.log(filterSectionData)
   // get filter sections
   const filterSections = filterSectionData.map((curFilterSectionData, i) => {
     return (
@@ -105,7 +129,7 @@ export const Options = ({
           ...curFilterSectionData,
           key: curFilterSectionData.field,
           filterDefs: filterDefs[curFilterSectionData.field],
-          hide: i > 0 && !showAdditionalFilters,
+          hide: i > 5 && !showAdditionalFilters,
           filters,
           setFilters,
         }}
