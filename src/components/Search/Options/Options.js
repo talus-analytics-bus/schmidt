@@ -86,7 +86,8 @@ export const Options = ({
       }
     }
   }
-
+  console.log('filterSectionData')
+  console.log(filterSectionData)
   // get filter sections
   const filterSections = filterSectionData.map((curFilterSectionData, i) => {
     return (
@@ -94,7 +95,7 @@ export const Options = ({
         {...{
           ...curFilterSectionData,
           key: curFilterSectionData.field,
-          filterDefs,
+          filterDefs: filterDefs[curFilterSectionData.field],
           hide: i > 0 && !showAdditionalFilters,
           filters,
           setFilters,

@@ -33,7 +33,7 @@ export const FilterSection = ({
       <FilterSet
         {...{
           checkboxes: true,
-          filterDefs: [filterDefs],
+          filterDefs: [{ [filterDefs.field]: filterDefs }],
           noToggle: true,
           filters,
           setFilters,
