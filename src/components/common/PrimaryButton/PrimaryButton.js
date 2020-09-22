@@ -1,5 +1,6 @@
-// standard packages
+// 3rd party packages
 import React, { useState } from 'react'
+import classNames from 'classnames'
 
 // third party packages
 import { Link } from 'gatsby'
@@ -23,11 +24,16 @@ export const PrimaryButton = ({
 
   // if link: whether target is in app or external
   urlIsExternal = false,
+
+  // if true: button is secondary and styled as such
+  isSecondary = false,
 }) => {
   const icon =
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
   const unwrappedButton = (
-    <button className={styles.button}>
+    <button
+      className={classNames(styles.button, { [styles.secondary]: isSecondary })}
+    >
       {icon}
       {label}
     </button>

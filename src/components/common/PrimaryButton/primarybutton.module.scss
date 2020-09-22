@@ -11,7 +11,7 @@
   .button {
     color: white;
     @include btn-primary();
-    padding: 10px;
+    padding: 5px 10px;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -21,6 +21,16 @@
       position: relative;
       margin-right: 5px;
       left: -3px;
+    }
+
+    // secondary buttons have different and less emphasizing styling
+    &.secondary {
+      background: white;
+      color: #333;
+      border-color: $navy-blue;
+      &:hover {
+        background: darken(white, 5%);
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = process.env.GATSBY_METRICS_API_URL
+const API_URL = process.env.GATSBY_API_URL
 
 const SearchQuery = async ({
   page = 1,

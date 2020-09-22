@@ -1,31 +1,54 @@
 @import '../../../assets/styles/vars.scss';
 .card {
   background-color: #f7f7f7;
-  // background-color: lightblue;
-  // border: 1px solid #333;
   width: 100%;
   display: flex;
   flex-flow: row;
   min-height: 200px;
   padding: 10px;
   @include spaceItemsHoriz(20px);
+
   &:first-child {
     border: 1px solid #333;
     @include boxShadow();
   }
+  // make item number column as wide as 9,999
+  .col:first-child {
+    min-width: 43px;
+  }
+
+  // let second col with img thumbnail be fixed width
+  $max-height: 150px;
+  $letter-width: $max-height/1.29;
+  .col:nth-child(2) {
+    width: $max-height/1.29;
+  }
+
+  // let details and actions column use full width
   .col:last-child {
     width: 100%;
   }
   .thumbnail {
-    width: 100px;
+    width: $letter-width;
     display: flex;
     justify-content: center;
     img {
       border: 1px solid #365194;
-      max-height: 100px;
-      max-width: 100px;
+      max-height: $max-height;
+    }
+    &.placeholder {
+      // placeholder thumbnail shown if no file is available
+      border: 1px solid #365194;
+      height: $max-height; // like a letter page
+      width: $letter-width;
+
+      // format text in placeholder rectangle
+      text-align: center;
+      align-items: center;
+      color: $gray;
     }
   }
+
   .resultNumber {
     font-family: 'rawline', serif;
     font-weight: bold;
@@ -46,10 +69,31 @@
   .detailsAndActions {
     display: flex;
     @include spaceItemsHoriz(20px);
-    margin-top: 10px;
-    align-items: center;
-    > div {
-      max-width: 200px;
+    margin-top: 20px;
+
+    .details {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      align-items: center;
+
+      // color details icons navy blue
+      i {
+        color: $navy-blue;
+      }
+
+      // alignment for individual detail items
+      .authOrg,
+      .date {
+        @include spaceItemsHoriz(5px);
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .actions {
+      display: flex;
+      margin-left: auto;
+      @include spaceItemsHoriz(10px);
     }
   }
 }
