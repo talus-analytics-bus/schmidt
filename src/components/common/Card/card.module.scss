@@ -1,28 +1,27 @@
 @import '../../../assets/styles/vars.scss';
 .card {
-  background-color: #f7f7f7;
+  background-color: $light-gray;
   width: 100%;
-  display: flex;
-  flex-flow: row;
-  min-height: 200px;
+  // display: flex;
+  // flex-flow: row;
   padding: 10px;
-  @include spaceItemsHoriz(20px);
+  border: 1px solid transparent;
 
-  &:first-child {
-    border: 1px solid #333;
-    @include boxShadow();
+  transition: all 0.25s;
+  &:hover {
+    border-color: #333;
+    @include boxShadowStrong();
+    cursor: pointer;
   }
-  // make item number column as wide as 9,999
-  .col:first-child {
-    min-width: 43px;
+  &:active {
+    background-color: darken($light-gray, 5%);
   }
 
-  // let second col with img thumbnail be fixed width
   $max-height: 150px;
   $letter-width: $max-height/1.29;
-  .col:nth-child(2) {
-    width: $max-height/1.29;
-  }
+
+  display: grid;
+  grid-template-columns: max-content $letter-width auto;
 
   // let details and actions column use full width
   .col:last-child {
@@ -35,6 +34,7 @@
     img {
       border: 1px solid #365194;
       max-height: $max-height;
+      max-width: $letter-width;
     }
     &.placeholder {
       // placeholder thumbnail shown if no file is available
@@ -50,11 +50,15 @@
   }
 
   .resultNumber {
+    margin-right: 10px;
     font-family: 'rawline', serif;
     font-weight: bold;
   }
   .main {
     width: 100%;
+    margin-left: 10px;
+    padding-right: 10px;
+
     .type {
       text-transform: uppercase;
       font-family: 'rawline', serif;
@@ -65,35 +69,35 @@
       color: #4682b4;
       line-height: 1.25;
     }
-  }
-  .detailsAndActions {
-    display: flex;
-    @include spaceItemsHoriz(20px);
-    margin-top: 20px;
-
-    .details {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      align-items: center;
-
-      // color details icons navy blue
-      i {
-        color: $navy-blue;
-      }
-
-      // alignment for individual detail items
-      .authOrg,
-      .date {
-        @include spaceItemsHoriz(5px);
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    .actions {
+    .detailsAndActions {
       display: flex;
-      margin-left: auto;
-      @include spaceItemsHoriz(10px);
+      @include spaceItemsHoriz(20px);
+      margin-top: 20px;
+
+      .details {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        align-items: center;
+
+        // color details icons navy blue
+        i {
+          color: $navy-blue;
+        }
+
+        // alignment for individual detail items
+        .authOrg,
+        .date {
+          @include spaceItemsHoriz(5px);
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .actions {
+        display: flex;
+        margin-left: auto;
+        @include spaceItemsHoriz(10px);
+      }
     }
   }
 }

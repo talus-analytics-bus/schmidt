@@ -51,33 +51,36 @@ export const Card = ({
           <div className={styles.title}>
             {title !== '' ? title : 'Untitled'}
           </div>
-        </div>
-
-        <div className={styles.detailsAndActions}>
-          <div className={styles.details}>
-            <div className={styles.authOrg}>
-              <i className={'material-icons'}>person</i>
-              <div>
-                {authors.length > 0 &&
-                  authors.map(d => <div>{d.authoring_organization}</div>)}
-                {authors.length === 0 && (
-                  <div>Authoring organization unavailable</div>
-                )}
+          <div className={styles.detailsAndActions}>
+            <div className={styles.details}>
+              <div className={styles.authOrg}>
+                <i className={'material-icons'}>person</i>
+                <div>
+                  {authors.length > 0 &&
+                    authors.map(d => <div>{d.authoring_organization}</div>)}
+                  {authors.length === 0 && (
+                    <div>Authoring organization unavailable</div>
+                  )}
+                </div>
+              </div>
+              <div className={styles.date}>
+                <i className={'material-icons'}>event</i>
+                {date !== null && <span>{formatDate(date)}</span>}
+                {date === null && <span>Date unavailable</span>}
               </div>
             </div>
-            <div className={styles.date}>
-              <i className={'material-icons'}>event</i>
-              {date !== null && <span>{formatDate(date)}</span>}
-              {date === null && <span>Date unavailable</span>}
+            <div className={styles.actions}>
+              <PrimaryButton
+                {...{
+                  label: 'Preview',
+                  iconName: 'preview',
+                  isSecondary: true,
+                }}
+              />
+              <PrimaryButton
+                {...{ label: 'View details', iconName: 'read_more' }}
+              />
             </div>
-          </div>
-          <div className={styles.actions}>
-            <PrimaryButton
-              {...{ label: 'Preview', iconName: 'preview', isSecondary: true }}
-            />
-            <PrimaryButton
-              {...{ label: 'View details', iconName: 'read_more' }}
-            />
           </div>
         </div>
       </div>
