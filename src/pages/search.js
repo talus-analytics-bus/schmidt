@@ -78,6 +78,7 @@ const Search = ({ setPage }) => {
         <Results
           {...{
             searchData,
+            searchText,
             setSearchText,
             curPage,
             setCurPage,

@@ -27,14 +27,11 @@ export const SearchBar = ({ searchText, setSearchText, ...props }) => {
     setSearchDelay(newTimeout)
   }
 
-  // update data by getting search results
-
   // EFFECT HOOKS
   // when search reference updates, update search text
+
   useEffect(() => {
-    if (searchText !== '') {
-      console.log('SEARCH TRIGGERED: ' + searchText)
-    } else {
+    if (searchText === '' || searchText === undefined || searchText === null) {
       // if search text is blank, ensure the input value is set to blank,
       // in case search was cleared by another component
       searchRef.current.value = ''
@@ -49,7 +46,7 @@ export const SearchBar = ({ searchText, setSearchText, ...props }) => {
         onChange={updateSearchText}
         type="text"
         placeholder={'Search for pandemic information sources'}
-      ></input>
+      />
     </div>
   )
 }

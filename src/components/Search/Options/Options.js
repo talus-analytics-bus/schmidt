@@ -89,8 +89,6 @@ export const Options = ({
     setSearchText('')
     setFilters({})
   }
-  console.log('filters')
-  console.log(filters)
   // EFFECT HOOKS // ------------------------------------------------------- //
 
   /**
