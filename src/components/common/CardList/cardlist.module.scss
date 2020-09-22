@@ -4,7 +4,8 @@
   width: 100%;
   @include spaceItemsVert(20px);
   padding: 10px 0;
-
-  display: grid;
-  grid-auto-rows: 250px;
+  .cards {
+    display: grid;
+    grid-auto-rows: 250px;
+  }
 }

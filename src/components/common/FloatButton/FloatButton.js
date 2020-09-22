@@ -13,6 +13,7 @@ export const FloatButton = ({
   onClick,
   defaultOn = false,
   noOnToggle = false,
+  icon = null,
   ...props
 }) => {
   // STATE
@@ -26,7 +27,7 @@ export const FloatButton = ({
       }}
       className={classNames(styles.floatButton, { [styles.on]: on })}
     >
-      <i className={'material-icons'}>expand_less</i>
+      {icon}
       {label}
     </button>
   )

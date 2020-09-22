@@ -386,6 +386,7 @@ export const Options = ({
         <div className={styles.filterSections}>{filterSections}</div>
         <FloatButton
           {...{
+            icon: <i className={'material-icons'}>expand_less</i>,
             label: `${
               showAdditionalFilters ? 'Hide' : 'Show'
             } additional filters`,

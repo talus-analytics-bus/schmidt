@@ -42,7 +42,7 @@ export const CardList = ({
   else
     return (
       <div className={styles.cardList}>
-        {cards}
+        <div className={styles.cards}>{cards}</div>
         {setNextPage && (
           <FloatButton
             {...{
@@ -52,6 +52,14 @@ export const CardList = ({
                 }
               },
               noOnToggle: true,
+              icon: (
+                <i
+                  style={{ transform: 'rotate(90deg)' }}
+                  className={'material-icons'}
+                >
+                  expand_less
+                </i>
+              ),
               label: 'Next page',
             }}
           />
