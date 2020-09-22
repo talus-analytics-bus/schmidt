@@ -9,6 +9,7 @@
     padding: 10px;
     font-size: 1.25rem;
     background-color: $light-gray;
+    cursor: pointer;
 
     @include spaceItemsHoriz(10px);
 
@@ -17,9 +18,11 @@
       color: $navy-blue;
       font-size: 2rem;
 
+      // style caret
       &:last-of-type {
         margin-left: auto;
         transform: rotate(180deg);
+        cursor: pointer;
       }
     }
   }

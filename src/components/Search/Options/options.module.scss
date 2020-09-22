@@ -1,6 +1,11 @@
 @import '../../../assets/styles/vars.scss';
 .options {
   border-right: 2px $soft-blue solid;
+  .sortBy {
+    display: flex;
+    align-items: flex-end;
+    @include spaceItemsHoriz(10px);
+  }
   .content {
     @include spaceItemsVert(20px);
   }

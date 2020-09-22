@@ -50,6 +50,7 @@ const Search = ({ setPage }) => {
       filters,
       order_by: orderBy,
       is_desc: isDesc,
+      is_desc: isDesc,
       explain_results: true,
     })
     queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
@@ -63,7 +64,7 @@ const Search = ({ setPage }) => {
   // when filters or search text change, get updated search data
   useEffect(() => {
     getData()
-  }, [searchText, pagesize, curPage, orderBy, filters])
+  }, [searchText, pagesize, curPage, orderBy, isDesc, filters])
 
   // JSX
   return (

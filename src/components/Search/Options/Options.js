@@ -17,6 +17,8 @@ export const Options = ({
   baselineFilterCounts,
   orderBy,
   setOrderBy,
+  isDesc,
+  setIsDesc,
   searchText,
   setSearchText,
   filters,
@@ -128,30 +130,52 @@ export const Options = ({
       <h2>Refine search</h2>
       <div className={styles.content}>
         <button onClick={onStartOver}>Start over</button>
-        <div>
-          Sort results by:{' '}
-          <Selectpicker
-            {...{
-              setOption: setOrderBy,
-              curSelection: orderBy,
-              allOption: null,
-              label: null,
-              optionList: [
-                {
-                  label: 'Relevance',
-                  value: 'relevance',
-                },
-                {
-                  label: 'Date',
-                  value: 'date',
-                },
-                {
-                  label: 'Title',
-                  value: 'title',
-                },
-              ],
-            }}
-          />
+        <div className={styles.sortBy}>
+          <div>
+            Sort results by:{' '}
+            <Selectpicker
+              {...{
+                setOption: setOrderBy,
+                curSelection: orderBy,
+                allOption: null,
+                label: null,
+                optionList: [
+                  {
+                    label: 'Relevance',
+                    value: 'relevance',
+                  },
+                  {
+                    label: 'Date',
+                    value: 'date',
+                  },
+                  {
+                    label: 'Title',
+                    value: 'title',
+                  },
+                ],
+              }}
+            />
+          </div>
+          <div>
+            <Selectpicker
+              {...{
+                setOption: setIsDesc,
+                curSelection: isDesc,
+                allOption: null,
+                label: null,
+                optionList: [
+                  {
+                    label: 'Descending',
+                    value: true,
+                  },
+                  {
+                    label: 'Ascending',
+                    value: false,
+                  },
+                ],
+              }}
+            />
+          </div>
         </div>
         <div className={styles.filterSections}>{filterSections}</div>
         <FloatButton
