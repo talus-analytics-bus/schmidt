@@ -5,8 +5,16 @@ import { Link } from 'gatsby'
 import ReactTooltip from 'react-tooltip'
 
 // local components
-import { InfoTooltip, Selectpicker, FloatButton } from '../../common'
+import {
+  InfoTooltip,
+  Selectpicker,
+  FloatButton,
+  CheckboxSet,
+} from '../../common'
 import FilterSection from './content/FilterSection/FilterSection'
+
+// local utility functions
+import { getIntArray } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -23,6 +31,10 @@ export const Options = ({
   setSearchText,
   filters,
   setFilters,
+  fromYear,
+  setFromYear,
+  toYear,
+  setToYear,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -33,6 +45,13 @@ export const Options = ({
 
   // define filters
   const filterDefs = {
+    years: {
+      field: 'years',
+      key: 'years',
+      label: 'Years',
+      choices: [],
+      custom: true,
+    },
     key_topics: {
       field: 'key_topics',
       key: 'key_topics',
@@ -46,7 +65,7 @@ export const Options = ({
       choices: [],
     },
     authors: {
-      field: 'authors',
+      field: 'author.id',
       key: 'authors',
       label: 'Authoring organizations',
       choices: [],
@@ -70,6 +89,7 @@ export const Options = ({
     key_topics: 'device_hub',
     authors: 'person',
     author_types: 'apartment',
+    years: 'event',
   }
 
   // define filter section component data
@@ -100,7 +120,7 @@ export const Options = ({
       const filterHasDefinition = filterDefs[field] !== undefined
       if (filterHasDefinition) {
         // if a filter has subsections, get choices for each subsection
-        const filterHasSubsections = filterDefs[field].subsections !== undefined
+        // const filterHasSubsections = filterDefs[field].subsections !== undefined
 
         filterDefs[field].choices = curFilterSectionData.choices
 
@@ -116,11 +136,158 @@ export const Options = ({
           }
         })
 
+        const isCustom = filterDefs[field].custom === true
+        if (isCustom) {
+          if (field === 'years') {
+            filterDefs[field].custom = (
+              <CheckboxSet
+                {...{
+                  name: null,
+                  sorted: false,
+                  curVal: filters[field],
+                  choices: curFilterSectionData.choices
+                    .filter(({ value }) => {
+                      return [2020, 2019, 2018].includes(value)
+                    })
+                    .sort(function (a, b) {
+                      if (a.value > b.value) return -1
+                      else return 1
+                    })
+                    .concat([
+                      {
+                        custom: (
+                          <div
+                            className={styles.customYearRange}
+                            onClick={e => {
+                              e.stopPropagation()
+                            }}
+                          >
+                            <div>Custom year range:</div>
+                            <Selectpicker
+                              {...{
+                                placeholder: 'from',
+                                setOption: v => {
+                                  // set new from year
+                                  setFromYear(v)
+
+                                  // set "to" year if irrational
+                                  if (toYear < v) {
+                                    setToYear(v)
+                                  }
+
+                                  // if custom year not enabled, enable it and
+                                  // disable other years
+                                  const customYearDisabled =
+                                    filters[field] === undefined ||
+                                    (filters[field] !== undefined &&
+                                      filters[field].length > 0 &&
+                                      filters[field][0] !== 'custom')
+                                  const newFilters = {
+                                    ...filters,
+                                    [field]: ['custom'],
+                                  }
+                                  setFilters(newFilters)
+                                },
+                                curSelection: fromYear,
+                                allOption: null,
+                                label: null,
+                                optionList: getIntArray(1980, 2020)
+                                  .reverse()
+                                  .map(year => {
+                                    return { label: year, value: year }
+                                  }),
+                              }}
+                            />
+                            <div> - </div>
+                            <Selectpicker
+                              {...{
+                                placeholder: 'to',
+                                setOption: v => {
+                                  // set new to year
+                                  setToYear(v)
+
+                                  // if custom year not enabled, enable it and
+                                  // disable other years
+                                  const customYearDisabled =
+                                    filters[field] === undefined ||
+                                    (filters[field] !== undefined &&
+                                      filters[field].length > 0 &&
+                                      filters[field][0] !== 'custom')
+                                  const newFilters = {
+                                    ...filters,
+                                    [field]: ['custom'],
+                                  }
+                                  setFilters(newFilters)
+                                },
+                                curSelection: toYear,
+                                allOption: null,
+                                label: null,
+                                optionList: getIntArray(1980, 2020)
+                                  .reverse()
+                                  .map(year => {
+                                    return { label: year, value: year }
+                                  })
+                                  .filter(d => d.value >= fromYear),
+                              }}
+                            />
+                          </div>
+                        ),
+                        value: 'custom',
+                        count: null,
+                        label: null,
+                      },
+                    ]),
+                  callback: v => {
+                    console.log('v')
+                    console.log(v)
+                    if (v.length > 0) {
+                      //
+                      console.log('filters.years')
+                      console.log(filters.years)
+                      const alreadyCustom =
+                        filters.years !== undefined &&
+                        filters.years[0] === 'custom' &&
+                        filters.years.length === 1
+
+                      const specificYearReplacingRange =
+                        alreadyCustom && v.length > 1
+
+                      // range?
+                      const isCustom = v.includes('custom') && !alreadyCustom
+
+                      if (isCustom) {
+                        console.log('isRange')
+                        const newFilters = {
+                          ...filters,
+                          [field]: ['custom'],
+                        }
+                        setFilters(newFilters)
+                      } else if (specificYearReplacingRange) {
+                        console.log('specificYearReplacingRange')
+                        setFilters({ ...filters, [field]: [v[0]] })
+                      } else {
+                        console.log('other')
+                        setFilters({ ...filters, [field]: v })
+                      }
+                    } else {
+                      const newFilters = { ...filters }
+                      delete newFilters[field]
+                      setFilters(newFilters)
+                    }
+                  },
+                }}
+              />
+            )
+          }
+        }
+
         // append this def data to the overall list of filter sections
         filterSectionData.push(curFilterSectionData)
       }
     })
   }
+
+  // filterSectionData.push(yearsFilterSectionData)
   // get filter sections
   const filterSections = filterSectionData.map((curFilterSectionData, i) => {
     return (

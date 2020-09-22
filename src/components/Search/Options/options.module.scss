@@ -9,4 +9,9 @@
   .content {
     @include spaceItemsVert(20px);
   }
+  .customYearRange {
+    display: flex;
+    align-items: center;
+    @include spaceItemsHoriz(10px);
+  }
 }

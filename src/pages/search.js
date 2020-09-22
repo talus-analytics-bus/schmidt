@@ -35,6 +35,10 @@ const Search = ({ setPage }) => {
   // search bar text and filters
   const [searchText, setSearchText] = useState('')
   const [filters, setFilters] = useState({})
+  const [fromYear, setFromYear] = useState('null')
+  const [toYear, setToYear] = useState('null')
+  console.log('filters')
+  console.log(filters)
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
@@ -48,6 +52,8 @@ const Search = ({ setPage }) => {
       pagesize,
       search_text: searchText,
       filters,
+      fromYear,
+      toYear,
       order_by: orderBy,
       is_desc: isDesc,
       is_desc: isDesc,
@@ -85,6 +91,10 @@ const Search = ({ setPage }) => {
             setSearchText,
             filters,
             setFilters,
+            fromYear,
+            setFromYear,
+            toYear,
+            setToYear,
           }}
         />
         <Results

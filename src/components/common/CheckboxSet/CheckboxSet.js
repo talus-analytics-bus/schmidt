@@ -16,6 +16,7 @@ const CheckboxSet = ({
   ],
   callback = v => console.log(v),
   curVal = [],
+  sorted = true,
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
@@ -42,8 +43,7 @@ const CheckboxSet = ({
     })
     setAllValues(newAllValues)
   }
-
-  const checkboxes = choices.map(({ label, value, count = null }) => (
+  const checkboxes = choices.map(({ label, value, count = null, custom }) => (
     <Checkbox
       {...{
         label,
@@ -54,24 +54,27 @@ const CheckboxSet = ({
         },
         curChecked: curVal.includes(value.toString()),
         count,
+        custom,
       }}
     />
   ))
-  checkboxes.sort(function (a, b) {
-    if (a.props.label > b.props.label) {
-      return 1
-    } else return -1
-  })
-  checkboxes.sort(function (a, b) {
-    if (a.props.count > b.props.count) {
-      return -1
-    } else return 1
-  })
-  checkboxes.sort(function (a, b) {
-    if (a.props.curChecked && !b.props.curChecked) {
-      return -1
-    } else return 1
-  })
+  if (sorted) {
+    checkboxes.sort(function (a, b) {
+      if (a.props.label > b.props.label) {
+        return 1
+      } else return -1
+    })
+    checkboxes.sort(function (a, b) {
+      if (a.props.count > b.props.count) {
+        return -1
+      } else return 1
+    })
+    checkboxes.sort(function (a, b) {
+      if (a.props.curChecked && !b.props.curChecked) {
+        return -1
+      } else return 1
+    })
+  }
 
   return (
     <div className={styles.checkboxSet}>

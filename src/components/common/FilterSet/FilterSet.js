@@ -32,8 +32,6 @@ const FilterSet = ({
   vertical = false,
   ...props
 }) => {
-  console.log('filterDefs')
-  console.log(filterDefs)
   const [activeFilter, setActiveFilter] = useState(null)
   const [show, setShow] = useState(true)
   const filterGroups = []
@@ -63,7 +61,8 @@ const FilterSet = ({
           return primaryFilters.includes(d.group)
         })
       }
-      if (checkboxes)
+      if (v.custom !== undefined) filterGroupComponents.push(v.custom)
+      else if (checkboxes)
         filterGroupComponents.push(
           <FilterCheckbox
             {...{

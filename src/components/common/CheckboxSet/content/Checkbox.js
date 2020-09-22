@@ -18,6 +18,7 @@ const Checkbox = ({
   curChecked,
   callback,
   count = null,
+  custom,
   ...props
 }) => {
   /**
@@ -56,6 +57,7 @@ const Checkbox = ({
             {
               // count !== null && curChecked === true && <> ({comma(count)})</>
             }
+            {custom !== undefined && custom}
           </span>
         </label>
       </form>
