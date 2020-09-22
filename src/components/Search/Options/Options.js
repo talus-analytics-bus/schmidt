@@ -79,6 +79,18 @@ export const Options = ({
       //   { field: 'authors', key: 'author.id', label: 'Names', choices: [] },
       // ],
     },
+    funders: {
+      field: 'funder.name',
+      key: 'funders',
+      label: 'Funders',
+      choices: [],
+    },
+    types_of_record: {
+      field: 'type_of_record',
+      key: 'types_of_record',
+      label: 'Record types',
+      choices: [],
+    },
   }
 
   // get list of keys of filters
@@ -90,6 +102,8 @@ export const Options = ({
     authors: 'person',
     author_types: 'apartment',
     years: 'event',
+    funders: 'payments',
+    types_of_record: 'insert_drive_file',
   }
 
   // define filter section component data
@@ -296,7 +310,7 @@ export const Options = ({
           ...curFilterSectionData,
           key: curFilterSectionData.field,
           filterDefs: filterDefs[curFilterSectionData.field],
-          hide: i > 5 && !showAdditionalFilters,
+          hide: i > 3 && !showAdditionalFilters,
           filters,
           setFilters,
         }}
