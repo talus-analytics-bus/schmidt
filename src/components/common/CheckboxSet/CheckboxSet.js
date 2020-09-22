@@ -1,52 +1,67 @@
-import React from "react";
-import styles from "./checkboxset.module.scss";
-import Checkbox from "./content/Checkbox";
+import React from 'react'
+import styles from './checkboxset.module.scss'
+import Checkbox from './content/Checkbox'
 
 /**
  * @method CheckboxSet
  */
-const CheckboxSet = ({ label, choices, callback, curVal, ...props }) => {
-  const [allValues, setAllValues] = React.useState(curVal);
+const CheckboxSet = ({
+  name = 'Name',
+  choices = [
+    {
+      label: 'Value A',
+      value: 'value_a',
+      count: 5202,
+    },
+  ],
+  callback = v => console.log(v),
+  curVal = [],
+  ...props
+}) => {
+  const [allValues, setAllValues] = React.useState(curVal)
 
-  // Trigger callback when all values change
+  // Trigger callback when all values or filters change
   React.useEffect(() => {
-    callback([...new Set(allValues.join(",").split(","))]);
-  }, [allValues]);
+    if (allValues.length > 0)
+      callback([...new Set(allValues.join(',').split(','))])
+    else callback([])
+  }, [allValues])
 
   const updateAllValues = v => {
-    const oldAllValues = JSON.parse(JSON.stringify(allValues));
-    const remove = oldAllValues.includes(v);
+    const oldAllValues = JSON.parse(JSON.stringify(allValues))
+    const remove = oldAllValues.includes(v)
     if (remove) {
-      const updatedAllValues = oldAllValues.filter(d => d !== v);
-      setAllValues(updatedAllValues);
+      const updatedAllValues = oldAllValues.filter(d => d !== v)
+      setAllValues(updatedAllValues)
     } else {
-      const updatedAllValues = oldAllValues;
-      updatedAllValues.push(v);
-      setAllValues(updatedAllValues);
+      const updatedAllValues = oldAllValues
+      updatedAllValues.push(v)
+      setAllValues(updatedAllValues)
     }
-  };
+  }
 
-  const checkboxes = choices.map(d => (
+  const checkboxes = choices.map(({ label, value, count = null }) => (
     <Checkbox
       {...{
-        label: d.name,
+        label,
         disabled: props.disabled,
-        value: d.value,
+        value,
         callback: v => {
-          updateAllValues(v);
+          updateAllValues(v)
         },
-        curChecked: allValues.includes(d.value.join(","))
+        curChecked: curVal.includes(value),
+        count,
       }}
     />
-  ));
+  ))
   return (
     <div className={styles.checkboxSet}>
       <div role="label" className={styles.label}>
-        {label}
+        {name}
       </div>
       <div className={styles.checkboxContainer}>{checkboxes}</div>
     </div>
-  );
-};
+  )
+}
 
-export default CheckboxSet;
+export default CheckboxSet

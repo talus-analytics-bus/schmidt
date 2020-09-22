@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Filter } from '../'
+import { Filter, FilterCheckbox } from '../'
 
 // 3rd party packages
 import classNames from 'classnames'
@@ -23,11 +23,12 @@ import funnelSvg from '../../../assets/icons/funnel.svg'
  * Create a bay of filters based on filter definitions
  */
 const FilterSet = ({
-  filterDefs,
-  filters,
-  setFilters,
+  filterDefs = [],
+  filters = {},
+  setFilters = () => '',
   disabled = false,
   disabledValues = ['Country'],
+  checkboxes = false,
   ...props
 }) => {
   const [activeFilter, setActiveFilter] = useState(null)
@@ -49,39 +50,64 @@ const FilterSet = ({
 
     for (const [k, v] of Object.entries(filterGroup)) {
       filterDefsObj[k] = v
-      let items = v.items
-      // if filter has a primary filter that drives its items, parse them
-      if (v.items !== undefined && v.primary !== undefined) {
+      let choices = v.choices
+      // if filter has a primary filter that drives its choices, parse them
+      if (v.choices !== undefined && v.primary !== undefined) {
         const primaryFilters = filters[v.primary] || []
         // if primary filters are undefined or zero length, disable this filter
-        // otherwise set its items based on the selections
-        items = v.items.filter(d => {
+        // otherwise set its choices based on the selections
+        choices = v.choices.filter(d => {
           return primaryFilters.includes(d.group)
         })
       }
-      filterGroupComponents.push(
-        <Filter
-          {...{
-            key: v.field,
-            field: v.field,
-            label: v.label,
-            items: items,
-            radio: v.radio,
-            skip: v.skip,
-            className: v.className,
-            defaultRadioValue: v.defaultRadioValue,
-            dateRange: v.dateRange,
-            minMaxDate: v.minMaxDate,
-            primary: v.primary,
-            disabledText: v.disabledText,
-            filters,
-            setFilters,
-            activeFilter,
-            setActiveFilter,
-            withGrouping: v.withGrouping,
-          }}
-        />
-      )
+      if (checkboxes)
+        filterGroupComponents.push(
+          <FilterCheckbox
+            {...{
+              key: v.field,
+              field: v.field,
+              label: v.label,
+              choices: choices,
+              radio: v.radio,
+              skip: v.skip,
+              className: v.className,
+              defaultRadioValue: v.defaultRadioValue,
+              dateRange: v.dateRange,
+              minMaxDate: v.minMaxDate,
+              primary: v.primary,
+              disabledText: v.disabledText,
+              filters,
+              setFilters,
+              activeFilter,
+              setActiveFilter,
+              withGrouping: v.withGrouping,
+            }}
+          />
+        )
+      else
+        filterGroupComponents.push(
+          <Filter
+            {...{
+              key: v.field,
+              field: v.field,
+              label: v.label,
+              choices: choices,
+              radio: v.radio,
+              skip: v.skip,
+              className: v.className,
+              defaultRadioValue: v.defaultRadioValue,
+              dateRange: v.dateRange,
+              minMaxDate: v.minMaxDate,
+              primary: v.primary,
+              disabledText: v.disabledText,
+              filters,
+              setFilters,
+              activeFilter,
+              setActiveFilter,
+              withGrouping: v.withGrouping,
+            }}
+          />
+        )
     }
     filterGroupComponents.dropdowns = !filterGroupComponents.some(
       d => d.props.radio
@@ -98,11 +124,11 @@ const FilterSet = ({
    * @return {[type]}       [description]
    */
   const getBadge = ({ label, field, value }) => {
-    const items = filterDefsObj[field].items
-    const match = items.find(d => d.value === value)
+    const choices = filterDefsObj[field].choices
+    const match = choices.find(d => d.value === value)
     let formattedValue
     if (match) {
-      formattedValue = items.find(d => d.value === value).label
+      formattedValue = choices.find(d => d.value === value).label
     } else formattedValue = value
     return (
       <div className={styles.badge} key={field + '-' + value}>

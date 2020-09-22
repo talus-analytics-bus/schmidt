@@ -4,6 +4,7 @@ import RadioToggle from './RadioToggle/RadioToggle.js'
 import CheckboxSet from './CheckboxSet/CheckboxSet.js'
 import Checkbox from './CheckboxSet/content/Checkbox.js'
 import Filter from './Filter/Filter.js'
+import FilterCheckbox from './FilterCheckbox/FilterCheckbox.js'
 import FilterSet from './FilterSet/FilterSet.js'
 import ShowMore from './ShowMore/ShowMore.js'
 import Drawer from './Drawer/Drawer.js'
@@ -26,6 +27,7 @@ export {
   Checkbox,
   RadioToggle,
   Filter,
+  FilterCheckbox,
   FilterSet,
   ShowMore,
   Drawer,

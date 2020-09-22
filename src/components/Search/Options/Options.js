@@ -12,10 +12,14 @@ import FilterSection from './content/FilterSection/FilterSection'
 import styles from './options.module.scss'
 
 export const Options = ({
+  showFilterSections,
+  filterCounts,
   orderBy,
   setOrderBy,
   searchText,
   setSearchText,
+  filters,
+  setFilters,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -23,12 +27,58 @@ export const Options = ({
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
 
   // CONSTANTS // ---------------------------------------------------------- //
+
+  // define filters
+  const filterDefs = {
+    key_topics: {
+      field: 'key_topics',
+      label: 'Topic areas',
+      choices: [],
+    },
+  }
+
   // define filter section component data
-  const filterSectionData = [{}, {}, {}]
+  // TODO link to a filterset and filters
+  const filterSectionData = []
+  if (showFilterSections) {
+    for (const [fieldName, valueCounts] of Object.entries(filterCounts)) {
+      const curFilterSectionData = {
+        label: fieldName, // TODO pretty,
+        choices: [],
+      }
+      valueCounts.forEach(([value, count]) => {
+        curFilterSectionData.choices.push({
+          value,
+          count,
+          label: value,
+        })
+      })
+
+      // if the filter has a defintion specified, update the chocies in that
+      // definition object
+      const filterHasDefinition = filterDefs[fieldName] !== undefined
+      if (filterHasDefinition) {
+        filterDefs[fieldName].choices = curFilterSectionData.choices
+      }
+
+      // append this def data to the overall list of filter sections
+      filterSectionData.push(curFilterSectionData)
+    }
+  }
+
   // get filter sections
-  const filterSections = filterSectionData.map((d, i) => {
+  const filterSections = filterSectionData.map((curFilterSectionData, i) => {
     return (
-      <FilterSection {...{ key: i, hide: i > 0 && !showAdditionalFilters }} />
+      <FilterSection
+        {...{
+          ...curFilterSectionData,
+          filterDefs,
+          key: i,
+          hide: i > 0 && !showAdditionalFilters,
+          filters,
+          setFilters,
+        }}
+      />
     )
   })
 
@@ -37,6 +87,7 @@ export const Options = ({
   const onStartOver = () => {
     // set search text to be blank
     setSearchText('')
+    setFilters({})
   }
   // EFFECT HOOKS // ------------------------------------------------------- //
 

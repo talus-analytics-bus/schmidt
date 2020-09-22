@@ -26,8 +26,11 @@ const Search = ({ setPage }) => {
   const [curPage, setCurPage] = useState(1)
   const [pagesize, setPagesize] = useState(5)
 
-  // search bar text
+  // search bar text and filters
   const [searchText, setSearchText] = useState('')
+  const [filters, setFilters] = useState({})
+  console.log('filters')
+  console.log(filters)
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
@@ -39,13 +42,12 @@ const Search = ({ setPage }) => {
       page: curPage,
       pagesize,
       search_text: searchText,
-      filters: {}, // TODO filters
+      filters, // TODO filters
       order_by: orderBy,
       is_desc: isDesc,
-      explain_results: false,
-      // explain_results: true,
+      // explain_results: false,
+      explain_results: true,
     })
-    console.log(results)
     setSearchData(results.data)
   }
 
@@ -53,7 +55,7 @@ const Search = ({ setPage }) => {
   // when filters or search text change, get updated search data
   useEffect(() => {
     getData()
-  }, [searchText, pagesize, curPage, orderBy])
+  }, [searchText, pagesize, curPage, orderBy, filters])
 
   // JSX
   return (
@@ -62,27 +64,30 @@ const Search = ({ setPage }) => {
       <div className={styles.search}>
         <Options
           {...{
+            searchData,
+            showFilterSections: searchData !== null,
+            filterCounts: searchData !== null ? searchData.filter_counts : {},
             orderBy,
             setOrderBy,
             isDesc,
             setIsDesc,
             searchText,
             setSearchText,
+            filters,
+            setFilters,
           }}
         />
-        {true && (
-          <Results
-            {...{
-              searchText,
-              setSearchText,
-              curPage,
-              setCurPage,
-              pagesize,
-              setPagesize,
-              searchData,
-            }}
-          />
-        )}
+        <Results
+          {...{
+            searchData,
+            setSearchText,
+            curPage,
+            setCurPage,
+            pagesize,
+            setPagesize,
+            searchData,
+          }}
+        />
       </div>
     </Layout>
   )

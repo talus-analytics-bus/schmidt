@@ -20,12 +20,12 @@ import 'react-date-range/dist/theme/default.css'
 
 /**
  * @method Filter
- * create a clickable filter dropdown based on provided items
+ * create a clickable filter dropdown based on provided choices
  */
 const Filter = ({
   field,
   label,
-  items,
+  choices,
   filters,
   disabledText,
   primary,
@@ -40,34 +40,34 @@ const Filter = ({
   ...props
 }) => {
   const [show, setShow] = useState(false)
-  let initSelectedItems
+  let initSelectedChoices
   if (!dateRange) {
-    initSelectedItems =
+    initSelectedChoices =
       filters[field] !== undefined
-        ? items.filter(d => filters[field].includes(d.value))
+        ? choices.filter(d => filters[field].includes(d.value))
         : []
   } else {
-    initSelectedItems = filters[field] !== undefined ? filters[field] : []
+    initSelectedChoices = filters[field] !== undefined ? filters[field] : []
   }
   const primaryFiltersOff =
     primary !== undefined &&
     (filters[primary] === undefined || filters[primary].length === 0)
-  const noItems = items && items.length === 0
+  const noChoices = choices && choices.length === 0
   const disabled = primaryFiltersOff
   const [filterState, setFilterState] = useState({
-    items,
-    selectedItems: initSelectedItems,
+    choices,
+    selectedChoices: initSelectedChoices,
   })
   const [showRangeSelection, setShowRangeSelection] = useState(false)
   const initDateRangeState = [
     {
       startDate:
-        initSelectedItems.length > 0
-          ? new Date(moment(initSelectedItems[0]))
+        initSelectedChoices.length > 0
+          ? new Date(moment(initSelectedChoices[0]))
           : undefined,
       endDate:
-        initSelectedItems.length > 0
-          ? new Date(moment(initSelectedItems[1]))
+        initSelectedChoices.length > 0
+          ? new Date(moment(initSelectedChoices[1]))
           : undefined,
       key: 'selection',
     },
@@ -78,25 +78,25 @@ const Filter = ({
   // // a badge, then update this filter's selected values to match
   // useEffect(() => {
   //   if (isEmpty(filters)) {
-  //     setFilterState({ ...filterState, selectedItems: [] });
+  //     setFilterState({ ...filterState, selectedChoices: [] });
   //     if (dateRange) {
   //       setDateRangeState(initDateRangeState);
   //     }
   //   } else {
   //     if (filters[field] !== undefined) {
-  //       const curFilters = filterState.selectedItems;
+  //       const curFilters = filterState.selectedChoices;
   //       const newFilters = curFilters.filter(
   //         d => filters[field].includes(d.value) || filters[field].includes(d)
   //       );
-  //       setFilterState({ ...filterState, selectedItems: newFilters });
+  //       setFilterState({ ...filterState, selectedChoices: newFilters });
   //     } else {
-  //       setFilterState({ ...filterState, selectedItems: [] });
+  //       setFilterState({ ...filterState, selectedChoices: [] });
   //     }
   //   }
   // }, [filters]);
 
-  const nMax = items !== undefined ? items.length : 0
-  const nCur = filterState.selectedItems.length
+  const nMax = choices !== undefined ? choices.length : 0
+  const nCur = filterState.selectedChoices.length
 
   // define element ID for menu
   const elId = field + 'Dropdown'
@@ -132,32 +132,35 @@ const Filter = ({
       }
     } else {
       // update filter state
-      let updatedSelectedItems = null
+      let updatedSelectedChoices = null
       if (isEmpty(filters)) {
-        updatedSelectedItems = []
-        setFilterState({ ...filterState, selectedItems: updatedSelectedItems })
+        updatedSelectedChoices = []
+        setFilterState({
+          ...filterState,
+          selectedChoices: updatedSelectedChoices,
+        })
         if (dateRange) {
           setDateRangeState(initDateRangeState)
         }
       } else {
         if (filters[field] !== undefined) {
-          // if (filters[field] !== undefined && items !== undefined) {
+          // if (filters[field] !== undefined && choices !== undefined) {
 
-          const curFilters = filterState.selectedItems
+          const curFilters = filterState.selectedChoices
           const newFilters = curFilters.filter(
             d => filters[field].includes(d.value) || filters[field].includes(d)
           )
 
-          updatedSelectedItems = newFilters
+          updatedSelectedChoices = newFilters
           setFilterState({
             ...filterState,
-            selectedItems: updatedSelectedItems,
+            selectedChoices: updatedSelectedChoices,
           })
         } else {
-          updatedSelectedItems = []
+          updatedSelectedChoices = []
           setFilterState({
             ...filterState,
-            selectedItems: updatedSelectedItems,
+            selectedChoices: updatedSelectedChoices,
           })
         }
       }
@@ -173,14 +176,14 @@ const Filter = ({
           delete newFilters[field]
           setFilters(newFilters)
         } else if (thisFiltersOn) {
-          const newSelectedItems = updatedSelectedItems.filter(d => {
+          const newSelectedChoices = updatedSelectedChoices.filter(d => {
             return filters[primary].includes(d.group)
           })
           const newFilterState = { ...filterState }
           const newFilters = { ...filters }
-          newFilters[field] = newSelectedItems.map(d => d.value)
+          newFilters[field] = newSelectedChoices.map(d => d.value)
 
-          newFilterState.selectedItems = newSelectedItems
+          newFilterState.selectedChoices = newSelectedChoices
           const mustUpdateFilters = !arraysMatch(
             filters[field],
             newFilters[field]
@@ -199,7 +202,7 @@ const Filter = ({
       if (startRaw === undefined || endRaw === undefined) {
         setFilterState({
           ...filterState,
-          selectedItems: [],
+          selectedChoices: [],
         })
         return
       } else {
@@ -209,7 +212,7 @@ const Filter = ({
         ]
         setFilterState({
           ...filterState,
-          selectedItems: v,
+          selectedChoices: v,
         })
         // update filters
         setFilters({ ...filters, [field]: v })
@@ -217,23 +220,23 @@ const Filter = ({
     }
   }, [dateRangeState])
   if (skip) return <></>
-  const showSelectAll = items && items.length > 4
+  const showSelectAll = choices && choices.length > 4
   let responsiveHeight = 0
-  if (items !== undefined) {
-    const hasGroup = items.length > 0 && items[0].group !== undefined
-    let nEntries = items.length
+  if (choices !== undefined) {
+    const hasGroup = choices.length > 0 && choices[0].group !== undefined
+    let nEntries = choices.length
     if (showSelectAll) nEntries++
     if (hasGroup) {
-      const nGroups = [...new Set(items.map(d => d.group))].length
+      const nGroups = [...new Set(choices.map(d => d.group))].length
       nEntries += nGroups
     }
-    responsiveHeight = items && nEntries < 5 ? nEntries * 42 : 7 * 42
+    responsiveHeight = choices && nEntries < 5 ? nEntries * 42 : 7 * 42
   }
   if (props.radio !== true) {
     return (
       <div
         className={classNames(styles.filter, {
-          [styles.disabled]: disabled || noItems,
+          [styles.disabled]: disabled || noChoices,
         })}
       >
         <div className={styles.label}>{label}</div>
@@ -243,7 +246,7 @@ const Filter = ({
             className={classNames(styles.filterButton, className, {
               [styles.shown]: show,
               [styles.selected]: nCur > 0,
-              [styles.disabled]: disabled || noItems,
+              [styles.disabled]: disabled || noChoices,
             })}
             onClick={e => {
               if (activeFilter !== field) {
@@ -257,17 +260,17 @@ const Filter = ({
               <span className={styles.field}>
                 {getInputLabel({
                   dateRange,
-                  items,
+                  choices,
                   nMax,
                   dateRangeState,
-                  selectedItems: filterState.selectedItems,
+                  selectedChoices: filterState.selectedChoices,
                   disabledText,
                   disabled,
                 })}
               </span>
               <span className={styles.selections}>
                 {' '}
-                {!dateRange && !disabled && !noItems && (
+                {!dateRange && !disabled && !noChoices && (
                   <span className={styles.numbers}>
                     ({nCur} of {nMax})
                   </span>
@@ -297,17 +300,17 @@ const Filter = ({
             {!dateRange && (
               <MultiSelect
                 wrapperClassName={styles.filterMenuWrapper}
-                items={items}
+                choices={choices}
                 withGrouping={withGrouping}
-                selectedItems={filterState.selectedItems}
-                showSelectedItems={false}
+                selectedChoices={filterState.selectedChoices}
+                showSelectedChoices={false}
                 showSelectAll={showSelectAll}
                 showSearch={showSelectAll}
                 responsiveHeight={responsiveHeight}
                 onChange={v => {
                   setFilterState({
                     ...filterState,
-                    selectedItems: v,
+                    selectedChoices: v,
                   })
                   // update filters
                   if (v.length > 0) {
@@ -348,20 +351,20 @@ const Filter = ({
       <RadioToggle
         {...{
           className,
-          choices: items,
+          choices,
           curVal:
             isEmpty(filters) || isEmpty(filters[field])
               ? defaultRadioValue
               : filters[field],
           callback: v => {
-            const vItem = items.find(d => d.value === v)
+            const vChoice = choices.find(d => d.value === v)
             setFilterState({
               ...filterState,
-              selectedItems: [vItem],
+              selectedChoices: [vChoice],
             })
 
             // update filters
-            setFilters({ ...filters, [field]: [vItem.value] })
+            setFilters({ ...filters, [field]: [vChoice.value] })
           },
           label,
         }}
@@ -377,30 +380,30 @@ const Filter = ({
  * @param  {[type]}      dateRange      [description]
  * @param  {[type]}      nMax           [description]
  * @param  {[type]}      dateRangeState [description]
- * @param  {[type]}      selectedItems  [description]
+ * @param  {[type]}      selectedChoices  [description]
  * @return {[type]}                     [description]
  */
 export const getInputLabel = ({
   dateRange,
   nMax,
   dateRangeState,
-  items,
-  selectedItems,
+  choices,
+  selectedChoices,
   disabledText,
   disabled,
 }) => {
   if (!dateRange) {
     // if this filter has a primary and it isn't active, disable it
-    if (!disabled && items && items.length === 0) {
+    if (!disabled && choices && choices.length === 0) {
       return 'No options'
     } else if (disabled) {
       return disabledText
     }
-    if (selectedItems.length === 1) {
-      if (selectedItems[0].label.length < 15) return selectedItems[0].label
+    if (selectedChoices.length === 1) {
+      if (selectedChoices[0].label.length < 15) return selectedChoices[0].label
       else return '1 selected'
-    } else if (selectedItems.length === nMax) return 'All selected'
-    else if (selectedItems.length > 0) return 'Multiple selected'
+    } else if (selectedChoices.length === nMax) return 'All selected'
+    else if (selectedChoices.length > 0) return 'Multiple selected'
     else return 'None selected'
   } else {
     const startRaw = dateRangeState[0].startDate

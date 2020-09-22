@@ -1,13 +1,23 @@
-import React from "react";
-import styles from "./checkbox.module.scss";
-import { darkModerateBlue } from "../../../../assets/styles/vars.scss";
+import React from 'react'
+import styles from './checkbox.module.scss'
+import { darkModerateBlue } from '../../../../assets/styles/vars.scss'
+
+// local utility functions
+import { comma } from '../../../misc/Util'
 
 /**
  * Generic radio toggle
  * TODO implement tooltip
  * @method Checkbox
  */
-const Checkbox = ({ label, value, curChecked, callback, ...props }) => {
+const Checkbox = ({
+  label,
+  value,
+  curChecked,
+  callback,
+  count = null,
+  ...props
+}) => {
   /**
    * When radio button changes, set current choice equal to its value.
    * @method onChange
@@ -15,9 +25,9 @@ const Checkbox = ({ label, value, curChecked, callback, ...props }) => {
    * @return {[type]}   [description]
    */
   const onChange = e => {
-    const input = e.target.closest("label").querySelector("input");
-    callback(input.value);
-  };
+    const input = e.target.closest('label').querySelector('input')
+    callback(input.value)
+  }
 
   // return <div>Checkbox</div>;
 
@@ -25,7 +35,7 @@ const Checkbox = ({ label, value, curChecked, callback, ...props }) => {
     <div className={styles.checkbox}>
       <form>
         <label
-          style={{ color: curChecked === true ? darkModerateBlue : "" }}
+          style={{ color: curChecked === true ? darkModerateBlue : '' }}
           onClick={callback ? onChange : undefined}
           for={label}
         >
@@ -34,14 +44,17 @@ const Checkbox = ({ label, value, curChecked, callback, ...props }) => {
             name={label}
             value={value}
             checked={curChecked === true}
-            disabled={props.disabled ? "disabled" : ""}
+            disabled={props.disabled ? 'disabled' : ''}
           />
-          <span>{label}</span>
+          <span>
+            {label}
+            {count !== null && <> ({comma(count)})</>}
+          </span>
         </label>
       </form>
     </div>
-  );
-  return checkboxJsx;
-};
+  )
+  return checkboxJsx
+}
 
-export default Checkbox;
+export default Checkbox
