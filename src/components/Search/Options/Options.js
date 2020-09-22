@@ -41,9 +41,10 @@ export const Options = ({
   // TODO link to a filterset and filters
   const filterSectionData = []
   if (showFilterSections) {
-    for (const [fieldName, valueCounts] of Object.entries(filterCounts)) {
+    for (const [field, valueCounts] of Object.entries(filterCounts)) {
       const curFilterSectionData = {
-        label: fieldName, // TODO pretty,
+        label: field, // TODO pretty,
+        field,
         choices: [],
       }
       valueCounts.forEach(([value, count]) => {
@@ -56,13 +57,12 @@ export const Options = ({
 
       // if the filter has a defintion specified, update the chocies in that
       // definition object
-      const filterHasDefinition = filterDefs[fieldName] !== undefined
+      const filterHasDefinition = filterDefs[field] !== undefined
       if (filterHasDefinition) {
-        filterDefs[fieldName].choices = curFilterSectionData.choices
+        filterDefs[field].choices = curFilterSectionData.choices
+        // append this def data to the overall list of filter sections
+        filterSectionData.push(curFilterSectionData)
       }
-
-      // append this def data to the overall list of filter sections
-      filterSectionData.push(curFilterSectionData)
     }
   }
 
@@ -72,8 +72,8 @@ export const Options = ({
       <FilterSection
         {...{
           ...curFilterSectionData,
+          key: curFilterSectionData.field,
           filterDefs,
-          key: i,
           hide: i > 0 && !showAdditionalFilters,
           filters,
           setFilters,
@@ -89,6 +89,8 @@ export const Options = ({
     setSearchText('')
     setFilters({})
   }
+  console.log('filters')
+  console.log(filters)
   // EFFECT HOOKS // ------------------------------------------------------- //
 
   /**

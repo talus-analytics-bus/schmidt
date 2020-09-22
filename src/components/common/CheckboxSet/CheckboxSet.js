@@ -19,7 +19,6 @@ const CheckboxSet = ({
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
-
   // Trigger callback when all values or filters change
   React.useEffect(() => {
     if (allValues.length > 0)
@@ -28,16 +27,17 @@ const CheckboxSet = ({
   }, [allValues])
 
   const updateAllValues = v => {
-    const oldAllValues = JSON.parse(JSON.stringify(allValues))
-    const remove = oldAllValues.includes(v)
-    if (remove) {
-      const updatedAllValues = oldAllValues.filter(d => d !== v)
-      setAllValues(updatedAllValues)
-    } else {
-      const updatedAllValues = oldAllValues
-      updatedAllValues.push(v)
-      setAllValues(updatedAllValues)
-    }
+    // debug: test checkbox vals
+    const newAllValues = []
+    checkboxes.forEach(d => {
+      const wasAlreadyChecked = d.props.curChecked
+      const matchesChangedCheckbox = d.props.value === v
+      if (wasAlreadyChecked && matchesChangedCheckbox) return
+      else if (!wasAlreadyChecked && matchesChangedCheckbox) {
+        newAllValues.push(v)
+      }
+    })
+    setAllValues(newAllValues)
   }
 
   const checkboxes = choices.map(({ label, value, count = null }) => (

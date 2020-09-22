@@ -29,8 +29,6 @@ const Search = ({ setPage }) => {
   // search bar text and filters
   const [searchText, setSearchText] = useState('')
   const [filters, setFilters] = useState({})
-  console.log('filters')
-  console.log(filters)
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
