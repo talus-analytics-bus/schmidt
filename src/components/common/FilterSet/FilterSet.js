@@ -29,6 +29,7 @@ const FilterSet = ({
   disabled = false,
   disabledValues = ['Country'],
   checkboxes = false,
+  vertical = false,
   ...props
 }) => {
   const [activeFilter, setActiveFilter] = useState(null)
@@ -229,6 +230,7 @@ const FilterSet = ({
               key={d.map(dd => dd.key).join('-')}
               className={classNames(styles.filterGroup, {
                 [styles.dropdowns]: d.dropdowns,
+                [styles.vertical]: vertical,
               })}
             >
               {d}

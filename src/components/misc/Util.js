@@ -1103,6 +1103,21 @@ export const formatDate = input => {
   // return moment(input).format('MMM D, YYYY')
 }
 
+/**
+ * Execute queries in parallel
+ * @method
+ * @param  {[type]} queries [description]
+ * @return {[type]}         [description]
+ */
+export const execute = async function ({ queries }) {
+  const results = {}
+  for (const [k, v] of Object.entries(queries)) {
+    const res = await v
+    results[k] = res
+  }
+  return results
+}
+
 // Project-specific exports // --------------------------------------------- //
 export const areaScorecardDefs = [
   {

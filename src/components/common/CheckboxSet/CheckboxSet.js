@@ -19,6 +19,7 @@ const CheckboxSet = ({
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
+
   // Trigger callback when all values or filters change
   React.useEffect(() => {
     if (allValues.length > 0)
@@ -31,10 +32,12 @@ const CheckboxSet = ({
     const newAllValues = []
     checkboxes.forEach(d => {
       const wasAlreadyChecked = d.props.curChecked
-      const matchesChangedCheckbox = d.props.value === v
+      const matchesChangedCheckbox = d.props.value.toString() === v
       if (wasAlreadyChecked && matchesChangedCheckbox) return
-      else if (!wasAlreadyChecked && matchesChangedCheckbox) {
-        newAllValues.push(v)
+      else if (wasAlreadyChecked) {
+        newAllValues.push(d.props.value)
+      } else if (!wasAlreadyChecked && matchesChangedCheckbox) {
+        newAllValues.push(d.props.value)
       }
     })
     setAllValues(newAllValues)
@@ -49,11 +52,27 @@ const CheckboxSet = ({
         callback: v => {
           updateAllValues(v)
         },
-        curChecked: curVal.includes(value),
+        curChecked: curVal.includes(value.toString()),
         count,
       }}
     />
   ))
+  checkboxes.sort(function (a, b) {
+    if (a.props.label > b.props.label) {
+      return 1
+    } else return -1
+  })
+  checkboxes.sort(function (a, b) {
+    if (a.props.count > b.props.count) {
+      return -1
+    } else return 1
+  })
+  checkboxes.sort(function (a, b) {
+    if (a.props.curChecked && !b.props.curChecked) {
+      return -1
+    } else return 1
+  })
+
   return (
     <div className={styles.checkboxSet}>
       <div role="label" className={styles.label}>

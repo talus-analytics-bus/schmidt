@@ -14,6 +14,7 @@ import styles from './options.module.scss'
 export const Options = ({
   showFilterSections,
   filterCounts,
+  baselineFilterCounts,
   orderBy,
   setOrderBy,
   searchText,
@@ -35,6 +36,11 @@ export const Options = ({
       label: 'Topic areas',
       choices: [],
     },
+    authors: {
+      field: 'author.id',
+      label: 'Authoring organization',
+      choices: [],
+    },
   }
 
   // define filter section component data
@@ -47,9 +53,11 @@ export const Options = ({
         field,
         choices: [],
       }
-      valueCounts.forEach(([value, count]) => {
+      const alreadySeenValues = []
+      valueCounts.forEach(([value, count, id]) => {
+        alreadySeenValues.push(id || value)
         curFilterSectionData.choices.push({
-          value,
+          value: id || value,
           count,
           label: value,
         })
@@ -60,6 +68,19 @@ export const Options = ({
       const filterHasDefinition = filterDefs[field] !== undefined
       if (filterHasDefinition) {
         filterDefs[field].choices = curFilterSectionData.choices
+
+        // add any "missing" values
+        baselineFilterCounts[field].forEach(([value, count, id]) => {
+          if (alreadySeenValues.includes(id || value)) return
+          else {
+            curFilterSectionData.choices.push({
+              value: id || value,
+              count: 0,
+              label: value,
+            })
+          }
+        })
+
         // append this def data to the overall list of filter sections
         filterSectionData.push(curFilterSectionData)
       }

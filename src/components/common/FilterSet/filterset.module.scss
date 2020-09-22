@@ -29,7 +29,11 @@
   @include spaceItemsHoriz(5rem);
   .filterGroup {
     display: flex;
-    @include spaceItemsHoriz(50px);
+    flex-flow: column;
+    &:not(.vertical) {
+      @include spaceItemsHoriz(50px);
+      flex-flow: row;
+    }
 
     &.dropdowns {
       margin-top: 20px;

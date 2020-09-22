@@ -1,5 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 // local components
 import Layout from '../components/Layout/Layout'
@@ -9,14 +10,19 @@ import Options from '../components/Search/Options/Options'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
+import { execute } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Search/search.module.scss'
 
+// constants
+const API_URL = process.env.GATSBY_API_URL
+
 const Search = ({ setPage }) => {
   // STATE
-  // card data from API response to search query
+  // card and filter counts data from API response to search query
   const [searchData, setSearchData] = useState(null)
+  const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
 
   // order by parameters
   const [orderBy, setOrderBy] = useState('date')
@@ -36,17 +42,21 @@ const Search = ({ setPage }) => {
   // FUNCTIONS
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
-    const results = await SearchQuery({
+    const queries = {}
+    queries.searchQuery = SearchQuery({
       page: curPage,
       pagesize,
       search_text: searchText,
-      filters, // TODO filters
+      filters,
       order_by: orderBy,
       is_desc: isDesc,
-      // explain_results: false,
       explain_results: true,
     })
-    setSearchData(results.data)
+    queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+
+    const results = await execute({ queries })
+    setSearchData(results.searchQuery.data)
+    setBaselineFilterCounts(results.filterCountsQuery.data.data)
   }
 
   // EFFECT HOOKS
@@ -62,9 +72,10 @@ const Search = ({ setPage }) => {
       <div className={styles.search}>
         <Options
           {...{
-            searchData,
-            showFilterSections: searchData !== null,
+            showFilterSections:
+              searchData !== null && baselineFilterCounts !== null,
             filterCounts: searchData !== null ? searchData.filter_counts : {},
+            baselineFilterCounts,
             orderBy,
             setOrderBy,
             isDesc,

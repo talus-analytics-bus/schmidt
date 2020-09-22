@@ -49,6 +49,9 @@ const Checkbox = ({
           <span>
             {label}
             {count !== null && <> ({comma(count)})</>}
+            {
+              // count !== null && curChecked === true && <> ({comma(count)})</>
+            }
           </span>
         </label>
       </form>

@@ -38,6 +38,7 @@ export const FilterSection = ({
           filters,
           setFilters,
           showSelectedFilters: false,
+          vertical: true,
         }}
       />
     </div>
