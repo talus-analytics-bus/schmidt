@@ -12,6 +12,7 @@ export const FloatButton = ({
   label,
   onClick,
   defaultOn = false,
+  noOnToggle = false,
   ...props
 }) => {
   // STATE
@@ -21,7 +22,7 @@ export const FloatButton = ({
     <button
       onClick={() => {
         onClick()
-        setOn(!on)
+        if (!noOnToggle) setOn(!on)
       }}
       className={classNames(styles.floatButton, { [styles.on]: on })}
     >

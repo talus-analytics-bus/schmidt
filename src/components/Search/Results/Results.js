@@ -54,7 +54,19 @@ export const Results = ({
               nouns: 'items',
             }}
           />
-          <CardList {...{ start, cardData: searchData.data }} />
+          <CardList
+            {...{
+              start,
+              cardData: searchData.data,
+              setNextPage:
+                searchData.page !== searchData.num_pages
+                  ? () => {
+                      setCurPage(curPage + 1)
+                      window.scrollTo(0, 0)
+                    }
+                  : false,
+            }}
+          />
         </>
       )}
     </div>

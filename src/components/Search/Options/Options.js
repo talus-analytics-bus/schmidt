@@ -368,6 +368,7 @@ export const Options = ({
                 curSelection: isDesc,
                 allOption: null,
                 label: null,
+                disabled: orderBy === 'relevance',
                 optionList: [
                   {
                     label: 'Descending',

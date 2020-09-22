@@ -15,13 +15,18 @@ const Selectpicker = ({
   label,
   curSelection,
   placeholder = '--',
+  disabled = false,
   ...props
 }) => {
   const handleChange = e => {
     setOption(e.target.value)
   }
   return (
-    <div className={styles.selectpicker}>
+    <div
+      className={classNames(styles.selectpicker, {
+        [styles.disabled]: disabled,
+      })}
+    >
       <div className={styles.label}>{label}</div>
       <select value={curSelection} onChange={handleChange}>
         <option disabled value={'null'}>

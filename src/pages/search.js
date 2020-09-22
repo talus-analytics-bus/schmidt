@@ -67,10 +67,17 @@ const Search = ({ setPage }) => {
   }
 
   // EFFECT HOOKS
+  // when xxx
+  useEffect(() => {
+    if (curPage !== 1) {
+      setCurPage(1)
+    } else getData()
+  }, [searchText, pagesize, orderBy, isDesc, filters])
+
   // when filters or search text change, get updated search data
   useEffect(() => {
     getData()
-  }, [searchText, pagesize, curPage, orderBy, isDesc, filters])
+  }, [curPage])
 
   // JSX
   return (
