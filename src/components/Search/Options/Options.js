@@ -38,9 +38,15 @@ export const Options = ({
     },
     authors: {
       field: 'author.id',
-      label: 'Authoring organization',
+      label: 'Authoring organizations',
       choices: [],
     },
+  }
+
+  // define icon names to use for each section
+  const iconNamesByField = {
+    key_topics: 'device_hub',
+    authors: 'person',
   }
 
   // define filter section component data
@@ -52,6 +58,7 @@ export const Options = ({
         label: field, // TODO pretty,
         field,
         choices: [],
+        iconName: iconNamesByField[field] || null,
       }
       const alreadySeenValues = []
       valueCounts.forEach(([value, count, id]) => {
@@ -119,41 +126,43 @@ export const Options = ({
   return (
     <div className={styles.options}>
       <h2>Refine search</h2>
-      <button onClick={onStartOver}>Start over</button>
-      <div>
-        Sort results by:{' '}
-        <Selectpicker
+      <div className={styles.content}>
+        <button onClick={onStartOver}>Start over</button>
+        <div>
+          Sort results by:{' '}
+          <Selectpicker
+            {...{
+              setOption: setOrderBy,
+              curSelection: orderBy,
+              allOption: null,
+              label: null,
+              optionList: [
+                {
+                  label: 'Relevance',
+                  value: 'relevance',
+                },
+                {
+                  label: 'Date',
+                  value: 'date',
+                },
+                {
+                  label: 'Title',
+                  value: 'title',
+                },
+              ],
+            }}
+          />
+        </div>
+        <div className={styles.filterSections}>{filterSections}</div>
+        <FloatButton
           {...{
-            setOption: setOrderBy,
-            curSelection: orderBy,
-            allOption: null,
-            label: null,
-            optionList: [
-              {
-                label: 'Relevance',
-                value: 'relevance',
-              },
-              {
-                label: 'Date',
-                value: 'date',
-              },
-              {
-                label: 'Title',
-                value: 'title',
-              },
-            ],
+            label: `${
+              showAdditionalFilters ? 'Hide' : 'Show'
+            } additional filters`,
+            onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
           }}
         />
       </div>
-      {filterSections}
-      <FloatButton
-        {...{
-          label: `${
-            showAdditionalFilters ? 'Hide' : 'Show'
-          } additional filters`,
-          onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
-        }}
-      />
     </div>
   )
 }

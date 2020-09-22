@@ -1,4 +1,4 @@
-@import "../../../../assets/styles/vars.scss";
+@import '../../../../assets/styles/vars.scss';
 
 .checkbox {
   > div {
@@ -10,7 +10,7 @@
   }
   label {
     font-weight: normal;
-    color: black;
+    color: #333;
     display: flex;
     flex-flow: row;
     white-space: normal;
@@ -19,7 +19,14 @@
   input {
     margin: auto 5px auto 0;
     &:checked + span {
-      color: $dark-blue;
+      color: $selected-blue;
+    }
+  }
+
+  // gray checkboxes
+  &.gray {
+    label {
+      color: #7c7c7c;
     }
   }
 }

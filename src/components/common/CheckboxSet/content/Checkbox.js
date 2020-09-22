@@ -1,6 +1,8 @@
+// 3rd party packages
 import React from 'react'
 import styles from './checkbox.module.scss'
 import { darkModerateBlue } from '../../../../assets/styles/vars.scss'
+import classNames from 'classnames'
 
 // local utility functions
 import { comma } from '../../../misc/Util'
@@ -32,7 +34,9 @@ const Checkbox = ({
   // return <div>Checkbox</div>;
 
   const checkboxJsx = (
-    <div className={styles.checkbox}>
+    <div
+      className={classNames(styles.checkbox, { [styles.gray]: count === 0 })}
+    >
       <form>
         <label
           style={{ color: curChecked === true ? darkModerateBlue : '' }}

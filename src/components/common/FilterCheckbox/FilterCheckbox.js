@@ -83,7 +83,8 @@ const FilterCheckbox = ({
     >
       <CheckboxSet
         {...{
-          name: label,
+          name: null,
+          // name: label,
           choices,
           curVal: filters[field],
           callback: v => {

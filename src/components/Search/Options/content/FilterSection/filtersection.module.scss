@@ -1,3 +1,49 @@
+@import '../../../../../assets/styles/vars.scss';
 .filterSection {
-  background-color: lightgreen;
+  .bar {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border: 1px solid $gray;
+    border-right: none;
+    padding: 10px;
+    font-size: 1.25rem;
+    background-color: $light-gray;
+
+    @include spaceItemsHoriz(10px);
+
+    // make icons navy and larger
+    i {
+      color: $navy-blue;
+      font-size: 2rem;
+
+      &:last-of-type {
+        margin-left: auto;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  // ensure borders between sections do not double up
+  &:not(:first-of-type) .bar {
+    border-top: none;
+  }
+
+  .content {
+    padding-right: 20px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    display: none;
+  }
+  &.open {
+    + div .bar {
+      border-top: 1px solid $gray;
+    }
+    .bar i:last-of-type {
+      transform: unset;
+    }
+    .content {
+      display: flex;
+    }
+  }
 }

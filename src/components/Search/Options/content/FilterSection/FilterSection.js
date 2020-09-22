@@ -20,7 +20,13 @@ export const FilterSection = ({
   setFilters,
   ...props
 }) => {
+  // CONSTANTS
+  const icon =
+    iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
+
   // STATE // -------------------------------------------------------------- //
+  // open or collapsed?
+  const [open, setOpen] = useState(true)
 
   // EFFECT HOOKS // ------------------------------------------------------- //
 
@@ -29,18 +35,30 @@ export const FilterSection = ({
    * filter options as checkboxes or radio buttons
    */
   return (
-    <div className={classNames({ hide })}>
-      <FilterSet
-        {...{
-          checkboxes: true,
-          filterDefs: [{ [filterDefs.field]: filterDefs }],
-          noToggle: true,
-          filters,
-          setFilters,
-          showSelectedFilters: false,
-          vertical: true,
-        }}
-      />
+    <div
+      className={classNames(styles.filterSection, {
+        hide,
+        [styles.open]: open,
+      })}
+    >
+      <div onClick={() => setOpen(!open)} className={styles.bar}>
+        {icon}
+        <span>{filterDefs.label}</span>
+        <i className={'material-icons'}>expand_less</i>
+      </div>
+      <div className={styles.content}>
+        <FilterSet
+          {...{
+            checkboxes: true,
+            filterDefs: [{ [filterDefs.field]: filterDefs }],
+            noToggle: true,
+            filters,
+            setFilters,
+            showSelectedFilters: false,
+            vertical: true,
+          }}
+        />
+      </div>
     </div>
   )
 }
