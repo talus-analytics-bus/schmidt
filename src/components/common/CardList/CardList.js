@@ -46,8 +46,13 @@ export const CardList = ({
 
   // JSX
   if (cards === null) return null
-  else if (cards.length === 0) return <div>No items found</div>
-  else
+  else if (cards.length === 0) {
+    return (
+      <div className={styles.cardList}>
+        <div>No items found</div>
+      </div>
+    )
+  } else
     return (
       <div className={styles.cardList}>
         <div className={styles.cards}>{cards}</div>

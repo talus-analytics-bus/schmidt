@@ -22,6 +22,10 @@ $phone: 'screen and (max-width: 812px)';
   }
   .rowNumberTracker {
     margin-top: 5px;
+    visibility: hidden;
+    &.show {
+      visibility: visible;
+    }
   }
   .pageButtons {
     display: flex;

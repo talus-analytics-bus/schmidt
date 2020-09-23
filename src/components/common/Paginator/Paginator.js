@@ -16,6 +16,7 @@ export const Paginator = ({
   nTotalRecords,
   pagesize,
   setPagesize,
+  showCounter = true,
   noun = 'row',
   nouns = 'rows',
 }) => {
@@ -188,7 +189,11 @@ export const Paginator = ({
         </select>
         <label>items per page</label>
       </div>
-      <div className={styles.rowNumberTracker}>
+      <div
+        className={classNames(styles.rowNumberTracker, {
+          [styles.show]: showCounter,
+        })}
+      >
         Showing {comma(curPage * pagesize - pagesize + 1)} to{' '}
         {comma(Math.min(curPage * pagesize, nTotalRecords))} of{' '}
         {comma(nTotalRecords)} {nTotalRecords !== 1 ? nouns : noun}

@@ -54,6 +54,7 @@ export const Results = ({
               nTotalRecords: searchData.total,
               pagesize,
               setPagesize,
+              showCounter: searchData.data.length > 0,
               noun: 'item',
               nouns: 'items',
             }}
