@@ -58,6 +58,7 @@ export const Results = ({
             {...{
               start,
               cardData: searchData.data,
+              snippets: searchData.data_snippets || null,
               setNextPage:
                 searchData.page !== searchData.num_pages
                   ? () => {

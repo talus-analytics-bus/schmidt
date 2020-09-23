@@ -252,12 +252,8 @@ export const Options = ({
                       },
                     ]),
                   callback: v => {
-                    console.log('v')
-                    console.log(v)
                     if (v.length > 0) {
                       //
-                      console.log('filters.years')
-                      console.log(filters.years)
                       const alreadyCustom =
                         filters.years !== undefined &&
                         filters.years[0] === 'custom' &&

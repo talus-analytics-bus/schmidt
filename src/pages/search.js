@@ -37,8 +37,6 @@ const Search = ({ setPage }) => {
   const [filters, setFilters] = useState({})
   const [fromYear, setFromYear] = useState('null')
   const [toYear, setToYear] = useState('null')
-  console.log('filters')
-  console.log(filters)
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null

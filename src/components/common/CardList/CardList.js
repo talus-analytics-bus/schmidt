@@ -17,6 +17,7 @@ export const CardList = ({
   start,
   cardData = [],
   setNextPage = false,
+  snippets = [],
   ...props
 }) => {
   // CONSTANTS
@@ -24,12 +25,16 @@ export const CardList = ({
   const cards =
     cardData !== null
       ? cardData.map(({ ...cardProps }, i) => {
+          const allCardProps = {
+            key: cardProps.id,
+            resultNumber: comma(start + i),
+            ...cardProps,
+          }
+          if (snippets !== null) allCardProps.snippets = snippets[i]
           return (
             <Card
               {...{
-                key: cardProps.id,
-                resultNumber: comma(start + i),
-                ...cardProps,
+                ...allCardProps,
               }}
             />
           )

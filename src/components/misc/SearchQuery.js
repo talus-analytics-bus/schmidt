@@ -36,12 +36,9 @@ const SearchQuery = async ({
 
   const filtersForReq = {}
   if (usingCustomYearRange) {
-    console.log('setting it')
     filtersForReq.years = []
     filtersForReq.years[0] = `range_${fromYear || 0}_${toYear || 9999}`
   }
-  console.log('filtersForReq')
-  console.log(filtersForReq)
   // prepare request
   const req = await axios.post(
     `${API_URL}/get/search`,
