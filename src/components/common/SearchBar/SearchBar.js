@@ -64,6 +64,9 @@ export const SearchBar = ({
         })}
         src={loading}
       />
+      <div className={styles.bumper}>
+        <i className={'material-icons'}>search</i>
+      </div>
     </div>
   )
 }

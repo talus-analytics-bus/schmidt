@@ -2,14 +2,36 @@
 .searchBar {
   position: relative;
   margin-left: auto;
-  border-radius: 10px;
+  $border-radius: 10px;
+  $bumper-width: 50px;
+  border-radius: $border-radius;
   border: 2px solid $soft-blue;
   margin-left: auto;
   width: 450px;
   height: 60px;
   display: flex;
+  // bumper is the blue cap on the right end of the bar
+  .bumper {
+    border-radius: 0 $border-radius $border-radius 0;
+    background-color: $navy-blue;
+    width: 50px;
+    position: absolute;
+    height: calc(100% + 4px);
+    top: -2px;
+    right: -2px;
+    cursor: default;
+
+    // magnifying glass icon
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      color: white;
+      font-size: 2.5rem;
+    }
+  }
   input {
-    border-radius: 10px;
+    border-radius: $border-radius;
     font-family: 'rawline', serif;
     font-weight: 600;
     font-size: 1.25rem;
@@ -31,7 +53,7 @@
   .loading {
     position: absolute;
     height: 100%;
-    right: 0;
+    right: $bumper-width;
     opacity: 0;
     transition: all 0.5s;
     &.show {
