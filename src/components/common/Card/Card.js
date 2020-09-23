@@ -30,6 +30,8 @@ export const Card = ({
   files,
   snippets = {},
   filters = {},
+  setShowOverlay = () => '',
+  detail = false,
   ...props
 }) => {
   // define obj to hold card text, including highlighted snippets, if any
@@ -137,7 +139,12 @@ export const Card = ({
   trimmedSnippets.forEach(([key, variable]) => {
     if (snippets[key] !== undefined) {
       card[key] = getHighlightSegments({ text: snippets[key], maxWords: 20 })
-    } else card[key] = null
+    } else {
+      console.log(key)
+      if (key === 'description' && detail) {
+        card[key] = variable
+      } else card[key] = null
+    }
   })
 
   // process link list snippets: highlight and turn into hyperlinked text
@@ -252,7 +259,7 @@ export const Card = ({
   //   width="300"
   // ></iframe>
   return (
-    <div className={styles.card}>
+    <div className={classNames(styles.card, { [styles.detail]: detail })}>
       <div className={styles.col}>
         <div className={styles.resultNumber}>{resultNumber}</div>
       </div>
@@ -300,7 +307,11 @@ export const Card = ({
                 }}
               />
               <PrimaryButton
-                {...{ label: 'View details', iconName: 'read_more' }}
+                {...{
+                  label: 'View details',
+                  iconName: 'read_more',
+                  onClick: () => setShowOverlay(id),
+                }}
               />
             </div>
           </div>

@@ -7,17 +7,23 @@
   transition: all 0.25s;
   // padding: 10px;
 
-  &:hover {
-    border-color: #333;
-    @include boxShadowStrong();
-    cursor: pointer;
-  }
-  &:active {
-    background-color: darken($light-gray, 5%);
+  &:not(.detail) {
+    &:hover {
+      border-color: #333;
+      @include boxShadowStrong();
+      cursor: pointer;
+    }
+    &:active {
+      background-color: darken($light-gray, 5%);
+    }
   }
 
   $max-height: 150px;
+  $max-height-lg: 300px;
+
+  // if detail page card, allow larger sizing
   $letter-width: $max-height/1.29;
+  $letter-width-lg: $max-height-lg/1.29;
 
   display: grid;
   grid-template-columns: max-content $letter-width auto;
@@ -26,6 +32,8 @@
   .col:last-child {
     width: 100%;
   }
+
+  // non-detail thumbnails: normal size
   .thumbnail {
     width: $letter-width;
     display: flex;
@@ -45,6 +53,23 @@
       text-align: center;
       align-items: center;
       color: $gray;
+    }
+  }
+
+  // detail thumbnails: larger
+  &.detail {
+    grid-template-columns: max-content $letter-width-lg auto;
+
+    .thumbnail {
+      width: $letter-width-lg;
+      img {
+        max-height: $max-height-lg;
+        max-width: $letter-width-lg;
+      }
+      &.placeholder {
+        height: $max-height-lg; // like a letter page
+        width: $letter-width-lg;
+      }
     }
   }
 
@@ -142,6 +167,18 @@
     color: $selected-blue;
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  // if detail card: reformat to suit the details page
+  &.detail {
+    background-color: pink;
+
+    // hide actions since they are shown elsewhere
+    .detailsAndActions {
+      .actions {
+        display: none;
+      }
     }
   }
 }

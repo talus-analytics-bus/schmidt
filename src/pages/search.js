@@ -5,6 +5,7 @@ import axios from 'axios'
 // local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
+import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
@@ -49,6 +50,13 @@ const Search = ({ setPage }) => {
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
+
+  // showing detail overlay?
+  const [showOverlay, setShowOverlay] = useState(432)
+  // const [showOverlay, setShowOverlay] = useState(false)
+  // const [showOverlay, setShowOverlay] = useState(
+  //   urlParams.get('overlay') !== undefined || false
+  // )
 
   // search bar text and filters
   /**
@@ -252,41 +260,54 @@ const Search = ({ setPage }) => {
               img: null,
             }}
           />
-          <Options
-            {...{
-              showFilterSections:
-                searchData !== null && baselineFilterCounts !== null,
-              filterCounts: searchData !== null ? searchData.filter_counts : {},
-              baselineFilterCounts,
-              orderBy,
-              setOrderBy,
-              isDesc,
-              setIsDesc,
-              searchText,
-              setSearchText,
-              filters,
-              setFilters,
-              fromYear,
-              setFromYear,
-              toYear,
-              setToYear,
-            }}
-          />
-          <Results
-            {...{
-              searchData,
-              searchText,
-              setSearchText,
-              curPage,
-              setCurPage,
-              pagesize,
-              setPagesize,
-              searchData,
-              isSearchingText,
-              setIsSearchingText,
-              filters,
-            }}
-          />
+          <div className={styles.sections}>
+            <Options
+              {...{
+                showFilterSections:
+                  searchData !== null && baselineFilterCounts !== null,
+                filterCounts:
+                  searchData !== null ? searchData.filter_counts : {},
+                baselineFilterCounts,
+                orderBy,
+                setOrderBy,
+                isDesc,
+                setIsDesc,
+                searchText,
+                setSearchText,
+                filters,
+                setFilters,
+                fromYear,
+                setFromYear,
+                toYear,
+                setToYear,
+              }}
+            />
+            <Results
+              {...{
+                searchData,
+                searchText,
+                setSearchText,
+                curPage,
+                setCurPage,
+                pagesize,
+                setPagesize,
+                searchData,
+                isSearchingText,
+                setIsSearchingText,
+                filters,
+                setShowOverlay,
+              }}
+            />
+          </div>
+          {showOverlay !== false && (
+            <DetailOverlay
+              {...{
+                title: 'Test',
+                id: showOverlay,
+                close: () => setShowOverlay(false),
+              }}
+            />
+          )}
         </div>
       </Layout>
       <LoadingSpinner loading={!initialized} />
