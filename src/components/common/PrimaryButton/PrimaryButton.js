@@ -19,6 +19,9 @@ export const PrimaryButton = ({
   // if using icon: material icon name
   iconName = null,
 
+  // callback on click
+  onClick = null,
+
   // if link: URL to go to
   url = null,
 
@@ -27,12 +30,21 @@ export const PrimaryButton = ({
 
   // if true: button is secondary and styled as such
   isSecondary = false,
+
+  // if true: button is link
+  isLink = false,
 }) => {
   const icon =
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
   const unwrappedButton = (
     <button
-      className={classNames(styles.button, { [styles.secondary]: isSecondary })}
+      onClick={() => {
+        if (onClick) onClick()
+      }}
+      className={classNames(styles.button, {
+        [styles.secondary]: isSecondary,
+        [styles.link]: isLink,
+      })}
     >
       {icon}
       {label}

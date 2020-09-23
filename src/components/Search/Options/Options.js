@@ -10,6 +10,7 @@ import {
   Selectpicker,
   FloatButton,
   CheckboxSet,
+  PrimaryButton,
 } from '../../common'
 import FilterSection from './content/FilterSection/FilterSection'
 
@@ -330,7 +331,9 @@ export const Options = ({
     <div className={styles.options}>
       <h2>Refine search</h2>
       <div className={styles.content}>
-        <button onClick={onStartOver}>Start over</button>
+        <PrimaryButton
+          {...{ onClick: onStartOver, label: 'Start over', isLink: true }}
+        />
         <div className={styles.sortBy}>
           <div>
             Sort results by:{' '}

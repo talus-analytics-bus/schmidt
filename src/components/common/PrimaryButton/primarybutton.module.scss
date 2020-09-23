@@ -10,7 +10,9 @@
   }
   .button {
     color: white;
-    @include btn-primary();
+    &:not(.link) {
+      @include btn-primary();
+    }
     padding: 5px 10px;
     font-size: 1rem;
     display: flex;
@@ -30,6 +32,21 @@
       border-color: $navy-blue;
       &:hover {
         background: darken(white, 5%);
+      }
+    }
+    // link buttons look like simple hyperlinks
+    &.link {
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 0;
+      color: $selected-blue;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:active,
+      &:focus {
+        color: darken($selected-blue, 10%);
       }
     }
   }
