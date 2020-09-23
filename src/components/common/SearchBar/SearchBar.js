@@ -35,6 +35,8 @@ export const SearchBar = ({ searchText, setSearchText, ...props }) => {
       // if search text is blank, ensure the input value is set to blank,
       // in case search was cleared by another component
       searchRef.current.value = ''
+    } else {
+      searchRef.current.value = searchText
     }
   }, [searchText])
 
