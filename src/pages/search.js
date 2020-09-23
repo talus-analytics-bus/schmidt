@@ -25,12 +25,16 @@ const Search = ({ setPage }) => {
   const [searchData, setSearchData] = useState(null)
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
   const [initialized, setInitialized] = useState(false)
+  const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
+  const [checkingPopState, setCheckingPopState] = useState(false)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
   const urlParams = new URLSearchParams(window.location.search)
 
   // order by parameters
+  // const [orderBy, setOrderBy] = useState('date')
+  // const [isDesc, setIsDesc] = useState(true)
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
@@ -52,22 +56,36 @@ const Search = ({ setPage }) => {
   }
 
   // define init filters
+  // const [filters, setFilters] = useState({})
   const initFilters = getFiltersFromUrlParams(urlParams)
-  const [filters, setFilters] = useState(initFilters)
+  const [filters, setFilters] = useState(!initialized ? initFilters : {})
 
   // define init search text
+  // const [searchText, setSearchText] = useState('')
   const initSearchText = urlParams.get('search_text') || ''
-  const [searchText, setSearchText] = useState(initSearchText)
+  const [searchText, setSearchText] = useState(
+    !initialized ? initSearchText : ''
+  )
 
   // define init years
-  const [fromYear, setFromYear] = useState(urlParams.get('from') || 'null')
-  const [toYear, setToYear] = useState(urlParams.get('to') || 'null')
+  // const [fromYear, setFromYear] = useState('null')
+  // const [toYear, setToYear] = useState('null')
+  const [fromYear, setFromYear] = useState(
+    !initialized ? urlParams.get('from') || 'null' : 'null'
+  )
+  const [toYear, setToYear] = useState(
+    !initialized ? urlParams.get('to') || 'null' : 'null'
+  )
 
   // current page and pagesize of paginator
-  const pageStr = urlParams.get('page') || '1'
   // const [curPage, setCurPage] = useState(1)
+  // const [pagesize, setPagesize] = useState(5)
+  const pageStr = !initialized ? urlParams.get('page') || '1' : '1'
   const [curPage, setCurPage] = useState(+pageStr)
-  const [pagesize, setPagesize] = useState(urlParams.get('pagesize') || 5)
+
+  const [pagesize, setPagesize] = useState(
+    !initialized ? urlParams.get('pagesize') || 5 : 5
+  )
 
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
@@ -93,31 +111,101 @@ const Search = ({ setPage }) => {
       explain_results: true,
     })
     queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
-
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
     setBaselineFilterCounts(results.filterCountsQuery.data.data)
 
-    // update URL params to contain relevant options
-    // TODO
+    // update URL params to contain relevant options, unless this update was
+    // triggered by a state pop in history
+    if (!popstateTriggeredUpdate) {
+      const newUrlParams = new URLSearchParams()
+      newUrlParams.set('filters', JSON.stringify(filters))
+      newUrlParams.set('page', curPage)
+      newUrlParams.set('pagesize', pagesize)
+      newUrlParams.set('search_text', searchText)
+      newUrlParams.set('order_by', orderBy)
+      newUrlParams.set('is_desc', isDesc)
+      const newUrl =
+        newUrlParams.toString() !== '' ? `/search?${newUrlParams}` : '/search'
+      const newState = {
+        filters,
+        curPage,
+        pagesize,
+        orderBy,
+        isDesc,
+        searchText,
+      } // TODO check
+      window.history.pushState(newState, '', newUrl)
+    } else {
+      setPopstateTriggeredUpdate(false)
+    }
   }
 
   // EFFECT HOOKS
+  // when update triggered by popstate, use those vars only
+  useEffect(() => {
+    if (initialized) {
+      if (popstateTriggeredUpdate) {
+        getData()
+      }
+    }
+  }, [popstateTriggeredUpdate])
+
   // when xxx
   useEffect(() => {
     if (initialized) {
-      if (curPage !== 1) {
-        setCurPage(1)
-      } else {
-        getData()
+      if (!popstateTriggeredUpdate && !checkingPopState) {
+        if (curPage !== 1) {
+          setCurPage(1)
+        } else {
+          getData()
+        }
       }
     }
   }, [searchText, pagesize, orderBy, isDesc, filters])
 
   // when filters or search text change, get updated search data
   useEffect(() => {
-    getData()
-    if (!initialized) setInitialized(true)
+    if (!popstateTriggeredUpdate && !checkingPopState) {
+      getData()
+      if (!initialized) {
+        // set page to initialized so data retrieval from filters, etc. happens
+        setInitialized(true)
+
+        // add event to process URL params when a history state is popped
+        if (window !== undefined) {
+          window.onpopstate = function (e) {
+            setCheckingPopState(true)
+            const state = e.state
+            if (state !== undefined && state !== null) {
+              const toCheck = [
+                ['curPage', setCurPage, curPage],
+                ['filters', setFilters, filters],
+                ['pagesize', setPagesize, pagesize],
+                ['orderBy', setOrderBy, orderBy],
+                ['isDesc', setIsDesc, isDesc],
+                [
+                  'searchText',
+                  setSearchText,
+                  searchText,
+                  () => setSearchText(''),
+                ],
+              ]
+              // update all state variables and then trigger a data fetch
+              toCheck.forEach(([key, updateFunc, curVal, fallbackFunc]) => {
+                if (state[key] !== undefined) {
+                  updateFunc(state[key])
+                } else {
+                  if (fallbackFunc) fallbackFunc()
+                }
+              })
+              setPopstateTriggeredUpdate(true)
+              setCheckingPopState(false)
+            }
+          }
+        }
+      }
+    }
   }, [curPage])
 
   // set scroll event to show "scroll to top" as appropriate
