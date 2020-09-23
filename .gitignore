@@ -9,3 +9,6 @@ node_modules
 
 # Gatsby cache
 .cache
+
+# Env vars
+.env*
