@@ -64,10 +64,9 @@ const Search = ({ setPage }) => {
   const [toYear, setToYear] = useState(urlParams.get('to') || 'null')
 
   // current page and pagesize of paginator
-  // NOTE init values from URL params do not yet work as expected
   const pageStr = urlParams.get('page') || '1'
-  const [curPage, setCurPage] = useState(1)
-  // const [curPage, setCurPage] = useState(+pageStr)
+  // const [curPage, setCurPage] = useState(1)
+  const [curPage, setCurPage] = useState(+pageStr)
   const [pagesize, setPagesize] = useState(urlParams.get('pagesize') || 5)
 
   // simple header/footer reference
