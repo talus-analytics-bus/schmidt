@@ -25,6 +25,7 @@ export const Card = ({
   description,
   date,
   authors,
+  funders,
   key_topics,
   files,
   snippets = {},
@@ -120,7 +121,10 @@ export const Card = ({
   const trimmedSnippets = [['description', description]]
 
   // link list snippets are author names, etc. that when clicked do something
-  const linkListSnippets = [['authors', authors, 'authoring_organization']]
+  const linkListSnippets = [
+    ['authors', authors, 'authoring_organization'],
+    ['funders', funders, 'name'],
+  ]
 
   // process standard snippets: highlight plain text
   standardSnippets.forEach(([key, variable]) => {
@@ -197,7 +201,6 @@ export const Card = ({
   }
 
   // key topic match?
-  // const keyTopicMatch =
   if (key_topics.length > 0) {
     const keyTopicsJsxTmp = []
     const keyTopicsFilters =
@@ -222,12 +225,22 @@ export const Card = ({
         keyTopicsJsx.push(d)
         if (i !== keyTopicsJsxTmp.length - 1) keyTopicsJsx.push(' • ')
       })
-    console.log('keyTopicsJsx')
-    console.log(keyTopicsJsx)
+
     tagSnippets.push(
       <div className={styles.tagSnippet}>
         <i className={'material-icons'}>device_hub</i>
         <div className={styles.iconSnippet}>{keyTopicsJsx}</div>
+      </div>
+    )
+  }
+
+  // funder match?
+  const funderMatch = snippets['funders'] !== undefined
+  if (funderMatch) {
+    tagSnippets.push(
+      <div className={styles.tagSnippet}>
+        <i className={'material-icons'}>payments</i>
+        <div className={styles.iconSnippet}>{card.funders}</div>
       </div>
     )
   }
