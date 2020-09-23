@@ -26,17 +26,32 @@ export const Card = ({
   authors,
   key_topics,
   files,
-  snippets,
+  snippets = {},
   ...props
 }) => {
+  // define obj to hold card text, including highlighted snippets, if any
   const card = {}
+
+  /**
+   * Get highlighted text snippets in the card data and assign them to the
+   * `card` object that holds card text, if found, otherwise assign normal txt
+   * @method getHighlightSegments
+   * @param  {[type]}             text           [description]
+   * @param  {String}             [type='normal' }]            [description]
+   * @return {[type]}                            [description]
+   */
   const getHighlightSegments = ({ text, type = 'normal' }) => {
     // replace text within highlight tags with JSX
     const textArr = text
       .replace('</highlight>', '<highlight>')
       .split('<highlight>')
+
+    // arr to hold new text (with highlights)
     const newText = []
+
+    // for each text chunk, wrap in highlight JSX tag
     textArr.forEach((d, i) => {
+      // odd segments are highlighted portions
       const highlightSegment = i % 2 === 1
       if (highlightSegment) {
         newText.push(
@@ -45,59 +60,69 @@ export const Card = ({
           </span>
         )
       } else {
+        // push normal text if not a highlight snippet
         newText.push(<>{d}</>)
       }
     })
     return newText
   }
-  if (snippets !== null && snippets !== undefined) {
-    const standardSnippets = [['title', title]]
-    const linkListSnippets = [['authors', authors, 'authoring_organization']]
-    standardSnippets.forEach(([key, variable]) => {
-      if (snippets[key] !== undefined) {
-        card[key] = getHighlightSegments({ text: snippets[key] })
-      } else card[key] = variable
-    })
-    linkListSnippets.forEach(([key, variable, linkTextField]) => {
-      if (snippets[key] !== undefined) {
-        // assume id is link field
-        const linkIdField = 'id'
 
-        // get link list entry text
-        const linkListEntries = variable.map(d => {
-          const matchingSnippet = snippets[key].find(dd => dd.id === d.id)
-          if (matchingSnippet) {
-            return {
-              onClick: () => console.log(d[linkIdField]), // TODO
-              text: getHighlightSegments({
-                text: matchingSnippet[linkTextField],
-                type: 'small',
-              }),
-            }
-          } else {
-            return {
-              onClick: () => console.log(d[linkIdField]), // TODO
-              text: d[linkTextField],
-            }
+  // if snippets are provided, then scan them and use them
+  // standard snippets are plain text (not hyperlinks)
+  const standardSnippets = [['title', title]]
+
+  // link list snippets are author names, etc. that when clicked do something
+  const linkListSnippets = [['authors', authors, 'authoring_organization']]
+
+  // process standard snippets: highlight plain text
+  standardSnippets.forEach(([key, variable]) => {
+    if (snippets[key] !== undefined) {
+      card[key] = getHighlightSegments({ text: snippets[key] })
+    } else card[key] = variable
+  })
+
+  // process link list snippets: highlight and turn into hyperlinked text
+  linkListSnippets.forEach(([key, variable, linkTextField]) => {
+    if (snippets[key] !== undefined) {
+      // assume id is link field
+      const linkIdField = 'id'
+
+      // get link list entry text
+      const linkListEntries = variable.map(d => {
+        const matchingSnippet = snippets[key].find(dd => dd.id === d.id)
+
+        // if a snippet was found for the linked instance, highlight its name
+        if (matchingSnippet) {
+          return {
+            onClick: () => console.log(d[linkIdField]), // TODO
+            text: getHighlightSegments({
+              text: matchingSnippet[linkTextField],
+              type: 'small',
+            }),
           }
-        })
-        card[key] = linkListEntries.map(d => (
-          <div onClick={d.onClick} className={styles.link}>
-            {d.text}
-          </div>
-        ))
-      }
-    })
-  }
+        } else {
+          // return normal text if no highlight
+          return {
+            onClick: () => console.log(d[linkIdField]), // TODO
+            text: d[linkTextField],
+          }
+        }
+      })
 
-  // TOOD generate link list using same code as above in modular way
-  if (card.authors === undefined) {
-    card.authors = authors.map(d => (
-      <div onClick={() => console.log(d.id)} className={styles.link}>
-        {d.authoring_organization}
-      </div>
-    ))
-  }
+      // collate link entry text into a list of links
+      card[key] = linkListEntries.map(d => (
+        <div onClick={d.onClick} className={styles.link}>
+          {d.text}
+        </div>
+      ))
+    } else {
+      card.authors = authors.map(d => (
+        <div onClick={() => console.log(d.id)} className={styles.link}>
+          {d.authoring_organization}
+        </div>
+      ))
+    }
+  })
 
   // TODO thsi iframe code for preview:
   // <iframe

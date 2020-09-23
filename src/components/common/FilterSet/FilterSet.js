@@ -151,9 +151,13 @@ const FilterSet = ({
               filterDefsObj[field].dateRange ||
               newFilters[field].length === 0
             ) {
+              console.log('setFilters called')
+
               delete newFilters[field]
               setFilters(newFilters)
             } else {
+              console.log('setFilters called')
+
               setFilters(newFilters)
             }
           }}

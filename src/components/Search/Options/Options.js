@@ -231,6 +231,7 @@ export const Options = ({
                                     ...filters,
                                     [field]: ['custom'],
                                   }
+
                                   setFilters(newFilters)
                                 },
                                 curSelection: toYear,
@@ -266,23 +267,22 @@ export const Options = ({
                       const isCustom = v.includes('custom') && !alreadyCustom
 
                       if (isCustom) {
-                        console.log('isRange')
                         const newFilters = {
                           ...filters,
                           [field]: ['custom'],
                         }
                         setFilters(newFilters)
                       } else if (specificYearReplacingRange) {
-                        console.log('specificYearReplacingRange')
                         setFilters({ ...filters, [field]: [v[0]] })
                       } else {
-                        console.log('other')
                         setFilters({ ...filters, [field]: v })
                       }
                     } else {
-                      const newFilters = { ...filters }
-                      delete newFilters[field]
-                      setFilters(newFilters)
+                      if (filters.years !== undefined) {
+                        const newFilters = { ...filters }
+                        delete newFilters[field]
+                        setFilters(newFilters)
+                      }
                     }
                   },
                 }}

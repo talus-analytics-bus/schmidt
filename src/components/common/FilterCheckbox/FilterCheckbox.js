@@ -90,9 +90,11 @@ const FilterCheckbox = ({
           callback: v => {
             if (v.length > 0) setFilters({ ...filters, [field]: v })
             else {
-              const newFilters = { ...filters }
-              delete newFilters[field]
-              setFilters(newFilters)
+              if (filters[field] !== undefined) {
+                const newFilters = { ...filters }
+                delete newFilters[field]
+                setFilters(newFilters)
+              }
             }
           },
         }}

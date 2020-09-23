@@ -24,20 +24,51 @@ const Search = ({ setPage }) => {
   // card and filter counts data from API response to search query
   const [searchData, setSearchData] = useState(null)
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
+  const [initialized, setInitialized] = useState(false)
+
+  // get URL params to parse for filters, search text, pagination settings,
+  // and sorting settings
+  const urlParams = new URLSearchParams(window.location.search)
 
   // order by parameters
-  const [orderBy, setOrderBy] = useState('date')
-  const [isDesc, setIsDesc] = useState(true)
-
-  // current page and pagesize of paginator
-  const [curPage, setCurPage] = useState(1)
-  const [pagesize, setPagesize] = useState(5)
+  const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
+  const isDescStr = urlParams.get('is_desc') || 'true'
+  const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
   // search bar text and filters
-  const [searchText, setSearchText] = useState('')
-  const [filters, setFilters] = useState({})
-  const [fromYear, setFromYear] = useState('null')
-  const [toYear, setToYear] = useState('null')
+  /**
+   * Get filters stored in URL, if any, as JSON
+   * @method getFiltersFromUrlParams
+   * @param  {[type]}                urlParams [description]
+   * @return {[type]}                          [description]
+   */
+  const getFiltersFromUrlParams = urlParams => {
+    // If filters are specific in the url params, and they are for the current
+    // entity class, use them. Otherwise, clear them
+    const urlFilterParams = urlParams.get('filters')
+    const useUrlFilters = urlFilterParams !== null
+    const newFilters = useUrlFilters ? JSON.parse(urlFilterParams) : {}
+    return newFilters
+  }
+
+  // define init filters
+  const initFilters = getFiltersFromUrlParams(urlParams)
+  const [filters, setFilters] = useState(initFilters)
+
+  // define init search text
+  const initSearchText = urlParams.get('search_text') || ''
+  const [searchText, setSearchText] = useState(initSearchText)
+
+  // define init years
+  const [fromYear, setFromYear] = useState(urlParams.get('from') || 'null')
+  const [toYear, setToYear] = useState(urlParams.get('to') || 'null')
+
+  // current page and pagesize of paginator
+  // NOTE init values from URL params do not yet work as expected
+  const pageStr = urlParams.get('page') || '1'
+  const [curPage, setCurPage] = useState(1)
+  // const [curPage, setCurPage] = useState(+pageStr)
+  const [pagesize, setPagesize] = useState(urlParams.get('pagesize') || 5)
 
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
@@ -67,19 +98,27 @@ const Search = ({ setPage }) => {
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
     setBaselineFilterCounts(results.filterCountsQuery.data.data)
+
+    // update URL params to contain relevant options
+    // TODO
   }
 
   // EFFECT HOOKS
   // when xxx
   useEffect(() => {
-    if (curPage !== 1) {
-      setCurPage(1)
-    } else getData()
+    if (initialized) {
+      if (curPage !== 1) {
+        setCurPage(1)
+      } else {
+        getData()
+      }
+    }
   }, [searchText, pagesize, orderBy, isDesc, filters])
 
   // when filters or search text change, get updated search data
   useEffect(() => {
     getData()
+    if (!initialized) setInitialized(true)
   }, [curPage])
 
   // set scroll event to show "scroll to top" as appropriate

@@ -31,6 +31,9 @@ export const CardList = ({
             ...cardProps,
           }
           if (snippets !== null) allCardProps.snippets = snippets[i]
+          else {
+            allCardProps.snippets = {}
+          }
           return (
             <Card
               {...{
