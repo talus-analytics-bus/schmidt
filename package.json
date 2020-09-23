@@ -8,6 +8,7 @@
     "@kenshooui/react-multi-select": "^1.1.6",
     "browser-monads": "^1.0.0",
     "d3": "^5.16.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",
     "esm": "^3.2.25",
@@ -47,8 +48,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "GATSBY_ENV=production && gatsby build",
+    "develop": "GATSBY_ENV=development && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
