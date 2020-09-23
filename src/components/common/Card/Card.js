@@ -66,8 +66,6 @@ export const Card = ({
         // get link list entry text
         const linkListEntries = variable.map(d => {
           const matchingSnippet = snippets[key].find(dd => dd.id === d.id)
-          console.log('matchingSnippet')
-          console.log(matchingSnippet)
           if (matchingSnippet) {
             return {
               onClick: () => console.log(d[linkIdField]), // TODO
@@ -100,6 +98,13 @@ export const Card = ({
       </div>
     ))
   }
+
+  // TODO thsi iframe code for preview:
+  // <iframe
+  //   src={`${API_URL}/get/file?id=${files[0].id}`}
+  //   height="200"
+  //   width="300"
+  // ></iframe>
   return (
     <div className={styles.card}>
       <div className={styles.col}>

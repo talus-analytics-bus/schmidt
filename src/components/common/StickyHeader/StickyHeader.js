@@ -7,8 +7,8 @@ import classNames from 'classnames'
 import arrow from './arrowIcon.png'
 import logo from '../../../assets/images/logo.png'
 
-// local components
-import { TimeframePicker } from '../'
+// // local components
+// import { TimeframePicker } from '../'
 
 /**
  * @method StickyHeader
@@ -17,8 +17,6 @@ export const StickyHeader = ({
   show,
   name,
   img = null,
-  year,
-  setYear,
   className,
   setSimpleHeaderRef,
 }) => {
@@ -34,12 +32,14 @@ export const StickyHeader = ({
       })}
     >
       <div ref={simpleHeaderRef} className={classNames(styles.stickyHeader)}>
-        <div className={styles.countryName}>
-          {img}
-          {name}
-        </div>
-        <TimeframePicker {...{ year, setYear }} />
+        {
+          // <div className={styles.countryName}>
+          //   {img}
+          //   {name}
+          // </div>
+        }
         <a
+          className={styles.scrollToTop}
           onClick={() => {
             if (window !== undefined) {
               window.scrollTo(0, 0)
@@ -49,9 +49,15 @@ export const StickyHeader = ({
           <img src={arrow} className={styles.arrow} />
           <span>scroll to top</span>
         </a>
-        <div className={styles.stickyFooter}>
-          <img className={styles.logo} src={logo} alt={'HIV Policy Lab'} />
-        </div>
+        {
+          // <div className={styles.stickyFooter}>
+          //   <img
+          //     className={styles.logo}
+          //     src={logo}
+          //     alt={'Pandemic Repository'}
+          //   />
+          // </div>
+        }
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
+import { StickyHeader } from '../components/common'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -37,6 +38,10 @@ const Search = ({ setPage }) => {
   const [filters, setFilters] = useState({})
   const [fromYear, setFromYear] = useState('null')
   const [toYear, setToYear] = useState('null')
+
+  // simple header/footer reference
+  const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
@@ -77,11 +82,29 @@ const Search = ({ setPage }) => {
     getData()
   }, [curPage])
 
+  // set scroll event to show "scroll to top" as appropriate
+  useEffect(() => {
+    const displayThresh = 20
+    if (simpleHeaderRef.current !== null) {
+      window.addEventListener('scroll', () => {
+        setShowScrollToTop(window.scrollY > displayThresh)
+      })
+    }
+  }, [simpleHeaderRef])
+
   // JSX
   return (
     <Layout page={'search'}>
       <SEO title="Search results" />
       <div className={styles.search}>
+        <StickyHeader
+          {...{
+            show: showScrollToTop,
+            name: 'Name',
+            setSimpleHeaderRef,
+            img: null,
+          }}
+        />
         <Options
           {...{
             showFilterSections:

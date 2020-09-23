@@ -11,6 +11,7 @@ import Footer from '../components/Layout/Footer/Footer'
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
 
+const test = process.env.GATSBY_TEST_VAR // this should be defined
 const IndexPage = () => {
   // STATE  // --------------------------------------------------------------//
   const [loading, setLoading] = useState(false)
@@ -19,6 +20,7 @@ const IndexPage = () => {
   // useEffect(() => {
   //
   // }, [])
+  console.log('test var = ' + test)
 
   // JSX // -----------------------------------------------------------------//
   if (loading) return <div />
