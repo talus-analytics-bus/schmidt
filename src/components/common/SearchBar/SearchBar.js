@@ -1,13 +1,21 @@
 // 3rd party packages
 import React, { useState, useEffect, useRef } from 'react'
+import classNames from 'classnames'
 
 // assets and styles
 import styles from './searchbar.module.scss'
+import loading from './loading.svg'
 
 /**
  * @method SearchBar
  */
-export const SearchBar = ({ searchText, setSearchText, ...props }) => {
+export const SearchBar = ({
+  searchText,
+  setSearchText,
+  isSearchingText,
+  setIsSearchingText,
+  ...props
+}) => {
   // STATE
   // track search bar text and delay timing between search event triggers
   const [searchDelay, setSearchDelay] = useState(null)
@@ -23,6 +31,7 @@ export const SearchBar = ({ searchText, setSearchText, ...props }) => {
     const newTimeout = setTimeout(() => {
       const newSearchText = searchRef.current.value
       setSearchText(newSearchText)
+      setIsSearchingText(true)
     }, [500])
     setSearchDelay(newTimeout)
   }
@@ -48,6 +57,12 @@ export const SearchBar = ({ searchText, setSearchText, ...props }) => {
         onChange={updateSearchText}
         type="text"
         placeholder={'Search for pandemic information sources'}
+      />
+      <img
+        className={classNames(styles.loading, {
+          [styles.show]: isSearchingText,
+        })}
+        src={loading}
       />
     </div>
   )

@@ -15,6 +15,18 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    // loading spinner
+    .loading {
+      position: absolute;
+      height: 100px;
+      left: 200px;
+      opacity: 0;
+      transition: all 0.5s;
+      &.showLoading {
+        opacity: 1;
+      }
+    }
     .menu {
       .links {
         margin-top: 28px;

@@ -19,6 +19,8 @@ export const Results = ({
   setPagesize,
   searchText,
   setSearchText,
+  isSearchingText,
+  setIsSearchingText,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -40,7 +42,9 @@ export const Results = ({
    */
   return (
     <div className={styles.results}>
-      <SearchBar {...{ searchText, setSearchText }} />
+      <SearchBar
+        {...{ searchText, setSearchText, isSearchingText, setIsSearchingText }}
+      />
       {showPaginator && (
         <>
           <Paginator

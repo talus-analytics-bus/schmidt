@@ -15,10 +15,10 @@ import './reset.css'
 import Nav from './Nav/Nav'
 import Footer from './Footer/Footer'
 
-const Layout = ({ children, page }) => {
+const Layout = ({ children, page, loading }) => {
   return (
     <div className={styles.layout}>
-      <Nav page={page} />
+      <Nav page={page} loading={loading} />
       {children}
       <Footer />
     </div>

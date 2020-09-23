@@ -24,9 +24,15 @@ const Search = ({ setPage }) => {
   // card and filter counts data from API response to search query
   const [searchData, setSearchData] = useState(null)
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
-  const [initialized, setInitialized] = useState(false)
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
   const [checkingPopState, setCheckingPopState] = useState(false)
+
+  // has first data load for page occurred?
+  const [initialized, setInitialized] = useState(false)
+
+  // is page currently fetching search data?
+  const [isSearching, setIsSearching] = useState(false)
+  const [isSearchingText, setIsSearchingText] = useState(false)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -102,6 +108,9 @@ const Search = ({ setPage }) => {
   // FUNCTIONS
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
+    // if the page has already initialized, then a search is being done
+    setIsSearching(true)
+
     const queries = {}
     queries.searchQuery = SearchQuery({
       page: curPage,
@@ -149,6 +158,8 @@ const Search = ({ setPage }) => {
 
     // set page to initialized so data retrieval from filters, etc. happens
     if (!initialized) setInitialized(true)
+    setIsSearching(false)
+    setIsSearchingText(false)
   }
 
   // EFFECT HOOKS
@@ -230,7 +241,7 @@ const Search = ({ setPage }) => {
   // JSX
   return (
     <>
-      <Layout page={'search'}>
+      <Layout page={'search'} loading={isSearching && !isSearchingText}>
         <SEO title="Search results" />
         <div className={styles.search}>
           <StickyHeader
@@ -271,6 +282,8 @@ const Search = ({ setPage }) => {
               pagesize,
               setPagesize,
               searchData,
+              isSearchingText,
+              setIsSearchingText,
             }}
           />
         </div>

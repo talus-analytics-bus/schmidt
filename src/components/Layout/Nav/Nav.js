@@ -7,8 +7,9 @@ import { InfoTooltip } from '../../common'
 
 // assets
 import logo from '../../../assets/images/logo.svg'
+import loadingSvg from '../../../assets/images/loading-blue.svg'
 
-const Nav = ({ page, ...props }) => {
+const Nav = ({ page, loading, ...props }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showCountryPicker, setShowCountryPicker] = useState(false)
   const linksRef = useRef(null)
@@ -73,6 +74,12 @@ const Nav = ({ page, ...props }) => {
       <div className={styles.nav}>
         <Link to={'/'}>
           <img src={logo} />
+          <img
+            className={classNames(styles.loading, {
+              [styles.showLoading]: loading,
+            })}
+            src={loadingSvg}
+          />
         </Link>
         <div className={styles.menu}>
           <button ref={hamburgerRef} className={styles.hamburger}>
