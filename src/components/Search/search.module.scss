@@ -23,9 +23,8 @@
   // space out the left and right sections consistently
   > div {
     margin: 0 20px;
-    &:first-child {
+    &:nth-child(2) {
       margin: 0;
-      // padding-right: 20px;
     }
     &:last-child {
       margin-right: 0;

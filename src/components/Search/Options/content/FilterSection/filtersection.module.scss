@@ -13,6 +13,20 @@
 
     @include spaceItemsHoriz(10px);
 
+    .label {
+      .numSelected {
+        align-items: flex-end;
+        color: $selected-blue;
+        font-style: italic;
+      }
+    }
+    .clearButton {
+      margin-left: auto;
+      & + i:last-of-type {
+        margin-left: 0;
+      }
+    }
+
     // make icons navy and larger
     i {
       color: $navy-blue;

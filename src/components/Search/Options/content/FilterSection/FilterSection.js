@@ -4,7 +4,8 @@ import classNames from 'classnames'
 import ReactTooltip from 'react-tooltip'
 
 // local components
-import { FilterSet } from '../../../../common'
+import { FilterSet, PrimaryButton } from '../../../../common'
+import { comma } from '../../../../misc/Util'
 
 // local assets and styling
 import styles from './filtersection.module.scss'
@@ -15,9 +16,11 @@ export const FilterSection = ({
   choices = [],
   grouped = false,
   filterDefs,
+  field,
   hide,
   filters,
   setFilters,
+  numSelected = null,
   ...props
 }) => {
   // CONSTANTS
@@ -43,7 +46,34 @@ export const FilterSection = ({
     >
       <div onClick={() => setOpen(!open)} className={styles.bar}>
         {icon}
-        <span>{filterDefs.label}</span>
+        <span className={styles.label}>
+          <span>{filterDefs.label}&nbsp;</span>
+          {
+            <span className={styles.numSelected}>
+              {numSelected && (
+                <>
+                  <span>({comma(numSelected)})&nbsp;</span>
+                </>
+              )}
+            </span>
+          }
+        </span>
+        {numSelected && (
+          <div className={styles.clearButton}>
+            <PrimaryButton
+              {...{
+                onClick: e => {
+                  e.stopPropagation()
+                  const newFilters = { ...filters }
+                  delete newFilters[filterDefs.field]
+                  setFilters(newFilters)
+                },
+                label: 'Clear',
+                isLink: true,
+              }}
+            />
+          </div>
+        )}
         <i className={'material-icons'}>expand_less</i>
       </div>
       <div className={styles.content}>

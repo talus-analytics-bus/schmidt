@@ -38,8 +38,8 @@ export const PrimaryButton = ({
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
   const unwrappedButton = (
     <button
-      onClick={() => {
-        if (onClick) onClick()
+      onClick={e => {
+        if (onClick) onClick(e)
       }}
       className={classNames(styles.button, {
         [styles.secondary]: isSecondary,

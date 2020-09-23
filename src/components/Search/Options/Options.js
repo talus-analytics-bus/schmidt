@@ -138,7 +138,7 @@ export const Options = ({
         // const filterHasSubsections = filterDefs[field].subsections !== undefined
 
         filterDefs[field].choices = curFilterSectionData.choices
-
+        curFilterSectionData.key = filterDefs[field].field
         // add any "missing" values
         baselineFilterCounts[field].forEach(([value, count, id]) => {
           if (alreadySeenValues.includes(id || value)) return
@@ -310,6 +310,9 @@ export const Options = ({
           hide: i > 3 && !showAdditionalFilters,
           filters,
           setFilters,
+          numSelected:
+            filters[curFilterSectionData.key] &&
+            filters[curFilterSectionData.key].length,
         }}
       />
     )
