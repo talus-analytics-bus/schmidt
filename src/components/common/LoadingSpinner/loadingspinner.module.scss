@@ -10,7 +10,7 @@
   height: 100%;
   opacity: 0;
   pointer-events: none;
-  z-index: 4;
+  z-index: 9;
   &.on {
     opacity: 1;
     pointer-events: all;

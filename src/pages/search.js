@@ -227,51 +227,54 @@ const Search = ({ setPage }) => {
 
   // JSX
   return (
-    <Layout page={'search'}>
-      <SEO title="Search results" />
-      <div className={styles.search}>
-        <StickyHeader
-          {...{
-            show: showScrollToTop,
-            name: 'Name',
-            setSimpleHeaderRef,
-            img: null,
-          }}
-        />
-        <Options
-          {...{
-            showFilterSections:
-              searchData !== null && baselineFilterCounts !== null,
-            filterCounts: searchData !== null ? searchData.filter_counts : {},
-            baselineFilterCounts,
-            orderBy,
-            setOrderBy,
-            isDesc,
-            setIsDesc,
-            searchText,
-            setSearchText,
-            filters,
-            setFilters,
-            fromYear,
-            setFromYear,
-            toYear,
-            setToYear,
-          }}
-        />
-        <Results
-          {...{
-            searchData,
-            searchText,
-            setSearchText,
-            curPage,
-            setCurPage,
-            pagesize,
-            setPagesize,
-            searchData,
-          }}
-        />
-      </div>
-    </Layout>
+    <>
+      <Layout page={'search'}>
+        <SEO title="Search results" />
+        <div className={styles.search}>
+          <StickyHeader
+            {...{
+              show: showScrollToTop,
+              name: 'Name',
+              setSimpleHeaderRef,
+              img: null,
+            }}
+          />
+          <Options
+            {...{
+              showFilterSections:
+                searchData !== null && baselineFilterCounts !== null,
+              filterCounts: searchData !== null ? searchData.filter_counts : {},
+              baselineFilterCounts,
+              orderBy,
+              setOrderBy,
+              isDesc,
+              setIsDesc,
+              searchText,
+              setSearchText,
+              filters,
+              setFilters,
+              fromYear,
+              setFromYear,
+              toYear,
+              setToYear,
+            }}
+          />
+          <Results
+            {...{
+              searchData,
+              searchText,
+              setSearchText,
+              curPage,
+              setCurPage,
+              pagesize,
+              setPagesize,
+              searchData,
+            }}
+          />
+        </div>
+      </Layout>
+      <LoadingSpinner loading={!initialized} />
+    </>
   )
 }
 
