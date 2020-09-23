@@ -7,9 +7,42 @@
   border-radius: $border-radius;
   border: 2px solid $soft-blue;
   margin-left: auto;
-  width: 450px;
-  height: 60px;
+  width: 480px;
+  $height: 60px;
+  height: $height;
   display: flex;
+
+  // loading spinner and clear button which reside inside the area not covered
+  // by the blue bumper
+  .inner {
+    position: relative;
+    right: $bumper-width;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin-left: auto;
+    background-color: transparent;
+
+    // clear button
+    .clearButton {
+      color: #333;
+      cursor: pointer;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+    .loading {
+      height: $height;
+      opacity: 0;
+      transition: all 0.5s;
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
+
   // bumper is the blue cap on the right end of the bar
   .bumper {
     border-radius: 0 $border-radius $border-radius 0;
@@ -34,7 +67,7 @@
     border-radius: $border-radius;
     font-family: 'rawline', serif;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     height: 100%;
     width: 100%;
     margin-bottom: 10px;
@@ -48,16 +81,6 @@
       font-style: italic;
       color: gray;
       font-weight: normal;
-    }
-  }
-  .loading {
-    position: absolute;
-    height: 100%;
-    right: $bumper-width;
-    opacity: 0;
-    transition: all 0.5s;
-    &.show {
-      opacity: 1;
     }
   }
 }

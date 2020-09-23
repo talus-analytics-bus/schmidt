@@ -58,12 +58,22 @@ export const SearchBar = ({
         type="text"
         placeholder={'Search for pandemic information sources'}
       />
-      <img
-        className={classNames(styles.loading, {
-          [styles.show]: isSearchingText,
-        })}
-        src={loading}
-      />
+      <div className={styles.inner}>
+        <img
+          className={classNames(styles.loading, {
+            [styles.show]: isSearchingText,
+          })}
+          src={loading}
+        />
+        {searchText !== '' && (
+          <i
+            onClick={() => setSearchText('')}
+            className={classNames('material-icons', styles.clearButton)}
+          >
+            clear
+          </i>
+        )}
+      </div>
       <div className={styles.bumper}>
         <i className={'material-icons'}>search</i>
       </div>
