@@ -63,7 +63,9 @@ export const Results = ({
                 searchData.page !== searchData.num_pages
                   ? () => {
                       setCurPage(curPage + 1)
-                      window.scrollTo(0, 0)
+                      if (window !== undefined) {
+                        window.scrollTo(0, 0)
+                      }
                     }
                   : false,
             }}

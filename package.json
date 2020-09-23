@@ -8,7 +8,6 @@
     "@kenshooui/react-multi-select": "^1.1.6",
     "browser-monads": "^1.0.0",
     "d3": "^5.16.0",
-    "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",
     "esm": "^3.2.25",

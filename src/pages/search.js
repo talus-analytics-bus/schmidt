@@ -30,7 +30,10 @@ const Search = ({ setPage }) => {
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
-  const urlParams = new URLSearchParams(window.location.search)
+  let urlParams
+  if (window !== undefined) {
+    urlParams = new URLSearchParams(window.location.search)
+  }
 
   // order by parameters
   // const [orderBy, setOrderBy] = useState('date')
@@ -135,7 +138,9 @@ const Search = ({ setPage }) => {
         isDesc,
         searchText,
       } // TODO check
-      window.history.pushState(newState, '', newUrl)
+      if (window !== undefined) {
+        window.history.pushState(newState, '', newUrl)
+      }
     } else {
       setPopstateTriggeredUpdate(false)
     }
@@ -212,9 +217,11 @@ const Search = ({ setPage }) => {
   useEffect(() => {
     const displayThresh = 20
     if (simpleHeaderRef.current !== null) {
-      window.addEventListener('scroll', () => {
-        setShowScrollToTop(window.scrollY > displayThresh)
-      })
+      if (window !== undefined)
+        window.addEventListener('scroll', () => {
+          if (window !== undefined)
+            setShowScrollToTop(window.scrollY > displayThresh)
+        })
     }
   }, [simpleHeaderRef])
 

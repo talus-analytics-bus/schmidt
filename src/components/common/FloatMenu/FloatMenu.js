@@ -29,7 +29,7 @@ const FloatMenu = ({
   // on click anywhere but in menu, and menu is shown, close menu; otherwise
   // do nothing
   useEffect(() => {
-    if (show)
+    if (show && document !== undefined)
       document.getElementById('___gatsby').onclick = e => {
         if (wrapperRef === null || wrapperRef.current === null) return
         const wrapper = wrapperRef.current

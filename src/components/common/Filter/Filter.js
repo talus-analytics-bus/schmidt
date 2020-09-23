@@ -104,15 +104,19 @@ const Filter = ({
   // Close filter if user clicks outside it
   if (show) {
     const onClick = e => {
-      const el = document.getElementById(elId)
-      if (el && el.contains(e.target)) {
-        return
-      } else {
-        window.removeEventListener('click', onClick)
-        setShow(false)
+      if (document !== undefined) {
+        const el = document.getElementById(elId)
+        if (el && el.contains(e.target)) {
+          return
+        } else {
+          if (window !== undefined) {
+            window.removeEventListener('click', onClick)
+            setShow(false)
+          }
+        }
       }
+      if (window !== undefined) window.addEventListener('click', onClick)
     }
-    window.addEventListener('click', onClick)
   }
 
   useEffect(() => {

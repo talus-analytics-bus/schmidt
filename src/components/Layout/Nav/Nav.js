@@ -19,15 +19,16 @@ const Nav = ({ page, ...props }) => {
   // on click anywhere but in menu, and menu is shown, close menu; otherwise
   // do nothing
   useEffect(() => {
-    document.getElementById('___gatsby').onclick = e => {
-      if (linksRef === null || linksRef.current === null) return
-      const links = linksRef.current
-      if (links.contains(e.target) || hamburgerRef.current.contains(e.target))
-        return
-      else {
-        setShowMobileMenu(false)
+    if (document !== undefined)
+      document.getElementById('___gatsby').onclick = e => {
+        if (linksRef === null || linksRef.current === null) return
+        const links = linksRef.current
+        if (links.contains(e.target) || hamburgerRef.current.contains(e.target))
+          return
+        else {
+          setShowMobileMenu(false)
+        }
       }
-    }
   }, [showMobileMenu, showCountryPicker])
 
   /**
