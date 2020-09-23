@@ -109,13 +109,14 @@ const Filter = ({
         if (el && el.contains(e.target)) {
           return
         } else {
-          if (window !== undefined) {
+          if (typeof window !== 'undefined') {
             window.removeEventListener('click', onClick)
             setShow(false)
           }
         }
       }
-      if (window !== undefined) window.addEventListener('click', onClick)
+      if (typeof window !== 'undefined')
+        window.addEventListener('click', onClick)
     }
   }
 

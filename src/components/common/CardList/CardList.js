@@ -30,7 +30,7 @@ export const CardList = ({
             resultNumber: comma(start + i),
             ...cardProps,
           }
-          if (snippets !== null) allCardProps.snippets = snippets[i]
+          if (snippets !== null) allCardProps.snippets = snippets[i] || {}
           else {
             allCardProps.snippets = {}
           }

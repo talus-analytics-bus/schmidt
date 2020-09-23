@@ -41,7 +41,7 @@ export const StickyHeader = ({
         <a
           className={styles.scrollToTop}
           onClick={() => {
-            if (window !== undefined) {
+            if (typeof window !== 'undefined') {
               window.scrollTo(0, 0)
             }
           }}

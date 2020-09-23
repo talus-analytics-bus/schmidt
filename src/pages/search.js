@@ -7,7 +7,7 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
-import { StickyHeader } from '../components/common'
+import { StickyHeader, LoadingSpinner } from '../components/common'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -31,8 +31,10 @@ const Search = ({ setPage }) => {
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
   let urlParams
-  if (window !== undefined) {
+  if (typeof window !== 'undefined') {
     urlParams = new URLSearchParams(window.location.search)
+  } else {
+    urlParams = new URLSearchParams()
   }
 
   // order by parameters
@@ -138,12 +140,15 @@ const Search = ({ setPage }) => {
         isDesc,
         searchText,
       } // TODO check
-      if (window !== undefined) {
+      if (typeof window !== 'undefined') {
         window.history.pushState(newState, '', newUrl)
       }
     } else {
       setPopstateTriggeredUpdate(false)
     }
+
+    // set page to initialized so data retrieval from filters, etc. happens
+    if (!initialized) setInitialized(true)
   }
 
   // EFFECT HOOKS
@@ -174,11 +179,8 @@ const Search = ({ setPage }) => {
     if (!popstateTriggeredUpdate && !checkingPopState) {
       getData()
       if (!initialized) {
-        // set page to initialized so data retrieval from filters, etc. happens
-        setInitialized(true)
-
         // add event to process URL params when a history state is popped
-        if (window !== undefined) {
+        if (typeof window !== 'undefined') {
           window.onpopstate = function (e) {
             setCheckingPopState(true)
             const state = e.state
@@ -217,9 +219,9 @@ const Search = ({ setPage }) => {
   useEffect(() => {
     const displayThresh = 20
     if (simpleHeaderRef.current !== null) {
-      if (window !== undefined)
+      if (typeof window !== 'undefined')
         window.addEventListener('scroll', () => {
-          if (window !== undefined)
+          if (typeof window !== 'undefined')
             setShowScrollToTop(window.scrollY > displayThresh)
         })
     }
