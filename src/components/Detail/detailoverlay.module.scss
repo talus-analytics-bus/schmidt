@@ -50,4 +50,34 @@
       display: flex;
     }
   }
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    .cardAndRelated {
+    }
+    .sideBar {
+      .keyTopics {
+        @include spaceItemsVert(10px);
+        .keyTopic {
+          display: grid;
+          grid-template-columns: 15px 1fr;
+          grid-gap: 0 5px;
+          align-items: center;
+          color: #898989;
+          .colorBlock {
+            height: 30px;
+            background-color: #e5e5e5;
+          }
+          &.active {
+            color: $selected-blue;
+            font-weight: 600;
+            .colorBlock {
+              background-color: $navy-blue;
+            }
+          }
+        }
+      }
+    }
+  }
 }

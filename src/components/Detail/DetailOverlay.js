@@ -6,9 +6,8 @@ import classNames from 'classnames'
 // local components
 import Layout from '../Layout/Layout'
 import SEO from '../seo'
-// import Results from '../components/Detail/Results/Results'
-// import Options from '../components/Detail/Options/Options'
 import { Card } from '../../components/common'
+import Panel from './content/Panel'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
@@ -34,6 +33,16 @@ const DetailOverlay = ({
   floating = true,
   close = () => '',
 }) => {
+  // CONSTANTS
+  const keyTopics = [
+    'Biodefense',
+    'Emerging infectious disease',
+    'Health security',
+    'Intentional biological attacks and CBRNE threats',
+    'Naturally occurring infectious disease outbreak/pandemic preparedness',
+    'Public health response',
+  ]
+
   // STATE
   // item and related items data
   const [itemData, setItemData] = useState(null)
@@ -74,7 +83,29 @@ const DetailOverlay = ({
             <i className={'material-icons'}>close</i>
           </div>
         </div>
-        <Card {...{ ...itemData, detail: true }} />
+        <div className={styles.content}>
+          <div className={styles.cardAndRelated}>
+            <Card {...{ ...itemData, detail: true }} />
+          </div>
+          <div className={styles.sideBar}>
+            <Panel {...{ title: 'Topic areas' }}>
+              <div className={styles.keyTopics}>
+                {keyTopics.map(d => (
+                  <>
+                    <div
+                      className={classNames(styles.keyTopic, {
+                        [styles.active]: itemData.key_topics.includes(d),
+                      })}
+                    >
+                      <div className={styles.colorBlock}></div>
+                      <span>{d}</span>
+                    </div>
+                  </>
+                ))}
+              </div>
+            </Panel>
+          </div>
+        </div>
       </div>
     )
 }

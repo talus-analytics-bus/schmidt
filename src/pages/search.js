@@ -52,7 +52,7 @@ const Search = ({ setPage }) => {
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
   // showing detail overlay?
-  const [showOverlay, setShowOverlay] = useState(432)
+  const [showOverlay, setShowOverlay] = useState(1)
   // const [showOverlay, setShowOverlay] = useState(false)
   // const [showOverlay, setShowOverlay] = useState(
   //   urlParams.get('overlay') !== undefined || false
