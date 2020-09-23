@@ -6,7 +6,7 @@
   padding: 10px 0;
   .cards {
     display: grid;
-    grid-auto-rows: 250px;
+    grid-auto-rows: minmax(250px, auto);
     grid-gap: 10px 0;
   }
 }

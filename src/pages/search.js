@@ -284,6 +284,7 @@ const Search = ({ setPage }) => {
               searchData,
               isSearchingText,
               setIsSearchingText,
+              filters,
             }}
           />
         </div>

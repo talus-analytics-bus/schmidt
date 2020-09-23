@@ -21,6 +21,7 @@ export const Results = ({
   setSearchText,
   isSearchingText,
   setIsSearchingText,
+  filters,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -64,6 +65,7 @@ export const Results = ({
               start,
               cardData: searchData.data,
               snippets: searchData.data_snippets || null,
+              filters,
               setNextPage:
                 searchData.page !== searchData.num_pages
                   ? () => {

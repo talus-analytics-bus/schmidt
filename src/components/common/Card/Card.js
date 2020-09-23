@@ -9,7 +9,7 @@ import styles from './card.module.scss'
 import { PrimaryButton } from '../'
 
 // local utility functions
-import { formatDate } from '../../misc/Util'
+import { formatDate, isEmpty } from '../../misc/Util'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -22,11 +22,13 @@ export const Card = ({
   id,
   type_of_record,
   title,
+  description,
   date,
   authors,
   key_topics,
   files,
   snippets = {},
+  filters = {},
   ...props
 }) => {
   // define obj to hold card text, including highlighted snippets, if any
@@ -40,10 +42,10 @@ export const Card = ({
    * @param  {String}             [type='normal' }]            [description]
    * @return {[type]}                            [description]
    */
-  const getHighlightSegments = ({ text, type = 'normal' }) => {
+  const getHighlightSegments = ({ text, type = 'normal', maxWords = null }) => {
     // replace text within highlight tags with JSX
     const textArr = text
-      .replace('</highlight>', '<highlight>')
+      .replace(/<\/highlight>/g, '<highlight>')
       .split('<highlight>')
 
     // arr to hold new text (with highlights)
@@ -64,12 +66,58 @@ export const Card = ({
         newText.push(<>{d}</>)
       }
     })
-    return newText
+
+    // if max words provided, trim
+    let pre, post, highlighted
+    let nWords = 0
+    if (maxWords) {
+      const trimmedText = []
+      const halfMax = maxWords / 2
+      let done = false
+      let i = 0
+      while (!done && i < newText.length) {
+        const frag = newText[i]
+
+        if (pre === undefined) {
+          // get first words of first fragment
+          const preWordsAll = frag.props.children.split(' ')
+          const preWordsTrimmed = preWordsAll.slice(
+            Math.max(preWordsAll.length - halfMax, 0),
+            preWordsAll.length
+          )
+
+          const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
+          pre = `"${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
+          nWords += preWordsTrimmed.length
+          trimmedText.push(<span>{pre} </span>)
+        } else if (highlighted === undefined) {
+          highlighted = frag
+          trimmedText.push(highlighted)
+        } else if (post === undefined) {
+          const wordsAll = frag.props.children.split(' ')
+          const wordsTrimmed = wordsAll.slice(0, halfMax)
+
+          const ellipsis = wordsTrimmed.length !== wordsAll.length
+          post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}"`
+          nWords += wordsTrimmed.length
+          trimmedText.push(<span>{post}</span>)
+        }
+        done =
+          pre !== undefined && post !== undefined && highlighted !== undefined
+        i += 1
+        continue
+      }
+      return trimmedText
+    } else return newText
   }
 
   // if snippets are provided, then scan them and use them
   // standard snippets are plain text (not hyperlinks)
   const standardSnippets = [['title', title]]
+
+  // trimmed snippets should only have a few words around the first highlighted
+  // word displayed
+  const trimmedSnippets = [['description', description]]
 
   // link list snippets are author names, etc. that when clicked do something
   const linkListSnippets = [['authors', authors, 'authoring_organization']]
@@ -79,6 +127,13 @@ export const Card = ({
     if (snippets[key] !== undefined) {
       card[key] = getHighlightSegments({ text: snippets[key] })
     } else card[key] = variable
+  })
+
+  // process trimmed snippets: highlight plain text and then trim
+  trimmedSnippets.forEach(([key, variable]) => {
+    if (snippets[key] !== undefined) {
+      card[key] = getHighlightSegments({ text: snippets[key], maxWords: 20 })
+    } else card[key] = null
   })
 
   // process link list snippets: highlight and turn into hyperlinked text
@@ -123,6 +178,59 @@ export const Card = ({
       ))
     }
   })
+
+  // if (!isEmpty(snippets)) {
+  //   console.log('snippets')
+  //   console.log(snippets)
+  // }
+
+  // process tag snippets
+  const pdfMatch = snippets['files'] !== undefined
+  const tagSnippets = []
+  if (pdfMatch) {
+    tagSnippets.push(
+      <div className={styles.tagSnippet}>
+        <i className={'material-icons'}>picture_as_pdf</i>
+        <div className={styles.iconSnippet}>{snippets.files}</div>
+      </div>
+    )
+  }
+
+  // key topic match?
+  // const keyTopicMatch =
+  if (key_topics.length > 0) {
+    const keyTopicsJsxTmp = []
+    const keyTopicsFilters =
+      filters.key_topics !== undefined ? filters.key_topics : []
+    key_topics.forEach(d => {
+      if (keyTopicsFilters.includes(d)) {
+        keyTopicsJsxTmp.push(
+          <span className={classNames(styles.highlighted, styles.small)}>
+            {d}
+          </span>
+        )
+      } else {
+        keyTopicsJsxTmp.push(<>{d}</>)
+      }
+    })
+
+    // add bullet chars
+    const needsBulletChars = keyTopicsJsxTmp.length > 1
+    const keyTopicsJsx = needsBulletChars ? [] : keyTopicsJsxTmp
+    if (needsBulletChars)
+      keyTopicsJsxTmp.forEach((d, i) => {
+        keyTopicsJsx.push(d)
+        if (i !== keyTopicsJsxTmp.length - 1) keyTopicsJsx.push(' • ')
+      })
+    console.log('keyTopicsJsx')
+    console.log(keyTopicsJsx)
+    tagSnippets.push(
+      <div className={styles.tagSnippet}>
+        <i className={'material-icons'}>device_hub</i>
+        <div className={styles.iconSnippet}>{keyTopicsJsx}</div>
+      </div>
+    )
+  }
 
   // TODO thsi iframe code for preview:
   // <iframe
@@ -183,6 +291,10 @@ export const Card = ({
               />
             </div>
           </div>
+          <div className={styles.descriptionSnippet}>{card.description}</div>
+          {tagSnippets.length > 0 && (
+            <div className={styles.tagSnippets}>{tagSnippets}</div>
+          )}
         </div>
       </div>
     </div>

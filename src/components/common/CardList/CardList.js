@@ -18,6 +18,7 @@ export const CardList = ({
   cardData = [],
   setNextPage = false,
   snippets = [],
+  filters,
   ...props
 }) => {
   // CONSTANTS
@@ -38,6 +39,7 @@ export const CardList = ({
             <Card
               {...{
                 ...allCardProps,
+                filters,
               }}
             />
           )

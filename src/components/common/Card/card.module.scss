@@ -2,12 +2,11 @@
 .card {
   background-color: $light-gray;
   width: 100%;
-  // display: flex;
-  // flex-flow: row;
   padding: 10px;
   border: 1px solid transparent;
-
   transition: all 0.25s;
+  // padding: 10px;
+
   &:hover {
     border-color: #333;
     @include boxShadowStrong();
@@ -97,6 +96,35 @@
         display: flex;
         margin-left: auto;
         @include spaceItemsHoriz(10px);
+      }
+    }
+
+    // description snippet, if any text matched, with a few words around the
+    // matched text
+    .descriptionSnippet {
+      margin-top: 20px;
+      color: #333;
+      font-style: italic;
+      font-size: 1.3rem;
+      line-height: 1.5;
+    }
+
+    // tag snippets: including an icon and some matched text
+    .tagSnippets {
+      border-top: 1px solid $gray;
+      margin-top: 10px;
+      padding-top: 10px;
+      display: flex;
+      flex-flow: column;
+      @include spaceItemsVert(5px);
+
+      .tagSnippet {
+        display: flex;
+        @include spaceItemsHoriz(5px);
+        align-items: center;
+        i {
+          color: $navy-blue;
+        }
       }
     }
   }
