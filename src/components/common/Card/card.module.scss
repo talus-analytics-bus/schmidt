@@ -68,6 +68,7 @@
   &.detail {
     padding: 20px;
     grid-template-columns: max-content $letter-width-lg auto;
+    background-color: white;
     .resultNumber {
       display: none;
     }
@@ -77,7 +78,7 @@
     }
     .thumbnail {
       width: $letter-width-lg;
-      justify-content: unset;
+      // justify-content: unset;
       img {
         max-height: $max-height-lg;
         max-width: $letter-width-lg;
@@ -188,8 +189,6 @@
 
   // if detail card: reformat to suit the details page
   &.detail {
-    background-color: pink;
-
     // hide actions since they are shown elsewhere
     .detailsAndActions {
       .actions {

@@ -142,7 +142,6 @@ export const Card = ({
     if (snippets[key] !== undefined) {
       card[key] = getHighlightSegments({ text: snippets[key], maxWords: 20 })
     } else {
-      console.log(key)
       if (key === 'description' && detail) {
         card[key] = variable || 'Description not yet available for this item'
       } else card[key] = null
@@ -191,11 +190,6 @@ export const Card = ({
       ))
     }
   })
-
-  // if (!isEmpty(snippets)) {
-  //   console.log('snippets')
-  //   console.log(snippets)
-  // }
 
   // process tag snippets
   const pdfMatch = snippets['files'] !== undefined

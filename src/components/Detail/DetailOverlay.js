@@ -6,7 +6,7 @@ import classNames from 'classnames'
 // local components
 import Layout from '../Layout/Layout'
 import SEO from '../seo'
-import { Card } from '../../components/common'
+import { Card, CardList } from '../../components/common'
 import Panel from './content/Panel'
 
 // local utility functions
@@ -36,6 +36,7 @@ const DetailOverlay = ({
   // STATE
   // opacity control
   const [opacity, setOpacity] = useState(0)
+  const [loaded, setLoaded] = useState(false)
 
   // CONSTANTS
   const keyTopics = [
@@ -50,8 +51,7 @@ const DetailOverlay = ({
   // STATE
   // item and related items data
   const [itemData, setItemData] = useState(null)
-  console.log('itemData')
-  console.log(itemData)
+
   const [relatedItemsData, setRelatedItemsData] = useState(null)
   // FUNCTIONS
   // get item data
@@ -67,7 +67,6 @@ const DetailOverlay = ({
   // load data when ID is set
   useEffect(() => {
     if (id !== false) {
-      console.log('id = ' + id)
       getData()
       if (typeof window !== 'undefined') {
         window.scrollTo(0, 0)
@@ -76,11 +75,15 @@ const DetailOverlay = ({
   }, [id])
 
   useEffect(() => {
-    if (itemData !== null) {
-      setOpacity(1)
+    if (itemData !== null && relatedItemsData !== null) {
+      setLoaded(true)
     }
-  }, [itemData])
-  if (itemData === null) return null
+  }, [itemData, relatedItemsData])
+
+  useEffect(() => {
+    if (loaded) setOpacity(1)
+  }, [loaded])
+  if (!loaded) return null
   else
     return (
       <div
@@ -92,8 +95,8 @@ const DetailOverlay = ({
         <div className={styles.band}>
           <div
             onClick={() => {
-              close()
               setOpacity(0)
+              setTimeout(close, 250)
             }}
             className={styles.closeButton}
           >
@@ -103,8 +106,45 @@ const DetailOverlay = ({
         <div className={styles.content}>
           <div className={styles.cardAndRelated}>
             <Card {...{ ...itemData, detail: true }} />
+            <hr style={{ borderColor: '#333' }} />
+            {relatedItemsData !== null && (
+              <div className={styles.relatedItems}>
+                <Panel
+                  {...{
+                    key: `similarPanel${id}`,
+                    title: `Similar items (${relatedItemsData.related_items.length})`,
+                    iconName: 'file_copy',
+                    secondary: false,
+                  }}
+                >
+                  <CardList
+                    {...{
+                      key: `cardList${id}`,
+                      cardData: relatedItemsData.related_items,
+                      start: 1,
+                    }}
+                  />
+                </Panel>
+              </div>
+            )}
           </div>
           <div className={styles.sideBar}>
+            <Panel {...{ title: 'Topic areas' }}>
+              <div className={styles.keyTopics}>
+                {keyTopics.map(d => (
+                  <>
+                    <div
+                      className={classNames(styles.keyTopic, {
+                        [styles.active]: itemData.key_topics.includes(d),
+                      })}
+                    >
+                      <div className={styles.colorBlock}></div>
+                      <span>{d}</span>
+                    </div>
+                  </>
+                ))}
+              </div>
+            </Panel>
             <Panel {...{ title: 'Topic areas' }}>
               <div className={styles.keyTopics}>
                 {keyTopics.map(d => (

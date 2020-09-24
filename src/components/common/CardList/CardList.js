@@ -28,7 +28,6 @@ export const CardList = ({
     cardData !== null
       ? cardData.map(({ ...cardProps }, i) => {
           const allCardProps = {
-            key: cardProps.id,
             resultNumber: comma(start + i),
             ...cardProps,
           }
@@ -40,6 +39,7 @@ export const CardList = ({
             <Card
               {...{
                 ...allCardProps,
+                key: allCardProps.id,
                 filters,
                 setShowOverlay,
               }}

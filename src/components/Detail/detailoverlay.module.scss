@@ -1,5 +1,8 @@
 @import '../../assets/styles/vars.scss';
 .detailOverlay {
+  .relatedItems {
+    padding-left: 20px;
+  }
   // standard: max width of screen is 1300px
   // center content in that view
   // TODO pull up in scope to master SCSS file
@@ -9,9 +12,12 @@
   width: 100%;
   height: 100%;
   font-size: 1rem;
+  background-color: white;
 
   .band {
     display: none;
+    border-right: 2px solid #5c5c5c;
+
     padding: 20px;
     background-color: #5c5c5c;
     width: 100%;
@@ -38,7 +44,7 @@
     }
   }
   // animate opacity, controlled in JS
-  transition: opacity 0.5s;
+  transition: opacity 0.25s;
 
   &.floating {
     z-index: 9; // above header
@@ -48,21 +54,27 @@
     padding: 0;
 
     // animate opacity, controlled in JS
-    transition: opacity 0.5s;
+    transition: opacity 0.25s;
 
     background-color: white;
     .band {
       display: flex;
     }
-    @include boxShadowStrong();
   }
+
   .content {
+    border-left: 2px solid #5c5c5c;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 350px;
-    .cardAndRelated {
-    }
+    background-color: white;
+
     .sideBar {
+      background-color: $light-gray;
+      @include spaceItemsVert(10px);
+      margin-left: 10px;
+      border-right: 2px solid #5c5c5c;
+
       .keyTopics {
         @include spaceItemsVert(10px);
         .keyTopic {
@@ -83,6 +95,11 @@
             }
           }
         }
+      }
+
+      // extend last panel to bottom
+      > div:not(:first-child) {
+        border-top: 10px solid white;
       }
     }
   }
