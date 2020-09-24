@@ -88,6 +88,13 @@
         width: $letter-width-lg;
       }
     }
+
+    // description is not italicized in detail mode
+    .main {
+      .descriptionSnippet {
+        font-style: normal;
+      }
+    }
   }
 
   .resultNumber {
