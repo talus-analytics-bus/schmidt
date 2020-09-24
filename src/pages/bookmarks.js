@@ -28,6 +28,11 @@ const Bookmarks = ({}) => {
   // STATE
   // page initialized?
   const [initialized, setInitialized] = useState(false)
+
+  // data loaded?
+  const [loading, setLoading] = useState(!initialized)
+
+  // page data -- bookmarked items
   const [bookmarkedItemData, setBookmarkedItemData] = useState({})
 
   // is page currently fetching search data?
@@ -85,6 +90,7 @@ const Bookmarks = ({}) => {
     }
     // set show overlay value
     setShowOverlay(newId)
+    setLoading(true)
   }
 
   // // FUNCTIONS
@@ -117,19 +123,15 @@ const Bookmarks = ({}) => {
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
     // get all bookmarked items, placeholder for now
+    setLoading(true)
     const results = await ItemsQuery({
       ids: bookmarkedIds.split(',').map(d => +d),
       pagesize,
       page: curPage,
     })
     setBookmarkedItemData(results.data)
+    setLoading(false)
   }
-
-  // // remove
-  // localStorage.removeItem('myData');
-  //
-  // // remove all
-  // localStorage.clear();
 
   // EFFECT HOOKS
   // get bookmarked ids initially
@@ -138,10 +140,9 @@ const Bookmarks = ({}) => {
       withBookmarkedIds({ callback: setBookmarkedIds })
   }, [bookmarkedIds])
 
-  // when xxx
+  // re-fetch data if a parameter is changed after bookmarks are loaded
   useEffect(() => {
     if (bookmarkedIds !== null) {
-      // if (!popstateTriggeredUpdate && !freezeDataUpdates) {
       if (curPage !== 1) {
         setCurPage(1)
       } else {
@@ -151,6 +152,7 @@ const Bookmarks = ({}) => {
     }
   }, [bookmarkedIds, pagesize, orderBy, isDesc])
 
+  // get new data when page is changed
   useEffect(() => {
     if (initialized) {
       getData()
@@ -178,7 +180,7 @@ const Bookmarks = ({}) => {
     <>
       <Layout
         page={'bookmarks'}
-        loading={false}
+        loading={loading}
         bookmarkCount={bookmarkArr.length}
       >
         <SEO title="Search results" />
@@ -246,7 +248,7 @@ const Bookmarks = ({}) => {
                 origScrollY,
                 onViewDetails,
                 origScrollY,
-                onLoaded: () => setIsSearching(false),
+                onLoaded: () => setLoading(false),
                 bookmarkedIds,
                 setBookmarkedIds,
                 simpleHeaderRef,
