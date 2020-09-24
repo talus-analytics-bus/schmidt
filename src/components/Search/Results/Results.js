@@ -23,6 +23,7 @@ export const Results = ({
   setIsSearchingText,
   filters,
   setShowOverlay,
+  onViewDetails,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -67,7 +68,7 @@ export const Results = ({
               cardData: searchData.data,
               snippets: searchData.data_snippets || null,
               filters,
-              setShowOverlay,
+              onViewDetails,
               setNextPage:
                 searchData.page !== searchData.num_pages
                   ? () => {

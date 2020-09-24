@@ -34,7 +34,8 @@ const DetailOverlay = ({
   // other data
   floating = true,
   close = () => '',
-  setShowOverlay,
+  origScrollY,
+  onViewDetails,
 }) => {
   // STATE
   // opacity control
@@ -88,11 +89,14 @@ const DetailOverlay = ({
   // FUNCTIONS
   // get item data
   const getData = async () => {
-    const results = await ItemQuery({
-      id,
-    })
-    setItemData(results.data.data)
-    setRelatedItemsData(results.data)
+    if (id === false) return
+    else {
+      const results = await ItemQuery({
+        id,
+      })
+      setItemData(results.data.data)
+      setRelatedItemsData(results.data)
+    }
   }
 
   // FUNCTIONS
@@ -131,6 +135,9 @@ const DetailOverlay = ({
         <div className={styles.band}>
           <div
             onClick={() => {
+              if (typeof window !== undefined) {
+                window.scrollTo(0, origScrollY)
+              }
               setOpacity(0)
               setTimeout(close, 250)
             }}
@@ -141,7 +148,7 @@ const DetailOverlay = ({
         </div>
         <div className={styles.content}>
           <div className={styles.cardAndRelated}>
-            <Card {...{ ...itemData, detail: true, setShowOverlay }} />
+            <Card {...{ ...itemData, detail: true, onViewDetails }} />
             <hr style={{ borderColor: '#333' }} />
             {relatedItemsData !== null && (
               <div className={styles.relatedItems}>
@@ -158,7 +165,7 @@ const DetailOverlay = ({
                       key: `cardList${id}`,
                       cardData: relatedItemsData.related_items,
                       start: 1,
-                      setShowOverlay,
+                      onViewDetails,
                     }}
                   />
                 </Panel>

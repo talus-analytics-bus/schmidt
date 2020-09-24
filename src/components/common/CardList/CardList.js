@@ -19,7 +19,7 @@ export const CardList = ({
   setNextPage = false,
   snippets = [],
   filters,
-  setShowOverlay = () => '',
+  onViewDetails = () => '',
   ...props
 }) => {
   // CONSTANTS
@@ -41,7 +41,7 @@ export const CardList = ({
                 ...allCardProps,
                 key: allCardProps.id,
                 filters,
-                setShowOverlay,
+                onViewDetails,
               }}
             />
           )

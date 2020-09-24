@@ -56,6 +56,10 @@ const Search = ({ setPage }) => {
     urlParams.get('show_overlay') || false
   )
 
+  // track original Y scroll position when overlay was launched so it can be
+  // set back when it is closed
+  const [origScrollY, setOrigScrollY] = useState(0)
+
   // search bar text and filters
   /**
    * Get filters stored in URL, if any, as JSON
@@ -110,6 +114,15 @@ const Search = ({ setPage }) => {
 
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
+
+  const onViewDetails = newId => {
+    if (typeof window !== undefined) {
+      // set scroll Y value
+      setOrigScrollY(window.scrollY)
+    }
+    // set show overlay value
+    setShowOverlay(newId)
+  }
 
   // FUNCTIONS
   // update state object, URL, and history entry when key params change
@@ -236,6 +249,14 @@ const Search = ({ setPage }) => {
                   if (fallbackFunc) fallbackFunc()
                 }
               })
+
+              // // if overlay is disabled then return to original Y pos
+              // if (
+              //   state.showOverlay !== undefined &&
+              //   (state.showOverlay === 'false' || state.showOverlay === false)
+              // ) {
+              //   window.scrollTo(0, origScrollY)
+              // }
               setPopstateTriggeredUpdate(true)
               setCheckingPopState(false)
             }
@@ -309,6 +330,7 @@ const Search = ({ setPage }) => {
                 isSearchingText,
                 setIsSearchingText,
                 filters,
+                onViewDetails,
                 setShowOverlay,
               }}
             />
@@ -319,7 +341,9 @@ const Search = ({ setPage }) => {
                 title: 'Test',
                 id: showOverlay,
                 close: () => setShowOverlay(false),
-                setShowOverlay,
+                origScrollY,
+                onViewDetails,
+                origScrollY,
               }}
             />
           )}

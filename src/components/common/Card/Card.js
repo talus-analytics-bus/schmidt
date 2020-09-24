@@ -32,7 +32,7 @@ export const Card = ({
   files,
   snippets = {},
   filters = {},
-  setShowOverlay = () => '',
+  onViewDetails = () => '',
   detail = false,
   ...props
 }) => {
@@ -255,7 +255,13 @@ export const Card = ({
   //   width="300"
   // ></iframe>
   return (
-    <div className={classNames(styles.card, { [styles.detail]: detail })}>
+    <div
+      onClick={e => {
+        e.stopPropagation()
+        onViewDetails(id)
+      }}
+      className={classNames(styles.card, { [styles.detail]: detail })}
+    >
       <div className={styles.col}>
         <div className={styles.resultNumber}>{resultNumber}</div>
       </div>
@@ -318,7 +324,7 @@ export const Card = ({
                 {...{
                   label: 'View details',
                   iconName: 'read_more',
-                  onClick: () => setShowOverlay(id),
+                  onClick: () => onViewDetails(id),
                 }}
               />
             </div>
