@@ -52,11 +52,9 @@ const Search = ({ setPage }) => {
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
   // showing detail overlay?
-  const [showOverlay, setShowOverlay] = useState(false)
-  // const [showOverlay, setShowOverlay] = useState(false)
-  // const [showOverlay, setShowOverlay] = useState(
-  //   urlParams.get('overlay') !== undefined || false
-  // )
+  const [showOverlay, setShowOverlay] = useState(
+    urlParams.get('show_overlay') || false
+  )
 
   // search bar text and filters
   /**
@@ -114,6 +112,32 @@ const Search = ({ setPage }) => {
   const resultsHaveLoaded = searchData !== null
 
   // FUNCTIONS
+  // update state object, URL, and history entry when key params change
+  const updateHistory = ({}) => {
+    const newUrlParams = new URLSearchParams()
+    newUrlParams.set('filters', JSON.stringify(filters))
+    newUrlParams.set('page', curPage)
+    newUrlParams.set('pagesize', pagesize)
+    newUrlParams.set('search_text', searchText)
+    newUrlParams.set('show_overlay', showOverlay)
+    newUrlParams.set('order_by', orderBy)
+    newUrlParams.set('is_desc', isDesc)
+    const newUrl =
+      newUrlParams.toString() !== '' ? `/search?${newUrlParams}` : '/search'
+    const newState = {
+      filters,
+      curPage,
+      pagesize,
+      orderBy,
+      isDesc,
+      searchText,
+      showOverlay,
+    }
+    if (typeof window !== 'undefined') {
+      window.history.pushState(newState, '', newUrl)
+    }
+  }
+
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
     // if the page has already initialized, then a search is being done
@@ -140,26 +164,7 @@ const Search = ({ setPage }) => {
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history
     if (!popstateTriggeredUpdate) {
-      const newUrlParams = new URLSearchParams()
-      newUrlParams.set('filters', JSON.stringify(filters))
-      newUrlParams.set('page', curPage)
-      newUrlParams.set('pagesize', pagesize)
-      newUrlParams.set('search_text', searchText)
-      newUrlParams.set('order_by', orderBy)
-      newUrlParams.set('is_desc', isDesc)
-      const newUrl =
-        newUrlParams.toString() !== '' ? `/search?${newUrlParams}` : '/search'
-      const newState = {
-        filters,
-        curPage,
-        pagesize,
-        orderBy,
-        isDesc,
-        searchText,
-      } // TODO check
-      if (typeof window !== 'undefined') {
-        window.history.pushState(newState, '', newUrl)
-      }
+      updateHistory({})
     } else {
       setPopstateTriggeredUpdate(false)
     }
@@ -171,6 +176,11 @@ const Search = ({ setPage }) => {
   }
 
   // EFFECT HOOKS
+  // when overlay is changed, store new state
+  useEffect(() => {
+    updateHistory({})
+  }, [showOverlay])
+
   // when update triggered by popstate, use those vars only
   useEffect(() => {
     if (initialized) {
@@ -205,6 +215,7 @@ const Search = ({ setPage }) => {
             const state = e.state
             if (state !== undefined && state !== null) {
               const toCheck = [
+                ['showOverlay', setShowOverlay, showOverlay],
                 ['curPage', setCurPage, curPage],
                 ['filters', setFilters, filters],
                 ['pagesize', setPagesize, pagesize],
@@ -308,6 +319,7 @@ const Search = ({ setPage }) => {
                 title: 'Test',
                 id: showOverlay,
                 close: () => setShowOverlay(false),
+                setShowOverlay,
               }}
             />
           )}

@@ -21,6 +21,7 @@ import cross from '../../assets/icons/cross.svg'
 // const API_URL = process.env.GATSBY_API_URL
 
 const DetailOverlay = ({
+  // item data
   id,
   type_of_record,
   title,
@@ -30,8 +31,10 @@ const DetailOverlay = ({
   funders,
   key_topics,
   files,
+  // other data
   floating = true,
   close = () => '',
+  setShowOverlay,
 }) => {
   // STATE
   // opacity control
@@ -39,15 +42,29 @@ const DetailOverlay = ({
   const [loaded, setLoaded] = useState(false)
 
   // CONSTANTS
+  // key topics
+  // TODO move up in scope and use throughout site, and/or get from API call
   const keyTopics = [
-    'Biodefense',
-    'Emerging infectious disease',
-    'Health security',
-    'Intentional biological attacks and CBRNE threats',
-    'Naturally occurring infectious disease outbreak/pandemic preparedness',
-    'Public health response',
+    { displayName: 'Biodefense' },
+    { displayName: 'Biosurveillance' },
+    { displayName: 'Emerging infectious disease' },
+    { displayName: 'Health security' },
+    { displayName: 'Healthcare and medical preparedness' },
+    {
+      displayName: 'Intentional biological attacks and CBRNE',
+      value: 'Intentional biological attacks and CBRNE threats',
+    },
+    {
+      displayName: 'Medical countermeasures',
+      value: 'Medical countermeasures (including vaccines, therapeutics)',
+    },
+    {
+      displayName: 'Naturally occurring infectious outbreak',
+      value:
+        'Naturally occurring infectious disease outbreak/pandemic preparedness',
+    },
+    { displayName: 'Public health response' },
   ]
-
   // author fields
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type' },
@@ -78,15 +95,41 @@ const DetailOverlay = ({
     setRelatedItemsData(results.data)
   }
 
+  // FUNCTIONS
+
   // EFFECT HOOKS
   // load data when ID is set
   useEffect(() => {
+    // if ID is provided fetch data, and scroll to top
     if (id !== false) {
       getData()
       if (typeof window !== 'undefined') {
         window.scrollTo(0, 0)
       }
     }
+    // if (typeof window !== 'undefined') {
+    //   const urlParams = new URLSearchParams(window.location.search)
+    //
+    //   // update overlay item ID
+    //   urlParams.set('show_overlay', id)
+    //
+    //   // create new state object for history entry
+    //   const newState = window.history.state
+    //   if (newState !== null) {
+    //     // for (const [key, value] of urlParams.entries()) {
+    //     //   if (key === 'filters') newState[key] = JSON.parse(value)
+    //     //   else newState[key] = value
+    //     // }
+    //     newState.showOverlay = id
+    //
+    //     // e.g., "/search" or "/bookmarks"
+    //     const pathname = window.location.pathname
+    //     const newUrl =
+    //       urlParams.toString() !== '' ? `${pathname}?${urlParams}` : pathname
+    //
+    //     window.history.pushState(newState, '', newUrl)
+    //   }
+    // }
   }, [id])
 
   useEffect(() => {
@@ -121,7 +164,7 @@ const DetailOverlay = ({
         </div>
         <div className={styles.content}>
           <div className={styles.cardAndRelated}>
-            <Card {...{ ...itemData, detail: true }} />
+            <Card {...{ ...itemData, detail: true, setShowOverlay }} />
             <hr style={{ borderColor: '#333' }} />
             {relatedItemsData !== null && (
               <div className={styles.relatedItems}>
@@ -138,6 +181,7 @@ const DetailOverlay = ({
                       key: `cardList${id}`,
                       cardData: relatedItemsData.related_items,
                       start: 1,
+                      setShowOverlay,
                     }}
                   />
                 </Panel>
@@ -147,15 +191,15 @@ const DetailOverlay = ({
           <div className={styles.sideBar}>
             <Panel {...{ title: 'Topic areas' }}>
               <div className={styles.keyTopics}>
-                {keyTopics.map(d => (
+                {keyTopics.map(({ displayName, value = displayName }) => (
                   <>
                     <div
                       className={classNames(styles.keyTopic, {
-                        [styles.active]: itemData.key_topics.includes(d),
+                        [styles.active]: itemData.key_topics.includes(value),
                       })}
                     >
                       <div className={styles.colorBlock}></div>
-                      <span>{d}</span>
+                      <span>{displayName}</span>
                     </div>
                   </>
                 ))}
