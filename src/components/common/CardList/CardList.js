@@ -43,7 +43,7 @@ export const CardList = ({
             <Card
               {...{
                 ...allCardProps,
-                key: allCardProps.id,
+                key: allCardProps.id + '-' + i,
                 filters,
                 idx: i,
                 onViewDetails,

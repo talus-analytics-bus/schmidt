@@ -55,10 +55,16 @@ export const Card = ({
   const [thumbnail, setThumbnail] = useState(null)
 
   // EFFECT HOOKS
-  // animate card entrances
+  // animate card entrances -- any card that changes position in the order
+  // or is new to the list will fly in
   useEffect(() => {
-    if (!detail && !related) setTimeout(() => setLeft(0), 100 * idx)
-  }, [])
+    if (!detail && !related) {
+      if (left === 0) {
+        setLeft(20)
+      }
+      setTimeout(() => setLeft(0), 100 * idx)
+    }
+  }, [idx])
 
   // define obj to hold card text, including highlighted snippets, if any
   const card = {}
