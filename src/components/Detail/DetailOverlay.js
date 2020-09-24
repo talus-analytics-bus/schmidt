@@ -48,6 +48,21 @@ const DetailOverlay = ({
     'Public health response',
   ]
 
+  // author fields
+  const authorFields = [
+    { field: 'type_of_authoring_organization', name: 'Type' },
+    { field: 'if_national_country_of_authoring_org', name: 'Location' },
+    {
+      field: 'authoring_organization_has_governance_authority',
+      name: 'Has governance authority?',
+      formatter: v => {
+        if (v === true) return 'Yes'
+        else if (v === false) return 'No'
+        else return undefined
+      },
+    },
+  ]
+
   // STATE
   // item and related items data
   const [itemData, setItemData] = useState(null)
@@ -83,6 +98,7 @@ const DetailOverlay = ({
   useEffect(() => {
     if (loaded) setOpacity(1)
   }, [loaded])
+
   if (!loaded) return null
   else
     return (
@@ -145,10 +161,50 @@ const DetailOverlay = ({
                 ))}
               </div>
             </Panel>
+            <Panel
+              {...{
+                title: `Authoring organization${
+                  itemData.authors.length > 1 ? 's' : ''
+                }`,
+                iconName: 'person',
+              }}
+            >
+              <div className={styles.authors}>
+                {itemData.authors.map(d => (
+                  <>
+                    <div className={styles.authorName}>
+                      {d.authoring_organization}
+                    </div>
+                    <div className={styles.authorInfo}>
+                      {authorFields.map(
+                        ({ name, field, formatter = v => v }) => (
+                          <div className={styles.infoItem}>
+                            <div className={styles.field}>{name}</div>
+                            <div className={styles.value}>
+                              {formatter(d[field]) || (
+                                <div className={styles.noData}>
+                                  Data not available
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </>
+                ))}
+                {itemData.authors.length === 0 && (
+                  <div className={styles.noData}>Data not available</div>
+                )}
+              </div>
+            </Panel>
             <Panel {...{ title: 'Funders', iconName: 'payments' }}>
               <div className={styles.funders}>
-                {itemData.funders.map(d => (
-                  <>{d.name}</>
+                {itemData.funders.map((d, i) => (
+                  <>
+                    {d.name}
+                    {i !== itemData.funders.length - 1 ? ' • ' : ''}
+                  </>
                 ))}
                 {itemData.funders.length === 0 && (
                   <div className={styles.noData}>Data not available</div>
