@@ -30,6 +30,9 @@ const Bookmarks = ({}) => {
   const [initialized, setInitialized] = useState(false)
   const [bookmarkedItemData, setBookmarkedItemData] = useState({})
 
+  // is page currently fetching search data?
+  const [isSearching, setIsSearching] = useState(false)
+
   // bookmarked items IDs
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
@@ -61,9 +64,28 @@ const Bookmarks = ({}) => {
     !initialized ? urlParams.get('pagesize') || 5 : 5
   )
 
+  // showing detail overlay?
+  const [showOverlay, setShowOverlay] = useState(
+    urlParams.get('show_overlay') || false
+  )
+
+  // track original Y scroll position when overlay was launched so it can be
+  // set back when it is closed
+  const [origScrollY, setOrigScrollY] = useState(0)
+
   // CONSTANTS
   const showPaginator = true
   const start = curPage * pagesize - pagesize + 1
+
+  // fire when view details buttons are pressed to display the detail overlay
+  const onViewDetails = ({ newId, related = false }) => {
+    if (typeof window !== undefined && !related) {
+      // set scroll Y value
+      setOrigScrollY(window.scrollY)
+    }
+    // set show overlay value
+    setShowOverlay(newId)
+  }
 
   // // FUNCTIONS
   // // update state object, URL, and history entry when key params change
@@ -147,10 +169,18 @@ const Bookmarks = ({}) => {
     }
   }, [simpleHeaderRef])
 
+  // count bookmarks to show in nav
+  const bookmarkArr =
+    bookmarkedIds !== null ? bookmarkedIds.split(',').filter(d => d !== '') : []
+
   // JSX
   return (
     <>
-      <Layout page={'bookmarks'} loading={false}>
+      <Layout
+        page={'bookmarks'}
+        loading={false}
+        bookmarkCount={bookmarkArr.length}
+      >
         <SEO title="Search results" />
         <div className={styles.bookmarks}>
           <StickyHeader
@@ -192,6 +222,7 @@ const Bookmarks = ({}) => {
                     onViewDetails: () => '',
                     bookmarkedIds,
                     setBookmarkedIds,
+                    onViewDetails,
                     setNextPage:
                       bookmarkedItemData.page !== bookmarkedItemData.num_pages
                         ? () => {
@@ -206,6 +237,21 @@ const Bookmarks = ({}) => {
               </>
             )}
           </Panel>
+          {showOverlay !== false && (
+            <DetailOverlay
+              {...{
+                title: 'Test',
+                id: showOverlay,
+                close: () => setShowOverlay(false),
+                origScrollY,
+                onViewDetails,
+                origScrollY,
+                onLoaded: () => setIsSearching(false),
+                bookmarkedIds,
+                setBookmarkedIds,
+              }}
+            />
+          )}
         </div>
       </Layout>
       <LoadingSpinner loading={false} />

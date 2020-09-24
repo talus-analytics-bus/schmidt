@@ -17,9 +17,12 @@ export const BookmarkToggle = ({
   isSecondary = false,
   bookmarkedIds = [],
   setBookmarkedIds = () => '',
+  simple = false,
   id,
 }) => {
-  const icon = <i className={'material-icons'}>{'bookmark'}</i>
+  const icon = (
+    <i className={'material-icons'}>{add ? 'bookmark_border' : 'bookmark'}</i>
+  )
 
   // remove this item from bookmarked IDs
   const rmvFunc = e => {
@@ -71,7 +74,16 @@ export const BookmarkToggle = ({
   )
 
   // JSX // ---------------------------------------------------------------- //
-  return <div className={styles.wrapper}>{button}</div>
+  return simple ? (
+    <div
+      onClick={onClick}
+      className={classNames(styles.wrapper, styles.simple)}
+    >
+      {icon}
+    </div>
+  ) : (
+    <div className={styles.wrapper}>{button}</div>
+  )
 }
 
 export default BookmarkToggle

@@ -299,21 +299,26 @@ export const Card = ({
       </div>
       <div className={styles.col}>
         <div className={styles.main}>
-          <div className={styles.type}>{type_of_record}</div>
-          <div className={styles.title}>
-            {title !== '' ? card.title : 'Untitled'}
+          <div className={styles.header}>
+            <div className={styles.type}>{type_of_record}</div>
+            {bookmarkedIds !== null && (
+              <BookmarkToggle
+                {...{
+                  add: !bookmarkedIds.includes(id),
+                  isSecondary: true,
+                  bookmarkedIds,
+                  setBookmarkedIds,
+                  id,
+                  simple: true,
+                }}
+              />
+            )}
           </div>
-          {bookmarkedIds && (
-            <BookmarkToggle
-              {...{
-                add: !bookmarkedIds.includes(id),
-                isSecondary: true,
-                bookmarkedIds,
-                setBookmarkedIds,
-                id,
-              }}
-            />
-          )}
+          <div className={styles.title}>
+            <div className={styles.text}>
+              {title !== '' ? card.title : 'Untitled'}
+            </div>
+          </div>
           <div className={styles.detailsAndActions}>
             <div className={styles.details}>
               <div className={styles.authOrg}>

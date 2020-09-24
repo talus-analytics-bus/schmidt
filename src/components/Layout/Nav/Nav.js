@@ -4,12 +4,13 @@ import { Link } from 'gatsby'
 import styles from './nav.module.scss'
 import ReactTooltip from 'react-tooltip'
 import { InfoTooltip } from '../../common'
+import { comma } from '../../misc/Util'
 
 // assets
 import logo from '../../../assets/images/logo.svg'
 import loadingSvg from '../../../assets/images/loading-blue.svg'
 
-const Nav = ({ page, loading, ...props }) => {
+const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const linksRef = useRef(null)
   const hamburgerRef = useRef(null)
@@ -87,7 +88,9 @@ const Nav = ({ page, loading, ...props }) => {
               to={'/bookmarks'}
             >
               <i className={'material-icons'}>bookmark</i>
-              <span>Bookmarks</span>
+              <span>
+                Bookmarks {bookmarkCount > 0 && <>({comma(bookmarkCount)})</>}
+              </span>
             </Link>
             <Link
               onClick={() => {

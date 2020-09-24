@@ -39,6 +39,7 @@ const DetailOverlay = ({
   onLoaded = () => '',
   bookmarkedIds,
   setBookmarkedIds,
+  simpleHeaderRef,
 }) => {
   // STATE
   // opacity control
@@ -144,10 +145,15 @@ const DetailOverlay = ({
   // do nothing
   useEffect(() => {
     if (floating && opacity === 1 && typeof document !== 'undefined')
-      document.getElementById('___gatsby').onclick = e => {
+      document.getElementsByTagName('html')[0].onclick = e => {
         if (wrapperRef === null || wrapperRef.current === null) return
         const wrapper = wrapperRef.current
         if (wrapper && wrapper.contains(e.target)) return
+        else if (
+          simpleHeaderRef.current &&
+          simpleHeaderRef.current.contains(e.target)
+        )
+          return
         else {
           dismissFloatingOverlay()
         }
@@ -172,7 +178,15 @@ const DetailOverlay = ({
         </div>
         <div className={styles.content}>
           <div className={styles.cardAndRelated}>
-            <Card {...{ ...itemData, detail: true, onViewDetails }} />
+            <Card
+              {...{
+                ...itemData,
+                detail: true,
+                onViewDetails,
+                bookmarkedIds,
+                setBookmarkedIds,
+              }}
+            />
             <hr style={{ borderColor: '#333' }} />
             {relatedItemsData !== null && (
               <div className={styles.relatedItems}>

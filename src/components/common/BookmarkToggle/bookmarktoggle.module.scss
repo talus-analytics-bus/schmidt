@@ -1,6 +1,8 @@
 @import '../../../assets/styles/vars.scss';
 .wrapper {
   width: max-content;
+  cursor: pointer;
+
   a {
     &:hover,
     &:active,
@@ -48,6 +50,17 @@
       &:focus {
         color: darken($selected-blue, 10%);
       }
+    }
+  }
+  // simple version: just an icon
+  &.simple {
+    position: relative;
+    right: 0;
+    margin-bottom: 20px;
+    height: 0;
+    i {
+      color: $navy-blue;
+      font-size: 3rem;
     }
   }
 }

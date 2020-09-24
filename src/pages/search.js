@@ -112,6 +112,7 @@ const Search = ({ setPage }) => {
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
 
+  // fire when view details buttons are pressed to display the detail overlay
   const onViewDetails = ({ newId, related = false }) => {
     if (typeof window !== undefined && !related) {
       // set scroll Y value
@@ -282,12 +283,17 @@ const Search = ({ setPage }) => {
     }
   }, [simpleHeaderRef])
 
+  // count bookmarks to show in nav
+  const bookmarkArr =
+    bookmarkedIds !== null ? bookmarkedIds.split(',').filter(d => d !== '') : []
+
   // JSX
   return (
     <>
       <Layout
         page={'search'}
         loading={isSearching && !isSearchingText && initialized}
+        bookmarkCount={bookmarkArr.length}
       >
         <SEO title="Search results" />
         <div className={styles.search}>
@@ -356,6 +362,7 @@ const Search = ({ setPage }) => {
                 onLoaded: () => setIsSearching(false),
                 bookmarkedIds,
                 setBookmarkedIds,
+                simpleHeaderRef,
               }}
             />
           )}
