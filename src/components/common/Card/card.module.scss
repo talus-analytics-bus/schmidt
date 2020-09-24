@@ -220,11 +220,14 @@
   .downloads {
     margin-top: 20px;
     width: auto;
+    i {
+      position: relative;
+      left: -5px;
+    }
     .downloadItem {
       display: grid;
       grid-template-columns: max-content max-content;
       grid-gap: 10px 20px;
-      margin-left: 5px;
     }
   }
 }
