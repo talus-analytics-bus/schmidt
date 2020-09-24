@@ -20,6 +20,7 @@ export const CardList = ({
   snippets = [],
   filters,
   onViewDetails = () => '',
+  related = false,
   ...props
 }) => {
   // CONSTANTS
@@ -42,6 +43,7 @@ export const CardList = ({
                 key: allCardProps.id,
                 filters,
                 onViewDetails,
+                related,
               }}
             />
           )

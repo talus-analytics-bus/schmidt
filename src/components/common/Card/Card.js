@@ -34,6 +34,7 @@ export const Card = ({
   filters = {},
   onViewDetails = () => '',
   detail = false,
+  related = false,
   ...props
 }) => {
   // define obj to hold card text, including highlighted snippets, if any
@@ -258,7 +259,7 @@ export const Card = ({
     <div
       onClick={e => {
         e.stopPropagation()
-        onViewDetails(id)
+        onViewDetails({ newId: id, related })
       }}
       className={classNames(styles.card, { [styles.detail]: detail })}
     >

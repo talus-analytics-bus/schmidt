@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 // import axios from 'axios'
 
@@ -43,6 +43,15 @@ const DetailOverlay = ({
   const [loaded, setLoaded] = useState(false)
 
   // CONSTANTS
+  // function called when floating overlay is dismissed
+  const dismissFloatingOverlay = () => {
+    if (typeof window !== undefined) {
+      window.scrollTo(0, origScrollY)
+    }
+    setOpacity(0)
+    setTimeout(close, 250)
+  }
+
   // key topics
   // TODO move up in scope and use throughout site, and/or get from API call
   const keyTopics = [
@@ -84,8 +93,8 @@ const DetailOverlay = ({
   // STATE
   // item and related items data
   const [itemData, setItemData] = useState(null)
-
   const [relatedItemsData, setRelatedItemsData] = useState(null)
+
   // FUNCTIONS
   // get item data
   const getData = async () => {
@@ -99,10 +108,12 @@ const DetailOverlay = ({
     }
   }
 
-  // FUNCTIONS
+  // REFS
+  // track overlay element so it can be dismissed if user clicks outside it
+  const wrapperRef = useRef(null)
 
   // EFFECT HOOKS
-  // load data when ID is set
+  // fetch data when ID is set
   useEffect(() => {
     // if ID is provided fetch data, and scroll to top
     if (id !== false) {
@@ -113,36 +124,45 @@ const DetailOverlay = ({
     }
   }, [id])
 
+  // don't show component until all data fetched
   useEffect(() => {
     if (itemData !== null && relatedItemsData !== null) {
       setLoaded(true)
     }
   }, [itemData, relatedItemsData])
 
+  // fade in when loaded
   useEffect(() => {
     if (loaded) setOpacity(1)
   }, [loaded])
 
+  // on click anywhere but in menu, and menu is shown, close menu; otherwise
+  // do nothing
+  useEffect(() => {
+    if (floating && opacity === 1 && typeof document !== 'undefined')
+      document.getElementById('___gatsby').onclick = e => {
+        if (wrapperRef === null || wrapperRef.current === null) return
+        const wrapper = wrapperRef.current
+        if (wrapper && wrapper.contains(e.target)) return
+        else {
+          dismissFloatingOverlay()
+        }
+      }
+  }, [opacity])
+
+  // JSX
   if (!loaded) return null
   else
     return (
       <div
+        ref={wrapperRef}
         style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
         className={classNames(styles.detailOverlay, {
           [styles.floating]: floating,
         })}
       >
         <div className={styles.band}>
-          <div
-            onClick={() => {
-              if (typeof window !== undefined) {
-                window.scrollTo(0, origScrollY)
-              }
-              setOpacity(0)
-              setTimeout(close, 250)
-            }}
-            className={styles.closeButton}
-          >
+          <div onClick={dismissFloatingOverlay} className={styles.closeButton}>
             <i className={'material-icons'}>close</i>
           </div>
         </div>
@@ -166,6 +186,7 @@ const DetailOverlay = ({
                       cardData: relatedItemsData.related_items,
                       start: 1,
                       onViewDetails,
+                      related: true,
                     }}
                   />
                 </Panel>

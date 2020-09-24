@@ -115,8 +115,8 @@ const Search = ({ setPage }) => {
   // CONSTANTS
   const resultsHaveLoaded = searchData !== null
 
-  const onViewDetails = newId => {
-    if (typeof window !== undefined) {
+  const onViewDetails = ({ newId, related = false }) => {
+    if (typeof window !== undefined && !related) {
       // set scroll Y value
       setOrigScrollY(window.scrollY)
     }
