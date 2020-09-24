@@ -80,6 +80,12 @@ export const Options = ({
       //   { field: 'authors', key: 'author.id', label: 'Names', choices: [] },
       // ],
     },
+    events: {
+      field: 'event.name',
+      key: 'events',
+      label: 'Events',
+      choices: [],
+    },
     funders: {
       field: 'funder.name',
       key: 'funders',
@@ -105,6 +111,7 @@ export const Options = ({
     years: 'event',
     funders: 'payments',
     types_of_record: 'insert_drive_file',
+    events: 'outbreak_events',
   }
 
   // define filter section component data
@@ -307,7 +314,7 @@ export const Options = ({
           ...curFilterSectionData,
           key: curFilterSectionData.field,
           filterDefs: filterDefs[curFilterSectionData.field],
-          hide: i > 2 && !showAdditionalFilters,
+          // hide: i > 2 && !showAdditionalFilters,
           defaultOpen: i < 3,
           filters,
           setFilters,
@@ -387,17 +394,19 @@ export const Options = ({
           </div>
         </div>
         <div className={styles.filterSections}>{filterSections}</div>
-        {showFilterSections && (
-          <FloatButton
-            {...{
-              icon: <i className={'material-icons'}>expand_less</i>,
-              label: `${
-                showAdditionalFilters ? 'Hide' : 'Show'
-              } additional filters`,
-              onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
-            }}
-          />
-        )}
+        {
+          //   showFilterSections && (
+          //   <FloatButton
+          //     {...{
+          //       icon: <i className={'material-icons'}>expand_less</i>,
+          //       label: `${
+          //         showAdditionalFilters ? 'Hide' : 'Show'
+          //       } additional filters`,
+          //       onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
+          //     }}
+          //   />
+          // )
+        }
       </div>
     </div>
   )

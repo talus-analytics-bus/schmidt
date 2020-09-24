@@ -11,14 +11,9 @@ import Panel from './content/Panel'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
-// import { execute } from '../components/misc/Util'
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
-import cross from '../../assets/icons/cross.svg'
-
-// // constants
-// const API_URL = process.env.GATSBY_API_URL
 
 const DetailOverlay = ({
   // item data

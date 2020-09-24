@@ -28,6 +28,11 @@
     }
 
     // make icons navy and larger
+    img {
+      $size: 32px;
+      height: $size;
+      width: $size;
+    }
     i {
       color: $navy-blue;
       font-size: 2rem;

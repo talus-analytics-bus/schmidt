@@ -6,9 +6,6 @@ import classNames from 'classnames'
 import styles from './panel.module.scss'
 import events from '../../../assets/icons/events.svg'
 
-// // constants
-// const API_URL = process.env.GATSBY_API_URL
-
 export const Panel = ({
   title = 'Panel name',
   iconName = 'device_hub',
