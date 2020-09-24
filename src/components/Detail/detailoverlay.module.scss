@@ -64,6 +64,8 @@
 
   .content {
     border-left: 2px solid #5c5c5c;
+    border-bottom: 2px solid #5c5c5c;
+
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 330px;
@@ -127,9 +129,14 @@
         }
       }
 
-      // extend last panel to bottom
-      > div:not(:first-child) {
-        border-top: 10px solid white;
+      // add "gap" between panels
+      > div {
+        &:not(:first-child) {
+          border-top: 10px solid white;
+        }
+        &:last-child {
+          border-bottom: 10px solid white;
+        }
       }
     }
   }
