@@ -1,6 +1,7 @@
 @import '../../../assets/styles/vars.scss';
 .options {
   border-right: 2px $soft-blue solid;
+  height: 100%;
   .sortBy {
     display: flex;
     align-items: flex-end;
