@@ -297,7 +297,7 @@ export const Card = ({
           <div className={styles.thumbnail}>
             <img
               key={files[0].id}
-              src={`${S3_URL}${files[0].s3_filename}_thumb`}
+              src={`${S3_URL}/${files[0].s3_filename}_thumb`}
             />
           </div>
         )}
