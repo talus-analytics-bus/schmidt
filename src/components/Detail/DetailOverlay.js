@@ -36,6 +36,7 @@ const DetailOverlay = ({
   close = () => '',
   origScrollY,
   onViewDetails,
+  onLoaded = () => '',
 }) => {
   // STATE
   // opacity control
@@ -105,6 +106,7 @@ const DetailOverlay = ({
       })
       setItemData(results.data.data)
       setRelatedItemsData(results.data)
+      onLoaded()
     }
   }
 

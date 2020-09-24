@@ -4,6 +4,12 @@
     background-color: $light-gray;
     padding: 20px;
   }
+  &.heading {
+    .title {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  }
 
   .title {
     display: flex;
@@ -14,6 +20,11 @@
       font-family: 'rawline', serif;
       text-transform: uppercase;
       font-weight: 600;
+      h2 {
+        text-transform: none;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
     }
     i {
       font-size: 2rem;

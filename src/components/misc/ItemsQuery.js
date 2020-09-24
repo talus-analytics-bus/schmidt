@@ -3,6 +3,7 @@ const API_URL = process.env.GATSBY_API_URL
 
 const ItemsQuery = async ({
   page = 1,
+  ids = [],
   pagesize = 1000000,
   fields = [],
   by_category = null,
@@ -18,8 +19,8 @@ const ItemsQuery = async ({
   const params = new URLSearchParams()
 
   // fields to return
-  fields.forEach(d => {
-    params.append('fields', d)
+  ids.forEach(d => {
+    params.append('ids', d)
   })
 
   // pagination params

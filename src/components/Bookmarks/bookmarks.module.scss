@@ -1,0 +1,15 @@
+.bookmarks {
+  // debug: pink
+  // background-color: pink;
+
+  // standard: max width of screen is 1300px
+  // center content in that view
+  // TODO pull up in scope to master SCSS file
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  position: relative;
+}

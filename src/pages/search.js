@@ -45,8 +45,6 @@ const Search = ({ setPage }) => {
   }
 
   // order by parameters
-  // const [orderBy, setOrderBy] = useState('date')
-  // const [isDesc, setIsDesc] = useState(true)
   const [orderBy, setOrderBy] = useState(
     urlParams.get('order_by') || 'relevance'
   )
@@ -79,20 +77,16 @@ const Search = ({ setPage }) => {
   }
 
   // define init filters
-  // const [filters, setFilters] = useState({})
   const initFilters = getFiltersFromUrlParams(urlParams)
   const [filters, setFilters] = useState(!initialized ? initFilters : {})
 
   // define init search text
-  // const [searchText, setSearchText] = useState('')
   const initSearchText = urlParams.get('search_text') || ''
   const [searchText, setSearchText] = useState(
     !initialized ? initSearchText : ''
   )
 
   // define init years
-  // const [fromYear, setFromYear] = useState('null')
-  // const [toYear, setToYear] = useState('null')
   const [fromYear, setFromYear] = useState(
     !initialized ? urlParams.get('from') || 'null' : 'null'
   )
@@ -101,8 +95,6 @@ const Search = ({ setPage }) => {
   )
 
   // current page and pagesize of paginator
-  // const [curPage, setCurPage] = useState(1)
-  // const [pagesize, setPagesize] = useState(5)
   const pageStr = !initialized ? urlParams.get('page') || '1' : '1'
   const [curPage, setCurPage] = useState(+pageStr)
 
@@ -194,6 +186,7 @@ const Search = ({ setPage }) => {
   // when overlay is changed, store new state
   useEffect(() => {
     updateHistory({})
+    setIsSearching(showOverlay !== false)
   }, [showOverlay])
 
   // when update triggered by popstate, use those vars only
@@ -349,6 +342,7 @@ const Search = ({ setPage }) => {
                 origScrollY,
                 onViewDetails,
                 origScrollY,
+                onLoaded: () => setIsSearching(false),
               }}
             />
           )}

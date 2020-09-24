@@ -9,11 +9,12 @@ import events from '../../../assets/icons/events.svg'
 // // constants
 // const API_URL = process.env.GATSBY_API_URL
 
-const Panel = ({
+export const Panel = ({
   title = 'Panel name',
   iconName = 'device_hub',
   children = null,
   secondary = true,
+  heading = true,
 }) => {
   // CONSTANTS
   // special icon?
@@ -29,7 +30,10 @@ const Panel = ({
     )
   return (
     <div
-      className={classNames(styles.panel, { [styles.secondary]: secondary })}
+      className={classNames(styles.panel, {
+        [styles.secondary]: secondary,
+        [styles.heading]: heading,
+      })}
     >
       <div className={styles.title}>
         {icon}
