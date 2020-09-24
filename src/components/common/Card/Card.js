@@ -390,7 +390,9 @@ export const Card = ({
               >
                 {files.map(({ id, num_bytes, filename }) => (
                   <div className={styles.downloadItem}>
-                    <i className={'material-icons'}>picture_as_pdf</i>
+                    {
+                      // <i className={'material-icons'}>picture_as_pdf</i>
+                    }
                     <PrimaryButton
                       {...{
                         label: filename,

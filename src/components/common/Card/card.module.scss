@@ -222,9 +222,9 @@
     width: auto;
     .downloadItem {
       display: grid;
-      grid-template-columns: 30px max-content max-content;
+      grid-template-columns: max-content max-content;
       grid-gap: 10px 20px;
-      margin-left: 10px;
+      margin-left: 5px;
     }
   }
 }
