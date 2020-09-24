@@ -26,7 +26,7 @@ const Search = ({ setPage }) => {
   const [searchData, setSearchData] = useState(null)
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
-  const [checkingPopState, setCheckingPopState] = useState(false)
+  const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
 
   // has first data load for page occurred?
   const [initialized, setInitialized] = useState(false)
@@ -47,7 +47,9 @@ const Search = ({ setPage }) => {
   // order by parameters
   // const [orderBy, setOrderBy] = useState('date')
   // const [isDesc, setIsDesc] = useState(true)
-  const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
+  const [orderBy, setOrderBy] = useState(
+    urlParams.get('order_by') || 'relevance'
+  )
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
@@ -206,7 +208,7 @@ const Search = ({ setPage }) => {
   // when xxx
   useEffect(() => {
     if (initialized) {
-      if (!popstateTriggeredUpdate && !checkingPopState) {
+      if (!popstateTriggeredUpdate && !freezeDataUpdates) {
         if (curPage !== 1) {
           setCurPage(1)
         } else {
@@ -218,13 +220,13 @@ const Search = ({ setPage }) => {
 
   // when filters or search text change, get updated search data
   useEffect(() => {
-    if (!popstateTriggeredUpdate && !checkingPopState) {
+    if (!popstateTriggeredUpdate && !freezeDataUpdates) {
       getData()
       if (!initialized) {
         // add event to process URL params when a history state is popped
         if (typeof window !== 'undefined') {
           window.onpopstate = function (e) {
-            setCheckingPopState(true)
+            setFreezeDataUpdates(true)
             const state = e.state
             if (state !== undefined && state !== null) {
               const toCheck = [
@@ -258,7 +260,7 @@ const Search = ({ setPage }) => {
               //   window.scrollTo(0, origScrollY)
               // }
               setPopstateTriggeredUpdate(true)
-              setCheckingPopState(false)
+              setFreezeDataUpdates(false)
             }
           }
         }
@@ -332,6 +334,9 @@ const Search = ({ setPage }) => {
                 filters,
                 onViewDetails,
                 setShowOverlay,
+                setFreezeDataUpdates,
+                setOrderBy,
+                setIsDesc,
               }}
             />
           </div>

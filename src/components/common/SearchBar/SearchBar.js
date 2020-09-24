@@ -14,6 +14,9 @@ export const SearchBar = ({
   setSearchText,
   isSearchingText,
   setIsSearchingText,
+  setFreezeDataUpdates,
+  setOrderBy,
+  setIsDesc,
   ...props
 }) => {
   // STATE
@@ -30,8 +33,14 @@ export const SearchBar = ({
     clearTimeout(searchDelay)
     const newTimeout = setTimeout(() => {
       const newSearchText = searchRef.current.value
-      setSearchText(newSearchText)
+
+      // sort by relevance, descending if not already
+      setFreezeDataUpdates(true)
       setIsSearchingText(true)
+      setOrderBy('relevance')
+      setIsDesc(true)
+      setFreezeDataUpdates(false)
+      setSearchText(newSearchText)
     }, [500])
     setSearchDelay(newTimeout)
   }

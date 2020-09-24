@@ -24,6 +24,9 @@ export const Results = ({
   filters,
   setShowOverlay,
   onViewDetails,
+  setFreezeDataUpdates,
+  setOrderBy,
+  setIsDesc,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -46,7 +49,15 @@ export const Results = ({
   return (
     <div className={styles.results}>
       <SearchBar
-        {...{ searchText, setSearchText, isSearchingText, setIsSearchingText }}
+        {...{
+          searchText,
+          setSearchText,
+          isSearchingText,
+          setIsSearchingText,
+          setFreezeDataUpdates,
+          setOrderBy,
+          setIsDesc,
+        }}
       />
       {showPaginator && (
         <>
