@@ -249,6 +249,7 @@ const Bookmarks = ({}) => {
                 onLoaded: () => setIsSearching(false),
                 bookmarkedIds,
                 setBookmarkedIds,
+                simpleHeaderRef,
               }}
             />
           )}
