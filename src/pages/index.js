@@ -17,10 +17,6 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(false)
 
   // // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
-  // useEffect(() => {
-  //
-  // }, [])
-  console.log('test var = ' + test)
 
   // JSX // -----------------------------------------------------------------//
   if (loading) return <div />
