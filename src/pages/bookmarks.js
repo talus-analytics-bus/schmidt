@@ -12,11 +12,12 @@ import {
   LoadingSpinner,
   Paginator,
   CardList,
+  PrimaryButton,
 } from '../components/common'
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
-import { execute, withBookmarkedIds } from '../components/misc/Util'
+import { execute, withBookmarkedIds, isEmpty } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Bookmarks/bookmarks.module.scss'
@@ -33,7 +34,7 @@ const Bookmarks = ({}) => {
   const [loading, setLoading] = useState(!initialized)
 
   // page data -- bookmarked items
-  const [bookmarkedItemData, setBookmarkedItemData] = useState({})
+  const [bookmarkedItemData, setBookmarkedItemData] = useState({ data: [] })
 
   // is page currently fetching search data?
   const [isSearching, setIsSearching] = useState(false)
@@ -81,6 +82,7 @@ const Bookmarks = ({}) => {
   // CONSTANTS
   const showPaginator = true
   const start = curPage * pagesize - pagesize + 1
+  const someBookmarks = bookmarkedItemData.data.length > 0
 
   // fire when view details buttons are pressed to display the detail overlay
   const onViewDetails = ({ newId, related = false }) => {
@@ -123,14 +125,20 @@ const Bookmarks = ({}) => {
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
     // get all bookmarked items, placeholder for now
-    setLoading(true)
-    const results = await ItemsQuery({
-      ids: bookmarkedIds.split(',').map(d => +d),
-      pagesize,
-      page: curPage,
-    })
-    setBookmarkedItemData(results.data)
-    setLoading(false)
+    const ids = bookmarkedIds.split(',').map(d => +d)
+    if (ids.length > 0) {
+      setLoading(true)
+      const results = await ItemsQuery({
+        ids: bookmarkedIds.split(',').map(d => +d),
+        pagesize,
+        page: curPage,
+      })
+      setBookmarkedItemData(results.data)
+      setLoading(false)
+    } else {
+      setBookmarkedItemData({ data: [] })
+    }
+    if (!initialized) setInitialized(true)
   }
 
   // EFFECT HOOKS
@@ -147,7 +155,6 @@ const Bookmarks = ({}) => {
         setCurPage(1)
       } else {
         getData()
-        if (!initialized) setInitialized(true)
       }
     }
   }, [bookmarkedIds, pagesize, orderBy, isDesc])
@@ -201,41 +208,63 @@ const Bookmarks = ({}) => {
               heading: true,
             }}
           >
-            {showPaginator && (
+            {initialized && (
               <>
-                <Paginator
-                  {...{
-                    curPage,
-                    setCurPage,
-                    nTotalRecords: bookmarkedItemData.total,
-                    pagesize,
-                    setPagesize,
-                    showCounter: true, // TODO
-                    // showCounter: bookmarkedItemData.data.length > 0,
-                    noun: 'item',
-                    nouns: 'items',
-                  }}
-                />
-                <CardList
-                  {...{
-                    start,
-                    cardData: bookmarkedItemData.data,
-                    snippets: bookmarkedItemData.data_snippets || null,
-                    onViewDetails: () => '',
-                    bookmarkedIds,
-                    setBookmarkedIds,
-                    onViewDetails,
-                    setNextPage:
-                      bookmarkedItemData.page !== bookmarkedItemData.num_pages
-                        ? () => {
-                            setCurPage(curPage + 1)
-                            if (typeof window !== 'undefined') {
-                              window.scrollTo(0, 0)
-                            }
-                          }
-                        : false,
-                  }}
-                />
+                {!someBookmarks && (
+                  <>
+                    <div className={styles.noBookmarksInstructions}>
+                      You have no bookmarked items yet. Click the{' '}
+                      <i className={'material-icons'}>bookmark_border</i>
+                      bookmark icon on any search result to save one.{'  '}
+                      &nbsp;
+                    </div>
+                    <PrimaryButton
+                      {...{
+                        label: 'Go to search page',
+                        iconName: 'search',
+                        url: '/search',
+                      }}
+                    />
+                  </>
+                )}
+                {showPaginator && someBookmarks && (
+                  <>
+                    <Paginator
+                      {...{
+                        curPage,
+                        setCurPage,
+                        nTotalRecords: bookmarkedItemData.total,
+                        pagesize,
+                        setPagesize,
+                        showCounter: true, // TODO
+                        // showCounter: bookmarkedItemData.data.length > 0,
+                        noun: 'item',
+                        nouns: 'items',
+                      }}
+                    />
+                    <CardList
+                      {...{
+                        start,
+                        cardData: bookmarkedItemData.data,
+                        snippets: bookmarkedItemData.data_snippets || null,
+                        onViewDetails: () => '',
+                        bookmarkedIds,
+                        setBookmarkedIds,
+                        onViewDetails,
+                        setNextPage:
+                          bookmarkedItemData.page !==
+                          bookmarkedItemData.num_pages
+                            ? () => {
+                                setCurPage(curPage + 1)
+                                if (typeof window !== 'undefined') {
+                                  window.scrollTo(0, 0)
+                                }
+                              }
+                            : false,
+                      }}
+                    />
+                  </>
+                )}
               </>
             )}
           </Panel>

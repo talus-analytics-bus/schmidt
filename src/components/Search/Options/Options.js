@@ -387,15 +387,17 @@ export const Options = ({
           </div>
         </div>
         <div className={styles.filterSections}>{filterSections}</div>
-        <FloatButton
-          {...{
-            icon: <i className={'material-icons'}>expand_less</i>,
-            label: `${
-              showAdditionalFilters ? 'Hide' : 'Show'
-            } additional filters`,
-            onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
-          }}
-        />
+        {showFilterSections && (
+          <FloatButton
+            {...{
+              icon: <i className={'material-icons'}>expand_less</i>,
+              label: `${
+                showAdditionalFilters ? 'Hide' : 'Show'
+              } additional filters`,
+              onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
+            }}
+          />
+        )}
       </div>
     </div>
   )

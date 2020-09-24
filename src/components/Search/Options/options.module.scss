@@ -2,6 +2,7 @@
 .options {
   border-right: 2px $soft-blue solid;
   height: 100%;
+  min-height: 90vh;
   .sortBy {
     display: flex;
     align-items: flex-end;
