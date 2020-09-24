@@ -107,7 +107,7 @@
         .authorName {
           font-weight: 600;
           font-size: 1.2rem;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
           color: $selected-blue;
           cursor: pointer;
           &:hover {
@@ -115,7 +115,7 @@
           }
         }
         .authorInfo {
-          @include spaceItemsVert(10px);
+          @include spaceItemsVert(20px);
           .infoItem {
             .field {
               text-transform: uppercase;
