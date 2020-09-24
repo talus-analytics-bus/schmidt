@@ -189,6 +189,9 @@ const DetailOverlay = ({
                 ))}
               </div>
             </Panel>
+            {
+              // Author info
+            }
             <Panel
               {...{
                 title: `Authoring organization${
@@ -226,6 +229,27 @@ const DetailOverlay = ({
                 )}
               </div>
             </Panel>
+            {
+              // Event info
+            }
+            <Panel
+              {...{ title: 'Related events', iconName: 'outbreak_events' }}
+            >
+              <div className={styles.events}>
+                {itemData.events.map((d, i) => (
+                  <>
+                    {d.name}
+                    {i !== itemData.events.length - 1 ? ' • ' : ''}
+                  </>
+                ))}
+                {itemData.events.length === 0 && (
+                  <div className={styles.noData}>Data not available</div>
+                )}
+              </div>
+            </Panel>
+            {
+              // Funder info
+            }
             <Panel {...{ title: 'Funders', iconName: 'payments' }}>
               <div className={styles.funders}>
                 {itemData.funders.map((d, i) => (

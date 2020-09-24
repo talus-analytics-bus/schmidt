@@ -20,5 +20,13 @@
       color: $navy-blue;
       margin-right: 3px;
     }
+
+    // special icons that are not material, but svg imports
+    .specialIcon {
+      $size: 32px;
+      height: $size;
+      width: $size;
+      margin-right: 5px;
+    }
   }
 }
