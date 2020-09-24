@@ -11,7 +11,6 @@ import loadingSvg from '../../../assets/images/loading-blue.svg'
 
 const Nav = ({ page, loading, ...props }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [showCountryPicker, setShowCountryPicker] = useState(false)
   const linksRef = useRef(null)
   const hamburgerRef = useRef(null)
   const pickerRef = useRef(null)
@@ -30,38 +29,7 @@ const Nav = ({ page, loading, ...props }) => {
           setShowMobileMenu(false)
         }
       }
-  }, [showMobileMenu, showCountryPicker])
-
-  /**
-   * Return JSX for country picker that opens when you hover on "Country Details" link
-   * @method renderCountryPicker
-   */
-  const renderCountryPicker = () => {
-    return (
-      <div
-        className={styles.countryPicker}
-        onMouseLeave={() => {
-          if (showCountryPicker) {
-            setShowCountryPicker(false)
-          }
-        }}
-      >
-        <div className={styles.tabContainer}>
-          <div
-            className={classNames(
-              styles.tab,
-              page === 'country' ? styles.active : ''
-            )}
-          >
-            Country
-          </div>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.title}>Find a country</div>
-        </div>
-      </div>
-    )
-  }
+  }, [showMobileMenu])
 
   return (
     <div
@@ -99,28 +67,40 @@ const Nav = ({ page, loading, ...props }) => {
               onClick={() => {
                 setShowMobileMenu(false)
               }}
-              className={page === 'search' ? styles.active : ''}
+              className={classNames(
+                page === 'search' ? styles.active : '',
+                styles.linkText
+              )}
               to={'/search'}
             >
-              Search
+              <i className={'material-icons'}>search</i>
+              <span>Search</span>
             </Link>
             <Link
               onClick={() => {
                 setShowMobileMenu(false)
               }}
-              className={page === 'bookmarks' ? styles.active : ''}
+              className={classNames(
+                page === 'bookmarks' ? styles.active : '',
+                styles.linkText
+              )}
               to={'/bookmarks'}
             >
-              Bookmarks
+              <i className={'material-icons'}>bookmark</i>
+              <span>Bookmarks</span>
             </Link>
             <Link
               onClick={() => {
                 setShowMobileMenu(false)
               }}
-              className={page === 'about' ? styles.active : ''}
+              className={classNames(
+                page === 'about' ? styles.active : '',
+                styles.linkText
+              )}
               to={'/about'}
             >
-              About
+              <i className={'material-icons'}>info</i>
+              <span>About</span>
             </Link>
             <Link
               onClick={() => {

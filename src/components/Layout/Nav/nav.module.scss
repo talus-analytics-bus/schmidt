@@ -16,6 +16,18 @@
     align-items: center;
     justify-content: flex-end;
 
+    // center link text and icons
+    .linkText {
+      display: flex;
+      align-items: center;
+      @include spaceItemsHoriz(3px);
+      i {
+        position: relative;
+        top: 2px;
+        text-decoration: none;
+      }
+    }
+
     // loading spinner
     .loading {
       position: absolute;
@@ -51,6 +63,12 @@
     }
     a,
     .countryLinkContainer {
+      text-decoration: none;
+      > span {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
       &:not([role='search-result']) {
         color: $navy-blue;
         white-space: nowrap;
