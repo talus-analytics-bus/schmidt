@@ -145,20 +145,14 @@ const DetailOverlay = ({
                 ))}
               </div>
             </Panel>
-            <Panel {...{ title: 'Topic areas' }}>
-              <div className={styles.keyTopics}>
-                {keyTopics.map(d => (
-                  <>
-                    <div
-                      className={classNames(styles.keyTopic, {
-                        [styles.active]: itemData.key_topics.includes(d),
-                      })}
-                    >
-                      <div className={styles.colorBlock}></div>
-                      <span>{d}</span>
-                    </div>
-                  </>
+            <Panel {...{ title: 'Funders', iconName: 'payments' }}>
+              <div className={styles.funders}>
+                {itemData.funders.map(d => (
+                  <>{d.name}</>
                 ))}
+                {itemData.funders.length === 0 && (
+                  <div className={styles.noData}>Data not available</div>
+                )}
               </div>
             </Panel>
           </div>
