@@ -103,9 +103,9 @@ const DetailOverlay = ({
     // if ID is provided fetch data, and scroll to top
     if (id !== false) {
       getData()
-      if (typeof window !== 'undefined') {
-        window.scrollTo(0, 0)
-      }
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
     }
   }, [id])
 
