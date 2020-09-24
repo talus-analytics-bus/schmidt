@@ -292,7 +292,10 @@ export const Card = ({
       <div className={classNames(styles.col, styles.thumbnailCol)}>
         {files.length > 0 && (
           <div className={styles.thumbnail}>
-            <img src={`${S3_URL}${files[0].s3_filename}_thumb`} />
+            <img
+              key={files[0].id}
+              src={`${S3_URL}${files[0].s3_filename}_thumb`}
+            />
           </div>
         )}
         {files.length === 0 && (
