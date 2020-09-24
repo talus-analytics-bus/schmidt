@@ -52,7 +52,7 @@ const Search = ({ setPage }) => {
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
   // showing detail overlay?
-  const [showOverlay, setShowOverlay] = useState(1)
+  const [showOverlay, setShowOverlay] = useState(false)
   // const [showOverlay, setShowOverlay] = useState(false)
   // const [showOverlay, setShowOverlay] = useState(
   //   urlParams.get('overlay') !== undefined || false
@@ -249,7 +249,10 @@ const Search = ({ setPage }) => {
   // JSX
   return (
     <>
-      <Layout page={'search'} loading={isSearching && !isSearchingText}>
+      <Layout
+        page={'search'}
+        loading={isSearching && !isSearchingText && initialized}
+      >
         <SEO title="Search results" />
         <div className={styles.search}>
           <StickyHeader
