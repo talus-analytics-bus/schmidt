@@ -28,6 +28,14 @@
   display: grid;
   grid-template-columns: max-content $letter-width auto;
 
+  // make thumbnail col content centered and spaced
+  .col.thumbnailCol {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    @include spaceItemsVert(10px);
+  }
+
   // let details and actions column use full width
   .col:last-child {
     width: 100%;
@@ -184,6 +192,17 @@
     // hide tag snippets too
     .tagSnippets {
       display: none;
+    }
+  }
+
+  // Downloads list
+  .downloads {
+    margin-top: 200px;
+    width: auto;
+    .downloadItem {
+      display: grid;
+      grid-template-columns: 30px max-content max-content;
+      grid-gap: 10px 20px;
     }
   }
 }

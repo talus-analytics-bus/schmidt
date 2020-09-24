@@ -1,15 +1,17 @@
 // 3rd party packages
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import axios from 'axios'
 
 // assets and styles
 import styles from './card.module.scss'
 
 // local components
 import { PrimaryButton } from '../'
+import Panel from '../../Detail/content/Panel'
 
 // local utility functions
-import { formatDate, isEmpty } from '../../misc/Util'
+import { formatDate, isEmpty, bytesToMegabytes } from '../../misc/Util'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -142,7 +144,7 @@ export const Card = ({
     } else {
       console.log(key)
       if (key === 'description' && detail) {
-        card[key] = variable
+        card[key] = variable || 'Description not yet available for this item'
       } else card[key] = null
     }
   })
@@ -263,7 +265,7 @@ export const Card = ({
       <div className={styles.col}>
         <div className={styles.resultNumber}>{resultNumber}</div>
       </div>
-      <div className={styles.col}>
+      <div className={classNames(styles.col, styles.thumbnailCol)}>
         {files.length > 0 && (
           <div className={styles.thumbnail}>
             <img src={`${API_URL}/get/file?id=${files[0].id}&get_thumb=true`} />
@@ -274,6 +276,18 @@ export const Card = ({
             Preview unavailable
           </div>
         )}
+        {
+          // Show preview button under thumbnail on details page
+          detail && files.length > 0 && (
+            <PrimaryButton
+              {...{
+                label: 'Preview',
+                iconName: 'preview',
+                isSecondary: true,
+              }}
+            />
+          )
+        }
       </div>
       <div className={styles.col}>
         <div className={styles.main}>
@@ -318,6 +332,38 @@ export const Card = ({
           <div className={styles.descriptionSnippet}>{card.description}</div>
           {tagSnippets.length > 0 && (
             <div className={styles.tagSnippets}>{tagSnippets}</div>
+          )}
+          {detail && (
+            <div className={styles.downloads}>
+              <Panel
+                {...{
+                  title: 'Downloads',
+                  secondary: false,
+                  iconName: 'get_app',
+                }}
+              >
+                {files.map(({ id, num_bytes, filename }) => (
+                  <div className={styles.downloadItem}>
+                    <i className={'material-icons'}>picture_as_pdf</i>
+                    <PrimaryButton
+                      {...{
+                        label: filename,
+                        isLink: true,
+                        urlIsExternal: true,
+                        url: `${API_URL}/get/file?id=${id}`,
+                        // onClick: () => {
+                        //   if (typeof window !== 'undefined') {
+                        //     window.open.assign(`${API_URL}/get/file?id=${id}`)
+                        //   }
+                        // },
+                      }}
+                    />
+                    {<span>{bytesToMegabytes(num_bytes)}</span>}
+                  </div>
+                ))}
+                {files.length === 0 && <div>None</div>}
+              </Panel>
+            </div>
           )}
         </div>
       </div>

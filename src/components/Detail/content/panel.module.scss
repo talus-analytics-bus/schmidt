@@ -1,7 +1,9 @@
 @import '../../../assets/styles/vars.scss';
 .panel {
-  background-color: $light-gray;
-  padding: 20px;
+  &.secondary {
+    background-color: $light-gray;
+    padding: 20px;
+  }
 
   .title {
     display: flex;

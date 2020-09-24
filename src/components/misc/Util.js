@@ -1137,3 +1137,10 @@ export const areaScorecardDefs = [
     area: 'Health systems',
   },
 ]
+
+/**
+ * Convert KB to MB
+ */
+export const bytesToMegabytes = v => {
+  return Util.decimalizeOne(parseFloat(v) / 1000000.0) + ' Mb'
+}

@@ -12,9 +12,12 @@ const Panel = ({
   title = 'Panel name',
   iconName = 'device_hub',
   children = null,
+  secondary = true,
 }) => {
   return (
-    <div className={styles.panel}>
+    <div
+      className={classNames(styles.panel, { [styles.secondary]: secondary })}
+    >
       <div className={styles.title}>
         {iconName && <i className={'material-icons'}>{iconName}</i>}
         <div className={styles.text}>{title}</div>
