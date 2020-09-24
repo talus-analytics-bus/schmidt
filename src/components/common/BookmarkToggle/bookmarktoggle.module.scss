@@ -1,0 +1,53 @@
+@import '../../../assets/styles/vars.scss';
+.wrapper {
+  width: max-content;
+  a {
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  .button {
+    color: white;
+    &:not(.link) {
+      @include btn-primary();
+    }
+    padding: 5px 10px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+
+    i {
+      position: relative;
+      margin-right: 5px;
+      left: -3px;
+    }
+
+    // secondary buttons have different and less emphasizing styling
+    &.secondary {
+      background: white;
+      color: #333;
+      border-color: $navy-blue;
+      &:hover {
+        background: darken(white, 5%);
+      }
+    }
+    // link buttons look like simple hyperlinks
+    &.link {
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 0;
+      color: $selected-blue;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:active,
+      &:focus {
+        color: darken($selected-blue, 10%);
+      }
+    }
+  }
+}

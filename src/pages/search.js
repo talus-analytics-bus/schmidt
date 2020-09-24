@@ -12,7 +12,7 @@ import { StickyHeader, LoadingSpinner } from '../components/common'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
-import { execute } from '../components/misc/Util'
+import { execute, withBookmarkedIds } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Search/search.module.scss'
@@ -27,6 +27,9 @@ const Search = ({ setPage }) => {
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
   const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
+
+  // bookmarked items
+  const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
   // has first data load for page occurred?
   const [initialized, setInitialized] = useState(false)
@@ -183,6 +186,12 @@ const Search = ({ setPage }) => {
   }
 
   // EFFECT HOOKS
+  // get bookmarked ids initially
+  useEffect(() => {
+    if (bookmarkedIds === null)
+      withBookmarkedIds({ callback: setBookmarkedIds })
+  }, [bookmarkedIds])
+
   // when overlay is changed, store new state
   useEffect(() => {
     updateHistory({})
@@ -330,6 +339,8 @@ const Search = ({ setPage }) => {
                 setFreezeDataUpdates,
                 setOrderBy,
                 setIsDesc,
+                bookmarkedIds,
+                setBookmarkedIds,
               }}
             />
           </div>
@@ -343,6 +354,8 @@ const Search = ({ setPage }) => {
                 onViewDetails,
                 origScrollY,
                 onLoaded: () => setIsSearching(false),
+                bookmarkedIds,
+                setBookmarkedIds,
               }}
             />
           )}

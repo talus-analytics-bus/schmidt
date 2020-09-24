@@ -27,6 +27,8 @@ export const Results = ({
   setFreezeDataUpdates,
   setOrderBy,
   setIsDesc,
+  bookmarkedIds,
+  setBookmarkedIds,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -80,6 +82,8 @@ export const Results = ({
               snippets: searchData.data_snippets || null,
               filters,
               onViewDetails,
+              bookmarkedIds,
+              setBookmarkedIds,
               setNextPage:
                 searchData.page !== searchData.num_pages
                   ? () => {

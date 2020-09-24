@@ -7,11 +7,16 @@ import axios from 'axios'
 import styles from './card.module.scss'
 
 // local components
-import { PrimaryButton } from '../'
+import { PrimaryButton, BookmarkToggle } from '../'
 import Panel from '../../Detail/content/Panel'
 
 // local utility functions
-import { formatDate, isEmpty, bytesToMegabytes } from '../../misc/Util'
+import {
+  formatDate,
+  isEmpty,
+  bytesToMegabytes,
+  removeBookmark,
+} from '../../misc/Util'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -35,6 +40,8 @@ export const Card = ({
   onViewDetails = () => '',
   detail = false,
   related = false,
+  setBookmarkedIds = () => '',
+  bookmarkedIds = [],
   ...props
 }) => {
   // define obj to hold card text, including highlighted snippets, if any
@@ -296,6 +303,17 @@ export const Card = ({
           <div className={styles.title}>
             {title !== '' ? card.title : 'Untitled'}
           </div>
+          {bookmarkedIds && (
+            <BookmarkToggle
+              {...{
+                add: !bookmarkedIds.includes(id),
+                isSecondary: true,
+                bookmarkedIds,
+                setBookmarkedIds,
+                id,
+              }}
+            />
+          )}
           <div className={styles.detailsAndActions}>
             <div className={styles.details}>
               <div className={styles.authOrg}>

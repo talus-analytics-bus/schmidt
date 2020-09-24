@@ -1,11 +1,11 @@
 // 3rd party packages
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // local components
 import { Card, FloatButton } from '../'
 
 // local utility functions
-import { comma } from '../../misc/Util'
+import { comma, withBookmarkedIds } from '../../misc/Util'
 
 // assets and styles
 import styles from './cardlist.module.scss'
@@ -21,6 +21,8 @@ export const CardList = ({
   filters,
   onViewDetails = () => '',
   related = false,
+  bookmarkedIds,
+  setBookmarkedIds,
   ...props
 }) => {
   // CONSTANTS
@@ -44,6 +46,8 @@ export const CardList = ({
                 filters,
                 onViewDetails,
                 related,
+                bookmarkedIds,
+                setBookmarkedIds,
               }}
             />
           )

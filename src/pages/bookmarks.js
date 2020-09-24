@@ -16,7 +16,7 @@ import {
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
-import { execute, getIntArray } from '../components/misc/Util'
+import { execute, withBookmarkedIds } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Bookmarks/bookmarks.module.scss'
@@ -29,6 +29,9 @@ const Bookmarks = ({}) => {
   // page initialized?
   const [initialized, setInitialized] = useState(false)
   const [bookmarkedItemData, setBookmarkedItemData] = useState({})
+
+  // bookmarked items IDs
+  const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
@@ -93,23 +96,29 @@ const Bookmarks = ({}) => {
   const getData = async () => {
     // get all bookmarked items, placeholder for now
     const results = await ItemsQuery({
-      ids: getIntArray(1, 20),
+      ids: bookmarkedIds.split(',').map(d => +d),
       pagesize,
       page: curPage,
     })
-    console.log('results')
-    console.log(results)
     setBookmarkedItemData(results.data)
   }
 
+  // // remove
+  // localStorage.removeItem('myData');
+  //
+  // // remove all
+  // localStorage.clear();
+
   // EFFECT HOOKS
-  // useEffect(() => {
-  //   getData()
-  // }, [])
+  // get bookmarked ids initially
+  useEffect(() => {
+    if (bookmarkedIds === null)
+      withBookmarkedIds({ callback: setBookmarkedIds })
+  }, [bookmarkedIds])
 
   // when xxx
   useEffect(() => {
-    if (true) {
+    if (bookmarkedIds !== null) {
       // if (!popstateTriggeredUpdate && !freezeDataUpdates) {
       if (curPage !== 1) {
         setCurPage(1)
@@ -118,7 +127,8 @@ const Bookmarks = ({}) => {
         if (!initialized) setInitialized(true)
       }
     }
-  }, [pagesize, orderBy, isDesc])
+  }, [bookmarkedIds, pagesize, orderBy, isDesc])
+
   useEffect(() => {
     if (initialized) {
       getData()
@@ -180,6 +190,8 @@ const Bookmarks = ({}) => {
                     cardData: bookmarkedItemData.data,
                     snippets: bookmarkedItemData.data_snippets || null,
                     onViewDetails: () => '',
+                    bookmarkedIds,
+                    setBookmarkedIds,
                     setNextPage:
                       bookmarkedItemData.page !== bookmarkedItemData.num_pages
                         ? () => {

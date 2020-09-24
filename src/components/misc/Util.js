@@ -1144,3 +1144,26 @@ export const areaScorecardDefs = [
 export const bytesToMegabytes = v => {
   return Util.decimalizeOne(parseFloat(v) / 1000000.0) + ' Mb'
 }
+
+/**
+ * Make bookmarked items available to a callback function
+ */
+export const withBookmarkedIds = async ({ callback }) => {
+  // get bookmarked items
+  if (typeof localStorage !== 'undefined') {
+    // getter
+    const bookmarkedIds = localStorage.getItem('bookmarkedIds') || ''
+    if (callback) callback(bookmarkedIds)
+  }
+}
+
+// remove a bookmark
+export const removeBookmark = ({ id, callback }) => {
+  if (typeof localStorage !== 'undefined') {
+    // get bookmarked items
+    const bookmarkedIds = localStorage.getItem('bookmarkedIds') || []
+    const newBookmarkedIds = bookmarkedIds.filter(d => +d !== +id)
+    localStorage.setItem('bookmarkedIds', newBookmarkedIds)
+    if (callback) callback(newBookmarkedIds)
+  }
+}

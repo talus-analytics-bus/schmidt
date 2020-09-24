@@ -37,6 +37,8 @@ const DetailOverlay = ({
   origScrollY,
   onViewDetails,
   onLoaded = () => '',
+  bookmarkedIds,
+  setBookmarkedIds,
 }) => {
   // STATE
   // opacity control
@@ -189,6 +191,8 @@ const DetailOverlay = ({
                       start: 1,
                       onViewDetails,
                       related: true,
+                      bookmarkedIds,
+                      setBookmarkedIds,
                     }}
                   />
                 </Panel>

@@ -18,6 +18,7 @@ import Card from './Card/Card.js'
 import StickyHeader from './StickyHeader/StickyHeader.js'
 import SearchBar from './SearchBar/SearchBar.js'
 import PrimaryButton from './PrimaryButton/PrimaryButton.js'
+import BookmarkToggle from './BookmarkToggle/BookmarkToggle.js'
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js'
 import FloatButton from './FloatButton/FloatButton.js'
 export {
@@ -41,6 +42,7 @@ export {
   StickyHeader,
   SearchBar,
   PrimaryButton,
+  BookmarkToggle,
   LoadingSpinner,
   FloatButton,
 }
