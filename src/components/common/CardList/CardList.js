@@ -23,6 +23,7 @@ export const CardList = ({
   related = false,
   bookmarkedIds,
   setBookmarkedIds,
+  animate = false,
   ...props
 }) => {
   // CONSTANTS
@@ -44,10 +45,12 @@ export const CardList = ({
                 ...allCardProps,
                 key: allCardProps.id,
                 filters,
+                idx: i,
                 onViewDetails,
                 related,
                 bookmarkedIds,
                 setBookmarkedIds,
+                animate,
               }}
             />
           )

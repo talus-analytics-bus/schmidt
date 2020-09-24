@@ -4,9 +4,8 @@
   width: 100%;
   padding: 10px;
   border: 1px solid transparent;
-  transition: all 0.25s;
-  // padding: 10px;
-
+  transition: all ease 0.25s;
+  position: relative;
   &:not(.detail) {
     &:hover {
       border-color: #333;

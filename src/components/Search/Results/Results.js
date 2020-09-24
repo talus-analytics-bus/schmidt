@@ -37,10 +37,8 @@ export const Results = ({
   const showPaginator = searchData !== null
 
   // define start / end result numbers
-  // Showing {comma(curPage * pagesize - pagesize + 1)} to{' '}
-  // {comma(Math.min(curPage * pagesize, nTotalRecords))} of{' '}
-  // {comma(nTotalRecords)} {nTotalRecords !== 1 ? nouns : noun}
-  const start = curPage * pagesize - pagesize + 1
+
+  const start = showPaginator ? searchData.page * pagesize - pagesize + 1 : 1
 
   // EFFECT HOOKS // ------------------------------------------------------- //
 

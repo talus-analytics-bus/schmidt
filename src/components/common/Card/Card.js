@@ -1,5 +1,5 @@
 // 3rd party packages
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import axios from 'axios'
 
@@ -28,6 +28,7 @@ const S3_URL = process.env.GATSBY_S3_URL
 export const Card = ({
   resultNumber,
   id,
+  idx = 0,
   type_of_record,
   title,
   description,
@@ -43,8 +44,19 @@ export const Card = ({
   related = false,
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
+  animate = false,
   ...props
 }) => {
+  // STATE
+  // card's left css property
+  const [left, setLeft] = useState(detail ? 0 : 20)
+
+  // EFFECT HOOKS
+  // animate card entrances
+  useEffect(() => {
+    if (!detail) setTimeout(() => setLeft(0), 100 * idx)
+  }, [])
+
   // define obj to hold card text, including highlighted snippets, if any
   const card = {}
 
@@ -263,8 +275,11 @@ export const Card = ({
   //   height="200"
   //   width="300"
   // ></iframe>
+
+  // JSX
   return (
     <div
+      style={{ left }}
       onClick={e => {
         e.stopPropagation()
         onViewDetails({ newId: id, related })
