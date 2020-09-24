@@ -20,6 +20,7 @@ import {
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
+const S3_URL = process.env.GATSBY_S3_URL
 
 /**
  * @method Card
@@ -276,7 +277,7 @@ export const Card = ({
       <div className={classNames(styles.col, styles.thumbnailCol)}>
         {files.length > 0 && (
           <div className={styles.thumbnail}>
-            <img src={`${API_URL}/get/file?id=${files[0].id}&get_thumb=true`} />
+            <img src={`${S3_URL}${files[0].s3_filename}_thumb`} />
           </div>
         )}
         {files.length === 0 && (
@@ -374,7 +375,7 @@ export const Card = ({
                         label: filename,
                         isLink: true,
                         urlIsExternal: true,
-                        url: `${API_URL}/get/file?id=${id}`,
+                        url: `${API_URL}/get/file/${filename}?id=${id}`,
                         // onClick: () => {
                         //   if (typeof window !== 'undefined') {
                         //     window.open.assign(`${API_URL}/get/file?id=${id}`)

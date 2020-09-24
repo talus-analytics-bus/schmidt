@@ -102,7 +102,7 @@ const DetailOverlay = ({
   // FUNCTIONS
   // get item data
   const getData = async () => {
-    if (id === false) return
+    if (id === false || id === 'false') return
     else {
       const results = await ItemQuery({
         id,
