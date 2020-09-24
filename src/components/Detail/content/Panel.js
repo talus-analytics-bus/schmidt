@@ -14,7 +14,7 @@ export const Panel = ({
   iconName = 'device_hub',
   children = null,
   secondary = true,
-  heading = true,
+  heading = false,
 }) => {
   // CONSTANTS
   // special icon?
