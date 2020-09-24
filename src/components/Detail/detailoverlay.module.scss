@@ -37,6 +37,8 @@
       }
     }
   }
+  // animate opacity, controlled in JS
+  transition: opacity 0.5s;
 
   &.floating {
     z-index: 9; // above header
@@ -45,10 +47,14 @@
     top: 0;
     padding: 0;
 
+    // animate opacity, controlled in JS
+    transition: opacity 0.5s;
+
     background-color: white;
     .band {
       display: flex;
     }
+    @include boxShadowStrong();
   }
   .content {
     width: 100%;

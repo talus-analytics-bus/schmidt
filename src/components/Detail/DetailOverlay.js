@@ -33,6 +33,10 @@ const DetailOverlay = ({
   floating = true,
   close = () => '',
 }) => {
+  // STATE
+  // opacity control
+  const [opacity, setOpacity] = useState(0)
+
   // CONSTANTS
   const keyTopics = [
     'Biodefense',
@@ -70,16 +74,29 @@ const DetailOverlay = ({
       }
     }
   }, [id])
+
+  useEffect(() => {
+    if (itemData !== null) {
+      setOpacity(1)
+    }
+  }, [itemData])
   if (itemData === null) return null
   else
     return (
       <div
+        style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
         className={classNames(styles.detailOverlay, {
           [styles.floating]: floating,
         })}
       >
         <div className={styles.band}>
-          <div onClick={close} className={styles.closeButton}>
+          <div
+            onClick={() => {
+              close()
+              setOpacity(0)
+            }}
+            className={styles.closeButton}
+          >
             <i className={'material-icons'}>close</i>
           </div>
         </div>

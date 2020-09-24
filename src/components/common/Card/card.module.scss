@@ -64,12 +64,20 @@
     }
   }
 
-  // detail thumbnails: larger
+  // detail thumbnails: larger, etc.
   &.detail {
+    padding: 20px;
     grid-template-columns: max-content $letter-width-lg auto;
-
+    .resultNumber {
+      display: none;
+    }
+    .col:last-child {
+      margin-left: 10px;
+      padding-right: 0;
+    }
     .thumbnail {
       width: $letter-width-lg;
+      justify-content: unset;
       img {
         max-height: $max-height-lg;
         max-width: $letter-width-lg;

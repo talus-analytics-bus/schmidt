@@ -299,7 +299,7 @@ const Search = ({ setPage }) => {
               }}
             />
           </div>
-          {showOverlay !== false && (
+          {true && (
             <DetailOverlay
               {...{
                 title: 'Test',
