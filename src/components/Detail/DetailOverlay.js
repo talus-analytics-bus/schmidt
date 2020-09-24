@@ -107,29 +107,6 @@ const DetailOverlay = ({
         window.scrollTo(0, 0)
       }
     }
-    // if (typeof window !== 'undefined') {
-    //   const urlParams = new URLSearchParams(window.location.search)
-    //
-    //   // update overlay item ID
-    //   urlParams.set('show_overlay', id)
-    //
-    //   // create new state object for history entry
-    //   const newState = window.history.state
-    //   if (newState !== null) {
-    //     // for (const [key, value] of urlParams.entries()) {
-    //     //   if (key === 'filters') newState[key] = JSON.parse(value)
-    //     //   else newState[key] = value
-    //     // }
-    //     newState.showOverlay = id
-    //
-    //     // e.g., "/search" or "/bookmarks"
-    //     const pathname = window.location.pathname
-    //     const newUrl =
-    //       urlParams.toString() !== '' ? `${pathname}?${urlParams}` : pathname
-    //
-    //     window.history.pushState(newState, '', newUrl)
-    //   }
-    // }
   }, [id])
 
   useEffect(() => {

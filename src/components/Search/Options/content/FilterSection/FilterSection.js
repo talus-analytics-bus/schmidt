@@ -21,6 +21,7 @@ export const FilterSection = ({
   filters,
   setFilters,
   numSelected = null,
+  defaultOpen = true,
   ...props
 }) => {
   // CONSTANTS
@@ -29,7 +30,7 @@ export const FilterSection = ({
 
   // STATE // -------------------------------------------------------------- //
   // open or collapsed?
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(defaultOpen)
 
   // EFFECT HOOKS // ------------------------------------------------------- //
 

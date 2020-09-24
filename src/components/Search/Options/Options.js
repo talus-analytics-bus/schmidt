@@ -307,7 +307,8 @@ export const Options = ({
           ...curFilterSectionData,
           key: curFilterSectionData.field,
           filterDefs: filterDefs[curFilterSectionData.field],
-          hide: i > 3 && !showAdditionalFilters,
+          hide: i > 2 && !showAdditionalFilters,
+          defaultOpen: i < 3,
           filters,
           setFilters,
           numSelected:
