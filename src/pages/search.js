@@ -48,9 +48,7 @@ const Search = ({ setPage }) => {
   }
 
   // order by parameters
-  const [orderBy, setOrderBy] = useState(
-    urlParams.get('order_by') || 'relevance'
-  )
+  const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(isDescStr === 'true')
 
