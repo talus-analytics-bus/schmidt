@@ -100,7 +100,7 @@ const Search = ({ setPage }) => {
   const [curPage, setCurPage] = useState(+pageStr)
 
   const [pagesize, setPagesize] = useState(
-    !initialized ? urlParams.get('pagesize') || 10 : 10
+    !initialized ? urlParams.get('pagesize') || 25 : 25
   )
 
   // simple header/footer reference
