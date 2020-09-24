@@ -134,9 +134,12 @@
         &:not(:first-child) {
           border-top: 10px solid white;
         }
-        &:last-child {
-          border-bottom: 10px solid white;
-        }
+        // &:nth-last-child(2) {
+        //   border-bottom: none;
+        // }
+        // &:last-child {
+        //   border-bottom: 10px solid white;
+        // }
       }
     }
   }
