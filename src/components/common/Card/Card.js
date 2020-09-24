@@ -49,12 +49,15 @@ export const Card = ({
 }) => {
   // STATE
   // card's left css property
-  const [left, setLeft] = useState(detail ? 0 : 20)
+  const [left, setLeft] = useState(detail || related ? 0 : 20)
+
+  // image
+  const [thumbnail, setThumbnail] = useState(null)
 
   // EFFECT HOOKS
   // animate card entrances
   useEffect(() => {
-    if (!detail) setTimeout(() => setLeft(0), 100 * idx)
+    if (!detail && !related) setTimeout(() => setLeft(0), 100 * idx)
   }, [])
 
   // define obj to hold card text, including highlighted snippets, if any
