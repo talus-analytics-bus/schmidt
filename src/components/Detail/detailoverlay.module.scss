@@ -99,6 +99,9 @@
           grid-gap: 0 5px;
           align-items: center;
           color: #898989;
+          span {
+            color: unset;
+          }
           .colorBlock {
             height: 30px;
             background-color: #e5e5e5;
