@@ -85,7 +85,6 @@ export const Card = ({
 
     // arr to hold new text (with highlights)
     const newText = []
-
     // for each text chunk, wrap in highlight JSX tag
     textArr.forEach((d, i) => {
       // odd segments are highlighted portions
@@ -105,7 +104,7 @@ export const Card = ({
     // if max words provided, trim
     let pre, post, highlighted
     let nWords = 0
-    if (maxWords) {
+    if (maxWords !== null) {
       const trimmedText = []
       const halfMax = maxWords / 2
       let done = false
@@ -187,7 +186,6 @@ export const Card = ({
       // get link list entry text
       const linkListEntries = variable.map(d => {
         const matchingSnippet = snippets[key].find(dd => dd.id === d.id)
-
         // if a snippet was found for the linked instance, highlight its name
         if (matchingSnippet) {
           return {
@@ -213,9 +211,9 @@ export const Card = ({
         </div>
       ))
     } else {
-      card.authors = authors.map(d => (
+      card[key] = variable.map(d => (
         <div onClick={() => console.log(d.id)} className={styles.link}>
-          {d.authoring_organization}
+          {d[linkTextField]}
         </div>
       ))
     }
