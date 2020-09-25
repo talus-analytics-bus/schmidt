@@ -7,7 +7,7 @@ import axios from 'axios'
 import styles from './card.module.scss'
 
 // local components
-import { PrimaryButton, BookmarkToggle } from '../'
+import { PrimaryButton, BookmarkToggle, ShowMore } from '../'
 import Panel from '../../Detail/content/Panel'
 
 // local utility functions
@@ -70,7 +70,7 @@ export const Card = ({
   }, [idx])
 
   // define obj to hold card text, including highlighted snippets, if any
-  const card = {}
+  const card = { show: {} }
 
   /**
    * Get highlighted text snippets in the card data and assign them to the
@@ -80,85 +80,99 @@ export const Card = ({
    * @param  {String}             [type='normal' }]            [description]
    * @return {[type]}                            [description]
    */
-  const getHighlightSegments = ({ text, type = 'normal', maxWords = null }) => {
-    // replace text within highlight tags with JSX, taking care not to
-    // introduce extra spaces before or after the highlighted words
-    const textArr = text
-      .replace(/<\/highlight>/g, '<highlight>')
-      .replace(/"/g, "'")
-      .split('<highlight>')
-    const firstFewFrags = text.split(/<\/?highlight>/g).slice(0, 3)
+  const getHighlightSegments = ({
+    text,
+    type = 'normal',
+    maxWords = null,
+    highlightAll = false,
+  }) => {
+    // if highlight all, simply return the entire text highlighted.
+    if (highlightAll) {
+      return (
+        <span className={classNames(styles.highlighted, styles[type])}>
+          {text}
+        </span>
+      )
+    } else {
+      // replace text within highlight tags with JSX, taking care not to
+      // introduce extra spaces before or after the highlighted words
+      const textArr = text
+        .replace(/<\/highlight>/g, '<highlight>')
+        .replace(/"/g, "'")
+        .split('<highlight>')
+      const firstFewFrags = text.split(/<\/?highlight>/g).slice(0, 3)
 
-    // was there a space after the last highlighted word? If so, don't trim it
-    const firstFewStr = `${firstFewFrags[0]}<highlight>${firstFewFrags[1]}</highlight>${firstFewFrags[2]}`
+      // was there a space after the last highlighted word? If so, don't trim it
+      const firstFewStr = `${firstFewFrags[0]}<highlight>${firstFewFrags[1]}</highlight>${firstFewFrags[2]}`
 
-    // check whether we need to trim extra spaces out of the final string
-    const trimPost = /\/highlight>(?!\s)/g.test(firstFewStr)
-    const trimPre = !/(?=\s)\s<highlight>/g.test(firstFewStr)
+      // check whether we need to trim extra spaces out of the final string
+      const trimPost = /\/highlight>(?!\s)/g.test(firstFewStr)
+      const trimPre = !/(?=\s)\s<highlight>/g.test(firstFewStr)
 
-    // arr to hold new text (with highlights)
-    const newText = []
+      // arr to hold new text (with highlights)
+      const newText = []
 
-    // for each text chunk, wrap in highlight JSX tag
-    textArr.forEach((d, i) => {
-      // odd segments are highlighted portions
-      const highlightSegment = i % 2 === 1
-      if (highlightSegment) {
-        newText.push(
-          <span className={classNames(styles.highlighted, styles[type])}>
-            {d}
-          </span>
-        )
-      } else {
-        // push normal text if not a highlight snippet
-        newText.push(<>{d}</>)
-      }
-    })
-
-    // if max words provided, trim
-    let pre, post, highlighted
-    let plainString = ''
-    let nWords = 0
-    if (maxWords !== null) {
-      const trimmedText = []
-      const halfMax = maxWords / 2
-      let done = false
-      let i = 0
-      while (!done && i < newText.length) {
-        const frag = newText[i]
-
-        if (pre === undefined) {
-          // get first words of first fragment
-          const preWordsAll = frag.props.children.split(' ')
-          const preWordsTrimmed = preWordsAll.slice(
-            Math.max(preWordsAll.length - halfMax, 0),
-            preWordsAll.length
+      // for each text chunk, wrap in highlight JSX tag
+      textArr.forEach((d, i) => {
+        // odd segments are highlighted portions
+        const highlightSegment = i % 2 === 1
+        if (highlightSegment) {
+          newText.push(
+            <span className={classNames(styles.highlighted, styles[type])}>
+              {d}
+            </span>
           )
-
-          // add ellipsis only if fragment is the very beginning or end of text
-          const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
-          pre = `"${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
-          nWords += preWordsTrimmed.length
-          trimmedText.push(<span>{trimPre ? pre.trim() : pre}</span>)
-        } else if (highlighted === undefined) {
-          highlighted = frag
-          trimmedText.push(highlighted)
-        } else if (post === undefined) {
-          const wordsAll = frag.props.children.split(' ')
-          const wordsTrimmed = wordsAll.slice(0, halfMax)
-
-          const ellipsis = wordsTrimmed.length !== wordsAll.length
-          post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}"`
-          nWords += wordsTrimmed.length
-          trimmedText.push(<span>{trimPost ? post.trim() : post}</span>)
+        } else {
+          // push normal text if not a highlight snippet
+          newText.push(<>{d}</>)
         }
-        done =
-          pre !== undefined && post !== undefined && highlighted !== undefined
-        i += 1
-        continue
-      }
-      return trimmedText
-    } else return newText
+      })
+
+      // if max words provided, trim
+      let pre, post, highlighted
+      let plainString = ''
+      let nWords = 0
+      if (maxWords !== null) {
+        const trimmedText = []
+        const halfMax = maxWords / 2
+        let done = false
+        let i = 0
+        while (!done && i < newText.length) {
+          const frag = newText[i]
+
+          if (pre === undefined) {
+            // get first words of first fragment
+            const preWordsAll = frag.props.children.split(' ')
+            const preWordsTrimmed = preWordsAll.slice(
+              Math.max(preWordsAll.length - halfMax, 0),
+              preWordsAll.length
+            )
+
+            // add ellipsis only if fragment is the very beginning or end of text
+            const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
+            pre = `${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
+            nWords += preWordsTrimmed.length
+            trimmedText.push(<span>{trimPre ? pre.trim() : pre}</span>)
+          } else if (highlighted === undefined) {
+            highlighted = frag
+            trimmedText.push(highlighted)
+          } else if (post === undefined) {
+            const wordsAll = frag.props.children.split(' ')
+            const wordsTrimmed = wordsAll.slice(0, halfMax)
+
+            const ellipsis = wordsTrimmed.length !== wordsAll.length
+            post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}`
+            nWords += wordsTrimmed.length
+            trimmedText.push(<span>{trimPost ? post.trim() : post}</span>)
+          }
+          done =
+            pre !== undefined && post !== undefined && highlighted !== undefined
+          i += 1
+          continue
+        }
+        return trimmedText
+      } else return newText
+    }
   }
 
   // if snippets are provided, then scan them and use them
@@ -167,8 +181,9 @@ export const Card = ({
 
   // tag snippet fields: always shown, and will be highlighted if match
   const tagFields = [
-    ['key_topics', key_topics],
-    ['events', events, 'name', 'event.name'],
+    // ['key_topics', key_topics],
+    // ['events', events, 'name', 'event.name'],
+    // ['funders', funders, 'name', 'funder.name'],
   ]
 
   // trimmed snippets should only have a few words around the first highlighted
@@ -177,8 +192,10 @@ export const Card = ({
 
   // link list snippets are author names, etc. that when clicked do something
   const linkListSnippets = [
-    ['authors', authors, 'authoring_organization'],
-    ['funders', funders, 'name'],
+    ['authors', authors, 'authoring_organization', 'author.id', 'id'],
+    ['funders', funders, 'name', 'funder.name'],
+    ['events', events, 'name', 'event.name', 'name'],
+    ['key_topics', key_topics],
   ]
 
   // process standard snippets: highlight plain text
@@ -195,33 +212,64 @@ export const Card = ({
     } else {
       if (key === 'description' && detail) {
         card[key] = variable || 'Description not yet available for this item'
-      } else card[key] = null
+      } else card[key] = <ShowMore text={variable} charLimit={200} />
     }
   })
 
   // process link list snippets: highlight and turn into hyperlinked text
-  linkListSnippets.forEach(([key, variable, linkTextField]) => {
-    if (snippets[key] !== undefined) {
+  linkListSnippets.forEach(
+    ([
+      key,
+      variable,
+      linkTextField = undefined,
+      filterKey = key,
+      filterField = linkTextField,
+    ]) => {
+      // func for getting value from datum
+      const getVal = linkTextField ? v => v[linkTextField] : v => v
+      const getFilterVal = filterField ? v => v[filterField] : v => v
+
       // assume id is link field
       const linkIdField = 'id'
 
       // get link list entry text
       const linkListEntries = variable.map(d => {
-        const matchingSnippet = snippets[key].find(dd => dd.id === d.id)
+        const filterValues = filters[filterKey]
+        const matchingTagExists =
+          filterValues !== undefined
+            ? filterValues.find(
+                fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
+              )
+            : undefined
+        const matchingTag = matchingTagExists ? getVal(d) : undefined
+
+        const matchingSearchSnippet =
+          snippets[key] !== undefined
+            ? snippets[key].find(dd => dd.id === d.id)
+            : undefined
+
+        const matchingSnippet =
+          matchingTag ||
+          (matchingSearchSnippet !== undefined
+            ? getVal(matchingSearchSnippet)
+            : undefined)
+
         // if a snippet was found for the linked instance, highlight its name
         if (matchingSnippet) {
+          card.show[key] = true
           return {
             onClick: () => console.log(d[linkIdField]), // TODO
             text: getHighlightSegments({
-              text: matchingSnippet[linkTextField],
+              text: matchingSnippet,
               type: 'small',
+              highlightAll: matchingTag !== undefined,
             }),
           }
         } else {
           // return normal text if no highlight
           return {
             onClick: () => console.log(d[linkIdField]), // TODO
-            text: d[linkTextField],
+            text: getVal(d),
           }
         }
       })
@@ -232,14 +280,8 @@ export const Card = ({
           {d.text}
         </div>
       ))
-    } else {
-      card[key] = variable.map(d => (
-        <div onClick={() => console.log(d.id)} className={styles.link}>
-          {d[linkTextField]}
-        </div>
-      ))
     }
-  })
+  )
 
   // process tag snippets
   const pdfMatch = snippets['files'] !== undefined
@@ -296,12 +338,32 @@ export const Card = ({
   })
 
   // funder match?
-  const funderMatch = snippets['funders'] !== undefined
-  if (funderMatch) {
+  if (card.show.funders) {
     tagSnippets.push(
       <div className={styles.tagSnippet}>
         <i className={'material-icons'}>payments</i>
         <div className={styles.iconSnippet}>{card.funders}</div>
+      </div>
+    )
+  }
+  if (card.show.events) {
+    const icon = getIconByName({ iconName: iconNamesByField['events'], styles })
+    tagSnippets.push(
+      <div className={styles.tagSnippet}>
+        {icon}
+        <div className={styles.iconSnippet}>{card.events}</div>
+      </div>
+    )
+  }
+  if (card.show.key_topics) {
+    const icon = getIconByName({
+      iconName: iconNamesByField['key_topics'],
+      styles,
+    })
+    tagSnippets.push(
+      <div className={styles.tagSnippet}>
+        {icon}
+        <div className={styles.iconSnippet}>{card.key_topics}</div>
       </div>
     )
   }
