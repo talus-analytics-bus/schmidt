@@ -295,6 +295,22 @@ const Search = ({ setPage }) => {
       >
         <SEO title="Search results" />
         <div className={styles.search}>
+          {showOverlay !== false && (
+            <DetailOverlay
+              {...{
+                title: 'Test',
+                id: showOverlay,
+                close: () => setShowOverlay(false),
+                origScrollY,
+                onViewDetails,
+                origScrollY,
+                onLoaded: () => setIsSearching(false),
+                bookmarkedIds,
+                setBookmarkedIds,
+                simpleHeaderRef,
+              }}
+            />
+          )}
           <StickyHeader
             {...{
               show: showScrollToTop,
@@ -348,22 +364,6 @@ const Search = ({ setPage }) => {
               }}
             />
           </div>
-          {showOverlay !== false && (
-            <DetailOverlay
-              {...{
-                title: 'Test',
-                id: showOverlay,
-                close: () => setShowOverlay(false),
-                origScrollY,
-                onViewDetails,
-                origScrollY,
-                onLoaded: () => setIsSearching(false),
-                bookmarkedIds,
-                setBookmarkedIds,
-                simpleHeaderRef,
-              }}
-            />
-          )}
         </div>
       </Layout>
       <LoadingSpinner loading={!initialized} />

@@ -78,15 +78,15 @@ const DetailOverlay = ({
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type' },
     { field: 'if_national_country_of_authoring_org', name: 'Location' },
-    {
-      field: 'authoring_organization_has_governance_authority',
-      name: 'Has governance authority?',
-      formatter: v => {
-        if (v === true) return 'Yes'
-        else if (v === false) return 'No'
-        else return undefined
-      },
-    },
+    // {
+    //   field: 'authoring_organization_has_governance_authority',
+    //   name: 'Has governance authority?',
+    //   formatter: v => {
+    //     if (v === true) return 'Yes'
+    //     else if (v === false) return 'No'
+    //     else return undefined
+    //   },
+    // },
   ]
 
   // STATE
@@ -136,6 +136,22 @@ const DetailOverlay = ({
     if (loaded) setOpacity(1)
   }, [loaded])
 
+  // add listener to close overlay on esc key
+  useEffect(() => {
+    // close overlay on escape key
+    const escFunction = e => {
+      if (e.keyCode === 27) dismissFloatingOverlay()
+    }
+
+    // assign listener
+    document.addEventListener('keydown', escFunction, false)
+
+    // remove listener on unmount
+    return () => {
+      document.removeEventListener('keydown', escFunction, false)
+    }
+  }, [])
+
   // on click anywhere but in menu, and menu is shown, close menu; otherwise
   // do nothing
   useEffect(() => {
@@ -182,7 +198,6 @@ const DetailOverlay = ({
                 setBookmarkedIds,
               }}
             />
-            <hr style={{ borderColor: '#333' }} />
             {relatedItemsData !== null && (
               <div className={styles.relatedItems}>
                 <Panel

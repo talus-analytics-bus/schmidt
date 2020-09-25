@@ -1,7 +1,9 @@
 @import '../../assets/styles/vars.scss';
 .detailOverlay {
   .relatedItems {
-    padding-left: 20px;
+    margin-left: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
   }
   // standard: max width of screen is 1300px
   // center content in that view
@@ -68,7 +70,7 @@
     .sideBar {
       background-color: $light-gray;
       @include spaceItemsVert(10px);
-      margin-left: 10px;
+      margin-left: 20px;
       border-right: 2px solid #5c5c5c;
 
       .keyTopics {
