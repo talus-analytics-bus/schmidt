@@ -149,6 +149,17 @@
           }
         }
       }
+      .govAuth {
+        border: 3px solid $navy-blue;
+        padding: 10px;
+        &.yes {
+          background-color: #dae0f1;
+          font-weight: 600;
+        }
+        &.notAvail {
+          border-color: $gray;
+        }
+      }
 
       // add "gap" between panels
       > div {

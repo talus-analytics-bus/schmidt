@@ -6,7 +6,7 @@ import classNames from 'classnames'
 // local components
 import Layout from '../Layout/Layout'
 import SEO from '../seo'
-import { Card, CardList } from '../../components/common'
+import { Card, CardList, InfoTooltip } from '../../components/common'
 import Panel from './content/Panel'
 
 // local utility functions
@@ -31,6 +31,7 @@ const DetailOverlay = ({
   funders,
   key_topics,
   files,
+  authoring_organization_has_governance_authority,
 
   // other data
   filters,
@@ -59,7 +60,6 @@ const DetailOverlay = ({
     setOpacity(0)
     setTimeout(close, 250)
   }
-
   // key topics
   // TODO move up in scope and use throughout site, and/or get from API call
   const keyTopics = [
@@ -214,7 +214,40 @@ const DetailOverlay = ({
 
   // JSX
   if (!loaded) return null
-  else
+  else {
+    const getGovAuthIndicator = () => {
+      let message = ''
+      const status = itemData.authoring_organization_has_governance_authority
+      const plural =
+        itemData.authors.length > 1
+          ? ['Organizations', 'have', 'do not have']
+          : ['Organization', 'has', 'does not have']
+      if (status === true) {
+        message = `${plural[0]} ${plural[1]} governance authority`
+      } else if (status === false) {
+        message = `${plural[0]} ${plural[2]} governance authority`
+      } else {
+        message = 'Governance authority information is not available'
+      }
+      return (
+        <div
+          className={classNames(styles.govAuth, {
+            [styles.yes]: status === true,
+            [styles.no]: status === false,
+            [styles.notAvail]: status === null,
+          })}
+        >
+          {message}{' '}
+          <InfoTooltip
+            text={
+              'This field captures whether the authorizing organization(s) have governance authority over the topic, recommendations, or other content of the product developed. For example, the US Congress has governance over US biosecurity policy but a US think tank does not. Intergovernmental organizations will have governance authority that depends on the context and topic of the product. '
+            }
+          />
+        </div>
+      )
+    }
+    const govAuthIndicator = getGovAuthIndicator()
+
     return (
       <div
         ref={wrapperRef}
@@ -356,6 +389,7 @@ const DetailOverlay = ({
                   <div className={styles.noData}>Data not available</div>
                 )}
               </div>
+              {govAuthIndicator}
             </Panel>
             {
               // Event info
@@ -402,6 +436,7 @@ const DetailOverlay = ({
         </div>
       </div>
     )
+  }
 }
 
 export default DetailOverlay
