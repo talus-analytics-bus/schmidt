@@ -43,6 +43,7 @@ export const Card = ({
   files,
   snippets = {},
   filters = {},
+  setFilters = () => '',
   onViewDetails = () => '',
   detail = false,
   related = false,
@@ -241,6 +242,25 @@ export const Card = ({
       const alreadySeenList = []
       const linkListEntries = variable
         .map(d => {
+          // define func to add filter on link click
+          const toggleFilter = (e, datum) => {
+            e.stopPropagation()
+            const newFilters = { ...filters }
+            const curVals = filters[filterKey]
+            const newVals = curVals !== undefined ? [...filters[filterKey]] : []
+            const thisVal = getFilterVal(datum).toString()
+            if (!newVals.includes(thisVal)) {
+              newVals.push(thisVal)
+              newFilters[filterKey] = newVals
+            } else {
+              newFilters[filterKey] = newVals.filter(v => v !== thisVal)
+            }
+            if (newFilters[filterKey].length === 0) {
+              delete newFilters[filterKey]
+            }
+            setFilters(newFilters)
+          }
+
           const filterValues = filters[filterKey]
           const matchingTagExists =
             filterValues !== undefined
@@ -270,7 +290,7 @@ export const Card = ({
             if (matchingSnippet) {
               card.show[filterKey] = true
               return {
-                onClick: () => console.log(d[linkIdField]), // TODO
+                onClick: e => toggleFilter(e, d),
                 text: getHighlightSegments({
                   text: matchingSnippet,
                   type: 'small',
@@ -280,7 +300,8 @@ export const Card = ({
             } else {
               // return normal text if no highlight
               return {
-                onClick: () => console.log(d[linkIdField]), // TODO
+                onClick: e => toggleFilter(e, d),
+
                 text: getVal(d),
               }
             }

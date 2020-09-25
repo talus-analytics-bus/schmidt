@@ -354,6 +354,7 @@ const Search = ({ setPage }) => {
                 isSearchingText,
                 setIsSearchingText,
                 filters,
+                setFilters,
                 onViewDetails,
                 setShowOverlay,
                 setFreezeDataUpdates,
