@@ -1197,3 +1197,13 @@ export const getIconByName = ({ iconName, styles = {} }) => {
     )
   return icon
 }
+
+// return JSX of text array as a bullet-delimited list
+export function asBulletDelimitedList(d, i, all) {
+  return (
+    <>
+      {d}
+      {i !== all.length - 1 ? <span>&nbsp;•&nbsp;</span> : ''}
+    </>
+  )
+}

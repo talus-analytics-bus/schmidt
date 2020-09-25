@@ -100,26 +100,30 @@
       }
 
       .authors {
-        .authorName {
-          font-weight: 600;
-          font-size: 1.2rem;
-          margin-bottom: 20px;
-          color: $selected-blue;
-          cursor: pointer;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-        .authorInfo {
-          @include spaceItemsVert(20px);
-          .infoItem {
-            .field {
-              text-transform: uppercase;
-              font-family: 'rawline', serif;
-              font-size: 0.8rem;
-              margin-bottom: 2px;
+        @include borderItemsVert(20px);
+
+        .author {
+          .authorName {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: $selected-blue;
+            cursor: pointer;
+            &:hover {
+              text-decoration: underline;
             }
-            .value {
+          }
+          .authorInfo {
+            @include spaceItemsVert(20px);
+            .infoItem {
+              .field {
+                text-transform: uppercase;
+                font-family: 'rawline', serif;
+                font-size: 0.8rem;
+                margin-bottom: 2px;
+              }
+              .value {
+              }
             }
           }
         }

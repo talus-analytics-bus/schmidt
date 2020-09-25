@@ -11,6 +11,7 @@ import Panel from './content/Panel'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
+import { asBulletDelimitedList } from '../../components/misc/Util'
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
@@ -65,7 +66,7 @@ const DetailOverlay = ({
     },
     {
       displayName: 'Medical countermeasures',
-      value: 'Medical countermeasures (including vaccines, therapeutics)',
+      value: 'Medical countermeasures (including vaccines and therapeutics)',
     },
     {
       displayName: 'Naturally occurring infectious outbreak',
@@ -252,8 +253,8 @@ const DetailOverlay = ({
               }}
             >
               <div className={styles.authors}>
-                {itemData.authors.map(d => (
-                  <>
+                {itemData.authors.map((d, i) => (
+                  <div className={styles.author}>
                     <div className={styles.authorName}>
                       {d.authoring_organization}
                     </div>
@@ -273,7 +274,7 @@ const DetailOverlay = ({
                         )
                       )}
                     </div>
-                  </>
+                  </div>
                 ))}
                 {itemData.authors.length === 0 && (
                   <div className={styles.noData}>Data not available</div>
@@ -287,12 +288,7 @@ const DetailOverlay = ({
               {...{ title: 'Related events', iconName: 'outbreak_events' }}
             >
               <div className={styles.events}>
-                {itemData.events.map((d, i) => (
-                  <>
-                    {d.name}
-                    {i !== itemData.events.length - 1 ? ' • ' : ''}
-                  </>
-                ))}
+                {itemData.events.map(d => d.name).map(asBulletDelimitedList)}
                 {itemData.events.length === 0 && (
                   <div className={styles.noData}>Data not available</div>
                 )}

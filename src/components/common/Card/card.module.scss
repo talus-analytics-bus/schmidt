@@ -132,6 +132,7 @@
       .details {
         display: grid;
         grid-template-columns: 300px 1fr;
+        grid-gap: 0 10px;
         align-items: center;
 
         // color details icons navy blue
@@ -145,6 +146,10 @@
           @include spaceItemsHoriz(5px);
           display: flex;
           align-items: center;
+        }
+        .authOrgList {
+          // display: inline-flex;
+          // flex-flow: wrap;
         }
       }
 
@@ -180,6 +185,10 @@
         align-items: center;
         i {
           color: $navy-blue;
+        }
+        .iconSnippet {
+          display: flex;
+          flex-flow: wrap;
         }
       }
     }

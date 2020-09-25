@@ -18,6 +18,7 @@ import {
   removeBookmark,
   iconNamesByField,
   getIconByName,
+  asBulletDelimitedList,
 } from '../../misc/Util'
 
 // constants
@@ -130,7 +131,6 @@ export const Card = ({
 
       // if max words provided, trim
       let pre, post, highlighted
-      let plainString = ''
       let nWords = 0
       if (maxWords !== null) {
         const trimmedText = []
@@ -178,13 +178,6 @@ export const Card = ({
   // if snippets are provided, then scan them and use them
   // standard snippets are plain text (not hyperlinks)
   const standardSnippets = [['title', title]]
-
-  // tag snippet fields: always shown, and will be highlighted if match
-  const tagFields = [
-    // ['key_topics', key_topics],
-    // ['events', events, 'name', 'event.name'],
-    // ['funders', funders, 'name', 'funder.name'],
-  ]
 
   // trimmed snippets should only have a few words around the first highlighted
   // word displayed
@@ -245,53 +238,64 @@ export const Card = ({
       const linkIdField = 'id'
 
       // get link list entry text
-      const linkListEntries = variable.map(d => {
-        const filterValues = filters[filterKey]
-        const matchingTagExists =
-          filterValues !== undefined
-            ? filterValues.find(
-                fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
-              )
-            : undefined
-        const matchingTag = matchingTagExists ? getVal(d) : undefined
+      const alreadySeenList = []
+      const linkListEntries = variable
+        .map(d => {
+          const filterValues = filters[filterKey]
+          const matchingTagExists =
+            filterValues !== undefined
+              ? filterValues.find(
+                  fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
+                )
+              : undefined
+          const matchingTag = matchingTagExists ? getVal(d) : undefined
 
-        const matchingSearchSnippet =
-          snippets[key] !== undefined
-            ? snippets[key].find(dd => dd.id === d.id)
-            : undefined
+          const matchingSearchSnippet =
+            snippets[key] !== undefined
+              ? snippets[key].find(dd => dd.id === d.id)
+              : undefined
 
-        const matchingSnippet =
-          matchingTag ||
-          (matchingSearchSnippet !== undefined
-            ? getVal(matchingSearchSnippet)
-            : undefined)
+          const matchingSnippet =
+            matchingTag ||
+            (matchingSearchSnippet !== undefined
+              ? getVal(matchingSearchSnippet)
+              : undefined)
 
-        // if a snippet was found for the linked instance, highlight its name
-        if (matchingSnippet) {
-          card.show[filterKey] = true
-          return {
-            onClick: () => console.log(d[linkIdField]), // TODO
-            text: getHighlightSegments({
-              text: matchingSnippet,
-              type: 'small',
-              highlightAll: matchingTag !== undefined,
-            }),
+          // if a snippet was found for the linked instance, highlight its name
+          const alreadySeen = alreadySeenList.includes(getVal(d))
+          if (alreadySeen) return null
+          else {
+            alreadySeenList.push(getVal(d))
+
+            if (matchingSnippet) {
+              card.show[filterKey] = true
+              return {
+                onClick: () => console.log(d[linkIdField]), // TODO
+                text: getHighlightSegments({
+                  text: matchingSnippet,
+                  type: 'small',
+                  highlightAll: matchingTag !== undefined,
+                }),
+              }
+            } else {
+              // return normal text if no highlight
+              return {
+                onClick: () => console.log(d[linkIdField]), // TODO
+                text: getVal(d),
+              }
+            }
           }
-        } else {
-          // return normal text if no highlight
-          return {
-            onClick: () => console.log(d[linkIdField]), // TODO
-            text: getVal(d),
-          }
-        }
-      })
+        })
+        .filter(d => d !== null)
 
       // collate link entry text into a list of links
-      card[filterKey] = linkListEntries.map(d => (
-        <div onClick={d.onClick} className={styles.link}>
-          {d.text}
-        </div>
-      ))
+      card[filterKey] = linkListEntries
+        .map(d => (
+          <span onClick={d.onClick} className={styles.link}>
+            {d.text}
+          </span>
+        ))
+        .map(asBulletDelimitedList)
 
       // if showing, collate info JSX, unless special
       if (
@@ -393,7 +397,7 @@ export const Card = ({
             <div className={styles.details}>
               <div className={styles.authOrg}>
                 <i className={'material-icons'}>person</i>
-                <div>
+                <div className={styles.authOrgList}>
                   {authors.length > 0 && card['author.id']}
                   {authors.length === 0 && (
                     <div>Authoring organization unavailable</div>
