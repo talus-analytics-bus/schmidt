@@ -86,7 +86,29 @@ const DetailOverlay = ({
   // author fields
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type' },
-    { field: 'if_national_country_of_authoring_org', name: 'Location' },
+    {
+      formatter: d => {
+        console.log('d')
+        console.log(d)
+        if (d.if_national_country_of_authoring_org === undefined)
+          return undefined
+        const flag =
+          d.if_national_iso2_of_authoring_org !== undefined ? (
+            <img
+              key={d.if_national_iso2_of_authoring_org}
+              src={`https://www.countryflags.io/${d.if_national_iso2_of_authoring_org.toLowerCase()}/shiny/64.png`}
+            />
+          ) : null
+        return (
+          <>
+            {flag}
+            {d.if_national_country_of_authoring_org}
+          </>
+        )
+      },
+      field: 'if_national_country_of_authoring_org',
+      name: 'Location',
+    },
     // {
     //   field: 'authoring_organization_has_governance_authority',
     //   name: 'Has governance authority?',
@@ -369,11 +391,11 @@ const DetailOverlay = ({
                     </div>
                     <div className={styles.authorInfo}>
                       {authorFields.map(
-                        ({ name, field, formatter = v => v }) => (
+                        ({ name, field, formatter = v => v[field] }) => (
                           <div className={styles.infoItem}>
                             <div className={styles.field}>{name}</div>
                             <div className={styles.value}>
-                              {formatter(d[field]) || (
+                              {formatter(d) || (
                                 <div className={styles.noData}>
                                   Data not available
                                 </div>

@@ -144,6 +144,12 @@
                 margin-bottom: 2px;
               }
               .value {
+                display: flex;
+                align-items: center;
+                img {
+                  height: 20px;
+                  margin-right: 3px;
+                }
               }
             }
           }
