@@ -85,7 +85,7 @@ const DetailOverlay = ({
   ]
   // author fields
   const authorFields = [
-    { field: 'type_of_authoring_organization', name: 'Type' },
+    { field: 'type_of_authoring_organization', name: 'Type', link: true },
     {
       formatter: d => {
         if (d.if_national_country_of_authoring_org === undefined)
@@ -389,16 +389,32 @@ const DetailOverlay = ({
                     </div>
                     <div className={styles.authorInfo}>
                       {authorFields.map(
-                        ({ name, field, formatter = v => v[field] }) => (
+                        ({
+                          name,
+                          field,
+                          formatter = v => v[field],
+                          link = false,
+                        }) => (
                           <div className={styles.infoItem}>
                             <div className={styles.field}>{name}</div>
-                            <div className={styles.value}>
-                              {formatter(d) || (
-                                <div className={styles.noData}>
-                                  Data not available
-                                </div>
-                              )}
-                            </div>
+                            {!link && (
+                              <div className={styles.value}>
+                                {formatter(d) || (
+                                  <div className={styles.noData}>
+                                    Data not available
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            {link && (
+                              <div className={styles.value}>
+                                {highlightTag({
+                                  displayName: d[field],
+                                  filterValue: d[field],
+                                  filterKey: 'author.' + field,
+                                })}
+                              </div>
+                            )}
                           </div>
                         )
                       )}
