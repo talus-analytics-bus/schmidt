@@ -88,8 +88,6 @@ const DetailOverlay = ({
     { field: 'type_of_authoring_organization', name: 'Type' },
     {
       formatter: d => {
-        console.log('d')
-        console.log(d)
         if (d.if_national_country_of_authoring_org === undefined)
           return undefined
         const flag =
