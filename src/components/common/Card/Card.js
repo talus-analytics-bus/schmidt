@@ -82,6 +82,7 @@ export const Card = ({
     // introduce extra spaces before or after the highlighted words
     const textArr = text
       .replace(/<\/highlight>/g, '<highlight>')
+      .replace(/"/g, "'")
       .split('<highlight>')
     const firstFewFrags = text.split(/<\/?highlight>/g).slice(0, 3)
 
