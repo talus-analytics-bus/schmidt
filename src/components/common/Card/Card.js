@@ -120,6 +120,7 @@ export const Card = ({
             preWordsAll.length
           )
 
+          // add ellipsis only if fragment is the very beginning or end of text
           const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
           pre = `"${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
           nWords += preWordsTrimmed.length
@@ -134,7 +135,7 @@ export const Card = ({
           const ellipsis = wordsTrimmed.length !== wordsAll.length
           post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}"`
           nWords += wordsTrimmed.length
-          trimmedText.push(<span>{post}</span>)
+          trimmedText.push(<span>{post.trim()}</span>)
         }
         done =
           pre !== undefined && post !== undefined && highlighted !== undefined
