@@ -78,13 +78,23 @@ export const Card = ({
    * @return {[type]}                            [description]
    */
   const getHighlightSegments = ({ text, type = 'normal', maxWords = null }) => {
-    // replace text within highlight tags with JSX
+    // replace text within highlight tags with JSX, taking care not to
+    // introduce extra spaces before or after the highlighted words
     const textArr = text
       .replace(/<\/highlight>/g, '<highlight>')
       .split('<highlight>')
+    const firstFewFrags = text.split(/<\/?highlight>/g).slice(0, 3)
+
+    // was there a space after the last highlighted word? If so, don't trim it
+    const firstFewStr = `${firstFewFrags[0]}<highlight>${firstFewFrags[1]}</highlight>${firstFewFrags[2]}`
+
+    // check whether we need to trim extra spaces out of the final string
+    const trimPost = /\/highlight>(?!\s)/g.test(firstFewStr)
+    const trimPre = !/(?=\s)\s<highlight>/g.test(firstFewStr)
 
     // arr to hold new text (with highlights)
     const newText = []
+
     // for each text chunk, wrap in highlight JSX tag
     textArr.forEach((d, i) => {
       // odd segments are highlighted portions
@@ -103,6 +113,7 @@ export const Card = ({
 
     // if max words provided, trim
     let pre, post, highlighted
+    let plainString = ''
     let nWords = 0
     if (maxWords !== null) {
       const trimmedText = []
@@ -124,7 +135,7 @@ export const Card = ({
           const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
           pre = `"${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
           nWords += preWordsTrimmed.length
-          trimmedText.push(<span>{pre} </span>)
+          trimmedText.push(<span>{trimPre ? pre.trim() : pre}</span>)
         } else if (highlighted === undefined) {
           highlighted = frag
           trimmedText.push(highlighted)
@@ -135,7 +146,7 @@ export const Card = ({
           const ellipsis = wordsTrimmed.length !== wordsAll.length
           post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}"`
           nWords += wordsTrimmed.length
-          trimmedText.push(<span>{post.trim()}</span>)
+          trimmedText.push(<span>{trimPost ? post.trim() : post}</span>)
         }
         done =
           pre !== undefined && post !== undefined && highlighted !== undefined
