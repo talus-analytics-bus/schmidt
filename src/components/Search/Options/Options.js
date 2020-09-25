@@ -330,6 +330,8 @@ export const Options = ({
   // handle start over
   const onStartOver = () => {
     // set search text to be blank
+    setOrderBy('date')
+    setIsDesc(true)
     setSearchText('')
     setFilters({})
   }
