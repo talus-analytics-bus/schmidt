@@ -251,6 +251,7 @@ const Bookmarks = ({}) => {
                         bookmarkedIds,
                         setBookmarkedIds,
                         onViewDetails,
+                        bookmark: true,
                         setNextPage:
                           bookmarkedItemData.page !==
                           bookmarkedItemData.num_pages
@@ -281,6 +282,7 @@ const Bookmarks = ({}) => {
                 bookmarkedIds,
                 setBookmarkedIds,
                 simpleHeaderRef,
+                bookmark: true,
               }}
             />
           )}

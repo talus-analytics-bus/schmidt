@@ -11,7 +11,11 @@ import Panel from './content/Panel'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
-import { asBulletDelimitedList } from '../../components/misc/Util'
+import {
+  asBulletDelimitedList,
+  toggleFilter,
+  getHighlightSegments,
+} from '../../components/misc/Util'
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
@@ -27,7 +31,10 @@ const DetailOverlay = ({
   funders,
   key_topics,
   files,
+
   // other data
+  filters,
+  setFilters,
   floating = true,
   close = () => '',
   origScrollY,
@@ -36,6 +43,7 @@ const DetailOverlay = ({
   bookmarkedIds,
   setBookmarkedIds,
   simpleHeaderRef,
+  bookmark = false,
 }) => {
   // STATE
   // opacity control
@@ -96,6 +104,38 @@ const DetailOverlay = ({
   const [relatedItemsData, setRelatedItemsData] = useState(null)
 
   // FUNCTIONS
+
+  // highlight metadata tag if filtered
+  const highlightTag = ({ displayName, filterValue, filterKey }) => {
+    return (
+      <span
+        onClick={e =>
+          toggleFilter({
+            e,
+            getFilterVal: () => filterValue,
+            filters,
+            filterKey,
+            openNewPage: bookmark,
+            setFilters: v => {
+              dismissFloatingOverlay()
+              setFilters(v)
+            },
+          })
+        }
+        className={styles.link}
+      >
+        {getHighlightSegments({
+          text: displayName,
+          highlightAll:
+            filters !== undefined &&
+            filters[filterKey] !== undefined &&
+            filters[filterKey].includes(filterValue),
+          styles,
+        })}
+      </span>
+    )
+  }
+
   // get item data
   const getData = async () => {
     if (id === false || id === 'false') return
@@ -197,6 +237,12 @@ const DetailOverlay = ({
                 onViewDetails,
                 bookmarkedIds,
                 setBookmarkedIds,
+                filters,
+                bookmark,
+                setFilters: v => {
+                  dismissFloatingOverlay()
+                  setFilters(v)
+                },
               }}
             />
             {relatedItemsData !== null && (
@@ -218,6 +264,13 @@ const DetailOverlay = ({
                       related: true,
                       bookmarkedIds,
                       setBookmarkedIds,
+                      filters,
+                      bookmark,
+
+                      setFilters: v => {
+                        dismissFloatingOverlay()
+                        setFilters(v)
+                      },
                     }}
                   />
                 </Panel>
@@ -230,12 +283,31 @@ const DetailOverlay = ({
                 {keyTopics.map(({ displayName, value = displayName }) => (
                   <>
                     <div
+                      onClick={e =>
+                        toggleFilter({
+                          openNewPage: bookmark,
+                          e,
+                          getFilterVal: () => value,
+                          filters,
+                          filterKey: 'key_topics',
+                          setFilters: v => {
+                            dismissFloatingOverlay()
+                            setFilters(v)
+                          },
+                        })
+                      }
                       className={classNames(styles.keyTopic, {
                         [styles.active]: itemData.key_topics.includes(value),
                       })}
                     >
                       <div className={styles.colorBlock}></div>
-                      <span>{displayName}</span>
+                      <span>
+                        {highlightTag({
+                          displayName,
+                          filterValue: value,
+                          filterKey: 'key_topics',
+                        })}
+                      </span>
                     </div>
                   </>
                 ))}
@@ -256,7 +328,11 @@ const DetailOverlay = ({
                 {itemData.authors.map((d, i) => (
                   <div className={styles.author}>
                     <div className={styles.authorName}>
-                      {d.authoring_organization}
+                      {highlightTag({
+                        displayName: d.authoring_organization,
+                        filterValue: d.id.toString(),
+                        filterKey: 'author.id',
+                      })}
                     </div>
                     <div className={styles.authorInfo}>
                       {authorFields.map(
@@ -288,7 +364,15 @@ const DetailOverlay = ({
               {...{ title: 'Related events', iconName: 'outbreak_events' }}
             >
               <div className={styles.events}>
-                {itemData.events.map(d => d.name).map(asBulletDelimitedList)}
+                {itemData.events
+                  .map(d =>
+                    highlightTag({
+                      displayName: d.name,
+                      filterValue: d.name,
+                      filterKey: 'event.name',
+                    })
+                  )
+                  .map(asBulletDelimitedList)}
                 {itemData.events.length === 0 && (
                   <div className={styles.noData}>Data not available</div>
                 )}
@@ -299,12 +383,16 @@ const DetailOverlay = ({
             }
             <Panel {...{ title: 'Funders', iconName: 'payments' }}>
               <div className={styles.funders}>
-                {itemData.funders.map((d, i) => (
-                  <>
-                    {d.name}
-                    {i !== itemData.funders.length - 1 ? ' • ' : ''}
-                  </>
-                ))}
+                {itemData.funders
+                  .map(d =>
+                    highlightTag({
+                      displayName: d.name,
+                      filterValue: d.name,
+                      filterKey: 'funder.name',
+                    })
+                  )
+                  .map(asBulletDelimitedList)}
+
                 {itemData.funders.length === 0 && (
                   <div className={styles.noData}>Data not available</div>
                 )}

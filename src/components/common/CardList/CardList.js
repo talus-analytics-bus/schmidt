@@ -25,6 +25,7 @@ export const CardList = ({
   bookmarkedIds,
   setBookmarkedIds,
   animate = false,
+  bookmark = false,
   ...props
 }) => {
   // CONSTANTS
@@ -52,6 +53,7 @@ export const CardList = ({
                 related,
                 bookmarkedIds,
                 setBookmarkedIds,
+                bookmark,
                 animate,
               }}
             />

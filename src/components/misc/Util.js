@@ -1,6 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
+import classNames from 'classnames'
 
 // project-specific assets
 import events from '../../assets/icons/events.svg'
@@ -1206,4 +1207,144 @@ export function asBulletDelimitedList(d, i, all) {
       {i !== all.length - 1 ? <span>&nbsp;•&nbsp;</span> : ''}
     </>
   )
+}
+
+// toggle specific filter on / off given a datum that contains it
+export const toggleFilter = ({
+  e,
+  datum,
+  getFilterVal,
+  filters,
+  filterKey,
+  setFilters,
+  openNewPage = false,
+}) => {
+  e.stopPropagation()
+
+  const thisVal = getFilterVal(datum).toString()
+
+  // if on a page other than search, open a new search page
+  if (openNewPage) {
+    if (typeof window !== 'undefined') {
+      window.open(`/search?filters={"${filterKey}":["${thisVal}"]}`)
+    }
+  } else {
+    // otherwise, update filters
+    const newFilters = { ...filters }
+    const curVals = filters[filterKey]
+    const newVals = curVals !== undefined ? [...filters[filterKey]] : []
+    if (!newVals.includes(thisVal)) {
+      newVals.push(thisVal)
+      newFilters[filterKey] = newVals
+    } else {
+      newFilters[filterKey] = newVals.filter(v => v !== thisVal)
+    }
+    if (newFilters[filterKey].length === 0) {
+      delete newFilters[filterKey]
+    }
+    setFilters(newFilters)
+  }
+}
+
+/**
+ * Get highlighted text snippets in the card data and assign them to the
+ * `card` object that holds card text, if found, otherwise assign normal txt
+ * @method getHighlightSegments
+ * @param  {[type]}             text           [description]
+ * @param  {String}             [type='normal' }]            [description]
+ * @return {[type]}                            [description]
+ */
+export const getHighlightSegments = ({
+  text,
+  type = 'normal',
+  maxWords = null,
+  highlightAll = false,
+  styles = {},
+}) => {
+  // if highlight all, simply return the entire text highlighted.
+  if (highlightAll) {
+    return (
+      <span className={classNames(styles.highlighted, styles[type])}>
+        {text}
+      </span>
+    )
+  } else {
+    // replace text within highlight tags with JSX, taking care not to
+    // introduce extra spaces before or after the highlighted words
+    const textArr = text
+      .replace(/<\/highlight>/g, '<highlight>')
+      .replace(/"/g, "'")
+      .split('<highlight>')
+    const firstFewFrags = text.split(/<\/?highlight>/g).slice(0, 3)
+
+    // was there a space after the last highlighted word? If so, don't trim it
+    const firstFewStr = `${firstFewFrags[0]}<highlight>${firstFewFrags[1]}</highlight>${firstFewFrags[2]}`
+
+    // check whether we need to trim extra spaces out of the final string
+    const trimPost = /\/highlight>(?!\s)/g.test(firstFewStr)
+    const trimPre = !/(?=\s)\s<highlight>/g.test(firstFewStr)
+
+    // arr to hold new text (with highlights)
+    const newText = []
+
+    // for each text chunk, wrap in highlight JSX tag
+    textArr.forEach((d, i) => {
+      // odd segments are highlighted portions
+      const highlightSegment = i % 2 === 1
+      if (highlightSegment) {
+        newText.push(
+          <span className={classNames(styles.highlighted, styles[type])}>
+            {d}
+          </span>
+        )
+      } else {
+        // push normal text if not a highlight snippet
+        newText.push(<>{d}</>)
+      }
+    })
+
+    // if max words provided, trim
+    let pre, post, highlighted
+    let nWords = 0
+    if (maxWords !== null) {
+      const trimmedText = []
+      const halfMax = maxWords / 2
+      let done = false
+      let i = 0
+      while (!done && i < newText.length) {
+        const frag = newText[i]
+
+        if (pre === undefined) {
+          // get first words of first fragment
+          const preWordsAll = frag.props.children.split(' ')
+          const preWordsTrimmed = preWordsAll.slice(
+            Math.max(preWordsAll.length - halfMax, 0),
+            preWordsAll.length
+          )
+
+          // add ellipsis only if fragment is the very beginning or end of text
+          const ellipsis = Math.max(preWordsAll.length - halfMax, 0) !== 0
+          pre = `${ellipsis ? '...' : ''}${preWordsTrimmed.join(' ')}`
+          nWords += preWordsTrimmed.length
+          trimmedText.push(<span>{trimPre ? pre.trim() : pre}</span>)
+        } else if (highlighted === undefined) {
+          highlighted = frag
+          trimmedText.push(highlighted)
+        } else if (post === undefined) {
+          const wordsAll = frag.props.children.split(' ')
+          const wordsTrimmed = wordsAll.slice(0, halfMax)
+
+          const ellipsis = wordsTrimmed.length !== wordsAll.length
+          post = ` ${wordsTrimmed.join(' ')}${ellipsis ? '...' : ''}`
+          nWords += wordsTrimmed.length
+          trimmedText.push(<span>{trimPost ? post.trim() : post}</span>)
+        }
+        done =
+          pre !== undefined && post !== undefined && highlighted !== undefined
+        i += 1
+        continue
+      }
+      return trimmedText
+    } else return newText
+  }
 }

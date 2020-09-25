@@ -301,6 +301,8 @@ const Search = ({ setPage }) => {
                 title: 'Test',
                 id: showOverlay,
                 close: () => setShowOverlay(false),
+                filters,
+                setFilters,
                 origScrollY,
                 onViewDetails,
                 origScrollY,
@@ -308,6 +310,7 @@ const Search = ({ setPage }) => {
                 bookmarkedIds,
                 setBookmarkedIds,
                 simpleHeaderRef,
+                bookmark: false,
               }}
             />
           )}
