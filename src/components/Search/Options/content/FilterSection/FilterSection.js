@@ -5,11 +5,10 @@ import ReactTooltip from 'react-tooltip'
 
 // local components
 import { FilterSet, PrimaryButton } from '../../../../common'
-import { comma } from '../../../../misc/Util'
+import { comma, getIconByName } from '../../../../misc/Util'
 
 // local assets and styling
 import styles from './filtersection.module.scss'
-import events from '../../../../../assets/icons/events.svg'
 
 export const FilterSection = ({
   label = 'Filter section placeholder',
@@ -26,17 +25,7 @@ export const FilterSection = ({
   ...props
 }) => {
   // CONSTANTS
-  // special icon?
-  const specialIcons = {
-    outbreak_events: events,
-  }
-  const specialIcon = specialIcons[iconName]
-  const icon =
-    specialIcon !== undefined ? (
-      <img className={styles.specialIcon} src={specialIcon} />
-    ) : (
-      <>{iconName && <i className={'material-icons'}>{iconName}</i>}</>
-    )
+  const icon = getIconByName({ iconName, styles })
 
   // STATE // -------------------------------------------------------------- //
   // open or collapsed?

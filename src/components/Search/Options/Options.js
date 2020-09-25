@@ -15,7 +15,7 @@ import {
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import { getIntArray } from '../../misc/Util'
+import { getIntArray, iconNamesByField } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -102,17 +102,6 @@ export const Options = ({
 
   // get list of keys of filters
   const filterKeys = Object.keys(filterDefs)
-
-  // define icon names to use for each section
-  const iconNamesByField = {
-    key_topics: 'device_hub',
-    authors: 'person',
-    author_types: 'apartment',
-    years: 'event',
-    funders: 'payments',
-    types_of_record: 'insert_drive_file',
-    events: 'outbreak_events',
-  }
 
   // define filter section component data
   // TODO link to a filterset and filters

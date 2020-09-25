@@ -16,6 +16,8 @@ import {
   isEmpty,
   bytesToMegabytes,
   removeBookmark,
+  iconNamesByField,
+  getIconByName,
 } from '../../misc/Util'
 
 // constants
@@ -36,6 +38,7 @@ export const Card = ({
   authors,
   funders,
   key_topics,
+  events,
   files,
   snippets = {},
   filters = {},
@@ -162,6 +165,12 @@ export const Card = ({
   // standard snippets are plain text (not hyperlinks)
   const standardSnippets = [['title', title]]
 
+  // tag snippet fields: always shown, and will be highlighted if match
+  const tagFields = [
+    ['key_topics', key_topics],
+    ['events', events, 'name', 'event.name'],
+  ]
+
   // trimmed snippets should only have a few words around the first highlighted
   // word displayed
   const trimmedSnippets = [['description', description]]
@@ -244,39 +253,47 @@ export const Card = ({
     )
   }
 
-  // key topic match?
-  if (key_topics.length > 0) {
-    const keyTopicsJsxTmp = []
-    const keyTopicsFilters =
-      filters.key_topics !== undefined ? filters.key_topics : []
-    key_topics.forEach(d => {
-      if (keyTopicsFilters.includes(d)) {
-        keyTopicsJsxTmp.push(
-          <span className={classNames(styles.highlighted, styles.small)}>
-            {d}
-          </span>
-        )
-      } else {
-        keyTopicsJsxTmp.push(<>{d}</>)
-      }
-    })
+  // standard tag snippet fields
 
-    // add bullet chars
-    const needsBulletChars = keyTopicsJsxTmp.length > 1
-    const keyTopicsJsx = needsBulletChars ? [] : keyTopicsJsxTmp
-    if (needsBulletChars)
-      keyTopicsJsxTmp.forEach((d, i) => {
-        keyTopicsJsx.push(d)
-        if (i !== keyTopicsJsxTmp.length - 1) keyTopicsJsx.push(' • ')
+  // key topic match?
+  tagFields.forEach(([key, variable, linkTextField, filterKey = key]) => {
+    // get func for getting variable instance values
+    const getVal = linkTextField !== undefined ? v => v[linkTextField] : v => v
+    if (variable.length > 0) {
+      const keyTopicsJsxTmp = []
+
+      const keyTopicsFilters =
+        filters[filterKey] !== undefined ? filters[filterKey] : []
+      variable.forEach(d => {
+        if (keyTopicsFilters.includes(getVal(d))) {
+          keyTopicsJsxTmp.push(
+            <span className={classNames(styles.highlighted, styles.small)}>
+              {getVal(d)}
+            </span>
+          )
+        } else {
+          keyTopicsJsxTmp.push(<>{getVal(d)}</>)
+        }
       })
 
-    tagSnippets.push(
-      <div className={styles.tagSnippet}>
-        <i className={'material-icons'}>device_hub</i>
-        <div className={styles.iconSnippet}>{keyTopicsJsx}</div>
-      </div>
-    )
-  }
+      // add bullet chars
+      const needsBulletChars = keyTopicsJsxTmp.length > 1
+      const keyTopicsJsx = needsBulletChars ? [] : keyTopicsJsxTmp
+      if (needsBulletChars)
+        keyTopicsJsxTmp.forEach((d, i) => {
+          keyTopicsJsx.push(d)
+          if (i !== keyTopicsJsxTmp.length - 1) keyTopicsJsx.push(' • ')
+        })
+
+      const icon = getIconByName({ iconName: iconNamesByField[key], styles })
+      tagSnippets.push(
+        <div className={styles.tagSnippet}>
+          <i className={'material-icons'}>{icon}</i>
+          <div className={styles.iconSnippet}>{keyTopicsJsx}</div>
+        </div>
+      )
+    }
+  })
 
   // funder match?
   const funderMatch = snippets['funders'] !== undefined

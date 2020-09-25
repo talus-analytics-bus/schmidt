@@ -2,6 +2,9 @@ import React from 'react'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 
+// project-specific assets
+import events from '../../assets/icons/events.svg'
+
 // Utility functions and data.
 const Util = {}
 
@@ -1166,4 +1169,31 @@ export const removeBookmark = ({ id, callback }) => {
     localStorage.setItem('bookmarkedIds', newBookmarkedIds)
     if (callback) callback(newBookmarkedIds)
   }
+}
+
+// define icon names to use for each section
+export const iconNamesByField = {
+  key_topics: 'device_hub',
+  authors: 'person',
+  author_types: 'apartment',
+  years: 'event',
+  funders: 'payments',
+  types_of_record: 'insert_drive_file',
+  events: 'outbreak_events',
+}
+
+// return icon JSX by name
+export const getIconByName = ({ iconName, styles = {} }) => {
+  // special icon?
+  const specialIcons = {
+    outbreak_events: events,
+  }
+  const specialIcon = specialIcons[iconName]
+  const icon =
+    specialIcon !== undefined ? (
+      <img className={styles.specialIcon} src={specialIcon} />
+    ) : (
+      <>{iconName && <i className={'material-icons'}>{iconName}</i>}</>
+    )
+  return icon
 }

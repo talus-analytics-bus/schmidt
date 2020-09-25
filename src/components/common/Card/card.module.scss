@@ -230,4 +230,11 @@
       grid-gap: 10px 20px;
     }
   }
+
+  // make special icons the same size as material icons
+  .specialIcon {
+    $size: 24px;
+    height: 24px;
+    width: 24px;
+  }
 }
