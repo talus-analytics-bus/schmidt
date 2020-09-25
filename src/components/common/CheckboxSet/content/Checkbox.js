@@ -32,7 +32,8 @@ const Checkbox = ({
     callback(input.value)
   }
 
-  // return <div>Checkbox</div>;
+  // show 'unspecified' instead of blanks
+  if (label !== null && label === '') label = 'Unspecified'
 
   const checkboxJsx = (
     <div
