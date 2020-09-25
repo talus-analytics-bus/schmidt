@@ -190,14 +190,6 @@ export const Card = ({
   // word displayed
   const trimmedSnippets = [['description', description]]
 
-  // link list snippets are author names, etc. that when clicked do something
-  const linkListSnippets = [
-    ['authors', authors, 'authoring_organization', 'author.id', 'id'],
-    ['funders', funders, 'name', 'funder.name'],
-    ['events', events, 'name', 'event.name', 'name'],
-    ['key_topics', key_topics],
-  ]
-
   // process standard snippets: highlight plain text
   standardSnippets.forEach(([key, variable]) => {
     if (snippets[key] !== undefined) {
@@ -215,8 +207,28 @@ export const Card = ({
       } else card[key] = <ShowMore text={variable} charLimit={200} />
     }
   })
-
   // process link list snippets: highlight and turn into hyperlinked text
+  // link list snippets are author names, etc. that when clicked do something
+  const linkListSnippets = [
+    ['authors', authors, 'authoring_organization', 'author.id', 'id'],
+    [
+      'author_types',
+      authors,
+      'type_of_authoring_organization',
+      'author.type_of_authoring_organization',
+      'type_of_authoring_organization',
+    ],
+    ['funders', funders, 'name', 'funder.name'],
+    ['events', events, 'name', 'event.name', 'name'],
+    ['key_topics', key_topics],
+    ['types_of_record', [type_of_record], undefined, 'type_of_record'],
+  ]
+
+  // collate tag snippets to show why search results were shown
+  const tagSnippets = []
+
+  // iterate over filter categories that should be shown as highlighted
+  // text matches
   linkListSnippets.forEach(
     ([
       key,
@@ -256,7 +268,7 @@ export const Card = ({
 
         // if a snippet was found for the linked instance, highlight its name
         if (matchingSnippet) {
-          card.show[key] = true
+          card.show[filterKey] = true
           return {
             onClick: () => console.log(d[linkIdField]), // TODO
             text: getHighlightSegments({
@@ -275,95 +287,35 @@ export const Card = ({
       })
 
       // collate link entry text into a list of links
-      card[key] = linkListEntries.map(d => (
+      card[filterKey] = linkListEntries.map(d => (
         <div onClick={d.onClick} className={styles.link}>
           {d.text}
         </div>
       ))
+
+      // if showing, collate info JSX, unless special
+      if (
+        card.show[filterKey] &&
+        key !== 'authors' &&
+        key !== 'types_of_record'
+      ) {
+        tagSnippets.push(
+          <div className={styles.tagSnippet}>
+            {getIconByName({ iconName: iconNamesByField[key], styles })}
+            <div className={styles.iconSnippet}>{card[filterKey]}</div>
+          </div>
+        )
+      }
     }
   )
 
   // process tag snippets
   const pdfMatch = snippets['files'] !== undefined
-  const tagSnippets = []
   if (pdfMatch) {
     tagSnippets.push(
       <div className={styles.tagSnippet}>
         <i className={'material-icons'}>picture_as_pdf</i>
         <div className={styles.iconSnippet}>{snippets.files}</div>
-      </div>
-    )
-  }
-
-  // standard tag snippet fields
-
-  // key topic match?
-  tagFields.forEach(([key, variable, linkTextField, filterKey = key]) => {
-    // get func for getting variable instance values
-    const getVal = linkTextField !== undefined ? v => v[linkTextField] : v => v
-    if (variable.length > 0) {
-      const keyTopicsJsxTmp = []
-
-      const keyTopicsFilters =
-        filters[filterKey] !== undefined ? filters[filterKey] : []
-      variable.forEach(d => {
-        if (keyTopicsFilters.includes(getVal(d))) {
-          keyTopicsJsxTmp.push(
-            <span className={classNames(styles.highlighted, styles.small)}>
-              {getVal(d)}
-            </span>
-          )
-        } else {
-          keyTopicsJsxTmp.push(<>{getVal(d)}</>)
-        }
-      })
-
-      // add bullet chars
-      const needsBulletChars = keyTopicsJsxTmp.length > 1
-      const keyTopicsJsx = needsBulletChars ? [] : keyTopicsJsxTmp
-      if (needsBulletChars)
-        keyTopicsJsxTmp.forEach((d, i) => {
-          keyTopicsJsx.push(d)
-          if (i !== keyTopicsJsxTmp.length - 1) keyTopicsJsx.push(' • ')
-        })
-
-      const icon = getIconByName({ iconName: iconNamesByField[key], styles })
-      tagSnippets.push(
-        <div className={styles.tagSnippet}>
-          <i className={'material-icons'}>{icon}</i>
-          <div className={styles.iconSnippet}>{keyTopicsJsx}</div>
-        </div>
-      )
-    }
-  })
-
-  // funder match?
-  if (card.show.funders) {
-    tagSnippets.push(
-      <div className={styles.tagSnippet}>
-        <i className={'material-icons'}>payments</i>
-        <div className={styles.iconSnippet}>{card.funders}</div>
-      </div>
-    )
-  }
-  if (card.show.events) {
-    const icon = getIconByName({ iconName: iconNamesByField['events'], styles })
-    tagSnippets.push(
-      <div className={styles.tagSnippet}>
-        {icon}
-        <div className={styles.iconSnippet}>{card.events}</div>
-      </div>
-    )
-  }
-  if (card.show.key_topics) {
-    const icon = getIconByName({
-      iconName: iconNamesByField['key_topics'],
-      styles,
-    })
-    tagSnippets.push(
-      <div className={styles.tagSnippet}>
-        {icon}
-        <div className={styles.iconSnippet}>{card.key_topics}</div>
       </div>
     )
   }
@@ -418,7 +370,7 @@ export const Card = ({
       <div className={styles.col}>
         <div className={styles.main}>
           <div className={styles.header}>
-            <div className={styles.type}>{type_of_record}</div>
+            <div className={styles.type}>{card.type_of_record}</div>
             {bookmarkedIds !== null && (
               <BookmarkToggle
                 {...{
@@ -442,7 +394,7 @@ export const Card = ({
               <div className={styles.authOrg}>
                 <i className={'material-icons'}>person</i>
                 <div>
-                  {authors.length > 0 && card.authors}
+                  {authors.length > 0 && card['author.id']}
                   {authors.length === 0 && (
                     <div>Authoring organization unavailable</div>
                   )}
@@ -450,7 +402,15 @@ export const Card = ({
               </div>
               <div className={styles.date}>
                 <i className={'material-icons'}>event</i>
-                {date !== null && <span>{formatDate(date)}</span>}
+                {date !== null && (
+                  <span
+                    className={classNames(styles.small, {
+                      [styles.highlighted]: filters.years !== undefined,
+                    })}
+                  >
+                    {formatDate(date)}
+                  </span>
+                )}
                 {date === null && <span>Date unavailable</span>}
               </div>
             </div>
