@@ -133,7 +133,7 @@ const Search = ({ setPage }) => {
     newUrlParams.set('order_by', orderBy)
     newUrlParams.set('is_desc', isDesc)
     const newUrl =
-      newUrlParams.toString() !== '' ? `/search?${newUrlParams}` : '/search'
+      newUrlParams.toString() !== '' ? `/search/?${newUrlParams}` : '/search/'
     const newState = {
       filters,
       curPage,
