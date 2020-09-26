@@ -1233,7 +1233,7 @@ export const toggleFilter = ({
   // if on a page other than search, open a new search page
   if (openNewPage) {
     if (typeof window !== 'undefined') {
-      window.open(`/search?filters={"${filterKey}":["${thisVal}"]}`)
+      window.open(`/search/?filters={"${filterKey}":["${thisVal}"]}`)
     }
   } else {
     // otherwise, update filters
