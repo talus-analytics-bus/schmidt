@@ -1,5 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
 // local components
@@ -17,7 +18,12 @@ import {
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
-import { execute, withBookmarkedIds, isEmpty } from '../components/misc/Util'
+import {
+  execute,
+  withBookmarkedIds,
+  isEmpty,
+  getTooltipTextFunc,
+} from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Bookmarks/bookmarks.module.scss'
@@ -122,14 +128,20 @@ const Bookmarks = ({}) => {
   //   }
   // }
 
+  // get tooltip text function
+  const getTooltipText = getTooltipTextFunc({
+    bookmark: true,
+    detail: false,
+    related: false,
+  })
+
   // get result of search query whenever filters or search text are updated
   const getData = async () => {
     // get all bookmarked items, placeholder for now
-    const ids = bookmarkedIds.split(',').map(d => +d)
-    if (ids.length > 0) {
+    if (bookmarkedIds.length > 0) {
       setLoading(true)
       const results = await ItemsQuery({
-        ids: bookmarkedIds.split(',').map(d => +d),
+        ids: bookmarkedIds,
         pagesize,
         page: curPage,
       })
@@ -137,6 +149,7 @@ const Bookmarks = ({}) => {
       setLoading(false)
     } else {
       setBookmarkedItemData({ data: [] })
+      setLoading(false)
     }
     if (!initialized) setInitialized(true)
   }
@@ -179,8 +192,7 @@ const Bookmarks = ({}) => {
   }, [simpleHeaderRef])
 
   // count bookmarks to show in nav
-  const bookmarkArr =
-    bookmarkedIds !== null ? bookmarkedIds.split(',').filter(d => d !== '') : []
+  const bookmarkArr = bookmarkedIds !== null ? bookmarkedIds : []
 
   // JSX
   return (
@@ -252,6 +264,7 @@ const Bookmarks = ({}) => {
                         setBookmarkedIds,
                         onViewDetails,
                         bookmark: true,
+                        getTooltipText,
                         setNextPage:
                           bookmarkedItemData.page !==
                           bookmarkedItemData.num_pages
@@ -287,6 +300,15 @@ const Bookmarks = ({}) => {
             />
           )}
         </div>
+        <ReactTooltip
+          id={'searchHighlightInfo'}
+          type="light"
+          effect="float"
+          delayHide={0}
+          delayShow={500}
+          scrollHide={true}
+          getContent={content => content}
+        />
       </Layout>
       <LoadingSpinner loading={false} />
     </>

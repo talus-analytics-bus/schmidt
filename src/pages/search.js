@@ -1,5 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
 // local components
@@ -217,6 +218,9 @@ const Search = ({ setPage }) => {
         }
       }
     }
+    // rebuild tooltips when things change
+    ReactTooltip.hide()
+    ReactTooltip.rebuild()
   }, [searchText, pagesize, orderBy, isDesc, filters])
 
   // when filters or search text change, get updated search data
@@ -283,7 +287,7 @@ const Search = ({ setPage }) => {
 
   // count bookmarks to show in nav
   const bookmarkArr =
-    bookmarkedIds !== null ? bookmarkedIds.split(',').filter(d => d !== '') : []
+    bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
 
   // JSX
   return (
@@ -369,6 +373,15 @@ const Search = ({ setPage }) => {
             />
           </div>
         </div>
+        <ReactTooltip
+          id={'searchHighlightInfo'}
+          type="light"
+          effect="float"
+          delayHide={0}
+          delayShow={500}
+          scrollHide={true}
+          getContent={content => content}
+        />
       </Layout>
       <LoadingSpinner loading={!initialized} />
     </>

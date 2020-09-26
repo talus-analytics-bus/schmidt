@@ -24,6 +24,7 @@ export const CardList = ({
   related = false,
   bookmarkedIds,
   setBookmarkedIds,
+  getTooltipText,
   animate = false,
   bookmark = false,
   ...props
@@ -53,6 +54,7 @@ export const CardList = ({
                 related,
                 bookmarkedIds,
                 setBookmarkedIds,
+                getTooltipText,
                 bookmark,
                 animate,
               }}

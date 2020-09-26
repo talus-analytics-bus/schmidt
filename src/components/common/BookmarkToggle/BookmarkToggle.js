@@ -19,6 +19,7 @@ export const BookmarkToggle = ({
   setBookmarkedIds = () => '',
   simple = false,
   id,
+  key,
 }) => {
   const icon = (
     <i className={'material-icons'}>{add ? 'bookmark_border' : 'bookmark'}</i>
@@ -29,18 +30,16 @@ export const BookmarkToggle = ({
     e.stopPropagation()
 
     // get new id list
-    const newIdList = bookmarkedIds
-      .split(',')
-      .filter(d => +d !== id)
-      .join(',')
+    const newIdListArr = [...bookmarkedIds].filter(d => +d !== +id)
+    const newIdListStr = newIdListArr.join(',')
 
     // update local storage
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('bookmarkedIds', newIdList)
+      localStorage.setItem('bookmarkedIds', newIdListStr)
     }
 
     // update state
-    setBookmarkedIds(newIdList)
+    setBookmarkedIds(newIdListArr)
   }
 
   // add this item to bookmarked IDs
@@ -48,17 +47,17 @@ export const BookmarkToggle = ({
     e.stopPropagation()
 
     // get new id list
-    const newIdArr = bookmarkedIds.split(',')
+    const newIdArr = [...bookmarkedIds]
     newIdArr.push(id)
-    const newIdList = newIdArr.join(',')
+    const newIdListStr = newIdArr.join(',')
 
     // update local storage
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('bookmarkedIds', newIdList)
+      localStorage.setItem('bookmarkedIds', newIdListStr)
     }
 
     // update state
-    setBookmarkedIds(newIdList)
+    setBookmarkedIds(newIdArr)
   }
   const onClick = add ? addFunc : rmvFunc
   const button = (
@@ -76,13 +75,16 @@ export const BookmarkToggle = ({
   // JSX // ---------------------------------------------------------------- //
   return simple ? (
     <div
+      key={key}
       onClick={onClick}
       className={classNames(styles.wrapper, styles.simple)}
     >
       {icon}
     </div>
   ) : (
-    <div className={styles.wrapper}>{button}</div>
+    <div key={key} className={styles.wrapper}>
+      {button}
+    </div>
   )
 }
 

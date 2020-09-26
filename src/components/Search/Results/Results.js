@@ -9,6 +9,7 @@ import { InfoTooltip } from '../../common'
 import styles from './results.module.scss'
 
 // local components
+import { getTooltipTextFunc } from '../../misc/Util'
 import { SearchBar, Paginator, CardList } from '../../common'
 
 export const Results = ({
@@ -37,8 +38,14 @@ export const Results = ({
   // show paginator if card data loaded
   const showPaginator = searchData !== null
 
-  // define start / end result numbers
+  // tooltip text generator
+  const getTooltipText = getTooltipTextFunc({
+    detail: false,
+    bookmark: false,
+    related: false,
+  })
 
+  // define start / end result numbers
   const start = showPaginator ? searchData.page * pagesize - pagesize + 1 : 1
 
   // EFFECT HOOKS // ------------------------------------------------------- //
@@ -84,6 +91,7 @@ export const Results = ({
               onViewDetails,
               bookmarkedIds,
               setBookmarkedIds,
+              getTooltipText,
               setNextPage:
                 searchData.page !== searchData.num_pages
                   ? () => {

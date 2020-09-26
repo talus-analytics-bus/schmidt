@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -1157,7 +1158,13 @@ export const withBookmarkedIds = async ({ callback }) => {
   if (typeof localStorage !== 'undefined') {
     // getter
     const bookmarkedIds = localStorage.getItem('bookmarkedIds') || ''
-    if (callback) callback(bookmarkedIds)
+    if (callback)
+      callback(
+        bookmarkedIds
+          .split(',')
+          .filter(d => d !== '')
+          .map(d => +d)
+      )
   }
 }
 
@@ -1260,11 +1267,16 @@ export const getHighlightSegments = ({
   maxWords = null,
   highlightAll = false,
   styles = {},
+  getTooltipText = () => null,
 }) => {
   // if highlight all, simply return the entire text highlighted.
   if (highlightAll) {
     return (
-      <span className={classNames(styles.highlighted, styles[type])}>
+      <span
+        data-for={'searchHighlightInfo'}
+        data-tip={getTooltipText('remove')}
+        className={classNames(styles.highlighted, styles[type])}
+      >
         {text}
       </span>
     )
@@ -1293,13 +1305,24 @@ export const getHighlightSegments = ({
       const highlightSegment = i % 2 === 1
       if (highlightSegment) {
         newText.push(
-          <span className={classNames(styles.highlighted, styles[type])}>
+          <span
+            data-for={'searchHighlightInfo'}
+            data-tip={getTooltipText('remove')}
+            className={classNames(styles.highlighted, styles[type])}
+          >
             {d}
           </span>
         )
       } else {
         // push normal text if not a highlight snippet
-        newText.push(<>{d}</>)
+        newText.push(
+          <span
+            data-for={'searchHighlightInfo'}
+            data-tip={getTooltipText('add')}
+          >
+            {d}
+          </span>
+        )
       }
     })
 
@@ -1347,4 +1370,26 @@ export const getHighlightSegments = ({
       return trimmedText
     } else return newText
   }
+}
+
+/**
+ * Get the appropriate tooltip text function for filter tags based on the
+ * context
+ * @method getTooltipTextFunc
+ * @param  {[type]}           detail   [description]
+ * @param  {[type]}           bookmark [description]
+ * @param  {[type]}           related  [description]
+ * @return {[type]}                    [description]
+ */
+export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
+  const getTooltipText = add => {
+    if (bookmark) {
+      return 'Click to start a new search filtered by this tag'
+    } else if (detail || related) {
+      return `Click to return to your search and ${add} this filter tag`
+    } else {
+      return `Click to ${add} this filter tag`
+    }
+  }
+  return getTooltipText
 }

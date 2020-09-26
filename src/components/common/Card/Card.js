@@ -1,5 +1,6 @@
 // 3rd party packages
 import React, { useState, useEffect } from 'react'
+import ReactTooltip from 'react-tooltip'
 import classNames from 'classnames'
 import axios from 'axios'
 
@@ -53,6 +54,7 @@ export const Card = ({
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
   animate = false,
+  getTooltipText,
   ...props
 }) => {
   // STATE
@@ -61,6 +63,11 @@ export const Card = ({
 
   // image
   const [thumbnail, setThumbnail] = useState(null)
+
+  // CONSTANTS
+  // get array of bookmark ids
+  const bookmarkedIdsArr =
+    typeof bookmarkedIds === 'string' ? bookmarkedIds.split(',') : bookmarkedIds
 
   // EFFECT HOOKS
   // animate card entrances -- any card that changes position in the order
@@ -72,6 +79,8 @@ export const Card = ({
       }
       setTimeout(() => setLeft(0), 100 * idx)
     }
+    // rebuild tooltips when things change
+    ReactTooltip.rebuild()
   }, [idx])
 
   // define obj to hold card text, including highlighted snippets, if any
@@ -88,7 +97,11 @@ export const Card = ({
   // process standard snippets: highlight plain text
   standardSnippets.forEach(([key, variable]) => {
     if (snippets[key] !== undefined) {
-      card[key] = getHighlightSegments({ text: snippets[key], styles })
+      card[key] = getHighlightSegments({
+        text: snippets[key],
+        getTooltipText,
+        styles,
+      })
     } else card[key] = variable
   })
 
@@ -97,6 +110,8 @@ export const Card = ({
     if (snippets[key] !== undefined) {
       card[key] = getHighlightSegments({
         text: snippets[key],
+        getTooltipText,
+
         maxWords: 20,
         styles,
       })
@@ -188,6 +203,7 @@ export const Card = ({
                     setFilters,
                   }),
                 text: getHighlightSegments({
+                  getTooltipText,
                   text: matchingSnippet,
                   type: 'small',
                   highlightAll: matchingTag !== undefined,
@@ -209,7 +225,14 @@ export const Card = ({
                     setFilters,
                   }),
 
-                text: getVal(d),
+                text: (
+                  <span
+                    data-for={'searchHighlightInfo'}
+                    data-tip={getTooltipText('add')}
+                  >
+                    {getVal(d)}
+                  </span>
+                ),
               }
             }
           }
@@ -306,9 +329,10 @@ export const Card = ({
             {bookmarkedIds !== null && (
               <BookmarkToggle
                 {...{
-                  add: !bookmarkedIds.includes(id),
+                  key: id,
+                  add: !bookmarkedIdsArr.includes(+id),
                   isSecondary: true,
-                  bookmarkedIds,
+                  bookmarkedIds: bookmarkedIdsArr,
                   setBookmarkedIds,
                   id,
                   simple: true,
@@ -378,22 +402,22 @@ export const Card = ({
               >
                 {files.map(({ id, num_bytes, filename }) => (
                   <div className={styles.downloadItem}>
-                    {
-                      // <i className={'material-icons'}>picture_as_pdf</i>
-                    }
-                    <PrimaryButton
-                      {...{
-                        label: filename,
-                        isLink: true,
-                        urlIsExternal: true,
-                        url: `${API_URL}/get/file/${filename}?id=${id}`,
-                        // onClick: () => {
-                        //   if (typeof window !== 'undefined') {
-                        //     window.open.assign(`${API_URL}/get/file?id=${id}`)
-                        //   }
-                        // },
-                      }}
-                    />
+                    <span
+                      data-for={'searchHighlightInfo'}
+                      data-tip={'Click to download this file'}
+                    >
+                      <PrimaryButton
+                        {...{
+                          label: filename,
+                          isLink: true,
+                          urlIsExternal: true,
+                          url: `${API_URL}/get/file/${filename.replace(
+                            /\?/g,
+                            ''
+                          )}?id=${id}`,
+                        }}
+                      />
+                    </span>
                     {<span>{bytesToMegabytes(num_bytes)}</span>}
                   </div>
                 ))}

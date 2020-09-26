@@ -4,9 +4,8 @@ import classNames from 'classnames'
 // import axios from 'axios'
 
 // local components
-import Layout from '../Layout/Layout'
 import SEO from '../seo'
-import { Card, CardList, InfoTooltip } from '../../components/common'
+import { Card, CardList, InfoTooltip, Paginator } from '../../components/common'
 import Panel from './content/Panel'
 
 // local utility functions
@@ -15,6 +14,7 @@ import {
   asBulletDelimitedList,
   toggleFilter,
   getHighlightSegments,
+  getTooltipTextFunc,
 } from '../../components/misc/Util'
 
 // styles and assets
@@ -47,11 +47,31 @@ const DetailOverlay = ({
   bookmark = false,
 }) => {
   // STATE
+  // item and related items data
+  const [itemData, setItemData] = useState(null)
+  const [relatedItemsData, setRelatedItemsData] = useState(null)
+
   // opacity control
   const [opacity, setOpacity] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
+  // current page and pagesize of paginator
+  // const pageStr = !initialized ? urlParams.get('page') || '1' : '1'
+  // const [curPage, setCurPage] = useState(+pageStr)
+  const [curPage, setCurPage] = useState(1)
+
+  // const [pagesize, setPagesize] = useState(
+  //   !initialized ? urlParams.get('pagesize') || 25 : 25
+  // )
+  const [pagesize, setPagesize] = useState(25)
+
   // CONSTANTS
+  // define start / end result numbers
+  const start =
+    relatedItemsData !== null
+      ? relatedItemsData.page * pagesize - pagesize + 1
+      : 1
+
   // function called when floating overlay is dismissed
   const dismissFloatingOverlay = () => {
     if (typeof window !== undefined) {
@@ -91,7 +111,7 @@ const DetailOverlay = ({
         if (d.if_national_country_of_authoring_org === undefined)
           return undefined
         const flag =
-          d.if_national_iso2_of_authoring_org !== undefined ? (
+          d.if_national_iso2_of_authoring_org !== null ? (
             <img
               key={d.if_national_iso2_of_authoring_org}
               src={`https://www.countryflags.io/${d.if_national_iso2_of_authoring_org.toLowerCase()}/shiny/64.png`}
@@ -100,30 +120,24 @@ const DetailOverlay = ({
         return (
           <>
             {flag}
-            {d.if_national_country_of_authoring_org}
+            {d.if_national_country_of_authoring_org || 'International'}
           </>
         )
       },
       field: 'if_national_country_of_authoring_org',
       name: 'Location',
     },
-    // {
-    //   field: 'authoring_organization_has_governance_authority',
-    //   name: 'Has governance authority?',
-    //   formatter: v => {
-    //     if (v === true) return 'Yes'
-    //     else if (v === false) return 'No'
-    //     else return undefined
-    //   },
-    // },
   ]
 
-  // STATE
-  // item and related items data
-  const [itemData, setItemData] = useState(null)
-  const [relatedItemsData, setRelatedItemsData] = useState(null)
-
   // FUNCTIONS
+  // get tooltip text depending on type of card
+  const detail = true
+  const related = false
+  const getTooltipText = getTooltipTextFunc({
+    detail: true,
+    bookmark,
+    related: true,
+  })
 
   // highlight metadata tag if filtered
   const highlightTag = ({ displayName, filterValue, filterKey }) => {
@@ -146,6 +160,7 @@ const DetailOverlay = ({
       >
         {getHighlightSegments({
           text: displayName,
+          getTooltipText,
           highlightAll:
             filters !== undefined &&
             filters[filterKey] !== undefined &&
@@ -162,6 +177,8 @@ const DetailOverlay = ({
     else {
       const results = await ItemQuery({
         id,
+        pagesize,
+        page: curPage,
       })
       setItemData(results.data.data)
       setRelatedItemsData(results.data)
@@ -184,6 +201,22 @@ const DetailOverlay = ({
       window.scrollTo(0, 0)
     }
   }, [id])
+
+  // fetch data when page changes
+  useEffect(() => {
+    // if ID is provided fetch data, and scroll to top
+    if (id !== false) {
+      getData()
+    }
+  }, [curPage])
+
+  // fetch data when pagesize changes
+  useEffect(() => {
+    // if ID is provided fetch data, and scroll to top
+    if (curPage !== 1) {
+      setCurPage(1)
+    }
+  }, [pagesize])
 
   // don't show component until all data fetched
   useEffect(() => {
@@ -292,6 +325,7 @@ const DetailOverlay = ({
                 setBookmarkedIds,
                 filters,
                 bookmark,
+                getTooltipText,
                 setFilters: v => {
                   dismissFloatingOverlay()
                   setFilters(v)
@@ -303,27 +337,48 @@ const DetailOverlay = ({
                 <Panel
                   {...{
                     key: `similarPanel${id}`,
-                    title: `Similar items (${relatedItemsData.related_items.length})`,
+                    title: `Similar items (${relatedItemsData.total})`,
                     iconName: 'file_copy',
                     secondary: false,
                   }}
                 >
+                  <Paginator
+                    {...{
+                      curPage,
+                      setCurPage,
+                      nTotalRecords: relatedItemsData.total,
+                      pagesize,
+                      setPagesize,
+                      showCounter: relatedItemsData.related_items.length > 0,
+                      noun: 'similar item',
+                      nouns: 'similar items',
+                    }}
+                  />
                   <CardList
                     {...{
                       key: `cardList${id}`,
                       cardData: relatedItemsData.related_items,
-                      start: 1,
+                      start,
                       onViewDetails,
                       related: true,
                       bookmarkedIds,
                       setBookmarkedIds,
                       filters,
                       bookmark,
-
+                      getTooltipText,
                       setFilters: v => {
                         dismissFloatingOverlay()
                         setFilters(v)
                       },
+                      setNextPage:
+                        relatedItemsData.page !== relatedItemsData.num_pages
+                          ? () => {
+                              setCurPage(curPage + 1)
+                              if (typeof window !== 'undefined') {
+                                window.scrollTo(0, 0)
+                              }
+                            }
+                          : false,
                     }}
                   />
                 </Panel>
