@@ -103,21 +103,23 @@ const PreviewOverlay = ({
               )}?id=${file.id}`}
             ></iframe>
           </div>
-          <div className={styles.fileTicker}>
-            <Ticker
-              {...{
-                items: files.map(({ id, filename, s3_filename }) => {
-                  return {
-                    id,
-                    label: filename,
-                    imgSrcUrl: `${S3_URL}/${s3_filename}_thumb`,
-                  }
-                }),
-                curItemIdx: curFileIdx,
-                setCurItemIdx: setCurFileIdx,
-              }}
-            />
-          </div>
+          {files.length > 1 && (
+            <div className={styles.fileTicker}>
+              <Ticker
+                {...{
+                  items: files.map(({ id, filename, s3_filename }) => {
+                    return {
+                      id,
+                      label: filename,
+                      imgSrcUrl: `${S3_URL}/${s3_filename}_thumb`,
+                    }
+                  }),
+                  curItemIdx: curFileIdx,
+                  setCurItemIdx: setCurFileIdx,
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

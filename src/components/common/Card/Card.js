@@ -379,18 +379,20 @@ export const Card = ({
                 </div>
               </div>
               <div className={styles.actions}>
-                <PrimaryButton
-                  {...{
-                    label: 'Preview',
-                    iconName: 'preview',
-                    isSecondary: true,
-                    onClick: e => {
-                      e.stopPropagation()
-                      e.preventDefault()
-                      setShowPreview(true)
-                    },
-                  }}
-                />
+                {files.length > 0 && (
+                  <PrimaryButton
+                    {...{
+                      label: 'Preview',
+                      iconName: 'preview',
+                      isSecondary: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        setShowPreview(true)
+                      },
+                    }}
+                  />
+                )}
                 <PrimaryButton
                   {...{
                     label: 'View details',
