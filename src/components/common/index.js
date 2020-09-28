@@ -21,6 +21,8 @@ import PrimaryButton from './PrimaryButton/PrimaryButton.js'
 import BookmarkToggle from './BookmarkToggle/BookmarkToggle.js'
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js'
 import FloatButton from './FloatButton/FloatButton.js'
+import PreviewOverlay from './PreviewOverlay/PreviewOverlay.js'
+import Ticker from './Ticker/Ticker.js'
 export {
   Legend,
   Selectpicker,
@@ -45,4 +47,6 @@ export {
   BookmarkToggle,
   LoadingSpinner,
   FloatButton,
+  PreviewOverlay,
+  Ticker,
 }

@@ -8,7 +8,7 @@ import axios from 'axios'
 import styles from './card.module.scss'
 
 // local components
-import { PrimaryButton, BookmarkToggle, ShowMore } from '../'
+import { PrimaryButton, BookmarkToggle, ShowMore, PreviewOverlay } from '../'
 import Panel from '../../Detail/content/Panel'
 
 // local utility functions
@@ -60,6 +60,9 @@ export const Card = ({
   // STATE
   // card's left css property
   const [left, setLeft] = useState(detail || related ? 0 : 20)
+
+  // show preview or hide?
+  const [showPreview, setShowPreview] = useState(false)
 
   // image
   const [thumbnail, setThumbnail] = useState(null)
@@ -275,156 +278,167 @@ export const Card = ({
     )
   }
 
-  // TODO thsi iframe code for preview:
-  // <iframe
-  //   src={`${API_URL}/get/file?id=${files[0].id}`}
-  //   height="200"
-  //   width="300"
-  // ></iframe>
-
   // JSX
   return (
-    <div
-      style={{ left }}
-      onClick={e => {
-        e.stopPropagation()
-        onViewDetails({ newId: id, related })
-      }}
-      className={classNames(styles.card, { [styles.detail]: detail })}
-    >
-      <div className={styles.col}>
-        <div className={styles.resultNumber}>{resultNumber}</div>
-      </div>
-      <div className={classNames(styles.col, styles.thumbnailCol)}>
-        {files.length > 0 && (
-          <div className={styles.thumbnail}>
-            <img
-              key={files[0].id}
-              src={`${S3_URL}/${files[0].s3_filename}_thumb`}
-            />
-          </div>
-        )}
-        {files.length === 0 && (
-          <div className={classNames(styles.thumbnail, styles.placeholder)}>
-            Preview unavailable
-          </div>
-        )}
-        {
-          // Show preview button under thumbnail on details page
-          detail && files.length > 0 && (
-            <PrimaryButton
-              {...{
-                label: 'Preview',
-                iconName: 'preview',
-                isSecondary: true,
-              }}
-            />
-          )
-        }
-      </div>
-      <div className={styles.col}>
-        <div className={styles.main}>
-          <div className={styles.header}>
-            <div className={styles.type}>{card.type_of_record}</div>
-            {bookmarkedIds !== null && (
-              <BookmarkToggle
-                {...{
-                  key: id,
-                  add: !bookmarkedIdsArr.includes(+id),
-                  isSecondary: true,
-                  bookmarkedIds: bookmarkedIdsArr,
-                  setBookmarkedIds,
-                  id,
-                  simple: true,
-                }}
+    <div className={styles.cardContainer}>
+      {true && (
+        <PreviewOverlay {...{ id, files, showPreview, setShowPreview }} />
+      )}
+      <div
+        style={{ left }}
+        onClick={e => {
+          e.stopPropagation()
+          onViewDetails({ newId: id, related })
+        }}
+        className={classNames(styles.card, {
+          [styles.detail]: detail,
+          [styles.frozen]: showPreview,
+        })}
+      >
+        <div className={styles.col}>
+          <div className={styles.resultNumber}>{resultNumber}</div>
+        </div>
+        <div className={classNames(styles.col, styles.thumbnailCol)}>
+          {files.length > 0 && (
+            <div className={styles.thumbnail}>
+              <img
+                key={files[0].id}
+                src={`${S3_URL}/${files[0].s3_filename}_thumb`}
               />
-            )}
-          </div>
-          <div className={styles.title}>
-            <div className={styles.text}>
-              {title !== '' ? card.title : 'Untitled'}
             </div>
-          </div>
-          <div className={styles.detailsAndActions}>
-            <div className={styles.details}>
-              <div className={styles.authOrg}>
-                <i className={'material-icons'}>person</i>
-                <div className={styles.authOrgList}>
-                  {authors.length > 0 && card['author.id']}
-                  {authors.length === 0 && (
-                    <div>Authoring organization unavailable</div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.date}>
-                <i className={'material-icons'}>event</i>
-                {date !== null && (
-                  <span
-                    className={classNames(styles.small, {
-                      [styles.highlighted]: filters.years !== undefined,
-                    })}
-                  >
-                    {formatDate(date)}
-                  </span>
-                )}
-                {date === null && <span>Date unavailable</span>}
-              </div>
+          )}
+          {files.length === 0 && (
+            <div className={classNames(styles.thumbnail, styles.placeholder)}>
+              Preview unavailable
             </div>
-            <div className={styles.actions}>
+          )}
+          {
+            // Show preview button under thumbnail on details page
+            detail && files.length > 0 && (
               <PrimaryButton
                 {...{
                   label: 'Preview',
                   iconName: 'preview',
                   isSecondary: true,
+                  onClick: e => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                    setShowPreview(true)
+                  },
                 }}
               />
-              <PrimaryButton
-                {...{
-                  label: 'View details',
-                  iconName: 'read_more',
-                  onClick: () => onViewDetails(id),
-                }}
-              />
+            )
+          }
+        </div>
+        <div className={styles.col}>
+          <div className={styles.main}>
+            <div className={styles.header}>
+              <div className={styles.type}>{card.type_of_record}</div>
+              {bookmarkedIds !== null && (
+                <BookmarkToggle
+                  {...{
+                    key: id,
+                    add: !bookmarkedIdsArr.includes(+id),
+                    isSecondary: true,
+                    bookmarkedIds: bookmarkedIdsArr,
+                    setBookmarkedIds,
+                    id,
+                    simple: true,
+                  }}
+                />
+              )}
             </div>
-          </div>
-          <div className={styles.descriptionSnippet}>{card.description}</div>
-          {tagSnippets.length > 0 && (
-            <div className={styles.tagSnippets}>{tagSnippets}</div>
-          )}
-          {detail && (
-            <div className={styles.downloads}>
-              <Panel
-                {...{
-                  title: 'Downloads',
-                  secondary: false,
-                  iconName: 'get_app',
-                }}
-              >
-                {files.map(({ id, num_bytes, filename }) => (
-                  <div className={styles.downloadItem}>
-                    <span
-                      data-for={'searchHighlightInfo'}
-                      data-tip={'Click to download this file'}
-                    >
-                      <PrimaryButton
-                        {...{
-                          label: filename,
-                          isLink: true,
-                          urlIsExternal: true,
-                          url: `${API_URL}/get/file/${filename.replace(
-                            /\?/g,
-                            ''
-                          )}?id=${id}`,
-                        }}
-                      />
-                    </span>
-                    {<span>{bytesToMegabytes(num_bytes)}</span>}
+            <div className={styles.title}>
+              <div className={styles.text}>
+                {title !== '' ? card.title : 'Untitled'}
+              </div>
+            </div>
+            <div className={styles.detailsAndActions}>
+              <div className={styles.details}>
+                <div className={styles.authOrg}>
+                  <i className={'material-icons'}>person</i>
+                  <div className={styles.authOrgList}>
+                    {authors.length > 0 && card['author.id']}
+                    {authors.length === 0 && (
+                      <div>Authoring organization unavailable</div>
+                    )}
                   </div>
-                ))}
-                {files.length === 0 && <div>None</div>}
-              </Panel>
+                </div>
+                <div className={styles.date}>
+                  <i className={'material-icons'}>event</i>
+                  {date !== null && (
+                    <span
+                      className={classNames(styles.small, {
+                        [styles.highlighted]: filters.years !== undefined,
+                      })}
+                    >
+                      {formatDate(date)}
+                    </span>
+                  )}
+                  {date === null && <span>Date unavailable</span>}
+                </div>
+              </div>
+              <div className={styles.actions}>
+                <PrimaryButton
+                  {...{
+                    label: 'Preview',
+                    iconName: 'preview',
+                    isSecondary: true,
+                    onClick: e => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      setShowPreview(true)
+                    },
+                  }}
+                />
+                <PrimaryButton
+                  {...{
+                    label: 'View details',
+                    iconName: 'read_more',
+                    onClick: () => onViewDetails(id),
+                  }}
+                />
+              </div>
             </div>
-          )}
+            <div className={styles.descriptionSnippet}>{card.description}</div>
+            {tagSnippets.length > 0 && (
+              <div className={styles.tagSnippets}>{tagSnippets}</div>
+            )}
+            {detail && (
+              <div className={styles.downloads}>
+                <Panel
+                  {...{
+                    title: 'Downloads',
+                    secondary: false,
+                    iconName: 'get_app',
+                  }}
+                >
+                  {files.map(({ id, num_bytes, filename }) => (
+                    <div className={styles.downloadItem}>
+                      <span
+                        data-for={'searchHighlightInfo'}
+                        data-tip={'Click to download this file'}
+                      >
+                        <PrimaryButton
+                          {...{
+                            label: filename,
+                            isLink: true,
+                            urlIsExternal: true,
+                            url: `${API_URL}/get/file/${filename.replace(
+                              /\?/g,
+                              ''
+                            )}?id=${id}`,
+                          }}
+                        />
+                      </span>
+                      {<span>{bytesToMegabytes(num_bytes)}</span>}
+                    </div>
+                  ))}
+                  {files.length === 0 && <div>None</div>}
+                </Panel>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

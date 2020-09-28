@@ -1,251 +1,261 @@
 @import '../../../assets/styles/vars.scss';
-.card {
-  background-color: $light-gray;
-  width: 100%;
-  padding: 20px;
-  border: 1px solid transparent;
-  transition: all ease 0.25s;
-  position: relative;
-  &:not(.detail) {
-    &:hover {
-      border-color: #333;
-      @include boxShadowStrong();
-      cursor: pointer;
-    }
-    &:active {
-      background-color: darken($light-gray, 5%);
-    }
-  }
-
-  $max-height: 150px;
-  $max-height-lg: 300px;
-
-  // if detail page card, allow larger sizing
-  $letter-width: $max-height/1.29;
-  $letter-width-lg: $max-height-lg/1.29;
-
-  display: grid;
-  grid-template-columns: max-content $letter-width auto;
-
-  // make thumbnail col content centered and spaced
-  .col.thumbnailCol {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    @include spaceItemsVert(10px);
-  }
-
-  // let details and actions column use full width
-  .col:last-child {
+.cardContainer {
+  .card {
+    background-color: $light-gray;
     width: 100%;
-  }
-
-  // non-detail thumbnails: normal size
-  .thumbnail {
-    width: $letter-width;
-    display: flex;
-    justify-content: center;
-    img {
-      border: 1px solid #365194;
-      max-height: $max-height;
-      max-width: $letter-width;
-    }
-    &.placeholder {
-      // placeholder thumbnail shown if no file is available
-      border: 1px solid #365194;
-      height: $max-height; // like a letter page
-      width: $letter-width;
-
-      // format text in placeholder rectangle
-      text-align: center;
-      align-items: center;
-      color: $gray;
-    }
-  }
-
-  // detail thumbnails: larger, etc.
-  &.detail {
     padding: 20px;
-    grid-template-columns: max-content $letter-width-lg auto;
-    background-color: white;
-    .resultNumber {
-      display: none;
-    }
-    .col:last-child {
-      margin-left: 10px;
-      padding-right: 0;
-    }
-    .thumbnail {
-      width: $letter-width-lg;
-      // justify-content: unset;
-      img {
-        max-height: $max-height-lg;
-        max-width: $letter-width-lg;
-      }
-      &.placeholder {
-        height: $max-height-lg; // like a letter page
-        width: $letter-width-lg;
-      }
-    }
-
-    // description is not italicized in detail mode
-    .main {
-      .descriptionSnippet {
-        font-style: normal;
-      }
-    }
-  }
-
-  .resultNumber {
-    margin-right: 10px;
-    font-family: 'rawline', serif;
-    font-weight: bold;
-  }
-  .main {
-    width: 100%;
-    margin-left: 10px;
-    padding-right: 10px;
-
-    .header {
-      width: 100%;
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      .type {
-        text-transform: uppercase;
-        font-family: 'rawline', serif;
+    border: 1px solid transparent;
+    transition: all ease 0.25s;
+    position: relative;
+    &:not(.detail) {
+      &:hover {
+        border-color: #333;
+        @include boxShadowStrong();
         cursor: pointer;
       }
-    }
-    .title {
-      .text {
-        max-width: 88%;
-        font-size: 1.5rem;
-        color: $selected-blue;
-        line-height: 1.25;
+      &:active {
+        background-color: darken($light-gray, 5%);
       }
     }
-    .detailsAndActions {
+
+    $max-height: 150px;
+    $max-height-lg: 300px;
+
+    // if detail page card, allow larger sizing
+    $letter-width: $max-height/1.29;
+    $letter-width-lg: $max-height-lg/1.29;
+
+    display: grid;
+    grid-template-columns: max-content $letter-width auto;
+
+    // make thumbnail col content centered and spaced
+    .col.thumbnailCol {
       display: flex;
-      @include spaceItemsHoriz(20px);
-      margin-top: 20px;
+      flex-flow: column;
+      align-items: center;
+      @include spaceItemsVert(10px);
+    }
 
-      .details {
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        grid-gap: 0 10px;
+    // let details and actions column use full width
+    .col:last-child {
+      width: 100%;
+    }
+
+    // non-detail thumbnails: normal size
+    .thumbnail {
+      width: $letter-width;
+      display: flex;
+      justify-content: center;
+      img {
+        border: 1px solid #365194;
+        max-height: $max-height;
+        max-width: $letter-width;
+      }
+      &.placeholder {
+        // placeholder thumbnail shown if no file is available
+        border: 1px solid #365194;
+        height: $max-height; // like a letter page
+        width: $letter-width;
+
+        // format text in placeholder rectangle
+        text-align: center;
         align-items: center;
+        color: $gray;
+      }
+    }
 
-        // color details icons navy blue
-        i {
-          color: $navy-blue;
+    // detail thumbnails: larger, etc.
+    &.detail {
+      padding: 20px;
+      grid-template-columns: max-content $letter-width-lg auto;
+      background-color: white;
+      .resultNumber {
+        display: none;
+      }
+      .col:last-child {
+        margin-left: 10px;
+        padding-right: 0;
+      }
+      .thumbnail {
+        width: $letter-width-lg;
+        // justify-content: unset;
+        img {
+          max-height: $max-height-lg;
+          max-width: $letter-width-lg;
         }
+        &.placeholder {
+          height: $max-height-lg; // like a letter page
+          width: $letter-width-lg;
+        }
+      }
 
-        // alignment for individual detail items
-        .authOrg,
-        .date {
-          @include spaceItemsHoriz(5px);
-          display: flex;
+      // description is not italicized in detail mode
+      .main {
+        .descriptionSnippet {
+          font-style: normal;
+        }
+      }
+    }
+
+    .resultNumber {
+      margin-right: 10px;
+      font-family: 'rawline', serif;
+      font-weight: bold;
+    }
+    .main {
+      width: 100%;
+      margin-left: 10px;
+      padding-right: 10px;
+
+      .header {
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        .type {
+          text-transform: uppercase;
+          font-family: 'rawline', serif;
+          cursor: pointer;
+        }
+      }
+      .title {
+        .text {
+          max-width: 88%;
+          font-size: 1.5rem;
+          color: $selected-blue;
+          line-height: 1.25;
+        }
+      }
+      .detailsAndActions {
+        display: flex;
+        @include spaceItemsHoriz(20px);
+        margin-top: 20px;
+
+        .details {
+          display: grid;
+          grid-template-columns: 300px 1fr;
+          grid-gap: 0 10px;
           align-items: center;
+
+          // color details icons navy blue
+          i {
+            color: $navy-blue;
+          }
+
+          // alignment for individual detail items
+          .authOrg,
+          .date {
+            @include spaceItemsHoriz(5px);
+            display: flex;
+            align-items: center;
+          }
+          .authOrgList {
+            span {
+              cursor: pointer;
+            }
+          }
         }
-        .authOrgList {
-          span {
-            cursor: pointer;
+
+        .actions {
+          display: flex;
+          margin-left: auto;
+          @include spaceItemsHoriz(10px);
+        }
+      }
+
+      // description snippet, if any text matched, with a few words around the
+      // matched text
+      .descriptionSnippet {
+        margin-top: 20px;
+        color: #333;
+        font-style: italic;
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+
+      // tag snippets: including an icon and some matched text
+      .tagSnippets {
+        border-top: 1px solid $gray;
+        margin-top: 10px;
+        padding-top: 10px;
+        display: flex;
+        flex-flow: column;
+        @include spaceItemsVert(5px);
+
+        .tagSnippet {
+          display: flex;
+          @include spaceItemsHoriz(5px);
+          align-items: center;
+          i {
+            color: $navy-blue;
+          }
+          .iconSnippet {
+            display: flex;
+            flex-flow: wrap;
           }
         }
       }
+    }
 
-      .actions {
-        display: flex;
-        margin-left: auto;
-        @include spaceItemsHoriz(10px);
+    // style highlighted text
+    .highlighted {
+      // text-decoration: underline;
+      // text-decoration-color: underline;
+      box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 #ffff00;
+      &.small {
+        box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 #ffff00;
+      }
+    }
+    .link {
+      color: $selected-blue;
+      &:hover {
+        text-decoration: underline;
       }
     }
 
-    // description snippet, if any text matched, with a few words around the
-    // matched text
-    .descriptionSnippet {
-      margin-top: 20px;
-      color: #333;
-      font-style: italic;
-      font-size: 1.3rem;
-      line-height: 1.5;
-    }
-
-    // tag snippets: including an icon and some matched text
-    .tagSnippets {
-      border-top: 1px solid $gray;
-      margin-top: 10px;
-      padding-top: 10px;
-      display: flex;
-      flex-flow: column;
-      @include spaceItemsVert(5px);
-
-      .tagSnippet {
-        display: flex;
-        @include spaceItemsHoriz(5px);
-        align-items: center;
-        i {
-          color: $navy-blue;
-        }
-        .iconSnippet {
-          display: flex;
-          flex-flow: wrap;
+    // if detail card: reformat to suit the details page
+    &.detail {
+      // hide actions since they are shown elsewhere
+      .detailsAndActions {
+        .actions {
+          display: none;
         }
       }
-    }
-  }
 
-  // style highlighted text
-  .highlighted {
-    // text-decoration: underline;
-    // text-decoration-color: underline;
-    box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 #ffff00;
-    &.small {
-      box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 #ffff00;
-    }
-  }
-  .link {
-    color: $selected-blue;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  // if detail card: reformat to suit the details page
-  &.detail {
-    // hide actions since they are shown elsewhere
-    .detailsAndActions {
-      .actions {
+      // hide tag snippets too
+      .tagSnippets {
         display: none;
       }
     }
 
-    // hide tag snippets too
-    .tagSnippets {
-      display: none;
+    // Downloads list
+    .downloads {
+      margin-top: 20px;
+      width: auto;
+      i {
+        position: relative;
+        left: -5px;
+      }
+      .downloadItem {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        grid-gap: 10px 20px;
+      }
     }
-  }
 
-  // Downloads list
-  .downloads {
-    margin-top: 20px;
-    width: auto;
-    i {
-      position: relative;
-      left: -5px;
+    // make special icons the same size as material icons
+    .specialIcon {
+      $size: 24px;
+      height: 24px;
+      width: 24px;
     }
-    .downloadItem {
-      display: grid;
-      grid-template-columns: max-content max-content;
-      grid-gap: 10px 20px;
-    }
-  }
 
-  // make special icons the same size as material icons
-  .specialIcon {
-    $size: 24px;
-    height: 24px;
-    width: 24px;
+    // when frozen, don't allow pointer events, e.g., when preview modal is up
+    &.frozen {
+      &,
+      *:not(div:first-child) {
+        pointer-events: none;
+      }
+    }
   }
 }

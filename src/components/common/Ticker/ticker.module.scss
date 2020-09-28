@@ -1,0 +1,47 @@
+@import '../../../assets/styles/vars.scss';
+.ticker {
+  display: flex;
+  align-items: center;
+  @include spaceItemsHoriz(30px);
+  .items {
+    display: flex;
+    .item {
+      margin: 20px 10px 0 10px;
+      img {
+        $max-height: 75px;
+        height: $max-height;
+        border: solid 4px transparent;
+        transition: all 0.25s;
+      }
+
+      // animate border change
+      &.current {
+        transition: all 0.25s;
+        img {
+          border-color: $selected-blue;
+        }
+      }
+    }
+  }
+
+  // style prev/next buttons (carets)
+  button {
+    background: none;
+    border: none;
+    font-size: 5rem;
+    position: relative;
+    line-height: 0;
+    top: -4px;
+    color: #333;
+    &:hover {
+      color: black;
+    }
+    &:active {
+      color: $navy-blue;
+    }
+    &.disabled {
+      color: gray;
+      pointer-events: none;
+    }
+  }
+}
