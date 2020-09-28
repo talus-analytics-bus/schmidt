@@ -221,6 +221,8 @@ const DetailOverlay = ({
     // if ID is provided fetch data, and scroll to top
     if (curPage !== 1) {
       setCurPage(1)
+    } else {
+      getData()
     }
   }, [pagesize])
 
