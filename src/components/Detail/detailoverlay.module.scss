@@ -1,190 +1,198 @@
 @import '../../assets/styles/vars.scss';
 .detailOverlay {
-  .relatedItems {
-    margin-left: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-  }
-  // standard: max width of screen is 1300px
-  // center content in that view
-  // TODO pull up in scope to master SCSS file
-  max-width: 1440px;
+  display: flex;
   margin: 0 auto;
-  padding: 0 20px;
   width: 100%;
-  height: 100%;
-  font-size: 1rem;
-
-  .link {
-    color: $selected-blue;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  // style highlighted text
-  .highlighted {
-    // text-decoration: underline;
-    // text-decoration-color: underline;
-    box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 #ffff00;
-    &.small {
-      box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 #ffff00;
-    }
-  }
-
-  .band {
-    display: none;
-    border-right: 2px solid #5c5c5c;
-
-    padding: 20px;
-    background-color: #5c5c5c;
-    width: 100%;
-    .closeButton {
-      margin-left: auto;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100%;
-      padding: 3px;
-      cursor: pointer;
-      i {
-        color: $navy-blue;
-        font-weight: bold;
-      }
-      &:hover {
-        background-color: darken(white, 5%);
-      }
-      &:active {
-        @include boxShadow();
-        background-color: darken(white, 10%);
-      }
-    }
-  }
-  transition: opacity 0.25s;
+  align-items: center;
+  justify-content: center;
 
   &.floating {
-    z-index: 9; // above header
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 0.25s;
+    .container {
+      z-index: 9; // above header
+      position: absolute;
+      top: 0;
+      transition: opacity 0.25s;
 
-    .band {
-      display: flex;
+      .band {
+        display: flex;
+      }
     }
   }
-
-  .content {
-    border-left: 2px solid #5c5c5c;
-    border-bottom: 2px solid #5c5c5c;
-
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 330px;
-    background-color: white;
-
-    .sideBar {
-      background-color: $light-gray;
-      @include spaceItemsVert(10px);
+  .container {
+    .relatedItems {
       margin-left: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+    // standard: max width of screen is 1300px
+    // center content in that view
+    // TODO pull up in scope to master SCSS file
+    max-width: 1330px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+
+    .link {
+      color: $selected-blue;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    // style highlighted text
+    .highlighted {
+      // text-decoration: underline;
+      // text-decoration-color: underline;
+      box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 #ffff00;
+      &.small {
+        box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 #ffff00;
+      }
+    }
+
+    .band {
+      display: none;
       border-right: 2px solid #5c5c5c;
 
-      .keyTopics {
-        @include spaceItemsVert(10px);
-        .keyTopic {
-          display: grid;
-          grid-template-columns: 15px 1fr;
-          grid-gap: 0 5px;
-          align-items: center;
-          color: #898989;
-          span {
-            color: unset;
-          }
-          .colorBlock {
-            height: 30px;
-            background-color: #e5e5e5;
-          }
-          cursor: pointer;
-          &:hover {
-            text-decoration: underline;
-          }
-          &.active {
-            color: $selected-blue;
-            font-weight: 600;
-            .colorBlock {
-              background-color: $navy-blue;
-            }
-          }
+      padding: 20px;
+      background-color: #5c5c5c;
+      width: 100%;
+      .closeButton {
+        margin-left: auto;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        padding: 3px;
+        cursor: pointer;
+        i {
+          color: $navy-blue;
+          font-weight: bold;
+        }
+        &:hover {
+          background-color: darken(white, 5%);
+        }
+        &:active {
+          @include boxShadow();
+          background-color: darken(white, 10%);
         }
       }
+    }
+    transition: opacity 0.25s;
 
-      .authors {
-        @include borderItemsVert(40px);
+    .content {
+      border-left: 2px solid #5c5c5c;
+      border-bottom: 2px solid #5c5c5c;
 
-        .author {
-          border-width: 4px;
-          .authorName {
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: $selected-blue;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      background-color: white;
+
+      .sideBar {
+        background-color: $light-gray;
+        @include spaceItemsVert(10px);
+        margin-left: 20px;
+        border-right: 2px solid #5c5c5c;
+
+        .keyTopics {
+          @include spaceItemsVert(10px);
+          .keyTopic {
+            display: grid;
+            grid-template-columns: 15px 1fr;
+            grid-gap: 0 5px;
+            align-items: center;
+            color: #898989;
+            span {
+              color: unset;
+            }
+            .colorBlock {
+              height: 30px;
+              background-color: #e5e5e5;
+            }
             cursor: pointer;
             &:hover {
               text-decoration: underline;
             }
-          }
-          .authorInfo {
-            @include spaceItemsVert(20px);
-            .infoItem {
-              .field {
-                text-transform: uppercase;
-                font-family: 'rawline', serif;
-                font-size: 0.8rem;
-                margin-bottom: 2px;
+            &.active {
+              color: $selected-blue;
+              font-weight: 600;
+              .colorBlock {
+                background-color: $navy-blue;
               }
-              .value {
-                display: flex;
-                align-items: center;
-                img {
-                  height: 20px;
-                  margin-right: 3px;
+            }
+          }
+        }
+
+        .authors {
+          @include borderItemsVert(40px);
+
+          .author {
+            border-width: 4px;
+            .authorName {
+              font-weight: 600;
+              font-size: 1.2rem;
+              margin-bottom: 20px;
+              color: $selected-blue;
+              cursor: pointer;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+            .authorInfo {
+              @include spaceItemsVert(20px);
+              .infoItem {
+                .field {
+                  text-transform: uppercase;
+                  font-family: 'rawline', serif;
+                  font-size: 0.8rem;
+                  margin-bottom: 2px;
+                }
+                .value {
+                  display: flex;
+                  align-items: center;
+                  img {
+                    height: 20px;
+                    margin-right: 3px;
+                  }
                 }
               }
             }
           }
         }
-      }
-      .govAuth {
-        border: 3px solid $navy-blue;
-        padding: 10px;
-        &.yes {
-          background-color: #dae0f1;
-          font-weight: 600;
+        .govAuth {
+          border: 3px solid $navy-blue;
+          padding: 10px;
+          &.yes {
+            background-color: #dae0f1;
+            font-weight: 600;
+          }
+          &.notAvail {
+            border-color: $gray;
+          }
         }
-        &.notAvail {
-          border-color: $gray;
-        }
-      }
 
-      // add "gap" between panels
-      > div {
-        &:not(:first-child) {
-          border-top: 10px solid white;
+        // add "gap" between panels
+        > div {
+          &:not(:first-child) {
+            border-top: 10px solid white;
+          }
+          // &:nth-last-child(2) {
+          //   border-bottom: none;
+          // }
+          // &:last-child {
+          //   border-bottom: 10px solid white;
+          // }
         }
-        // &:nth-last-child(2) {
-        //   border-bottom: none;
-        // }
-        // &:last-child {
-        //   border-bottom: 10px solid white;
-        // }
       }
     }
-  }
-  .noData {
-    font-style: italic;
-    color: $gray;
+    .noData {
+      font-style: italic;
+      color: $gray;
+    }
   }
 }
