@@ -15,7 +15,7 @@ import {
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import { getIntArray, iconNamesByField } from '../../misc/Util'
+import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -343,7 +343,12 @@ export const Options = ({
       <h2>Refine search</h2>
       <div className={styles.content}>
         <PrimaryButton
-          {...{ onClick: onStartOver, label: 'Start over', isLink: true }}
+          {...{
+            onClick: onStartOver,
+            label: 'Start over',
+            isLink: true,
+            disabled: isEmpty(filters) && searchText === '',
+          }}
         />
         <div className={styles.sortBy}>
           <div>
