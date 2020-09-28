@@ -52,21 +52,48 @@ const PreviewOverlay = ({
   useEffect(() => {
     if (showPreview) setOpacity(1)
     else setOpacity(0)
-  }, [showPreview])
 
-  // on click anywhere but in menu, and menu is shown, close menu; otherwise
-  // do nothing
-  useEffect(() => {
-    // if (opacity === 1 && typeof document !== 'undefined')
-    document.getElementsByTagName('html')[0].onclick = e => {
-      if (wrapperRef === null || wrapperRef.current === null) return
-      const wrapper = wrapperRef.current
-      if (wrapper && wrapper.contains(e.target)) return
-      else {
-        setShowPreview(false)
+    // define onclick listener to close overlay if clicked outside it
+    const onClick = e => {
+      if (typeof document !== 'undefined') {
+        if (wrapperRef === null || wrapperRef.current === null) return
+        const wrapper = wrapperRef.current
+        if (wrapper && wrapper.contains(e.target)) {
+          return
+        } else {
+          if (typeof window !== 'undefined') {
+            window.removeEventListener('click', onClick)
+            setShowPreview(false)
+          }
+        }
       }
     }
-  }, [opacity])
+
+    // Close filter if user clicks outside it
+    if (showPreview !== false) {
+      if (typeof window !== 'undefined')
+        window.addEventListener('click', onClick)
+    }
+    return () => {
+      window.removeEventListener('click', onClick)
+    }
+  }, [showPreview])
+
+  // add listener to close overlay on esc key
+  useEffect(() => {
+    // close overlay on escape key
+    const escFunctionPreview = e => {
+      if (e.keyCode === 27) setShowPreview(false)
+    }
+
+    // assign listener
+    document.addEventListener('keydown', escFunctionPreview, false)
+
+    // remove listener on unmount
+    return () => {
+      document.removeEventListener('keydown', escFunctionPreview, false)
+    }
+  }, [])
 
   // JSX
   if (!showPreview)
