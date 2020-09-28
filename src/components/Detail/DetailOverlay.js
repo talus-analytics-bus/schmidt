@@ -193,10 +193,16 @@ const DetailOverlay = ({
   // EFFECT HOOKS
   // fetch data when ID is set
   useEffect(() => {
-    // if ID is provided fetch data, and scroll to top
-    if (id !== false) {
-      getData()
+    // reset similar items page number if not one
+    if (curPage !== 1) {
+      setCurPage(1)
+    } else {
+      // if ID is provided fetch data, and scroll to top
+      if (id !== false) {
+        getData()
+      }
     }
+
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
     }
@@ -205,7 +211,7 @@ const DetailOverlay = ({
   // fetch data when page changes
   useEffect(() => {
     // if ID is provided fetch data, and scroll to top
-    if (id !== false) {
+    if (id !== false && itemData !== null) {
       getData()
     }
   }, [curPage])
