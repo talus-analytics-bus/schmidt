@@ -7,6 +7,9 @@ import SEO from '../components/seo'
 import Nav from '../components/Layout/Nav/Nav'
 import Footer from '../components/Layout/Footer/Footer'
 
+// local utility functions
+import { withBookmarkedIds } from '../components/misc/Util'
+
 // assets and styles
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
@@ -14,9 +17,17 @@ import logo from '../assets/images/logo.svg'
 const test = process.env.GATSBY_TEST_VAR // this should be defined
 const IndexPage = () => {
   // STATE  // --------------------------------------------------------------//
-  const [loading, setLoading] = useState(false)
+  // is page loaded yet? show nothing until it is
+  const [loading, setLoading] = useState(true)
+  const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
-  // // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
+  // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
+  // get bookmarked ids initially
+  useEffect(() => {
+    if (bookmarkedIds === null)
+      withBookmarkedIds({ callback: setBookmarkedIds })
+    setLoading(false)
+  }, [bookmarkedIds])
 
   // JSX // -----------------------------------------------------------------//
   if (loading) return <div />
@@ -24,7 +35,7 @@ const IndexPage = () => {
     return (
       <>
         <SEO title="Home" description="Pandemic Repository landing page" />
-        <Nav />
+        <Nav bookmarkCount={bookmarkedIds.length} />
         <article className={styles.main}>
           <img
             className={styles.mainLogo}
