@@ -1,47 +1,78 @@
 @import '../../../assets/styles/vars.scss';
 .ticker {
   display: flex;
-  align-items: center;
-  @include spaceItemsHoriz(30px);
-  .items {
-    display: flex;
-    .item {
-      margin: 20px 10px 0 10px;
-      img {
-        $max-height: 75px;
-        height: $max-height;
-        border: solid 4px transparent;
-        transition: all 0.25s;
-      }
+  flex-flow: column;
+  // @include spaceItemsHoriz(30px);
+  width: 100%;
 
-      // animate border change
-      &.current {
-        transition: all 0.25s;
-        img {
-          border-color: $selected-blue;
+  .label {
+    text-transform: uppercase;
+    font-family: 'rawline', serif;
+  }
+  .tickerContent {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    @include spaceItemsHoriz(30px);
+    width: 100%;
+
+    .items {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      .item {
+        margin: 20px 10px 0 10px;
+        .thumbnail {
+          $max-height: 75px;
+          height: $max-height;
+          border: solid 4px transparent;
+          transition: border-color 0.25s, opacity 0.25s;
+          opacity: 0.5;
+          cursor: pointer;
+          @include boxShadowStrong();
+
+          &.placeholder {
+            width: $max-height/1.29;
+            border: solid 1px gray;
+            @include boxShadowStrong();
+          }
+
+          &:hover {
+            opacity: 0.75;
+          }
+        }
+
+        // animate border change
+        &.current {
+          transition: border-color 0.25s, opacity 0.25s;
+          .thumbnail {
+            opacity: 1;
+            border: solid 4px $selected-blue;
+          }
         }
       }
     }
-  }
 
-  // style prev/next buttons (carets)
-  button {
-    background: none;
-    border: none;
-    font-size: 5rem;
-    position: relative;
-    line-height: 0;
-    top: -4px;
-    color: #333;
-    &:hover {
-      color: black;
-    }
-    &:active {
-      color: $navy-blue;
-    }
-    &.disabled {
-      color: gray;
-      pointer-events: none;
+    // style prev/next buttons (carets)
+    button {
+      background: none;
+      border: none;
+      font-size: 5rem;
+      position: relative;
+      line-height: 0;
+      top: -4px;
+      color: #333;
+      &:hover {
+        color: black;
+      }
+      &:active {
+        color: $navy-blue;
+      }
+      &.disabled {
+        color: gray;
+        pointer-events: none;
+      }
     }
   }
 }

@@ -35,7 +35,7 @@ export const CardList = ({
     cardData !== null
       ? cardData.map(({ ...cardProps }, i) => {
           const allCardProps = {
-            resultNumber: comma(start + i),
+            resultNumber: start && comma(start + i),
             ...cardProps,
           }
           if (snippets !== null) allCardProps.snippets = snippets[i] || {}

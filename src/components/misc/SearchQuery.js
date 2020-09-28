@@ -32,7 +32,9 @@ const SearchQuery = async ({
 
   // handle custom year range
   const usingCustomYearRange =
-    filters.years !== undefined && filters.years[0] === 'custom'
+    filters !== undefined &&
+    filters.years !== undefined &&
+    filters.years[0] === 'custom'
 
   const filtersForReq = {}
   if (usingCustomYearRange) {

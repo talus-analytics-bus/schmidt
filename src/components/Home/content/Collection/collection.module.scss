@@ -1,0 +1,39 @@
+@import '../../../../assets/styles/vars.scss';
+.collection {
+  font-size: 1rem;
+  width: 100%;
+  .cardCap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $light-gray;
+    height: 100%;
+    padding: 20px;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      i {
+        color: $navy-blue;
+        font-size: 2rem;
+        margin-right: 5px;
+      }
+    }
+  }
+  .card {
+    padding: 0 20px;
+    padding-bottom: 20px;
+    background-color: $light-gray;
+  }
+  .divider {
+    width: 100%;
+    border-top: 1px solid $navy-blue;
+    margin-bottom: 20px;
+  }
+  .ticker {
+    background-color: $light-gray;
+    padding: 20px;
+    padding-top: 0;
+  }
+}

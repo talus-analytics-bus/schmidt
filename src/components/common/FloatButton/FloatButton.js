@@ -9,7 +9,7 @@ import styles from './floatbutton.module.scss'
  * @method FloatButton
  */
 export const FloatButton = ({
-  label,
+  label = 'Click here',
   onClick,
   defaultOn = false,
   noOnToggle = false,

@@ -54,7 +54,7 @@ export const Card = ({
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
   animate = false,
-  getTooltipText,
+  getTooltipText = null,
   ...props
 }) => {
   // STATE
@@ -121,7 +121,10 @@ export const Card = ({
     } else {
       if (key === 'description' && detail) {
         card[key] = variable || 'Description not yet available for this item'
-      } else card[key] = <ShowMore text={variable} charLimit={200} />
+      } else
+        card[key] = (
+          <ShowMore key={id + '-text'} text={variable} charLimit={200} />
+        )
     }
   })
   // process link list snippets: highlight and turn into hyperlinked text
@@ -231,7 +234,7 @@ export const Card = ({
                 text: (
                   <span
                     data-for={'searchHighlightInfo'}
-                    data-tip={getTooltipText('add')}
+                    data-tip={getTooltipText && getTooltipText('add')}
                   >
                     {getVal(d)}
                   </span>
@@ -295,7 +298,10 @@ export const Card = ({
           [styles.frozen]: showPreview,
         })}
       >
-        <div className={styles.col}>
+        <div
+          style={{ width: resultNumber !== null ? '' : 0 }}
+          className={styles.col}
+        >
           <div className={styles.resultNumber}>{resultNumber}</div>
         </div>
         <div className={classNames(styles.col, styles.thumbnailCol)}>
