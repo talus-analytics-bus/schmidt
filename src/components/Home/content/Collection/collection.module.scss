@@ -2,6 +2,8 @@
 .collection {
   font-size: 1rem;
   width: 100%;
+  transition: opacity 1s, left 1s;
+  position: relative;
   .cardCap {
     display: flex;
     justify-content: space-between;
@@ -10,7 +12,7 @@
     height: 100%;
     padding: 20px;
     .title {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: 500;
       display: flex;
       align-items: center;

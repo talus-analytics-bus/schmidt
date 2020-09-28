@@ -33,6 +33,9 @@ export const Collection = ({
   // track which item in the ticker is selected
   const [curItemIdx, setCurItemIdx] = useState(0)
 
+  // entering?
+  const [entered, setEntered] = useState(false)
+
   // FUNCTIONS
   const getData = async () => {
     const results = await SearchQuery({
@@ -54,7 +57,21 @@ export const Collection = ({
       getData()
     }
   }, [])
-  if (loading) return null
+
+  // once loaded, fly in card
+  useEffect(() => {
+    if (loading) {
+      setEntered(true)
+    }
+  }, [loading])
+  if (loading)
+    return (
+      <div
+        style={{ opacity: 0, left: 20 }}
+        key={name + '-collection'}
+        className={styles.collection}
+      />
+    )
   else {
     // CONSTANTS
     // get tooltip text function
@@ -68,7 +85,11 @@ export const Collection = ({
     const item = data.data[curItemIdx]
     const iconName = type === 'key_topics' ? 'device_hub' : 'person'
     return (
-      <div className={styles.collection}>
+      <div
+        style={{ opacity: entered ? 1 : 0, left: entered ? 0 : 20 }}
+        key={name + '-collection'}
+        className={styles.collection}
+      >
         <div className={styles.cardCap}>
           <div className={styles.title}>
             <i className={'material-icons'}>{iconName}</i>
@@ -105,11 +126,7 @@ export const Collection = ({
                 onViewDetails: () => {
                   if (typeof window !== 'undefined') {
                     const filters = { [type]: [value] }
-                    window.location.assign(
-                      `/search?filters=${JSON.stringify(
-                        filters
-                      )}&show_overlay=${item.id}`
-                    )
+                    window.location.assign(`/search?show_overlay=${item.id}`)
                   }
                 },
               }}
