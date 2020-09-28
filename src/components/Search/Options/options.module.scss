@@ -16,4 +16,9 @@
     align-items: center;
     @include spaceItemsHoriz(10px);
   }
+
+  .collapseOrExpandAll {
+    display: flex;
+    @include spaceItemsHoriz(10px);
+  }
 }

@@ -33,6 +33,9 @@ export const PrimaryButton = ({
 
   // if true: button is link
   isLink = false,
+
+  // if true: disabled class applied
+  disabled = false,
 }) => {
   const icon =
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
@@ -68,7 +71,13 @@ export const PrimaryButton = ({
   }
 
   // JSX // ---------------------------------------------------------------- //
-  return <div className={styles.wrapper}>{button}</div>
+  return (
+    <div
+      className={classNames(styles.wrapper, { [styles.disabled]: disabled })}
+    >
+      {button}
+    </div>
+  )
 }
 
 export default PrimaryButton

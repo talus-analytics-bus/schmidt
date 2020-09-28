@@ -50,4 +50,13 @@
       }
     }
   }
+
+  // disabled: gray out text
+  // TODO full styling for buttons, only link is done so far
+  &.disabled {
+    button.button.link {
+      color: gray;
+      pointer-events: none;
+    }
+  }
 }

@@ -38,11 +38,18 @@ export const Options = ({
   setToYear,
   ...props
 }) => {
+  // CONSTANTS // ---------------------------------------------------------- //
+  // num filter sections shown open by default
+  const defaultNumOpen = 3
+
   // STATE // -------------------------------------------------------------- //
   // show/hide additional filter sections
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
 
-  // CONSTANTS // ---------------------------------------------------------- //
+  // trigger collapse all and expand all functions
+  const [triggerCollapseAll, setTriggerCollapseAll] = useState(false)
+  const [triggerExpandAll, setTriggerExpandAll] = useState(false)
+  const [numOpen, setNumOpen] = useState(defaultNumOpen)
 
   // define filters
   const filterDefs = {
@@ -70,15 +77,6 @@ export const Options = ({
       key: 'authors',
       label: 'Authoring organizations',
       choices: [],
-      // subsections: [
-      //   {
-      //     field: 'author_types',
-      //     key: 'author.type_of_authoring_organization',
-      //     label: 'Types',
-      //     choices: [],
-      //   },
-      //   { field: 'authors', key: 'author.id', label: 'Names', choices: [] },
-      // ],
     },
     events: {
       field: 'event.name',
@@ -294,7 +292,9 @@ export const Options = ({
     })
   }
 
-  // filterSectionData.push(yearsFilterSectionData)
+  // track number of filter sections to support collapse/expand all
+  const numFilterSections = filterSectionData.length
+
   // get filter sections
   const filterSections = filterSectionData.map((curFilterSectionData, i) => {
     return (
@@ -303,13 +303,20 @@ export const Options = ({
           ...curFilterSectionData,
           key: curFilterSectionData.field,
           filterDefs: filterDefs[curFilterSectionData.field],
-          // hide: i > 2 && !showAdditionalFilters,
-          defaultOpen: i < 3,
+          defaultOpen: i < defaultNumOpen,
           filters,
           setFilters,
           numSelected:
             filters[curFilterSectionData.key] &&
             filters[curFilterSectionData.key].length,
+          triggerCollapseAll,
+          setTriggerCollapseAll,
+          triggerExpandAll,
+          setTriggerExpandAll,
+          numOpen,
+          setNumOpen,
+          numFilterSections,
+          // hide: i > 2 && !showAdditionalFilters,
         }}
       />
     )
@@ -325,7 +332,9 @@ export const Options = ({
     setFilters({})
   }
   // EFFECT HOOKS // ------------------------------------------------------- //
+  // None yet
 
+  // JSX
   /**
    * Return JSX for search options including filters, reset, order by
    */
@@ -383,6 +392,24 @@ export const Options = ({
               }}
             />
           </div>
+        </div>
+        <div className={styles.collapseOrExpandAll}>
+          <PrimaryButton
+            {...{
+              onClick: () => setTriggerCollapseAll(true),
+              label: 'Collapse all',
+              isLink: true,
+              disabled: numOpen === 0,
+            }}
+          />
+          <PrimaryButton
+            {...{
+              onClick: () => setTriggerExpandAll(true),
+              label: 'Expand all',
+              isLink: true,
+              disabled: numOpen === numFilterSections,
+            }}
+          />
         </div>
         <div className={styles.filterSections}>{filterSections}</div>
         {

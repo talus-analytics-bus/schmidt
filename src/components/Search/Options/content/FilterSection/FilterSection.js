@@ -22,6 +22,13 @@ export const FilterSection = ({
   setFilters,
   numSelected = null,
   defaultOpen = true,
+  triggerCollapseAll,
+  setTriggerCollapseAll,
+  triggerExpandAll,
+  setTriggerExpandAll,
+  numOpen,
+  setNumOpen,
+  numFilterSections,
   ...props
 }) => {
   // CONSTANTS
@@ -32,6 +39,23 @@ export const FilterSection = ({
   const [open, setOpen] = useState(defaultOpen)
 
   // EFFECT HOOKS // ------------------------------------------------------- //
+  // when collapse all clicked, set open to false
+  useEffect(() => {
+    if (triggerCollapseAll) {
+      setOpen(false)
+      setNumOpen(0)
+    }
+    setTriggerCollapseAll(false)
+  }, [triggerCollapseAll])
+
+  // when expand all clicked, set open to true
+  useEffect(() => {
+    if (triggerExpandAll) {
+      setOpen(true)
+      setNumOpen(numFilterSections)
+    }
+    setTriggerExpandAll(false)
+  }, [triggerExpandAll])
 
   /**
    * Return JSX for filter section with expand/collapse bar, icon, label, and
@@ -44,7 +68,19 @@ export const FilterSection = ({
         [styles.open]: open,
       })}
     >
-      <div onClick={() => setOpen(!open)} className={styles.bar}>
+      <div
+        onClick={() => {
+          // toggle open / closed
+          setOpen(!open)
+
+          // track number currently open
+          const isClosing = open
+          if (isClosing) {
+            setNumOpen(numOpen - 1)
+          } else setNumOpen(numOpen + 1)
+        }}
+        className={styles.bar}
+      >
         {icon}
         <span className={styles.label}>
           <span>{filterDefs.label}&nbsp;</span>
