@@ -65,6 +65,28 @@ export const Results = ({
               Sort by{' '}
               <Selectpicker
                 {...{
+                  setOption: setIsDesc,
+                  curSelection: isDesc,
+                  allOption: null,
+                  label: null,
+                  // TODO ensure this sticks when coming from another page
+                  disabled: orderBy === 'relevance',
+                  optionList: [
+                    {
+                      label: 'Descending',
+                      value: true,
+                    },
+                    {
+                      label: 'Ascending',
+                      value: false,
+                    },
+                  ],
+                }}
+              />
+            </div>
+            <div>
+              <Selectpicker
+                {...{
                   setOption: setOrderBy,
                   curSelection: orderBy,
                   allOption: null,
@@ -81,28 +103,6 @@ export const Results = ({
                     {
                       label: 'Title',
                       value: 'title',
-                    },
-                  ],
-                }}
-              />
-            </div>
-            <div>
-              <Selectpicker
-                {...{
-                  setOption: setIsDesc,
-                  curSelection: isDesc,
-                  allOption: null,
-                  label: null,
-                  // TODO ensure this sticks when coming from another page
-                  disabled: orderBy === 'relevance',
-                  optionList: [
-                    {
-                      label: 'Descending',
-                      value: true,
-                    },
-                    {
-                      label: 'Ascending',
-                      value: false,
                     },
                   ],
                 }}

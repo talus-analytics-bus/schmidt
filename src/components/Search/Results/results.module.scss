@@ -1,9 +1,7 @@
 @import '../../../assets/styles/vars.scss';
 .results {
-  // background-color: pink;
-  // border: 1px solid red;
   height: 100%;
-  margin-top: 20px !important; // TODO elegantly
+  // margin-top: 20px !important; // TODO elegantly
   display: flex;
   flex-flow: column;
   @include spaceItemsVert(20px);
@@ -12,6 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
     .sortBy {
       display: flex;
       align-items: flex-end;
