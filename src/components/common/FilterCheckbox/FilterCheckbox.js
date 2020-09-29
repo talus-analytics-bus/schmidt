@@ -25,6 +25,7 @@ const FilterCheckbox = ({
   setActiveFilter,
   withGrouping = false,
   className,
+  showZeros = true,
   ...props
 }) => {
   // define initially selected choices list
@@ -74,7 +75,6 @@ const FilterCheckbox = ({
     }
   }, [filters])
 
-  // const showSelectAll = choices && choices.length > 4
   return (
     <div
       className={classNames(styles.filter, {
@@ -87,6 +87,7 @@ const FilterCheckbox = ({
           // name: label,
           choices,
           curVal: filters[field],
+          showZeros,
           callback: v => {
             if (v.length > 0) setFilters({ ...filters, [field]: v })
             else {

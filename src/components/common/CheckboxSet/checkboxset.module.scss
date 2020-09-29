@@ -1,14 +1,16 @@
 @import '../../../assets/styles/vars.scss';
 
 .checkboxSet {
-  .label:empty + .checkboxContainer {
-    margin-left: 0;
-  }
+  // .label:empty + .checkboxContainer {
+  //   margin-left: 0;
+  // }
   .checkboxContainer {
     font-family: 'Open Sans', sans-serif;
     // max-height: 400px;
     // overflow-y: scroll;
-    margin-left: 10px;
-    @include spaceItemsVert(15px);
+    margin-left: 20px;
+    @include spaceItemsVert(30px);
+    border-left: 1px solid lighten($gray, 20%);
+    padding-left: 10px;
   }
 }

@@ -37,6 +37,8 @@ const FilterSet = ({
   const filterGroups = []
   const filterDefsObj = {}
 
+  // get list of filter types enabled
+  const enabledFilterKeys = Object.keys(filters)
   // define version of `filters` that excludes and skipped ones
   const filtersNoSkip = {}
   filterDefs.forEach(filterDef => {
@@ -62,7 +64,14 @@ const FilterSet = ({
         })
       }
       if (v.custom !== undefined) filterGroupComponents.push(v.custom)
-      else if (checkboxes)
+      else if (checkboxes) {
+        // show zeros unless:
+        // (1) more than one filter type has been selected; or
+        // (2) one filter type has been selected and this isn't it
+        const moreThanOneTypeSelected = enabledFilterKeys.length > 1
+        const notThisTypeSelected =
+          enabledFilterKeys.length > 0 && !enabledFilterKeys.includes(v.field)
+        const showZeros = !moreThanOneTypeSelected && !notThisTypeSelected
         filterGroupComponents.push(
           <FilterCheckbox
             {...{
@@ -83,10 +92,11 @@ const FilterSet = ({
               activeFilter,
               setActiveFilter,
               withGrouping: v.withGrouping,
+              showZeros,
             }}
           />
         )
-      else
+      } else
         filterGroupComponents.push(
           <Filter
             {...{
@@ -151,13 +161,9 @@ const FilterSet = ({
               filterDefsObj[field].dateRange ||
               newFilters[field].length === 0
             ) {
-              console.log('setFilters called')
-
               delete newFilters[field]
               setFilters(newFilters)
             } else {
-              console.log('setFilters called')
-
               setFilters(newFilters)
             }
           }}

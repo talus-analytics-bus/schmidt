@@ -19,6 +19,7 @@ const Checkbox = ({
   callback,
   count = null,
   custom,
+  showZeros = true,
   ...props
 }) => {
   /**
@@ -37,7 +38,10 @@ const Checkbox = ({
 
   const checkboxJsx = (
     <div
-      className={classNames(styles.checkbox, { [styles.gray]: count === 0 })}
+      className={classNames(styles.checkbox, {
+        [styles.gray]: count === 0,
+        [styles.hide]: !showZeros && count !== null && count === 0,
+      })}
     >
       <form>
         <label
@@ -54,7 +58,7 @@ const Checkbox = ({
           />
           <span>
             {label}
-            {count !== null && <> ({comma(count)})</>}
+            {count !== null && count > 0 && <> ({comma(count)})</>}
             {
               // count !== null && curChecked === true && <> ({comma(count)})</>
             }

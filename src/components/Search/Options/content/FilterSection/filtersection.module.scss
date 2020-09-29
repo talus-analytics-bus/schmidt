@@ -4,14 +4,18 @@
     display: flex;
     flex-flow: row;
     align-items: center;
-    border: 1px solid $gray;
-    border-right: none;
+    // border: 1px solid $gray;
+    // border-right: none;
     padding: 10px;
     font-size: 1.25rem;
     background-color: $light-gray;
     cursor: pointer;
 
     @include spaceItemsHoriz(10px);
+
+    &:hover {
+      background-color: darken($light-gray, 5%);
+    }
 
     .label {
       .numSelected {
@@ -46,10 +50,10 @@
     }
   }
 
-  // ensure borders between sections do not double up
-  &:not(:first-of-type) .bar {
-    border-top: none;
-  }
+  // // ensure borders between sections do not double up
+  // &:not(:first-of-type) .bar {
+  //   border-top: none;
+  // }
 
   .content {
     padding-right: 20px;
@@ -58,9 +62,9 @@
     display: none;
   }
   &.open {
-    + div .bar {
-      border-top: 1px solid $gray;
-    }
+    // + div .bar {
+    //   border-top: 1px solid $gray;
+    // }
     .bar i:last-of-type {
       transform: unset;
     }

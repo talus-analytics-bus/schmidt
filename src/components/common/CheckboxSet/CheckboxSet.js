@@ -17,6 +17,7 @@ const CheckboxSet = ({
   callback = v => console.log(v),
   curVal = [],
   sorted = true,
+  showZeros = true,
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
@@ -55,6 +56,7 @@ const CheckboxSet = ({
         curChecked: curVal.includes(value.toString()),
         count,
         custom,
+        showZeros,
       }}
     />
   ))
