@@ -7,4 +7,15 @@
   display: flex;
   flex-flow: column;
   @include spaceItemsVert(20px);
+
+  .sortByAndSearchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .sortBy {
+      display: flex;
+      align-items: flex-end;
+      @include spaceItemsHoriz(5px);
+    }
+  }
 }

@@ -359,55 +359,59 @@ export const Options = ({
             disabled: startOverDisabled,
           }}
         />
-        <div className={styles.sortBy}>
-          <div>
-            Sort results by:{' '}
-            <Selectpicker
-              {...{
-                setOption: setOrderBy,
-                curSelection: orderBy,
-                allOption: null,
-                label: null,
-                optionList: [
-                  {
-                    label: 'Relevance',
-                    value: 'relevance',
-                  },
-                  {
-                    label: 'Date',
-                    value: 'date',
-                  },
-                  {
-                    label: 'Title',
-                    value: 'title',
-                  },
-                ],
-              }}
-            />
-          </div>
-          <div>
-            <Selectpicker
-              {...{
-                setOption: setIsDesc,
-                curSelection: isDesc,
-                allOption: null,
-                label: null,
-                // TODO ensure this sticks when coming from another page
-                disabled: orderBy === 'relevance',
-                optionList: [
-                  {
-                    label: 'Descending',
-                    value: true,
-                  },
-                  {
-                    label: 'Ascending',
-                    value: false,
-                  },
-                ],
-              }}
-            />
-          </div>
-        </div>
+        {
+          // Sort by controls were originally in the filter section, moved to
+          // results section for clarity
+          // <div className={styles.sortBy}>
+          //   <div>
+          //     Sort results by:{' '}
+          //     <Selectpicker
+          //       {...{
+          //         setOption: setOrderBy,
+          //         curSelection: orderBy,
+          //         allOption: null,
+          //         label: null,
+          //         optionList: [
+          //           {
+          //             label: 'Relevance',
+          //             value: 'relevance',
+          //           },
+          //           {
+          //             label: 'Date',
+          //             value: 'date',
+          //           },
+          //           {
+          //             label: 'Title',
+          //             value: 'title',
+          //           },
+          //         ],
+          //       }}
+          //     />
+          //   </div>
+          //   <div>
+          //     <Selectpicker
+          //       {...{
+          //         setOption: setIsDesc,
+          //         curSelection: isDesc,
+          //         allOption: null,
+          //         label: null,
+          //         // TODO ensure this sticks when coming from another page
+          //         disabled: orderBy === 'relevance',
+          //         optionList: [
+          //           {
+          //             label: 'Descending',
+          //             value: true,
+          //           },
+          //           {
+          //             label: 'Ascending',
+          //             value: false,
+          //           },
+          //         ],
+          //       }}
+          //     />
+          //   </div>
+          // </div>
+        }
         <div className={styles.collapseOrExpandAll}>
           <PrimaryButton
             {...{

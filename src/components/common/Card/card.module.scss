@@ -90,13 +90,6 @@
           width: $letter-width-lg;
         }
       }
-
-      // description is not italicized in detail mode
-      .main {
-        .descriptionSnippet {
-          font-style: normal;
-        }
-      }
     }
 
     .resultNumber {
@@ -174,7 +167,6 @@
       .descriptionSnippet {
         margin-top: 20px;
         color: #333;
-        font-style: italic;
         font-size: 1.3rem;
         line-height: 1.5;
       }

@@ -10,7 +10,7 @@ import styles from './results.module.scss'
 
 // local components
 import { getTooltipTextFunc } from '../../misc/Util'
-import { SearchBar, Paginator, CardList } from '../../common'
+import { SearchBar, Paginator, CardList, Selectpicker } from '../../common'
 
 export const Results = ({
   searchData,
@@ -27,7 +27,9 @@ export const Results = ({
   setShowOverlay,
   onViewDetails,
   setFreezeDataUpdates,
+  orderBy,
   setOrderBy,
+  isDesc,
   setIsDesc,
   bookmarkedIds,
   setBookmarkedIds,
@@ -56,17 +58,70 @@ export const Results = ({
    */
   return (
     <div className={styles.results}>
-      <SearchBar
-        {...{
-          searchText,
-          setSearchText,
-          isSearchingText,
-          setIsSearchingText,
-          setFreezeDataUpdates,
-          setOrderBy,
-          setIsDesc,
-        }}
-      />
+      <div className={styles.sortByAndSearchBar}>
+        {
+          <div className={styles.sortBy}>
+            <div>
+              Sort by{' '}
+              <Selectpicker
+                {...{
+                  setOption: setOrderBy,
+                  curSelection: orderBy,
+                  allOption: null,
+                  label: null,
+                  optionList: [
+                    {
+                      label: 'Relevance',
+                      value: 'relevance',
+                    },
+                    {
+                      label: 'Date',
+                      value: 'date',
+                    },
+                    {
+                      label: 'Title',
+                      value: 'title',
+                    },
+                  ],
+                }}
+              />
+            </div>
+            <div>
+              <Selectpicker
+                {...{
+                  setOption: setIsDesc,
+                  curSelection: isDesc,
+                  allOption: null,
+                  label: null,
+                  // TODO ensure this sticks when coming from another page
+                  disabled: orderBy === 'relevance',
+                  optionList: [
+                    {
+                      label: 'Descending',
+                      value: true,
+                    },
+                    {
+                      label: 'Ascending',
+                      value: false,
+                    },
+                  ],
+                }}
+              />
+            </div>
+          </div>
+        }
+        <SearchBar
+          {...{
+            searchText,
+            setSearchText,
+            isSearchingText,
+            setIsSearchingText,
+            setFreezeDataUpdates,
+            setOrderBy,
+            setIsDesc,
+          }}
+        />
+      </div>
       {showPaginator && (
         <>
           <Paginator
