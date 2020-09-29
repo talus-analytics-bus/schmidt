@@ -101,7 +101,7 @@ export const SearchBar = ({
         noData: previewResults.n_items === 0,
         onClick: () => {
           if (typeof window !== 'undefined') {
-            window.location.assign(`/search?search_text=${searchText}`)
+            window.location.assign(`/search/?search_text=${searchText}`)
           }
         },
         forSort: 999999,
@@ -172,7 +172,7 @@ export const SearchBar = ({
                     [filterKey]: [d[filterValueField].toString()],
                   }
                   window.location.assign(
-                    `/search?filters=${JSON.stringify(filters)}`
+                    `/search/?filters=${JSON.stringify(filters)}`
                   )
                 }
               },
@@ -219,7 +219,7 @@ export const SearchBar = ({
       <div className={styles.bumper}>
         <i className={'material-icons'}>search</i>
       </div>
-      {suggestions && !isSearchingText && (
+      {suggestions && !isSearchingText && searchText !== '' && (
         <div key={previewResults.search_text} className={styles.suggestions}>
           {suggestions.map(d => (
             <div
