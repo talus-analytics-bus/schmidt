@@ -55,15 +55,26 @@
         max-width: $letter-width;
       }
       &.placeholder {
+        position: relative;
         // placeholder thumbnail shown if no file is available
         border: 1px solid #365194;
         height: $max-height; // like a letter page
         width: $letter-width;
-
+        background-color: white;
         // format text in placeholder rectangle
         text-align: center;
         align-items: center;
         color: $gray;
+        img {
+          border: none;
+          position: absolute;
+          top: 5%;
+          left: 5%;
+          height: 30%;
+        }
+        font-size: 3rem;
+        font-weight: 600;
+        font-family: 'rawline', serif;
       }
     }
 
@@ -81,6 +92,7 @@
       }
       .thumbnail {
         width: $letter-width-lg;
+        font-size: 5rem;
         // justify-content: unset;
         img {
           max-height: $max-height-lg;
@@ -90,6 +102,9 @@
           height: $max-height-lg; // like a letter page
           width: $letter-width-lg;
         }
+      }
+      .noData {
+        color: gray;
       }
     }
 

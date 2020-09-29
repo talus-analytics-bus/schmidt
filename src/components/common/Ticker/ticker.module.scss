@@ -33,9 +33,23 @@
           @include boxShadowStrong();
 
           &.placeholder {
+            position: relative;
             width: $max-height/1.29;
             border: solid 1px gray;
             @include boxShadowStrong();
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: 'rawline', serif;
+            img {
+              $size: 30%;
+              height: $size;
+              width: $size;
+              position: absolute;
+              top: 3px;
+              left: 5px;
+            }
           }
 
           &:hover {

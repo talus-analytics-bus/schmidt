@@ -6,6 +6,7 @@ import axios from 'axios'
 
 // assets and styles
 import styles from './card.module.scss'
+import logoIcon from '../../../assets/images/logo-icon.svg'
 
 // local components
 import { PrimaryButton, BookmarkToggle, ShowMore, PreviewOverlay } from '../'
@@ -327,7 +328,8 @@ export const Card = ({
           )}
           {files.length === 0 && (
             <div className={classNames(styles.thumbnail, styles.placeholder)}>
-              Preview unavailable
+              {title.charAt(0)}
+              <img src={logoIcon} />
             </div>
           )}
           {
@@ -345,6 +347,12 @@ export const Card = ({
                   },
                 }}
               />
+            )
+          }
+          {
+            // Show preview button under thumbnail on details page
+            detail && files.length === 0 && (
+              <div className={styles.noData}>Preview unavailable</div>
             )
           }
         </div>
