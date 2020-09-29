@@ -103,7 +103,7 @@ export const Collection = ({
                   if (typeof window !== 'undefined') {
                     const filters = { [type]: [value] }
                     window.location.assign(
-                      `/search?filters=${JSON.stringify(filters)}`
+                      `/search/?filters=${JSON.stringify(filters)}`
                     )
                   }
                 },
@@ -125,7 +125,7 @@ export const Collection = ({
                 onViewDetails: () => {
                   if (typeof window !== 'undefined') {
                     const filters = { [type]: [value] }
-                    window.location.assign(`/search?show_overlay=${item.id}`)
+                    window.location.assign(`/search/?show_overlay=${item.id}`)
                   }
                 },
               }}
