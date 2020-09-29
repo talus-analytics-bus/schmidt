@@ -46,6 +46,9 @@ export const Options = ({
   // show/hide additional filter sections
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
 
+  // is start over button disabled?
+  const [startOverDisabled, setStartOverDisabled] = useState(true)
+
   // trigger collapse all and expand all functions
   const [triggerCollapseAll, setTriggerCollapseAll] = useState(false)
   const [triggerExpandAll, setTriggerExpandAll] = useState(false)
@@ -332,7 +335,12 @@ export const Options = ({
     setFilters({})
   }
   // EFFECT HOOKS // ------------------------------------------------------- //
-  // None yet
+  // update whether start over button is disabled
+  useEffect(() => {
+    setStartOverDisabled(
+      isEmpty(filters) && (searchText === '' || searchText === null)
+    )
+  }, [filters, searchText])
 
   // JSX
   /**
@@ -344,10 +352,11 @@ export const Options = ({
       <div className={styles.content}>
         <PrimaryButton
           {...{
+            key: 'startOver',
             onClick: onStartOver,
             label: 'Start over',
             isLink: true,
-            disabled: isEmpty(filters) && searchText === '',
+            disabled: startOverDisabled,
           }}
         />
         <div className={styles.sortBy}>
