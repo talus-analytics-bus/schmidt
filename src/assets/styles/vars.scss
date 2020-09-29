@@ -1,8 +1,8 @@
 // VARIABLES
 // Project colors
 $teal: #529fa0;
-$soft-blue: #7290dd;
-$navy-blue: #365194;
+$soft-blue: #005b89;
+$navy-blue: #005b89;
 
 // general colors
 $light-blue: #95cbee;
@@ -26,7 +26,7 @@ $dark-moderate-green: #2d7447;
 $light-gray-3: #e8e8e8;
 
 // functional colors
-$selected-blue: #4682b4;
+$selected-blue: #2d89ad;
 $dark-selected-blue: $dark-blue;
 $no-data-gray: #d9d9da;
 
@@ -120,10 +120,10 @@ $overviews-bottom-margin: 40px;
 }
 
 @mixin gradientLanding() {
-  background: -moz-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -ms-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -o-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -webkit-linear-gradient(top, #e0e9ff 0%, #ffffff 100%);
+  background: -moz-linear-gradient(top, #425379 0%, #005b89 100%);
+  background: -ms-linear-gradient(top, #425379 0%, #005b89 100%);
+  background: -o-linear-gradient(top, #425379 0%, #005b89 100%);
+  background: -webkit-linear-gradient(top, rgba(#005b89, 0.4) 0%, #ffffff 80%);
 }
 
 @mixin gradientGray($dir: top) {
@@ -145,8 +145,8 @@ $overviews-bottom-margin: 40px;
     &:hover,
     &:active {
       background: white;
-      color: #213561;
-      border-color: #213561;
+      color: $navy-blue;
+      border-color: $navy-blue;
     }
     &:active {
       @include boxShadow();
