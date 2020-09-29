@@ -392,6 +392,7 @@ export const Options = ({
                 curSelection: isDesc,
                 allOption: null,
                 label: null,
+                // TODO ensure this sticks when coming from another page
                 disabled: orderBy === 'relevance',
                 optionList: [
                   {
