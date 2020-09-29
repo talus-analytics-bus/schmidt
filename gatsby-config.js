@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Pandemic Repository`,
-    description: `Schmidt Futures Pandemic Repository`,
+    title: `Health Security Net`,
+    description: `Schmidt Futures Health Security Net`,
     author: ``,
   },
   plugins: [

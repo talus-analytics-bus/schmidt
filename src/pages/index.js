@@ -118,7 +118,7 @@ const IndexPage = () => {
     const collectionsData = data.slice(0, numCollectionsLoaded) // DEBUG
     return (
       <>
-        <SEO title="Home" description="Pandemic Repository landing page" />
+        <SEO title="Home" description="Health Security Net landing page" />
         <Nav bookmarkCount={bookmarkedIds.length} />
         <div className={styles.home}>
           <article className={styles.main}>
@@ -126,7 +126,7 @@ const IndexPage = () => {
               <img
                 className={styles.mainLogo}
                 src={logo}
-                alt={'Pandemic Repository logo'}
+                alt={'Health Security Net logo'}
               ></img>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc

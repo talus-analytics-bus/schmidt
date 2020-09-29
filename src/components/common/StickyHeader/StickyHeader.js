@@ -56,7 +56,7 @@ export const StickyHeader = ({
           //   <img
           //     className={styles.logo}
           //     src={logo}
-          //     alt={'Pandemic Repository'}
+          //     alt={'Health Security Net'}
           //   />
           // </div>
         }
