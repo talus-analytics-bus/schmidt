@@ -148,7 +148,7 @@ export const SearchBar = ({
           phrase = (
             <span>
               {entityName}s matching <b>"{searchText}"</b> (
-              {comma(instances.length)}) :
+              {comma(instances.length)})
             </span>
           )
         }
@@ -200,7 +200,7 @@ export const SearchBar = ({
         ref={searchRef}
         onChange={updateSearchText}
         type="text"
-        placeholder={'Search repository'}
+        placeholder={'Search library'}
       />
       <div className={styles.inner}>
         <img
@@ -239,16 +239,16 @@ export const SearchBar = ({
                 </span>
               </div>
               {d.list.length > 0 && (
-                <ul className={styles.suggestionList}>
+                <div className={styles.suggestionList}>
                   {d.list.map(dd => (
-                    <li className={styles.suggestion}>
+                    <div className={styles.suggestion}>
                       <span onClick={dd.onClick ? dd.onClick : () => ''}>
                         {dd.name} ({comma(dd.count)} item
                         {dd.count === 1 ? '' : 's'})
                       </span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           ))}

@@ -129,9 +129,10 @@
         font-size: 1rem;
         display: flex;
         flex-flow: column;
-        @include spaceItemsVert(5px);
+        @include spaceItemsVert(20px);
         .suggestion {
           color: $selected-blue;
+          margin-left: calc(19px + 20px);
           cursor: pointer;
           &:hover {
             text-decoration: underline;
