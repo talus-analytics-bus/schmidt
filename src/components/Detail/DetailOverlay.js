@@ -83,25 +83,11 @@ const DetailOverlay = ({
   // key topics
   // TODO move up in scope and use throughout site, and/or get from API call
   const keyTopics = [
-    { displayName: 'Biodefense' },
     { displayName: 'Biosurveillance' },
-    { displayName: 'Emerging infectious disease' },
-    { displayName: 'Health security' },
-    { displayName: 'Healthcare and medical preparedness' },
-    {
-      displayName: 'Intentional biological attacks and CBRNE',
-      value: 'Intentional biological attacks and CBRNE threats',
-    },
-    {
-      displayName: 'Medical countermeasures',
-      value: 'Medical countermeasures (including vaccines and therapeutics)',
-    },
-    {
-      displayName: 'Naturally occurring infectious outbreak',
-      value:
-        'Naturally occurring infectious disease outbreak/pandemic preparedness',
-    },
-    { displayName: 'Public health response' },
+    { displayName: 'Emerging/epidemic infectious disease' },
+    { displayName: 'Health security (other)' },
+    { displayName: 'Intentional biological attacks' },
+    { displayName: 'Medical preparedness and MCMs' },
   ]
   // author fields
   const authorFields = [
