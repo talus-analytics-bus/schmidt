@@ -74,6 +74,7 @@ const IndexPage = () => {
     const results = await SearchQuery({
       search_text: searchText,
       preview: true,
+      explain_results: false,
     })
 
     setSearchResults(results.data)
