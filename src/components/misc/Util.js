@@ -1229,6 +1229,7 @@ export const toggleFilter = ({
   setFilters,
   setSearchText,
   openNewPage = false,
+  alwaysStartNew = true,
 }) => {
   e.stopPropagation()
 
@@ -1246,7 +1247,7 @@ export const toggleFilter = ({
     const newFilters = { ...filters }
     const curVals = filters[filterKey]
     const newVals = curVals !== undefined ? [...filters[filterKey]] : []
-    if (!newVals.includes(thisVal)) {
+    if (!newVals.includes(thisVal) || alwaysStartNew) {
       newVals.push(thisVal)
       newFilters[filterKey] = newVals
       // filter by just this tag
@@ -1287,6 +1288,7 @@ export const getHighlightSegments = ({
   highlightAll = false,
   styles = {},
   getTooltipText = () => null,
+  key = '',
 }) => {
   // if highlight all, simply return the entire text highlighted.
   if (highlightAll) {
@@ -1326,7 +1328,7 @@ export const getHighlightSegments = ({
         newText.push(
           <span
             data-for={'searchHighlightInfo'}
-            data-tip={getTooltipText('remove')}
+            data-tip={key !== 'title' ? getTooltipText('remove') : null}
             className={classNames(styles.highlighted, styles[type])}
           >
             {d}
@@ -1337,7 +1339,7 @@ export const getHighlightSegments = ({
         newText.push(
           <span
             data-for={'searchHighlightInfo'}
-            data-tip={getTooltipText('add')}
+            data-tip={key !== 'title' ? getTooltipText('add') : null}
           >
             {d}
           </span>

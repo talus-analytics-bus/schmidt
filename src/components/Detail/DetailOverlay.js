@@ -142,6 +142,7 @@ const DetailOverlay = ({
               setFilters(v)
             },
             setSearchText,
+            alwaysStartNew: true,
           })
         }
         className={styles.link}
@@ -408,6 +409,7 @@ const DetailOverlay = ({
                                 setFilters(v)
                               },
                               setSearchText,
+                              alwaysStartNew: true,
                             })
                           }
                           className={classNames(styles.keyTopic, {

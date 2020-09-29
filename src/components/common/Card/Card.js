@@ -105,6 +105,7 @@ export const Card = ({
         text: snippets[key],
         getTooltipText,
         styles,
+        key,
       })
     } else card[key] = variable
   })
@@ -158,6 +159,12 @@ export const Card = ({
       filterKey = key,
       filterField = linkTextField,
     ]) => {
+      // skip blanks
+      if (key === 'types_of_record' && variable[0] === '') {
+        card.types_of_record = null
+        return
+      }
+
       // func for getting value from datum
       const getVal = linkTextField ? v => v[linkTextField] : v => v
       const getFilterVal = filterField ? v => v[filterField] : v => v
@@ -295,6 +302,8 @@ export const Card = ({
         }}
         className={classNames(styles.card, {
           [styles.detail]: detail,
+          [styles.bookmark]: bookmark,
+          [styles.related]: related,
           [styles.frozen]: showPreview,
         })}
       >
@@ -339,7 +348,9 @@ export const Card = ({
         <div className={styles.col}>
           <div className={styles.main}>
             <div className={styles.header}>
-              <div className={styles.type}>{card.type_of_record}</div>
+              {card.type_of_record !== '' && (
+                <div className={styles.type}>{card.type_of_record}</div>
+              )}
               {bookmarkedIds !== null && (
                 <BookmarkToggle
                   {...{
@@ -372,12 +383,19 @@ export const Card = ({
                 </div>
                 <div className={styles.date}>
                   <i className={'material-icons'}>event</i>
+                  {
+                    // date !== null && (
+                    //   <span
+                    //     className={classNames(styles.small, {
+                    //       [styles.highlighted]: filters.years !== undefined,
+                    //     })}
+                    //   >
+                    //     {formatDate(date)}
+                    //   </span>
+                    // )
+                  }
                   {date !== null && (
-                    <span
-                      className={classNames(styles.small, {
-                        [styles.highlighted]: filters.years !== undefined,
-                      })}
-                    >
+                    <span className={classNames(styles.small)}>
                       {formatDate(date)}
                     </span>
                   )}
@@ -412,7 +430,7 @@ export const Card = ({
             {tagSnippets.length > 0 && (
               <div className={styles.tagSnippets}>{tagSnippets}</div>
             )}
-            {detail && (
+            {detail && files.length > 0 && (
               <div className={styles.downloads}>
                 <Panel
                   {...{
