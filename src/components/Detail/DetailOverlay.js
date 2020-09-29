@@ -62,9 +62,9 @@ const DetailOverlay = ({
   const [curPage, setCurPage] = useState(1)
 
   // const [pagesize, setPagesize] = useState(
-  //   !initialized ? urlParams.get('pagesize') || 25 : 25
+  //   !initialized ? urlParams.get('pagesize') || 10 : 10
   // )
-  const [pagesize, setPagesize] = useState(25)
+  const [pagesize, setPagesize] = useState(10)
 
   // CONSTANTS
   // define start / end result numbers

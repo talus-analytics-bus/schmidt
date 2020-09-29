@@ -152,17 +152,17 @@ export const Paginator = ({
       value: 10,
     },
     {
-      label: 25,
-      value: 25,
+      label: 20,
+      value: 20,
     },
-    {
-      label: 50,
-      value: 50,
-    },
-    {
-      label: 'All',
-      value: maxRecords,
-    },
+    // {
+    //   label: 50,
+    //   value: 50,
+    // },
+    // {
+    //   label: 'All',
+    //   value: maxRecords,
+    // },
   ]
 
   return (
