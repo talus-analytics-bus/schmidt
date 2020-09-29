@@ -240,8 +240,16 @@
       }
       .downloadItem {
         display: grid;
-        grid-template-columns: max-content max-content;
-        grid-gap: 10px 20px;
+        grid-template-columns: 1fr auto;
+
+        > :first-child {
+          > div {
+            width: auto;
+          }
+        }
+        > :last-child {
+          white-space: nowrap;
+        }
       }
     }
 
