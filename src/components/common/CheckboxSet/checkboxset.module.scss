@@ -12,5 +12,12 @@
     @include spaceItemsVert(30px);
     border-left: 1px solid lighten($gray, 20%);
     padding-left: 10px;
+    &:empty {
+      &::after {
+        content: 'No filters in this category available for current selections';
+        font-style: italic;
+        color: gray;
+      }
+    }
   }
 }

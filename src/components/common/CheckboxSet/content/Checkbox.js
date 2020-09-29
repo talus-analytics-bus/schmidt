@@ -35,8 +35,8 @@ const Checkbox = ({
 
   // show 'unspecified' instead of blanks
   if (label !== null && label === '') label = 'Unspecified'
-
-  const checkboxJsx = (
+  const hide = !showZeros && count !== null && count === 0
+  const checkboxJsx = !hide ? (
     <div
       className={classNames(styles.checkbox, {
         [styles.gray]: count === 0,
@@ -67,7 +67,7 @@ const Checkbox = ({
         </label>
       </form>
     </div>
-  )
+  ) : null
   return checkboxJsx
 }
 

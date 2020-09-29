@@ -29,6 +29,7 @@
 
     display: grid;
     grid-template-columns: max-content $letter-width auto;
+    @include spaceItemsHoriz(20px);
 
     // make thumbnail col content centered and spaced
     .col.thumbnailCol {
