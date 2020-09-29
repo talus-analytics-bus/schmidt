@@ -47,6 +47,7 @@ export const Card = ({
   snippets = {},
   filters = {},
   setFilters = () => '',
+  setSearchText,
   onViewDetails = () => '',
   detail = false,
   related = false,
@@ -206,6 +207,7 @@ export const Card = ({
                     filters,
                     filterKey,
                     setFilters,
+                    setSearchText,
                   }),
                 text: getHighlightSegments({
                   getTooltipText,
@@ -228,6 +230,7 @@ export const Card = ({
                     filters,
                     filterKey,
                     setFilters,
+                    setSearchText,
                   }),
 
                 text: (
@@ -283,7 +286,7 @@ export const Card = ({
   // JSX
   return (
     <div className={styles.cardContainer}>
-      <PreviewOverlay {...{ id, files, showPreview, setShowPreview }} />
+      <PreviewOverlay {...{ id, title, files, showPreview, setShowPreview }} />
       <div
         style={{ left }}
         onClick={e => {
@@ -426,17 +429,20 @@ export const Card = ({
                       >
                         <PrimaryButton
                           {...{
-                            label: filename,
+                            label: (
+                              <>
+                                {filename} ({bytesToMegabytes(num_bytes)})
+                              </>
+                            ),
                             isLink: true,
                             urlIsExternal: true,
-                            url: `${API_URL}/get/file/${filename.replace(
+                            url: `${API_URL}/get/file/${title.replace(
                               /\?/g,
                               ''
                             )}?id=${id}`,
                           }}
                         />
                       </span>
-                      {<span>{bytesToMegabytes(num_bytes)}</span>}
                     </div>
                   ))}
                   {files.length === 0 && <div>None</div>}

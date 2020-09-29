@@ -26,6 +26,9 @@ const PreviewOverlay = ({
   // id of item
   id,
 
+  // title of item
+  title,
+
   // files data
   files = [],
 
@@ -108,7 +111,7 @@ const PreviewOverlay = ({
       >
         <div ref={wrapperRef} className={styles.content}>
           <div className={styles.titleAndCloseButton}>
-            <div className={styles.title}>{file.filename}</div>
+            <div className={styles.title}>{title}</div>
             <div
               onClick={() => setShowPreview(false)}
               className={styles.closeButton}

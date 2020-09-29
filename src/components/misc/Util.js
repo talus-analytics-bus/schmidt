@@ -1227,6 +1227,7 @@ export const toggleFilter = ({
   filters,
   filterKey,
   setFilters,
+  setSearchText,
   openNewPage = false,
 }) => {
   e.stopPropagation()
@@ -1236,7 +1237,7 @@ export const toggleFilter = ({
   // if on a page other than search, open a new search page
   if (openNewPage) {
     if (typeof window !== 'undefined') {
-      window.open(
+      window.location.assign(
         `/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=`
       )
     }
@@ -1248,13 +1249,26 @@ export const toggleFilter = ({
     if (!newVals.includes(thisVal)) {
       newVals.push(thisVal)
       newFilters[filterKey] = newVals
-    } else {
-      newFilters[filterKey] = newVals.filter(v => v !== thisVal)
+      // filter by just this tag
+      setFilters({ [filterKey]: [thisVal.toString()] })
+      setSearchText('')
     }
-    if (newFilters[filterKey].length === 0) {
-      delete newFilters[filterKey]
-    }
-    setFilters(newFilters)
+
+    // // OLD update filters
+    // // otherwise, update filters
+    // const newFilters = { ...filters }
+    // const curVals = filters[filterKey]
+    // const newVals = curVals !== undefined ? [...filters[filterKey]] : []
+    // if (!newVals.includes(thisVal)) {
+    //   newVals.push(thisVal)
+    //   newFilters[filterKey] = newVals
+    // } else {
+    //   newFilters[filterKey] = newVals.filter(v => v !== thisVal)
+    // }
+    // if (newFilters[filterKey].length === 0) {
+    //   delete newFilters[filterKey]
+    // }
+    // setFilters(newFilters)
   }
 }
 
@@ -1388,13 +1402,17 @@ export const getHighlightSegments = ({
  */
 export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
   const getTooltipText = add => {
-    if (bookmark) {
-      return 'Click to start a new search filtered by this tag'
-    } else if (detail || related) {
-      return `Click to return to your search and ${add} this filter tag`
-    } else {
-      return `Click to ${add} this filter tag`
-    }
+    if (add === 'add') return 'Click to start a new search filtered by this tag'
+    else return null
+
+    // OLD: allow toggling on/off
+    // if (bookmark) {
+    //   return 'Click to start a new search filtered by this tag'
+    // } else if (detail || related) {
+    //   return `Click to return to your search and ${add} this filter tag`
+    // } else {
+    //   return `Click to ${add} this filter tag`
+    // }
   }
   return getTooltipText
 }

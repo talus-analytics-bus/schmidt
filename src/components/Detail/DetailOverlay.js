@@ -36,6 +36,7 @@ const DetailOverlay = ({
   // other data
   filters,
   setFilters,
+  setSearchText,
   floating = true,
   close = () => '',
   origScrollY,
@@ -140,6 +141,7 @@ const DetailOverlay = ({
               dismissFloatingOverlay()
               setFilters(v)
             },
+            setSearchText,
           })
         }
         className={styles.link}
@@ -330,6 +332,7 @@ const DetailOverlay = ({
                       dismissFloatingOverlay()
                       setFilters(v)
                     },
+                    setSearchText,
                   }}
                 />
                 {relatedItemsData !== null && (
@@ -371,6 +374,7 @@ const DetailOverlay = ({
                             dismissFloatingOverlay()
                             setFilters(v)
                           },
+                          setSearchText,
                           setNextPage:
                             relatedItemsData.page !== relatedItemsData.num_pages
                               ? () => {
@@ -403,6 +407,7 @@ const DetailOverlay = ({
                                 dismissFloatingOverlay()
                                 setFilters(v)
                               },
+                              setSearchText,
                             })
                           }
                           className={classNames(styles.keyTopic, {

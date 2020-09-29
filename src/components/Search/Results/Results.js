@@ -88,6 +88,7 @@ export const Results = ({
               snippets: searchData.data_snippets || null,
               filters,
               setFilters,
+              setSearchText,
               onViewDetails,
               bookmarkedIds,
               setBookmarkedIds,

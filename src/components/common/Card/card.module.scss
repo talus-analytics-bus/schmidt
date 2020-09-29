@@ -153,7 +153,7 @@
           }
           .authOrgList {
             span {
-              cursor: pointer;
+              // cursor: pointer;
             }
           }
         }
@@ -210,8 +210,14 @@
     }
     .link {
       color: $selected-blue;
-      &:hover {
-        text-decoration: underline;
+      :not(.highlighted) {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+      .highlighted {
+        cursor: default;
       }
     }
 
