@@ -98,19 +98,14 @@ const PreviewOverlay = ({
   // JSX
   if (!showPreview)
     return (
-      <div
-        key={'previewOverlay-' + id}
-        style={{ opacity: 0, pointerEvents: 'none', display: 'none' }}
-        className={styles.previewOverlay}
-      ></div>
+      <div key={'previewOverlay-' + id} className={styles.previewOverlay}></div>
     )
   return (
-    <div
-      key={'previewOverlay-' + id}
-      style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
-      className={styles.previewOverlay}
-    >
-      <div className={styles.container}>
+    <div key={'previewOverlay-' + id} className={styles.previewOverlay}>
+      <div
+        style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
+        className={styles.container}
+      >
         <div ref={wrapperRef} className={styles.content}>
           <div className={styles.titleAndCloseButton}>
             <div className={styles.title}>{file.filename}</div>

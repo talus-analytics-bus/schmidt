@@ -1,16 +1,19 @@
 @import '../../../assets/styles/vars.scss';
 .searchBar {
   position: relative;
-  margin-left: auto;
   $border-radius: 10px;
   $bumper-width: 50px;
   border-radius: $border-radius;
   border: 2px solid $soft-blue;
-  margin-left: auto;
   width: 480px;
   $height: 60px;
   height: $height;
   display: flex;
+  z-index: 1;
+
+  &.right {
+    margin-left: auto;
+  }
 
   // loading spinner and clear button which reside inside the area not covered
   // by the blue bumper
@@ -82,5 +85,71 @@
       color: gray;
       font-weight: normal;
     }
+  }
+
+  // suggested results, if applicable
+  .suggestions {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    top: calc(#{$height} - 4px);
+    $border-radius: 10px;
+    $bumper-width: 50px;
+    border-radius: $border-radius;
+    border: 2px solid $soft-blue;
+    @include borderItemsVert(20px);
+    font-size: 1.25rem;
+    font-family: 'rawline', serif;
+    padding: 20px 10px;
+    .section {
+      display: flex;
+      flex-flow: column;
+      &:first-child {
+        > .title:not(.noData) span {
+          color: $selected-blue;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        i {
+          color: $navy-blue;
+          margin-right: 5px;
+        }
+      }
+      .suggestionList {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        display: flex;
+        flex-flow: column;
+        @include spaceItemsVert(5px);
+        .suggestion {
+          color: $selected-blue;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  // gray if no matches in preview
+  .noData,
+  .noData i {
+    color: gray !important;
+  }
+
+  // special svg icon styling
+  img.specialIcon {
+    $size: 24px;
+    height: $size;
+    width: $size;
+    margin-right: 5px;
   }
 }

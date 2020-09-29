@@ -169,7 +169,6 @@ export const Card = ({
       const linkListEntries = variable
         .map(d => {
           const filterValues = filters[filterKey]
-
           const matchingTagExists =
             filterValues !== undefined
               ? filterValues.find(
@@ -284,9 +283,7 @@ export const Card = ({
   // JSX
   return (
     <div className={styles.cardContainer}>
-      {true && (
-        <PreviewOverlay {...{ id, files, showPreview, setShowPreview }} />
-      )}
+      <PreviewOverlay {...{ id, files, showPreview, setShowPreview }} />
       <div
         style={{ left }}
         onClick={e => {

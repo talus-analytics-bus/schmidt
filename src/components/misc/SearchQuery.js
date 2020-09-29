@@ -11,6 +11,7 @@ const SearchQuery = async ({
   filters,
   search_text = '',
   explain_results = true,
+  preview = false,
   fromYear,
   toYear,
 }) => {
@@ -29,6 +30,7 @@ const SearchQuery = async ({
   params.append('search_text', search_text)
   params.append('order_by', order_by)
   params.append('is_desc', is_desc)
+  params.append('preview', preview)
 
   // handle custom year range
   const usingCustomYearRange =

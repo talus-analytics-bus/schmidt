@@ -49,7 +49,6 @@ export const Collection = ({
     setData(results.data)
     setLoading(false)
   }
-  console.log(data)
   // EFFECT HOOKS
   // load data initially
   useEffect(() => {

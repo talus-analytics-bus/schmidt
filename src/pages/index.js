@@ -9,10 +9,16 @@ import SEO from '../components/seo'
 import Nav from '../components/Layout/Nav/Nav'
 import Footer from '../components/Layout/Footer/Footer'
 import Collection from '../components/Home/content/Collection/Collection'
-import { PrimaryButton, FloatButton, StickyHeader } from '../components/common'
+import {
+  PrimaryButton,
+  FloatButton,
+  StickyHeader,
+  SearchBar,
+} from '../components/common'
 
 // local utility functions
 import { withBookmarkedIds, execute } from '../components/misc/Util'
+import SearchQuery from '../components/misc/SearchQuery'
 
 // assets and styles
 import styles from '../assets/styles/homepage.module.scss'
@@ -39,11 +45,20 @@ const IndexPage = () => {
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
   const [showScrollToTop, setShowScrollToTop] = useState(true)
 
+  // search bar variables
+  const [orderBy, setOrderBy] = useState('date')
+  const [isDesc, setIsDesc] = useState(true)
+  const [searchText, setSearchText] = useState('')
+  const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
+  const [isSearchingText, setIsSearchingText] = useState(false)
+  const [searchResults, setSearchResults] = useState([])
+
   // data for collections displayed -- top 10 most recent items by topic or by
   // author name (type?)
   const [data, setData] = useState(null)
 
   // FUNCTIONS
+  // get basic page data
   const getData = async () => {
     const queries = {}
     queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
@@ -52,6 +67,17 @@ const IndexPage = () => {
       results.filterCountsQuery.data.data.key_topics.filter(d => d[1] > 0)
     )
     setLoading(false)
+  }
+
+  // get search data
+  const getSearchData = async () => {
+    const results = await SearchQuery({
+      search_text: searchText,
+      preview: true,
+    })
+
+    setSearchResults(results.data)
+    setIsSearchingText(false)
   }
 
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
@@ -65,6 +91,11 @@ const IndexPage = () => {
   useEffect(() => {
     if (data === null) getData()
   }, [])
+
+  // handle searching
+  useEffect(() => {
+    if (isSearchingText) getSearchData()
+  }, [searchText])
 
   // set scroll event to show "scroll to top" as appropriate
   useEffect(() => {
@@ -106,18 +137,25 @@ const IndexPage = () => {
               <div className={styles.mainButton}>
                 <PrimaryButton
                   {...{
-                    label: 'Search entire repository',
-                    iconName: 'search',
+                    label: 'Enter repository',
                     url: '/search',
                   }}
                 />
               </div>
-              <div className={styles.explainer}>
-                <i>
-                  This tool is designed to be used in Google Chrome or Mozilla
-                  Firefox.
-                </i>
-              </div>
+
+              <SearchBar
+                {...{
+                  searchText,
+                  setSearchText,
+                  isSearchingText,
+                  setIsSearchingText,
+                  setFreezeDataUpdates,
+                  setOrderBy,
+                  setIsDesc,
+                  previewResults: searchResults,
+                  right: false,
+                }}
+              />
             </div>
             <div className={styles.divider} />
             <div className={styles.lower}>

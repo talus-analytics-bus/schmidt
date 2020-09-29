@@ -6,6 +6,7 @@ import classNames from 'classnames'
 
 // project-specific assets
 import events from '../../assets/icons/events.svg'
+import events_disabled from '../../assets/icons/events_disabled.svg'
 
 // Utility functions and data.
 const Util = {}
@@ -906,7 +907,8 @@ export const isLightColor = color => {
 // return string with first char capitalized
 export const getInitCap = str => {
   if (str === undefined || str === null) return str
-  else return str.charAt(0).toUpperCase() + str.slice(1, str.length)
+  else
+    return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1, str.length)
 }
 
 /**
@@ -1191,12 +1193,13 @@ export const iconNamesByField = {
 }
 
 // return icon JSX by name
-export const getIconByName = ({ iconName, styles = {} }) => {
+export const getIconByName = ({ iconName, styles = {}, disabled = false }) => {
   // special icon?
   const specialIcons = {
     outbreak_events: events,
+    outbreak_events_disabled: events_disabled,
   }
-  const specialIcon = specialIcons[iconName]
+  const specialIcon = specialIcons[iconName + (disabled ? '_disabled' : '')]
   const icon =
     specialIcon !== undefined ? (
       <img className={styles.specialIcon} src={specialIcon} />
