@@ -101,7 +101,9 @@ export const SearchBar = ({
         noData: previewResults.n_items === 0,
         onClick: () => {
           if (typeof window !== 'undefined') {
-            window.location.assign(`/search/?search_text=${searchText}`)
+            window.location.assign(
+              `/search/?search_text=${searchText}&order_by=relevance`
+            )
           }
         },
         forSort: 999999,
