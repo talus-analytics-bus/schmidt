@@ -1,4 +1,4 @@
-.detail {
+.contact {
   // standard: max width of screen is 1300px
   // center content in that view
   // TODO pull up in scope to master SCSS file
@@ -8,4 +8,5 @@
   width: 100%;
   height: 100%;
   font-size: 1rem;
+  min-height: 90vh;
 }
