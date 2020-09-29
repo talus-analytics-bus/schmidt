@@ -1229,8 +1229,10 @@ export const toggleFilter = ({
   setFilters,
   setSearchText,
   openNewPage = false,
-  alwaysStartNew = true,
+  alwaysStartNew = false,
 }) => {
+  console.log('alwaysStartNew')
+  console.log(alwaysStartNew)
   e.stopPropagation()
 
   const thisVal = getFilterVal(datum).toString()

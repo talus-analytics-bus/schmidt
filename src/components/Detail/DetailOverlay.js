@@ -334,6 +334,7 @@ const DetailOverlay = ({
                       setFilters(v)
                     },
                     setSearchText,
+                    alwaysStartNew: true,
                   }}
                 />
                 {relatedItemsData !== null && (
@@ -371,6 +372,7 @@ const DetailOverlay = ({
                           filters,
                           bookmark,
                           getTooltipText,
+                          alwaysStartNew: true,
                           setFilters: v => {
                             dismissFloatingOverlay()
                             setFilters(v)

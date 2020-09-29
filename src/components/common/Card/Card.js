@@ -56,6 +56,7 @@ export const Card = ({
   bookmarkedIds = [],
   animate = false,
   getTooltipText = null,
+  alwaysStartNew,
   ...props
 }) => {
   // STATE
@@ -215,6 +216,7 @@ export const Card = ({
                     filterKey,
                     setFilters,
                     setSearchText,
+                    alwaysStartNew,
                   }),
                 text: getHighlightSegments({
                   getTooltipText,
@@ -238,6 +240,7 @@ export const Card = ({
                     filterKey,
                     setFilters,
                     setSearchText,
+                    alwaysStartNew,
                   }),
 
                 text: (
