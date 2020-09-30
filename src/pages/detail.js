@@ -21,11 +21,21 @@ import styles from '../components/Detail/detail.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Detail = ({}) => {
+  // CONSTANTS
+  // get url param for id to feed to <DetailOverlay />
+  let urlParams
+  if (typeof window !== 'undefined') {
+    urlParams = new URLSearchParams(window.location.search)
+  } else {
+    urlParams = new URLSearchParams()
+  }
+  const id = urlParams.get('id')
+
   return (
     <Layout page={'detail'} loading={false}>
       <SEO title="Detail" />
       <div className={styles.detail}>
-        <DetailOverlay />
+        <DetailOverlay id={id !== null ? id : 1} />
       </div>
     </Layout>
   )

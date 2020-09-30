@@ -439,6 +439,19 @@ export const Card = ({
                     }}
                   />
                 </div>
+                <div>
+                  <PrimaryButton
+                    {...{
+                      label: 'Open in new tab',
+                      iconName: 'launch',
+                      url: `/detail?id=${id}`,
+                      urlIsExternal: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                      },
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div className={styles.descriptionSnippet}>{card.description}</div>
