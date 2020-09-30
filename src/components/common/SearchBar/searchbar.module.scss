@@ -19,8 +19,9 @@
   // loading spinner and clear button which reside inside the area not covered
   // by the blue bumper
   .inner {
-    position: relative;
+    position: absolute;
     right: $bumper-width;
+    top: 0;
     display: flex;
     align-items: center;
     width: max-content;
