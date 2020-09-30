@@ -306,6 +306,7 @@ const Search = ({ setPage }) => {
                 id: showOverlay,
                 close: () => setShowOverlay(false),
                 filters,
+                floating: true,
                 setFilters,
                 setSearchText,
                 origScrollY,
