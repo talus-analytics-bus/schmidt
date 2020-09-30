@@ -1,0 +1,19 @@
+@import '../../../assets/styles/vars.scss';
+
+@media #{$breakpoint-one} {
+  .paginator {
+    // reflow vertically on mobile
+    flex-flow: column-reverse;
+    align-items: flex-start;
+    font-size: 0.87rem;
+    .extraControls {
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      .pagesizePicker {
+        label {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

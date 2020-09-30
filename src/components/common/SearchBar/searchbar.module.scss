@@ -5,10 +5,10 @@
   $bumper-width: 50px;
   border-radius: $border-radius;
   border: 2px solid $soft-blue;
-  width: 480px;
+  width: 50%;
   $height: 60px;
   height: $height;
-  display: flex;
+  // display: flex;
   z-index: 2;
   background-color: white;
 
@@ -153,5 +153,11 @@
     height: $size;
     width: $size;
     margin-right: 5px;
+  }
+}
+
+@media #{$breakpoint-one} {
+  .searchBar {
+    width: 100%;
   }
 }

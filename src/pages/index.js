@@ -128,12 +128,13 @@ const IndexPage = () => {
                 src={logo}
                 alt={'Health Security Net logo'}
               ></img>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                nec luctus felis. Donec magna mi, laoreet vitae rutrum sed,
-                mollis non ante. Phasellus a tincidunt quam, id bibendum nibh.
-                Nulla id finibus augue, nec luctus nisl. Duis at dolor bibendum,
-                vestibulum elit ac, accumsan risus. Duis sit amet convallis leo.
+              <p className={styles.landingText}>
+                Welcome to the Georgetown University Global Health Security
+                Library, a publicly accessible, centralized database of
+                warnings, evaluations, oversight efforts, strategies, and other
+                documents that relate to pandemics prior to 2020. This is a
+                coded and searchable database that enables access to documents
+                written about pandemic risk and related issues.
               </p>
               <div className={styles.mainButton}>
                 <PrimaryButton

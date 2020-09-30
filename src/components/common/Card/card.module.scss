@@ -148,7 +148,7 @@
 
         .details {
           display: grid;
-          grid-template-columns: 300px 1fr;
+          grid-template-columns: 1fr auto;
           grid-gap: 0 10px;
           align-items: center;
 
@@ -175,6 +175,9 @@
           display: flex;
           margin-left: auto;
           @include spaceItemsHoriz(10px);
+          div {
+            @include center();
+          }
         }
       }
 
@@ -302,3 +305,5 @@
     }
   }
 }
+
+@import './responsive.module.scss';
