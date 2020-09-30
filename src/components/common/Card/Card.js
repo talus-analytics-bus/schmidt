@@ -383,26 +383,30 @@ export const Card = ({
               </div>
               <div className={styles.actions}>
                 {files.length > 0 && (
+                  <div>
+                    <PrimaryButton
+                      {...{
+                        label: 'Preview',
+                        iconName: 'preview',
+                        isSecondary: true,
+                        onClick: e => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          setShowPreview(true)
+                        },
+                      }}
+                    />
+                  </div>
+                )}
+                <div>
                   <PrimaryButton
                     {...{
-                      label: 'Preview',
-                      iconName: 'preview',
-                      isSecondary: true,
-                      onClick: e => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        setShowPreview(true)
-                      },
+                      label: 'View details',
+                      iconName: 'read_more',
+                      onClick: () => onViewDetails(id),
                     }}
                   />
-                )}
-                <PrimaryButton
-                  {...{
-                    label: 'View details',
-                    iconName: 'read_more',
-                    onClick: () => onViewDetails(id),
-                  }}
-                />
+                </div>
               </div>
             </div>
             <div className={styles.descriptionSnippet}>{card.description}</div>
