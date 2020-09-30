@@ -38,6 +38,7 @@ const About = ({}) => {
       <SEO title="About" />
       <div className={styles.about}>
         <h2>About</h2>
+        <p>Content coming soon</p>
       </div>
     </Layout>
   )
