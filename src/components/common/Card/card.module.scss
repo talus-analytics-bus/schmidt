@@ -304,6 +304,16 @@
       }
     }
   }
+
+  // reasons why related, for related items
+  .why {
+    margin-left: auto;
+    font-style: italic;
+    display: flex;
+    justify-content: flex-end;
+    color: $theme-green;
+    margin-top: 30px;
+  }
 }
 
 @import './responsive.module.scss';

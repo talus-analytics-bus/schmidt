@@ -23,6 +23,10 @@
       margin-left: 20px;
       padding-top: 20px;
       border-top: 1px solid #333;
+      > div > :last-child {
+        @include spaceItemsVert(20px);
+        margin-top: 30px;
+      }
     }
     // standard: max width of screen is 1300px
     // center content in that view

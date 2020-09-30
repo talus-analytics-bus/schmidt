@@ -45,6 +45,7 @@ export const Card = ({
   key_topics,
   events,
   files,
+  why = [],
   snippets = {},
   filters = {},
   setFilters = () => '',
@@ -60,6 +61,7 @@ export const Card = ({
   alwaysStartNew,
   ...props
 }) => {
+  if (why.length > 0) console.log(why)
   // STATE
   // card's left css property
   const [left, setLeft] = useState(detail || related ? 0 : 20)
@@ -455,6 +457,14 @@ export const Card = ({
               </div>
             </div>
             <div className={styles.descriptionSnippet}>{card.description}</div>
+            {
+              // reasons related
+              related && (
+                <div className={styles.why}>
+                  {why.map(asBulletDelimitedList)}
+                </div>
+              )
+            }
             {tagSnippets.length > 0 && (
               <div className={styles.tagSnippets}>{tagSnippets}</div>
             )}
