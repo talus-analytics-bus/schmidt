@@ -8,3 +8,4 @@
   flex-flow: column;
   @include spaceItemsVert(20px);
 }
+@import './responsive.module.scss';
