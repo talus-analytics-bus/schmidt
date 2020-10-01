@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import { Link } from 'gatsby'
 import axios from 'axios'
@@ -15,6 +15,7 @@ import {
   StickyHeader,
   SearchBar,
 } from '../components/common'
+import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import { withBookmarkedIds, execute } from '../components/misc/Util'
@@ -28,6 +29,7 @@ import logo from '../assets/images/logo.svg'
 const API_URL = process.env.GATSBY_API_URL
 
 const IndexPage = () => {
+  const context = useContext(appContext)
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
@@ -109,6 +111,11 @@ const IndexPage = () => {
         })
     }
   }, [simpleHeaderRef])
+
+  // DEBUG update context
+  useEffect(() => {
+    context.setData({ ...data, test: 'mvm' })
+  }, [])
 
   // JSX // -----------------------------------------------------------------//
   if (loading) return <div />
