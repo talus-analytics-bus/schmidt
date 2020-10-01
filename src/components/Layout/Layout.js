@@ -1,7 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 // import { useStaticQuery, graphql } from 'gatsby'
-import ContextProvider from './ContextProvider'
 
 import styles from './Layout.module.scss'
 
@@ -18,13 +17,11 @@ import Footer from './Footer/Footer'
 
 const Layout = ({ children, page, loading, bookmarkCount }) => {
   return (
-    <ContextProvider>
-      <div key={'layout'} className={styles.layout}>
-        <Nav page={page} loading={loading} bookmarkCount={bookmarkCount} />
-        {children}
-        <Footer />
-      </div>
-    </ContextProvider>
+    <div className={styles.layout}>
+      <Nav page={page} loading={loading} bookmarkCount={bookmarkCount} />
+      {children}
+      <Footer />
+    </div>
   )
 }
 

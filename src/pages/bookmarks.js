@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
@@ -15,7 +15,6 @@ import {
   CardList,
   PrimaryButton,
 } from '../components/common'
-import { appContext } from '../components/Layout/ContextProvider'
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
@@ -40,63 +39,18 @@ const Bookmarks = ({}) => {
   // data loaded?
   const [loading, setLoading] = useState(!initialized)
 
-  // bookmarked items IDs
-  const [bookmarkedIds, setBookmarkedIds] = useState(null)
+  // page data -- bookmarked items
+  const [bookmarkedItemData, setBookmarkedItemData] = useState({ data: [] })
 
-  // EFFECT HOOKS
-  // get bookmarked ids initially
-  useEffect(() => {
-    if (bookmarkedIds === null)
-      withBookmarkedIds({ callback: setBookmarkedIds })
-  }, [bookmarkedIds])
-
-  // count bookmarks to show in nav
-  const bookmarkArr = bookmarkedIds !== null ? bookmarkedIds : []
-
-  // JSX
-  return (
-    <>
-      <Layout
-        page={'bookmarks'}
-        loading={loading}
-        bookmarkCount={bookmarkArr.length}
-      >
-        <BookmarksContent
-          {...{
-            initialized,
-            setInitialized,
-            loading,
-            setLoading,
-            bookmarkedIds,
-            setBookmarkedIds,
-          }}
-        />
-        <LoadingSpinner loading={false} />
-      </Layout>
-    </>
-  )
-}
-
-const BookmarksContent = ({
-  initialized,
-  setInitialized,
-  loading,
-  setLoading,
-  bookmarkedIds,
-  setBookmarkedIds,
-}) => {
-  const { data, setData } = useContext(appContext)
-  console.log('data -- bookmarks')
-  console.log(data)
   // is page currently fetching search data?
   const [isSearching, setIsSearching] = useState(false)
+
+  // bookmarked items IDs
+  const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
   const [showScrollToTop, setShowScrollToTop] = useState(false)
-
-  // page data -- bookmarked items
-  const [bookmarkedItemData, setBookmarkedItemData] = useState({ data: [] })
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -200,6 +154,13 @@ const BookmarksContent = ({
     if (!initialized) setInitialized(true)
   }
 
+  // EFFECT HOOKS
+  // get bookmarked ids initially
+  useEffect(() => {
+    if (bookmarkedIds === null)
+      withBookmarkedIds({ callback: setBookmarkedIds })
+  }, [bookmarkedIds])
+
   // re-fetch data if a parameter is changed after bookmarks are loaded
   useEffect(() => {
     if (bookmarkedIds !== null) {
@@ -229,114 +190,127 @@ const BookmarksContent = ({
         })
     }
   }, [simpleHeaderRef])
+
+  // count bookmarks to show in nav
+  const bookmarkArr = bookmarkedIds !== null ? bookmarkedIds : []
+
+  // JSX
   return (
     <>
-      <SEO title="Search results" />
-      <div className={styles.bookmarks}>
-        <StickyHeader
-          {...{
-            show: showScrollToTop,
-            name: 'Name',
-            setSimpleHeaderRef,
-            img: null,
-          }}
-        />
-        <Panel
-          {...{
-            title: <h2>Bookmarked items</h2>,
-            iconName: 'bookmark',
-            secondary: false,
-            heading: true,
-          }}
-        >
-          {initialized && (
-            <>
-              {!someBookmarks && (
-                <>
-                  <div className={styles.noBookmarksInstructions}>
-                    You have no bookmarked items yet. Click the{' '}
-                    <i className={'material-icons'}>bookmark_border</i>
-                    bookmark icon on any search result to save one.{'  '}
-                    &nbsp;
-                  </div>
-                  <PrimaryButton
-                    {...{
-                      label: 'Go to search page',
-                      iconName: 'search',
-                      url: '/search',
-                    }}
-                  />
-                </>
-              )}
-              {showPaginator && someBookmarks && (
-                <>
-                  <Paginator
-                    {...{
-                      curPage,
-                      setCurPage,
-                      nTotalRecords: bookmarkedItemData.total,
-                      pagesize,
-                      setPagesize,
-                      showCounter: true, // TODO
-                      // showCounter: bookmarkedItemData.data.length > 0,
-                      noun: 'item',
-                      nouns: 'items',
-                    }}
-                  />
-                  <CardList
-                    {...{
-                      start,
-                      cardData: bookmarkedItemData.data,
-                      snippets: bookmarkedItemData.data_snippets || null,
-                      onViewDetails: () => '',
-                      bookmarkedIds,
-                      setBookmarkedIds,
-                      onViewDetails,
-                      bookmark: true,
-                      getTooltipText,
-                      setNextPage:
-                        bookmarkedItemData.page !== bookmarkedItemData.num_pages
-                          ? () => {
-                              setCurPage(curPage + 1)
-                              if (typeof window !== 'undefined') {
-                                window.scrollTo(0, 0)
-                              }
-                            }
-                          : false,
-                    }}
-                  />
-                </>
-              )}
-            </>
-          )}
-        </Panel>
-        {showOverlay !== false && (
-          <DetailOverlay
+      <Layout
+        page={'bookmarks'}
+        loading={loading}
+        bookmarkCount={bookmarkArr.length}
+      >
+        <SEO title="Search results" />
+        <div className={styles.bookmarks}>
+          <StickyHeader
             {...{
-              title: 'Test',
-              id: showOverlay,
-              close: () => setShowOverlay(false),
-              origScrollY,
-              onViewDetails,
-              origScrollY,
-              onLoaded: () => setLoading(false),
-              bookmarkedIds,
-              setBookmarkedIds,
-              simpleHeaderRef,
-              bookmark: true,
+              show: showScrollToTop,
+              name: 'Name',
+              setSimpleHeaderRef,
+              img: null,
             }}
           />
-        )}
-      </div>
-      <ReactTooltip
-        id={'searchHighlightInfo'}
-        type="light"
-        effect="float"
-        delayHide={0}
-        delayShow={500}
-        scrollHide={true}
-        getContent={content => content}
-      />
+          <Panel
+            {...{
+              title: <h2>Bookmarked items</h2>,
+              iconName: 'bookmark',
+              secondary: false,
+              heading: true,
+            }}
+          >
+            {initialized && (
+              <>
+                {!someBookmarks && (
+                  <>
+                    <div className={styles.noBookmarksInstructions}>
+                      You have no bookmarked items yet. Click the{' '}
+                      <i className={'material-icons'}>bookmark_border</i>
+                      bookmark icon on any search result to save one.{'  '}
+                      &nbsp;
+                    </div>
+                    <PrimaryButton
+                      {...{
+                        label: 'Go to search page',
+                        iconName: 'search',
+                        url: '/search',
+                      }}
+                    />
+                  </>
+                )}
+                {showPaginator && someBookmarks && (
+                  <>
+                    <Paginator
+                      {...{
+                        curPage,
+                        setCurPage,
+                        nTotalRecords: bookmarkedItemData.total,
+                        pagesize,
+                        setPagesize,
+                        showCounter: true, // TODO
+                        // showCounter: bookmarkedItemData.data.length > 0,
+                        noun: 'item',
+                        nouns: 'items',
+                      }}
+                    />
+                    <CardList
+                      {...{
+                        start,
+                        cardData: bookmarkedItemData.data,
+                        snippets: bookmarkedItemData.data_snippets || null,
+                        onViewDetails: () => '',
+                        bookmarkedIds,
+                        setBookmarkedIds,
+                        onViewDetails,
+                        bookmark: true,
+                        getTooltipText,
+                        setNextPage:
+                          bookmarkedItemData.page !==
+                          bookmarkedItemData.num_pages
+                            ? () => {
+                                setCurPage(curPage + 1)
+                                if (typeof window !== 'undefined') {
+                                  window.scrollTo(0, 0)
+                                }
+                              }
+                            : false,
+                      }}
+                    />
+                  </>
+                )}
+              </>
+            )}
+          </Panel>
+          {showOverlay !== false && (
+            <DetailOverlay
+              {...{
+                title: 'Test',
+                id: showOverlay,
+                close: () => setShowOverlay(false),
+                origScrollY,
+                onViewDetails,
+                origScrollY,
+                onLoaded: () => setLoading(false),
+                bookmarkedIds,
+                setBookmarkedIds,
+                simpleHeaderRef,
+                bookmark: true,
+              }}
+            />
+          )}
+        </div>
+        <ReactTooltip
+          id={'searchHighlightInfo'}
+          type="light"
+          effect="float"
+          delayHide={0}
+          delayShow={500}
+          scrollHide={true}
+          getContent={content => content}
+        />
+      </Layout>
+      <LoadingSpinner loading={false} />
     </>
   )
 }

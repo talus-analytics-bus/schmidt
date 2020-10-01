@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import { Link } from 'gatsby'
 import axios from 'axios'
@@ -28,10 +28,7 @@ import logo from '../assets/images/logo.svg'
 const API_URL = process.env.GATSBY_API_URL
 
 const IndexPage = () => {
-  // // CONTEXT  // ----------------------------------------------------------- //
-  // const text = useContext(appContext)
-
-  // STATE  // ------------------------------------------------------------- //
+  // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
 
