@@ -149,6 +149,9 @@ export const Card = ({
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
   ]
 
+  console.log('key_topics')
+  console.log(key_topics)
+
   // collate tag snippets to show why search results were shown
   const tagSnippets = []
 

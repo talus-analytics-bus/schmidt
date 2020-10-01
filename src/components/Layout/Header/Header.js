@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from 'gatsby'
 
-import logoImg from '../../../assets/images/logo.png'
+import logoImg from '../../../assets/images/logo.svg'
 import styles from './Header.module.scss'
 
 function Header() {

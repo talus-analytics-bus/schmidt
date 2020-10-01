@@ -12,7 +12,7 @@ import styles from './footer.module.scss'
 import classNames from 'classnames'
 
 // assets
-import logo from '../../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.svg'
 import talus from '../../../assets/images/talus.png'
 import schmidt from '../../../assets/images/schmidt.svg'
 import georgetown from '../../../assets/images/georgetown.png'

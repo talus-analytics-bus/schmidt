@@ -34,6 +34,16 @@
         background: darken(white, 5%);
       }
     }
+
+    // smaller size
+    &.small {
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      i {
+        font-size: 1.25rem;
+      }
+    }
+
     // link buttons look like simple hyperlinks
     &.link {
       background: none;

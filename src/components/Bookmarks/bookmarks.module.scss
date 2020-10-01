@@ -14,6 +14,14 @@
   height: 100%;
   font-size: 1rem;
   position: relative;
+
+  .actions {
+    width: 100%;
+    > {
+      margin-left: auto;
+    }
+  }
+
   .noBookmarksInstructions {
     display: flex;
     flex-flow: wrap;

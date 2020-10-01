@@ -31,6 +31,9 @@ export const PrimaryButton = ({
   // if true: button is secondary and styled as such
   isSecondary = false,
 
+  // if true: smaller
+  isSmall = true,
+
   // if true: button is link
   isLink = false,
 
@@ -46,6 +49,7 @@ export const PrimaryButton = ({
       }}
       className={classNames(styles.button, {
         [styles.secondary]: isSecondary,
+        [styles.small]: isSmall,
         [styles.link]: isLink,
       })}
     >

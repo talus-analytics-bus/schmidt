@@ -19,6 +19,7 @@ import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
+import ToExcelQuery from '../components/misc/ToExcelQuery'
 import {
   execute,
   withBookmarkedIds,
@@ -218,7 +219,27 @@ const Bookmarks = ({}) => {
           />
           <Panel
             {...{
-              title: <h2>Bookmarked items</h2>,
+              title: (
+                <>
+                  <h2>Bookmarked items</h2>
+                  {someBookmarks && (
+                    <div className={styles.actions}>
+                      <PrimaryButton
+                        {...{
+                          label: 'Download Excel',
+                          isSecondary: true,
+                          isSmall: true,
+                          iconName: 'get_app',
+                          onClick: () => {
+                            console.log('ToExcelQuery')
+                            ToExcelQuery({ ids: bookmarkedIds })
+                          },
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
+              ),
               iconName: 'bookmark',
               secondary: false,
               heading: true,

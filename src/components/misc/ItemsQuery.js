@@ -18,7 +18,7 @@ const ItemsQuery = async ({
   // prepare URL params
   const params = new URLSearchParams()
 
-  // fields to return
+  // ids of items to return
   ids.forEach(d => {
     params.append('ids', d)
   })
@@ -33,6 +33,7 @@ const ItemsQuery = async ({
   const req = await axios.get(`${API_URL}/get/items`, {
     params,
   })
+
   const res = await req
   return res.data
 }
