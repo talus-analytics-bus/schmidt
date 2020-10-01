@@ -329,13 +329,14 @@ const DetailOverlay = ({
 
     return (
       <>
-        <div className={styles.shadow} />
+        <div className={floating ? styles.shadow : null} />
         <div
           ref={wrapperRef}
           style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
-          className={classNames(styles.detailOverlay, {
-            [styles.floating]: floating,
-          })}
+          className={classNames(
+            styles.detailOverlay,
+            floating ? styles.floating : styles.page
+          )}
         >
           <div className={styles.container}>
             <div className={styles.band}>
