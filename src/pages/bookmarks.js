@@ -300,6 +300,7 @@ const Bookmarks = ({}) => {
                 setBookmarkedIds,
                 simpleHeaderRef,
                 bookmark: true,
+                floating: true,
               }}
             />
           )}
