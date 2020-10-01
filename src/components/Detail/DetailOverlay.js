@@ -57,9 +57,17 @@ const DetailOverlay = ({
 
   // STATE
   // item and related items data
-  const [itemData, setItemData] = useState(null)
-  const [relatedItemsData, setRelatedItemsData] = useState(null)
-  const [keyTopics, setKeyTopics] = useState([])
+  const initItem = context.data.items[id]
+  const initItemData = initItem ? initItem.data : null
+  const initRelatedItemsData = initItem ? initItem : null
+  const [itemData, setItemData] = useState(initItemData)
+  const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
+
+  // key topics
+  const initKeyTopics = context.data.filterCounts
+    ? context.data.filterCounts.key_topics.map(d => d[0])
+    : []
+  const [keyTopics, setKeyTopics] = useState(initKeyTopics)
 
   // opacity control
   const [opacity, setOpacity] = useState(0)
@@ -168,17 +176,20 @@ const DetailOverlay = ({
       </span>
     )
   }
-
   // get item data
   const getData = async () => {
     if (id === false || id === 'false') return
     else {
       const queries = {}
-      queries.itemData = ItemQuery({
-        id,
-        pagesize,
-        page: curPage,
-      })
+
+      // if item has been loaded before, use that data, otherwise get it
+      const getItem = context.data.items[id] === undefined
+      if (getItem)
+        queries.itemData = ItemQuery({
+          id,
+          pagesize,
+          page: curPage,
+        })
 
       // get filter counts if not yet retrieved
       const getFilterCounts = context.data.filterCounts === undefined
@@ -186,18 +197,34 @@ const DetailOverlay = ({
         queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
       }
       const results = await execute({ queries })
-      setItemData(results.itemData.data.data)
-      setRelatedItemsData(results.itemData.data)
+
+      let newContextData = { ...context.data }
+
+      if (getItem) {
+        const item = results.itemData.data
+        setItemData(item.data)
+        setRelatedItemsData(results.itemData.data)
+        newContextData = {
+          ...newContextData,
+          items: { ...context.data.items, [id]: { ...item } },
+        }
+      } else {
+        setItemData(context.data.items[id].data)
+        setRelatedItemsData(context.data.items[id])
+      }
 
       // if getting filter counts set them, or return them if already set
       if (getFilterCounts) {
-        console.log('Getting filter counts')
         const filterCounts = results.filterCountsQuery.data.data
         setKeyTopics(filterCounts.key_topics.map(d => d[0]) || [])
-        context.setData({ ...context.data, filterCounts })
+        newContextData = {
+          ...newContextData,
+          filterCounts,
+        }
       } else {
         setKeyTopics(context.data.filterCounts.key_topics.map(d => d[0]) || [])
       }
+      context.setData(newContextData)
 
       // trigger on loaded callback func
       onLoaded()
