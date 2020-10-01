@@ -1,7 +1,7 @@
 @import '../../../assets/styles/vars.scss';
 .panel {
   &.secondary {
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     padding: 20px;
   }
   &.heading {
@@ -41,7 +41,7 @@
     }
     i {
       font-size: 2rem;
-      color: $navy-blue;
+      color: $blue;
       margin-right: 3px;
     }
 

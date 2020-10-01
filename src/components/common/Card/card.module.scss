@@ -2,7 +2,7 @@
 .cardContainer {
   .card {
     z-index: 1;
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -16,7 +16,7 @@
         cursor: pointer;
       }
       &:active {
-        background-color: darken($light-gray, 5%);
+        background-color: darken($very-light-gray, 5%);
       }
     }
 
@@ -137,7 +137,7 @@
           font-weight: 600;
           &,
           .highlighted {
-            color: $theme-green;
+            color: $green;
           }
         }
       }
@@ -154,7 +154,7 @@
 
           // color details icons navy blue
           i {
-            color: $navy-blue;
+            color: $blue;
           }
 
           // alignment for individual detail items
@@ -204,7 +204,7 @@
           @include spaceItemsHoriz(5px);
           align-items: center;
           i {
-            color: $navy-blue;
+            color: $blue;
           }
           .iconSnippet {
             display: flex;
@@ -225,7 +225,7 @@
       color: #333;
     }
     .link {
-      color: $selected-blue;
+      color: $light-blue;
       :not(.highlighted) {
         &:hover {
           text-decoration: underline;
@@ -242,7 +242,7 @@
       .link {
         .highlighted {
           box-shadow: none;
-          color: $selected-blue;
+          color: $light-blue;
           &:hover {
             text-decoration: underline;
             cursor: pointer;
@@ -311,7 +311,7 @@
     font-style: italic;
     display: flex;
     justify-content: flex-end;
-    color: $theme-green;
+    color: $green;
     margin-top: 30px;
   }
 }

@@ -4,7 +4,7 @@
   $border-radius: 10px;
   $bumper-width: 50px;
   border-radius: $border-radius;
-  border: 2px solid $soft-blue;
+  border: 2px solid $blue;
   width: 50%;
   $height: 60px;
   height: $height;
@@ -51,7 +51,7 @@
   // bumper is the blue cap on the right end of the bar
   .bumper {
     border-radius: 0 $border-radius $border-radius 0;
-    background-color: $navy-blue;
+    background-color: $blue;
     width: 50px;
     position: absolute;
     height: calc(100% + 4px);
@@ -98,7 +98,7 @@
     $border-radius: 10px;
     $bumper-width: 50px;
     border-radius: $border-radius;
-    border: 2px solid $soft-blue;
+    border: 2px solid $blue;
     @include borderItemsVert(20px);
     font-size: 1.25rem;
     font-family: 'rawline', serif;
@@ -108,7 +108,7 @@
       flex-flow: column;
       &:first-child {
         > .title:not(.noData) span {
-          color: $selected-blue;
+          color: $light-blue;
           cursor: pointer;
           &:hover {
             text-decoration: underline;
@@ -119,7 +119,7 @@
         display: flex;
         align-items: center;
         i {
-          color: $navy-blue;
+          color: $blue;
           margin-right: 5px;
         }
       }
@@ -132,7 +132,7 @@
         flex-flow: column;
         @include spaceItemsVert(20px);
         .suggestion {
-          color: $selected-blue;
+          color: $light-blue;
           margin-left: calc(19px + 20px);
           cursor: pointer;
           &:hover {

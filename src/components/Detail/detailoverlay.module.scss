@@ -39,7 +39,7 @@
     font-size: 1rem;
 
     .link {
-      color: $selected-blue;
+      color: $light-blue;
       cursor: pointer;
 
       &:hover {
@@ -72,7 +72,7 @@
         padding: 3px;
         cursor: pointer;
         i {
-          color: $navy-blue;
+          color: $blue;
           font-weight: bold;
         }
         &:hover {
@@ -96,7 +96,7 @@
       background-color: white;
 
       .sideBar {
-        background-color: $light-gray;
+        background-color: $very-light-gray;
         @include spaceItemsVert(10px);
         margin-left: 20px;
         border-right: 2px solid #5c5c5c;
@@ -121,10 +121,10 @@
               text-decoration: underline;
             }
             &.active {
-              color: $selected-blue;
+              color: $light-blue;
               font-weight: 600;
               .colorBlock {
-                background-color: $navy-blue;
+                background-color: $blue;
               }
             }
           }
@@ -139,7 +139,7 @@
               font-weight: 600;
               font-size: 1.2rem;
               margin-bottom: 20px;
-              color: $selected-blue;
+              color: $light-blue;
               cursor: pointer;
               &:hover {
                 text-decoration: underline;
@@ -167,7 +167,7 @@
           }
         }
         .govAuth {
-          border: 3px solid $navy-blue;
+          border: 3px solid $blue;
           padding: 10px;
           &.yes {
             background-color: #dae0f1;

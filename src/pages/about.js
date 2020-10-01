@@ -1,10 +1,13 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import classNames from 'classnames'
 
 // local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import { PrimaryButton } from '../components/common'
+import Overview from '../components/About/Overview'
+import Documentation from '../components/About/Documentation'
 
 // styles and assets
 import styles from '../components/About/about.module.scss'
@@ -17,9 +20,34 @@ const About = ({}) => {
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
 
+  // set content by tab
+  const [view, setView] = useState('overview')
+
   // ids of bookmarked items to count for nav
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
+  // CONSTANTS // -----------------------------------------------------------//
+  // define tabs and content
+  const tabs = [
+    {
+      name: 'Overview',
+      slug: 'overview',
+      content: (
+        <div className={styles.bodyContainer}>
+          <Overview />
+        </div>
+      ),
+    },
+    {
+      name: 'Documentation',
+      slug: 'documentation',
+      content: (
+        <div className={styles.bodyContainer}>
+          <Documentation />
+        </div>
+      ),
+    },
+  ]
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
   // get bookmarked ids initially
   useEffect(() => {
@@ -36,8 +64,33 @@ const About = ({}) => {
       bookmarkCount={loading ? null : bookmarkedIds.length}
     >
       <SEO title="About" />
-      <div className={styles.about}>
-        <h2>About</h2>
+      <div className={styles.container}>
+        <h2 className={styles.title}>
+          <i className={'material-icons'}>info</i>About
+        </h2>
+        <div className={styles.toggleContainer}>
+          {tabs.map(d => (
+            // <Link to={'/about/' + d.slug}>
+            <div
+              key={d.slug}
+              onClick={() => setView(d.slug)}
+              className={classNames(styles.tab, {
+                [styles.selected]: d.slug === view,
+              })}
+            >
+              {d.name}
+            </div>
+            // </Link>
+          ))}
+        </div>
+        {tabs.map(
+          d =>
+            d.slug === view && (
+              <div key={d.slug + '-content'} className={styles.content}>
+                {d.content}
+              </div>
+            )
+        )}
       </div>
     </Layout>
   )

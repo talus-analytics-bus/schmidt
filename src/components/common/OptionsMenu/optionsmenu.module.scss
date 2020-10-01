@@ -75,7 +75,7 @@
           border-radius: 4px;
           padding: 5px;
           @include selectStyling();
-          border: 2px solid $no-data-gray;
+          border: 2px solid $light-gray;
           max-width: 100%;
         }
       }

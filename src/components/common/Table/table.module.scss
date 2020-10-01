@@ -24,7 +24,7 @@
     position: relative;
     text-align: left;
     font-family: 'Open Sans', serif;
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     vertical-align: bottom;
     font-size: 1.06rem;
     > div > p:first-child {
@@ -44,7 +44,7 @@
     td > a {
       display: flex;
       align-items: center;
-      color: $selected-blue;
+      color: $light-blue;
       &,
       * {
         text-decoration: none !important;
