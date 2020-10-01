@@ -19,7 +19,7 @@
   input {
     margin: auto 5px auto 0;
     &:checked + span {
-      color: $selected-blue;
+      color: $light-blue;
     }
   }
 

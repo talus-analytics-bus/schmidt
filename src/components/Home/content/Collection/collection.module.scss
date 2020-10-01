@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     height: 100%;
     padding: 20px;
     .title {
@@ -18,7 +18,7 @@
       display: flex;
       align-items: center;
       i {
-        color: $navy-blue;
+        color: $blue;
         font-size: 2rem;
         margin-right: 5px;
       }
@@ -27,15 +27,15 @@
   .card {
     padding: 0 20px;
     padding-bottom: 20px;
-    background-color: $light-gray;
+    background-color: $very-light-gray;
   }
   .divider {
     width: 100%;
-    border-top: 1px solid $navy-blue;
+    border-top: 1px solid $blue;
     margin-bottom: 20px;
   }
   .ticker {
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     padding: 20px;
     padding-top: 0;
   }

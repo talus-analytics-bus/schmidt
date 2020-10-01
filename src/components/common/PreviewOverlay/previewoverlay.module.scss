@@ -39,7 +39,7 @@
         justify-content: space-between;
         width: 100%;
         .title {
-          color: $theme-green;
+          color: $green;
           font-weight: 600;
           font-size: 1.25rem;
         }
@@ -66,7 +66,7 @@
         padding: 3px;
         cursor: pointer;
         i {
-          color: $navy-blue;
+          color: $blue;
           font-weight: bold;
         }
         &:hover {

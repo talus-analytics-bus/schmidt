@@ -62,7 +62,7 @@
           transition: border-color 0.25s, opacity 0.25s;
           .thumbnail {
             opacity: 1;
-            border: solid 4px $selected-blue;
+            border: solid 4px $light-blue;
           }
         }
       }
@@ -81,7 +81,7 @@
         color: black;
       }
       &:active {
-        color: $navy-blue;
+        color: $blue;
       }
       &.disabled {
         color: gray;

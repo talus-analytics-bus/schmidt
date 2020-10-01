@@ -31,7 +31,7 @@
     &.secondary {
       background: white;
       color: #333;
-      border-color: $navy-blue;
+      border-color: $blue;
       &:hover {
         background: darken(white, 5%);
       }
@@ -42,13 +42,13 @@
       border: none;
       margin: 0;
       padding: 0;
-      color: $selected-blue;
+      color: $light-blue;
       &:hover {
         text-decoration: underline;
       }
       &:active,
       &:focus {
-        color: darken($selected-blue, 10%);
+        color: darken($light-blue, 10%);
       }
     }
   }
@@ -59,7 +59,7 @@
     // margin-bottom: 20px;
     height: 0;
     i {
-      color: $navy-blue;
+      color: $blue;
       font-size: 3rem;
     }
   }

@@ -8,19 +8,19 @@
     // border-right: none;
     padding: 10px;
     font-size: 1.25rem;
-    background-color: $light-gray;
+    background-color: $very-light-gray;
     cursor: pointer;
 
     @include spaceItemsHoriz(10px);
 
     &:hover {
-      background-color: darken($light-gray, 5%);
+      background-color: darken($very-light-gray, 5%);
     }
 
     .label {
       .numSelected {
         align-items: flex-end;
-        color: $selected-blue;
+        color: $light-blue;
         font-style: italic;
       }
     }
@@ -38,7 +38,7 @@
       width: $size;
     }
     i {
-      color: $navy-blue;
+      color: $blue;
       font-size: 2rem;
 
       // style caret
