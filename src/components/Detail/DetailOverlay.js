@@ -56,13 +56,6 @@ const DetailOverlay = ({
   const context = useContext(appContext)
 
   // STATE
-  // item and related items data
-  const initItem = context.data.items[id]
-  const initItemData = initItem ? initItem.data : null
-  const initRelatedItemsData = initItem ? initItem : null
-  const [itemData, setItemData] = useState(initItemData)
-  const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
-
   // key topics
   const initKeyTopics = context.data.filterCounts
     ? context.data.filterCounts.key_topics.map(d => d[0])
@@ -82,6 +75,14 @@ const DetailOverlay = ({
   //   !initialized ? urlParams.get('pagesize') || 10 : 10
   // )
   const [pagesize, setPagesize] = useState(10)
+
+  // item and related items data
+  const itemKey = `${id}-${pagesize}-${curPage}`
+  const initItem = context.data.items[itemKey]
+  const initItemData = initItem ? initItem.data : null
+  const initRelatedItemsData = initItem ? initItem : null
+  const [itemData, setItemData] = useState(initItemData)
+  const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
   // define start / end result numbers
@@ -182,8 +183,9 @@ const DetailOverlay = ({
     else {
       const queries = {}
 
-      // if item has been loaded before, use that data, otherwise get it
-      const getItem = context.data.items[id] === undefined
+      // if item has been loaded before, use that data, otherwise get interval
+      const itemKey = `${id}-${pagesize}-${curPage}`
+      const getItem = context.data.items[itemKey] === undefined
       if (getItem)
         queries.itemData = ItemQuery({
           id,
@@ -201,16 +203,17 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
+        console.log('Getting item: ' + itemKey)
         const item = results.itemData.data
         setItemData(item.data)
         setRelatedItemsData(results.itemData.data)
         newContextData = {
           ...newContextData,
-          items: { ...context.data.items, [id]: { ...item } },
+          items: { ...context.data.items, [itemKey]: { ...item } },
         }
       } else {
-        setItemData(context.data.items[id].data)
-        setRelatedItemsData(context.data.items[id])
+        setItemData(context.data.items[itemKey].data)
+        setRelatedItemsData(context.data.items[itemKey])
       }
 
       // if getting filter counts set them, or return them if already set
@@ -243,7 +246,8 @@ const DetailOverlay = ({
       setCurPage(1)
     } else {
       // if ID is provided fetch data, and scroll to top
-      if (id !== false) {
+      if (id !== false && id !== 'false') {
+        console.log('getData -- [id]')
         getData()
       }
     }
@@ -257,6 +261,7 @@ const DetailOverlay = ({
   useEffect(() => {
     // if ID is provided fetch data, and scroll to top
     if (id !== false && itemData !== null) {
+      console.log('getData -- [curPage]')
       getData()
     }
   }, [curPage])
@@ -266,7 +271,8 @@ const DetailOverlay = ({
     // if ID is provided fetch data, and scroll to top
     if (curPage !== 1) {
       setCurPage(1)
-    } else {
+    } else if (id !== false && itemData !== null) {
+      console.log('getData -- [pagesize]')
       getData()
     }
   }, [pagesize])
