@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
@@ -10,6 +10,7 @@ import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
+import { appContext } from '../components/Layout/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -22,13 +23,6 @@ import styles from '../components/Search/search.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Search = ({ setPage }) => {
-  // STATE
-  // card and filter counts data from API response to search query
-  const [searchData, setSearchData] = useState(null)
-  const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
-  const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
-  const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
-
   // bookmarked items
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
@@ -38,6 +32,80 @@ const Search = ({ setPage }) => {
   // is page currently fetching search data?
   const [isSearching, setIsSearching] = useState(false)
   const [isSearchingText, setIsSearchingText] = useState(false)
+
+  // count bookmarks to show in nav
+  const bookmarkArr =
+    bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
+
+  // EFFECT HOOKS
+  // get bookmarked ids initially
+  useEffect(() => {
+    if (bookmarkedIds === null)
+      withBookmarkedIds({ callback: setBookmarkedIds })
+  }, [bookmarkedIds])
+
+  // JSX
+  return (
+    <>
+      <Layout
+        page={'search'}
+        loading={isSearching && !isSearchingText && initialized}
+        bookmarkCount={bookmarkArr.length}
+      >
+        <SearchContent
+          {...{
+            initialized,
+            setInitialized,
+            isSearching,
+            setIsSearching,
+            bookmarkedIds,
+            setBookmarkedIds,
+            isSearchingText,
+            setIsSearchingText,
+          }}
+        />
+      </Layout>
+      <LoadingSpinner loading={!initialized} />
+    </>
+  )
+}
+
+const SearchContent = ({
+  initialized,
+  setInitialized,
+  isSearching,
+  setIsSearching,
+  bookmarkedIds,
+  setBookmarkedIds,
+  isSearchingText,
+  setIsSearchingText,
+}) => {
+  // CONTEXT
+  const { data, setData } = useContext(appContext)
+  // const fetchTopics = async () => {
+  //   return [{ value: 'fake topic value', name: 'fake topic name' }]
+  // }
+  // const getTopics = async () => {
+  //   if (data.key_topics !== null) return data.key_topics
+  //   else {
+  //     console.log('FETCHING TOPICS...')
+  //     fetchTopics().then(key_topics => {
+  //       setData({ ...data, key_topics })
+  //     })
+  //   }
+  // }
+  // getTopics()
+  useEffect(() => setData({ ...data, key_topics: 'test' }), [])
+  console.log(data)
+
+  // const keyTopics = getTopics()
+
+  // STATE
+  // card and filter counts data from API response to search query
+  const [searchData, setSearchData] = useState(null)
+  const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
+  const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
+  const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -186,12 +254,6 @@ const Search = ({ setPage }) => {
   }
 
   // EFFECT HOOKS
-  // get bookmarked ids initially
-  useEffect(() => {
-    if (bookmarkedIds === null)
-      withBookmarkedIds({ callback: setBookmarkedIds })
-  }, [bookmarkedIds])
-
   // when overlay is changed, store new state
   useEffect(() => {
     updateHistory({})
@@ -284,110 +346,96 @@ const Search = ({ setPage }) => {
         })
     }
   }, [simpleHeaderRef])
-
-  // count bookmarks to show in nav
-  const bookmarkArr =
-    bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
-
-  // JSX
   return (
     <>
-      <Layout
-        page={'search'}
-        loading={isSearching && !isSearchingText && initialized}
-        bookmarkCount={bookmarkArr.length}
-      >
-        <SEO title="Search results" />
-        <div className={styles.search}>
-          {showOverlay !== false && (
-            <DetailOverlay
-              {...{
-                title: 'Test',
-                id: showOverlay,
-                close: () => setShowOverlay(false),
-                filters,
-                floating: true,
-                setFilters,
-                setSearchText,
-                origScrollY,
-                onViewDetails,
-                origScrollY,
-                onLoaded: () => setIsSearching(false),
-                bookmarkedIds,
-                setBookmarkedIds,
-                simpleHeaderRef,
-                bookmark: false,
-              }}
-            />
-          )}
-          <StickyHeader
+      <SEO title="Search results" />
+      <div className={styles.search}>
+        {showOverlay !== false && (
+          <DetailOverlay
             {...{
-              show: showScrollToTop,
-              name: 'Name',
-              setSimpleHeaderRef,
-              img: null,
+              title: 'Test',
+              id: showOverlay,
+              close: () => setShowOverlay(false),
+              filters,
+              floating: true,
+              setFilters,
+              setSearchText,
+              origScrollY,
+              onViewDetails,
+              origScrollY,
+              onLoaded: () => setIsSearching(false),
+              bookmarkedIds,
+              setBookmarkedIds,
+              simpleHeaderRef,
+              bookmark: false,
             }}
           />
-          <div className={styles.sections}>
-            <Options
-              {...{
-                showFilterSections:
-                  searchData !== null && baselineFilterCounts !== null,
-                filterCounts:
-                  searchData !== null ? searchData.filter_counts : {},
-                baselineFilterCounts,
-                orderBy,
-                setOrderBy,
-                isDesc,
-                setIsDesc,
-                searchText,
-                setSearchText,
-                filters,
-                setFilters,
-                fromYear,
-                setFromYear,
-                toYear,
-                setToYear,
-              }}
-            />
-            <Results
-              {...{
-                searchData,
-                searchText,
-                setSearchText,
-                curPage,
-                setCurPage,
-                pagesize,
-                setPagesize,
-                searchData,
-                isSearchingText,
-                setIsSearchingText,
-                filters,
-                setFilters,
-                onViewDetails,
-                setShowOverlay,
-                setFreezeDataUpdates,
-                orderBy,
-                setOrderBy,
-                isDesc,
-                setIsDesc,
-                bookmarkedIds,
-                setBookmarkedIds,
-              }}
-            />
-          </div>
-        </div>
-        <ReactTooltip
-          id={'searchHighlightInfo'}
-          type="light"
-          effect="float"
-          delayHide={0}
-          delayShow={500}
-          scrollHide={true}
-          getContent={content => content}
+        )}
+        <StickyHeader
+          {...{
+            show: showScrollToTop,
+            name: 'Name',
+            setSimpleHeaderRef,
+            img: null,
+          }}
         />
-      </Layout>
-      <LoadingSpinner loading={!initialized} />
+        <div className={styles.sections}>
+          <Options
+            {...{
+              showFilterSections:
+                searchData !== null && baselineFilterCounts !== null,
+              filterCounts: searchData !== null ? searchData.filter_counts : {},
+              baselineFilterCounts,
+              orderBy,
+              setOrderBy,
+              isDesc,
+              setIsDesc,
+              searchText,
+              setSearchText,
+              filters,
+              setFilters,
+              fromYear,
+              setFromYear,
+              toYear,
+              setToYear,
+            }}
+          />
+          <Results
+            {...{
+              searchData,
+              searchText,
+              setSearchText,
+              curPage,
+              setCurPage,
+              pagesize,
+              setPagesize,
+              searchData,
+              isSearchingText,
+              setIsSearchingText,
+              filters,
+              setFilters,
+              onViewDetails,
+              setShowOverlay,
+              setFreezeDataUpdates,
+              orderBy,
+              setOrderBy,
+              isDesc,
+              setIsDesc,
+              bookmarkedIds,
+              setBookmarkedIds,
+            }}
+          />
+        </div>
+      </div>
+      <ReactTooltip
+        id={'searchHighlightInfo'}
+        type="light"
+        effect="float"
+        delayHide={0}
+        delayShow={500}
+        scrollHide={true}
+        getContent={content => content}
+      />
     </>
   )
 }

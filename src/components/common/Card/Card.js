@@ -61,7 +61,6 @@ export const Card = ({
   alwaysStartNew,
   ...props
 }) => {
-  if (why.length > 0) console.log(why)
   // STATE
   // card's left css property
   const [left, setLeft] = useState(detail || related ? 0 : 20)
