@@ -29,7 +29,9 @@ import logo from '../assets/images/logo.svg'
 const API_URL = process.env.GATSBY_API_URL
 
 const IndexPage = () => {
+  // CONTEXT
   const context = useContext(appContext)
+
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)

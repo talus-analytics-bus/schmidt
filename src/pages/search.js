@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
@@ -10,6 +10,7 @@ import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
+import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -22,6 +23,9 @@ import styles from '../components/Search/search.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Search = ({ setPage }) => {
+  // CONTEXT
+  const context = useContext(appContext)
+
   // STATE
   // card and filter counts data from API response to search query
   const [searchData, setSearchData] = useState(null)
@@ -166,10 +170,22 @@ const Search = ({ setPage }) => {
       is_desc: isDesc,
       explain_results: true,
     })
-    queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+
+    // get filter counts if not yet retrieved
+    const getFilterCounts = context.data.filterCounts === undefined
+    if (getFilterCounts) {
+      queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+    }
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
-    setBaselineFilterCounts(results.filterCountsQuery.data.data)
+    if (getFilterCounts) {
+      console.log('Getting filter counts')
+      const filterCounts = results.filterCountsQuery.data.data
+      setBaselineFilterCounts(filterCounts)
+      context.setData({ ...context.data, filterCounts })
+    } else {
+      setBaselineFilterCounts(context.data.filterCounts)
+    }
 
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history

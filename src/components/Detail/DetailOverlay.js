@@ -1,12 +1,13 @@
 // 3rd party components
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import classNames from 'classnames'
-// import axios from 'axios'
+import axios from 'axios'
 
 // local components
 import SEO from '../seo'
 import { Card, CardList, InfoTooltip, Paginator } from '../../components/common'
 import Panel from './content/Panel'
+import { appContext } from '../../components/misc/ContextProvider'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
@@ -15,10 +16,14 @@ import {
   toggleFilter,
   getHighlightSegments,
   getTooltipTextFunc,
+  execute,
 } from '../../components/misc/Util'
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
+
+// constants
+const API_URL = process.env.GATSBY_API_URL
 
 const DetailOverlay = ({
   // item data
@@ -47,10 +52,14 @@ const DetailOverlay = ({
   simpleHeaderRef = { current: null },
   bookmark = false,
 }) => {
+  // CONTEXT
+  const context = useContext(appContext)
+
   // STATE
   // item and related items data
   const [itemData, setItemData] = useState(null)
   const [relatedItemsData, setRelatedItemsData] = useState(null)
+  const [keyTopics, setKeyTopics] = useState([])
 
   // opacity control
   const [opacity, setOpacity] = useState(0)
@@ -83,13 +92,13 @@ const DetailOverlay = ({
   }
   // key topics
   // TODO move up in scope and use throughout site, and/or get from API call
-  const keyTopics = [
-    { displayName: 'Biosurveillance' },
-    { displayName: 'Emerging/epidemic infectious disease' },
-    { displayName: 'Health security (other)' },
-    { displayName: 'Intentional biological attacks' },
-    { displayName: 'Medical preparedness and MCMs' },
-  ]
+  // const keyTopics = [
+  //   { displayName: 'Biosurveillance' },
+  //   { displayName: 'Emerging/epidemic infectious disease' },
+  //   { displayName: 'Health security (other)' },
+  //   { displayName: 'Intentional biological attacks' },
+  //   { displayName: 'Medical preparedness and MCMs' },
+  // ]
   // author fields
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type', link: true },
@@ -164,13 +173,33 @@ const DetailOverlay = ({
   const getData = async () => {
     if (id === false || id === 'false') return
     else {
-      const results = await ItemQuery({
+      const queries = {}
+      queries.itemData = ItemQuery({
         id,
         pagesize,
         page: curPage,
       })
-      setItemData(results.data.data)
-      setRelatedItemsData(results.data)
+
+      // get filter counts if not yet retrieved
+      const getFilterCounts = context.data.filterCounts === undefined
+      if (getFilterCounts) {
+        queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+      }
+      const results = await execute({ queries })
+      setItemData(results.itemData.data.data)
+      setRelatedItemsData(results.itemData.data)
+
+      // if getting filter counts set them, or return them if already set
+      if (getFilterCounts) {
+        console.log('Getting filter counts')
+        const filterCounts = results.filterCountsQuery.data.data
+        setKeyTopics(filterCounts.key_topics.map(d => d[0]) || [])
+        context.setData({ ...context.data, filterCounts })
+      } else {
+        setKeyTopics(context.data.filterCounts.key_topics.map(d => d[0]) || [])
+      }
+
+      // trigger on loaded callback func
       onLoaded()
     }
   }
@@ -396,7 +425,7 @@ const DetailOverlay = ({
               <div className={styles.sideBar}>
                 <Panel {...{ title: 'Topic areas' }}>
                   <div className={styles.keyTopics}>
-                    {keyTopics.map(({ displayName, value = displayName }) => (
+                    {keyTopics.map(value => (
                       <>
                         <div
                           onClick={e =>
@@ -423,7 +452,7 @@ const DetailOverlay = ({
                           <div className={styles.colorBlock}></div>
                           <span>
                             {highlightTag({
-                              displayName,
+                              displayName: value,
                               filterValue: value,
                               filterKey: 'key_topics',
                             })}
