@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import classNames from 'classnames'
 import axios from 'axios'
+import { navigate } from 'gatsby'
 
 // assets and styles
 import styles from './card.module.scss'
@@ -50,10 +51,11 @@ export const Card = ({
   filters = {},
   setFilters = () => '',
   setSearchText,
-  onViewDetails = () => '',
+  onViewDetails = () => navigate('/detail/?id=' + id),
   floating = false,
   detail = false,
   related = false,
+  single = false,
   bookmark = false,
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
@@ -62,6 +64,9 @@ export const Card = ({
   alwaysStartNew,
   ...props
 }) => {
+  // CONSTANTS
+  const openNewPage = bookmark || single
+
   // STATE
   // card's left css property
   const [left, setLeft] = useState(detail || related ? 0 : 20)
@@ -120,7 +125,6 @@ export const Card = ({
       card[key] = getHighlightSegments({
         text: snippets[key],
         getTooltipText,
-
         maxWords: 20,
         styles,
       })
@@ -149,9 +153,6 @@ export const Card = ({
     ['key_topics', key_topics],
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
   ]
-
-  console.log('key_topics')
-  console.log(key_topics)
 
   // collate tag snippets to show why search results were shown
   const tagSnippets = []
@@ -214,9 +215,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -237,10 +238,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
-
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -449,7 +449,7 @@ export const Card = ({
                 </div>
               </div>
               <div className={styles.actions}>
-                {files.length > 0 && (
+                {!detail && files.length > 0 && (
                   <div>
                     <PrimaryButton
                       {...{

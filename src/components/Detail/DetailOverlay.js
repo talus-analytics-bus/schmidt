@@ -45,12 +45,13 @@ const DetailOverlay = ({
   floating = false,
   close = () => '',
   origScrollY = 0,
-  onViewDetails = () => '',
+  onViewDetails,
   onLoaded = () => '',
   bookmarkedIds = [],
   setBookmarkedIds = () => '',
   simpleHeaderRef = { current: null },
   bookmark = false,
+  setPageTitle,
 }) => {
   // CONTEXT
   const context = useContext(appContext)
@@ -85,6 +86,10 @@ const DetailOverlay = ({
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
+  // open new page if metadata tag is clicked?
+  const single = !floating
+  const openNewPage = bookmark || single
+
   // define start / end result numbers
   const start =
     relatedItemsData !== null
@@ -154,7 +159,7 @@ const DetailOverlay = ({
             getFilterVal: () => filterValue,
             filters,
             filterKey,
-            openNewPage: bookmark,
+            openNewPage,
             setFilters: v => {
               dismissFloatingOverlay()
               setFilters(v)
@@ -280,6 +285,7 @@ const DetailOverlay = ({
   // don't show component until all data fetched
   useEffect(() => {
     if (itemData !== null && relatedItemsData !== null) {
+      if (setPageTitle) setPageTitle(itemData.title)
       setLoaded(true)
     }
   }, [itemData, relatedItemsData])
@@ -393,6 +399,7 @@ const DetailOverlay = ({
                     bookmark,
                     getTooltipText,
                     floating,
+                    single: !floating,
                     setFilters: v => {
                       dismissFloatingOverlay()
                       setFilters(v)
@@ -435,6 +442,7 @@ const DetailOverlay = ({
                           setBookmarkedIds,
                           filters,
                           bookmark,
+                          single: !floating,
                           getTooltipText,
                           alwaysStartNew: true,
                           setFilters: v => {
@@ -465,7 +473,7 @@ const DetailOverlay = ({
                         <div
                           onClick={e =>
                             toggleFilter({
-                              openNewPage: bookmark,
+                              openNewPage,
                               e,
                               getFilterVal: () => value,
                               filters,

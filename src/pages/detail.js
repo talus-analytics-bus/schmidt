@@ -34,7 +34,11 @@ const Detail = ({}) => {
   const id = urlParams.get('id')
 
   // STATE
+  // bookmarked items IDs
   const [bookmarkedIds, setBookmarkedIds] = useState([])
+
+  // page title
+  const [pageTitle, setPageTitle] = useState('Details')
 
   // get bookmarked ids
   useEffect(() => withBookmarkedIds({ callback: setBookmarkedIds }), [])
@@ -46,9 +50,16 @@ const Detail = ({}) => {
       loading={false}
       bookmarkCount={bookmarkedIds.length}
     >
-      <SEO title="Detail" />
+      <SEO title={pageTitle} />
       <div className={styles.detail}>
-        <DetailOverlay id={id !== null ? id : 1} />
+        <DetailOverlay
+          {...{
+            id,
+            setPageTitle,
+            bookmarkedIds,
+            setBookmarkedIds,
+          }}
+        />
       </div>
     </Layout>
   )
