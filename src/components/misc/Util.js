@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 import classNames from 'classnames'
+import { navigate } from 'gatsby'
 
 // project-specific assets
 import events from '../../assets/icons/events.svg'
@@ -1238,9 +1239,7 @@ export const toggleFilter = ({
   // if on a page other than search, open a new search page
   if (openNewPage) {
     if (typeof window !== 'undefined') {
-      window.location.assign(
-        `/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=`
-      )
+      navigate(`/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=`)
     }
   } else {
     // otherwise, update filters
