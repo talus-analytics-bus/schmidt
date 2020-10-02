@@ -28,7 +28,7 @@
     // secondary buttons have different and less emphasizing styling
     &.secondary {
       background: white;
-      color: #333;
+      color: $blue;
       border-color: $blue;
       &:hover {
         background: darken(white, 5%);

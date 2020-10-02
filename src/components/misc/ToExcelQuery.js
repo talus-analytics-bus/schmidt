@@ -2,7 +2,7 @@ import axios from 'axios'
 const API_URL = process.env.GATSBY_API_URL
 
 const ToExcelQuery = async ({
-  ids = [1, 2, 3],
+  ids = [],
   order_by = 'date',
   is_desc = false,
 }) => {
