@@ -24,17 +24,6 @@ $border-radius: 5px;
 $overviews-bottom-margin: 40px;
 
 // MIXINS // ---------—---------—---------—---------—---------—---------—--- //
-@mixin header() {
-  color: $blue;
-  font-family: 'Rawline', serif;
-  font-weight: bold;
-  font-size: 2.15rem;
-  margin: 0 0 30px 0;
-  padding-top: 20px;
-  border-top: 5px $blue solid;
-  width: 100%;
-}
-
 @mixin sticky($top: 0) {
   position: -webkit-sticky; /* Safari */
   position: sticky;
