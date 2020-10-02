@@ -159,5 +159,10 @@
         content: ', ';
       }
     }
+    .endnotes {
+      [data-type*='endnote'] {
+        top: 0.3rem;
+      }
+    }
   }
 }
