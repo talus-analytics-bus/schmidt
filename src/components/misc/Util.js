@@ -1239,7 +1239,16 @@ export const toggleFilter = ({
   // if on a page other than search, open a new search page
   if (openNewPage) {
     if (typeof window !== 'undefined') {
-      navigate(`/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=`)
+      navigate(
+        `/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=&show_overlay=false`,
+        {
+          state: {
+            filters: { [filterKey]: [thisVal] },
+            searchText: '',
+            showOverlay: false,
+          },
+        }
+      )
     }
   } else {
     // otherwise, update filters
