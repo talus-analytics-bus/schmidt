@@ -1,18 +1,17 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 
 // local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
-// import Results from '../components/Detail/Results/Results'
-// import Options from '../components/Detail/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
+import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
-import { execute } from '../components/misc/Util'
+import { execute, withBookmarkedIds } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Detail/detail.module.scss'
@@ -21,6 +20,9 @@ import styles from '../components/Detail/detail.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Detail = ({}) => {
+  // CONTEXT
+  const context = useContext(appContext)
+
   // CONSTANTS
   // get url param for id to feed to <DetailOverlay />
   let urlParams
@@ -31,11 +33,33 @@ const Detail = ({}) => {
   }
   const id = urlParams.get('id')
 
+  // STATE
+  // bookmarked items IDs
+  const [bookmarkedIds, setBookmarkedIds] = useState([])
+
+  // page title
+  const [pageTitle, setPageTitle] = useState('Details')
+
+  // get bookmarked ids
+  useEffect(() => withBookmarkedIds({ callback: setBookmarkedIds }), [])
+
+  // JSX
   return (
-    <Layout page={'detail'} loading={false}>
-      <SEO title="Detail" />
+    <Layout
+      page={'detail'}
+      loading={false}
+      bookmarkCount={bookmarkedIds.length}
+    >
+      <SEO title={pageTitle} />
       <div className={styles.detail}>
-        <DetailOverlay id={id !== null ? id : 1} />
+        <DetailOverlay
+          {...{
+            id,
+            setPageTitle,
+            bookmarkedIds,
+            setBookmarkedIds,
+          }}
+        />
       </div>
     </Layout>
   )

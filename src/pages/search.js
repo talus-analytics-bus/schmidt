@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
+import { navigate } from 'gatsby'
 
 // local components
 import Layout from '../components/Layout/Layout'
@@ -145,10 +146,12 @@ const Search = ({ setPage }) => {
       orderBy,
       isDesc,
       searchText,
-      showOverlay,
+      showOverlay: showOverlay.toString(),
     }
     if (typeof window !== 'undefined') {
-      window.history.pushState(newState, '', newUrl)
+      if (initialized && !popstateTriggeredUpdate) {
+        navigate(newUrl, { state: newState })
+      }
     }
   }
 
@@ -179,7 +182,6 @@ const Search = ({ setPage }) => {
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
     if (getFilterCounts) {
-      console.log('Getting filter counts')
       const filterCounts = results.filterCountsQuery.data.data
       setBaselineFilterCounts(filterCounts)
       context.setData({ ...context.data, filterCounts })
@@ -189,7 +191,7 @@ const Search = ({ setPage }) => {
 
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history
-    if (!popstateTriggeredUpdate) {
+    if (!popstateTriggeredUpdate && initialized) {
       updateHistory({})
     } else {
       setPopstateTriggeredUpdate(false)
@@ -201,6 +203,27 @@ const Search = ({ setPage }) => {
     setIsSearchingText(false)
   }
 
+  // DEBUG
+  const updateDataHistory = () => {
+    // // if the page has already initialized, then a search is being done
+    // setIsSearching(true)
+    //
+    // setSearchData(searchData)
+
+    // update URL params to contain relevant options, unless this update was
+    // triggered by a state pop in history
+    if (!popstateTriggeredUpdate && initialized) {
+      updateHistory({})
+    } else {
+      setPopstateTriggeredUpdate(false)
+    }
+
+    // // // set page to initialized so data retrieval from filters, etc. happens
+    // // if (!initialized) setInitialized(true)
+    // setIsSearching(false)
+    // setIsSearchingText(false)
+  }
+
   // EFFECT HOOKS
   // get bookmarked ids initially
   useEffect(() => {
@@ -210,8 +233,15 @@ const Search = ({ setPage }) => {
 
   // when overlay is changed, store new state
   useEffect(() => {
-    updateHistory({})
-    setIsSearching(showOverlay !== false)
+    if (initialized) {
+      if (!popstateTriggeredUpdate && !freezeDataUpdates) {
+        updateDataHistory()
+      }
+    }
+    // if (!popstateTriggeredUpdate && initialized) {
+    //   updateHistory({})
+    // }
+    // setIsSearching(showOverlay !== false)
   }, [showOverlay])
 
   // when update triggered by popstate, use those vars only
@@ -223,7 +253,7 @@ const Search = ({ setPage }) => {
     }
   }, [popstateTriggeredUpdate])
 
-  // when xxx
+  // when key search params are changed, update the data
   useEffect(() => {
     if (initialized) {
       if (!popstateTriggeredUpdate && !freezeDataUpdates) {
@@ -249,6 +279,9 @@ const Search = ({ setPage }) => {
           window.onpopstate = function (e) {
             setFreezeDataUpdates(true)
             const state = e.state
+
+            // track whether any params were updated that should trigger
+            // the API request for new data
             if (state !== undefined && state !== null) {
               const toCheck = [
                 ['showOverlay', setShowOverlay, showOverlay],
@@ -267,19 +300,12 @@ const Search = ({ setPage }) => {
               // update all state variables and then trigger a data fetch
               toCheck.forEach(([key, updateFunc, curVal, fallbackFunc]) => {
                 if (state[key] !== undefined) {
-                  updateFunc(state[key])
+                  const newVal = state[key]
+                  updateFunc(newVal)
                 } else {
                   if (fallbackFunc) fallbackFunc()
                 }
               })
-
-              // // if overlay is disabled then return to original Y pos
-              // if (
-              //   state.showOverlay !== undefined &&
-              //   (state.showOverlay === 'false' || state.showOverlay === false)
-              // ) {
-              //   window.scrollTo(0, origScrollY)
-              // }
               setPopstateTriggeredUpdate(true)
               setFreezeDataUpdates(false)
             }
@@ -301,6 +327,13 @@ const Search = ({ setPage }) => {
     }
   }, [simpleHeaderRef])
 
+  // set initialized to false on unmount
+  useEffect(() => {
+    return () => {
+      setInitialized(false)
+    }
+  }, [])
+
   // count bookmarks to show in nav
   const bookmarkArr =
     bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
@@ -315,7 +348,7 @@ const Search = ({ setPage }) => {
       >
         <SEO title="Search results" />
         <div className={styles.search}>
-          {showOverlay !== false && (
+          {showOverlay !== false && showOverlay !== 'false' && (
             <DetailOverlay
               {...{
                 title: 'Test',

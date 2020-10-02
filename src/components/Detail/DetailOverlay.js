@@ -45,12 +45,13 @@ const DetailOverlay = ({
   floating = false,
   close = () => '',
   origScrollY = 0,
-  onViewDetails = () => '',
+  onViewDetails,
   onLoaded = () => '',
   bookmarkedIds = [],
   setBookmarkedIds = () => '',
   simpleHeaderRef = { current: null },
   bookmark = false,
+  setPageTitle,
 }) => {
   // CONTEXT
   const context = useContext(appContext)
@@ -78,13 +79,18 @@ const DetailOverlay = ({
 
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
-  const initItem = context.data.items[itemKey]
+  const initItem =
+    context.data.items !== undefined ? context.data.items[itemKey] : undefined
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
+  // open new page if metadata tag is clicked?
+  const single = !floating
+  const openNewPage = bookmark || single
+
   // define start / end result numbers
   const start =
     relatedItemsData !== null
@@ -154,7 +160,7 @@ const DetailOverlay = ({
             getFilterVal: () => filterValue,
             filters,
             filterKey,
-            openNewPage: bookmark,
+            openNewPage,
             setFilters: v => {
               dismissFloatingOverlay()
               setFilters(v)
@@ -203,7 +209,6 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
-        console.log('Getting item: ' + itemKey)
         const item = results.itemData.data
         setItemData(item.data)
         setRelatedItemsData(results.itemData.data)
@@ -247,7 +252,6 @@ const DetailOverlay = ({
     } else {
       // if ID is provided fetch data, and scroll to top
       if (id !== false && id !== 'false') {
-        console.log('getData -- [id]')
         getData()
       }
     }
@@ -261,7 +265,6 @@ const DetailOverlay = ({
   useEffect(() => {
     // if ID is provided fetch data, and scroll to top
     if (id !== false && itemData !== null) {
-      console.log('getData -- [curPage]')
       getData()
     }
   }, [curPage])
@@ -272,7 +275,6 @@ const DetailOverlay = ({
     if (curPage !== 1) {
       setCurPage(1)
     } else if (id !== false && itemData !== null) {
-      console.log('getData -- [pagesize]')
       getData()
     }
   }, [pagesize])
@@ -280,6 +282,7 @@ const DetailOverlay = ({
   // don't show component until all data fetched
   useEffect(() => {
     if (itemData !== null && relatedItemsData !== null) {
+      if (setPageTitle) setPageTitle(itemData.title)
       setLoaded(true)
     }
   }, [itemData, relatedItemsData])
@@ -392,6 +395,8 @@ const DetailOverlay = ({
                     filters,
                     bookmark,
                     getTooltipText,
+                    floating,
+                    single: !floating,
                     setFilters: v => {
                       dismissFloatingOverlay()
                       setFilters(v)
@@ -434,6 +439,7 @@ const DetailOverlay = ({
                           setBookmarkedIds,
                           filters,
                           bookmark,
+                          single: !floating,
                           getTooltipText,
                           alwaysStartNew: true,
                           setFilters: v => {
@@ -464,7 +470,7 @@ const DetailOverlay = ({
                         <div
                           onClick={e =>
                             toggleFilter({
-                              openNewPage: bookmark,
+                              openNewPage,
                               e,
                               getFilterVal: () => value,
                               filters,

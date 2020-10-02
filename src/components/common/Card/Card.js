@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import classNames from 'classnames'
 import axios from 'axios'
+import { navigate } from 'gatsby'
 
 // assets and styles
 import styles from './card.module.scss'
@@ -50,9 +51,11 @@ export const Card = ({
   filters = {},
   setFilters = () => '',
   setSearchText,
-  onViewDetails = () => '',
+  onViewDetails = () => navigate('/detail/?id=' + id),
+  floating = false,
   detail = false,
   related = false,
+  single = false,
   bookmark = false,
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
@@ -61,6 +64,9 @@ export const Card = ({
   alwaysStartNew,
   ...props
 }) => {
+  // CONSTANTS
+  const openNewPage = bookmark || single
+
   // STATE
   // card's left css property
   const [left, setLeft] = useState(detail || related ? 0 : 20)
@@ -119,7 +125,6 @@ export const Card = ({
       card[key] = getHighlightSegments({
         text: snippets[key],
         getTooltipText,
-
         maxWords: 20,
         styles,
       })
@@ -148,9 +153,6 @@ export const Card = ({
     ['key_topics', key_topics],
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
   ]
-
-  console.log('key_topics')
-  console.log(key_topics)
 
   // collate tag snippets to show why search results were shown
   const tagSnippets = []
@@ -213,9 +215,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -236,10 +238,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
-
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -298,6 +299,15 @@ export const Card = ({
     )
   }
 
+  // if item type is not defined, make it "Item"
+  if (
+    card.type_of_record === '' ||
+    card.type_of_record === undefined ||
+    card.type_of_record === null
+  ) {
+    card.type_of_record = 'Item'
+  }
+
   // JSX
   return (
     <div className={styles.cardContainer}>
@@ -317,7 +327,7 @@ export const Card = ({
       >
         <div
           style={{ width: resultNumber !== null ? '' : 0 }}
-          className={styles.col}
+          className={classNames(styles.col, styles.resultNumberCol)}
         >
           <div className={styles.resultNumber}>{resultNumber}</div>
         </div>
@@ -360,31 +370,52 @@ export const Card = ({
             )
           }
         </div>
-        <div className={styles.col}>
+        <div className={classNames(styles.col, styles.contentCol)}>
           <div className={styles.main}>
-            <div className={styles.header}>
-              {card.type_of_record !== '' && (
-                <div className={styles.type}>{card.type_of_record}</div>
-              )}
-              {bookmarkedIds !== null && (
-                <BookmarkToggle
-                  {...{
-                    key: id,
-                    add: !bookmarkedIdsArr.includes(+id),
-                    isSecondary: true,
-                    bookmarkedIds: bookmarkedIdsArr,
-                    setBookmarkedIds,
-                    id,
-                    simple: true,
-                  }}
-                />
-              )}
-            </div>
-            <div className={styles.title}>
-              <div className={styles.text}>
-                {title !== '' ? card.title : 'Untitled'}
+            <div className={styles.top}>
+              <div className={styles.headerAndTitle}>
+                <div className={styles.header}>
+                  {card.type_of_record !== '' && (
+                    <div className={styles.type}>{card.type_of_record}</div>
+                  )}
+                </div>
+                <div className={styles.title}>
+                  <div className={styles.text}>
+                    {title !== '' ? card.title : 'Untitled'}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.quickActions}>
+                {(!detail || floating) && (
+                  <PrimaryButton
+                    {...{
+                      label: 'Open in new tab',
+                      iconName: 'launch',
+                      url: `/detail?id=${id}`,
+                      urlIsExternal: true,
+                      isIcon: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                      },
+                    }}
+                  />
+                )}
+                {bookmarkedIds !== null && (
+                  <BookmarkToggle
+                    {...{
+                      key: id,
+                      add: !bookmarkedIdsArr.includes(+id),
+                      isSecondary: true,
+                      bookmarkedIds: bookmarkedIdsArr,
+                      setBookmarkedIds,
+                      id,
+                      simple: true,
+                    }}
+                  />
+                )}
               </div>
             </div>
+
             <div className={styles.detailsAndActions}>
               <div className={styles.details}>
                 <div className={styles.authOrg}>
@@ -418,7 +449,7 @@ export const Card = ({
                 </div>
               </div>
               <div className={styles.actions}>
-                {files.length > 0 && (
+                {!detail && files.length > 0 && (
                   <div>
                     <PrimaryButton
                       {...{
@@ -434,28 +465,17 @@ export const Card = ({
                     />
                   </div>
                 )}
-                <div>
-                  <PrimaryButton
-                    {...{
-                      label: 'View details',
-                      iconName: 'read_more',
-                      onClick: () => onViewDetails(id),
-                    }}
-                  />
-                </div>
-                <div>
-                  <PrimaryButton
-                    {...{
-                      label: 'Open in new tab',
-                      iconName: 'launch',
-                      url: `/detail?id=${id}`,
-                      urlIsExternal: true,
-                      onClick: e => {
-                        e.stopPropagation()
-                      },
-                    }}
-                  />
-                </div>
+                {!detail && (
+                  <div>
+                    <PrimaryButton
+                      {...{
+                        label: 'View details',
+                        iconName: 'read_more',
+                        onClick: () => onViewDetails(id),
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <div className={styles.descriptionSnippet}>{card.description}</div>
