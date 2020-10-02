@@ -37,11 +37,15 @@ export const PrimaryButton = ({
   // if true: button is link
   isLink = false,
 
+  // if true: button is simply the icon itself with no other styling
+  isIcon = false,
+
   // if true: disabled class applied
   disabled = false,
 }) => {
   const icon =
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
+
   const unwrappedButton = (
     <button
       onClick={e => {
@@ -51,10 +55,11 @@ export const PrimaryButton = ({
         [styles.secondary]: isSecondary,
         [styles.small]: isSmall,
         [styles.link]: isLink,
+        [styles.icon]: isIcon,
       })}
     >
       {icon}
-      {label}
+      {!isIcon && label}
     </button>
   )
 

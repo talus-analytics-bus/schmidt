@@ -51,6 +51,7 @@ export const Card = ({
   setFilters = () => '',
   setSearchText,
   onViewDetails = () => '',
+  floating = false,
   detail = false,
   related = false,
   bookmark = false,
@@ -298,6 +299,15 @@ export const Card = ({
     )
   }
 
+  // if item type is not defined, make it "Item"
+  if (
+    card.type_of_record === '' ||
+    card.type_of_record === undefined ||
+    card.type_of_record === null
+  ) {
+    card.type_of_record = 'Item'
+  }
+
   // JSX
   return (
     <div className={styles.cardContainer}>
@@ -317,7 +327,7 @@ export const Card = ({
       >
         <div
           style={{ width: resultNumber !== null ? '' : 0 }}
-          className={styles.col}
+          className={classNames(styles.col, styles.resultNumberCol)}
         >
           <div className={styles.resultNumber}>{resultNumber}</div>
         </div>
@@ -360,31 +370,52 @@ export const Card = ({
             )
           }
         </div>
-        <div className={styles.col}>
+        <div className={classNames(styles.col, styles.contentCol)}>
           <div className={styles.main}>
-            <div className={styles.header}>
-              {card.type_of_record !== '' && (
-                <div className={styles.type}>{card.type_of_record}</div>
-              )}
-              {bookmarkedIds !== null && (
-                <BookmarkToggle
-                  {...{
-                    key: id,
-                    add: !bookmarkedIdsArr.includes(+id),
-                    isSecondary: true,
-                    bookmarkedIds: bookmarkedIdsArr,
-                    setBookmarkedIds,
-                    id,
-                    simple: true,
-                  }}
-                />
-              )}
-            </div>
-            <div className={styles.title}>
-              <div className={styles.text}>
-                {title !== '' ? card.title : 'Untitled'}
+            <div className={styles.top}>
+              <div className={styles.headerAndTitle}>
+                <div className={styles.header}>
+                  {card.type_of_record !== '' && (
+                    <div className={styles.type}>{card.type_of_record}</div>
+                  )}
+                </div>
+                <div className={styles.title}>
+                  <div className={styles.text}>
+                    {title !== '' ? card.title : 'Untitled'}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.quickActions}>
+                {(!detail || floating) && (
+                  <PrimaryButton
+                    {...{
+                      label: 'Open in new tab',
+                      iconName: 'launch',
+                      url: `/detail?id=${id}`,
+                      urlIsExternal: true,
+                      isIcon: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                      },
+                    }}
+                  />
+                )}
+                {bookmarkedIds !== null && (
+                  <BookmarkToggle
+                    {...{
+                      key: id,
+                      add: !bookmarkedIdsArr.includes(+id),
+                      isSecondary: true,
+                      bookmarkedIds: bookmarkedIdsArr,
+                      setBookmarkedIds,
+                      id,
+                      simple: true,
+                    }}
+                  />
+                )}
               </div>
             </div>
+
             <div className={styles.detailsAndActions}>
               <div className={styles.details}>
                 <div className={styles.authOrg}>
@@ -434,28 +465,17 @@ export const Card = ({
                     />
                   </div>
                 )}
-                <div>
-                  <PrimaryButton
-                    {...{
-                      label: 'View details',
-                      iconName: 'read_more',
-                      onClick: () => onViewDetails(id),
-                    }}
-                  />
-                </div>
-                <div>
-                  <PrimaryButton
-                    {...{
-                      label: 'Open in new tab',
-                      iconName: 'launch',
-                      url: `/detail?id=${id}`,
-                      urlIsExternal: true,
-                      onClick: e => {
-                        e.stopPropagation()
-                      },
-                    }}
-                  />
-                </div>
+                {!detail && (
+                  <div>
+                    <PrimaryButton
+                      {...{
+                        label: 'View details',
+                        iconName: 'read_more',
+                        onClick: () => onViewDetails(id),
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <div className={styles.descriptionSnippet}>{card.description}</div>

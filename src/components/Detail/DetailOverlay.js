@@ -392,6 +392,7 @@ const DetailOverlay = ({
                     filters,
                     bookmark,
                     getTooltipText,
+                    floating,
                     setFilters: v => {
                       dismissFloatingOverlay()
                       setFilters(v)

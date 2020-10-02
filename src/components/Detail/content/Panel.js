@@ -33,7 +33,7 @@ export const Panel = ({
       })}
     >
       <div className={styles.title}>
-        <div>
+        <div className={styles.titleContent}>
           {icon}
           <div className={styles.text}>{title}</div>
         </div>

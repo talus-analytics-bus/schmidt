@@ -40,7 +40,7 @@
     }
 
     // let details and actions column use full width
-    .col:last-child {
+    .col.contentCol {
       width: 100%;
     }
 
@@ -113,107 +113,128 @@
       font-family: 'rawline', serif;
       font-weight: bold;
     }
-    .main {
-      width: 100%;
-      margin-left: 10px;
-      padding-right: 10px;
-
-      .header {
+    .contentCol {
+      .main {
         width: 100%;
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        .type {
-          text-transform: uppercase;
-          font-family: 'rawline', serif;
-          cursor: pointer;
-        }
-      }
-      .title {
-        .text {
-          max-width: 88%;
-          font-size: 1.6rem;
-          line-height: 1.25;
-          font-weight: 600;
-          &,
-          .highlighted {
-            color: $green;
-          }
-        }
-      }
-      .detailsAndActions {
-        display: flex;
-        @include spaceItemsHoriz(20px);
-        margin-top: 20px;
+        margin-left: 10px;
+        padding-right: 10px;
 
-        .details {
+        .top {
           display: grid;
-          grid-template-columns: 1fr auto;
-          grid-gap: 0 10px;
-          align-items: center;
+          grid-gap: 0 20px;
+          grid-template-columns: auto 1fr;
+          align-items: flex-start;
 
-          // color details icons navy blue
-          i {
-            color: $blue;
+          .headerAndTitle {
+            .header {
+              width: 100%;
+              position: relative;
+              display: flex;
+              justify-content: space-between;
+
+              // report, goverment action, etc. displayed just above title
+              .type {
+                text-transform: uppercase;
+                font-family: 'rawline', serif;
+                cursor: pointer;
+              }
+            }
+            .title {
+              .text {
+                font-size: 1.6rem;
+                line-height: 1.25;
+                font-weight: 600;
+                &,
+                .highlighted {
+                  color: $green;
+                }
+              }
+            }
           }
-
-          // alignment for individual detail items
-          .authOrg,
-          .date {
-            @include spaceItemsHoriz(5px);
+          // quick actions in the upper right corner of the card to bookmark or
+          // to open in new tab
+          .quickActions {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            right: -3px;
           }
-          .authOrgList {
-            span {
-              // cursor: pointer;
+        }
+        .detailsAndActions {
+          display: flex;
+          @include spaceItemsHoriz(20px);
+          margin-top: 20px;
+
+          .details {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 0 10px;
+            align-items: center;
+
+            // color details icons navy blue
+            i {
+              color: $blue;
+            }
+
+            // alignment for individual detail items
+            .authOrg,
+            .date {
+              @include spaceItemsHoriz(5px);
+              display: flex;
+              align-items: center;
+            }
+            .authOrgList {
+              span {
+                // cursor: pointer;
+              }
+            }
+          }
+
+          // actions below main card info to preview file or view popup
+          .actions {
+            display: flex;
+            margin-left: auto;
+            @include spaceItemsHoriz(10px);
+            div {
+              @include center();
             }
           }
         }
 
-        .actions {
-          display: flex;
-          margin-left: auto;
-          @include spaceItemsHoriz(10px);
-          div {
-            @include center();
-          }
+        // description snippet, if any text matched, with a few words around the
+        // matched text
+        .descriptionSnippet {
+          margin-top: 20px;
+          color: #333;
+          font-size: 1.3rem;
+          line-height: 1.5;
         }
-      }
 
-      // description snippet, if any text matched, with a few words around the
-      // matched text
-      .descriptionSnippet {
-        margin-top: 20px;
-        color: #333;
-        font-size: 1.3rem;
-        line-height: 1.5;
-      }
-
-      // tag snippets: including an icon and some matched text
-      .tagSnippets {
-        border-top: 1px solid $gray;
-        margin-top: 10px;
-        padding-top: 10px;
-        display: flex;
-        flex-flow: column;
-        @include spaceItemsVert(5px);
-
-        .tagSnippet {
+        // tag snippets: including an icon and some matched text
+        .tagSnippets {
+          border-top: 1px solid $gray;
+          margin-top: 10px;
+          padding-top: 10px;
           display: flex;
-          @include spaceItemsHoriz(5px);
-          align-items: center;
-          i {
-            color: $blue;
-          }
-          .iconSnippet {
+          flex-flow: column;
+          @include spaceItemsVert(5px);
+
+          .tagSnippet {
             display: flex;
-            flex-flow: wrap;
+            @include spaceItemsHoriz(5px);
+            align-items: center;
+            i {
+              color: $blue;
+            }
+            .iconSnippet {
+              display: flex;
+              flex-flow: wrap;
+            }
           }
         }
       }
     }
-
     // style highlighted text
     .highlighted {
       // text-decoration: underline;
