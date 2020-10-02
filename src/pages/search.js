@@ -15,7 +15,11 @@ import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
-import { execute, withBookmarkedIds } from '../components/misc/Util'
+import {
+  execute,
+  withBookmarkedIds,
+  defaultContext,
+} from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Search/search.module.scss'
@@ -25,7 +29,7 @@ const API_URL = process.env.GATSBY_API_URL
 
 const Search = ({ setPage }) => {
   // CONTEXT
-  const context = useContext(appContext)
+  const context = useContext(appContext) || defaultContext
 
   // STATE
   // card and filter counts data from API response to search query

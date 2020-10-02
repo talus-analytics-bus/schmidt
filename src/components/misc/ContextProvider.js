@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react'
-
+import { defaultContext } from './Util'
 export const appContext = createContext()
 
 const ContextProvider = ({ children }) => {
-  const [data, setData] = useState({ filterCounts: undefined, items: {} })
+  const [data, setData] = useState(defaultContext.data)
   const initialContext = { data, setData }
 
   return (

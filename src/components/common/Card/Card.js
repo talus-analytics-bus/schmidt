@@ -391,7 +391,7 @@ export const Card = ({
                     {...{
                       label: 'Open in new tab',
                       iconName: 'launch',
-                      url: `/detail?id=${id}`,
+                      url: `/detail/?id=${id}`,
                       urlIsExternal: true,
                       isIcon: true,
                       onClick: e => {

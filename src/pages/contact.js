@@ -38,6 +38,7 @@ const Contact = ({}) => {
       <SEO title="About" />
       <div className={styles.contact}>
         <h2>Contact</h2>
+        <p>Content coming soon</p>
       </div>
     </Layout>
   )

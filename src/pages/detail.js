@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 // local components
@@ -7,7 +7,6 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import { StickyHeader, LoadingSpinner } from '../components/common'
-import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -20,9 +19,6 @@ import styles from '../components/Detail/detail.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Detail = ({}) => {
-  // CONTEXT
-  const context = useContext(appContext)
-
   // CONSTANTS
   // get url param for id to feed to <DetailOverlay />
   let urlParams
@@ -40,28 +36,37 @@ const Detail = ({}) => {
   // page title
   const [pageTitle, setPageTitle] = useState('Details')
 
+  // loading?
+  const [loading, setLoading] = useState(true)
+
   // get bookmarked ids
-  useEffect(() => withBookmarkedIds({ callback: setBookmarkedIds }), [])
+  useEffect(() => {
+    withBookmarkedIds({ callback: setBookmarkedIds })
+  }, [])
 
   // JSX
   return (
-    <Layout
-      page={'detail'}
-      loading={false}
-      bookmarkCount={bookmarkedIds.length}
-    >
-      <SEO title={pageTitle} />
-      <div className={styles.detail}>
-        <DetailOverlay
-          {...{
-            id,
-            setPageTitle,
-            bookmarkedIds,
-            setBookmarkedIds,
-          }}
-        />
-      </div>
-    </Layout>
+    <>
+      <Layout
+        page={'detail'}
+        loading={false}
+        bookmarkCount={bookmarkedIds.length}
+      >
+        <SEO title={pageTitle} />
+        <div className={styles.detail}>
+          <DetailOverlay
+            {...{
+              id,
+              setPageTitle,
+              bookmarkedIds,
+              setBookmarkedIds,
+              onLoaded: () => setLoading(false),
+            }}
+          />
+        </div>
+      </Layout>
+      <LoadingSpinner {...{ loading }} />
+    </>
   )
 }
 

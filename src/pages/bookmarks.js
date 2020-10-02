@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 
@@ -15,7 +15,6 @@ import {
   CardList,
   PrimaryButton,
 } from '../components/common'
-import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
@@ -34,9 +33,6 @@ import styles from '../components/Bookmarks/bookmarks.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Bookmarks = ({}) => {
-  // CONTEXT
-  const context = useContext(appContext)
-
   // STATE
   // page initialized?
   const [initialized, setInitialized] = useState(false)

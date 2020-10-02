@@ -1426,3 +1426,9 @@ export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
   }
   return getTooltipText
 }
+
+// default context
+export const defaultContext = {
+  data: { filterCounts: undefined, items: {} },
+  setData: () => '',
+}

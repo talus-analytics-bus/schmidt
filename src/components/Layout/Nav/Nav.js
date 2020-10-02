@@ -72,7 +72,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'search' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/search'}
+              to={'/search/'}
             >
               <i className={'material-icons'}>search</i>
               <span>Search</span>
@@ -85,7 +85,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'bookmarks' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/bookmarks'}
+              to={'/bookmarks/'}
             >
               <i className={'material-icons'}>bookmark</i>
               <span>
@@ -100,7 +100,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'about' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/about'}
+              to={'/about/'}
             >
               <i className={'material-icons'}>info</i>
               <span>About</span>
@@ -113,7 +113,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'contact' ? styles.active : '',
                 styles.contactDrape
               )}
-              to={'/contact'}
+              to={'/contact/'}
             >
               {showMobileMenu ? (
                 'Contact us'
