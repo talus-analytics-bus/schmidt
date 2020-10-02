@@ -17,6 +17,7 @@ import {
   getHighlightSegments,
   getTooltipTextFunc,
   execute,
+  defaultContext,
 } from '../../components/misc/Util'
 
 // styles and assets
@@ -54,7 +55,7 @@ const DetailOverlay = ({
   setPageTitle,
 }) => {
   // CONTEXT
-  const context = useContext(appContext)
+  const context = useContext(appContext) || defaultContext
 
   // STATE
   // key topics
@@ -294,17 +295,19 @@ const DetailOverlay = ({
 
   // add listener to close overlay on esc key
   useEffect(() => {
-    // close overlay on escape key
-    const escFunction = e => {
-      if (e.keyCode === 27) dismissFloatingOverlay()
-    }
+    if (!single) {
+      // close overlay on escape key
+      const escFunction = e => {
+        if (e.keyCode === 27) dismissFloatingOverlay()
+      }
 
-    // assign listener
-    document.addEventListener('keydown', escFunction, false)
+      // assign listener
+      document.addEventListener('keydown', escFunction, false)
 
-    // remove listener on unmount
-    return () => {
-      document.removeEventListener('keydown', escFunction, false)
+      // remove listener on unmount
+      return () => {
+        document.removeEventListener('keydown', escFunction, false)
+      }
     }
   }, [])
 
