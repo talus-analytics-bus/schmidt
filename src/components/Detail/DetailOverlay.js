@@ -79,7 +79,8 @@ const DetailOverlay = ({
 
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
-  const initItem = context.data.items[itemKey]
+  const initItem =
+    context.data.items !== undefined ? context.data.items[itemKey] : undefined
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
@@ -208,7 +209,6 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
-        console.log('Getting item: ' + itemKey)
         const item = results.itemData.data
         setItemData(item.data)
         setRelatedItemsData(results.itemData.data)
@@ -252,7 +252,6 @@ const DetailOverlay = ({
     } else {
       // if ID is provided fetch data, and scroll to top
       if (id !== false && id !== 'false') {
-        console.log('getData -- [id]')
         getData()
       }
     }
@@ -266,7 +265,6 @@ const DetailOverlay = ({
   useEffect(() => {
     // if ID is provided fetch data, and scroll to top
     if (id !== false && itemData !== null) {
-      console.log('getData -- [curPage]')
       getData()
     }
   }, [curPage])
@@ -277,7 +275,6 @@ const DetailOverlay = ({
     if (curPage !== 1) {
       setCurPage(1)
     } else if (id !== false && itemData !== null) {
-      console.log('getData -- [pagesize]')
       getData()
     }
   }, [pagesize])

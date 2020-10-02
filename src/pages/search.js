@@ -127,7 +127,7 @@ const Search = ({ setPage }) => {
 
   // FUNCTIONS
   // update state object, URL, and history entry when key params change
-  const updateHistory = ({}) => {
+  const updateHistory = ({ initialized }) => {
     const newUrlParams = new URLSearchParams()
     newUrlParams.set('filters', JSON.stringify(filters))
     newUrlParams.set('page', curPage)
@@ -148,7 +148,7 @@ const Search = ({ setPage }) => {
       showOverlay,
     }
     if (typeof window !== 'undefined') {
-      window.history.pushState(newState, '', newUrl)
+      window.history.replaceState(newState, '', newUrl)
     }
   }
 
@@ -179,7 +179,6 @@ const Search = ({ setPage }) => {
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
     if (getFilterCounts) {
-      console.log('Getting filter counts')
       const filterCounts = results.filterCountsQuery.data.data
       setBaselineFilterCounts(filterCounts)
       context.setData({ ...context.data, filterCounts })
@@ -190,7 +189,7 @@ const Search = ({ setPage }) => {
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history
     if (!popstateTriggeredUpdate) {
-      updateHistory({})
+      updateHistory({ initialized })
     } else {
       setPopstateTriggeredUpdate(false)
     }
@@ -210,7 +209,9 @@ const Search = ({ setPage }) => {
 
   // when overlay is changed, store new state
   useEffect(() => {
-    updateHistory({})
+    if (initialized) {
+      updateHistory({ initialized })
+    }
     setIsSearching(showOverlay !== false)
   }, [showOverlay])
 
