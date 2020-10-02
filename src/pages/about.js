@@ -14,6 +14,7 @@ import styles from '../components/About/about.module.scss'
 
 // local utility functions
 import { withBookmarkedIds } from '../components/misc/Util'
+import ToExcelQuery from '../components/misc/ToExcelQuery'
 
 const About = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -69,19 +70,32 @@ const About = ({}) => {
           <i className={'material-icons'}>info</i>About
         </h2>
         <div className={styles.toggleContainer}>
-          {tabs.map(d => (
-            // <Link to={'/about/' + d.slug}>
-            <div
-              key={d.slug}
-              onClick={() => setView(d.slug)}
-              className={classNames(styles.tab, {
-                [styles.selected]: d.slug === view,
-              })}
-            >
-              {d.name}
-            </div>
-            // </Link>
-          ))}
+          <div className={styles.tabs}>
+            {tabs.map(d => (
+              // <Link to={'/about/' + d.slug}>
+              <div
+                key={d.slug}
+                onClick={() => setView(d.slug)}
+                className={classNames(styles.tab, {
+                  [styles.selected]: d.slug === view,
+                })}
+              >
+                {d.name}
+              </div>
+              // </Link>
+            ))}
+          </div>
+          <PrimaryButton
+            {...{
+              label: 'Download all data',
+              isSecondary: true,
+              isSmall: true,
+              iconName: 'get_app',
+              onClick: () => {
+                ToExcelQuery({})
+              },
+            }}
+          />
         </div>
         {tabs.map(
           d =>
