@@ -22,13 +22,6 @@ const Footer = () => {
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
         <div className={styles.logos}>
-          <a href={'https://schmidtfutures.com/'} target="_blank">
-            <img
-              className={styles.schmidt}
-              src={schmidt}
-              alt={'Schmidt Futures logo'}
-            ></img>
-          </a>
           <a href={'https://ghss.georgetown.edu/'} target="_blank">
             <img
               className={styles.georgetown}
