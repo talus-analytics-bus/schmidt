@@ -487,7 +487,7 @@ export const Card = ({
                 </div>
               )
             }
-            {tagSnippets.length > 0 && (
+            {!detail && tagSnippets.length > 0 && (
               <div className={styles.tagSnippets}>{tagSnippets}</div>
             )}
             {detail && files.length > 0 && (
