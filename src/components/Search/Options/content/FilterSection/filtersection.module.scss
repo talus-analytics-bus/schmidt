@@ -73,3 +73,13 @@
     }
   }
 }
+
+@media #{$breakpoint-two} {
+  .filterSection {
+    .content {
+      margin-left: 5px;
+    }
+    .bar {
+    }
+  }
+}

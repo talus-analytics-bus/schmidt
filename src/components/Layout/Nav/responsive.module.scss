@@ -31,8 +31,12 @@
       + div,
       + article {
         margin-top: 80px;
+        @media #{$phone} {
+          margin-top: 120px;
+        }
       }
     }
+
     &.wide {
       .nav {
         padding: 5px 10px;

@@ -19,5 +19,8 @@
         color: gray;
       }
     }
+    @media #{$breakpoint-two} {
+      margin-left: 0px;
+    }
   }
 }

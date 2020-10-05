@@ -165,3 +165,11 @@
     }
   }
 }
+
+@media #{$phone} {
+  .searchBar {
+    &.right {
+      margin-left: 0px;
+    }
+  }
+}

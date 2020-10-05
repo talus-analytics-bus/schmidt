@@ -123,7 +123,7 @@ export const Results = ({
         />
       </div>
       {showPaginator && (
-        <>
+        <div className={styles.content}>
           <Paginator
             {...{
               curPage,
@@ -159,7 +159,7 @@ export const Results = ({
                   : false,
             }}
           />
-        </>
+        </div>
       )}
     </div>
   )

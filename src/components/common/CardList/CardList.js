@@ -82,25 +82,27 @@ export const CardList = ({
       <div className={styles.cardList}>
         <div className={styles.cards}>{cards}</div>
         {setNextPage && (
-          <FloatButton
-            {...{
-              onClick: () => {
-                if (setNextPage) {
-                  setNextPage()
-                }
-              },
-              noOnToggle: true,
-              icon: (
-                <i
-                  style={{ transform: 'rotate(90deg)' }}
-                  className={'material-icons'}
-                >
-                  expand_less
-                </i>
-              ),
-              label: 'Next page',
-            }}
-          />
+          <div className={styles.nextButton}>
+            <FloatButton
+              {...{
+                onClick: () => {
+                  if (setNextPage) {
+                    setNextPage()
+                  }
+                },
+                noOnToggle: true,
+                icon: (
+                  <i
+                    style={{ transform: 'rotate(90deg)' }}
+                    className={'material-icons'}
+                  >
+                    expand_less
+                  </i>
+                ),
+                label: 'Next page',
+              }}
+            />
+          </div>
         )}
       </div>
     )

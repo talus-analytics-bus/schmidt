@@ -18,4 +18,19 @@
     }
   }
 }
-@import './responsive.module.scss';
+@media #{$phone} {
+  .results {
+    .sortByAndSearchBar {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      margin-bottom: 0px;
+      .sortBy {
+        margin-top: 20px;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+}
