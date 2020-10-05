@@ -8,7 +8,6 @@
   width: 50%;
   $height: 60px;
   height: $height;
-  // display: flex;
   z-index: 2;
   background-color: white;
 
@@ -168,8 +167,26 @@
 
 @media #{$phone} {
   .searchBar {
+    $height: 50px;
+    height: $height;
     &.right {
       margin-left: 0px;
+    }
+    .inner {
+      .loading {
+        height: $height;
+      }
+    }
+    .bumper {
+      i {
+        font-size: 1.5rem;
+      }
+    }
+    .suggestions {
+      top: calc(#{$height} - 4px);
+    }
+    input {
+      padding: 5px 10px;
     }
   }
 }

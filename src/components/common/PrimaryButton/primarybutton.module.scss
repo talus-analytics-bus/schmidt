@@ -71,6 +71,12 @@
       i {
         margin-right: 0;
         font-size: 2.5rem;
+        @media #{$breakpoint-one} {
+          font-size: 2rem;
+        }
+        @media #{$phone-narrow} {
+          font-size: 1.7rem;
+        }
         position: relative;
         top: -2px;
       }

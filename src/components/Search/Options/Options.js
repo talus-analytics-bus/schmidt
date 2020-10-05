@@ -36,6 +36,8 @@ export const Options = ({
   setFromYear,
   toYear,
   setToYear,
+  mobile,
+  setOptionsVisible,
   ...props
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
@@ -347,8 +349,18 @@ export const Options = ({
    * Return JSX for search options including filters, reset, order by
    */
   return (
-    <div className={styles.options}>
-      <h2>Refine search</h2>
+    <div className={classNames(styles.options, { [styles.mobile]: mobile })}>
+      <div className={styles.header}>
+        <h2>Refine search</h2>
+        {mobile && (
+          <i
+            className="material-icons"
+            onClick={() => setOptionsVisible(false)}
+          >
+            close
+          </i>
+        )}
+      </div>
       <div className={styles.content}>
         <PrimaryButton
           {...{

@@ -31,8 +31,80 @@
               }
             }
           }
+          .descriptionSnippet {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media #{$phone} {
+  .cardContainer {
+    .card {
+      .contentCol {
+        .main {
+          .top {
+            .headerAndTitle {
+              .title {
+                .text {
+                  font-size: 1.1rem;
+                }
+              }
+            }
+          }
+          .descriptionSnippet {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media #{$phone-narrow} {
+  .cardContainer {
+    .card {
+      display: flex;
+      flex-direction: row;
+      > :not(:last-child) {
+        margin-right: 0px;
+      }
+      .thumbnail {
+        display: none;
+      }
+      .contentCol {
+        .main {
+          .top {
+            grid-gap: 0 5px;
+            .headerAndTitle {
+              .header {
+                .type {
+                  font-size: 0.8rem;
+                  margin-bottom: 5px;
+                }
+              }
+              .title {
+                .text {
+                  font-size: 0.9rem;
+                }
+              }
+            }
+          }
           .detailsAndActions {
+            .details {
+              grid-template-columns: 1fr;
+              font-size: 0.9rem;
+              .date {
+                margin-top: 5px;
+              }
+            }
             .actions {
+              margin-left: 0px;
+              .previewButton {
+                display: none;
+              }
             }
           }
           .descriptionSnippet {

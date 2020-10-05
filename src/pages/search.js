@@ -38,6 +38,9 @@ const Search = ({ setPage }) => {
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
   const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
 
+  //filters modal on mobile
+  const [optionsVisible, setOptionsVisible] = useState(false)
+
   // bookmarked items
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
 
@@ -373,6 +376,31 @@ const Search = ({ setPage }) => {
               }}
             />
           )}
+          {optionsVisible && (
+            <Options
+              {...{
+                showFilterSections:
+                  searchData !== null && baselineFilterCounts !== null,
+                filterCounts:
+                  searchData !== null ? searchData.filter_counts : {},
+                baselineFilterCounts,
+                orderBy,
+                setOrderBy,
+                isDesc,
+                setIsDesc,
+                searchText,
+                setSearchText,
+                filters,
+                setFilters,
+                fromYear,
+                setFromYear,
+                toYear,
+                setToYear,
+                mobile: true,
+                setOptionsVisible,
+              }}
+            />
+          )}
           <StickyHeader
             {...{
               show: showScrollToTop,
@@ -401,6 +429,8 @@ const Search = ({ setPage }) => {
                 setFromYear,
                 toYear,
                 setToYear,
+                mobile: false,
+                setOptionsVisible,
               }}
             />
             <Results
@@ -426,6 +456,7 @@ const Search = ({ setPage }) => {
                 setIsDesc,
                 bookmarkedIds,
                 setBookmarkedIds,
+                setOptionsVisible,
               }}
             />
           </div>

@@ -450,7 +450,7 @@ export const Card = ({
               </div>
               <div className={styles.actions}>
                 {!detail && files.length > 0 && (
-                  <div>
+                  <div className={styles.previewButton}>
                     <PrimaryButton
                       {...{
                         label: 'Preview',

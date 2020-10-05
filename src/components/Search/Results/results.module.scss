@@ -18,19 +18,53 @@
     }
   }
 }
+@media screen and (min-width: 813px) {
+  .toggleOptions {
+    display: none;
+  }
+}
 @media #{$phone} {
   .results {
     .sortByAndSearchBar {
       flex-direction: column-reverse;
       align-items: flex-start;
       margin-bottom: 0px;
-      .sortBy {
+      .toggleOptions {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        background-color: $very-light-gray;
+        @include boxShadow();
+      }
+      .optionsRow {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         margin-top: 20px;
       }
     }
     .content {
       display: flex;
       flex-direction: column-reverse;
+    }
+  }
+}
+
+@media #{$phone-narrow} {
+  .results {
+    .sortByAndSearchBar {
+      .optionsRow {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .sortBy {
+        margin-top: 20px;
+      }
+      .toggleOptions {
+        width: 100%;
+      }
     }
   }
 }

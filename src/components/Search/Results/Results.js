@@ -11,6 +11,7 @@ import styles from './results.module.scss'
 // local components
 import { getTooltipTextFunc } from '../../misc/Util'
 import { SearchBar, Paginator, CardList, Selectpicker } from '../../common'
+import { style } from 'd3'
 
 export const Results = ({
   searchData,
@@ -33,6 +34,7 @@ export const Results = ({
   setIsDesc,
   bookmarkedIds,
   setBookmarkedIds,
+  setOptionsVisible,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -60,53 +62,61 @@ export const Results = ({
     <div className={styles.results}>
       <div className={styles.sortByAndSearchBar}>
         {
-          <div className={styles.sortBy}>
-            <div>
-              Sort by{' '}
-              <Selectpicker
-                {...{
-                  setOption: setIsDesc,
-                  curSelection: isDesc,
-                  allOption: null,
-                  label: null,
-                  // TODO ensure this sticks when coming from another page
-                  disabled: orderBy === 'relevance',
-                  optionList: [
-                    {
-                      label: 'Descending',
-                      value: true,
-                    },
-                    {
-                      label: 'Ascending',
-                      value: false,
-                    },
-                  ],
-                }}
-              />
+          <div className={styles.optionsRow}>
+            <div
+              className={styles.toggleOptions}
+              onClick={() => setOptionsVisible(true)}
+            >
+              Filters
             </div>
-            <div>
-              <Selectpicker
-                {...{
-                  setOption: setOrderBy,
-                  curSelection: orderBy,
-                  allOption: null,
-                  label: null,
-                  optionList: [
-                    {
-                      label: 'Relevance',
-                      value: 'relevance',
-                    },
-                    {
-                      label: 'Date',
-                      value: 'date',
-                    },
-                    {
-                      label: 'Title',
-                      value: 'title',
-                    },
-                  ],
-                }}
-              />
+            <div className={styles.sortBy}>
+              <div>
+                Sort by{' '}
+                <Selectpicker
+                  {...{
+                    setOption: setIsDesc,
+                    curSelection: isDesc,
+                    allOption: null,
+                    label: null,
+                    // TODO ensure this sticks when coming from another page
+                    disabled: orderBy === 'relevance',
+                    optionList: [
+                      {
+                        label: 'Descending',
+                        value: true,
+                      },
+                      {
+                        label: 'Ascending',
+                        value: false,
+                      },
+                    ],
+                  }}
+                />
+              </div>
+              <div>
+                <Selectpicker
+                  {...{
+                    setOption: setOrderBy,
+                    curSelection: orderBy,
+                    allOption: null,
+                    label: null,
+                    optionList: [
+                      {
+                        label: 'Relevance',
+                        value: 'relevance',
+                      },
+                      {
+                        label: 'Date',
+                        value: 'date',
+                      },
+                      {
+                        label: 'Title',
+                        value: 'title',
+                      },
+                    ],
+                  }}
+                />
+              </div>
             </div>
           </div>
         }
