@@ -450,20 +450,39 @@ export const Card = ({
               </div>
               <div className={styles.actions}>
                 {!detail && files.length > 0 && (
-                  <div className={styles.previewButton}>
-                    <PrimaryButton
-                      {...{
-                        label: 'Preview',
-                        iconName: 'preview',
-                        isSecondary: true,
-                        onClick: e => {
-                          e.stopPropagation()
-                          e.preventDefault()
-                          setShowPreview(true)
-                        },
-                      }}
-                    />
-                  </div>
+                  <>
+                    <div className={styles.previewButton}>
+                      <PrimaryButton
+                        {...{
+                          label: 'Preview',
+                          iconName: 'preview',
+                          isSecondary: true,
+                          onClick: e => {
+                            e.stopPropagation()
+                            e.preventDefault()
+                            setShowPreview(true)
+                          },
+                        }}
+                      />
+                    </div>
+                    <div className={styles.mobilePreviewButton}>
+                      <PrimaryButton
+                        {...{
+                          label: 'Open PDF',
+                          iconName: 'launch',
+                          isSecondary: true,
+                          urlIsExternal: true,
+                          url: `${API_URL}/get/file/${title.replace(
+                            /\?/g,
+                            ''
+                          )}?id=${files[0].id}`,
+                          onClick: e => {
+                            e.stopPropagation()
+                          },
+                        }}
+                      />
+                    </div>
+                  </>
                 )}
                 {!detail && (
                   <div>

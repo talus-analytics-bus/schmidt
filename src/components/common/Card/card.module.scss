@@ -199,6 +199,9 @@
             div {
               @include center();
             }
+            .mobilePreviewButton {
+              display: none;
+            }
           }
         }
 

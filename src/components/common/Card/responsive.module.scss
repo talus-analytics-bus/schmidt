@@ -57,6 +57,16 @@
           .descriptionSnippet {
             font-size: 1rem;
           }
+          .detailsAndActions {
+            .actions {
+              .previewButton {
+                display: none;
+              }
+              .mobilePreviewButton {
+                display: block;
+              }
+            }
+          }
         }
       }
     }
@@ -101,16 +111,22 @@
               }
             }
             .actions {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
               margin-left: 0px;
-              .previewButton {
-                display: none;
+              .mobilePreviewButton {
+                margin-bottom: 10px;
               }
             }
           }
           .descriptionSnippet {
-            font-size: 1rem;
+            font-size: 0.9rem;
           }
         }
+      }
+      .tagSnippets {
+        font-size: 0.9rem;
       }
     }
   }
