@@ -5,9 +5,25 @@ import moment from 'moment'
 import classNames from 'classnames'
 import { navigate } from 'gatsby'
 
-// project-specific assets
+// project-specific assets - icons
+// network blob
 import events from '../../assets/icons/events.svg'
 import events_disabled from '../../assets/icons/events_disabled.svg'
+
+// speech bubble
+import speech from '../../assets/icons/speech.svg'
+import speech_orange from '../../assets/icons/speech_orange.svg'
+import speech_disabled from '../../assets/icons/speech_disabled.svg'
+
+// caution sign
+import caution from '../../assets/icons/caution.svg'
+import caution_orange from '../../assets/icons/caution_orange.svg'
+import caution_disabled from '../../assets/icons/caution_disabled.svg'
+
+// rings sign
+import rings from '../../assets/icons/rings.svg'
+import rings_orange from '../../assets/icons/rings_orange.svg'
+import rings_disabled from '../../assets/icons/rings_disabled.svg'
 
 // Utility functions and data.
 const Util = {}
@@ -1185,20 +1201,49 @@ export const removeBookmark = ({ id, callback }) => {
 // define icon names to use for each section
 export const iconNamesByField = {
   key_topics: 'device_hub',
+  // key_topics: 'speech',
+  // key_topics: 'speech_orange',
   authors: 'person',
   author_types: 'apartment',
   years: 'event',
   funders: 'payments',
   types_of_record: 'insert_drive_file',
   events: 'outbreak_events',
+  // events: 'rings',
+  // events: 'rings_orange',
+  // events: 'caution',
+  // events: 'caution_orange',
 }
 
 // return icon JSX by name
-export const getIconByName = ({ iconName, styles = {}, disabled = false }) => {
+export const getIconByName = ({
+  field = undefined,
+  iconName = iconNamesByField[field],
+  styles = {},
+  disabled = false,
+}) => {
   // special icon?
   const specialIcons = {
+    // network blob
     outbreak_events: events,
     outbreak_events_disabled: events_disabled,
+
+    // speech bubble
+    speech,
+    speech_orange,
+    speech_disabled,
+
+    // caution sign
+    caution,
+    caution_orange,
+    caution_disabled,
+    caution_orange_disabled: caution_disabled,
+
+    // rings
+    rings,
+    rings_orange,
+    rings_orange_disabled: rings_disabled,
+    rings_disabled,
   }
   const specialIcon = specialIcons[iconName + (disabled ? '_disabled' : '')]
   const icon =

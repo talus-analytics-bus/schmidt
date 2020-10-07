@@ -17,10 +17,18 @@
       font-weight: 600;
       display: flex;
       align-items: center;
+
+      // style icons
+      i,
+      img {
+        margin-right: 5px;
+      }
       i {
         color: $blue;
         font-size: 2rem;
-        margin-right: 5px;
+      }
+      img {
+        height: 24px;
       }
     }
   }

@@ -2,6 +2,9 @@
 import React from 'react'
 import classNames from 'classnames'
 
+// local utility functions
+import { getIconByName } from '../../misc/Util'
+
 // styles and assets
 import styles from './panel.module.scss'
 import events from '../../../assets/icons/events.svg'
@@ -14,17 +17,7 @@ export const Panel = ({
   heading = false,
 }) => {
   // CONSTANTS
-  // special icon?
-  const specialIcons = {
-    outbreak_events: events,
-  }
-  const specialIcon = specialIcons[iconName]
-  const icon =
-    specialIcon !== undefined ? (
-      <img className={styles.specialIcon} src={specialIcon} />
-    ) : (
-      <>{iconName && <i className={'material-icons'}>{iconName}</i>}</>
-    )
+  const icon = getIconByName({ iconName, styles })
   return (
     <div
       className={classNames(styles.panel, {

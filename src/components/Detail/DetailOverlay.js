@@ -18,6 +18,7 @@ import {
   getTooltipTextFunc,
   execute,
   defaultContext,
+  iconNamesByField,
 } from '../../components/misc/Util'
 
 // styles and assets
@@ -410,7 +411,12 @@ const DetailOverlay = ({
                   }}
                 />
                 <div className={classNames(styles.sideBar, styles.wide)}>
-                  <Panel {...{ title: 'Topic areas' }}>
+                  <Panel
+                    {...{
+                      title: 'Topic areas',
+                      iconName: iconNamesByField.key_topics,
+                    }}
+                  >
                     <div className={styles.keyTopics}>
                       {keyTopics.map(value => (
                         <>
@@ -457,7 +463,7 @@ const DetailOverlay = ({
                       title: `Authoring organization${
                         itemData.authors.length > 1 ? 's' : ''
                       }`,
-                      iconName: 'person',
+                      iconName: iconNamesByField.authors,
                     }}
                   >
                     <div className={styles.authors}>
@@ -516,7 +522,7 @@ const DetailOverlay = ({
                   <Panel
                     {...{
                       title: 'Related events',
-                      iconName: 'outbreak_events',
+                      iconName: iconNamesByField.events,
                     }}
                   >
                     <div className={styles.events}>
