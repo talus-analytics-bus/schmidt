@@ -10,7 +10,7 @@
     .container {
       z-index: 9; // above header
       position: absolute;
-      top: 0;
+      top: -20px; // TODO elegantly, get value from search.module.scss
       transition: opacity 0.25s;
 
       .band {
@@ -18,6 +18,7 @@
       }
     }
   }
+
   .container {
     .relatedItems {
       margin-left: 20px;
@@ -99,7 +100,13 @@
         background-color: $very-light-gray;
         @include spaceItemsVert(10px);
         margin-left: 20px;
-        border-right: 2px solid #5c5c5c;
+        &:not(.wide) {
+          border-right: 2px solid #5c5c5c;
+        }
+        &.wide {
+          margin-right: 20px;
+          margin-bottom: 20px;
+        }
 
         .keyTopics {
           @include spaceItemsVert(10px);
@@ -167,10 +174,10 @@
           }
         }
         .govAuth {
-          border: 3px solid $blue;
+          border: 1px solid $blue;
           padding: 10px;
           &.yes {
-            background-color: #dae0f1;
+            // background-color: #dae0f1;
             font-weight: 600;
           }
           &.notAvail {
@@ -208,6 +215,44 @@
         .sideBar {
           border-right: 0px solid #5c5c5c;
         }
+      }
+    }
+  }
+  // wide view: sidebar goes under the card
+  // non-wide view: sidebar goes along the right gutter
+  &.wide {
+    .content {
+      grid-template-columns: unset;
+      .sideBar {
+        background-color: $very-light-gray;
+        display: grid;
+        grid-gap: 10px;
+        justify-content: space-between;
+        grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+        > div {
+          border: none !important;
+          margin: 0 !important;
+          // width: max-content;
+          &:first-child {
+            // width: 300px;
+          }
+        }
+      }
+      // Using flex
+      // .sideBar {
+      //   background-color: $very-light-gray;
+      //   display: flex;
+      //   flex-flow: wrap;
+      //   > div {
+      //     border: none !important;
+      //     margin: 0 !important;
+      //     width: max-content;
+      //   }
+      // }
+    }
+    .container {
+      .relatedItems {
+        margin-right: 20px;
       }
     }
   }

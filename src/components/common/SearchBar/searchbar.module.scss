@@ -98,7 +98,7 @@
     $bumper-width: 50px;
     border-radius: $border-radius;
     border: 2px solid $blue;
-    @include borderItemsVert(20px);
+    @include spaceItemsVert(40px);
     font-size: 1.25rem;
     font-family: 'rawline', serif;
     padding: 20px 10px;
@@ -129,7 +129,7 @@
         font-size: 1rem;
         display: flex;
         flex-flow: column;
-        @include spaceItemsVert(20px);
+        @include spaceItemsVert(10px);
         .suggestion {
           color: $light-blue;
           margin-left: calc(19px + 20px);

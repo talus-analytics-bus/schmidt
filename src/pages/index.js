@@ -114,11 +114,6 @@ const IndexPage = () => {
     }
   }, [simpleHeaderRef])
 
-  // DEBUG update context
-  useEffect(() => {
-    context.setData({ ...data, test: 'mvm' })
-  }, [])
-
   // JSX // -----------------------------------------------------------------//
   if (loading) return <div />
   else {
