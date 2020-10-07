@@ -8,9 +8,6 @@
           > :not(:last-child) {
             margin-right: 1.5rem;
           }
-          > :nth-last-child(2) {
-            margin-right: 0;
-          }
         }
       }
     }
@@ -83,7 +80,7 @@
           }
         }
         .hamburger {
-          color: $green;
+          color: white;
           z-index: 10000;
           position: relative;
           top: 3px;

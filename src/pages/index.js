@@ -24,6 +24,7 @@ import SearchQuery from '../components/misc/SearchQuery'
 // assets and styles
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
+import flag from '../assets/images/landing-test.png'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -123,7 +124,8 @@ const IndexPage = () => {
     return (
       <>
         <SEO title="Home" description="Health Security Net landing page" />
-        <Nav bookmarkCount={bookmarkedIds.length} />
+        <Nav bookmarkCount={bookmarkedIds.length} page="index" />
+        <img className={styles.largeFlag} src={flag}></img>
         <div className={styles.home}>
           <article className={styles.main}>
             <div className={styles.upper}>
@@ -132,6 +134,7 @@ const IndexPage = () => {
                 src={logo}
                 alt={'Health Security Net logo'}
               ></img>
+              <div className={styles.textWrapShape}></div>
               <p className={styles.landingText}>
                 Welcome to the Georgetown University Global Health Security
                 Library, a publicly accessible, centralized database of
@@ -140,28 +143,30 @@ const IndexPage = () => {
                 coded and searchable database that enables access to documents
                 written about pandemic risk and related issues.
               </p>
-              <div className={styles.mainButton}>
-                <PrimaryButton
+              <div className={styles.controls}>
+                <div className={styles.mainButton}>
+                  <PrimaryButton
+                    {...{
+                      label: 'Enter library',
+                      url: '/search',
+                    }}
+                  />
+                </div>
+
+                <SearchBar
                   {...{
-                    label: 'Enter library',
-                    url: '/search',
+                    searchText,
+                    setSearchText,
+                    isSearchingText,
+                    setIsSearchingText,
+                    setFreezeDataUpdates,
+                    setOrderBy,
+                    setIsDesc,
+                    previewResults: searchResults,
+                    right: false,
                   }}
                 />
               </div>
-
-              <SearchBar
-                {...{
-                  searchText,
-                  setSearchText,
-                  isSearchingText,
-                  setIsSearchingText,
-                  setFreezeDataUpdates,
-                  setOrderBy,
-                  setIsDesc,
-                  previewResults: searchResults,
-                  right: false,
-                }}
-              />
             </div>
             <div className={styles.divider} />
             <div className={styles.lower}>

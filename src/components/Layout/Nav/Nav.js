@@ -37,10 +37,15 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
     <div
       className={classNames(styles.navWrapper, {
         [styles.showMobileMenu]: showMobileMenu,
+        [styles.static]: page === 'index',
       })}
     >
-      <div className={styles.nav}>
-        <Link to={'/'}>
+      <div
+        className={classNames(styles.nav, {
+          [styles.landing]: page === 'index',
+        })}
+      >
+        <Link to={'/'} className={page === 'index' ? styles.hidden : ''}>
           <img src={logo} />
           <img
             className={classNames(styles.loading, {
