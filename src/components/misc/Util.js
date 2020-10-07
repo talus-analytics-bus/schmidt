@@ -1200,16 +1200,16 @@ export const removeBookmark = ({ id, callback }) => {
 
 // define icon names to use for each section
 export const iconNamesByField = {
-  key_topics: 'device_hub',
-  // key_topics: 'speech',
+  // key_topics: 'device_hub',
+  key_topics: 'speech',
   // key_topics: 'speech_orange',
   authors: 'person',
   author_types: 'apartment',
   years: 'event',
   funders: 'payments',
   types_of_record: 'insert_drive_file',
-  events: 'outbreak_events',
-  // events: 'rings',
+  // events: 'outbreak_events',
+  events: 'rings',
   // events: 'rings_orange',
   // events: 'caution',
   // events: 'caution_orange',
