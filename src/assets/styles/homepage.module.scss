@@ -6,7 +6,7 @@ $vertical-spacing: 60px;
   .main {
     .upper {
       padding: 30px;
-      @include gradientLanding();
+      // @include gradientLanding();
       position: relative;
       display: flex;
       flex-direction: column;

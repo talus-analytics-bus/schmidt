@@ -1,9 +1,10 @@
 @import '../../../assets/styles/vars.scss';
 .navWrapper {
-  border-bottom: 12px solid $blue;
   z-index: 9;
   width: 100%;
-  background: white;
+  background: $orange;
+  color: white;
+  position: relative;
 
   .nav {
     max-width: 1440px;
@@ -20,9 +21,9 @@
       display: flex;
       align-items: center;
       @include spaceItemsHoriz(3px);
+      color: white;
       i {
         position: relative;
-        top: 2px;
         text-decoration: none;
       }
     }
@@ -40,28 +41,18 @@
     }
     .menu {
       .links {
-        margin-top: 28px;
         display: flex;
         font-size: 1.2rem;
+        // margin-right: 160px;
         > :not(:last-child) {
           margin-right: 3rem;
-        }
-        //help us update button is actually last child, so we also need this for last link:
-        > :nth-last-child(2) {
-          margin-right: 0;
-        }
-        .compareLink {
-          > span {
-            display: none;
-          }
         }
       }
       .hamburger {
         display: none;
       }
     }
-    a,
-    .countryLinkContainer {
+    a {
       text-decoration: none;
       > span {
         &:hover {
@@ -69,51 +60,11 @@
         }
       }
       &:not([role='search-result']) {
-        color: $blue;
         white-space: nowrap;
       }
     }
-    .countryLinkContainer {
-      position: relative;
-    }
-    .countryPicker {
-      .tabContainer {
-        position: absolute;
-        right: -20px;
-        top: -10px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        @include boxShadow();
-        border-radius: 5px 5px 0 0;
-        .tab {
-          padding: 10px 20px 10px 20px;
-          background-color: white;
-          height: 45px;
-          //text-decoration: underline;
-          z-index: 1;
-          border-radius: 5px 5px 0 0;
-        }
-      }
-      .content {
-        position: absolute;
-        top: 34px;
-        right: -20px;
-        background-color: white;
-        width: 300px;
-        padding: 20px;
-        @include boxShadow();
-        border-radius: 5px 0 5px 5px;
-        .title {
-          text-align: left;
-          margin-bottom: 20px;
-          color: black;
-          font-size: 1.4rem;
-        }
-      }
-    }
     .active * {
-      font-weight: bold;
+      font-weight: 600;
     }
     a:first-child {
       margin-right: auto;
@@ -123,6 +74,12 @@
     img {
       height: 60px;
     }
+  }
+  .smallFlag {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 222px;
   }
   &.wide {
     div {

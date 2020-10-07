@@ -7,8 +7,9 @@ import { InfoTooltip } from '../../common'
 import { comma } from '../../misc/Util'
 
 // assets
-import logo from '../../../assets/images/logo.svg'
+import logo from '../../../assets/images/white-logo.svg'
 import loadingSvg from '../../../assets/images/loading-blue.svg'
+import flag from '../../../assets/images/header-test.png'
 
 const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
@@ -35,8 +36,6 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   return (
     <div
       className={classNames(styles.navWrapper, {
-        [styles.static]: page === 'country' || page === 'compare',
-        [styles.wide]: page === 'map',
         [styles.showMobileMenu]: showMobileMenu,
       })}
     >
@@ -111,22 +110,17 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               }}
               className={classNames(
                 page === 'contact' ? styles.active : '',
-                styles.contactDrape
+                styles.linkText
               )}
               to={'/contact/'}
             >
-              {showMobileMenu ? (
-                'Contact us'
-              ) : (
-                <div>
-                  <i className={'material-icons'}>mail</i>
-                  <span>contact us</span>
-                </div>
-              )}
+              <i className={'material-icons'}>mail</i>
+              <span>Contact Us</span>
             </Link>
           </div>
         </div>
       </div>
+      {/* <img className={styles.smallFlag} src={flag}></img> */}
     </div>
   )
 }
