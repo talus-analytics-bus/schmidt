@@ -2,7 +2,7 @@
 .cardContainer {
   .card {
     z-index: 1;
-    background-color: $very-light-gray;
+    background-color: darken($very-light-gray, 1%);
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -16,7 +16,7 @@
         cursor: pointer;
       }
       &:active {
-        background-color: darken($very-light-gray, 5%);
+        background-color: darken($very-light-gray, 6%);
       }
     }
 
@@ -112,6 +112,7 @@
       margin-right: 10px;
       font-family: 'rawline', serif;
       font-weight: bold;
+      font-size: 1.5rem;
     }
     .contentCol {
       .main {
