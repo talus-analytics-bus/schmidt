@@ -40,7 +40,7 @@ export const Collection = ({
   const getData = async () => {
     const results = await SearchQuery({
       page: 1,
-      pagesize: 10,
+      pagesize: 15,
       filters: { [type]: [value] },
       order_by: 'date',
       is_desc: 'true',
