@@ -167,10 +167,10 @@
           }
         }
         .govAuth {
-          border: 3px solid $blue;
+          border: 1px solid $blue;
           padding: 10px;
           &.yes {
-            background-color: #dae0f1;
+            // background-color: #dae0f1;
             font-weight: 600;
           }
           &.notAvail {
