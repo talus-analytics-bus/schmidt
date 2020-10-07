@@ -10,24 +10,20 @@
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 20px;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     .logos {
-      display: flex;
-      flex-flow: row;
-      justify-content: flex-end;
-
+      width: 500px;
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      column-gap: 20px;
+      padding: 20px 0px 50px 0px;
       a {
-        display: flex;
-        img {
-          height: 80px;
-        }
+        @include center();
       }
       img {
         max-width: 100%;
-        padding: 20px 10px;
-        &:last-child {
-          padding-right: 0;
-        }
       }
     }
   }

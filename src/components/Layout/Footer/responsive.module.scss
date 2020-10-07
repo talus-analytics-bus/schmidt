@@ -1,32 +1,22 @@
 @import '../../../assets/styles/vars.scss';
 
 @media #{$phone} {
-    .footerContainer {
-        grid-template-columns: 1fr;
-        .mainLogo {
-            margin-bottom: 10px;
-            a {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                img {
-                    max-width: 50%;
-                }
-            }
-        }
-        .logos {
-            display: flex;
-            flex-direction: column;
-            align-items: center;  
-            padding: 2vw 30vw;  
-            a {
-                margin: 4vw 0;
-            }        
-        }
-        .copyright {
-            text-align: center;
-            padding: 0 3vw 3vw 3vw;
-            font-size: .9rem;
-        }
+  .footerContainer {
+    .footer {
+      .logos {
+        width: 400px;
+      }
     }
+  }
+}
+
+@media #{$phone-narrow} {
+  .footerContainer {
+    .footer {
+      .logos {
+        width: 100%;
+        padding: 20px 0px 60px 0px;
+      }
+    }
+  }
 }
