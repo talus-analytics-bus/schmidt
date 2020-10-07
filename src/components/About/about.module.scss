@@ -12,7 +12,6 @@
   min-height: 90vh;
   h2 {
     font-weight: 500;
-    font-family: 'rawline', sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,7 +38,6 @@
         padding: 10px 20px;
         cursor: pointer;
         font-size: 1.7rem;
-        font-family: 'rawline', sans-serif;
         &.selected {
           border-bottom: $b-width solid white;
           z-index: 1;
@@ -76,12 +74,10 @@
     }
     h2 {
       font-weight: 600;
-      font-family: 'rawline', sans-serif;
     }
     h3 {
       font-size: 1.8rem;
       font-weight: 600;
-      font-family: 'rawline', sans-serif;
       border-top: 3px solid $light-blue;
       padding-top: 10px;
       margin: 40px 0px 20px 0px;
@@ -89,7 +85,6 @@
     h4 {
       font-size: 1.6rem;
       font-weight: 600;
-      font-family: 'rawline', sans-serif;
       margin: 40px 0px 20px 0px;
     }
     .contributors {

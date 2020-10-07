@@ -70,7 +70,6 @@
   input {
     background-color: white;
     border-radius: $border-radius;
-    font-family: 'rawline', serif;
     font-weight: 600;
     font-size: 1.2rem;
     height: 100%;
@@ -101,7 +100,6 @@
     border: 2px solid $blue;
     @include spaceItemsVert(40px);
     font-size: 1.25rem;
-    font-family: 'rawline', serif;
     padding: 20px 10px;
     .section {
       display: flex;
@@ -126,7 +124,6 @@
       .suggestionList {
         margin-top: 10px;
         margin-left: 10px;
-        font-family: 'Open Sans', sans-serif;
         font-size: 1rem;
         display: flex;
         flex-flow: column;

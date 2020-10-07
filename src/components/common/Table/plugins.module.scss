@@ -15,7 +15,6 @@
   }
   $gray-band: #e6e7e8;
   table.banded {
-    font-family: 'Open Sans', sans-serif;
     font-size: 1.2rem;
     &,
     td,
@@ -107,7 +106,6 @@
     }
   }
   table.bandedStandard {
-    font-family: 'Open Sans', sans-serif;
     &,
     td,
     th,
@@ -261,7 +259,6 @@
     th,
     tr {
       border: none;
-      font-family: 'Open Sans', sans-serif;
     }
     th {
       background-color: white;
@@ -313,7 +310,6 @@
   }
   // pagination styling
   .paginationTotal {
-    font-family: 'Open Sans', sans-serif;
   }
   [class*='react-bootstrap-table-pagination'] {
     font-size: 1rem;
@@ -337,7 +333,6 @@
         }
       }
       a {
-        font-family: 'Open Sans', sans-serif;
         background-color: none;
         border: none;
         color: #333;

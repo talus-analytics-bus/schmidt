@@ -1,7 +1,6 @@
 body,
 button {
-  font-family: 'Open Sans';
-  font-weight: normal;
+  font-family: 'Poppins';
 }
 
 button {
@@ -12,14 +11,16 @@ p {
   margin: 0;
 }
 
-h1 {
-  font-family: 'rawline', serif;
-  // font-size: 2.13rem;
-  // font-weight: 600;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins';
+  font-weight: 600;
 }
 
 h2 {
-  font-family: 'rawline', serif;
   font-size: 2.13rem;
-  // font-weight: 600;
 }
