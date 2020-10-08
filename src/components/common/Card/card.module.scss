@@ -2,9 +2,8 @@
 .cardContainer {
   .card {
     z-index: 1;
-    background-color: darken($very-light-gray, 1%);
+    background-color: $light-gray;
     width: 100%;
-    height: 100%;
     padding: 20px;
     border: 1px solid transparent;
     transition: all ease 0.25s;
@@ -42,6 +41,7 @@
     // let details and actions column use full width
     .col.contentCol {
       width: 100%;
+      height: 100%;
     }
 
     // non-detail thumbnails: normal size
@@ -130,7 +130,8 @@
               position: relative;
               display: flex;
               justify-content: space-between;
-
+              font-weight: 500;
+              margin-bottom: 2px;
               // report, goverment action, etc. displayed just above title
               .type {
                 text-transform: uppercase;
@@ -139,9 +140,9 @@
             }
             .title {
               .text {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
                 line-height: 1.25;
-                font-weight: 600;
+                font-weight: 500;
                 &,
                 .highlighted {
                   color: $blue;
@@ -161,15 +162,12 @@
         }
         .detailsAndActions {
           display: flex;
-          @include spaceItemsHoriz(20px);
           margin-top: 20px;
 
           .details {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            grid-gap: 0 10px;
-            align-items: center;
-
+            display: flex;
+            flex-direction: column;
+            @include spaceItemsVert(10px);
             // color details icons navy blue
             i {
               color: $blue;
@@ -188,21 +186,23 @@
               }
             }
           }
-
-          // actions below main card info to preview file or view popup
-          .actions {
-            display: flex;
-            margin-left: auto;
-            @include spaceItemsHoriz(10px);
-            div {
-              @include center();
-            }
-            .mobilePreviewButton {
-              display: none;
-            }
-          }
         }
 
+        // actions below main card info to preview file or view popup
+        .actions {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          margin-top: 10px;
+          @include spaceItemsHoriz(10px);
+          div {
+            @include center();
+          }
+          .mobilePreviewButton {
+            display: none;
+          }
+        }
         // description snippet, if any text matched, with a few words around the
         // matched text
         .descriptionSnippet {
@@ -240,9 +240,9 @@
     .highlighted {
       // text-decoration: underline;
       // text-decoration-color: underline;
-      box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 $highlighted;
+      box-shadow: inset 0 -10px 0 $highlighted;
       &.small {
-        box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 $highlighted;
+        box-shadow: inset 0 -5px 0 $highlighted;
       }
       color: #333;
     }

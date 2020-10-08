@@ -41,7 +41,7 @@ $box-border: 1px $dark-gray solid;
       position: fixed;
       right: 20px;
       bottom: -100%;
-      background-color: #c4c4c4;
+      background-color: $gray;
       color: white;
       @include boxShadow();
       padding: 6px 10px;

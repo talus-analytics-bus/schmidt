@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 // assets and styles
-import { styles, toggle } from './showmore.module.scss'
+import styles from './showmore.module.scss'
 
 /**
  * @method ShowMore
@@ -26,14 +26,14 @@ export const ShowMore = ({ text = '', charLimit = 30, wordLimit = null }) => {
   const textToShow = getText({ text, expanded, charLimit })
 
   return (
-    <span className={styles}>
+    <span className={styles.container}>
       {textToShow}{' '}
       <span
         onClick={e => {
           e.stopPropagation()
           setExpanded(!expanded)
         }}
-        className={toggle}
+        className={styles.toggle}
       >
         {!textShortEnough && label}
       </span>

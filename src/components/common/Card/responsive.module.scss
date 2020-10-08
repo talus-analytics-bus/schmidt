@@ -7,9 +7,9 @@
         .main {
           .detailsAndActions {
             flex-direction: column;
-            .actions {
-              margin-top: 10px;
-            }
+          }
+          .actions {
+            margin-top: 10px;
           }
         }
       }
@@ -58,13 +58,13 @@
             font-size: 1rem;
           }
           .detailsAndActions {
-            .actions {
-              .previewButton {
-                display: none;
-              }
-              .mobilePreviewButton {
-                display: block;
-              }
+          }
+          .actions {
+            .previewButton {
+              display: none;
+            }
+            .mobilePreviewButton {
+              display: block;
             }
           }
         }
@@ -110,14 +110,14 @@
                 margin-top: 5px;
               }
             }
-            .actions {
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              margin-left: 0px;
-              .mobilePreviewButton {
-                margin-bottom: 10px;
-              }
+          }
+          .actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 0px;
+            .mobilePreviewButton {
+              margin-bottom: 10px;
             }
           }
           .descriptionSnippet {

@@ -448,56 +448,12 @@ export const Card = ({
                   {date === null && <span>Date unavailable</span>}
                 </div>
               </div>
-              <div className={styles.actions}>
-                {!detail && files.length > 0 && (
-                  <>
-                    <div className={styles.previewButton}>
-                      <PrimaryButton
-                        {...{
-                          label: 'Preview',
-                          iconName: 'preview',
-                          isSecondary: true,
-                          onClick: e => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            setShowPreview(true)
-                          },
-                        }}
-                      />
-                    </div>
-                    <div className={styles.mobilePreviewButton}>
-                      <PrimaryButton
-                        {...{
-                          label: 'Open PDF',
-                          iconName: 'launch',
-                          isSecondary: true,
-                          urlIsExternal: true,
-                          url: `${API_URL}/get/file/${title.replace(
-                            /\?/g,
-                            ''
-                          )}?id=${files[0].id}`,
-                          onClick: e => {
-                            e.stopPropagation()
-                          },
-                        }}
-                      />
-                    </div>
-                  </>
-                )}
-                {!detail && (
-                  <div>
-                    <PrimaryButton
-                      {...{
-                        label: 'View details',
-                        iconName: 'read_more',
-                        onClick: () => onViewDetails(id),
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
             </div>
-            <div className={styles.descriptionSnippet}>{card.description}</div>
+            {description !== '' && (
+              <div className={styles.descriptionSnippet}>
+                {card.description}
+              </div>
+            )}
             {
               // reasons related
               related && (
@@ -509,6 +465,54 @@ export const Card = ({
             {!detail && !related && tagSnippets.length > 0 && (
               <div className={styles.tagSnippets}>{tagSnippets}</div>
             )}
+            <div className={styles.actions}>
+              {!detail && files.length > 0 && (
+                <>
+                  <div className={styles.previewButton}>
+                    <PrimaryButton
+                      {...{
+                        label: 'Preview',
+                        iconName: 'preview',
+                        isSecondary: true,
+                        onClick: e => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          setShowPreview(true)
+                        },
+                      }}
+                    />
+                  </div>
+                  <div className={styles.mobilePreviewButton}>
+                    <PrimaryButton
+                      {...{
+                        label: 'Open PDF',
+                        iconName: 'launch',
+                        isSecondary: true,
+                        urlIsExternal: true,
+                        url: `${API_URL}/get/file/${title.replace(
+                          /\?/g,
+                          ''
+                        )}?id=${files[0].id}`,
+                        onClick: e => {
+                          e.stopPropagation()
+                        },
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+              {!detail && (
+                <div>
+                  <PrimaryButton
+                    {...{
+                      label: 'View details',
+                      iconName: 'read_more',
+                      onClick: () => onViewDetails(id),
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             {detail && files.length > 0 && (
               <div className={styles.downloads}>
                 <Panel
