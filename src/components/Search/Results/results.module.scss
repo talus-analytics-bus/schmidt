@@ -4,17 +4,23 @@
   // margin-top: 20px !important; // TODO elegantly
   display: flex;
   flex-flow: column;
-  @include spaceItemsVert(20px);
 
   .sortByAndSearchBar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: flex-end;
+    margin-bottom: 30px;
     .sortBy {
       display: flex;
       align-items: flex-end;
-      @include spaceItemsHoriz(5px);
+      @include spaceItemsHoriz(10px);
+      margin-right: 20px;
+      .sortHeader {
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
     }
   }
 }

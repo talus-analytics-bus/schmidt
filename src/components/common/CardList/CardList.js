@@ -81,7 +81,7 @@ export const CardList = ({
     return (
       <div className={styles.cardList}>
         <div className={styles.cards}>{cards}</div>
-        {setNextPage && (
+        {/* {setNextPage && (
           <div className={styles.nextButton}>
             <FloatButton
               {...{
@@ -103,7 +103,7 @@ export const CardList = ({
               }}
             />
           </div>
-        )}
+        )} */}
       </div>
     )
 }

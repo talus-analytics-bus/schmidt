@@ -71,7 +71,7 @@ export const Results = ({
             </div>
             <div className={styles.sortBy}>
               <div>
-                Sort by{' '}
+                <div className={styles.sortHeader}>Sort by</div>
                 <Selectpicker
                   {...{
                     setOption: setIsDesc,
@@ -134,18 +134,6 @@ export const Results = ({
       </div>
       {showPaginator && (
         <div className={styles.content}>
-          <Paginator
-            {...{
-              curPage,
-              setCurPage,
-              nTotalRecords: searchData.total,
-              pagesize,
-              setPagesize,
-              showCounter: searchData.data.length > 0,
-              noun: 'item',
-              nouns: 'items',
-            }}
-          />
           <CardList
             {...{
               start,
@@ -167,6 +155,18 @@ export const Results = ({
                       }
                     }
                   : false,
+            }}
+          />
+          <Paginator
+            {...{
+              curPage,
+              setCurPage,
+              nTotalRecords: searchData.total,
+              pagesize,
+              setPagesize,
+              showCounter: searchData.data.length > 0,
+              noun: 'item',
+              nouns: 'items',
             }}
           />
         </div>

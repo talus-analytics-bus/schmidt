@@ -5,8 +5,8 @@
   $bumper-width: 50px;
   border-radius: $border-radius;
   border: 2px solid $blue;
-  width: 50%;
-  $height: 60px;
+  width: 60%;
+  $height: 50px;
   height: $height;
   z-index: 2;
   background-color: white;
@@ -64,7 +64,7 @@
     justify-content: center;
     i {
       color: white;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
   input {

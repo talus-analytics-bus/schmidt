@@ -8,7 +8,7 @@ import { comma } from '../../misc/Util'
 
 // assets
 import logo from '../../../assets/images/white-logo.svg'
-import loadingSvg from '../../../assets/images/loading-blue.svg'
+import loadingSvg from '../../../assets/images/loading.svg'
 import flag from '../../../assets/images/header-test.png'
 
 const Nav = ({ page, loading, bookmarkCount, ...props }) => {

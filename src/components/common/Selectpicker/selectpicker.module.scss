@@ -7,16 +7,22 @@
   }
 
   select {
-    font-size: 1em;
+    font-size: 0.9em;
     max-width: 200px;
-    height: 36px;
+    height: 30px;
+    border: 2px $blue solid;
+    color: $blue;
+    border-radius: 3px;
     cursor: pointer;
+    &:hover {
+      background-color: $very-light-gray;
+    }
   }
 
   &.disabled {
-    color: gray;
     select {
-      background-color: $very-light-gray;
+      color: $gray;
+      border-color: $gray;
     }
     pointer-events: none;
   }
