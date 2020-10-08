@@ -216,14 +216,6 @@ const IndexPage = () => {
           getContent={content => content}
         />
         <Footer />
-        <StickyHeader
-          {...{
-            show: showScrollToTop,
-            name: 'Name',
-            setSimpleHeaderRef,
-            img: null,
-          }}
-        />
       </>
     )
   }
