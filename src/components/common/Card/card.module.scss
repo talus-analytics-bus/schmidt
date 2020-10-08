@@ -2,12 +2,13 @@
 .cardContainer {
   .card {
     z-index: 1;
-    background-color: $light-gray;
+    background-color: $lighter-gray;
     width: 100%;
     padding: 20px;
     border: 1px solid transparent;
     transition: all ease 0.25s;
     position: relative;
+    font-size: 1.1rem;
     &:not(.detail) {
       &:hover {
         border-color: #333;
