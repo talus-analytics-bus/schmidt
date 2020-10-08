@@ -42,7 +42,7 @@ export const Options = ({
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
   // num filter sections shown open by default
-  const defaultNumOpen = 3
+  const defaultNumOpen = 0
 
   // STATE // -------------------------------------------------------------- //
   // show/hide additional filter sections
@@ -74,13 +74,13 @@ export const Options = ({
     author_types: {
       field: 'author.type_of_authoring_organization',
       key: 'author_types',
-      label: 'Authoring organization types',
+      label: 'Authoring org. types',
       choices: [],
     },
     authors: {
       field: 'author.id',
       key: 'authors',
-      label: 'Authoring organizations',
+      label: 'Authoring orgs.',
       choices: [],
     },
     events: {
@@ -362,15 +362,16 @@ export const Options = ({
         )}
       </div>
       <div className={styles.content}>
-        <PrimaryButton
-          {...{
-            key: 'startOver',
-            onClick: onStartOver,
-            label: 'Start over',
-            isLink: true,
-            disabled: startOverDisabled,
-          }}
-        />
+        {!startOverDisabled && (
+          <PrimaryButton
+            {...{
+              key: 'startOver',
+              onClick: onStartOver,
+              label: 'Start over',
+              disabled: startOverDisabled,
+            }}
+          />
+        )}
         {
           // Sort by controls were originally in the filter section, moved to
           // results section for clarity
@@ -425,22 +426,26 @@ export const Options = ({
           // </div>
         }
         <div className={styles.collapseOrExpandAll}>
-          <PrimaryButton
-            {...{
-              onClick: () => setTriggerCollapseAll(true),
-              label: 'Collapse all',
-              isLink: true,
-              disabled: numOpen === 0,
-            }}
-          />
-          <PrimaryButton
-            {...{
-              onClick: () => setTriggerExpandAll(true),
-              label: 'Expand all',
-              isLink: true,
-              disabled: numOpen === numFilterSections,
-            }}
-          />
+          {numOpen !== 0 && (
+            <PrimaryButton
+              {...{
+                onClick: () => setTriggerCollapseAll(true),
+                label: 'Collapse all',
+                disabled: numOpen === 0,
+                isSecondary: true,
+              }}
+            />
+          )}
+          {numOpen !== numFilterSections && (
+            <PrimaryButton
+              {...{
+                onClick: () => setTriggerExpandAll(true),
+                label: 'Expand all',
+                disabled: numOpen === numFilterSections,
+                isSecondary: true,
+              }}
+            />
+          )}
         </div>
         <div className={styles.filterSections}>{filterSections}</div>
         {

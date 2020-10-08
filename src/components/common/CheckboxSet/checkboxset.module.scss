@@ -8,11 +8,8 @@
     font-family: 'Poppins', sans-serif;
     // max-height: 400px;
     // overflow-y: scroll;
-    margin-left: 20px;
-    @include spaceItemsVert(30px);
-    border-left: 1px solid lighten($gray, 20%);
-    padding-left: 10px;
     &:empty {
+      margin: 10px;
       &::after {
         content: 'No filters in this category available for current selections';
         font-style: italic;

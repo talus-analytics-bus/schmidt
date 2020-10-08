@@ -4,19 +4,45 @@
   > div {
     font-weight: bold;
   }
-  form {
-    display: flex;
-    flex-flow: column;
-  }
   label {
     font-weight: normal;
     color: #333;
     display: flex;
     flex-flow: row;
+    align-items: center;
     white-space: normal;
     cursor: pointer;
+    margin-bottom: 0px;
+    padding: 12px 10px;
+    &.noMargin {
+      padding: 4px 10px 12px 10px;
+    }
+    &:hover {
+      background-color: darken($very-light-gray, 3%);
+      .check {
+        background-color: $light-gray;
+      }
+    }
+    .check {
+      margin-right: 10px;
+      border: 2px $dark-gray solid;
+      @include center();
+      // border-radius: 4px;
+      height: 24px;
+      width: 24px;
+      i {
+        opacity: 0;
+        font-size: 20px;
+      }
+      &.visible {
+        i {
+          opacity: 1;
+        }
+      }
+    }
   }
   input {
+    display: none;
     margin: auto 5px auto 0;
     &:checked + span {
       color: $light-blue;
