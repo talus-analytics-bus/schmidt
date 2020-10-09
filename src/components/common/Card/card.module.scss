@@ -82,7 +82,6 @@
     &.detail {
       padding: 20px;
       grid-template-columns: max-content $letter-width-lg auto;
-      background-color: white;
       .resultNumber {
         display: none;
       }
@@ -334,7 +333,7 @@
     font-style: italic;
     display: flex;
     justify-content: flex-end;
-    color: $green;
+    color: $dark-blue;
     margin-top: 30px;
   }
 }

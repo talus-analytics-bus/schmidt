@@ -390,176 +390,184 @@ const DetailOverlay = ({
             </div>
             <div className={styles.content}>
               <div className={styles.cardAndRelated}>
-                <Card
-                  {...{
-                    ...itemData,
-                    detail: true,
-                    onViewDetails,
-                    bookmarkedIds,
-                    setBookmarkedIds,
-                    filters,
-                    bookmark,
-                    getTooltipText,
-                    floating,
-                    single: !floating,
-                    setFilters: v => {
-                      dismissFloatingOverlay()
-                      setFilters(v)
-                    },
-                    setSearchText,
-                    alwaysStartNew: true,
-                  }}
-                />
-                <div className={classNames(styles.sideBar, styles.wide)}>
-                  <Panel
+                <div className={styles.card}>
+                  <Card
                     {...{
-                      title: 'Topic areas',
-                      iconName: iconNamesByField.key_topics,
+                      ...itemData,
+                      detail: true,
+                      onViewDetails,
+                      bookmarkedIds,
+                      setBookmarkedIds,
+                      filters,
+                      bookmark,
+                      getTooltipText,
+                      floating,
+                      single: !floating,
+                      setFilters: v => {
+                        dismissFloatingOverlay()
+                        setFilters(v)
+                      },
+                      setSearchText,
+                      alwaysStartNew: true,
                     }}
-                  >
-                    <div className={styles.keyTopics}>
-                      {keyTopics.map(value => (
-                        <>
-                          <div
-                            onClick={e =>
-                              toggleFilter({
-                                openNewPage,
-                                e,
-                                getFilterVal: () => value,
-                                filters,
-                                filterKey: 'key_topics',
-                                setFilters: v => {
-                                  dismissFloatingOverlay()
-                                  setFilters(v)
-                                },
-                                setSearchText,
-                                alwaysStartNew: true,
-                              })
-                            }
-                            className={classNames(styles.keyTopic, {
-                              [styles.active]: itemData.key_topics.includes(
-                                value
-                              ),
-                            })}
-                          >
-                            <div className={styles.colorBlock}></div>
-                            <span>
-                              {highlightTag({
-                                displayName: value,
-                                filterValue: value,
-                                filterKey: 'key_topics',
+                  />
+                  <div className={classNames(styles.sideBar, styles.wide)}>
+                    <Panel
+                      {...{
+                        title: 'Topic areas',
+                        iconName: iconNamesByField.key_topics,
+                      }}
+                    >
+                      <div className={styles.keyTopics}>
+                        {keyTopics.map(value => (
+                          <>
+                            <div
+                              onClick={e =>
+                                toggleFilter({
+                                  openNewPage,
+                                  e,
+                                  getFilterVal: () => value,
+                                  filters,
+                                  filterKey: 'key_topics',
+                                  setFilters: v => {
+                                    dismissFloatingOverlay()
+                                    setFilters(v)
+                                  },
+                                  setSearchText,
+                                  alwaysStartNew: true,
+                                })
+                              }
+                              className={classNames(styles.keyTopic, {
+                                [styles.active]: itemData.key_topics.includes(
+                                  value
+                                ),
                               })}
-                            </span>
+                            >
+                              <div className={styles.colorBlock}></div>
+                              <span>
+                                {highlightTag({
+                                  displayName: value,
+                                  filterValue: value,
+                                  filterKey: 'key_topics',
+                                })}
+                              </span>
+                            </div>
+                          </>
+                        ))}
+                      </div>
+                    </Panel>
+                    {
+                      // Author info
+                    }
+                    <Panel
+                      {...{
+                        title: `Authoring org${
+                          itemData.authors.length > 1 ? 's' : ''
+                        }.`,
+                        iconName: iconNamesByField.authors,
+                      }}
+                    >
+                      <div className={styles.authors}>
+                        {itemData.authors.map((d, i) => (
+                          <div className={styles.author}>
+                            <div className={styles.authorName}>
+                              {highlightTag({
+                                displayName: d.authoring_organization,
+                                filterValue: d.id.toString(),
+                                filterKey: 'author.id',
+                              })}
+                            </div>
+                            <div className={styles.authorInfo}>
+                              {authorFields.map(
+                                ({
+                                  name,
+                                  field,
+                                  formatter = v => v[field],
+                                  link = false,
+                                }) => (
+                                  <div className={styles.infoItem}>
+                                    <div className={styles.field}>{name}</div>
+                                    {!link && (
+                                      <div className={styles.value}>
+                                        {formatter(d) || (
+                                          <div className={styles.noData}>
+                                            Data not available
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
+                                    {link && (
+                                      <div className={styles.value}>
+                                        {highlightTag({
+                                          displayName: d[field],
+                                          filterValue: d[field],
+                                          filterKey: 'author.' + field,
+                                        })}
+                                      </div>
+                                    )}
+                                  </div>
+                                )
+                              )}
+                            </div>
                           </div>
-                        </>
-                      ))}
-                    </div>
-                  </Panel>
-                  {
-                    // Author info
-                  }
-                  <Panel
-                    {...{
-                      title: `Authoring organization${
-                        itemData.authors.length > 1 ? 's' : ''
-                      }`,
-                      iconName: iconNamesByField.authors,
-                    }}
-                  >
-                    <div className={styles.authors}>
-                      {itemData.authors.map((d, i) => (
-                        <div className={styles.author}>
-                          <div className={styles.authorName}>
-                            {highlightTag({
-                              displayName: d.authoring_organization,
-                              filterValue: d.id.toString(),
-                              filterKey: 'author.id',
-                            })}
+                        ))}
+                        {itemData.authors.length === 0 && (
+                          <div className={styles.noData}>
+                            Data not available
                           </div>
-                          <div className={styles.authorInfo}>
-                            {authorFields.map(
-                              ({
-                                name,
-                                field,
-                                formatter = v => v[field],
-                                link = false,
-                              }) => (
-                                <div className={styles.infoItem}>
-                                  <div className={styles.field}>{name}</div>
-                                  {!link && (
-                                    <div className={styles.value}>
-                                      {formatter(d) || (
-                                        <div className={styles.noData}>
-                                          Data not available
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
-                                  {link && (
-                                    <div className={styles.value}>
-                                      {highlightTag({
-                                        displayName: d[field],
-                                        filterValue: d[field],
-                                        filterKey: 'author.' + field,
-                                      })}
-                                    </div>
-                                  )}
-                                </div>
-                              )
-                            )}
+                        )}
+                      </div>
+                      {govAuthIndicator}
+                    </Panel>
+                    {
+                      // Event info
+                    }
+                    <Panel
+                      {...{
+                        title: 'Related events',
+                        iconName: iconNamesByField.events,
+                      }}
+                    >
+                      <div className={styles.events}>
+                        {itemData.events
+                          .map(d =>
+                            highlightTag({
+                              displayName: d.name,
+                              filterValue: d.name,
+                              filterKey: 'event.name',
+                            })
+                          )
+                          .map(asBulletDelimitedList)}
+                        {itemData.events.length === 0 && (
+                          <div className={styles.noData}>
+                            Data not available
                           </div>
-                        </div>
-                      ))}
-                      {itemData.authors.length === 0 && (
-                        <div className={styles.noData}>Data not available</div>
-                      )}
-                    </div>
-                    {govAuthIndicator}
-                  </Panel>
-                  {
-                    // Event info
-                  }
-                  <Panel
-                    {...{
-                      title: 'Related events',
-                      iconName: iconNamesByField.events,
-                    }}
-                  >
-                    <div className={styles.events}>
-                      {itemData.events
-                        .map(d =>
-                          highlightTag({
-                            displayName: d.name,
-                            filterValue: d.name,
-                            filterKey: 'event.name',
-                          })
-                        )
-                        .map(asBulletDelimitedList)}
-                      {itemData.events.length === 0 && (
-                        <div className={styles.noData}>Data not available</div>
-                      )}
-                    </div>
-                  </Panel>
-                  {
-                    // Funder info
-                  }
-                  <Panel {...{ title: 'Funders', iconName: 'payments' }}>
-                    <div className={styles.funders}>
-                      {itemData.funders
-                        .map(d =>
-                          highlightTag({
-                            displayName: d.name,
-                            filterValue: d.name,
-                            filterKey: 'funder.name',
-                          })
-                        )
-                        .map(asBulletDelimitedList)}
+                        )}
+                      </div>
+                    </Panel>
+                    {
+                      // Funder info
+                    }
+                    <Panel {...{ title: 'Funders', iconName: 'payments' }}>
+                      <div className={styles.funders}>
+                        {itemData.funders
+                          .map(d =>
+                            highlightTag({
+                              displayName: d.name,
+                              filterValue: d.name,
+                              filterKey: 'funder.name',
+                            })
+                          )
+                          .map(asBulletDelimitedList)}
 
-                      {itemData.funders.length === 0 && (
-                        <div className={styles.noData}>Data not available</div>
-                      )}
-                    </div>
-                  </Panel>
+                        {itemData.funders.length === 0 && (
+                          <div className={styles.noData}>
+                            Data not available
+                          </div>
+                        )}
+                      </div>
+                    </Panel>
+                  </div>
                 </div>
                 {relatedItemsData !== null && (
                   <div className={styles.relatedItems}>
@@ -571,19 +579,21 @@ const DetailOverlay = ({
                         secondary: false,
                       }}
                     >
-                      <Paginator
-                        {...{
-                          curPage,
-                          setCurPage,
-                          nTotalRecords: relatedItemsData.total,
-                          pagesize,
-                          setPagesize,
-                          showCounter:
-                            relatedItemsData.related_items.length > 0,
-                          noun: 'similar item',
-                          nouns: 'similar items',
-                        }}
-                      />
+                      {relatedItemsData.related_items > 0 && (
+                        <Paginator
+                          {...{
+                            curPage,
+                            setCurPage,
+                            nTotalRecords: relatedItemsData.total,
+                            pagesize,
+                            setPagesize,
+                            showCounter:
+                              relatedItemsData.related_items.length > 0,
+                            noun: 'similar item',
+                            nouns: 'similar items',
+                          }}
+                        />
+                      )}
                       <CardList
                         {...{
                           key: `cardList${id}`,

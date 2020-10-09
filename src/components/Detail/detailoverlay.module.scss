@@ -10,20 +10,24 @@
     .container {
       z-index: 9; // above header
       position: absolute;
-      top: -20px; // TODO elegantly, get value from search.module.scss
-      transition: opacity 0.25s;
+      top: -10px; // TODO elegantly, get value from search.module.scss
+      transition: opacity 0.5s;
 
       .band {
         display: flex;
       }
     }
+    .card {
+      background-color: $light-gray;
+      padding-bottom: 20px;
+    }
   }
 
   .container {
     .relatedItems {
-      margin-left: 20px;
-      padding-top: 20px;
-      border-top: 1px solid $dark-blue;
+      background-color: white;
+      margin: 20px;
+      padding: 20px;
       > div > :last-child {
         @include spaceItemsVert(20px);
         margin-top: 30px;
@@ -58,10 +62,8 @@
 
     .band {
       display: none;
-      border-right: 2px solid #5c5c5c;
-
       padding: 20px;
-      background-color: #5c5c5c;
+      background-color: $dark-blue;
       width: 100%;
       .closeButton {
         margin-left: auto;
@@ -88,24 +90,16 @@
     transition: opacity 0.25s;
 
     .content {
-      border-left: 2px solid #5c5c5c;
-      border-bottom: 2px solid #5c5c5c;
-
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 300px;
-      background-color: white;
+      background-color: $dark-blue;
 
       .sideBar {
-        background-color: $very-light-gray;
+        background-color: $light-gray;
         @include spaceItemsVert(10px);
-        margin-left: 20px;
-        &:not(.wide) {
-          border-right: 2px solid #5c5c5c;
-        }
+        margin: 0px 20px;
         &.wide {
-          margin-right: 20px;
-          margin-bottom: 20px;
         }
 
         .keyTopics {
@@ -205,14 +199,15 @@
   }
   &.page {
     .container {
-      padding: 0px 20px 0px 0px;
+      padding: 0px;
       max-width: 1440px;
+      border-left: 2px $dark-blue solid;
+      border-right: 2px $dark-blue solid;
       .content {
-        border-left: 0px solid #5c5c5c;
-        border-bottom: 0px solid #5c5c5c;
-
         .sideBar {
-          border-right: 0px solid #5c5c5c;
+          margin: 0px;
+          padding: 0px 20px 20px 20px;
+          background-color: $light-gray;
         }
       }
     }
@@ -223,7 +218,6 @@
     .content {
       grid-template-columns: unset;
       .sideBar {
-        background-color: $very-light-gray;
         display: grid;
         grid-gap: 10px;
         justify-content: space-between;
