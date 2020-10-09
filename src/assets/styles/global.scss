@@ -1,3 +1,4 @@
+@import './vars.scss';
 body,
 button {
   font-family: 'Poppins';
@@ -7,6 +8,9 @@ button {
   outline: none;
 }
 
+body {
+  color: $dark-blue;
+}
 p {
   margin: 0;
 }

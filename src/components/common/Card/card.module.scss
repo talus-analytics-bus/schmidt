@@ -2,7 +2,7 @@
 .cardContainer {
   .card {
     z-index: 1;
-    background-color: $lighter-gray;
+    background-color: $light-gray;
     width: 100%;
     padding: 20px;
     border: 1px solid transparent;
@@ -51,14 +51,14 @@
       display: flex;
       justify-content: center;
       img {
-        border: 1px solid #365194;
+        border: 1px solid $blue;
         max-height: $max-height;
         max-width: $letter-width;
       }
       &.placeholder {
         position: relative;
         // placeholder thumbnail shown if no file is available
-        border: 1px solid #365194;
+        border: 1px solid $blue;
         height: $max-height; // like a letter page
         width: $letter-width;
         background-color: white;

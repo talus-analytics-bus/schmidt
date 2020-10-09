@@ -23,7 +23,7 @@
     }
   }
   $b-width: 3px;
-  $b: solid $b-width #bebebe;
+  $b: solid $b-width $light-blue;
   .toggleContainer {
     display: flex;
     flex-direction: row;

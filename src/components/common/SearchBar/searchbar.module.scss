@@ -29,7 +29,7 @@
 
     // clear button
     .clearButton {
-      color: #333;
+      color: $dark-blue;
       cursor: pointer;
       font-size: 2rem;
       display: flex;
@@ -83,7 +83,7 @@
     }
     &::placeholder {
       font-style: italic;
-      color: gray;
+      color: $gray;
       font-weight: normal;
     }
   }

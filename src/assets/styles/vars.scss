@@ -1,17 +1,22 @@
 // VARIABLES
 // Project colors
-$dark-blue: #042668;
-$blue: #005b89;
-$light-blue: #2d89ad;
+$dark-blue: #2b2d42;
+$blue: #404263;
+$light-blue: #8d99ae;
 $green: #06777c;
-$orange: #db5800;
+$orange: #ef233c;
+$orange: #ef2e45;
+$orange: #f14156;
+$orange: #be0e23; //firebrick. ellie liked this one the most
+//$orange: #ab0d1f; //one shade darker
 $dark-gray: #6b6b6b;
-$gray: #999999;
-$light-gray: #e5e5e5;
+$gray: #8d99ae;
+$light-gray: #edf2f4;
 
 // General colors:
 $lighter-gray: #f2f2f2;
 $very-light-gray: #f7f7f7;
+$btn: $light-blue;
 $cyan: #53aadd;
 $light-blue-2: #abdaf4;
 
@@ -19,7 +24,7 @@ $light-blue-2: #abdaf4;
 $highlighted: lighten($orange, 30%);
 
 // general styles
-$border: 1px solid #ccc;
+$border: 1px solid #8d99ae;
 $border-radius: 5px;
 $overviews-bottom-margin: 40px;
 
@@ -93,26 +98,33 @@ $overviews-bottom-margin: 40px;
   -webkit-box-shadow: none;
 }
 
-@mixin gradientBlue() {
-  background: -moz-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -ms-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -o-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -webkit-linear-gradient(top, #425379 0%, #213561 100%);
-}
-
-@mixin gradientLanding() {
-  background: -moz-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -ms-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -o-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -webkit-linear-gradient(top, rgba(#005b89, 0.3) 0%, #ffffff 80%);
-}
-
 @mixin gradientGray($dir: top) {
   background: -moz-linear-gradient($dir, #ffffff 0%, #e4e4e4 100%);
   background: -ms-linear-gradient($dir, #ffffff 0%, #e4e4e4 100%);
   background: -o-linear-gradient($dir, #ffffff 0%, #e4e4e4 100%);
   background: -webkit-linear-gradient($dir, #ffffff 0%, #e4e4e4 100%);
 }
+
+// @mixin btn-primary($hover: true) {
+//   border: 2px solid $blue;
+//   border-radius: 6px;
+//   background: -moz-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -ms-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -o-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -webkit-linear-gradient(top, $btn 0%, $blue 100%);
+
+//   @if $hover {
+//     &:hover,
+//     &:active {
+//       background: white;
+//       color: $blue;
+//       border-color: $blue;
+//     }
+//     &:active {
+//       @include boxShadow();
+//     }
+//   }
+// }
 
 @mixin btn-primary($hover: true) {
   border: 2px solid transparent;

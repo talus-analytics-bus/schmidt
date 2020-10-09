@@ -45,7 +45,7 @@ $margin-left: 116px;
         font-size: 1.6rem;
         text-align: left;
         line-height: 2.5rem;
-        color: $dark-gray;
+        color: $blue;
       }
       //   .mainButton {
       //     button,
@@ -73,7 +73,7 @@ $margin-left: 116px;
       }
     }
     .divider {
-      border-top: 1px solid #333;
+      border-top: 1px solid $dark-blue;
       width: 90%;
       margin: 30px auto;
     }
@@ -83,7 +83,7 @@ $margin-left: 116px;
       h1 {
         margin-bottom: 40px;
         margin-top: 30px;
-        color: #333;
+        color: $dark-blue;
       }
       .collectionSection {
         display: flex;
