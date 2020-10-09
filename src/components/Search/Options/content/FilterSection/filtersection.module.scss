@@ -14,7 +14,7 @@
     @include spaceItemsHoriz(10px);
 
     &:hover {
-      background-color: darken($light-gray, 10%);
+      background-color: darken($light-gray, 5%);
       transition: 0.2s;
     }
 
@@ -58,12 +58,13 @@
 
   .content {
     margin-bottom: 20px;
-    background-color: $very-light-gray;
+    background-color: lighten($light-gray, 4%);
     display: none;
+    border: 2px solid $light-gray;
   }
   &.open {
     // + div .bar {
-    //   border-top: 1px solid $gray;
+    //   border-top: 1px solid $light-blue;
     // }
     .bar i:last-of-type {
       transform: unset;

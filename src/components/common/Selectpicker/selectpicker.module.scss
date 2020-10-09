@@ -15,14 +15,14 @@
     border-radius: 3px;
     cursor: pointer;
     &:hover {
-      background-color: $very-light-gray;
+      background-color: lighten($light-gray, 3%);
     }
   }
 
   &.disabled {
     select {
-      color: $gray;
-      border-color: $gray;
+      color: $light-blue;
+      border-color: $light-blue;
     }
     pointer-events: none;
   }

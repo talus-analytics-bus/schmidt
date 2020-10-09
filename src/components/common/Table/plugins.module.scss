@@ -13,7 +13,7 @@
   .paginationTotal {
     margin-left: 0 !important;
   }
-  $gray-band: #e6e7e8;
+  $light-blue-band: #e6e7e8;
   table.banded {
     font-size: 1.2rem;
     &,
@@ -93,7 +93,7 @@
 
     // banded rows
     tbody tr:nth-child(2n + 1) {
-      background-color: $gray-band;
+      background-color: $light-blue-band;
     }
 
     // cell alignment
@@ -158,7 +158,7 @@
 
     // banded rows
     tbody tr:nth-child(2n + 1) {
-      background-color: $gray-band;
+      background-color: $light-blue-band;
     }
     tbody tr:nth-child(2n) {
       &.expandedParent + tr .children > .childRow {
@@ -288,7 +288,7 @@
     }
     tbody tr td:first-child {
       //first column
-      border-right: 1px solid $gray;
+      border-right: 1px solid $light-blue;
       font-size: 1.3rem;
       font-weight: 600;
       text-align: right;
@@ -327,15 +327,15 @@
     li {
       &[class*='active'] {
         a {
-          background-color: $gray-band;
-          color: #333;
+          background-color: $light-blue-band;
+          color: $dark-blue;
           font-weight: 600;
         }
       }
       a {
         background-color: none;
         border: none;
-        color: #333;
+        color: $dark-blue;
       }
     }
   }

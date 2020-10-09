@@ -124,7 +124,7 @@
           * {
             background: transparent;
             + span > span {
-              color: #333;
+              color: $dark-blue;
             }
           }
         }

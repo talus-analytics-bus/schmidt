@@ -11,7 +11,7 @@
     font-size: 1.1rem;
     &:not(.detail) {
       &:hover {
-        border-color: #333;
+        border-color: $dark-blue;
         @include boxShadowStrong();
         cursor: pointer;
       }
@@ -65,7 +65,7 @@
         // format text in placeholder rectangle
         text-align: center;
         align-items: center;
-        color: $gray;
+        color: $light-blue;
         img {
           border: none;
           position: absolute;
@@ -208,14 +208,14 @@
         // matched text
         .descriptionSnippet {
           margin-top: 20px;
-          color: #333;
+          color: $dark-blue;
           font-size: 1.3rem;
           line-height: 1.5;
         }
 
         // tag snippets: including an icon and some matched text
         .tagSnippets {
-          border-top: 1px solid $gray;
+          border-top: 1px solid $light-blue;
           margin-top: 10px;
           padding-top: 10px;
           display: flex;
@@ -245,7 +245,7 @@
       &.small {
         box-shadow: inset 0 -5px 0 $highlighted;
       }
-      color: #333;
+      color: $dark-blue;
     }
     .link {
       color: $light-blue;

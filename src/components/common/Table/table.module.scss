@@ -40,7 +40,7 @@
   }
   // clear borders
   table {
-    border: 2px solid $gray;
+    border: 2px solid $light-blue;
     td > a {
       display: flex;
       align-items: center;
@@ -133,7 +133,7 @@
   }
   .unspecified {
     font-style: italic;
-    color: $gray;
+    color: $light-blue;
   }
 
   // Bootstrap tables
