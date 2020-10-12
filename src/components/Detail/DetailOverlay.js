@@ -588,21 +588,6 @@ const DetailOverlay = ({
                         secondary: false,
                       }}
                     >
-                      {relatedItemsData.related_items > 0 && (
-                        <Paginator
-                          {...{
-                            curPage,
-                            setCurPage,
-                            nTotalRecords: relatedItemsData.total,
-                            pagesize,
-                            setPagesize,
-                            showCounter:
-                              relatedItemsData.related_items.length > 0,
-                            noun: 'similar item',
-                            nouns: 'similar items',
-                          }}
-                        />
-                      )}
                       <CardList
                         {...{
                           key: `cardList${id}`,
@@ -633,6 +618,21 @@ const DetailOverlay = ({
                               : false,
                         }}
                       />
+                      {relatedItemsData.related_items.length > 0 && (
+                        <Paginator
+                          {...{
+                            curPage,
+                            setCurPage,
+                            nTotalRecords: relatedItemsData.total,
+                            pagesize,
+                            setPagesize,
+                            showCounter:
+                              relatedItemsData.related_items.length > 0,
+                            noun: 'similar item',
+                            nouns: 'similar items',
+                          }}
+                        />
+                      )}
                     </Panel>
                   </div>
                 )}
