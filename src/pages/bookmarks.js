@@ -262,19 +262,6 @@ const Bookmarks = ({}) => {
                 )}
                 {showPaginator && someBookmarks && (
                   <>
-                    <Paginator
-                      {...{
-                        curPage,
-                        setCurPage,
-                        nTotalRecords: bookmarkedItemData.total,
-                        pagesize,
-                        setPagesize,
-                        showCounter: true, // TODO
-                        // showCounter: bookmarkedItemData.data.length > 0,
-                        noun: 'item',
-                        nouns: 'items',
-                      }}
-                    />
                     <CardList
                       {...{
                         start,
@@ -296,6 +283,19 @@ const Bookmarks = ({}) => {
                                 }
                               }
                             : false,
+                      }}
+                    />
+                    <Paginator
+                      {...{
+                        curPage,
+                        setCurPage,
+                        nTotalRecords: bookmarkedItemData.total,
+                        pagesize,
+                        setPagesize,
+                        showCounter: true, // TODO
+                        // showCounter: bookmarkedItemData.data.length > 0,
+                        noun: 'item',
+                        nouns: 'items',
                       }}
                     />
                   </>

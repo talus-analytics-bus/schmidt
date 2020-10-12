@@ -69,4 +69,37 @@
   .content {
     @include spaceItemsVert(20px);
   }
+  &.expandable {
+    padding: 15px;
+    height: min-content;
+    .title {
+      cursor: pointer;
+      @include noSelect();
+      &:hover {
+        .ddIcon {
+          background-color: $light-gray;
+          transition: 0.5s;
+        }
+      }
+      margin-bottom: 0px;
+      .titleContent {
+        position: relative;
+      }
+      .text {
+        font-size: 1.3rem;
+        font-weight: normal;
+        margin-left: 5px;
+      }
+      .ddIcon {
+        @include center();
+        border-radius: 50%;
+        i {
+          margin-right: 0px;
+        }
+      }
+    }
+    .content {
+      margin-top: 10px;
+    }
+  }
 }

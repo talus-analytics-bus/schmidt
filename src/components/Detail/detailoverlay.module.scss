@@ -132,7 +132,7 @@
         }
 
         .authors {
-          @include borderItemsVert(40px);
+          @include borderItemsVert(30px);
 
           .author {
             border-width: 4px;

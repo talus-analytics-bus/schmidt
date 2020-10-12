@@ -416,6 +416,7 @@ const DetailOverlay = ({
                       {...{
                         title: 'Topic areas',
                         iconName: iconNamesByField.key_topics,
+                        expandable: true,
                       }}
                     >
                       <div className={styles.keyTopics}>
@@ -465,6 +466,7 @@ const DetailOverlay = ({
                           itemData.authors.length > 1 ? 's' : ''
                         }.`,
                         iconName: iconNamesByField.authors,
+                        expandable: true,
                       }}
                     >
                       <div className={styles.authors}>
@@ -526,6 +528,7 @@ const DetailOverlay = ({
                       {...{
                         title: 'Related events',
                         iconName: iconNamesByField.events,
+                        expandable: true,
                       }}
                     >
                       <div className={styles.events}>
@@ -548,7 +551,13 @@ const DetailOverlay = ({
                     {
                       // Funder info
                     }
-                    <Panel {...{ title: 'Funders', iconName: 'payments' }}>
+                    <Panel
+                      {...{
+                        title: 'Funders',
+                        iconName: 'payments',
+                        expandable: true,
+                      }}
+                    >
                       <div className={styles.funders}>
                         {itemData.funders
                           .map(d =>
