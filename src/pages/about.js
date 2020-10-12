@@ -88,7 +88,7 @@ const About = ({}) => {
           <PrimaryButton
             {...{
               label: 'Download all data',
-              isSecondary: true,
+              isSecondary: false,
               isSmall: true,
               iconName: 'get_app',
               onClick: () => {
