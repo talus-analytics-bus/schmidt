@@ -20,6 +20,8 @@
     .card {
       background-color: $light-gray;
       padding-bottom: 20px;
+      border-left: 3px $dark-blue solid;
+      border-right: 3px $dark-blue solid;
     }
   }
 
