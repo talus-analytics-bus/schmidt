@@ -143,6 +143,13 @@ const IndexPage = () => {
                 coded and searchable database that enables access to documents
                 written about pandemic risk and related issues.
               </p>
+              <p className={styles.landingText}>
+                Using this tool, you can search for specific documents using
+                keywords and filters, or browse by category, authoring
+                organization, specific event, and more. Documents can be
+                bookmarked to view later or downloaded directly from this site
+                (where available).
+              </p>
               <div className={styles.controls}>
                 <div className={styles.mainButton}>
                   <PrimaryButton
@@ -168,7 +175,7 @@ const IndexPage = () => {
                 />
               </div>
             </div>
-            <div className={styles.divider} />
+            {/* <div className={styles.divider} />
             <div className={styles.lower}>
               <div className={styles.collectionSection}>
                 <h1>Browse topic collections</h1>
@@ -203,7 +210,7 @@ const IndexPage = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
           </article>
         </div>
         <ReactTooltip
