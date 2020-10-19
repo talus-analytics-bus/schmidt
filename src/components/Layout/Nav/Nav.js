@@ -73,6 +73,19 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 setShowMobileMenu(false)
               }}
               className={classNames(
+                page === 'browse' ? styles.active : '',
+                styles.linkText
+              )}
+              to={'/browse/'}
+            >
+              <i className={'material-icons'}>explore</i>
+              <span>Explore</span>
+            </Link>
+            <Link
+              onClick={() => {
+                setShowMobileMenu(false)
+              }}
+              className={classNames(
                 page === 'search' ? styles.active : '',
                 styles.linkText
               )}
