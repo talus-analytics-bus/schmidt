@@ -64,14 +64,14 @@ const Checkbox = ({
             checked={curChecked === true}
             disabled={props.disabled ? 'disabled' : ''}
           />
-          <span>
+          <div className={styles.label}>
             {label}
             {count !== null && count > 0 && <> ({comma(count)})</>}
             {
               // count !== null && curChecked === true && <> ({comma(count)})</>
             }
             {custom !== undefined && custom}
-          </span>
+          </div>
         </label>
       </form>
     </div>

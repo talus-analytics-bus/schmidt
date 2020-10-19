@@ -9,7 +9,7 @@ import { InfoTooltip } from '../../common'
 import styles from './results.module.scss'
 
 // local components
-import { getTooltipTextFunc } from '../../misc/Util'
+import { getTooltipTextFunc, isEmpty } from '../../misc/Util'
 import { SearchBar, Paginator, CardList, Selectpicker } from '../../common'
 import { style } from 'd3'
 
@@ -41,6 +41,7 @@ export const Results = ({
   // CONSTANTS // ---------------------------------------------------------- //
   // show paginator if card data loaded
   const showPaginator = searchData !== null
+  const empty = isEmpty(filters) && searchText == ''
 
   // tooltip text generator
   const getTooltipText = getTooltipTextFunc({
@@ -61,14 +62,14 @@ export const Results = ({
   return (
     <div className={styles.results}>
       <div className={styles.sortByAndSearchBar}>
-        {
-          <div className={styles.optionsRow}>
-            <div
+        <div className={styles.optionsRow}>
+          {/* <div
               className={styles.toggleOptions}
               onClick={() => setOptionsVisible(true)}
             >
               Filters
-            </div>
+            </div> */}
+          {!empty && (
             <div className={styles.sortBy}>
               <div>
                 <div className={styles.sortHeader}>Sort by</div>
@@ -118,21 +119,10 @@ export const Results = ({
                 />
               </div>
             </div>
-          </div>
-        }
-        <SearchBar
-          {...{
-            searchText,
-            setSearchText,
-            isSearchingText,
-            setIsSearchingText,
-            setFreezeDataUpdates,
-            setOrderBy,
-            setIsDesc,
-          }}
-        />
+          )}
+        </div>
       </div>
-      {showPaginator && (
+      {showPaginator && !empty && (
         <div className={styles.content}>
           <CardList
             {...{

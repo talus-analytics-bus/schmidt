@@ -1209,10 +1209,10 @@ export const iconNamesByField = {
   funders: 'payments',
   types_of_record: 'insert_drive_file',
   // events: 'outbreak_events',
-  events: 'rings',
+  // events: 'rings',
   // events: 'rings_orange',
   // events: 'caution',
-  // events: 'caution_orange',
+  events: 'caution_orange',
 }
 
 // return icon JSX by name

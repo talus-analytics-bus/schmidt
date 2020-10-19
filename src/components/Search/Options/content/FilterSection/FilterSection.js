@@ -81,10 +81,11 @@ export const FilterSection = ({
         }}
         className={styles.bar}
       >
-        {icon}
+        <div className={styles.icon}>{icon}</div>
         <span className={styles.label}>
-          <span>{filterDefs.label}&nbsp;</span>
-          {
+          <span>{filterDefs.label}</span>
+          <i className={'material-icons'}>arrow_drop_up</i>
+          {/* {
             <span className={styles.numSelected}>
               {numSelected && (
                 <>
@@ -92,9 +93,9 @@ export const FilterSection = ({
                 </>
               )}
             </span>
-          }
+          } */}
         </span>
-        {numSelected && (
+        {/* {numSelected && (
           <div className={styles.clearButton}>
             <PrimaryButton
               {...{
@@ -109,8 +110,7 @@ export const FilterSection = ({
               }}
             />
           </div>
-        )}
-        <i className={'material-icons'}>expand_less</i>
+        )} */}
       </div>
       <div className={styles.content}>
         <FilterSet

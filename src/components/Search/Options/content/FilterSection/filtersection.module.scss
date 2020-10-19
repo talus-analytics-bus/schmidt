@@ -1,12 +1,12 @@
 @import '../../../../../assets/styles/vars.scss';
 .filterSection {
-  margin-right: 20px;
   margin-bottom: 10px;
   .bar {
     display: flex;
-    flex-flow: row;
+    position: relative;
+    flex-flow: column;
     align-items: center;
-    padding: 10px;
+    padding: 15px 15px 15px 17px;
     font-size: 1.25rem;
     background-color: $light-gray;
     cursor: pointer;
@@ -19,10 +19,26 @@
     }
 
     .label {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+
       .numSelected {
         align-items: flex-end;
         color: $light-blue;
         font-style: italic;
+      }
+      // style caret
+      i {
+        margin-left: auto;
+        transform: rotate(180deg);
+        cursor: pointer;
+        margin: -12px -8px -6px -6px;
+        font-size: 2.5rem;
+        color: $orange;
       }
     }
     .clearButton {
@@ -31,22 +47,17 @@
         margin-left: 0;
       }
     }
-
-    // make icons navy and larger
-    img {
-      $size: 32px;
-      height: $size;
-      width: $size;
-    }
-    i {
-      color: $blue;
-      font-size: 2rem;
-
-      // style caret
-      &:last-of-type {
-        margin-left: auto;
-        transform: rotate(180deg);
-        cursor: pointer;
+    .icon {
+      // make icons navy and larger
+      img {
+        $size: 40px;
+        height: $size;
+        width: $size;
+        margin-bottom: 8px;
+      }
+      i {
+        color: $orange;
+        font-size: 3rem;
       }
     }
   }
@@ -61,6 +72,9 @@
     background-color: lighten($light-gray, 4%);
     display: none;
     border: 2px solid $light-gray;
+    position: absolute;
+    z-index: 5;
+    @include boxShadow();
   }
   &.open {
     // + div .bar {

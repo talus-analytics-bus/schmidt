@@ -159,20 +159,21 @@ const IndexPage = () => {
                     }}
                   />
                 </div>
-
-                <SearchBar
-                  {...{
-                    searchText,
-                    setSearchText,
-                    isSearchingText,
-                    setIsSearchingText,
-                    setFreezeDataUpdates,
-                    setOrderBy,
-                    setIsDesc,
-                    previewResults: searchResults,
-                    right: false,
-                  }}
-                />
+                <div className={styles.searchBar}>
+                  <SearchBar
+                    {...{
+                      searchText,
+                      setSearchText,
+                      isSearchingText,
+                      setIsSearchingText,
+                      setFreezeDataUpdates,
+                      setOrderBy,
+                      setIsDesc,
+                      previewResults: searchResults,
+                      right: false,
+                    }}
+                  />
+                </div>
               </div>
             </div>
             {/* <div className={styles.divider} />

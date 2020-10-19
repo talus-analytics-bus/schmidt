@@ -40,12 +40,15 @@ $margin-left: 116px;
       }
       .landingText {
         margin-left: $margin-left;
-        margin-top: 30px;
+        margin-top: 80px;
         max-width: 70%;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         text-align: left;
         line-height: 2rem;
-        color: $blue;
+        color: $light-blue;
+        &:nth-of-type(2) {
+          margin-top: 40px;
+        }
       }
       //   .mainButton {
       //     button,
@@ -64,11 +67,14 @@ $margin-left: 116px;
       .controls {
         margin-left: $margin-left;
         .mainButton {
-          margin: 30px 0px;
+          margin: 80px 0px 30px 0px;
           button {
             padding: 15px;
             font-size: 1.3rem;
           }
+        }
+        .searchBar {
+          width: 60%;
         }
       }
     }

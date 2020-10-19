@@ -11,6 +11,7 @@ import {
   FloatButton,
   CheckboxSet,
   PrimaryButton,
+  SearchBar,
 } from '../../common'
 import FilterSection from './content/FilterSection/FilterSection'
 
@@ -38,6 +39,9 @@ export const Options = ({
   setToYear,
   mobile,
   setOptionsVisible,
+  isSearchingText,
+  setIsSearchingText,
+  setFreezeDataUpdates,
   ...props
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
@@ -61,44 +65,54 @@ export const Options = ({
     years: {
       field: 'years',
       key: 'years',
-      label: 'Years',
+      label: 'Date',
       choices: [],
       custom: true,
     },
     key_topics: {
       field: 'key_topics',
       key: 'key_topics',
-      label: 'Topic areas',
+      label: 'Topic area',
       choices: [],
     },
     author_types: {
       field: 'author.type_of_authoring_organization',
       key: 'author_types',
-      label: 'Authoring org. types',
+      label: (
+        <div>
+          Authoring
+          <br /> org. type
+        </div>
+      ),
       choices: [],
     },
     authors: {
       field: 'author.id',
       key: 'authors',
-      label: 'Authoring orgs.',
+      label: (
+        <div>
+          Authoring
+          <br /> organization
+        </div>
+      ),
       choices: [],
     },
     events: {
       field: 'event.name',
       key: 'events',
-      label: 'Events',
+      label: 'Event',
       choices: [],
     },
     funders: {
       field: 'funder.name',
       key: 'funders',
-      label: 'Funders',
+      label: 'Funder',
       choices: [],
     },
     types_of_record: {
       field: 'type_of_record',
       key: 'types_of_record',
-      label: 'Record types',
+      label: 'Record type',
       choices: [],
     },
   }
@@ -351,18 +365,34 @@ export const Options = ({
   return (
     <div className={classNames(styles.options, { [styles.mobile]: mobile })}>
       <div className={styles.header}>
-        <h2>Refine search</h2>
-        {mobile && (
+        <h1>Search library</h1>
+        <p>
+          Search the document library by keyword and use filters to narrow down
+          search results.
+        </p>
+        {/* {mobile && (
           <i
             className="material-icons"
             onClick={() => setOptionsVisible(false)}
           >
             close
           </i>
-        )}
+        )} */}
       </div>
-      <div className={styles.content}>
-        {!startOverDisabled && (
+      <SearchBar
+        {...{
+          searchText,
+          setSearchText,
+          isSearchingText,
+          setIsSearchingText,
+          setFreezeDataUpdates,
+          setOrderBy,
+          setIsDesc,
+        }}
+      />
+      <div className={styles.filters}>
+        <h2>Apply filters</h2>
+        {/* {!startOverDisabled && (
           <PrimaryButton
             {...{
               key: 'startOver',
@@ -371,96 +401,8 @@ export const Options = ({
               disabled: startOverDisabled,
             }}
           />
-        )}
-        {
-          // Sort by controls were originally in the filter section, moved to
-          // results section for clarity
-          // <div className={styles.sortBy}>
-          //   <div>
-          //     Sort results by:{' '}
-          //     <Selectpicker
-          //       {...{
-          //         setOption: setOrderBy,
-          //         curSelection: orderBy,
-          //         allOption: null,
-          //         label: null,
-          //         optionList: [
-          //           {
-          //             label: 'Relevance',
-          //             value: 'relevance',
-          //           },
-          //           {
-          //             label: 'Date',
-          //             value: 'date',
-          //           },
-          //           {
-          //             label: 'Title',
-          //             value: 'title',
-          //           },
-          //         ],
-          //       }}
-          //     />
-          //   </div>
-          //   <div>
-          //     <Selectpicker
-          //       {...{
-          //         setOption: setIsDesc,
-          //         curSelection: isDesc,
-          //         allOption: null,
-          //         label: null,
-          //         // TODO ensure this sticks when coming from another page
-          //         disabled: orderBy === 'relevance',
-          //         optionList: [
-          //           {
-          //             label: 'Descending',
-          //             value: true,
-          //           },
-          //           {
-          //             label: 'Ascending',
-          //             value: false,
-          //           },
-          //         ],
-          //       }}
-          //     />
-          //   </div>
-          // </div>
-        }
-        <div className={styles.collapseOrExpandAll}>
-          {numOpen !== 0 && (
-            <PrimaryButton
-              {...{
-                onClick: () => setTriggerCollapseAll(true),
-                label: 'Collapse all',
-                disabled: numOpen === 0,
-                isSecondary: true,
-              }}
-            />
-          )}
-          {numOpen !== numFilterSections && (
-            <PrimaryButton
-              {...{
-                onClick: () => setTriggerExpandAll(true),
-                label: 'Expand all',
-                disabled: numOpen === numFilterSections,
-                isSecondary: true,
-              }}
-            />
-          )}
-        </div>
+        )} */}
         <div className={styles.filterSections}>{filterSections}</div>
-        {
-          //   showFilterSections && (
-          //   <FloatButton
-          //     {...{
-          //       icon: <i className={'material-icons'}>expand_less</i>,
-          //       label: `${
-          //         showAdditionalFilters ? 'Hide' : 'Show'
-          //       } additional filters`,
-          //       onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
-          //     }}
-          //   />
-          // )
-        }
       </div>
     </div>
   )

@@ -18,49 +18,7 @@
   // space out the left and right sections consistently
   .sections {
     // for large screens show search on the right and options on the left
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 400px 1fr;
-    height: 100%;
-
-    // for small screens show search on top, options as collapsible modal
-    // TODO
-    > div {
-      height: 100%;
-      margin: 0 20px;
-      &:first-child {
-        margin: 0;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-}
-
-@media #{$breakpoint-two} {
-  .search {
-    .sections {
-      grid-template-columns: 270px 1fr;
-      > div {
-        margin: 0 20px;
-      }
-    }
-  }
-}
-
-@media #{$phone} {
-  .search {
-    .sections {
-      grid-template-columns: 1fr;
-      > div {
-        &:first-child {
-          display: none;
-        }
-        &:last-child {
-          margin-left: 0px;
-        }
-      }
-    }
+    display: flex;
+    flex-direction: column;
   }
 }

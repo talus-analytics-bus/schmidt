@@ -1,11 +1,10 @@
 @import '../../../assets/styles/vars.scss';
 .searchBar {
   position: relative;
-  $border-radius: 10px;
   $bumper-width: 50px;
-  border-radius: $border-radius;
+  border-radius: $big-radius;
   border: 2px solid $blue;
-  width: 60%;
+  margin-top: 20px;
   $height: 50px;
   height: $height;
   z-index: 2;
@@ -49,7 +48,7 @@
 
   // bumper is the blue cap on the right end of the bar
   .bumper {
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: 0 $big-radius $big-radius 0;
     background-color: $blue;
     width: 50px;
     position: absolute;
@@ -69,7 +68,7 @@
   }
   input {
     background-color: white;
-    border-radius: $border-radius;
+    border-radius: $big-radius;
     font-weight: 600;
     font-size: 1.2rem;
     height: 100%;
@@ -96,7 +95,7 @@
     top: calc(#{$height} - 4px);
     $border-radius: 10px;
     $bumper-width: 50px;
-    border-radius: $border-radius;
+    border-radius: $big-radius;
     border: 2px solid $blue;
     @include spaceItemsVert(40px);
     font-size: 1.25rem;

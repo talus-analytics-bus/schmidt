@@ -431,6 +431,9 @@ const Search = ({ setPage }) => {
                 setToYear,
                 mobile: false,
                 setOptionsVisible,
+                isSearchingText,
+                setIsSearchingText,
+                setFreezeDataUpdates,
               }}
             />
             <Results
@@ -443,8 +446,6 @@ const Search = ({ setPage }) => {
                 pagesize,
                 setPagesize,
                 searchData,
-                isSearchingText,
-                setIsSearchingText,
                 filters,
                 setFilters,
                 onViewDetails,

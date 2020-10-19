@@ -47,6 +47,10 @@
       color: $light-blue;
     }
   }
+  .label {
+    display: flex;
+    flex-direction: row;
+  }
 
   // gray checkboxes
   &.gray {
