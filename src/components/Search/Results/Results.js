@@ -61,18 +61,46 @@ export const Results = ({
    */
   return (
     <div className={styles.results}>
-      <div className={styles.sortByAndSearchBar}>
-        <div className={styles.optionsRow}>
+      {!empty && (
+        <div className={styles.sortByRow}>
+          {/* <div className={styles.optionsRow}> */}
           {/* <div
               className={styles.toggleOptions}
               onClick={() => setOptionsVisible(true)}
             >
               Filters
             </div> */}
-          {!empty && (
-            <div className={styles.sortBy}>
+          <p className={styles.resultsText}>
+            {searchData.total} result{searchData.total !== 1 ? 's' : ''}
+          </p>
+          <div className={styles.sortBy}>
+            <p className={styles.sortHeader}>Sort by</p>
+            <div>
+              <Selectpicker
+                {...{
+                  setOption: setOrderBy,
+                  curSelection: orderBy,
+                  allOption: null,
+                  label: null,
+                  optionList: [
+                    {
+                      label: 'Relevance',
+                      value: 'relevance',
+                    },
+                    {
+                      label: 'Date',
+                      value: 'date',
+                    },
+                    {
+                      label: 'Title',
+                      value: 'title',
+                    },
+                  ],
+                }}
+              />
+            </div>
+            {orderBy !== 'relevance' && (
               <div>
-                <div className={styles.sortHeader}>Sort by</div>
                 <Selectpicker
                   {...{
                     setOption: setIsDesc,
@@ -83,45 +111,22 @@ export const Results = ({
                     disabled: orderBy === 'relevance',
                     optionList: [
                       {
-                        label: 'Descending',
+                        label: orderBy === 'date' ? 'Newest first' : 'Z to A',
                         value: true,
                       },
                       {
-                        label: 'Ascending',
+                        label: orderBy === 'date' ? 'Oldest first' : 'A to Z',
                         value: false,
                       },
                     ],
                   }}
                 />
               </div>
-              <div>
-                <Selectpicker
-                  {...{
-                    setOption: setOrderBy,
-                    curSelection: orderBy,
-                    allOption: null,
-                    label: null,
-                    optionList: [
-                      {
-                        label: 'Relevance',
-                        value: 'relevance',
-                      },
-                      {
-                        label: 'Date',
-                        value: 'date',
-                      },
-                      {
-                        label: 'Title',
-                        value: 'title',
-                      },
-                    ],
-                  }}
-                />
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+          {/* </div> */}
         </div>
-      </div>
+      )}
       {showPaginator && !empty && (
         <div className={styles.content}>
           <CardList
