@@ -368,8 +368,6 @@ export const Options = ({
       case 'author.id':
         label = 'Author'
         //translate author id into human readable author name
-        console.log('value is: ' + value)
-        console.log(filterSectionData)
         if (filterSectionData !== null && filterSectionData !== undefined) {
           let authorObj = filterSectionData.filter(
             obj => obj.label === 'authors'
@@ -377,7 +375,6 @@ export const Options = ({
           let authorList
           if (authorObj !== undefined) {
             authorList = authorObj.choices
-            console.log(authorList)
             authorList.forEach(author => {
               if (author.value == value) {
                 authorValue = author.label

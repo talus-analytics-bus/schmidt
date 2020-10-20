@@ -386,20 +386,6 @@ export const Card = ({
                 </div>
               </div>
               <div className={styles.quickActions}>
-                {(!detail || floating) && (
-                  <PrimaryButton
-                    {...{
-                      label: 'Open in new tab',
-                      iconName: 'launch',
-                      url: `/detail/?id=${id}`,
-                      urlIsExternal: true,
-                      isIcon: true,
-                      onClick: e => {
-                        e.stopPropagation()
-                      },
-                    }}
-                  />
-                )}
                 {bookmarkedIds !== null && (
                   <BookmarkToggle
                     {...{
@@ -511,6 +497,19 @@ export const Card = ({
                     }}
                   />
                 </div>
+              )}
+              {(!detail || floating) && (
+                <PrimaryButton
+                  {...{
+                    label: 'Open in new tab',
+                    iconName: 'launch',
+                    url: `/detail/?id=${id}`,
+                    urlIsExternal: true,
+                    onClick: e => {
+                      e.stopPropagation()
+                    },
+                  }}
+                />
               )}
             </div>
             {detail && files.length > 0 && (

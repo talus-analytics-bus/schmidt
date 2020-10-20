@@ -8,7 +8,7 @@
     border: 1px solid transparent;
     transition: all ease 0.25s;
     position: relative;
-    font-size: 1.1rem;
+    font-size: 1rem;
     &:not(.detail) {
       &:hover {
         border-color: $dark-blue;
@@ -121,7 +121,7 @@
         .top {
           display: grid;
           grid-gap: 0 20px;
-          grid-template-columns: auto 1fr;
+          grid-template-columns: 1fr auto;
           align-items: flex-start;
 
           .headerAndTitle {
@@ -136,17 +136,19 @@
               .type {
                 text-transform: uppercase;
                 cursor: pointer;
+                font-size: 1rem;
+                font-weight: 400;
+                color: $blue;
               }
             }
             .title {
               .text {
-                font-size: 1.3rem;
-                line-height: 1.25;
+                max-width: 85%;
+                margin-top: 10px;
+                font-size: 1.6rem;
+                line-height: 1.45;
                 font-weight: 500;
-                &,
-                .highlighted {
-                  color: $blue;
-                }
+                color: $dark-blue;
               }
             }
           }
@@ -162,7 +164,9 @@
         }
         .detailsAndActions {
           display: flex;
-          margin-top: 20px;
+          margin-top: 15px;
+          padding-bottom: 20px;
+          border-bottom: 1px $blue solid;
 
           .details {
             display: flex;
@@ -180,10 +184,9 @@
               display: flex;
               align-items: center;
             }
-            .authOrgList {
-              span {
-                // cursor: pointer;
-              }
+            .authOrgList,
+            .date {
+              font-size: 1rem;
             }
           }
         }
@@ -194,7 +197,7 @@
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-          margin-top: 10px;
+          margin-top: 20px;
           @include spaceItemsHoriz(10px);
           div {
             @include center();
@@ -208,15 +211,12 @@
         .descriptionSnippet {
           margin-top: 20px;
           color: $dark-blue;
-          font-size: 1.1rem;
           line-height: 1.5;
         }
 
         // tag snippets: including an icon and some matched text
         .tagSnippets {
-          border-top: 1px solid $light-blue;
-          margin-top: 10px;
-          padding-top: 10px;
+          padding-top: 15px;
           display: flex;
           flex-flow: column;
           @include spaceItemsVert(5px);
@@ -247,7 +247,7 @@
       color: $dark-blue;
     }
     .link {
-      color: $light-blue;
+      color: $blue;
       :not(.highlighted) {
         &:hover {
           text-decoration: underline;
