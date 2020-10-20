@@ -345,6 +345,7 @@ export const Options = ({
   // Generate filter badge for 'selected filters' area
   const getBadge = (field, value) => {
     let label
+    let authorValue = null
     switch (field) {
       case 'event.name':
         label = 'Event'
@@ -357,14 +358,14 @@ export const Options = ({
         break
       case 'author.id':
         label = 'Author'
-        // translate author id into human readable author name
+        //translate author id into human readable author name
         if (filterSectionData !== null) {
           let authorList = filterSectionData.filter(
             obj => obj.label === 'authors'
           )[0].choices
           authorList.forEach(author => {
             if (author.value == value) {
-              value = author.label
+              authorValue = author.label
             }
           })
         }
@@ -384,7 +385,10 @@ export const Options = ({
     return (
       <div className={styles.badge}>
         <div>
-          {label}: <span className={styles.value}>{value}</span>
+          {label}:{' '}
+          <span className={styles.value}>
+            {authorValue !== null ? authorValue : value}
+          </span>
         </div>
         <div
           className={classNames('material-icons', styles.closeButton)}
