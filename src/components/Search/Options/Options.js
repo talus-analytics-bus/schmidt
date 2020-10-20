@@ -20,6 +20,7 @@ import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
+import { lab } from 'd3'
 
 export const Options = ({
   showFilterSections,
@@ -341,6 +342,59 @@ export const Options = ({
     )
   })
 
+  // Generate filter badge for 'selected filters' area
+  const getBadge = (field, value) => {
+    let label
+    switch (field) {
+      case 'event.name':
+        label = 'Event'
+        break
+      case 'funder.name':
+        label = 'Funder'
+        break
+      case 'type_of_record':
+        label = 'Record type'
+        break
+      case 'author.id':
+        label = 'Author'
+        break
+      case 'author.type_of_authoring_organization':
+        label = 'Author type'
+        break
+      case 'key_topics':
+        label = 'Topic'
+        break
+      case 'years':
+        label = 'Date'
+        break
+      default:
+        label = 'Filter'
+    }
+    return (
+      <div className={styles.badge}>
+        <div>
+          {label}: <span className={styles.value}>{value}</span>
+        </div>
+        <div
+          className={classNames('material-icons', styles.closeButton)}
+          onClick={() => {
+            const newFilters = { ...filters }
+            newFilters[field] = newFilters[field].filter(v => v !== value)
+
+            if (newFilters[field].length === 0) {
+              delete newFilters[field]
+              setFilters(newFilters)
+            } else {
+              setFilters(newFilters)
+            }
+          }}
+        >
+          close
+        </div>
+      </div>
+    )
+  }
+
   // FUNCTIONS // ------------------------------------------------------- //
   // handle start over
   const onStartOver = () => {
@@ -403,6 +457,30 @@ export const Options = ({
           />
         )} */}
         <div className={styles.filterSections}>{filterSections}</div>
+        {!isEmpty(filters) && (
+          <div className={styles.selectedFilters}>
+            <div className={styles.selectedHeader}>
+              Selected filters
+              {Object.keys(filters).length > 0 && (
+                <span className={styles.clearButton}>
+                  <PrimaryButton
+                    {...{
+                      key: 'clearAll',
+                      onClick: () => setFilters({}),
+                      label: 'Clear all',
+                      isSecondary: true,
+                    }}
+                  />
+                </span>
+              )}
+            </div>
+            <div className={styles.selectedFiltersList}>
+              {Object.entries(filters).map(([field, values]) =>
+                values.map(value => getBadge(field, value))
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

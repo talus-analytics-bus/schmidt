@@ -27,6 +27,47 @@
       align-items: center;
       @include spaceItemsHoriz(10px);
     }
+    .selectedFilters {
+      padding: 15px;
+      background-color: white;
+      .selectedHeader {
+        font-size: 1.4rem;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .clearButton {
+          margin-left: 20px;
+        }
+      }
+      .selectedFiltersList {
+        padding-top: 15px;
+        display: flex;
+        flex-flow: row-wrap;
+        .badge {
+          margin-right: 20px;
+          padding: 10px 15px;
+          background-color: $gray;
+          border-radius: $border-radius;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .value {
+            font-weight: 600;
+          }
+          .closeButton {
+            font-size: 1.1rem;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 3px;
+            &:hover {
+              background-color: lighten($gray, 5%);
+            }
+          }
+        }
+      }
+    }
   }
   // &.mobile {
   //   height: 100%;

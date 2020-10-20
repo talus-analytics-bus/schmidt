@@ -40,7 +40,7 @@ export const Results = ({
   // STATE // -------------------------------------------------------------- //
   // CONSTANTS // ---------------------------------------------------------- //
   // show paginator if card data loaded
-  const showPaginator = searchData !== null
+  const showPaginator = searchData !== null && searchData.total !== 0
   const empty = isEmpty(filters) && searchText == ''
 
   // tooltip text generator
@@ -70,9 +70,11 @@ export const Results = ({
             >
               Filters
             </div> */}
-          <p className={styles.resultsText}>
-            {searchData.total} result{searchData.total !== 1 ? 's' : ''}
-          </p>
+          {searchData !== null && (
+            <p className={styles.resultsText}>
+              {searchData.total} result{searchData.total !== 1 ? 's' : ''}
+            </p>
+          )}
           <div className={styles.sortBy}>
             <p className={styles.sortHeader}>Sort by</p>
             <div>
