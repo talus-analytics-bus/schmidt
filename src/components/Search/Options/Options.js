@@ -127,12 +127,21 @@ export const Options = ({
   if (showFilterSections) {
     filterKeys.forEach(field => {
       // for (const [field, valueCounts] of Object.entries(filterCounts)) {
+      // different icon color only on filters pages
+      let icon
+      if (field == 'key_topics') {
+        icon = 'speech_orange'
+      } else if (field == 'events') {
+        icon = 'caution_orange'
+      } else {
+        icon = iconNamesByField[field] || null
+      }
       const valueCounts = filterCounts[field]
       const curFilterSectionData = {
         label: field, // TODO pretty,
         field,
         choices: [],
-        iconName: iconNamesByField[field] || null,
+        iconName: icon,
       }
       const alreadySeenValues = []
       valueCounts.forEach(([value, count, id]) => {
