@@ -7,10 +7,8 @@
     flex-flow: column;
     align-items: center;
     padding: 15px 15px 15px 17px;
-    font-size: 1.25rem;
     background-color: $light-gray;
     cursor: pointer;
-    text-transform: uppercase;
     @include spaceItemsHoriz(10px);
     @include noSelect();
 
@@ -27,6 +25,7 @@
       text-align: center;
       font-size: 1rem;
       font-weight: 600;
+      text-transform: uppercase;
 
       .numSelected {
         align-items: flex-end;
@@ -77,15 +76,19 @@
     position: absolute;
     z-index: 5;
     @include boxShadow();
-    max-height: 300px;
+    max-height: 315px;
+    width: max-content;
     max-width: 400px;
     overflow: auto;
-    // left: 1px;
-    // top: 120px;
-    // &.rightAlign {
-    //   right: 1px;
-    //   left: unset;
-    // }
+    left: 1px;
+    top: 105px;
+    &.rightAlign {
+      right: 1px;
+      left: unset;
+    }
+    &.lower {
+      top: 120px;
+    }
   }
   &.open {
     // + div .bar {

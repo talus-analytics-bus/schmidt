@@ -39,6 +39,7 @@ export const FilterSection = ({
   const [open, setOpen] = useState(defaultOpen)
 
   let wrapperRef = useRef(null)
+  let contentRef = useRef(null)
 
   // EFFECT HOOKS // ------------------------------------------------------- //
   // when collapse all clicked, set open to false
@@ -128,24 +129,35 @@ export const FilterSection = ({
             />
           </div>
         )} */}
-      </div>
-      <div
-        className={classNames(styles.content, {
-          [styles.rightAlign]:
-            filterDefs.label == 'Record type' || filterDefs.label == 'Funder',
-        })}
-      >
-        <FilterSet
-          {...{
-            checkboxes: true,
-            filterDefs: [{ [filterDefs.field]: filterDefs }],
-            noToggle: true,
-            filters,
-            setFilters,
-            showSelectedFilters: false,
-            vertical: true,
+        <div
+          onClick={e => {
+            e.stopPropagation()
           }}
-        />
+          className={classNames(
+            styles.content,
+            {
+              [styles.rightAlign]:
+                filterDefs.label == 'Record type' ||
+                filterDefs.label == 'Funder',
+            },
+            {
+              [styles.lower]: label == 'author_types' || label == 'authors',
+            }
+          )}
+          ref={contentRef}
+        >
+          <FilterSet
+            {...{
+              checkboxes: true,
+              filterDefs: [{ [filterDefs.field]: filterDefs }],
+              noToggle: true,
+              filters,
+              setFilters,
+              showSelectedFilters: false,
+              vertical: true,
+            }}
+          />
+        </div>
       </div>
     </div>
   )
