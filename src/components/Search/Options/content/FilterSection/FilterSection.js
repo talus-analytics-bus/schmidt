@@ -38,6 +38,8 @@ export const FilterSection = ({
   // open or collapsed?
   const [open, setOpen] = useState(defaultOpen)
 
+  let wrapperRef = useRef(null)
+
   // EFFECT HOOKS // ------------------------------------------------------- //
   // when collapse all clicked, set open to false
   useEffect(() => {
@@ -57,6 +59,20 @@ export const FilterSection = ({
     setTriggerExpandAll(false)
   }, [triggerExpandAll])
 
+  // on click anywhere but in popup, and popup is shown, close popup; otherwise
+  // do nothing
+  useEffect(() => {
+    if (open)
+      document.getElementById('___gatsby').onclick = e => {
+        if (wrapperRef === null || wrapperRef.current === null) return
+        const wrapper = wrapperRef.current
+        if (wrapper && wrapper.contains(e.target)) {
+          return
+        } else {
+          setOpen(false)
+        }
+      }
+  }, [open])
   /**
    * Return JSX for filter section with expand/collapse bar, icon, label, and
    * filter options as checkboxes or radio buttons
@@ -71,7 +87,12 @@ export const FilterSection = ({
       <div
         onClick={() => {
           // toggle open / closed
-          setOpen(!open)
+          if (!open) {
+            // setTriggerCollapseAll(true)
+            setOpen(true)
+          } else {
+            setOpen(false)
+          }
 
           // track number currently open
           const isClosing = open
@@ -79,7 +100,7 @@ export const FilterSection = ({
             setNumOpen(numOpen - 1)
           } else setNumOpen(numOpen + 1)
         }}
-        className={styles.bar}
+        className={classNames(styles.bar, { [styles.open]: open })}
       >
         <div className={styles.icon}>{icon}</div>
         <span className={styles.label}>
@@ -112,7 +133,13 @@ export const FilterSection = ({
           </div>
         )} */}
       </div>
-      <div className={styles.content}>
+      <div
+        ref={wrapperRef}
+        className={classNames(styles.content, {
+          [styles.rightAlign]:
+            filterDefs.label == 'Record type' || filterDefs.label == 'Funder',
+        })}
+      >
         <FilterSet
           {...{
             checkboxes: true,

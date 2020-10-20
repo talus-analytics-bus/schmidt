@@ -12,8 +12,10 @@
     cursor: pointer;
     text-transform: uppercase;
     @include spaceItemsHoriz(10px);
+    @include noSelect();
 
-    &:hover {
+    &:hover,
+    &.open {
       background-color: darken($light-gray, 5%);
       transition: 0.2s;
     }
@@ -75,6 +77,15 @@
     position: absolute;
     z-index: 5;
     @include boxShadow();
+    max-height: 300px;
+    max-width: 400px;
+    overflow: auto;
+    // left: 1px;
+    // top: 120px;
+    // &.rightAlign {
+    //   right: 1px;
+    //   left: unset;
+    // }
   }
   &.open {
     // + div .bar {

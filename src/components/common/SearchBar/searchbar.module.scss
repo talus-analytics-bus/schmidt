@@ -153,14 +153,14 @@
   }
 }
 
-@media #{$breakpoint-one} {
-  .searchBar {
-    width: 100%;
-    &.right {
-      margin-left: 20px;
-    }
-  }
-}
+// @media #{$breakpoint-one} {
+//   .searchBar {
+//     width: 100%;
+//     &.right {
+//       margin-left: 20px;
+//     }
+//   }
+// }
 
 @media #{$phone} {
   .searchBar {
