@@ -368,15 +368,22 @@ export const Options = ({
       case 'author.id':
         label = 'Author'
         //translate author id into human readable author name
-        if (filterSectionData !== null) {
-          let authorList = filterSectionData.filter(
+        console.log('value is: ' + value)
+        console.log(filterSectionData)
+        if (filterSectionData !== null && filterSectionData !== undefined) {
+          let authorObj = filterSectionData.filter(
             obj => obj.label === 'authors'
-          )[0].choices
-          authorList.forEach(author => {
-            if (author.value == value) {
-              authorValue = author.label
-            }
-          })
+          )[0]
+          let authorList
+          if (authorObj !== undefined) {
+            authorList = authorObj.choices
+            console.log(authorList)
+            authorList.forEach(author => {
+              if (author.value == value) {
+                authorValue = author.label
+              }
+            })
+          }
         }
         break
       case 'author.type_of_authoring_organization':
