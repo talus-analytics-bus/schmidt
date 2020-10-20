@@ -79,6 +79,7 @@ export const FilterSection = ({
    */
   return (
     <div
+      ref={wrapperRef}
       className={classNames(styles.filterSection, {
         hide,
         [styles.open]: open,
@@ -87,12 +88,7 @@ export const FilterSection = ({
       <div
         onClick={() => {
           // toggle open / closed
-          if (!open) {
-            // setTriggerCollapseAll(true)
-            setOpen(true)
-          } else {
-            setOpen(false)
-          }
+          setOpen(!open)
 
           // track number currently open
           const isClosing = open
@@ -134,7 +130,6 @@ export const FilterSection = ({
         )} */}
       </div>
       <div
-        ref={wrapperRef}
         className={classNames(styles.content, {
           [styles.rightAlign]:
             filterDefs.label == 'Record type' || filterDefs.label == 'Funder',
