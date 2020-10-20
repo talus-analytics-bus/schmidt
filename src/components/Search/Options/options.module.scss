@@ -28,7 +28,7 @@
       @include spaceItemsHoriz(10px);
     }
     .selectedFilters {
-      padding: 15px;
+      padding: 15px 15px 0px 15px;
       background-color: white;
       .selectedHeader {
         font-size: 1.4rem;
@@ -43,9 +43,12 @@
       .selectedFiltersList {
         padding-top: 15px;
         display: flex;
-        flex-flow: row-wrap;
+        flex-direction: row;
+        flex-wrap: wrap;
         .badge {
+          @include noSelect();
           margin-right: 20px;
+          margin-bottom: 15px;
           padding: 10px 15px;
           background-color: $gray;
           border-radius: $border-radius;

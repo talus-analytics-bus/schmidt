@@ -357,6 +357,17 @@ export const Options = ({
         break
       case 'author.id':
         label = 'Author'
+        // translate author id into human readable author name
+        if (filterSectionData !== null) {
+          let authorList = filterSectionData.filter(
+            obj => obj.label === 'authors'
+          )[0].choices
+          authorList.forEach(author => {
+            if (author.value == value) {
+              value = author.label
+            }
+          })
+        }
         break
       case 'author.type_of_authoring_organization':
         label = 'Author type'
