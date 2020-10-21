@@ -406,10 +406,16 @@ const Browse = ({ setPage }) => {
 
   // generate items in list
   const Item = ({ name, count }) => {
-    return <div>{name}</div>
+    return (
+      <div className={styles.item}>
+        <div className={styles.name}>{name}</div>
+        <div className={styles.count}>
+          {count} document{count == 1 ? '' : 's'}
+        </div>
+      </div>
+    )
   }
-  console.log('List')
-  console.log(browseList)
+
   // JSX
   return (
     <>
@@ -493,7 +499,7 @@ const Browse = ({ setPage }) => {
             <div className={styles.results}>
               {browseList.map((item, index) => (
                 <Item
-                  key={`${item} - ${index}`}
+                  key={`${item[0]} - ${index} - ${item[1]}`}
                   name={item[0]}
                   count={item[1]}
                 />
