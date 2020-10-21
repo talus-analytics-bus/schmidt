@@ -224,10 +224,12 @@
       padding: 0px;
       max-width: 1440px;
       .content {
+        .card {
+          padding: 0px 20px;
+        }
         .sideBar {
           margin: 0px;
           padding: 0px 20px 20px 20px;
-          background-color: $light-gray;
         }
       }
     }
