@@ -305,7 +305,7 @@ export const Card = ({
     card.type_of_record === undefined ||
     card.type_of_record === null
   ) {
-    card.type_of_record = 'Item'
+    card.type_of_record = 'Document'
   }
 
   // JSX
@@ -374,13 +374,19 @@ export const Card = ({
           <div className={styles.main}>
             <div className={styles.top}>
               <div className={styles.headerAndTitle}>
-                <div className={styles.header}>
-                  {card.type_of_record !== '' && (
-                    <div className={styles.type}>{card.type_of_record}</div>
-                  )}
-                </div>
+                {!detail && (
+                  <div className={styles.header}>
+                    {card.type_of_record !== '' && (
+                      <div className={styles.type}>{card.type_of_record}</div>
+                    )}
+                  </div>
+                )}
                 <div className={styles.title}>
-                  <div className={styles.text}>
+                  <div
+                    className={classNames(styles.text, {
+                      [styles.noTopMargin]: detail,
+                    })}
+                  >
                     {title !== '' ? card.title : 'Untitled'}
                   </div>
                 </div>
@@ -437,7 +443,10 @@ export const Card = ({
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
-                {card.description}
+                {!detail && (
+                  <div className={styles.descripLabel}>Description:</div>
+                )}
+                <div className={styles.description}>{card.description}</div>
               </div>
             )}
             {
@@ -519,6 +528,8 @@ export const Card = ({
                     title: 'Downloads',
                     secondary: false,
                     iconName: 'get_app',
+                    expandable: true,
+                    bgColor: false,
                   }}
                 >
                   {files.map(({ id, num_bytes, filename }) => (

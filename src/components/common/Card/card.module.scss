@@ -16,8 +16,12 @@
         cursor: pointer;
       }
       &:active {
-        background-color: darken($very-light-gray, 6%);
+        background-color: darken($light-gray, 6%);
       }
+    }
+    &.detail,
+    &.related {
+      background-color: white;
     }
 
     $max-height: 150px;
@@ -149,6 +153,9 @@
                 line-height: 1.45;
                 font-weight: 500;
                 color: $dark-blue;
+                &.noTopMargin {
+                  margin-top: 0px;
+                }
               }
             }
           }
@@ -180,7 +187,7 @@
             // alignment for individual detail items
             .authOrg,
             .date {
-              @include spaceItemsHoriz(5px);
+              @include spaceItemsHoriz(8px);
               display: flex;
               align-items: center;
             }
@@ -198,7 +205,7 @@
           flex-direction: row;
           justify-content: flex-end;
           margin-top: 20px;
-          @include spaceItemsHoriz(10px);
+          @include spaceItemsHoriz(8px);
           div {
             @include center();
           }
@@ -210,8 +217,14 @@
         // matched text
         .descriptionSnippet {
           margin-top: 20px;
-          color: $dark-blue;
+          color: $blue;
           line-height: 1.5;
+          display: flex;
+          flex-direction: row;
+          .descripLabel {
+            font-weight: 500;
+            margin-right: 10px;
+          }
         }
 
         // tag snippets: including an icon and some matched text
@@ -219,11 +232,12 @@
           padding-top: 15px;
           display: flex;
           flex-flow: column;
-          @include spaceItemsVert(5px);
+          @include spaceItemsVert(10px);
+          line-height: 1.5;
 
           .tagSnippet {
             display: flex;
-            @include spaceItemsHoriz(5px);
+            @include spaceItemsHoriz(8px);
             align-items: center;
             i {
               color: $blue;

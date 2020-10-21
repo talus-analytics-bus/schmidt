@@ -16,6 +16,7 @@ export const Panel = ({
   secondary = true,
   heading = false,
   expandable = false,
+  bgColor = true,
 }) => {
   // CONSTANTS
   const icon = getIconByName({ iconName, styles })
@@ -27,6 +28,7 @@ export const Panel = ({
         [styles.secondary]: secondary,
         [styles.heading]: heading,
         [styles.expandable]: expandable,
+        [styles.color]: bgColor,
       })}
     >
       <div

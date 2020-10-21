@@ -1,4 +1,11 @@
 @import '../../assets/styles/vars.scss';
+
+@mixin sectionHeader() {
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
 .detailOverlay {
   display: flex;
   margin: 0 auto;
@@ -15,24 +22,28 @@
 
       .band {
         display: flex;
+        border-radius: $big-radius $big-radius 0px 0px;
       }
     }
     .card {
-      background-color: $light-gray;
       padding-bottom: 20px;
-      border-left: 3px $dark-blue solid;
-      border-right: 3px $dark-blue solid;
+      margin: 0px 20px;
     }
   }
 
   .container {
     .relatedItems {
-      background-color: white;
-      margin: 20px;
+      background-color: $light-gray;
       padding: 20px;
-      > div > :last-child {
-        @include spaceItemsVert(20px);
-        margin-top: 30px;
+      border-radius: 0px 0px $big-radius $big-radius;
+      .similarHeader {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        @include sectionHeader();
+        .similarText {
+          margin-left: 10px;
+        }
       }
     }
     // standard: max width of screen is 1300px
@@ -64,24 +75,30 @@
 
     .band {
       display: none;
-      padding: 20px;
-      background-color: $dark-blue;
+      padding: 20px 15px 10px 20px;
+      background-color: $light-gray;
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .recordType {
+        @include sectionHeader();
+      }
       .closeButton {
-        margin-left: auto;
-        background-color: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 100%;
         padding: 3px;
         cursor: pointer;
         i {
           color: $blue;
           font-weight: bold;
+          font-size: 2.5rem;
         }
         &:hover {
-          background-color: darken(white, 5%);
+          background-color: darken($light-gray, 5%);
+          border-radius: 50%;
         }
         &:active {
           @include boxShadow();
@@ -95,12 +112,13 @@
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 300px;
-      background-color: $dark-blue;
+      background-color: $light-gray;
+      border-radius: 0px 0px $big-radius $big-radius;
 
       .sideBar {
-        background-color: $light-gray;
         @include spaceItemsVert(10px);
-        margin: 0px 20px;
+        padding: 20px;
+        background-color: white;
         &.wide {
         }
 
@@ -244,11 +262,6 @@
       //     width: max-content;
       //   }
       // }
-    }
-    .container {
-      .relatedItems {
-        margin-right: 20px;
-      }
     }
   }
 }

@@ -4,6 +4,9 @@
     background-color: white;
     padding: 20px;
   }
+  &.color {
+    background-color: $light-gray;
+  }
   .title,
   .titleContent {
     display: flex;
@@ -77,7 +80,7 @@
       @include noSelect();
       &:hover {
         .ddIcon {
-          background-color: $light-gray;
+          background-color: darken($light-gray, 5%);
           transition: 0.5s;
         }
       }
