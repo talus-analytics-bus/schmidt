@@ -408,7 +408,7 @@ export const Card = ({
               </div>
             </div>
 
-            <div className={styles.detailsAndActions}>
+            <div className={styles.detailsAndDownloads}>
               <div className={styles.details}>
                 <div className={styles.authOrg}>
                   <i className={'material-icons'}>person</i>
@@ -440,6 +440,48 @@ export const Card = ({
                   {date === null && <span>Date unavailable</span>}
                 </div>
               </div>
+              {detail && files.length > 0 && (
+                <div className={styles.downloads}>
+                  <Panel
+                    {...{
+                      title: 'Downloads',
+                      secondary: false,
+                      iconName: 'get_app',
+                      bgColor: false,
+                    }}
+                  >
+                    {files.map(({ id, num_bytes, filename }) => (
+                      <div className={styles.downloadItem}>
+                        <i className={'material-icons'}>picture_as_pdf</i>
+                        <div
+                          data-for={'searchHighlightInfo'}
+                          data-tip={'Click to download this file'}
+                        >
+                          <PrimaryButton
+                            {...{
+                              label: (
+                                <div>
+                                  {filename}{' '}
+                                  <span className={styles.noBreak}>
+                                    ({bytesToMegabytes(num_bytes)})
+                                  </span>
+                                </div>
+                              ),
+                              isLink: true,
+                              urlIsExternal: true,
+                              url: `${API_URL}/get/file/${title.replace(
+                                /\?/g,
+                                ''
+                              )}?id=${id}`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    {files.length === 0 && <div>None</div>}
+                  </Panel>
+                </div>
+              )}
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
@@ -521,45 +563,6 @@ export const Card = ({
                 />
               )}
             </div>
-            {detail && files.length > 0 && (
-              <div className={styles.downloads}>
-                <Panel
-                  {...{
-                    title: 'Downloads',
-                    secondary: false,
-                    iconName: 'get_app',
-                    expandable: true,
-                    bgColor: false,
-                  }}
-                >
-                  {files.map(({ id, num_bytes, filename }) => (
-                    <div className={styles.downloadItem}>
-                      <span
-                        data-for={'searchHighlightInfo'}
-                        data-tip={'Click to download this file'}
-                      >
-                        <PrimaryButton
-                          {...{
-                            label: (
-                              <>
-                                {filename} ({bytesToMegabytes(num_bytes)})
-                              </>
-                            ),
-                            isLink: true,
-                            urlIsExternal: true,
-                            url: `${API_URL}/get/file/${title.replace(
-                              /\?/g,
-                              ''
-                            )}?id=${id}`,
-                          }}
-                        />
-                      </span>
-                    </div>
-                  ))}
-                  {files.length === 0 && <div>None</div>}
-                </Panel>
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -24,6 +24,9 @@
         display: flex;
         border-radius: $big-radius $big-radius 0px 0px;
       }
+      .relatedItems {
+        border-radius: 0px 0px $big-radius $big-radius;
+      }
     }
     .card {
       padding-bottom: 20px;
@@ -35,7 +38,6 @@
     .relatedItems {
       background-color: $light-gray;
       padding: 20px;
-      border-radius: 0px 0px $big-radius $big-radius;
       .similarHeader {
         display: flex;
         flex-direction: row;
@@ -221,8 +223,6 @@
     .container {
       padding: 0px;
       max-width: 1440px;
-      border-left: 2px $dark-blue solid;
-      border-right: 2px $dark-blue solid;
       .content {
         .sideBar {
           margin: 0px;
@@ -241,7 +241,7 @@
         display: grid;
         grid-gap: 10px;
         justify-content: space-between;
-        grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+        grid-template-columns: repeat(auto-fit, minmax(auto, 280px));
         > div {
           border: none !important;
           margin: 0 !important;

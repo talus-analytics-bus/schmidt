@@ -109,6 +109,14 @@
       .noData {
         color: gray;
       }
+      .contentCol {
+        .main {
+          .detailsAndDownloads {
+            display: grid;
+            grid-template-columns: 1fr 40%;
+          }
+        }
+      }
     }
 
     .resultNumber {
@@ -169,11 +177,11 @@
             right: -3px;
           }
         }
-        .detailsAndActions {
+        .detailsAndDownloads {
           display: flex;
           margin-top: 15px;
           padding-bottom: 20px;
-          border-bottom: 1px $blue solid;
+          border-bottom: 1px $light-blue solid;
 
           .details {
             display: flex;
@@ -290,7 +298,7 @@
     // if detail card: reformat to suit the details page
     &.detail {
       // hide actions since they are shown elsewhere
-      .detailsAndActions {
+      .detailsAndDownloads {
         .actions {
           display: none;
         }
@@ -304,23 +312,29 @@
 
     // Downloads list
     .downloads {
-      margin-top: 20px;
       width: auto;
+      border-left: 1px $light-blue solid;
+      padding-left: 40px;
+      margin-left: 40px;
       i {
         position: relative;
         left: -5px;
       }
       .downloadItem {
-        display: grid;
-        grid-template-columns: 1fr auto;
-
-        > :first-child {
-          > div {
-            width: auto;
-          }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        > i {
+          margin-left: 4px;
+        }
+        > div {
+          margin-left: 8px;
+          white-space: normal;
         }
         > :last-child {
-          white-space: nowrap;
+          .noBreak {
+            // white-space: nowrap;
+          }
         }
       }
     }
