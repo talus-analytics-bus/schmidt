@@ -1,8 +1,5 @@
 @import '../../assets/styles/vars.scss';
 .browse {
-  // debug: pink
-  // background-color: pink;
-
   // standard: max width of screen is 1300px
   // center content in that view
   // TODO pull up in scope to master SCSS file
@@ -15,52 +12,64 @@
   position: relative;
   min-height: 90vh;
 
+  .browseSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px 1%;
+    .browseButton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      @include noSelect();
+      padding: 15px;
+      width: 100%;
+      border-radius: $big-radius;
+      &:hover {
+        background-color: $light-gray;
+        .selectedRectangle {
+          width: 60px;
+          transition: 0.5s;
+        }
+      }
+      .buttonIcon {
+        $icon-size: 60px;
+        i {
+          font-size: $icon-size;
+          color: $orange;
+        }
+        img {
+          $adjusted-size: calc(#{$icon-size} - 6px);
+          width: $adjusted-size;
+          height: $adjusted-size;
+          margin-bottom: 6px;
+        }
+      }
+      .buttonLabel {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .selectedRectangle {
+        background-color: $orange;
+        border-radius: $border-radius;
+        margin-top: 10px;
+        height: 8px;
+        width: 0px;
+
+        &.selected {
+          width: 60px;
+        }
+      }
+    }
+  }
   // space out the left and right sections consistently
   .sections {
     // for large screens show search on the right and options on the left
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 400px 1fr;
-    height: 100%;
-
-    // for small screens show search on top, options as collapsible modal
-    // TODO
-    > div {
-      height: 100%;
-      margin: 0 20px;
-      &:first-child {
-        margin: 0;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-}
-
-@media #{$breakpoint-two} {
-  .search {
-    .sections {
-      grid-template-columns: 270px 1fr;
-      > div {
-        margin: 0 20px;
-      }
-    }
-  }
-}
-
-@media #{$phone} {
-  .search {
-    .sections {
-      grid-template-columns: 1fr;
-      > div {
-        &:first-child {
-          display: none;
-        }
-        &:last-child {
-          margin-left: 0px;
-        }
-      }
-    }
+    display: flex;
+    flex-direction: column;
   }
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 import { navigate } from 'gatsby'
+import classNames from 'classnames'
 
 // local components
 import Layout from '../components/Layout/Layout'
@@ -19,6 +20,9 @@ import {
   execute,
   withBookmarkedIds,
   defaultContext,
+  filterDefs,
+  getIconByName,
+  iconNamesByField,
 } from '../components/misc/Util'
 
 // styles and assets
@@ -37,6 +41,9 @@ const Browse = ({ setPage }) => {
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
   const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
+
+  // section currently being browsed
+  const [browseSection, setBrowseSection] = useState('key_topics')
 
   //filters modal on mobile
   const [optionsVisible, setOptionsVisible] = useState(false)
@@ -145,7 +152,7 @@ const Browse = ({ setPage }) => {
     newUrlParams.set('order_by', orderBy)
     newUrlParams.set('is_desc', isDesc)
     const newUrl =
-      newUrlParams.toString() !== '' ? `/search/?${newUrlParams}` : '/search/'
+      newUrlParams.toString() !== '' ? `/browse/?${newUrlParams}` : '/browse/'
     const newState = {
       filters,
       curPage,
@@ -345,6 +352,46 @@ const Browse = ({ setPage }) => {
   const bookmarkArr =
     bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
 
+  const filterOptions =
+    context.data.filterCounts !== undefined
+      ? Object.keys(context.data.filterCounts)
+      : []
+
+  // generate buttons to browse by topic, event, year, etc.
+  const BrowseButton = ({ type }) => {
+    let icon
+    if (type == 'key_topics') {
+      icon = 'speech_orange'
+    } else if (type == 'events') {
+      icon = 'caution_orange'
+    } else {
+      icon = iconNamesByField[type] || null
+    }
+    if (type === 'types_of_record') {
+      return null
+    } else {
+      return (
+        <div
+          className={classNames(styles.browseButton, {
+            [styles.selected]: browseSection == type,
+          })}
+          onClick={() => {
+            setBrowseSection(type)
+          }}
+        >
+          <div className={styles.buttonIcon}>
+            {getIconByName({ iconName: icon })}
+          </div>
+          <div className={styles.buttonLabel}>{filterDefs[type].label}</div>
+          <div
+            className={classNames(styles.selectedRectangle, {
+              [styles.selected]: browseSection == type,
+            })}
+          ></div>
+        </div>
+      )
+    }
+  }
   // JSX
   return (
     <>
@@ -356,11 +403,6 @@ const Browse = ({ setPage }) => {
         <SEO title="Search results" />
 
         <div className={styles.browse}>
-          <h1>Browse library</h1>
-          <p>
-            Explore documents by topic area, event, authoring organization, year
-            published, and more.
-          </p>
           {showOverlay !== false && showOverlay !== 'false' && (
             <DetailOverlay
               {...{
@@ -382,7 +424,7 @@ const Browse = ({ setPage }) => {
               }}
             />
           )}
-          {optionsVisible && (
+          {/* {optionsVisible && (
             <Options
               {...{
                 showFilterSections:
@@ -406,7 +448,7 @@ const Browse = ({ setPage }) => {
                 setOptionsVisible,
               }}
             />
-          )}
+          )} */}
           <StickyHeader
             {...{
               show: showScrollToTop,
@@ -415,8 +457,21 @@ const Browse = ({ setPage }) => {
               img: null,
             }}
           />
-          {/* <div className={styles.sections}>
-            <Options
+          <h1>Browse library</h1>
+          <p>
+            Explore documents by topic area, event, authoring organization, year
+            published, and more.
+          </p>
+          {/* Browse buttons */}
+          {context.data.filterCounts !== undefined && (
+            <div className={styles.browseSelection}>
+              {filterOptions.map(item => {
+                return <BrowseButton key={item} type={item} />
+              })}
+            </div>
+          )}
+          <div className={styles.sections}>
+            {/* <Options
               {...{
                 showFilterSections:
                   searchData !== null && baselineFilterCounts !== null,
@@ -438,8 +493,8 @@ const Browse = ({ setPage }) => {
                 mobile: false,
                 setOptionsVisible,
               }}
-            />
-            <Results
+            /> */}
+            {/* <Results
               {...{
                 searchData,
                 searchText,
@@ -464,8 +519,8 @@ const Browse = ({ setPage }) => {
                 setBookmarkedIds,
                 setOptionsVisible,
               }}
-            />
-          </div> */}
+            /> */}
+          </div>
         </div>
         <ReactTooltip
           id={'searchHighlightInfo'}

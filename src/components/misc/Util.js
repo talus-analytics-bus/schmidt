@@ -1477,3 +1477,60 @@ export const defaultContext = {
   data: { filterCounts: undefined, items: {} },
   setData: () => '',
 }
+
+// filter defs
+export const filterDefs = {
+  years: {
+    field: 'years',
+    key: 'years',
+    label: 'Date',
+    choices: [],
+    custom: true,
+  },
+  key_topics: {
+    field: 'key_topics',
+    key: 'key_topics',
+    label: 'Topic area',
+    choices: [],
+  },
+  author_types: {
+    field: 'author.type_of_authoring_organization',
+    key: 'author_types',
+    label: (
+      <div>
+        Authoring
+        <br /> org. type
+      </div>
+    ),
+    choices: [],
+  },
+  authors: {
+    field: 'author.id',
+    key: 'authors',
+    label: (
+      <div>
+        Authoring
+        <br /> organization
+      </div>
+    ),
+    choices: [],
+  },
+  events: {
+    field: 'event.name',
+    key: 'events',
+    label: 'Event',
+    choices: [],
+  },
+  funders: {
+    field: 'funder.name',
+    key: 'funders',
+    label: 'Funder',
+    choices: [],
+  },
+  types_of_record: {
+    field: 'type_of_record',
+    key: 'types_of_record',
+    label: 'Record type',
+    choices: [],
+  },
+}
