@@ -457,24 +457,21 @@ export const Card = ({
                           data-for={'searchHighlightInfo'}
                           data-tip={'Click to download this file'}
                         >
-                          <PrimaryButton
-                            {...{
-                              label: (
-                                <div>
-                                  {filename}{' '}
-                                  <span className={styles.noBreak}>
-                                    ({bytesToMegabytes(num_bytes)})
-                                  </span>
-                                </div>
-                              ),
-                              isLink: true,
-                              urlIsExternal: true,
-                              url: `${API_URL}/get/file/${title.replace(
-                                /\?/g,
-                                ''
-                              )}?id=${id}`,
-                            }}
-                          />
+                          <a
+                            target={'_blank'}
+                            rel="noreferrer"
+                            href={`${API_URL}/get/file/${title.replace(
+                              /\?/g,
+                              ''
+                            )}?id=${id}`}
+                          >
+                            <div>
+                              {filename}{' '}
+                              <span className={styles.noBreak}>
+                                ({bytesToMegabytes(num_bytes)})
+                              </span>
+                            </div>
+                          </a>
                         </div>
                       </div>
                     ))}

@@ -68,7 +68,7 @@ export const PrimaryButton = ({
   if (url !== null) {
     if (urlIsExternal) {
       button = (
-        <a target={'_blank'} href={url}>
+        <a target={'_blank'} rel="noreferrer" href={url}>
           {unwrappedButton}
         </a>
       )
