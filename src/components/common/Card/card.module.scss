@@ -111,15 +111,6 @@
       }
       .contentCol {
         .main {
-          .top {
-            .headerAndTitle {
-              .title {
-                .text {
-                  color: $orange;
-                }
-              }
-            }
-          }
           .detailsAndDownloads {
             display: grid;
             grid-template-columns: 1fr 40%;
