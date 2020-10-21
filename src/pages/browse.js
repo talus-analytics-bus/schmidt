@@ -44,6 +44,7 @@ const Browse = ({ setPage }) => {
 
   // section currently being browsed
   const [browseSection, setBrowseSection] = useState('key_topics')
+  const [browseList, setBrowseList] = useState([])
 
   //filters modal on mobile
   const [optionsVisible, setOptionsVisible] = useState(false)
@@ -341,6 +342,16 @@ const Browse = ({ setPage }) => {
     }
   }, [simpleHeaderRef])
 
+  // update list of items when different area is selected for browsing
+  useEffect(() => {
+    setBrowseList([])
+    if (context.data.filterCounts !== undefined) {
+      setBrowseList(context.data.filterCounts[browseSection])
+    } else {
+      setBrowseList([])
+    }
+  }, [browseSection])
+
   // set initialized to false on unmount
   useEffect(() => {
     return () => {
@@ -392,6 +403,13 @@ const Browse = ({ setPage }) => {
       )
     }
   }
+
+  // generate items in list
+  const Item = ({ name, count }) => {
+    return <div>{name}</div>
+  }
+  console.log('List')
+  console.log(browseList)
   // JSX
   return (
     <>
@@ -465,9 +483,22 @@ const Browse = ({ setPage }) => {
           {/* Browse buttons */}
           {context.data.filterCounts !== undefined && (
             <div className={styles.browseSelection}>
-              {filterOptions.map(item => {
-                return <BrowseButton key={item} type={item} />
+              {filterOptions.map((item, index) => {
+                return <BrowseButton key={`${item} - ${index}`} type={item} />
               })}
+            </div>
+          )}
+          {/* Browse results */}
+          {browseList !== null && (
+            <div className={styles.results}>
+              {browseList.map((item, index) => (
+                <Item
+                  key={`${item} - ${index}`}
+                  name={item[0]}
+                  count={item[1]}
+                />
+                // <div>{item[0]}</div>
+              ))}
             </div>
           )}
           <div className={styles.sections}>
