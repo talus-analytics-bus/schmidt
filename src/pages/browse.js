@@ -50,16 +50,6 @@ const Browse = ({ setPage }) => {
   const [browseSection, setBrowseSection] = useState('key_topics')
   const [browseList, setBrowseList] = useState([])
 
-  let rawList = browseList
-  rawList.forEach(item => {
-    if (item[0] == '' || item[0] == null) {
-      item[0] = 'Unspecified'
-    }
-  })
-
-  const listToDisplay =
-    isDesc === 'true' ? rawList.sort().reverse() : rawList.sort()
-
   //filters modal on mobile
   const [optionsVisible, setOptionsVisible] = useState(false)
 
@@ -155,6 +145,18 @@ const Browse = ({ setPage }) => {
     // set show overlay value
     setShowOverlay(newId)
   }
+
+  // format list to display
+  let rawList = browseList
+  rawList.forEach(item => {
+    if (item[0] == '' || item[0] == null) {
+      item[0] = 'Unspecified'
+    }
+  })
+
+  const listToDisplay =
+    isDesc === 'true' ? rawList.sort().reverse() : rawList.sort()
+  console.log(isDesc)
 
   // FUNCTIONS
   // update state object, URL, and history entry when key params change
