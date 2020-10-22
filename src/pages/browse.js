@@ -86,7 +86,6 @@ const Browse = ({ setPage }) => {
   // set back when it is closed
   const [origScrollY, setOrigScrollY] = useState(0)
 
-  const resultText = filterDefs[browseSection].resultLabel
   // search bar text and filters
   /**
    * Get filters stored in URL, if any, as JSON
@@ -134,6 +133,17 @@ const Browse = ({ setPage }) => {
   const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   // CONSTANTS
+  // sorting, case insensitive
+  const caseInsensitiveSort = (a, b) => {
+    a = a[0].toString().toLowerCase()
+    b = b[0].toString().toLowerCase()
+    let result
+    if (a > b) result = 1
+    if (a === b) result = 0
+    if (a < b) result = -1
+    return result
+  }
+
   const resultsHaveLoaded = searchData !== null
 
   // fire when view details buttons are pressed to display the detail overlay
@@ -146,17 +156,20 @@ const Browse = ({ setPage }) => {
     setShowOverlay(newId)
   }
 
-  // format list to display
+  // format list items to display
   let rawList = browseList
   rawList.forEach(item => {
     if (item[0] == '' || item[0] == null) {
       item[0] = 'Unspecified'
     }
   })
-
   const listToDisplay =
-    isDesc === 'true' ? rawList.sort().reverse() : rawList.sort()
-  console.log(isDesc)
+    isDesc === 'true'
+      ? rawList.sort(caseInsensitiveSort).reverse()
+      : rawList.sort(caseInsensitiveSort)
+
+  // text to display above list
+  const resultText = filterDefs[browseSection].resultLabel
 
   // FUNCTIONS
   // update state object, URL, and history entry when key params change
@@ -576,7 +589,7 @@ const Browse = ({ setPage }) => {
                 setOptionsVisible,
               }}
             /> */}
-            {/* <Results
+            <Results
               {...{
                 searchData,
                 searchText,
@@ -601,7 +614,7 @@ const Browse = ({ setPage }) => {
                 setBookmarkedIds,
                 setOptionsVisible,
               }}
-            /> */}
+            />
           </div>
         </div>
         <ReactTooltip
