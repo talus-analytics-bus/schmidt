@@ -52,6 +52,9 @@ const Browse = ({ setPage }) => {
   const [browseSection, setBrowseSection] = useState('key_topics')
   const [browseList, setBrowseList] = useState([])
 
+  // browse item clicked on
+  const [clickedItem, setClickedItem] = useState(null)
+
   // search text for filters
   const [filterSearchText, setFilterSearchText] = useState('')
 
@@ -495,17 +498,25 @@ const Browse = ({ setPage }) => {
               break
             default:
           }
-          console.log(newFilters)
           setFilters(newFilters)
+          if (clickedItem === name) {
+            setClickedItem(null)
+          } else {
+            setClickedItem(name)
+          }
         }}
       >
         <div className={styles.header}>
           <div className={styles.name}>{name}</div>
-          <div className={styles.count}>
-            {count} document{count == 1 ? '' : 's'}
-          </div>
+          {clickedItem !== name && (
+            <div className={styles.count}>
+              {count} document{count == 1 ? '' : 's'}
+            </div>
+          )}
         </div>
-        <div className={styles.nestedResults}>{children}</div>
+        {clickedItem === name && (
+          <div className={styles.nestedResults}>{children}</div>
+        )}
       </div>
     )
   }
@@ -647,10 +658,34 @@ const Browse = ({ setPage }) => {
           {browseList !== null && (
             <div className={styles.results}>
               {filteredList.map((item, index) => (
-                <Item
-                  key={`${item[0]} - ${index} - ${item[1]}`}
-                  content={item}
-                />
+                <Item key={`${item[0]} - ${index} - ${item[1]}`} content={item}>
+                  <Results
+                    {...{
+                      searchData,
+                      searchText,
+                      setSearchText,
+                      curPage,
+                      setCurPage,
+                      pagesize,
+                      setPagesize,
+                      searchData,
+                      isSearchingText,
+                      setIsSearchingText,
+                      filters,
+                      setFilters,
+                      onViewDetails,
+                      setShowOverlay,
+                      setFreezeDataUpdates,
+                      orderBy,
+                      setOrderBy,
+                      isDesc,
+                      setIsDesc,
+                      bookmarkedIds,
+                      setBookmarkedIds,
+                      setOptionsVisible,
+                    }}
+                  />
+                </Item>
                 // <div>{item[0]}</div>
               ))}
             </div>
@@ -680,32 +715,6 @@ const Browse = ({ setPage }) => {
                 setOptionsVisible,
               }}
             /> */}
-            <Results
-              {...{
-                searchData,
-                searchText,
-                setSearchText,
-                curPage,
-                setCurPage,
-                pagesize,
-                setPagesize,
-                searchData,
-                isSearchingText,
-                setIsSearchingText,
-                filters,
-                setFilters,
-                onViewDetails,
-                setShowOverlay,
-                setFreezeDataUpdates,
-                orderBy,
-                setOrderBy,
-                isDesc,
-                setIsDesc,
-                bookmarkedIds,
-                setBookmarkedIds,
-                setOptionsVisible,
-              }}
-            />
           </div>
         </div>
         <ReactTooltip
