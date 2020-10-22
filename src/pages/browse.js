@@ -31,6 +31,7 @@ import {
 
 // styles and assets
 import styles from '../components/Browse/browse.module.scss'
+import { set } from 'd3'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -49,6 +50,9 @@ const Browse = ({ setPage }) => {
   // section currently being browsed
   const [browseSection, setBrowseSection] = useState('key_topics')
   const [browseList, setBrowseList] = useState([])
+
+  // search text for filters
+  const [filterSearchText, setFilterSearchText] = useState('')
 
   //filters modal on mobile
   const [optionsVisible, setOptionsVisible] = useState(false)
@@ -157,16 +161,22 @@ const Browse = ({ setPage }) => {
   }
 
   // format list items to display
+  // make sure there are no blank values
   let rawList = browseList
   rawList.forEach(item => {
     if (item[0] == '' || item[0] == null) {
       item[0] = 'Unspecified'
     }
   })
+  // sort list
   const listToDisplay =
     isDesc === 'true'
       ? rawList.sort(caseInsensitiveSort).reverse()
       : rawList.sort(caseInsensitiveSort)
+  // filter with search term if applicable
+  const filteredList = listToDisplay.filter(item =>
+    item[0].toString().toLowerCase().includes(filterSearchText.toLowerCase())
+  )
 
   // text to display above list
   const resultText = filterDefs[browseSection].resultLabel
@@ -246,6 +256,10 @@ const Browse = ({ setPage }) => {
     if (!initialized) setInitialized(true)
     setIsSearching(false)
     setIsSearchingText(false)
+  }
+
+  const updateFilterSearchText = e => {
+    setFilterSearchText(e.target.value)
   }
 
   // DEBUG
@@ -516,6 +530,7 @@ const Browse = ({ setPage }) => {
             Explore documents by topic area, event, authoring organization, year
             published, and more.
           </p>
+
           {/* Browse buttons */}
           {context.data.filterCounts !== undefined && (
             <div className={styles.browseSelection}>
@@ -524,11 +539,36 @@ const Browse = ({ setPage }) => {
               })}
             </div>
           )}
+
+          {/* Search bar */}
+          <div className={styles.filterSearchBar}>
+            <input
+              onChange={updateFilterSearchText}
+              type="text"
+              placeholder={`Search`}
+              value={filterSearchText}
+            />
+            <div className={styles.inner}>
+              {filterSearchText !== '' && (
+                <i
+                  onClick={() => setFilterSearchText('')}
+                  className={classNames('material-icons', styles.clearButton)}
+                >
+                  clear
+                </i>
+              )}
+            </div>
+            <div className={styles.bumper}>
+              <i className={'material-icons'}>search</i>
+            </div>
+          </div>
+
+          {/* Sort by row */}
           <div className={styles.sortByRow}>
             {searchData !== null && (
               <p className={styles.resultsText}>
-                {browseList.length} {resultText}
-                {browseList.length !== 1 ? 's' : ''}
+                {filteredList.length} {resultText}
+                {filteredList.length !== 1 ? 's' : ''}
               </p>
             )}
             <div>
@@ -552,10 +592,11 @@ const Browse = ({ setPage }) => {
               />
             </div>
           </div>
+
           {/* Browse results */}
           {browseList !== null && (
             <div className={styles.results}>
-              {listToDisplay.map((item, index) => (
+              {filteredList.map((item, index) => (
                 <Item
                   key={`${item[0]} - ${index} - ${item[1]}`}
                   name={item[0]}
@@ -565,6 +606,7 @@ const Browse = ({ setPage }) => {
               ))}
             </div>
           )}
+
           <div className={styles.sections}>
             {/* <Options
               {...{

@@ -66,6 +66,86 @@
       }
     }
   }
+  .filterSearchBar {
+    position: relative;
+    $bumper-width: 50px;
+    border-radius: $big-radius;
+    border: 2px solid $blue;
+    margin-bottom: 20px;
+    $height: 50px;
+    height: $height;
+    z-index: 2;
+    background-color: white;
+    width: 50%;
+    &.right {
+      margin-left: auto;
+    }
+
+    // loading spinner and clear button which reside inside the area not covered
+    // by the blue bumper
+    .inner {
+      position: absolute;
+      right: $bumper-width;
+      top: 7px;
+      display: flex;
+      align-items: center;
+      width: max-content;
+      margin-left: auto;
+      background-color: transparent;
+
+      // clear button
+      .clearButton {
+        color: $dark-blue;
+        cursor: pointer;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+      }
+    }
+
+    // bumper is the blue cap on the right end of the bar
+    .bumper {
+      border-radius: 0 $big-radius $big-radius 0;
+      background-color: $blue;
+      width: 50px;
+      position: absolute;
+      height: calc(100% + 4px);
+      top: -2px;
+      right: -2px;
+      cursor: default;
+
+      // magnifying glass icon
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        color: white;
+        font-size: 2rem;
+      }
+    }
+    input {
+      background-color: white;
+      border-radius: $big-radius;
+      font-weight: 600;
+      font-size: 1.2rem;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 15px 10px;
+      border: none;
+      &:active,
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-style: italic;
+        color: $light-blue;
+        font-weight: normal;
+      }
+    }
+  }
 
   .sortByRow {
     display: flex;
