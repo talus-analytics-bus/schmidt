@@ -343,12 +343,14 @@ export const Options = ({
       default:
         label = 'Filter'
     }
+    let tempValue = value
+    if (tempValue === '') tempValue = 'Unspecified'
     return (
       <div className={styles.badge}>
         <div>
           {label}:{' '}
           <span className={styles.value}>
-            {authorValue !== null ? authorValue : value}
+            {authorValue !== null ? authorValue : tempValue}
           </span>
         </div>
         <div
