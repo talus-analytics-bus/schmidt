@@ -52,9 +52,6 @@ const Browse = ({ setPage }) => {
   const [browseSection, setBrowseSection] = useState('key_topics')
   const [browseList, setBrowseList] = useState([])
 
-  // browse item clicked on
-  const [clickedItem, setClickedItem] = useState(null)
-
   // search text for filters
   const [filterSearchText, setFilterSearchText] = useState('')
 
@@ -79,6 +76,11 @@ const Browse = ({ setPage }) => {
   } else {
     urlParams = new URLSearchParams()
   }
+
+  // browse item clicked on
+  const [clickedItem, setClickedItem] = useState(
+    urlParams.get('clicked') || null
+  )
 
   // order by parameters
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
@@ -196,6 +198,7 @@ const Browse = ({ setPage }) => {
     newUrlParams.set('show_overlay', showOverlay)
     newUrlParams.set('order_by', orderBy)
     newUrlParams.set('is_desc', isDesc)
+    newUrlParams.set('clicked', clickedItem)
     const newUrl =
       newUrlParams.toString() !== '' ? `/browse/?${newUrlParams}` : '/browse/'
     const newState = {
@@ -458,55 +461,55 @@ const Browse = ({ setPage }) => {
     const name = content[0]
     const count = content[1]
     return (
-      <div
-        className={styles.item}
-        onClick={() => {
-          let id = null
-          const arr = []
-          if (browseSection === 'authors') {
-            id = content[2]
-          }
-          let newFilters = {}
-          switch (browseSection) {
-            case 'authors':
-              arr.push(id.toString())
-              newFilters['author.id'] = arr
-              break
-            case 'key_topics':
-              arr.push(name)
-              newFilters['key_topics'] = arr
-              break
-            case 'author_types':
-              arr.push(name)
-              newFilters['author.type_of_authoring_organization'] = arr
-              break
-            case 'funders':
-              arr.push(name)
-              newFilters['funder.name'] = arr
-              break
-            case 'years':
-              arr.push(name.toString())
-              newFilters['years'] = arr
-              break
-            case 'types_of_record':
-              arr.push(name)
-              newFilters['type_of_record'] = arr
-              break
-            case 'events':
-              arr.push(name)
-              newFilters['event.name'] = arr
-              break
-            default:
-          }
-          setFilters(newFilters)
-          if (clickedItem === name) {
-            setClickedItem(null)
-          } else {
-            setClickedItem(name)
-          }
-        }}
-      >
-        <div className={styles.header}>
+      <div className={styles.item}>
+        <div
+          className={styles.header}
+          onClick={() => {
+            let id = null
+            const arr = []
+            if (browseSection === 'authors') {
+              id = content[2]
+            }
+            let newFilters = {}
+            switch (browseSection) {
+              case 'authors':
+                arr.push(id.toString())
+                newFilters['author.id'] = arr
+                break
+              case 'key_topics':
+                arr.push(name)
+                newFilters['key_topics'] = arr
+                break
+              case 'author_types':
+                arr.push(name)
+                newFilters['author.type_of_authoring_organization'] = arr
+                break
+              case 'funders':
+                arr.push(name)
+                newFilters['funder.name'] = arr
+                break
+              case 'years':
+                arr.push(name.toString())
+                newFilters['years'] = arr
+                break
+              case 'types_of_record':
+                arr.push(name)
+                newFilters['type_of_record'] = arr
+                break
+              case 'events':
+                arr.push(name)
+                newFilters['event.name'] = arr
+                break
+              default:
+            }
+            setFilters(newFilters)
+            if (clickedItem === name) {
+              setClickedItem(null)
+            } else {
+              setClickedItem(name)
+            }
+          }}
+        >
           <div className={styles.name}>{name}</div>
           {clickedItem !== name && (
             <div className={styles.count}>
