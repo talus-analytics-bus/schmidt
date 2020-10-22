@@ -404,6 +404,7 @@ const Browse = ({ setPage }) => {
     } else {
       setBrowseList([])
     }
+    setClickedItem(null)
   }, [browseSection])
 
   // set initialized to false on unmount
