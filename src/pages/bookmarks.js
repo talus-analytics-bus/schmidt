@@ -239,6 +239,7 @@ const Bookmarks = ({}) => {
               iconName: 'bookmark',
               secondary: false,
               heading: true,
+              bgColor: false,
             }}
           >
             {initialized && (

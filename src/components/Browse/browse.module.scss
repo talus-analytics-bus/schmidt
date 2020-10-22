@@ -170,12 +170,18 @@
     @include spaceItemsVert(20px);
     .item {
       background-color: $light-gray;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       padding: 20px;
       font-size: 1.2rem;
       border-radius: $big-radius;
+      cursor: pointer;
+      &:hover {
+        background-color: darken($light-gray, 5%);
+      }
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
       .name {
         color: $dark-blue;
         font-weight: 500;

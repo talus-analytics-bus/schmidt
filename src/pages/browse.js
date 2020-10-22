@@ -32,6 +32,7 @@ import {
 // styles and assets
 import styles from '../components/Browse/browse.module.scss'
 import { set } from 'd3'
+import { array } from 'prop-types'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -129,7 +130,7 @@ const Browse = ({ setPage }) => {
   const [curPage, setCurPage] = useState(+pageStr)
 
   const [pagesize, setPagesize] = useState(
-    !initialized ? urlParams.get('pagesize') || 10 : 10
+    !initialized ? urlParams.get('pagesize') || 5 : 5
   )
 
   // simple header/footer reference
@@ -389,6 +390,7 @@ const Browse = ({ setPage }) => {
   // update list of items when different area is selected for browsing
   useEffect(() => {
     setBrowseList([])
+    setFilters({})
     if (context.data.filterCounts !== undefined) {
       setBrowseList(context.data.filterCounts[browseSection])
     } else {
@@ -449,13 +451,61 @@ const Browse = ({ setPage }) => {
   }
 
   // generate items in list
-  const Item = ({ name, count }) => {
+  const Item = ({ content, children }) => {
+    const name = content[0]
+    const count = content[1]
     return (
-      <div className={styles.item}>
-        <div className={styles.name}>{name}</div>
-        <div className={styles.count}>
-          {count} document{count == 1 ? '' : 's'}
+      <div
+        className={styles.item}
+        onClick={() => {
+          let id = null
+          const arr = []
+          if (browseSection === 'authors') {
+            id = content[2]
+          }
+          let newFilters = {}
+          switch (browseSection) {
+            case 'authors':
+              arr.push(id.toString())
+              newFilters['author.id'] = arr
+              break
+            case 'key_topics':
+              arr.push(name)
+              newFilters['key_topics'] = arr
+              break
+            case 'author_types':
+              arr.push(name)
+              newFilters['author.type_of_authoring_organization'] = arr
+              break
+            case 'funders':
+              arr.push(name)
+              newFilters['funder.name'] = arr
+              break
+            case 'years':
+              arr.push(name.toString())
+              newFilters['years'] = arr
+              break
+            case 'types_of_record':
+              arr.push(name)
+              newFilters['type_of_record'] = arr
+              break
+            case 'events':
+              arr.push(name)
+              newFilters['event.name'] = arr
+              break
+            default:
+          }
+          console.log(newFilters)
+          setFilters(newFilters)
+        }}
+      >
+        <div className={styles.header}>
+          <div className={styles.name}>{name}</div>
+          <div className={styles.count}>
+            {count} document{count == 1 ? '' : 's'}
+          </div>
         </div>
+        <div className={styles.nestedResults}>{children}</div>
       </div>
     )
   }
@@ -565,7 +615,7 @@ const Browse = ({ setPage }) => {
 
           {/* Sort by row */}
           <div className={styles.sortByRow}>
-            {searchData !== null && (
+            {browseList !== null && (
               <p className={styles.resultsText}>
                 {filteredList.length} {resultText}
                 {filteredList.length !== 1 ? 's' : ''}
@@ -599,8 +649,7 @@ const Browse = ({ setPage }) => {
               {filteredList.map((item, index) => (
                 <Item
                   key={`${item[0]} - ${index} - ${item[1]}`}
-                  name={item[0]}
-                  count={item[1]}
+                  content={item}
                 />
                 // <div>{item[0]}</div>
               ))}
