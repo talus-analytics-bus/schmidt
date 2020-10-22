@@ -67,6 +67,25 @@
     }
   }
 
+  .sortByRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    .resultsText {
+      color: $light-blue;
+    }
+    .sortBy {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      @include spaceItemsHoriz(10px);
+      > div {
+        @include center();
+      }
+    }
+  }
+
   .results {
     @include spaceItemsVert(20px);
     .item {

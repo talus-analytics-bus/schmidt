@@ -1484,6 +1484,7 @@ export const filterDefs = {
     field: 'years',
     key: 'years',
     label: 'Date',
+    resultLabel: 'date',
     choices: [],
     custom: true,
   },
@@ -1491,6 +1492,7 @@ export const filterDefs = {
     field: 'key_topics',
     key: 'key_topics',
     label: 'Topic area',
+    resultLabel: 'topic area',
     choices: [],
   },
   author_types: {
@@ -1502,6 +1504,7 @@ export const filterDefs = {
         <br /> org. type
       </div>
     ),
+    resultLabel: 'authoring organization type',
     choices: [],
   },
   authors: {
@@ -1513,24 +1516,28 @@ export const filterDefs = {
         <br /> organization
       </div>
     ),
+    resultLabel: 'authoring organization',
     choices: [],
   },
   events: {
     field: 'event.name',
     key: 'events',
     label: 'Event',
+    resultLabel: 'event',
     choices: [],
   },
   funders: {
     field: 'funder.name',
     key: 'funders',
     label: 'Funder',
+    resultLabel: 'funder',
     choices: [],
   },
   types_of_record: {
     field: 'type_of_record',
     key: 'types_of_record',
     label: 'Record type',
+    resultLabel: 'record type',
     choices: [],
   },
 }

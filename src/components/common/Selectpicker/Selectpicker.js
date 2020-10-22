@@ -34,7 +34,9 @@ const Selectpicker = ({
         </option>
         {allOption && <option value="all">{allOption}</option>}
         {optionList.map(d => (
-          <option value={d.value}>{d.label}</option>
+          <option key={d.label} value={d.value}>
+            {d.label}
+          </option>
         ))}
       </select>
     </div>

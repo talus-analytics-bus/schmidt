@@ -11,7 +11,11 @@ import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
-import { StickyHeader, LoadingSpinner } from '../components/common'
+import {
+  StickyHeader,
+  LoadingSpinner,
+  Selectpicker,
+} from '../components/common'
 import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
@@ -71,7 +75,7 @@ const Browse = ({ setPage }) => {
   // order by parameters
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
-  const [isDesc, setIsDesc] = useState(isDescStr === 'true')
+  const [isDesc, setIsDesc] = useState(false)
 
   // showing detail overlay?
   const [showOverlay, setShowOverlay] = useState(
@@ -82,6 +86,7 @@ const Browse = ({ setPage }) => {
   // set back when it is closed
   const [origScrollY, setOrigScrollY] = useState(0)
 
+  const resultText = filterDefs[browseSection].resultLabel
   // search bar text and filters
   /**
    * Get filters stored in URL, if any, as JSON
@@ -494,6 +499,36 @@ const Browse = ({ setPage }) => {
               })}
             </div>
           )}
+          <div className={styles.sortByRow}>
+            {searchData !== null && (
+              <p className={styles.resultsText}>
+                {browseList.length} {resultText}
+                {browseList.length !== 1 ? 's' : ''}
+              </p>
+            )}
+            <div>
+              <Selectpicker
+                {...{
+                  setOption: setIsDesc,
+                  curSelection: isDesc,
+                  allOption: null,
+                  label: null,
+                  // TODO ensure this sticks when coming from another page
+                  disabled: orderBy === 'relevance',
+                  optionList: [
+                    {
+                      label: 'Z to A',
+                      value: true,
+                    },
+                    {
+                      label: 'A to Z',
+                      value: false,
+                    },
+                  ],
+                }}
+              />
+            </div>
+          </div>
           {/* Browse results */}
           {browseList !== null && (
             <div className={styles.results}>
