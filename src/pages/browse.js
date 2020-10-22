@@ -86,6 +86,7 @@ const Browse = ({ setPage }) => {
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(false)
+  const [listDesc, setListDesc] = useState(urlParams.get('list_desc') || false)
 
   // showing detail overlay?
   const [showOverlay, setShowOverlay] = useState(
@@ -176,7 +177,7 @@ const Browse = ({ setPage }) => {
   })
   // sort list
   const listToDisplay =
-    isDesc === 'true'
+    listDesc === 'true'
       ? rawList.sort(caseInsensitiveSort).reverse()
       : rawList.sort(caseInsensitiveSort)
   // filter with search term if applicable
@@ -199,6 +200,7 @@ const Browse = ({ setPage }) => {
     newUrlParams.set('order_by', orderBy)
     newUrlParams.set('is_desc', isDesc)
     newUrlParams.set('clicked', clickedItem)
+    newUrlParams.set('list_desc', listDesc)
     const newUrl =
       newUrlParams.toString() !== '' ? `/browse/?${newUrlParams}` : '/browse/'
     const newState = {
@@ -463,7 +465,9 @@ const Browse = ({ setPage }) => {
     return (
       <div className={styles.item}>
         <div
-          className={styles.header}
+          className={classNames(styles.header, {
+            [styles.bigContainer]: clickedItem === name,
+          })}
           onClick={() => {
             let id = null
             const arr = []
@@ -518,7 +522,9 @@ const Browse = ({ setPage }) => {
           )}
         </div>
         {clickedItem === name && (
-          <div className={styles.nestedResults}>{children}</div>
+          <div className={styles.resultContainer}>
+            <div className={styles.nestedResults}>{children}</div>
+          </div>
         )}
       </div>
     )
@@ -638,8 +644,8 @@ const Browse = ({ setPage }) => {
             <div>
               <Selectpicker
                 {...{
-                  setOption: setIsDesc,
-                  curSelection: isDesc,
+                  setOption: setListDesc,
+                  curSelection: listDesc,
                   allOption: null,
                   label: null,
                   optionList: [

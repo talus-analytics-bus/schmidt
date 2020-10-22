@@ -169,18 +169,21 @@
   .results {
     @include spaceItemsVert(20px);
     .item {
-      background-color: $light-gray;
-      padding: 20px;
       font-size: 1.2rem;
-      border-radius: $big-radius;
       cursor: pointer;
-      &:hover {
-        background-color: darken($light-gray, 5%);
-      }
       .header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        background-color: $light-gray;
+        padding: 20px;
+        border-radius: $big-radius;
+        &.bigContainer {
+          border-radius: $big-radius $big-radius 0px 0px;
+        }
+        &:hover {
+          background-color: darken($light-gray, 5%);
+        }
       }
       .name {
         color: $dark-blue;
@@ -188,6 +191,15 @@
       }
       .count {
         color: $light-blue;
+      }
+      .resultContainer {
+        background-color: $light-gray;
+        padding: 0px 20px 20px 20px;
+        border-radius: 0px 0px $big-radius $big-radius;
+      }
+      .nestedResults {
+        padding: 0px 20px 20px 20px;
+        background-color: white;
       }
     }
   }
