@@ -50,6 +50,16 @@ const Browse = ({ setPage }) => {
   const [browseSection, setBrowseSection] = useState('key_topics')
   const [browseList, setBrowseList] = useState([])
 
+  let rawList = browseList
+  rawList.forEach(item => {
+    if (item[0] == '' || item[0] == null) {
+      item[0] = 'Unspecified'
+    }
+  })
+
+  const listToDisplay =
+    isDesc === 'true' ? rawList.sort().reverse() : rawList.sort()
+
   //filters modal on mobile
   const [optionsVisible, setOptionsVisible] = useState(false)
 
@@ -513,8 +523,6 @@ const Browse = ({ setPage }) => {
                   curSelection: isDesc,
                   allOption: null,
                   label: null,
-                  // TODO ensure this sticks when coming from another page
-                  disabled: orderBy === 'relevance',
                   optionList: [
                     {
                       label: 'Z to A',
@@ -532,7 +540,7 @@ const Browse = ({ setPage }) => {
           {/* Browse results */}
           {browseList !== null && (
             <div className={styles.results}>
-              {browseList.map((item, index) => (
+              {listToDisplay.map((item, index) => (
                 <Item
                   key={`${item[0]} - ${index} - ${item[1]}`}
                   name={item[0]}
