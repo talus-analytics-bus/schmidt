@@ -89,6 +89,43 @@
     &.lower {
       top: 120px;
     }
+    .searchContainer {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0px;
+      background-color: $light-gray;
+    }
+    .searchBar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 5px 5px 7px 5px;
+      border: 2px $light-blue solid;
+      background-color: white;
+      .inner {
+        @include center();
+      }
+      .bumper {
+        // magnifying glass icon
+        cursor: default;
+        @include center();
+      }
+      input {
+        font-weight: 600;
+        height: 100%;
+        width: 100%;
+        border: none;
+        &:active,
+        &:focus {
+          outline: none;
+        }
+        &::placeholder {
+          font-style: italic;
+          color: $light-blue;
+          font-weight: normal;
+        }
+      }
+    }
   }
   &.open {
     // + div .bar {
@@ -99,6 +136,7 @@
     }
     .content {
       display: flex;
+      flex-direction: column;
     }
   }
 }

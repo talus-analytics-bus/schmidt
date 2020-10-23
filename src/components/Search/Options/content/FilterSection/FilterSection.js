@@ -155,25 +155,27 @@ export const FilterSection = ({
           )}
           ref={contentRef}
         >
-          <div className={styles.searchBar}>
-            <input
-              onChange={updateFilterSearchText}
-              type="text"
-              placeholder={`Search`}
-              value={filterSearchText}
-            />
-            <div className={styles.inner}>
-              {filterSearchText !== '' && (
-                <i
-                  onClick={() => setFilterSearchText('')}
-                  className={classNames('material-icons', styles.clearButton)}
-                >
-                  clear
-                </i>
-              )}
-            </div>
-            <div className={styles.bumper}>
-              <i className={'material-icons'}>search</i>
+          <div className={styles.searchContainer}>
+            <div className={styles.searchBar}>
+              <input
+                onChange={updateFilterSearchText}
+                type="text"
+                placeholder={`Search`}
+                value={filterSearchText}
+              />
+              <div className={styles.inner}>
+                {filterSearchText !== '' && (
+                  <i
+                    onClick={() => setFilterSearchText('')}
+                    className={classNames('material-icons', styles.clearButton)}
+                  >
+                    clear
+                  </i>
+                )}
+              </div>
+              <div className={styles.bumper}>
+                <i className={'material-icons'}>search</i>
+              </div>
             </div>
           </div>
           <FilterSet
