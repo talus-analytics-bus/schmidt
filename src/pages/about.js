@@ -66,9 +66,9 @@ const About = ({}) => {
     >
       <SEO title="About" />
       <div className={styles.container}>
-        <h2 className={styles.title}>
+        <h1 className={styles.title}>
           <i className={'material-icons'}>info</i>About
-        </h2>
+        </h1>
         <div className={styles.toggleContainer}>
           <div className={styles.tabs}>
             {tabs.map(d => (

@@ -217,7 +217,7 @@ const Bookmarks = ({}) => {
             {...{
               title: (
                 <>
-                  <h2>Bookmarked items</h2>
+                  <h1>Bookmarked items</h1>
                   {someBookmarks && (
                     <div className={styles.actions}>
                       <PrimaryButton
