@@ -147,9 +147,9 @@ export const Results = ({
                 searchData.page !== searchData.num_pages
                   ? () => {
                       setCurPage(curPage + 1)
-                      // if (typeof window !== 'undefined') {
-                      //   window.scrollTo(0, 0)
-                      // }
+                      if (typeof window !== 'undefined') {
+                        window.scrollTo(0, 0)
+                      }
                     }
                   : false,
             }}

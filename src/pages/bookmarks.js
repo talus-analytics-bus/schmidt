@@ -95,7 +95,7 @@ const Bookmarks = ({}) => {
   const onViewDetails = ({ newId, related = false }) => {
     if (typeof window !== undefined && !related) {
       // set scroll Y value
-      // setOrigScrollY(window.scrollY)
+      setOrigScrollY(window.scrollY)
     }
     // set show overlay value
     setShowOverlay(newId)
@@ -183,13 +183,13 @@ const Bookmarks = ({}) => {
   // set scroll event to show "scroll to top" as appropriate
   useEffect(() => {
     const displayThresh = 20
-    // if (simpleHeaderRef.current !== null) {
-    //   if (typeof window !== 'undefined')
-    //     window.addEventListener('scroll', () => {
-    //       if (typeof window !== 'undefined')
-    //         setShowScrollToTop(window.scrollY > displayThresh)
-    //     })
-    // }
+    if (simpleHeaderRef.current !== null) {
+      if (typeof window !== 'undefined')
+        window.addEventListener('scroll', () => {
+          if (typeof window !== 'undefined')
+            setShowScrollToTop(window.scrollY > displayThresh)
+        })
+    }
   }, [simpleHeaderRef])
 
   // count bookmarks to show in nav
@@ -279,9 +279,9 @@ const Bookmarks = ({}) => {
                           bookmarkedItemData.num_pages
                             ? () => {
                                 setCurPage(curPage + 1)
-                                // if (typeof window !== 'undefined') {
-                                //   window.scrollTo(0, 0)
-                                // }
+                                if (typeof window !== 'undefined') {
+                                  window.scrollTo(0, 0)
+                                }
                               }
                             : false,
                       }}

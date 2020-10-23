@@ -15,15 +15,15 @@ const Documentation = ({}) => {
   const onClick = e => {
     let el
     if (e.target.dataset.type === 'ref') {
-      // const num = e.target.id.split('_ednref')[1]
-      // el = document.getElementById('_edn' + num)
-      // el.scrollIntoView()
-      // window.scrollBy(0, -60)
+      const num = e.target.id.split('_ednref')[1]
+      el = document.getElementById('_edn' + num)
+      el.scrollIntoView()
+      window.scrollBy(0, -60)
     } else {
-      // const num = e.target.id.split('_edn')[1]
-      // el = document.getElementById('_ednref' + num)
-      // el.scrollIntoView()
-      // window.scrollBy(0, -113)
+      const num = e.target.id.split('_edn')[1]
+      el = document.getElementById('_ednref' + num)
+      el.scrollIntoView()
+      window.scrollBy(0, -113)
     }
   }
 

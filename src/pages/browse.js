@@ -159,10 +159,10 @@ const Browse = ({ setPage }) => {
 
   // fire when view details buttons are pressed to display the detail overlay
   const onViewDetails = ({ newId, related = false }) => {
-    // if (typeof window !== undefined && !related) {
-    //   // set scroll Y value
-    //   setOrigScrollY(window.scrollY)
-    // }
+    if (typeof window !== undefined && !related) {
+      // set scroll Y value
+      setOrigScrollY(window.scrollY)
+    }
     // set show overlay value
     setShowOverlay(newId)
   }
@@ -389,13 +389,13 @@ const Browse = ({ setPage }) => {
   // set scroll event to show "scroll to top" as appropriate
   useEffect(() => {
     const displayThresh = 20
-    // if (simpleHeaderRef.current !== null) {
-    //   if (typeof window !== 'undefined')
-    //     window.addEventListener('scroll', () => {
-    //       if (typeof window !== 'undefined')
-    //         setShowScrollToTop(window.scrollY > displayThresh)
-    //     })
-    // }
+    if (simpleHeaderRef.current !== null) {
+      if (typeof window !== 'undefined')
+        window.addEventListener('scroll', () => {
+          if (typeof window !== 'undefined')
+            setShowScrollToTop(window.scrollY > displayThresh)
+        })
+    }
   }, [simpleHeaderRef])
 
   // update list of items when different area is selected for browsing
