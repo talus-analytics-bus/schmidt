@@ -63,6 +63,7 @@ export const Collection = ({
       setEntered(true)
     }
   }, [loading])
+
   if (loading)
     return (
       <div
