@@ -38,6 +38,9 @@ export const FilterSection = ({
   // open or collapsed?
   const [open, setOpen] = useState(defaultOpen)
 
+  // search text for filters
+  const [filterSearchText, setFilterSearchText] = useState('')
+
   let wrapperRef = useRef(null)
   let contentRef = useRef(null)
 
@@ -74,6 +77,12 @@ export const FilterSection = ({
         }
       }
   }, [open])
+
+  // update search text
+  const updateFilterSearchText = e => {
+    setFilterSearchText(e.target.value)
+  }
+
   /**
    * Return JSX for filter section with expand/collapse bar, icon, label, and
    * filter options as checkboxes or radio buttons
@@ -146,6 +155,27 @@ export const FilterSection = ({
           )}
           ref={contentRef}
         >
+          <div className={styles.searchBar}>
+            <input
+              onChange={updateFilterSearchText}
+              type="text"
+              placeholder={`Search`}
+              value={filterSearchText}
+            />
+            <div className={styles.inner}>
+              {filterSearchText !== '' && (
+                <i
+                  onClick={() => setFilterSearchText('')}
+                  className={classNames('material-icons', styles.clearButton)}
+                >
+                  clear
+                </i>
+              )}
+            </div>
+            <div className={styles.bumper}>
+              <i className={'material-icons'}>search</i>
+            </div>
+          </div>
           <FilterSet
             {...{
               checkboxes: true,
