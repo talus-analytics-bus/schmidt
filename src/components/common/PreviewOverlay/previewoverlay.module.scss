@@ -37,6 +37,7 @@
       .titleAndCloseButton {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         .title {
           color: $dark-blue;
@@ -63,6 +64,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 100%;
+        max-height: 30px;
         padding: 3px;
         cursor: pointer;
         i {
