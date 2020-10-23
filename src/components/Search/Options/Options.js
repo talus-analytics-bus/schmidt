@@ -160,7 +160,6 @@ export const Options = ({
                                   if (toYear < v) {
                                     setToYear(v)
                                   }
-
                                   // if custom year not enabled, enable it and
                                   // disable other years
                                   const customYearDisabled =
@@ -226,7 +225,6 @@ export const Options = ({
                     ]),
                   callback: v => {
                     if (v.length > 0) {
-                      //
                       const alreadyCustom =
                         filters.years !== undefined &&
                         filters.years[0] === 'custom' &&
@@ -453,9 +451,15 @@ export const Options = ({
               )}
             </div>
             <div className={styles.selectedFiltersList}>
-              {Object.entries(filters).map(([field, values]) =>
-                values.map(value => getBadge(field, value))
-              )}
+              {Object.entries(filters).map(([field, values]) => (
+                <React.Fragment key={field}>
+                  {values.map(value => (
+                    <React.Fragment key={`${field} - ${value}`}>
+                      {getBadge(field, value)}
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         )}
