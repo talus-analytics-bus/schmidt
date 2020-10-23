@@ -214,7 +214,10 @@ const Browse = ({ setPage }) => {
     }
     if (typeof window !== 'undefined') {
       if (initialized && !popstateTriggeredUpdate) {
-        navigate(newUrl, { state: newState })
+        // provide scroll Y pos. so that it can be persisted after `navigate`
+        navigate(newUrl, {
+          state: { ...newState, scrollY: window.scrollY || 0 },
+        })
       }
     }
   }
