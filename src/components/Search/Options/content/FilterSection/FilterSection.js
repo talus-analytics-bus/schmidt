@@ -180,6 +180,7 @@ export const FilterSection = ({
           </div>
           <FilterSet
             {...{
+              searchText: filterSearchText,
               checkboxes: true,
               filterDefs: [{ [filterDefs.field]: filterDefs }],
               noToggle: true,

@@ -30,6 +30,7 @@ const FilterSet = ({
   disabledValues = ['Country'],
   checkboxes = false,
   vertical = false,
+  searchText = '',
   ...props
 }) => {
   const [activeFilter, setActiveFilter] = useState(null)
@@ -93,6 +94,7 @@ const FilterSet = ({
               setActiveFilter,
               withGrouping: v.withGrouping,
               showZeros,
+              searchText,
             }}
           />
         )

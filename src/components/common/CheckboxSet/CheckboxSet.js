@@ -18,6 +18,7 @@ const CheckboxSet = ({
   curVal = [],
   sorted = true,
   showZeros = true,
+  searchText = '',
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
@@ -44,22 +45,38 @@ const CheckboxSet = ({
     })
     setAllValues(newAllValues)
   }
-  const checkboxes = choices.map(({ label, value, count = null, custom }) => (
-    <Checkbox
-      {...{
-        label,
-        disabled: props.disabled,
-        value,
-        callback: v => {
-          updateAllValues(v)
-        },
-        curChecked: curVal.includes(value.toString()),
-        count,
-        custom,
-        showZeros,
-      }}
-    />
-  ))
+
+  // filter choices based on any search text
+  let filteredChoices = choices.filter(item => {
+    if (item.label !== null) {
+      return item.label
+        .toString()
+        .toLowerCase()
+        .includes(searchText.toLowerCase())
+    } else if (item.custom) {
+      return true
+    } else {
+      return false
+    }
+  })
+  const checkboxes = filteredChoices.map(
+    ({ label, value, count = null, custom }) => (
+      <Checkbox
+        {...{
+          label,
+          disabled: props.disabled,
+          value,
+          callback: v => {
+            updateAllValues(v)
+          },
+          curChecked: curVal.includes(value.toString()),
+          count,
+          custom,
+          showZeros,
+        }}
+      />
+    )
+  )
   if (sorted) {
     checkboxes.sort(function (a, b) {
       if (a.props.label > b.props.label) {
