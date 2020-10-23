@@ -43,9 +43,9 @@ export const StickyHeader = ({
           onClick={e => {
             e.stopPropagation()
             e.preventDefault()
-            if (typeof window !== 'undefined') {
-              window.scrollTo(0, 0)
-            }
+            // if (typeof window !== 'undefined') {
+            //   window.scrollTo(0, 0)
+            // }
           }}
         >
           <img src={arrow} className={styles.arrow} />

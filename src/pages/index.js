@@ -106,13 +106,13 @@ const IndexPage = () => {
   // set scroll event to show "scroll to top" as appropriate
   useEffect(() => {
     const displayThresh = 20
-    if (simpleHeaderRef.current !== null) {
-      if (typeof window !== 'undefined')
-        window.addEventListener('scroll', () => {
-          if (typeof window !== 'undefined')
-            setShowScrollToTop(window.scrollY > displayThresh)
-        })
-    }
+    // if (simpleHeaderRef.current !== null) {
+    //   if (typeof window !== 'undefined')
+    //     window.addEventListener('scroll', () => {
+    //       if (typeof window !== 'undefined')
+    //         setShowScrollToTop(window.scrollY > displayThresh)
+    //     })
+    // }
   }, [simpleHeaderRef])
 
   // JSX // -----------------------------------------------------------------//

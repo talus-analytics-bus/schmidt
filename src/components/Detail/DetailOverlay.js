@@ -102,9 +102,9 @@ const DetailOverlay = ({
 
   // function called when floating overlay is dismissed
   const dismissFloatingOverlay = () => {
-    if (typeof window !== undefined) {
-      window.scrollTo(0, origScrollY)
-    }
+    // if (typeof window !== undefined) {
+    //   window.scrollTo(0, origScrollY)
+    // }
     setOpacity(0)
     setTimeout(close, 250)
   }
@@ -259,9 +259,9 @@ const DetailOverlay = ({
       }
     }
 
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0)
-    }
+    // if (typeof window !== 'undefined') {
+    //   window.scrollTo(0, 0)
+    // }
   }, [id])
 
   // fetch data when page changes
@@ -616,9 +616,9 @@ const DetailOverlay = ({
                         relatedItemsData.page !== relatedItemsData.num_pages
                           ? () => {
                               setCurPage(curPage + 1)
-                              if (typeof window !== 'undefined') {
-                                window.scrollTo(0, 0)
-                              }
+                              // if (typeof window !== 'undefined') {
+                              //   window.scrollTo(0, 0)
+                              // }
                             }
                           : false,
                     }}
