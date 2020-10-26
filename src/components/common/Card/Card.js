@@ -494,7 +494,11 @@ export const Card = ({
               )
             }
             {!detail && !related && tagSnippets.length > 0 && (
-              <div className={styles.tagSnippets}>
+              <div
+                className={classNames(styles.tagSnippets, {
+                  [styles.topBorder]: description !== '',
+                })}
+              >
                 <div className={styles.tagSnippetsHeader}>
                   Matching filters:
                 </div>
