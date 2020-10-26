@@ -350,7 +350,7 @@ export const Card = ({
                 {...{
                   label: 'Preview',
                   iconName: 'preview',
-                  isSecondary: true,
+                  isSecondary: false,
                   onClick: e => {
                     e.stopPropagation()
                     e.preventDefault()
