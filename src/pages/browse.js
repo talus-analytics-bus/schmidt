@@ -31,8 +31,6 @@ import {
 
 // styles and assets
 import styles from '../components/Browse/browse.module.scss'
-import { set } from 'd3'
-import { array } from 'prop-types'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -519,11 +517,22 @@ const Browse = ({ setPage }) => {
           }}
         >
           <div className={styles.name}>{name}</div>
-          {clickedItem !== name && (
-            <div className={styles.count}>
-              {count} document{count == 1 ? '' : 's'}
+          <div className={styles.details}>
+            {clickedItem !== name && (
+              <div className={styles.count}>
+                {count} document{count == 1 ? '' : 's'}
+              </div>
+            )}
+            <div className={styles.caret}>
+              <i
+                className={classNames('material-icons', {
+                  [styles.open]: clickedItem === name,
+                })}
+              >
+                keyboard_arrow_down
+              </i>
             </div>
-          )}
+          </div>
         </div>
         {clickedItem === name && (
           <div className={styles.resultContainer}>
