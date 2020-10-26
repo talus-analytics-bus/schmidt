@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import classNames from 'classnames'
-import axios from 'axios'
 import { navigate } from 'gatsby'
 
 // assets and styles
@@ -16,9 +15,7 @@ import Panel from '../../Detail/content/Panel'
 // local utility functions
 import {
   formatDate,
-  isEmpty,
   bytesToMegabytes,
-  removeBookmark,
   iconNamesByField,
   getIconByName,
   asBulletDelimitedList,
@@ -497,7 +494,12 @@ export const Card = ({
               )
             }
             {!detail && !related && tagSnippets.length > 0 && (
-              <div className={styles.tagSnippets}>{tagSnippets}</div>
+              <div className={styles.tagSnippets}>
+                <div className={styles.tagSnippetsHeader}>
+                  Matching filters:
+                </div>
+                {tagSnippets}
+              </div>
             )}
             <div className={styles.actions}>
               {!detail && files.length > 0 && (

@@ -238,10 +238,16 @@
         // tag snippets: including an icon and some matched text
         .tagSnippets {
           padding-top: 15px;
+          margin-top: 15px;
           display: flex;
           flex-flow: column;
           @include spaceItemsVert(10px);
           line-height: 1.5;
+          border-top: 1px $light-blue solid;
+
+          .tagSnippetsHeader {
+            font-weight: 500;
+          }
 
           .tagSnippet {
             display: flex;
