@@ -4,7 +4,8 @@
     background-color: white;
     padding: 20px;
   }
-  &.color {
+  &.expandable {
+    // background-color: lighten($orange, 55%);
     background-color: $light-gray;
   }
   .title,

@@ -7,7 +7,6 @@ import { getIconByName } from '../../misc/Util'
 
 // styles and assets
 import styles from './panel.module.scss'
-import events from '../../../assets/icons/events.svg'
 
 export const Panel = ({
   title = 'Panel name',
@@ -16,7 +15,6 @@ export const Panel = ({
   secondary = true,
   heading = false,
   expandable = false,
-  bgColor = true,
 }) => {
   // CONSTANTS
   const icon = getIconByName({ iconName, styles })
@@ -28,7 +26,6 @@ export const Panel = ({
         [styles.secondary]: secondary,
         [styles.heading]: heading,
         [styles.expandable]: expandable,
-        [styles.color]: bgColor,
       })}
     >
       <div

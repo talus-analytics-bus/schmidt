@@ -444,7 +444,6 @@ export const Card = ({
                       title: 'Downloads',
                       secondary: false,
                       iconName: 'get_app',
-                      bgColor: false,
                     }}
                   >
                     {files.map(({ id, num_bytes, filename }) => (
