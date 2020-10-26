@@ -78,6 +78,12 @@ export const BookmarkToggle = ({
       key={key}
       onClick={onClick}
       className={classNames(styles.wrapper, styles.simple)}
+      data-for={'searchHighlightInfo'}
+      data-tip={
+        add
+          ? 'Click to add this document to your bookmarks'
+          : 'Click to remove this document from your bookmarks'
+      }
     >
       {icon}
     </div>
