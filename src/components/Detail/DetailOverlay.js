@@ -374,6 +374,8 @@ const DetailOverlay = ({
     if (type !== undefined && type !== null && type !== '') {
       recordType = type
     }
+
+    var topicCount = 0
     return (
       <>
         <div className={floating ? styles.shadow : null} />
@@ -431,41 +433,46 @@ const DetailOverlay = ({
                     }}
                   >
                     <div className={styles.keyTopics}>
-                      {keyTopics.map(value => (
-                        <>
-                          <div
-                            onClick={e =>
-                              toggleFilter({
-                                openNewPage,
-                                e,
-                                getFilterVal: () => value,
-                                filters,
-                                filterKey: 'key_topics',
-                                setFilters: v => {
-                                  dismissFloatingOverlay()
-                                  setFilters(v)
-                                },
-                                setSearchText,
-                                alwaysStartNew: true,
-                              })
-                            }
-                            className={classNames(styles.keyTopic, {
-                              [styles.active]: itemData.key_topics.includes(
-                                value
-                              ),
-                            })}
-                          >
-                            <div className={styles.colorBlock}></div>
-                            <span>
-                              {highlightTag({
-                                displayName: value,
-                                filterValue: value,
-                                filterKey: 'key_topics',
-                              })}
-                            </span>
-                          </div>
-                        </>
-                      ))}
+                      {keyTopics.map(value => {
+                        if (itemData.key_topics.includes(value))
+                          topicCount = topicCount + 1
+                        return itemData.key_topics.includes(value) ? (
+                          <>
+                            <div
+                              onClick={e =>
+                                toggleFilter({
+                                  openNewPage,
+                                  e,
+                                  getFilterVal: () => value,
+                                  filters,
+                                  filterKey: 'key_topics',
+                                  setFilters: v => {
+                                    dismissFloatingOverlay()
+                                    setFilters(v)
+                                  },
+                                  setSearchText,
+                                  alwaysStartNew: true,
+                                })
+                              }
+                              className={classNames(styles.keyTopic)}
+                            >
+                              <div className={styles.colorBlock}></div>
+                              <span>
+                                {highlightTag({
+                                  displayName: value,
+                                  filterValue: value,
+                                  filterKey: 'key_topics',
+                                })}
+                              </span>
+                            </div>
+                          </>
+                        ) : null
+                      })}
+                      {topicCount === 0 && (
+                        <i className={styles.placeholder}>
+                          No matching topic areas
+                        </i>
+                      )}
                     </div>
                   </Panel>
                   {

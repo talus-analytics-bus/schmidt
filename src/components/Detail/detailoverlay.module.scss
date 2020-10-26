@@ -135,21 +135,20 @@
             span {
               color: unset;
             }
-            .colorBlock {
-              height: 30px;
-              background-color: #e5e5e5;
-            }
             cursor: pointer;
             &:hover {
               text-decoration: underline;
             }
-            &.active {
-              color: $light-blue;
-              font-weight: 600;
-              .colorBlock {
-                background-color: $blue;
-              }
+            color: $light-blue;
+            .colorBlock {
+              background-color: $blue;
+              height: 8px;
+              width: 8px;
+              transform: rotate(45deg);
             }
+          }
+          .placeholder {
+            color: $light-blue;
           }
         }
 
