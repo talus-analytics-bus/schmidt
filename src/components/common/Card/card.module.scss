@@ -340,6 +340,7 @@
         > div {
           margin-left: 8px;
           white-space: normal;
+          word-break: break-all;
         }
         > :last-child {
           .noBreak {

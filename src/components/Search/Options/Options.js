@@ -77,9 +77,7 @@ export const Options = ({
       // for (const [field, valueCounts] of Object.entries(filterCounts)) {
       // different icon color only on filters pages
       let icon
-      if (field == 'key_topics') {
-        icon = 'speech_orange'
-      } else if (field == 'events') {
+      if (field == 'events') {
         icon = 'caution_orange'
       } else {
         icon = iconNamesByField[field] || null

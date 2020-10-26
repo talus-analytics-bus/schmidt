@@ -427,9 +427,7 @@ const Browse = ({ setPage }) => {
   // generate buttons to browse by topic, event, year, etc.
   const BrowseButton = ({ type }) => {
     let icon
-    if (type == 'key_topics') {
-      icon = 'speech_orange'
-    } else if (type == 'events') {
+    if (type == 'events') {
       icon = 'caution_orange'
     } else {
       icon = iconNamesByField[type] || null
