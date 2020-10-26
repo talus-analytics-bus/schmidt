@@ -22,8 +22,8 @@ const CheckboxSet = ({
   ...props
 }) => {
   const [allValues, setAllValues] = React.useState(curVal)
-
   // Trigger callback when all values or filters change
+
   React.useEffect(() => {
     if (allValues.length > 0)
       callback([...new Set(allValues.join(',').split(','))])
@@ -47,7 +47,7 @@ const CheckboxSet = ({
   }
 
   // filter choices based on any search text
-  let filteredChoices = choices.filter(item => {
+  const filteredChoices = choices.filter(item => {
     if (item.label !== null) {
       return item.label
         .toString()
@@ -59,6 +59,7 @@ const CheckboxSet = ({
       return false
     }
   })
+
   const checkboxes = filteredChoices.map(
     ({ label, value, count = null, custom }) => (
       <Checkbox

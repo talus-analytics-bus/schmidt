@@ -58,6 +58,9 @@ export const Options = ({
   // show/hide additional filter sections
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false)
 
+  // track current value for static single year selections
+  const [curValYears, setCurValYears] = useState(filters.years || [])
+
   // is start over button disabled?
   const [startOverDisabled, setStartOverDisabled] = useState(true)
 
@@ -128,13 +131,25 @@ export const Options = ({
                 {...{
                   name: null,
                   sorted: false,
-                  curVal: filters[field],
+                  key: 'single-years',
+                  curVal: curValYears,
                   choices: curFilterSectionData.choices
                     .filter(({ value }) => {
-                      return [2020, 2019, 2018].includes(value)
+                      if (value === null) return false
+                      else
+                        return ['2020', '2019', '2018'].includes(
+                          value.toString()
+                        )
+                    })
+                    .map(d => {
+                      return {
+                        ...d,
+                        value: d.value.toString(),
+                        label: d.label.toString(),
+                      }
                     })
                     .sort(function (a, b) {
-                      if (a.value > b.value) return -1
+                      if (+a.value > +b.value) return -1
                       else return 1
                     })
                     .concat([
@@ -177,7 +192,10 @@ export const Options = ({
                                 optionList: getIntArray(1980, 2020)
                                   .reverse()
                                   .map(year => {
-                                    return { label: year, value: year }
+                                    return {
+                                      label: year.toString(),
+                                      value: year.toString(),
+                                    }
                                   }),
                               }}
                             />
@@ -384,6 +402,7 @@ export const Options = ({
     setStartOverDisabled(
       isEmpty(filters) && (searchText === '' || searchText === null)
     )
+    setCurValYears(filters.years || [])
   }, [filters, searchText])
 
   // JSX
