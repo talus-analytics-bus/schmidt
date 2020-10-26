@@ -246,12 +246,12 @@ const Bookmarks = ({}) => {
               <>
                 {!someBookmarks && (
                   <>
-                    <div className={styles.noBookmarksInstructions}>
+                    <p className={styles.noBookmarksInstructions}>
                       You have no bookmarked items yet. Click the{' '}
                       <i className={'material-icons'}>bookmark_border</i>
-                      bookmark icon on any search result to save one.{'  '}
+                      {'  '}bookmark icon on any search result to save one.
                       &nbsp;
-                    </div>
+                    </p>
                     <PrimaryButton
                       {...{
                         label: 'Go to search page',
