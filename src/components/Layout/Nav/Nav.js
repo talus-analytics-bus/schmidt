@@ -47,12 +47,12 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
       >
         <Link to={'/'} className={page === 'index' ? styles.hidden : ''}>
           <img src={logo} />
-          <img
+          {/* <img
             className={classNames(styles.loading, {
               [styles.showLoading]: loading,
             })}
             src={loadingSvg}
-          />
+          /> */}
         </Link>
         <div className={styles.menu}>
           <button ref={hamburgerRef} className={styles.hamburger}>

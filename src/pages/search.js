@@ -458,6 +458,7 @@ const Search = ({ setPage }) => {
                 bookmarkedIds,
                 setBookmarkedIds,
                 setOptionsVisible,
+                loading: (isSearching && initialized) || isSearchingText,
               }}
             />
           </div>
