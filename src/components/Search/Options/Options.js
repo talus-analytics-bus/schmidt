@@ -70,6 +70,7 @@ export const Options = ({
       field: 'years',
       key: 'years',
       label: 'Date',
+      resultLabel: 'date',
       choices: [],
       custom: true,
     },
@@ -77,6 +78,7 @@ export const Options = ({
       field: 'key_topics',
       key: 'key_topics',
       label: 'Topic area',
+      resultLabel: 'topic area',
       choices: [],
     },
     author_types: {
@@ -84,10 +86,11 @@ export const Options = ({
       key: 'author_types',
       label: (
         <div>
-          Authoring
+          Publishing
           <br /> org. type
         </div>
       ),
+      resultLabel: 'publishing organization type',
       choices: [],
     },
     authors: {
@@ -95,28 +98,32 @@ export const Options = ({
       key: 'authors',
       label: (
         <div>
-          Authoring
+          Publishing
           <br /> organization
         </div>
       ),
+      resultLabel: 'publishing organization',
       choices: [],
     },
     events: {
       field: 'event.name',
       key: 'events',
       label: 'Event',
+      resultLabel: 'event',
       choices: [],
     },
     funders: {
       field: 'funder.name',
       key: 'funders',
       label: 'Funder',
+      resultLabel: 'funder',
       choices: [],
     },
     types_of_record: {
       field: 'type_of_record',
       key: 'types_of_record',
       label: 'Record type',
+      resultLabel: 'record type',
       choices: [],
     },
   }
