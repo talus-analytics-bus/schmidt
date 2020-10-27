@@ -67,7 +67,7 @@ export const Card = ({
 
   // STATE
   // card's left css property
-  const [left, setLeft] = useState(detail || related ? 0 : 20)
+  const [left, setLeft] = useState(detail || related || browse ? 0 : 20)
 
   // show preview or hide?
   const [showPreview, setShowPreview] = useState(false)

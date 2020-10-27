@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 import { navigate } from 'gatsby'
@@ -65,6 +65,9 @@ const Browse = ({ setPage }) => {
   // is page currently fetching search data?
   const [isSearching, setIsSearching] = useState(false)
   const [isSearchingText, setIsSearchingText] = useState(false)
+
+  // ref to currently open drawer
+  const clickedRef = useRef(null)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -164,8 +167,7 @@ const Browse = ({ setPage }) => {
     // set show overlay value
     setShowOverlay(newId)
   }
-  console.log(browseSection)
-  console.log(browseList)
+
   // FORMAT LIST OF RESULTS TO DISPLAY
   // filter out any unspecified items since that's a weird category for browsing
   let rawList = browseList.filter(
@@ -417,6 +419,14 @@ const Browse = ({ setPage }) => {
     }
   }, [])
 
+  // adjust scroll when new item is clicked
+  useEffect(() => {
+    if (clickedItem !== null && clickedRef.current) {
+      clickedRef.current.scrollIntoView(true, { behavior: 'smooth' })
+      window.scrollBy(0, -110)
+    }
+  }, [clickedItem])
+
   // count bookmarks to show in nav
   const bookmarkArr =
     bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
@@ -470,6 +480,7 @@ const Browse = ({ setPage }) => {
           className={classNames(styles.header, {
             [styles.bigContainer]: clickedItem === name,
           })}
+          ref={name === clickedItem ? clickedRef : null}
           onClick={() => {
             let id = null
             const arr = []
