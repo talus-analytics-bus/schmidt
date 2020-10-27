@@ -16,12 +16,7 @@ import {
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import {
-  getIntArray,
-  iconNamesByField,
-  isEmpty,
-  filterDefs,
-} from '../../misc/Util'
+import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -68,6 +63,63 @@ export const Options = ({
   const [triggerCollapseAll, setTriggerCollapseAll] = useState(false)
   const [triggerExpandAll, setTriggerExpandAll] = useState(false)
   const [numOpen, setNumOpen] = useState(defaultNumOpen)
+
+  // define filters
+  const filterDefs = {
+    years: {
+      field: 'years',
+      key: 'years',
+      label: 'Date',
+      choices: [],
+      custom: true,
+    },
+    key_topics: {
+      field: 'key_topics',
+      key: 'key_topics',
+      label: 'Topic area',
+      choices: [],
+    },
+    author_types: {
+      field: 'author.type_of_authoring_organization',
+      key: 'author_types',
+      label: (
+        <div>
+          Authoring
+          <br /> org. type
+        </div>
+      ),
+      choices: [],
+    },
+    authors: {
+      field: 'author.id',
+      key: 'authors',
+      label: (
+        <div>
+          Authoring
+          <br /> organization
+        </div>
+      ),
+      choices: [],
+    },
+    events: {
+      field: 'event.name',
+      key: 'events',
+      label: 'Event',
+      choices: [],
+    },
+    funders: {
+      field: 'funder.name',
+      key: 'funders',
+      label: 'Funder',
+      choices: [],
+    },
+    types_of_record: {
+      field: 'type_of_record',
+      key: 'types_of_record',
+      label: 'Record type',
+      choices: [],
+    },
+  }
 
   // get list of keys of filters
   const filterKeys = Object.keys(filterDefs)
