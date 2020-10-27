@@ -165,14 +165,9 @@ const Browse = ({ setPage }) => {
     setShowOverlay(newId)
   }
 
-  // format list items to display
-  // make sure there are no blank values
-  let rawList = browseList
-  rawList.forEach(item => {
-    if (item[0] == '' || item[0] == null) {
-      item[0] = 'Unspecified'
-    }
-  })
+  // FORMAT LIST OF RESULTS TO DISPLAY
+  // filter out any unspecified items since that's a weird category for browsing
+  let rawList = browseList.filter(item => item[0] !== 'Unspecified')
   // sort list
   const listToDisplay =
     listDesc === 'true'
