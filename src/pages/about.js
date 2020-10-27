@@ -15,6 +15,7 @@ import styles from '../components/About/about.module.scss'
 // local utility functions
 import { withBookmarkedIds } from '../components/misc/Util'
 import ToExcelQuery from '../components/misc/ToExcelQuery'
+import { style } from 'd3'
 
 const About = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -66,9 +67,9 @@ const About = ({}) => {
     >
       <SEO title="About" />
       <div className={styles.container}>
-        <h1 className={styles.title}>
+        {/* <h1 className={styles.title}>
           <i className={'material-icons'}>info</i>About
-        </h1>
+        </h1> */}
         <div className={styles.toggleContainer}>
           <div className={styles.tabs}>
             {tabs.map(d => (
@@ -76,11 +77,14 @@ const About = ({}) => {
               <div
                 key={d.slug}
                 onClick={() => setView(d.slug)}
-                className={classNames(styles.tab, {
-                  [styles.selected]: d.slug === view,
-                })}
+                className={classNames(styles.tab)}
               >
-                {d.name}
+                <div className={styles.label}>{d.name}</div>
+                <div
+                  className={classNames(styles.selectedRectangle, {
+                    [styles.selected]: d.slug === view,
+                  })}
+                ></div>
               </div>
               // </Link>
             ))}
