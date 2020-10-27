@@ -96,7 +96,11 @@ const Contact = ({}) => {
             <div className={styles.accessibility}>
               <p>
                 If you have any accessibility issues using this site, please
-                contact us directly at <a href="">contact email TBD</a>.
+                contact us directly at{' '}
+                <a href="mailto:outbreaks@georgetown.edu">
+                  outbreaks@georgetown.edu
+                </a>
+                .
               </p>
             </div>
           </div>
