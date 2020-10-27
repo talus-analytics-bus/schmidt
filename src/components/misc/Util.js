@@ -1207,7 +1207,7 @@ export const iconNamesByField = {
   authors: 'person',
   author_types: 'apartment',
   years: 'event',
-  funders: 'payments',
+  funders: 'monetization_on',
   types_of_record: 'insert_drive_file',
   // events: 'outbreak_events',
   // events: 'rings',

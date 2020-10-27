@@ -568,7 +568,7 @@ const DetailOverlay = ({
                   <Panel
                     {...{
                       title: 'Funders',
-                      iconName: 'payments',
+                      iconName: 'monetization_on',
                       expandable: true,
                     }}
                   >
