@@ -680,6 +680,7 @@ const Browse = ({ setPage }) => {
                       bookmarkedIds,
                       setBookmarkedIds,
                       setOptionsVisible,
+                      loading: isSearching && !isSearchingText && initialized,
                     }}
                   />
                 </Item>
