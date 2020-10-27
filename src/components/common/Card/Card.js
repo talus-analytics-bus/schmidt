@@ -410,14 +410,22 @@ export const Card = ({
               <div className={styles.details}>
                 <div className={styles.authOrg}>
                   <i className={'material-icons'}>person</i>
-                  <div className={styles.authOrgList}>
+                  <div
+                    className={classNames(styles.authOrgList, {
+                      [styles.disabled]: browse,
+                    })}
+                  >
                     {authors.length > 0 && card['author.id']}
                     {authors.length === 0 && (
                       <div>Publishing organization unavailable</div>
                     )}
                   </div>
                 </div>
-                <div className={styles.date}>
+                <div
+                  className={classNames(styles.date, {
+                    [styles.disabled]: browse,
+                  })}
+                >
                   <i className={'material-icons'}>event</i>
                   {
                     // date !== null && (
