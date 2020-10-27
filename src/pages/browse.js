@@ -406,7 +406,7 @@ const Browse = ({ setPage }) => {
       setBrowseList([])
     }
     setClickedItem(null)
-  }, [browseSection])
+  }, [browseSection, initialized])
 
   // set initialized to false on unmount
   useEffect(() => {
@@ -573,31 +573,6 @@ const Browse = ({ setPage }) => {
               }}
             />
           )}
-          {/* {optionsVisible && (
-            <Options
-              {...{
-                showFilterSections:
-                  searchData !== null && baselineFilterCounts !== null,
-                filterCounts:
-                  searchData !== null ? searchData.filter_counts : {},
-                baselineFilterCounts,
-                orderBy,
-                setOrderBy,
-                isDesc,
-                setIsDesc,
-                searchText,
-                setSearchText,
-                filters,
-                setFilters,
-                fromYear,
-                setFromYear,
-                toYear,
-                setToYear,
-                mobile: true,
-                setOptionsVisible,
-              }}
-            />
-          )} */}
           <StickyHeader
             {...{
               show: showScrollToTop,
