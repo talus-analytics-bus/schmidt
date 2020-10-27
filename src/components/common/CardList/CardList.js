@@ -30,6 +30,7 @@ export const CardList = ({
   getTooltipText,
   animate = false,
   bookmark = false,
+  browse = false,
   ...props
 }) => {
   // CONSTANTS
@@ -63,6 +64,7 @@ export const CardList = ({
                 getTooltipText,
                 bookmark,
                 animate,
+                browse,
               }}
             />
           )

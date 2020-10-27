@@ -681,6 +681,7 @@ const Browse = ({ setPage }) => {
                       setBookmarkedIds,
                       setOptionsVisible,
                       loading: isSearching && !isSearchingText && initialized,
+                      browse: true,
                     }}
                   />
                 </Item>

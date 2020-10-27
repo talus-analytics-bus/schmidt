@@ -36,6 +36,7 @@ export const Results = ({
   setBookmarkedIds,
   setOptionsVisible,
   loading,
+  browse = false,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -160,6 +161,7 @@ export const Results = ({
                         }
                       }
                     : false,
+                browse,
               }}
             />
             <Paginator

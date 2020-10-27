@@ -59,6 +59,7 @@ export const Card = ({
   animate = false,
   getTooltipText = null,
   alwaysStartNew,
+  browse = false,
   ...props
 }) => {
   // CONSTANTS
@@ -83,7 +84,7 @@ export const Card = ({
   // animate card entrances -- any card that changes position in the order
   // or is new to the list will fly in
   useEffect(() => {
-    if (!detail && !related) {
+    if (!detail && !related && !browse) {
       if (left === 0) {
         setLeft(20)
       }
