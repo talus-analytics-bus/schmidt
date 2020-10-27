@@ -608,8 +608,8 @@ const Browse = ({ setPage }) => {
           />
           <h1>Browse library</h1>
           <p>
-            Explore documents by topic area, event, authoring organization, year
-            published, and more.
+            Explore documents by topic area, event, publishing organization,
+            year published, and more.
           </p>
 
           {/* Browse buttons */}

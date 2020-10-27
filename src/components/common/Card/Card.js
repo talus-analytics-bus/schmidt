@@ -412,7 +412,7 @@ export const Card = ({
                   <div className={styles.authOrgList}>
                     {authors.length > 0 && card['author.id']}
                     {authors.length === 0 && (
-                      <div>Authoring organization unavailable</div>
+                      <div>Publishing organization unavailable</div>
                     )}
                   </div>
                 </div>

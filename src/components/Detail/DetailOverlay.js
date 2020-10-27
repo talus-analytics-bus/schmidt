@@ -360,7 +360,7 @@ const DetailOverlay = ({
           {message}{' '}
           <InfoTooltip
             text={
-              'This field captures whether the authorizing organization(s) have governance authority over the topic, recommendations, or other content of the product developed. For example, the US Congress has governance over US biosecurity policy but a US think tank does not. Intergovernmental organizations will have governance authority that depends on the context and topic of the product. '
+              'This field captures whether the publishing organization(s) have governance authority over the topic, recommendations, or other content of the product developed. For example, the US Congress has governance over US biosecurity policy but a US think tank does not. Intergovernmental organizations will have governance authority that depends on the context and topic of the product. '
             }
           />
         </div>
@@ -480,7 +480,7 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: `Authoring org${
+                      title: `Publishing org${
                         itemData.authors.length > 1 ? 's' : ''
                       }.`,
                       iconName: iconNamesByField.authors,

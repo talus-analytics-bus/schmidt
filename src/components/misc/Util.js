@@ -1501,11 +1501,11 @@ export const filterDefs = {
     key: 'author_types',
     label: (
       <div>
-        Authoring
+        Publishing
         <br /> org. type
       </div>
     ),
-    resultLabel: 'authoring organization type',
+    resultLabel: 'publishing organization type',
     choices: [],
   },
   authors: {
@@ -1513,11 +1513,11 @@ export const filterDefs = {
     key: 'authors',
     label: (
       <div>
-        Authoring
+        Publishing
         <br /> organization
       </div>
     ),
-    resultLabel: 'authoring organization',
+    resultLabel: 'publishing organization',
     choices: [],
   },
   events: {
