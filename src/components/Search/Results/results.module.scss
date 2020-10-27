@@ -1,10 +1,18 @@
 @import '../../../assets/styles/vars.scss';
+.resultsContainer {
+  position: relative;
+}
 .results {
   height: 100%;
   // margin-top: 20px !important; // TODO elegantly
   display: flex;
   flex-flow: column;
+  visibility: visible;
 
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
   .sortByRow {
     display: flex;
     justify-content: space-between;
@@ -22,6 +30,18 @@
         @include center();
       }
     }
+  }
+}
+
+.loadingSvg {
+  position: absolute;
+  top: 0px;
+  display: none;
+  &.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 }
 @media screen and (min-width: 813px) {

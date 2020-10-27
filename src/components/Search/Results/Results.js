@@ -61,15 +61,16 @@ export const Results = ({
    * Return JSX for search results that shows the search bar, results,
    * pagination controls, items per page controls
    */
-  if (loading) {
-    return (
-      <div>
+  return (
+    <div className={styles.resultsContainer}>
+      <div
+        className={classNames(styles.loadingSvg, {
+          [styles.active]: loading,
+        })}
+      >
         <img src={loadingSvg} alt={'loading spinner'}></img>
       </div>
-    )
-  } else {
-    return (
-      <div className={styles.results}>
+      <div className={classNames(styles.results, { [styles.hidden]: loading })}>
         {!empty && (
           <div className={styles.sortByRow}>
             {/* <div className={styles.optionsRow}> */}
@@ -179,8 +180,8 @@ export const Results = ({
           </div>
         )}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Results
