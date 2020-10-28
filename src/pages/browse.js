@@ -583,6 +583,7 @@ const Browse = ({ setPage }) => {
                 setBookmarkedIds,
                 simpleHeaderRef,
                 bookmark: false,
+                browse: true,
               }}
             />
           )}

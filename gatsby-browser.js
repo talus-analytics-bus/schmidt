@@ -26,6 +26,8 @@ export const shouldUpdateScroll = ({
 }) => {
   if (location.state && location.state.scrollY !== undefined) {
     window.scrollTo([0, location.state.scrollY])
+  } else {
+    return [0, 0]
   }
   return false
 }

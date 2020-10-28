@@ -55,6 +55,7 @@ const DetailOverlay = ({
   simpleHeaderRef = { current: null },
   bookmark = false,
   setPageTitle,
+  browse = false,
 }) => {
   // CONTEXT
   const context = useContext(appContext) || defaultContext
@@ -422,6 +423,7 @@ const DetailOverlay = ({
                     },
                     setSearchText,
                     alwaysStartNew: true,
+                    browse,
                   }}
                 />
                 <div className={classNames(styles.sideBar, styles.wide)}>
@@ -628,6 +630,7 @@ const DetailOverlay = ({
                               }
                             }
                           : false,
+                      browse,
                     }}
                   />
                   {relatedItemsData.related_items.length > 0 && (
