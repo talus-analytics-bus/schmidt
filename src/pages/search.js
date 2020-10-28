@@ -70,6 +70,8 @@ const Search = ({ setPage }) => {
     urlParams.get('show_overlay') || false
   )
 
+  const [keepScroll, setKeepScroll] = useState(false)
+
   // track original Y scroll position when overlay was launched so it can be
   // set back when it is closed
   const [origScrollY, setOrigScrollY] = useState(0)
@@ -157,7 +159,13 @@ const Search = ({ setPage }) => {
     }
     if (typeof window !== 'undefined') {
       if (initialized && !popstateTriggeredUpdate) {
-        navigate(newUrl, { state: newState })
+        navigate(newUrl, {
+          state: {
+            ...newState,
+            scrollY: keepScroll ? window.scrollY : undefined,
+          },
+        })
+        setKeepScroll(false)
       }
     }
   }
@@ -360,7 +368,10 @@ const Search = ({ setPage }) => {
               {...{
                 title: 'Test',
                 id: showOverlay,
-                close: () => setShowOverlay(false),
+                close: () => {
+                  setKeepScroll(true)
+                  setShowOverlay(false)
+                },
                 filters,
                 floating: true,
                 setFilters,
