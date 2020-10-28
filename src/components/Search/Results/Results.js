@@ -163,6 +163,7 @@ export const Results = ({
                       }
                     : false,
                 browse,
+                alwaysStartNew: true,
               }}
             />
             <Paginator

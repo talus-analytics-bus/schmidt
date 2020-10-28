@@ -291,14 +291,9 @@
     }
     .link {
       color: $blue;
-      :not(.highlighted) {
-        &:hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
-      .highlighted {
-        cursor: default;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
 

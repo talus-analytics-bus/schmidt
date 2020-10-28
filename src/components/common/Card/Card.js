@@ -264,7 +264,12 @@ export const Card = ({
       // collate link entry text into a list of links
       card[filterKey] = linkListEntries
         .map(d => (
-          <span onClick={d.onClick} className={styles.link}>
+          <span
+            onClick={d.onClick}
+            className={styles.link}
+            data-for={'searchHighlightInfo'}
+            data-tip={getTooltipText && getTooltipText('add')}
+          >
             {d.text}
           </span>
         ))
