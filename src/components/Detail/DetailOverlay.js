@@ -93,7 +93,7 @@ const DetailOverlay = ({
   // CONSTANTS
   // open new page if metadata tag is clicked?
   const single = !floating
-  const openNewPage = bookmark || single
+  const openNewPage = bookmark || single || browse
 
   // define start / end result numbers
   const start =
