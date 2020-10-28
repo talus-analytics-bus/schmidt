@@ -100,6 +100,7 @@
         img {
           max-height: $max-height-lg;
           max-width: $letter-width-lg;
+          border-color: $orange;
         }
         &.placeholder {
           height: $max-height-lg; // like a letter page
@@ -111,9 +112,22 @@
       }
       .contentCol {
         .main {
+          .top {
+            .headerAndTitle {
+              .title {
+                .text {
+                  color: $orange;
+                }
+              }
+            }
+          }
           .detailsAndDownloads {
             display: grid;
             grid-template-columns: 1fr 40%;
+            border-color: $orange;
+            .downloads {
+              border-color: $orange;
+            }
           }
         }
       }
