@@ -19,7 +19,7 @@ export const BookmarkToggle = ({
   setBookmarkedIds = () => '',
   simple = false,
   id,
-  key,
+  keyName,
 }) => {
   const icon = (
     <i className={'material-icons'}>{add ? 'bookmark_border' : 'bookmark'}</i>
@@ -75,7 +75,7 @@ export const BookmarkToggle = ({
   // JSX // ---------------------------------------------------------------- //
   return simple ? (
     <div
-      key={key}
+      key={keyName}
       onClick={onClick}
       className={classNames(styles.wrapper, styles.simple)}
       data-for={'searchHighlightInfo'}
@@ -88,7 +88,7 @@ export const BookmarkToggle = ({
       {icon}
     </div>
   ) : (
-    <div key={key} className={styles.wrapper}>
+    <div key={keyName} className={styles.wrapper}>
       {button}
     </div>
   )

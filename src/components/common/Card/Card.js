@@ -63,7 +63,7 @@ export const Card = ({
   ...props
 }) => {
   // CONSTANTS
-  const openNewPage = bookmark || single
+  const openNewPage = bookmark || single || browse
 
   // STATE
   // card's left css property
@@ -393,7 +393,7 @@ export const Card = ({
                 {bookmarkedIds !== null && (
                   <BookmarkToggle
                     {...{
-                      key: id,
+                      keyName: id,
                       add: !bookmarkedIdsArr.includes(+id),
                       isSecondary: true,
                       bookmarkedIds: bookmarkedIdsArr,
