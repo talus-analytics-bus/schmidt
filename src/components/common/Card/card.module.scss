@@ -216,9 +216,6 @@
             .authOrgList,
             .date {
               font-size: 1rem;
-              &.disabled {
-                pointer-events: none;
-              }
             }
           }
         }
