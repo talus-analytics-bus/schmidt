@@ -18,7 +18,7 @@ export const Panel = ({
 }) => {
   // CONSTANTS
   const icon = getIconByName({ iconName, styles })
-  const [expanded, setExpanded] = useState(!expandable)
+  const [expanded, setExpanded] = useState(true)
 
   return (
     <div
