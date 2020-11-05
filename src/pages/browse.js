@@ -562,7 +562,7 @@ const Browse = ({ setPage }) => {
         loading={isSearching && !isSearchingText && initialized}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Search results" />
+        <SEO title="Browse library" />
 
         <div className={styles.browse}>
           {showOverlay !== false && showOverlay !== 'false' && (
@@ -611,7 +611,7 @@ const Browse = ({ setPage }) => {
           )}
 
           {/* Search bar */}
-          <div className={styles.filterSearchBar}>
+          {/* <div className={styles.filterSearchBar}>
             <input
               onChange={updateFilterSearchText}
               type="text"
@@ -631,7 +631,7 @@ const Browse = ({ setPage }) => {
             <div className={styles.bumper}>
               <i className={'material-icons'}>search</i>
             </div>
-          </div>
+          </div> */}
 
           {/* Sort by row */}
           <div className={styles.sortByRow}>
@@ -641,25 +641,48 @@ const Browse = ({ setPage }) => {
                 {filteredList.length !== 1 ? 's' : ''}
               </p>
             )}
-            <div>
-              <Selectpicker
-                {...{
-                  setOption: setListDesc,
-                  curSelection: listDesc,
-                  allOption: null,
-                  label: null,
-                  optionList: [
-                    {
-                      label: 'Z to A',
-                      value: true,
-                    },
-                    {
-                      label: 'A to Z',
-                      value: false,
-                    },
-                  ],
-                }}
-              />
+            <div className={styles.sortBy}>
+              <p className={styles.sortHeader}>Sort by</p>
+              {/* <div>
+                <Selectpicker
+                  {...{
+                    setOption: setListDesc,
+                    curSelection: listDesc,
+                    allOption: null,
+                    label: null,
+                    optionList: [
+                      {
+                        label: 'Z to A',
+                        value: true,
+                      },
+                      {
+                        label: 'A to Z',
+                        value: false,
+                      },
+                    ],
+                  }}
+                />
+              </div> */}
+              <div>
+                <Selectpicker
+                  {...{
+                    setOption: setListDesc,
+                    curSelection: listDesc,
+                    allOption: null,
+                    label: null,
+                    optionList: [
+                      {
+                        label: 'Z to A',
+                        value: true,
+                      },
+                      {
+                        label: 'A to Z',
+                        value: false,
+                      },
+                    ],
+                  }}
+                />
+              </div>
             </div>
           </div>
 
