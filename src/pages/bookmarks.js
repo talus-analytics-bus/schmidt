@@ -219,10 +219,14 @@ const Bookmarks = ({}) => {
                 <>
                   <h1>Bookmarked items</h1>
                   {someBookmarks && (
-                    <div className={styles.actions}>
+                    <div
+                      className={styles.actions}
+                      data-for="searchHighlightInfo"
+                      data-tip="Download an Excel file (.xlsx) with metadata for your bookmarks"
+                    >
                       <PrimaryButton
                         {...{
-                          label: 'Download Excel',
+                          label: 'Download metadata',
                           isSecondary: true,
                           isSmall: true,
                           iconName: 'get_app',
