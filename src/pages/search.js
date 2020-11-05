@@ -470,6 +470,8 @@ const Search = ({ setPage }) => {
                 setBookmarkedIds,
                 setOptionsVisible,
                 loading: (isSearching && initialized) || isSearchingText,
+                fromYear,
+                toYear,
               }}
             />
           </div>

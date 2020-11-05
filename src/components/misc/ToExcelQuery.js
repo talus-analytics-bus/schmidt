@@ -3,8 +3,11 @@ const API_URL = process.env.GATSBY_API_URL
 
 const ToExcelQuery = async ({
   ids = [],
+  filters = null,
   order_by = 'date',
   is_desc = false,
+  fromYear,
+  toYear,
 }) => {
   // prepare URL params
   const params = new URLSearchParams()
@@ -13,15 +16,36 @@ const ToExcelQuery = async ({
   params.append('order_by', order_by)
   params.append('is_desc', is_desc)
 
-  // ids of items to return
-  ids.forEach(d => {
-    params.append('ids', d)
-  })
+  // use POST if filters provided, otherwise GET
+  const method = filters === null ? 'GET' : 'POST'
+
+  // if GET: ids of items to return
+  const filtersForReq = {} // POST only
+  if (method === 'GET')
+    ids.forEach(d => {
+      params.append('ids', d)
+    })
+  else if (method === 'POST') {
+    // handle custom year range
+    const usingCustomYearRange =
+      filters !== null &&
+      filters.years !== undefined &&
+      filters.years[0] === 'custom'
+
+    if (usingCustomYearRange) {
+      filtersForReq.years = []
+      filtersForReq.years[0] = `range_${fromYear || 0}_${toYear || 9999}`
+    }
+  }
+
+  // define data if POST
+  const data =
+    method === 'GET' ? {} : { filters: { ...filters, ...filtersForReq } }
 
   // prepare request
   const req = axios({
-    url: `${API_URL}/export/excel`,
-    method: 'GET',
+    url: `${API_URL}/${method.toLowerCase()}/export/excel`,
+    method,
     responseType: 'blob',
     config: {
       headers: {
@@ -30,6 +54,7 @@ const ToExcelQuery = async ({
       },
     },
     params,
+    data,
   })
 
   const res = await req

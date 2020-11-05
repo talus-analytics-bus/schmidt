@@ -10,8 +10,15 @@ import styles from './results.module.scss'
 import loadingSvg from '../../../assets/images/loading-blue.svg'
 
 // local components
+import ToExcelQuery from '../../misc/ToExcelQuery'
 import { getTooltipTextFunc, isEmpty } from '../../misc/Util'
-import { SearchBar, Paginator, CardList, Selectpicker } from '../../common'
+import {
+  SearchBar,
+  Paginator,
+  CardList,
+  Selectpicker,
+  PrimaryButton,
+} from '../../common'
 
 export const Results = ({
   searchData,
@@ -37,6 +44,8 @@ export const Results = ({
   setOptionsVisible,
   loading,
   browse = false,
+  fromYear,
+  toYear,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
@@ -83,6 +92,16 @@ export const Results = ({
             {searchData !== null && (
               <p className={styles.resultsText}>
                 {searchData.total} result{searchData.total !== 1 ? 's' : ''}
+                <PrimaryButton
+                  {...{
+                    label: 'Download',
+                    isSecondary: true,
+                    iconName: 'get_app',
+                    onClick: () => {
+                      ToExcelQuery({ filters, fromYear, toYear })
+                    },
+                  }}
+                />
               </p>
             )}
             <div className={styles.sortBy}>
