@@ -97,8 +97,8 @@ const Contact = ({}) => {
               <p>
                 If you have any accessibility issues using this site, please
                 contact us directly at{' '}
-                <a href="mailto:outbreaks@georgetown.edu">
-                  outbreaks@georgetown.edu
+                <a href="mailto:healthsecuritynet@georgetown.edu">
+                  healthsecuritynet@georgetown.edu
                 </a>
                 .
               </p>
