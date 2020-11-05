@@ -15,6 +15,7 @@ import {
   StickyHeader,
   LoadingSpinner,
   Selectpicker,
+  InfoTooltip,
 } from '../components/common'
 import { appContext } from '../components/misc/ContextProvider'
 
@@ -88,7 +89,7 @@ const Browse = ({ setPage }) => {
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(false)
   const [listDesc, setListDesc] = useState(urlParams.get('list_desc') || false)
-
+  const [sortBy, setSortBy] = useState('results')
   // showing detail overlay?
   const [showOverlay, setShowOverlay] = useState(
     urlParams.get('show_overlay') || false
@@ -186,6 +187,12 @@ const Browse = ({ setPage }) => {
   const filteredList = listToDisplay.filter(item =>
     item[0].toString().toLowerCase().includes(filterSearchText.toLowerCase())
   )
+  let numDocuments = 0
+  filteredList.forEach(item => {
+    if (item[1] !== undefined) {
+      numDocuments = numDocuments + item[1]
+    }
+  })
 
   // text to display above list
   const resultText = filterDefs[browseSection].resultLabel
@@ -554,6 +561,27 @@ const Browse = ({ setPage }) => {
     )
   }
 
+  // get text for second "sort by" box labels
+  const getSortText = value => {
+    if (value) {
+      if (sortBy === 'results') {
+        return 'Most'
+      } else {
+        return browseSection === 'years' || browseSection === 'events'
+          ? 'Most recent'
+          : 'Z to A'
+      }
+    } else {
+      if (sortBy === 'results') {
+        return 'Least'
+      } else {
+        return browseSection === 'years' || browseSection === 'events'
+          ? 'Least recent'
+          : 'A to Z'
+      }
+    }
+  }
+
   // JSX
   return (
     <>
@@ -639,30 +667,40 @@ const Browse = ({ setPage }) => {
               <p className={styles.resultsText}>
                 {filteredList.length} {resultText}
                 {filteredList.length !== 1 ? 's' : ''}
+                {` (${numDocuments} total documents)`}
+                <InfoTooltip
+                  text={`Not all documents in the library are associated with a${
+                    resultText === 'event' ? 'n' : ''
+                  } ${resultText}`}
+                />
               </p>
             )}
             <div className={styles.sortBy}>
               <p className={styles.sortHeader}>Sort by</p>
-              {/* <div>
+              <div>
                 <Selectpicker
                   {...{
-                    setOption: setListDesc,
-                    curSelection: listDesc,
+                    setOption: setSortBy,
+                    curSelection: sortBy,
                     allOption: null,
                     label: null,
                     optionList: [
                       {
-                        label: 'Z to A',
-                        value: true,
+                        label:
+                          browseSection === 'years' ||
+                          browseSection === 'events'
+                            ? 'Year'
+                            : 'Name',
+                        value: 'name',
                       },
                       {
-                        label: 'A to Z',
-                        value: false,
+                        label: 'Results',
+                        value: 'results',
                       },
                     ],
                   }}
                 />
-              </div> */}
+              </div>
               <div>
                 <Selectpicker
                   {...{
@@ -672,11 +710,11 @@ const Browse = ({ setPage }) => {
                     label: null,
                     optionList: [
                       {
-                        label: 'Z to A',
+                        label: getSortText(true),
                         value: true,
                       },
                       {
-                        label: 'A to Z',
+                        label: getSortText(false),
                         value: false,
                       },
                     ],
