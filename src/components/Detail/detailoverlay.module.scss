@@ -121,6 +121,8 @@
         @include spaceItemsVert(10px);
         padding: 20px;
         background-color: white;
+        border: $orange 3px solid;
+        border-top-width: 0px;
         &.wide {
         }
 

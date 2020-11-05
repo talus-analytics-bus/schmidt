@@ -86,6 +86,8 @@
     &.detail {
       padding: 20px;
       grid-template-columns: max-content $letter-width-lg auto;
+      border: $orange 3px solid;
+      border-bottom-width: 0px;
       .resultNumber {
         display: none;
       }
@@ -100,7 +102,7 @@
         img {
           max-height: $max-height-lg;
           max-width: $letter-width-lg;
-          border-color: $orange;
+          border-color: $blue;
         }
         &.placeholder {
           height: $max-height-lg; // like a letter page
@@ -124,9 +126,9 @@
           .detailsAndDownloads {
             display: grid;
             grid-template-columns: 1fr 40%;
-            border-color: $orange;
+            border-color: $blue;
             .downloads {
-              border-color: $orange;
+              border-color: $blue;
             }
           }
         }
