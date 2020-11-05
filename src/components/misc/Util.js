@@ -1484,8 +1484,8 @@ export const filterDefs = {
   years: {
     field: 'years',
     key: 'years',
-    label: 'Date',
-    resultLabel: 'date',
+    label: 'Year',
+    resultLabel: 'year',
     choices: [],
     custom: true,
   },

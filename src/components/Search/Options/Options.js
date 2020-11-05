@@ -66,8 +66,8 @@ export const Options = ({
     years: {
       field: 'years',
       key: 'years',
-      label: 'Date',
-      resultLabel: 'date',
+      label: 'Year',
+      resultLabel: 'year',
       choices: [],
       custom: true,
     },
@@ -393,7 +393,7 @@ export const Options = ({
         label = 'Topic'
         break
       case 'years':
-        label = 'Date'
+        label = 'Year'
         break
       default:
         label = 'Filter'
