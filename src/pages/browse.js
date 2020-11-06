@@ -88,7 +88,7 @@ const Browse = ({ setPage }) => {
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
   const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(false)
-  const [listDesc, setListDesc] = useState(urlParams.get('list_desc') || false)
+  const [listDesc, setListDesc] = useState(urlParams.get('list_desc') || 'true')
   const [sortBy, setSortBy] = useState('results')
   // showing detail overlay?
   const [showOverlay, setShowOverlay] = useState(
@@ -688,7 +688,7 @@ const Browse = ({ setPage }) => {
                 {filteredList.length !== 1 ? 's' : ''}
                 {` (${numDocuments} total documents)`}
                 <InfoTooltip
-                  text={`Not all documents in the library are associated with a${
+                  text={`Some documents in the library may not be associated with a${
                     resultText === 'event' ? 'n' : ''
                   } ${resultText}`}
                 />
@@ -781,32 +781,6 @@ const Browse = ({ setPage }) => {
               ))}
             </div>
           )}
-
-          <div className={styles.sections}>
-            {/* <Options
-              {...{
-                showFilterSections:
-                  searchData !== null && baselineFilterCounts !== null,
-                filterCounts:
-                  searchData !== null ? searchData.filter_counts : {},
-                baselineFilterCounts,
-                orderBy,
-                setOrderBy,
-                isDesc,
-                setIsDesc,
-                searchText,
-                setSearchText,
-                filters,
-                setFilters,
-                fromYear,
-                setFromYear,
-                toYear,
-                setToYear,
-                mobile: false,
-                setOptionsVisible,
-              }}
-            /> */}
-          </div>
         </div>
         <ReactTooltip
           id={'searchHighlightInfo'}
