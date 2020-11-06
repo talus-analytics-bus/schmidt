@@ -157,6 +157,17 @@ const Browse = ({ setPage }) => {
     return result
   }
 
+  // sorting, by number of results
+  const resultsSort = (a, b) => {
+    a = a[1]
+    b = b[0]
+    let result
+    if (a > b) result = 1
+    if (a === b) result = 0
+    if (a < b) result = -1
+    return result
+  }
+
   const resultsHaveLoaded = searchData !== null
 
   // fire when view details buttons are pressed to display the detail overlay
@@ -179,10 +190,18 @@ const Browse = ({ setPage }) => {
       item[0] !== null
   )
   // sort list
-  const listToDisplay =
-    listDesc === 'true'
-      ? rawList.sort(caseInsensitiveSort).reverse()
-      : rawList.sort(caseInsensitiveSort)
+  let listToDisplay
+  if (sortBy === 'name') {
+    listToDisplay =
+      listDesc === 'true'
+        ? rawList.sort(caseInsensitiveSort).reverse()
+        : rawList.sort(caseInsensitiveSort)
+  } else if (sortBy === 'results') {
+    listToDisplay =
+      listDesc === 'true'
+        ? rawList.sort(resultsSort)
+        : rawList.sort(resultsSort).reverse()
+  }
   // filter with search term if applicable
   const filteredList = listToDisplay.filter(item =>
     item[0].toString().toLowerCase().includes(filterSearchText.toLowerCase())
