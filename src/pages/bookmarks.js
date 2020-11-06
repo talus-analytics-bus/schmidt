@@ -28,6 +28,7 @@ import {
 
 // styles and assets
 import styles from '../components/Bookmarks/bookmarks.module.scss'
+import loadingGif from '../assets/icons/loading.gif'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -52,6 +53,9 @@ const Bookmarks = ({}) => {
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
   const [showScrollToTop, setShowScrollToTop] = useState(false)
+
+  // for setting download button loading gif
+  const [isDownloading, setIsDownloading] = useState(false)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -226,13 +230,23 @@ const Bookmarks = ({}) => {
                     >
                       <PrimaryButton
                         {...{
-                          label: 'Download metadata',
+                          label: !isDownloading ? (
+                            'Download metadata'
+                          ) : (
+                            <div className={styles.downloading}>
+                              Downloading...
+                              <img src={loadingGif} alt="loading" />
+                            </div>
+                          ),
                           isSecondary: true,
                           isSmall: true,
-                          iconName: 'get_app',
-                          onClick: () => {
-                            console.log('ToExcelQuery')
-                            ToExcelQuery({ ids: bookmarkedIds })
+                          iconName: !isDownloading ? 'get_app' : null,
+                          onClick: async () => {
+                            setIsDownloading(true)
+                            const response = await ToExcelQuery({
+                              ids: bookmarkedIds,
+                            })
+                            setIsDownloading(false)
                           },
                         }}
                       />
