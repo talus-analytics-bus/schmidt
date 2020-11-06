@@ -8,10 +8,18 @@ import { InfoTooltip } from '../../common'
 // local assets and styling
 import styles from './results.module.scss'
 import loadingSvg from '../../../assets/images/loading-blue.svg'
+import loadingGif from '../../../assets/icons/loading.gif'
 
 // local components
+import ToExcelQuery from '../../misc/ToExcelQuery'
 import { getTooltipTextFunc, isEmpty } from '../../misc/Util'
-import { SearchBar, Paginator, CardList, Selectpicker } from '../../common'
+import {
+  SearchBar,
+  Paginator,
+  CardList,
+  Selectpicker,
+  PrimaryButton,
+} from '../../common'
 
 export const Results = ({
   searchData,
@@ -37,9 +45,13 @@ export const Results = ({
   setOptionsVisible,
   loading,
   browse = false,
+  fromYear,
+  toYear,
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
+  const [isDownloading, setIsDownloading] = useState(false)
+
   // CONSTANTS // ---------------------------------------------------------- //
   // show paginator if card data loaded
   const showPaginator = searchData !== null && searchData.total !== 0
@@ -83,6 +95,29 @@ export const Results = ({
             {searchData !== null && (
               <p className={styles.resultsText}>
                 {searchData.total} result{searchData.total !== 1 ? 's' : ''}
+                <PrimaryButton
+                  {...{
+                    label: !isDownloading ? (
+                      'Download'
+                    ) : (
+                      <div className={styles.downloading}>
+                        Downloading...
+                        <img src={loadingGif} alt="loading" />
+                      </div>
+                    ),
+                    isSecondary: true,
+                    iconName: !isDownloading ? 'get_app' : null,
+                    onClick: async () => {
+                      setIsDownloading(true)
+                      const response = await ToExcelQuery({
+                        filters,
+                        fromYear,
+                        toYear,
+                      })
+                      setIsDownloading(false)
+                    },
+                  }}
+                />
               </p>
             )}
             <div className={styles.sortBy}>

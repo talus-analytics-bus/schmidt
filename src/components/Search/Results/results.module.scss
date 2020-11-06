@@ -19,7 +19,13 @@
     align-items: center;
     margin: 20px 0px;
     .resultsText {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
       color: $light-blue;
+      button {
+        margin-left: 10px;
+      }
     }
     .sortBy {
       display: flex;
@@ -29,6 +35,15 @@
       > div {
         @include center();
       }
+    }
+  }
+  .downloading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-left: 10px;
     }
   }
 }
