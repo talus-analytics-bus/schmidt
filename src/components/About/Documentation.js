@@ -31,7 +31,7 @@ const Documentation = ({}) => {
 
   // JSX
   return (
-    <>
+    <div className={styles.doc}>
       <p>
         The Global Health Security Library is one of a suite of free resources
         that makes data and information about pandemic planning and oversight
@@ -520,7 +520,7 @@ const Documentation = ({}) => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

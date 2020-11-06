@@ -18,7 +18,7 @@ const Overview = ({}) => {
 
   // JSX
   return (
-    <>
+    <div className={styles.over}>
       <p>
         The Global Health Security Library is a publicly accessible, centralized
         database of warnings, evaluations, oversight efforts, strategies, and
@@ -52,6 +52,23 @@ const Overview = ({}) => {
               alt="Georgetown University Center for Global Health Science and Security logo"
             ></img>
           </a>
+          <div className={styles.team}>
+            <div className={styles.header}>Team</div>
+            <div className={styles.members}>
+              <ul>
+                <li>Ellen P. Carlin (Principal Investigator)</li>
+                <li>Madison Alvarez</li>
+                <li>Maydha Dhanuka</li>
+                <li>Jessica Highland</li>
+                <li>Rebecca Katz</li>
+                <li>Andrew Meshnick</li>
+                <li>Allie Reichert</li>
+                <li>Ryan Remmel</li>
+                <li>Siobahn Robinson-Marshall</li>
+                <li>Claire Standley</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className={styles.contributor}>
           <a href={'https://talusanalytics.com/'} target="_blank">
@@ -61,6 +78,17 @@ const Overview = ({}) => {
               alt="Talus Analytics logo"
             ></img>
           </a>
+          <div className={styles.team}>
+            <div className={styles.header}>Team</div>
+            <div className={styles.members}>
+              <ul>
+                <li>Ellie Graeden (Principal Investigator)</li>
+                <li>Nate Bennett</li>
+                <li>Alaina Case</li>
+                <li>Michael Van Maele</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div className={styles.contributors}>
@@ -75,7 +103,7 @@ const Overview = ({}) => {
           </a>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -69,19 +69,6 @@
         margin-top: 20px;
       }
     }
-    $lh: 1.8rem;
-    li {
-      line-height: $lh;
-      p {
-        line-height: $lh;
-      }
-      &:not(:first-of-type) {
-        margin-top: 20px;
-      }
-      &.noTopMargin {
-        margin-top: 0px;
-      }
-    }
     h2 {
       font-weight: 600;
     }
@@ -97,14 +84,43 @@
       font-weight: 600;
       margin: 40px 0px 20px 0px;
     }
+    .doc {
+      $lh: 1.8rem;
+      li {
+        line-height: $lh;
+        p {
+          line-height: $lh;
+        }
+        &:not(:first-of-type) {
+          margin-top: 20px;
+        }
+        &.noTopMargin {
+          margin-top: 0px;
+        }
+      }
+    }
+    .over {
+      .members {
+        font-size: 1.2rem;
+        ul {
+          padding-left: 25px;
+        }
+        li {
+          margin-top: 8px;
+        }
+      }
+    }
     .contributors {
       &:not(:last-child) {
         margin-bottom: 90px;
       }
       .contributor {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1.3fr 3fr;
+        column-gap: 5%;
         background-color: $very-light-gray;
+        border-radius: $big-radius;
+        border: darken($very-light-gray, 5%) 2px solid;
         &:not(:first-of-type) {
           margin-top: 20px;
         }
@@ -116,6 +132,16 @@
           }
           &.schmidt {
             width: 80%;
+          }
+        }
+        .team {
+          padding: 20px;
+          margin: 20px;
+          font-size: 1.5rem;
+          background-color: darken($very-light-gray, 5%);
+          border-radius: $big-radius;
+          .header {
+            font-weight: 600;
           }
         }
       }
