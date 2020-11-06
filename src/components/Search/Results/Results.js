@@ -8,6 +8,7 @@ import { InfoTooltip } from '../../common'
 // local assets and styling
 import styles from './results.module.scss'
 import loadingSvg from '../../../assets/images/loading-blue.svg'
+import loadingGif from '../../../assets/icons/loading.gif'
 
 // local components
 import ToExcelQuery from '../../misc/ToExcelQuery'
@@ -49,6 +50,8 @@ export const Results = ({
   ...props
 }) => {
   // STATE // -------------------------------------------------------------- //
+  const [isDownloading, setIsDownloading] = useState(false)
+
   // CONSTANTS // ---------------------------------------------------------- //
   // show paginator if card data loaded
   const showPaginator = searchData !== null && searchData.total !== 0
@@ -94,11 +97,24 @@ export const Results = ({
                 {searchData.total} result{searchData.total !== 1 ? 's' : ''}
                 <PrimaryButton
                   {...{
-                    label: 'Download',
+                    label: !isDownloading ? (
+                      'Download'
+                    ) : (
+                      <div className={styles.downloading}>
+                        Downloading...
+                        <img src={loadingGif} alt="loading" />
+                      </div>
+                    ),
                     isSecondary: true,
-                    iconName: 'get_app',
-                    onClick: () => {
-                      ToExcelQuery({ filters, fromYear, toYear })
+                    iconName: !isDownloading ? 'get_app' : null,
+                    onClick: async () => {
+                      setIsDownloading(true)
+                      const response = await ToExcelQuery({
+                        filters,
+                        fromYear,
+                        toYear,
+                      })
+                      setIsDownloading(false)
                     },
                   }}
                 />
