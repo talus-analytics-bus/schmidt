@@ -169,7 +169,6 @@
   .results {
     @include spaceItemsVert(20px);
     .item {
-      font-size: 1.2rem;
       cursor: pointer;
       .header {
         display: flex;
@@ -179,6 +178,7 @@
         background-color: $light-gray;
         padding: 20px;
         border-radius: $big-radius;
+        font-size: 1.2rem;
         &.bigContainer {
           border-radius: $big-radius $big-radius 0px 0px;
         }
