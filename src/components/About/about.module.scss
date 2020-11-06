@@ -71,18 +71,22 @@
     }
     h2 {
       font-weight: 600;
+      font-size: 2.1rem;
+      padding-bottom: 10px;
+      border-bottom: 5px solid $light-blue;
+      margin-top: 40px;
     }
     h3 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 600;
-      border-top: 3px solid $light-blue;
-      padding-top: 10px;
       margin: 40px 0px 20px 0px;
     }
     h4 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 600;
       margin: 40px 0px 20px 0px;
+      border-bottom: 3px solid $light-blue;
+      padding-bottom: 5px;
     }
     .doc {
       $lh: 1.8rem;
@@ -99,6 +103,9 @@
         }
       }
     }
+    .indent {
+      margin-left: 3%;
+    }
     .over {
       .members {
         font-size: 1.2rem;
@@ -112,7 +119,7 @@
     }
     .contributors {
       &:not(:last-child) {
-        margin-bottom: 90px;
+        margin-bottom: 60px;
       }
       .contributor {
         display: grid;
@@ -128,7 +135,7 @@
           width: 100%;
           padding: 20px;
           &.talus {
-            width: 95%;
+            width: 85%;
           }
           &.schmidt {
             width: 80%;
