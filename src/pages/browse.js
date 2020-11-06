@@ -160,7 +160,7 @@ const Browse = ({ setPage }) => {
   // sorting, by number of results
   const resultsSort = (a, b) => {
     a = a[1]
-    b = b[0]
+    b = b[1]
     let result
     if (a > b) result = 1
     if (a === b) result = 0
@@ -199,8 +199,8 @@ const Browse = ({ setPage }) => {
   } else if (sortBy === 'results') {
     listToDisplay =
       listDesc === 'true'
-        ? rawList.sort(resultsSort)
-        : rawList.sort(resultsSort).reverse()
+        ? rawList.sort(resultsSort).reverse()
+        : rawList.sort(resultsSort)
   }
   // filter with search term if applicable
   const filteredList = listToDisplay.filter(item =>
