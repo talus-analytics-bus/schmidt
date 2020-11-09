@@ -198,13 +198,11 @@ const Browse = ({ setPage }) => {
       listDesc === 'true'
         ? rawList.sort(caseInsensitiveSort).reverse()
         : rawList.sort(caseInsensitiveSort)
-    // console.log('sorting by name, listDesc = ' + listDesc)
   } else if (sortBy === 'results') {
     listToDisplay =
       listDesc === 'true'
         ? rawList.sort(resultsSort).reverse()
         : rawList.sort(resultsSort)
-    // console.log('sorting by results, listDesc = ' + listDesc)
   }
   // filter with search term if applicable
   const filteredList = listToDisplay.filter(item =>
@@ -304,16 +302,6 @@ const Browse = ({ setPage }) => {
 
   const updateFilterSearchText = e => {
     setFilterSearchText(e.target.value)
-  }
-
-  const sortBySelect = value => {
-    if (value === 'results') {
-      setListDesc(false)
-      setListDesc(true)
-    } else {
-      setListDesc(false)
-    }
-    setSortBy(value)
   }
 
   // DEBUG
@@ -717,7 +705,7 @@ const Browse = ({ setPage }) => {
               <div>
                 <Selectpicker
                   {...{
-                    setOption: sortBySelect,
+                    setOption: setSortBy,
                     curSelection: sortBy,
                     allOption: null,
                     label: null,
