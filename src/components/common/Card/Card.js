@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 import classNames from 'classnames'
-import axios from 'axios'
+import { navigate } from 'gatsby'
 
 // assets and styles
 import styles from './card.module.scss'
@@ -15,9 +15,7 @@ import Panel from '../../Detail/content/Panel'
 // local utility functions
 import {
   formatDate,
-  isEmpty,
   bytesToMegabytes,
-  removeBookmark,
   iconNamesByField,
   getIconByName,
   asBulletDelimitedList,
@@ -45,24 +43,31 @@ export const Card = ({
   key_topics,
   events,
   files,
+  why = [],
   snippets = {},
   filters = {},
   setFilters = () => '',
   setSearchText,
-  onViewDetails = () => '',
+  onViewDetails = () => navigate('/detail/?id=' + id),
+  floating = false,
   detail = false,
   related = false,
+  single = false,
   bookmark = false,
   setBookmarkedIds = () => '',
   bookmarkedIds = [],
   animate = false,
   getTooltipText = null,
   alwaysStartNew,
+  browse = false,
   ...props
 }) => {
+  // CONSTANTS
+  const openNewPage = bookmark || single || browse
+
   // STATE
   // card's left css property
-  const [left, setLeft] = useState(detail || related ? 0 : 20)
+  const [left, setLeft] = useState(detail || related || browse ? 0 : 20)
 
   // show preview or hide?
   const [showPreview, setShowPreview] = useState(false)
@@ -79,7 +84,7 @@ export const Card = ({
   // animate card entrances -- any card that changes position in the order
   // or is new to the list will fly in
   useEffect(() => {
-    if (!detail && !related) {
+    if (!detail && !related && !browse) {
       if (left === 0) {
         setLeft(20)
       }
@@ -118,7 +123,6 @@ export const Card = ({
       card[key] = getHighlightSegments({
         text: snippets[key],
         getTooltipText,
-
         maxWords: 20,
         styles,
       })
@@ -209,9 +213,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -232,10 +236,9 @@ export const Card = ({
               return {
                 onClick: e =>
                   toggleFilter({
-                    e,
-                    openNewPage: bookmark,
-
                     datum: d,
+                    e,
+                    openNewPage,
                     getFilterVal,
                     filters,
                     filterKey,
@@ -261,7 +264,12 @@ export const Card = ({
       // collate link entry text into a list of links
       card[filterKey] = linkListEntries
         .map(d => (
-          <span onClick={d.onClick} className={styles.link}>
+          <span
+            onClick={d.onClick}
+            className={styles.link}
+            data-for={'searchHighlightInfo'}
+            data-tip={getTooltipText && getTooltipText('add')}
+          >
             {d.text}
           </span>
         ))
@@ -294,6 +302,15 @@ export const Card = ({
     )
   }
 
+  // if item type is not defined, make it "Item"
+  if (
+    card.type_of_record === '' ||
+    card.type_of_record === undefined ||
+    card.type_of_record === null
+  ) {
+    card.type_of_record = 'Document'
+  }
+
   // JSX
   return (
     <div className={styles.cardContainer}>
@@ -313,7 +330,7 @@ export const Card = ({
       >
         <div
           style={{ width: resultNumber !== null ? '' : 0 }}
-          className={styles.col}
+          className={classNames(styles.col, styles.resultNumberCol)}
         >
           <div className={styles.resultNumber}>{resultNumber}</div>
         </div>
@@ -339,7 +356,7 @@ export const Card = ({
                 {...{
                   label: 'Preview',
                   iconName: 'preview',
-                  isSecondary: true,
+                  isSecondary: false,
                   onClick: e => {
                     e.stopPropagation()
                     e.preventDefault()
@@ -356,39 +373,52 @@ export const Card = ({
             )
           }
         </div>
-        <div className={styles.col}>
+        <div className={classNames(styles.col, styles.contentCol)}>
           <div className={styles.main}>
-            <div className={styles.header}>
-              {card.type_of_record !== '' && (
-                <div className={styles.type}>{card.type_of_record}</div>
-              )}
-              {bookmarkedIds !== null && (
-                <BookmarkToggle
-                  {...{
-                    key: id,
-                    add: !bookmarkedIdsArr.includes(+id),
-                    isSecondary: true,
-                    bookmarkedIds: bookmarkedIdsArr,
-                    setBookmarkedIds,
-                    id,
-                    simple: true,
-                  }}
-                />
-              )}
-            </div>
-            <div className={styles.title}>
-              <div className={styles.text}>
-                {title !== '' ? card.title : 'Untitled'}
+            <div className={styles.top}>
+              <div className={styles.headerAndTitle}>
+                {!detail && (
+                  <div className={styles.header}>
+                    {card.type_of_record !== '' && (
+                      <div className={styles.type}>{card.type_of_record}</div>
+                    )}
+                  </div>
+                )}
+                <div className={styles.title}>
+                  <div
+                    className={classNames(styles.text, {
+                      [styles.noTopMargin]: detail,
+                    })}
+                  >
+                    {title !== '' ? card.title : 'Untitled'}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.quickActions}>
+                {bookmarkedIds !== null && (
+                  <BookmarkToggle
+                    {...{
+                      keyName: id,
+                      add: !bookmarkedIdsArr.includes(+id),
+                      isSecondary: true,
+                      bookmarkedIds: bookmarkedIdsArr,
+                      setBookmarkedIds,
+                      id,
+                      simple: true,
+                    }}
+                  />
+                )}
               </div>
             </div>
-            <div className={styles.detailsAndActions}>
+
+            <div className={styles.detailsAndDownloads}>
               <div className={styles.details}>
                 <div className={styles.authOrg}>
                   <i className={'material-icons'}>person</i>
                   <div className={styles.authOrgList}>
                     {authors.length > 0 && card['author.id']}
                     {authors.length === 0 && (
-                      <div>Authoring organization unavailable</div>
+                      <div>Publishing organization unavailable</div>
                     )}
                   </div>
                 </div>
@@ -413,9 +443,77 @@ export const Card = ({
                   {date === null && <span>Date unavailable</span>}
                 </div>
               </div>
-              <div className={styles.actions}>
-                {files.length > 0 && (
-                  <div>
+              {detail && files.length > 0 && (
+                <div className={styles.downloads}>
+                  <Panel
+                    {...{
+                      title: 'Downloads',
+                      secondary: false,
+                      iconName: 'get_app',
+                    }}
+                  >
+                    {files.map(({ id, num_bytes, filename }) => (
+                      <div className={styles.downloadItem}>
+                        <i className={'material-icons'}>picture_as_pdf</i>
+                        <div
+                          data-for={'searchHighlightInfo'}
+                          data-tip={'Click to download this file'}
+                        >
+                          <a
+                            target={'_blank'}
+                            rel="noreferrer"
+                            href={`${API_URL}/get/file/${title.replace(
+                              /\?/g,
+                              ''
+                            )}?id=${id}`}
+                          >
+                            <div>
+                              {filename}{' '}
+                              <span className={styles.noBreak}>
+                                ({bytesToMegabytes(num_bytes)})
+                              </span>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                    {files.length === 0 && <div>None</div>}
+                  </Panel>
+                </div>
+              )}
+            </div>
+            {description !== '' && (
+              <div className={styles.descriptionSnippet}>
+                {!detail && (
+                  <div className={styles.descripLabel}>Description:</div>
+                )}
+                <div className={styles.description}>{card.description}</div>
+              </div>
+            )}
+            {
+              // reasons related
+              related && (
+                <div className={styles.why}>
+                  {why.map(asBulletDelimitedList)}
+                </div>
+              )
+            }
+            {!detail && !related && tagSnippets.length > 0 && (
+              <div
+                className={classNames(styles.tagSnippets, {
+                  [styles.topBorder]: description !== '',
+                })}
+              >
+                <div className={styles.tagSnippetsHeader}>
+                  Matching filters:
+                </div>
+                {tagSnippets}
+              </div>
+            )}
+            <div className={styles.actions}>
+              {!detail && files.length > 0 && (
+                <>
+                  <div className={styles.previewButton}>
                     <PrimaryButton
                       {...{
                         label: 'Preview',
@@ -429,7 +527,26 @@ export const Card = ({
                       }}
                     />
                   </div>
-                )}
+                  <div className={styles.mobilePreviewButton}>
+                    <PrimaryButton
+                      {...{
+                        label: 'Open PDF',
+                        iconName: 'launch',
+                        isSecondary: true,
+                        urlIsExternal: true,
+                        url: `${API_URL}/get/file/${title.replace(
+                          /\?/g,
+                          ''
+                        )}?id=${files[0].id}`,
+                        onClick: e => {
+                          e.stopPropagation()
+                        },
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+              {!detail && (
                 <div>
                   <PrimaryButton
                     {...{
@@ -439,49 +556,21 @@ export const Card = ({
                     }}
                   />
                 </div>
-              </div>
-            </div>
-            <div className={styles.descriptionSnippet}>{card.description}</div>
-            {tagSnippets.length > 0 && (
-              <div className={styles.tagSnippets}>{tagSnippets}</div>
-            )}
-            {detail && files.length > 0 && (
-              <div className={styles.downloads}>
-                <Panel
+              )}
+              {(!detail || floating) && (
+                <PrimaryButton
                   {...{
-                    title: 'Downloads',
-                    secondary: false,
-                    iconName: 'get_app',
+                    label: 'Open in new tab',
+                    iconName: 'launch',
+                    url: `/detail/?id=${id}`,
+                    urlIsExternal: true,
+                    onClick: e => {
+                      e.stopPropagation()
+                    },
                   }}
-                >
-                  {files.map(({ id, num_bytes, filename }) => (
-                    <div className={styles.downloadItem}>
-                      <span
-                        data-for={'searchHighlightInfo'}
-                        data-tip={'Click to download this file'}
-                      >
-                        <PrimaryButton
-                          {...{
-                            label: (
-                              <>
-                                {filename} ({bytesToMegabytes(num_bytes)})
-                              </>
-                            ),
-                            isLink: true,
-                            urlIsExternal: true,
-                            url: `${API_URL}/get/file/${title.replace(
-                              /\?/g,
-                              ''
-                            )}?id=${id}`,
-                          }}
-                        />
-                      </span>
-                    </div>
-                  ))}
-                  {files.length === 0 && <div>None</div>}
-                </Panel>
-              </div>
-            )}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -7,7 +7,6 @@
 
   .label {
     text-transform: uppercase;
-    font-family: 'rawline', serif;
   }
   .tickerContent {
     display: flex;
@@ -41,7 +40,6 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            font-family: 'rawline', serif;
             img {
               $size: 30%;
               height: $size;
@@ -62,7 +60,7 @@
           transition: border-color 0.25s, opacity 0.25s;
           .thumbnail {
             opacity: 1;
-            border: solid 4px $selected-blue;
+            border: solid 4px $light-blue;
           }
         }
       }
@@ -76,12 +74,12 @@
       position: relative;
       line-height: 0;
       top: -4px;
-      color: #333;
+      color: $dark-blue;
       &:hover {
         color: black;
       }
       &:active {
-        color: $navy-blue;
+        color: $blue;
       }
       &.disabled {
         color: gray;

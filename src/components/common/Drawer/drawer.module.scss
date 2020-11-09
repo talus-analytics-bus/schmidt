@@ -65,7 +65,6 @@
     // e.g., "Download all/filtered data"
     .action {
       .primary {
-        font-family: 'Rawline', serif;
         background-color: $blue;
         color: white;
       }
@@ -74,7 +73,7 @@
   .content {
     padding: $padding;
     font-size: 1rem;
-    background-color: $light-gray-2;
+    background-color: $very-light-gray;
     @include spaceItemsVert(20px);
     &.hidden {
       // visibility: hidden;

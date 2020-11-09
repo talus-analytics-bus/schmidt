@@ -11,6 +11,7 @@ import {
   FloatButton,
   CheckboxSet,
   PrimaryButton,
+  SearchBar,
 } from '../../common'
 import FilterSection from './content/FilterSection/FilterSection'
 
@@ -19,6 +20,7 @@ import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
+import { lab } from 'd3'
 
 export const Options = ({
   showFilterSections,
@@ -36,11 +38,16 @@ export const Options = ({
   setFromYear,
   toYear,
   setToYear,
+  mobile,
+  setOptionsVisible,
+  isSearchingText,
+  setIsSearchingText,
+  setFreezeDataUpdates,
   ...props
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
   // num filter sections shown open by default
-  const defaultNumOpen = 3
+  const defaultNumOpen = 0
 
   // STATE // -------------------------------------------------------------- //
   // show/hide additional filter sections
@@ -59,44 +66,61 @@ export const Options = ({
     years: {
       field: 'years',
       key: 'years',
-      label: 'Years',
+      label: 'Year',
+      resultLabel: 'year',
       choices: [],
       custom: true,
     },
     key_topics: {
       field: 'key_topics',
       key: 'key_topics',
-      label: 'Topic areas',
+      label: 'Topic area',
+      resultLabel: 'topic area',
       choices: [],
     },
     author_types: {
       field: 'author.type_of_authoring_organization',
       key: 'author_types',
-      label: 'Authoring organization types',
+      label: (
+        <div>
+          Publishing
+          <br /> org. type
+        </div>
+      ),
+      resultLabel: 'publishing organization type',
       choices: [],
     },
     authors: {
       field: 'author.id',
       key: 'authors',
-      label: 'Authoring organizations',
+      label: (
+        <div>
+          Publishing
+          <br /> organization
+        </div>
+      ),
+      resultLabel: 'publishing organization',
       choices: [],
     },
     events: {
       field: 'event.name',
       key: 'events',
-      label: 'Events',
+      label: 'Event',
+      resultLabel: 'event',
       choices: [],
     },
     funders: {
       field: 'funder.name',
       key: 'funders',
-      label: 'Funders',
+      label: 'Funder',
+      resultLabel: 'funder',
       choices: [],
     },
     types_of_record: {
       field: 'type_of_record',
       key: 'types_of_record',
-      label: 'Record types',
+      label: 'Document type',
+      resultLabel: 'document type',
       choices: [],
     },
   }
@@ -110,12 +134,19 @@ export const Options = ({
   if (showFilterSections) {
     filterKeys.forEach(field => {
       // for (const [field, valueCounts] of Object.entries(filterCounts)) {
+      // different icon color only on filters pages
+      let icon
+      if (field == 'events') {
+        icon = 'caution_orange'
+      } else {
+        icon = iconNamesByField[field] || null
+      }
       const valueCounts = filterCounts[field]
       const curFilterSectionData = {
         label: field, // TODO pretty,
         field,
         choices: [],
-        iconName: iconNamesByField[field] || null,
+        iconName: icon,
       }
       const alreadySeenValues = []
       valueCounts.forEach(([value, count, id]) => {
@@ -186,7 +217,6 @@ export const Options = ({
                                   if (toYear < v) {
                                     setToYear(v)
                                   }
-
                                   // if custom year not enabled, enable it and
                                   // disable other years
                                   const customYearDisabled =
@@ -252,7 +282,6 @@ export const Options = ({
                     ]),
                   callback: v => {
                     if (v.length > 0) {
-                      //
                       const alreadyCustom =
                         filters.years !== undefined &&
                         filters.years[0] === 'custom' &&
@@ -325,6 +354,80 @@ export const Options = ({
     )
   })
 
+  // Generate filter badge for 'selected filters' area
+  const getBadge = (field, value) => {
+    let label
+    let authorValue = null
+    switch (field) {
+      case 'event.name':
+        label = 'Event'
+        break
+      case 'funder.name':
+        label = 'Funder'
+        break
+      case 'type_of_record':
+        label = 'Document type'
+        break
+      case 'author.id':
+        label = 'Author'
+        //translate author id into human readable author name
+        if (filterSectionData !== null && filterSectionData !== undefined) {
+          let authorObj = filterSectionData.filter(
+            obj => obj.label === 'authors'
+          )[0]
+          let authorList
+          if (authorObj !== undefined) {
+            authorList = authorObj.choices
+            authorList.forEach(author => {
+              if (author.value == value) {
+                authorValue = author.label
+              }
+            })
+          }
+        }
+        break
+      case 'author.type_of_authoring_organization':
+        label = 'Author type'
+        break
+      case 'key_topics':
+        label = 'Topic'
+        break
+      case 'years':
+        label = 'Year'
+        break
+      default:
+        label = 'Filter'
+    }
+    let tempValue = value
+    if (tempValue === '') tempValue = 'Unspecified'
+    return (
+      <div className={styles.badge}>
+        <div>
+          {label}:{' '}
+          <span className={styles.value}>
+            {authorValue !== null ? authorValue : tempValue}
+          </span>
+        </div>
+        <div
+          className={classNames('material-icons', styles.closeButton)}
+          onClick={() => {
+            const newFilters = { ...filters }
+            newFilters[field] = newFilters[field].filter(v => v !== value)
+
+            if (newFilters[field].length === 0) {
+              delete newFilters[field]
+              setFilters(newFilters)
+            } else {
+              setFilters(newFilters)
+            }
+          }}
+        >
+          close
+        </div>
+      </div>
+    )
+  }
+
   // FUNCTIONS // ------------------------------------------------------- //
   // handle start over
   const onStartOver = () => {
@@ -347,103 +450,76 @@ export const Options = ({
    * Return JSX for search options including filters, reset, order by
    */
   return (
-    <div className={styles.options}>
-      <h2>Refine search</h2>
-      <div className={styles.content}>
-        <PrimaryButton
-          {...{
-            key: 'startOver',
-            onClick: onStartOver,
-            label: 'Start over',
-            isLink: true,
-            disabled: startOverDisabled,
-          }}
-        />
-        {
-          // Sort by controls were originally in the filter section, moved to
-          // results section for clarity
-          // <div className={styles.sortBy}>
-          //   <div>
-          //     Sort results by:{' '}
-          //     <Selectpicker
-          //       {...{
-          //         setOption: setOrderBy,
-          //         curSelection: orderBy,
-          //         allOption: null,
-          //         label: null,
-          //         optionList: [
-          //           {
-          //             label: 'Relevance',
-          //             value: 'relevance',
-          //           },
-          //           {
-          //             label: 'Date',
-          //             value: 'date',
-          //           },
-          //           {
-          //             label: 'Title',
-          //             value: 'title',
-          //           },
-          //         ],
-          //       }}
-          //     />
-          //   </div>
-          //   <div>
-          //     <Selectpicker
-          //       {...{
-          //         setOption: setIsDesc,
-          //         curSelection: isDesc,
-          //         allOption: null,
-          //         label: null,
-          //         // TODO ensure this sticks when coming from another page
-          //         disabled: orderBy === 'relevance',
-          //         optionList: [
-          //           {
-          //             label: 'Descending',
-          //             value: true,
-          //           },
-          //           {
-          //             label: 'Ascending',
-          //             value: false,
-          //           },
-          //         ],
-          //       }}
-          //     />
-          //   </div>
-          // </div>
-        }
-        <div className={styles.collapseOrExpandAll}>
+    <div className={classNames(styles.options, { [styles.mobile]: mobile })}>
+      <div className={styles.header}>
+        <h1>Search library</h1>
+        <p>
+          Search the document library by keyword and use filters to narrow down
+          search results.
+        </p>
+        {/* {mobile && (
+          <i
+            className="material-icons"
+            onClick={() => setOptionsVisible(false)}
+          >
+            close
+          </i>
+        )} */}
+      </div>
+      <SearchBar
+        {...{
+          searchText,
+          setSearchText,
+          isSearchingText,
+          setIsSearchingText,
+          setFreezeDataUpdates,
+          setOrderBy,
+          setIsDesc,
+        }}
+      />
+      <div className={styles.filters}>
+        <h2>Apply filters</h2>
+        {/* {!startOverDisabled && (
           <PrimaryButton
             {...{
-              onClick: () => setTriggerCollapseAll(true),
-              label: 'Collapse all',
-              isLink: true,
-              disabled: numOpen === 0,
+              key: 'startOver',
+              onClick: onStartOver,
+              label: 'Start over',
+              disabled: startOverDisabled,
             }}
           />
-          <PrimaryButton
-            {...{
-              onClick: () => setTriggerExpandAll(true),
-              label: 'Expand all',
-              isLink: true,
-              disabled: numOpen === numFilterSections,
-            }}
-          />
-        </div>
+        )} */}
         <div className={styles.filterSections}>{filterSections}</div>
-        {
-          //   showFilterSections && (
-          //   <FloatButton
-          //     {...{
-          //       icon: <i className={'material-icons'}>expand_less</i>,
-          //       label: `${
-          //         showAdditionalFilters ? 'Hide' : 'Show'
-          //       } additional filters`,
-          //       onClick: () => setShowAdditionalFilters(!showAdditionalFilters),
-          //     }}
-          //   />
-          // )
-        }
+        {!isEmpty(filters) && (
+          <div className={styles.selectedFilters}>
+            <div className={styles.selectedHeader}>
+              Selected filters
+              {Object.keys(filters).length > 0 && (
+                <span className={styles.clearButton}>
+                  <PrimaryButton
+                    {...{
+                      key: 'clearAll',
+                      onClick: () => setFilters({}),
+                      label: 'Clear all',
+                      isSecondary: true,
+                    }}
+                  />
+                </span>
+              )}
+            </div>
+            <div className={styles.selectedFiltersList}>
+              {Object.entries(filters).map(([field, values]) => (
+                <React.Fragment key={field}>
+                  {values.map(value => (
+                    <React.Fragment key={`${field} - ${value}`}>
+                      {getBadge(field, value)}
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ import styles from './footer.module.scss'
 import classNames from 'classnames'
 
 // assets
-import logo from '../../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.svg'
 import talus from '../../../assets/images/talus.png'
 import schmidt from '../../../assets/images/schmidt.svg'
 import georgetown from '../../../assets/images/georgetown.png'
@@ -22,13 +22,6 @@ const Footer = () => {
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
         <div className={styles.logos}>
-          <a href={'https://schmidtfutures.com/'} target="_blank">
-            <img
-              className={styles.schmidt}
-              src={schmidt}
-              alt={'Schmidt Futures logo'}
-            ></img>
-          </a>
           <a href={'https://ghss.georgetown.edu/'} target="_blank">
             <img
               className={styles.georgetown}

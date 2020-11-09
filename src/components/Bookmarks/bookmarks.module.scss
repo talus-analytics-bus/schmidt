@@ -14,13 +14,24 @@
   height: 100%;
   font-size: 1rem;
   position: relative;
+
   .noBookmarksInstructions {
     display: flex;
     flex-flow: wrap;
     align-items: center;
     margin-bottom: 10px;
     > i {
-      color: $navy-blue;
+      color: $blue;
+      margin: 0px 5px;
+    }
+  }
+  .downloading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-left: 10px;
     }
   }
 }

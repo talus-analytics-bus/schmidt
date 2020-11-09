@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import styles from './stickyheader.module.scss'
 import classNames from 'classnames'
 import arrow from './arrowIcon.png'
-import logo from '../../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.svg'
 
 // // local components
 // import { TimeframePicker } from '../'

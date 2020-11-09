@@ -1,4 +1,4 @@
-@import "../../../assets/styles/vars.scss";
+@import '../../../assets/styles/vars.scss';
 .dateSlider {
   display: flex;
   flex-flow: column;
@@ -8,7 +8,6 @@
   .label {
     width: max-content;
     font-weight: 700;
-    font-family: "Open Sans", sans-serif;
     min-width: 315px;
     margin-bottom: 30px;
   }
@@ -22,12 +21,12 @@
     @include spaceItemsHoriz(10px);
 
     // override defaults of package
-    [class*="rc-slider-dot"] {
+    [class*='rc-slider-dot'] {
       display: none;
     }
-    [class*="mark"] {
+    [class*='mark'] {
       white-space: nowrap;
-      color: #333;
+      color: $dark-blue;
     }
     $height: 12px;
     .sliderBar {
@@ -49,7 +48,6 @@
         background-color: #0e223f;
         border-radius: 4px;
         font-size: 0.9rem;
-        font-family: "Open Sans", sans-serif;
         padding: 4px;
       }
       .grooves {

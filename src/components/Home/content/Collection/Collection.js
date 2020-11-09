@@ -7,7 +7,7 @@ import { CardList, Ticker, PrimaryButton } from '../../../common'
 
 // local utility functions
 import SearchQuery from '../../../misc/SearchQuery'
-import { comma, getTooltipTextFunc } from '../../../misc/Util'
+import { comma, getTooltipTextFunc, getIconByName } from '../../../misc/Util'
 
 // styles and assets
 import styles from './collection.module.scss'
@@ -40,7 +40,7 @@ export const Collection = ({
   const getData = async () => {
     const results = await SearchQuery({
       page: 1,
-      pagesize: 10,
+      pagesize: 15,
       filters: { [type]: [value] },
       order_by: 'date',
       is_desc: 'true',
@@ -63,6 +63,7 @@ export const Collection = ({
       setEntered(true)
     }
   }, [loading])
+
   if (loading)
     return (
       <div
@@ -82,7 +83,7 @@ export const Collection = ({
 
     // current item
     const item = data.data[curItemIdx]
-    const iconName = type === 'key_topics' ? 'device_hub' : 'person'
+    const icon = getIconByName({ field: 'key_topics', styles })
     return (
       <div
         style={{ opacity: entered ? 1 : 0, left: entered ? 0 : 20 }}
@@ -91,7 +92,7 @@ export const Collection = ({
       >
         <div className={styles.cardCap}>
           <div className={styles.title}>
-            <i className={'material-icons'}>{iconName}</i>
+            {icon}
             {name}
           </div>
           <div className={styles.button}>

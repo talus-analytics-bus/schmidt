@@ -21,7 +21,7 @@
       background-color: white;
       // background-color: #f0f0f0;
       // background-color: #5c5c5c;
-      border: 1px solid #333;
+      border: 1px solid $dark-blue;
       border-radius: 4px;
       padding: 20px;
       position: relative;
@@ -37,9 +37,10 @@
       .titleAndCloseButton {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         .title {
-          color: $theme-green;
+          color: $dark-blue;
           font-weight: 600;
           font-size: 1.25rem;
         }
@@ -63,10 +64,11 @@
         align-items: center;
         justify-content: center;
         border-radius: 100%;
+        max-height: 30px;
         padding: 3px;
         cursor: pointer;
         i {
-          color: $navy-blue;
+          color: $blue;
           font-weight: bold;
         }
         &:hover {

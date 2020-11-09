@@ -21,14 +21,16 @@ export const CardList = ({
   filters,
   setFilters,
   setSearchText,
-  onViewDetails = () => '',
+  onViewDetails,
   related = false,
+  single = false,
   alwaysStartNew,
   bookmarkedIds,
   setBookmarkedIds,
   getTooltipText,
   animate = false,
   bookmark = false,
+  browse = false,
   ...props
 }) => {
   // CONSTANTS
@@ -55,12 +57,14 @@ export const CardList = ({
                 idx: i,
                 onViewDetails,
                 related,
+                single,
                 bookmarkedIds,
                 alwaysStartNew,
                 setBookmarkedIds,
                 getTooltipText,
                 bookmark,
                 animate,
+                browse,
               }}
             />
           )
@@ -79,27 +83,6 @@ export const CardList = ({
     return (
       <div className={styles.cardList}>
         <div className={styles.cards}>{cards}</div>
-        {setNextPage && (
-          <FloatButton
-            {...{
-              onClick: () => {
-                if (setNextPage) {
-                  setNextPage()
-                }
-              },
-              noOnToggle: true,
-              icon: (
-                <i
-                  style={{ transform: 'rotate(90deg)' }}
-                  className={'material-icons'}
-                >
-                  expand_less
-                </i>
-              ),
-              label: 'Next page',
-            }}
-          />
-        )}
       </div>
     )
 }

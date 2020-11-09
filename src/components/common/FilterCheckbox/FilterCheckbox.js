@@ -26,6 +26,7 @@ const FilterCheckbox = ({
   withGrouping = false,
   className,
   showZeros = true,
+  searchText = '',
   ...props
 }) => {
   // define initially selected choices list
@@ -98,6 +99,7 @@ const FilterCheckbox = ({
               }
             }
           },
+          searchText,
         }}
       />
     </div>

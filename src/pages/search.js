@@ -1,7 +1,8 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
+import { navigate } from 'gatsby'
 
 // local components
 import Layout from '../components/Layout/Layout'
@@ -10,10 +11,15 @@ import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
+import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
-import { execute, withBookmarkedIds } from '../components/misc/Util'
+import {
+  execute,
+  withBookmarkedIds,
+  defaultContext,
+} from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Search/search.module.scss'
@@ -22,12 +28,18 @@ import styles from '../components/Search/search.module.scss'
 const API_URL = process.env.GATSBY_API_URL
 
 const Search = ({ setPage }) => {
+  // CONTEXT
+  const context = useContext(appContext) || defaultContext
+
   // STATE
   // card and filter counts data from API response to search query
   const [searchData, setSearchData] = useState(null)
   const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
   const [popstateTriggeredUpdate, setPopstateTriggeredUpdate] = useState(false)
   const [freezeDataUpdates, setFreezeDataUpdates] = useState(false)
+
+  //filters modal on mobile
+  const [optionsVisible, setOptionsVisible] = useState(false)
 
   // bookmarked items
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
@@ -57,6 +69,8 @@ const Search = ({ setPage }) => {
   const [showOverlay, setShowOverlay] = useState(
     urlParams.get('show_overlay') || false
   )
+
+  const [keepScroll, setKeepScroll] = useState(false)
 
   // track original Y scroll position when overlay was launched so it can be
   // set back when it is closed
@@ -141,10 +155,18 @@ const Search = ({ setPage }) => {
       orderBy,
       isDesc,
       searchText,
-      showOverlay,
+      showOverlay: showOverlay.toString(),
     }
     if (typeof window !== 'undefined') {
-      window.history.pushState(newState, '', newUrl)
+      if (initialized && !popstateTriggeredUpdate) {
+        navigate(newUrl, {
+          state: {
+            ...newState,
+            scrollY: keepScroll ? window.scrollY : undefined,
+          },
+        })
+        setKeepScroll(false)
+      }
     }
   }
 
@@ -166,14 +188,25 @@ const Search = ({ setPage }) => {
       is_desc: isDesc,
       explain_results: true,
     })
-    queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+
+    // get filter counts if not yet retrieved
+    const getFilterCounts = context.data.filterCounts === undefined
+    if (getFilterCounts) {
+      queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+    }
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
-    setBaselineFilterCounts(results.filterCountsQuery.data.data)
+    if (getFilterCounts) {
+      const filterCounts = results.filterCountsQuery.data.data
+      setBaselineFilterCounts(filterCounts)
+      context.setData({ ...context.data, filterCounts })
+    } else {
+      setBaselineFilterCounts(context.data.filterCounts)
+    }
 
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history
-    if (!popstateTriggeredUpdate) {
+    if (!popstateTriggeredUpdate && initialized) {
       updateHistory({})
     } else {
       setPopstateTriggeredUpdate(false)
@@ -185,6 +218,27 @@ const Search = ({ setPage }) => {
     setIsSearchingText(false)
   }
 
+  // DEBUG
+  const updateDataHistory = () => {
+    // // if the page has already initialized, then a search is being done
+    // setIsSearching(true)
+    //
+    // setSearchData(searchData)
+
+    // update URL params to contain relevant options, unless this update was
+    // triggered by a state pop in history
+    if (!popstateTriggeredUpdate && initialized) {
+      updateHistory({})
+    } else {
+      setPopstateTriggeredUpdate(false)
+    }
+
+    // // // set page to initialized so data retrieval from filters, etc. happens
+    // // if (!initialized) setInitialized(true)
+    // setIsSearching(false)
+    // setIsSearchingText(false)
+  }
+
   // EFFECT HOOKS
   // get bookmarked ids initially
   useEffect(() => {
@@ -194,8 +248,15 @@ const Search = ({ setPage }) => {
 
   // when overlay is changed, store new state
   useEffect(() => {
-    updateHistory({})
-    setIsSearching(showOverlay !== false)
+    if (initialized) {
+      if (!popstateTriggeredUpdate && !freezeDataUpdates) {
+        updateDataHistory()
+      }
+    }
+    // if (!popstateTriggeredUpdate && initialized) {
+    //   updateHistory({})
+    // }
+    // setIsSearching(showOverlay !== false)
   }, [showOverlay])
 
   // when update triggered by popstate, use those vars only
@@ -207,7 +268,7 @@ const Search = ({ setPage }) => {
     }
   }, [popstateTriggeredUpdate])
 
-  // when xxx
+  // when key search params are changed, update the data
   useEffect(() => {
     if (initialized) {
       if (!popstateTriggeredUpdate && !freezeDataUpdates) {
@@ -233,6 +294,9 @@ const Search = ({ setPage }) => {
           window.onpopstate = function (e) {
             setFreezeDataUpdates(true)
             const state = e.state
+
+            // track whether any params were updated that should trigger
+            // the API request for new data
             if (state !== undefined && state !== null) {
               const toCheck = [
                 ['showOverlay', setShowOverlay, showOverlay],
@@ -251,19 +315,12 @@ const Search = ({ setPage }) => {
               // update all state variables and then trigger a data fetch
               toCheck.forEach(([key, updateFunc, curVal, fallbackFunc]) => {
                 if (state[key] !== undefined) {
-                  updateFunc(state[key])
+                  const newVal = state[key]
+                  updateFunc(newVal)
                 } else {
                   if (fallbackFunc) fallbackFunc()
                 }
               })
-
-              // // if overlay is disabled then return to original Y pos
-              // if (
-              //   state.showOverlay !== undefined &&
-              //   (state.showOverlay === 'false' || state.showOverlay === false)
-              // ) {
-              //   window.scrollTo(0, origScrollY)
-              // }
               setPopstateTriggeredUpdate(true)
               setFreezeDataUpdates(false)
             }
@@ -285,6 +342,13 @@ const Search = ({ setPage }) => {
     }
   }, [simpleHeaderRef])
 
+  // set initialized to false on unmount
+  useEffect(() => {
+    return () => {
+      setInitialized(false)
+    }
+  }, [])
+
   // count bookmarks to show in nav
   const bookmarkArr =
     bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
@@ -299,13 +363,17 @@ const Search = ({ setPage }) => {
       >
         <SEO title="Search results" />
         <div className={styles.search}>
-          {showOverlay !== false && (
+          {showOverlay !== false && showOverlay !== 'false' && (
             <DetailOverlay
               {...{
                 title: 'Test',
                 id: showOverlay,
-                close: () => setShowOverlay(false),
+                close: () => {
+                  setKeepScroll(true)
+                  setShowOverlay(false)
+                },
                 filters,
+                floating: true,
                 setFilters,
                 setSearchText,
                 origScrollY,
@@ -316,6 +384,31 @@ const Search = ({ setPage }) => {
                 setBookmarkedIds,
                 simpleHeaderRef,
                 bookmark: false,
+              }}
+            />
+          )}
+          {optionsVisible && (
+            <Options
+              {...{
+                showFilterSections:
+                  searchData !== null && baselineFilterCounts !== null,
+                filterCounts:
+                  searchData !== null ? searchData.filter_counts : {},
+                baselineFilterCounts,
+                orderBy,
+                setOrderBy,
+                isDesc,
+                setIsDesc,
+                searchText,
+                setSearchText,
+                filters,
+                setFilters,
+                fromYear,
+                setFromYear,
+                toYear,
+                setToYear,
+                mobile: true,
+                setOptionsVisible,
               }}
             />
           )}
@@ -347,6 +440,11 @@ const Search = ({ setPage }) => {
                 setFromYear,
                 toYear,
                 setToYear,
+                mobile: false,
+                setOptionsVisible,
+                isSearchingText,
+                setIsSearchingText,
+                setFreezeDataUpdates,
               }}
             />
             <Results
@@ -359,8 +457,6 @@ const Search = ({ setPage }) => {
                 pagesize,
                 setPagesize,
                 searchData,
-                isSearchingText,
-                setIsSearchingText,
                 filters,
                 setFilters,
                 onViewDetails,
@@ -372,6 +468,10 @@ const Search = ({ setPage }) => {
                 setIsDesc,
                 bookmarkedIds,
                 setBookmarkedIds,
+                setOptionsVisible,
+                loading: (isSearching && initialized) || isSearchingText,
+                fromYear,
+                toYear,
               }}
             />
           </div>

@@ -1,46 +1,85 @@
 @import '../../assets/styles/vars.scss';
 $icon-size: 60px;
 $vertical-spacing: 60px;
-
+$margin-left: 116px;
+.largeFlag {
+  position: absolute;
+  right: -1px;
+  top: 0px;
+  width: 45%;
+  max-width: 800px;
+  z-index: 9999;
+  pointer-events: none;
+}
 .home {
+  position: relative;
   .main {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0px 20px;
     .upper {
-      padding: 30px;
-      @include gradientLanding();
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      @include spaceItemsVert(30px);
+      padding: $vertical-spacing;
+      //   position: relative;
+      //   display: flex;
+      //   flex-direction: column;
+      //   align-items: center;
+      //   @include spaceItemsVert(30px);
       .mainLogo {
         height: 120px;
-        // margin: $vertical-spacing 0;
       }
-      p {
-        max-width: 90%;
-        width: 50rem;
-        font-size: 1.4rem;
-        text-align: center;
-        line-height: 2.3rem;
-        color: #333;
+      .textWrapShape {
+        $w: 100%;
+        $h: 600px;
+        $shape: polygon(0px 0px, $w 0px, $w $h, 0px 250px);
+        float: right;
+        shape-outside: $shape;
+        clip-path: $shape;
+        width: 50%;
+        height: $h;
+        // background-color: red;
       }
-      .mainButton {
-        button,
-        button i {
-          font-size: 2rem;
+      .landingText {
+        margin-left: $margin-left;
+        margin-top: 80px;
+        max-width: 70%;
+        font-size: 1.25rem;
+        text-align: left;
+        line-height: 2rem;
+        color: $light-blue;
+        &:nth-of-type(2) {
+          margin-top: 40px;
         }
-        button {
-          padding: 20px;
-        }
       }
-      .explainer {
-        font-size: 1.3rem;
-        text-align: center;
-        max-width: 80%;
+      //   .mainButton {
+      //     button,
+      //     button i {
+      //       font-size: 2rem;
+      //     }
+      //     button {
+      //       padding: 20px;
+      //     }
+      //   }
+      //   .explainer {
+      //     font-size: 1.3rem;
+      //     text-align: center;
+      //     max-width: 80%;
+      //   }
+      .controls {
+        margin-left: $margin-left;
+        .mainButton {
+          margin: 80px 0px 30px 0px;
+          button {
+            padding: 15px;
+            font-size: 1.3rem;
+          }
+        }
+        .searchBar {
+          width: 60%;
+        }
       }
     }
     .divider {
-      border-top: 1px solid #333;
+      border-top: 1px solid $dark-blue;
       width: 90%;
       margin: 30px auto;
     }
@@ -50,7 +89,7 @@ $vertical-spacing: 60px;
       h1 {
         margin-bottom: 40px;
         margin-top: 30px;
-        color: #333;
+        color: $dark-blue;
       }
       .collectionSection {
         display: flex;

@@ -1,5 +1,5 @@
 // 3rd party components
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import { Link } from 'gatsby'
 import axios from 'axios'
@@ -15,6 +15,7 @@ import {
   StickyHeader,
   SearchBar,
 } from '../components/common'
+import { appContext } from '../components/misc/ContextProvider'
 
 // local utility functions
 import { withBookmarkedIds, execute } from '../components/misc/Util'
@@ -23,11 +24,15 @@ import SearchQuery from '../components/misc/SearchQuery'
 // assets and styles
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
+import flag from '../assets/images/landing-test.png'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
 
 const IndexPage = () => {
+  // CONTEXT
+  const context = useContext(appContext)
+
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
@@ -119,7 +124,8 @@ const IndexPage = () => {
     return (
       <>
         <SEO title="Home" description="Health Security Net landing page" />
-        <Nav bookmarkCount={bookmarkedIds.length} />
+        <Nav bookmarkCount={bookmarkedIds.length} page="index" />
+        <img className={styles.largeFlag} src={flag}></img>
         <div className={styles.home}>
           <article className={styles.main}>
             <div className={styles.upper}>
@@ -128,38 +134,52 @@ const IndexPage = () => {
                 src={logo}
                 alt={'Health Security Net logo'}
               ></img>
+              <div className={styles.textWrapShape}></div>
               <p className={styles.landingText}>
-                Welcome to the Georgetown University Global Health Security
-                Library, a publicly accessible, centralized database of
-                warnings, evaluations, oversight efforts, strategies, and other
-                documents that relate to pandemics prior to 2020. This is a
-                coded and searchable database that enables access to documents
-                written about pandemic risk and related issues.
+                Welcome to the Health Security Library, a publicly accessible,
+                centralized library with over 2,000 documents. Prior to the
+                COVID-19 pandemic in 2020, there was a wealth of work -
+                research, government reviews, panels, and briefings - that
+                provided information on how to prepare, plan, respond to, and
+                recover from a pandemic. This Library provides access to that
+                body of work: the warnings, evaluations, oversight efforts,
+                strategies, and other documents related to pandemics and
+                pandemic risk prior to 2020.
               </p>
-              <div className={styles.mainButton}>
-                <PrimaryButton
-                  {...{
-                    label: 'Enter library',
-                    url: '/search',
-                  }}
-                />
+              <p className={styles.landingText}>
+                Using this tool, you can search for specific documents using
+                keywords and filters, or browse by category, publishing
+                organization, specific event, and more. Documents can be
+                bookmarked to view later or downloaded directly from this site
+                (where available).
+              </p>
+              <div className={styles.controls}>
+                <div className={styles.mainButton}>
+                  <PrimaryButton
+                    {...{
+                      label: 'Browse documents',
+                      url: '/browse',
+                    }}
+                  />
+                </div>
+                <div className={styles.searchBar}>
+                  <SearchBar
+                    {...{
+                      searchText,
+                      setSearchText,
+                      isSearchingText,
+                      setIsSearchingText,
+                      setFreezeDataUpdates,
+                      setOrderBy,
+                      setIsDesc,
+                      previewResults: searchResults,
+                      right: false,
+                    }}
+                  />
+                </div>
               </div>
-
-              <SearchBar
-                {...{
-                  searchText,
-                  setSearchText,
-                  isSearchingText,
-                  setIsSearchingText,
-                  setFreezeDataUpdates,
-                  setOrderBy,
-                  setIsDesc,
-                  previewResults: searchResults,
-                  right: false,
-                }}
-              />
             </div>
-            <div className={styles.divider} />
+            {/* <div className={styles.divider} />
             <div className={styles.lower}>
               <div className={styles.collectionSection}>
                 <h1>Browse topic collections</h1>
@@ -194,7 +214,7 @@ const IndexPage = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
           </article>
         </div>
         <ReactTooltip
@@ -207,14 +227,6 @@ const IndexPage = () => {
           getContent={content => content}
         />
         <Footer />
-        <StickyHeader
-          {...{
-            show: showScrollToTop,
-            name: 'Name',
-            setSimpleHeaderRef,
-            img: null,
-          }}
-        />
       </>
     )
   }

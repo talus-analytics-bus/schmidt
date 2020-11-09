@@ -4,6 +4,7 @@
   display: flex;
   flex-flow: column;
   font-size: 1rem;
+  width: 100%;
   .toggle {
     margin-left: auto;
     display: flex;
@@ -30,14 +31,13 @@
   .filterGroup {
     display: flex;
     flex-flow: column;
+    width: 100%;
     &:not(.vertical) {
       @include spaceItemsHoriz(50px);
       flex-flow: row;
     }
 
     &.dropdowns {
-      margin-top: 20px;
-
       > div {
         min-width: 250px;
         margin: 0;
@@ -74,7 +74,7 @@
     display: flex;
     align-items: center;
     .clear {
-      color: $selected-blue;
+      color: $light-blue;
       background-color: white;
       border: none;
       font-size: 0.8rem;
@@ -90,12 +90,11 @@
     // TODO reconcile with padding;
 
     .badge {
-      font-family: 'Open Sans', sans-serif;
       display: flex;
       align-items: center;
       border-radius: 8px;
       border: 2px solid #b3b3b3;
-      color: #333;
+      color: $dark-blue;
       padding: 5px 10px;
       margin-bottom: 0.5em;
       margin-right: 0.5em;

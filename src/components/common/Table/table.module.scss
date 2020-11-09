@@ -23,8 +23,8 @@
   th {
     position: relative;
     text-align: left;
-    font-family: 'Open Sans', serif;
-    background-color: $light-gray;
+    font-family: 'Poppins', serif;
+    background-color: $very-light-gray;
     vertical-align: bottom;
     font-size: 1.06rem;
     > div > p:first-child {
@@ -40,11 +40,11 @@
   }
   // clear borders
   table {
-    border: 2px solid $gray;
+    border: 2px solid $light-blue;
     td > a {
       display: flex;
       align-items: center;
-      color: $selected-blue;
+      color: $light-blue;
       &,
       * {
         text-decoration: none !important;
@@ -133,7 +133,7 @@
   }
   .unspecified {
     font-style: italic;
-    color: $gray;
+    color: $light-blue;
   }
 
   // Bootstrap tables

@@ -1,0 +1,238 @@
+@import '../../assets/styles/vars.scss';
+.browse {
+  // standard: max width of screen is 1300px
+  // center content in that view
+  // TODO pull up in scope to master SCSS file
+  max-width: 1440px;
+  margin: 20px auto;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  position: relative;
+  min-height: 90vh;
+
+  .browseSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px 1% 20px 1%;
+    .browseButton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      @include noSelect();
+      padding: 15px;
+      width: 100%;
+      border-radius: $big-radius;
+      &:hover {
+        background-color: $light-gray;
+        .selectedRectangle {
+          width: 60px;
+          transition: 0.5s;
+        }
+      }
+      .buttonIcon {
+        $icon-size: 60px;
+        i {
+          font-size: $icon-size;
+          color: $orange;
+        }
+        img {
+          $adjusted-size: calc(#{$icon-size} - 6px);
+          width: $adjusted-size;
+          height: $adjusted-size;
+          margin-bottom: 6px;
+        }
+      }
+      .buttonLabel {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .selectedRectangle {
+        background-color: $orange;
+        border-radius: $border-radius;
+        margin-top: 10px;
+        height: 8px;
+        width: 0px;
+
+        &.selected {
+          width: 60px;
+        }
+      }
+    }
+  }
+  .filterSearchBar {
+    position: relative;
+    $bumper-width: 50px;
+    border-radius: $big-radius;
+    border: 2px solid $blue;
+    margin-bottom: 20px;
+    $height: 50px;
+    height: $height;
+    z-index: 2;
+    background-color: white;
+    width: 50%;
+    &.right {
+      margin-left: auto;
+    }
+
+    // loading spinner and clear button which reside inside the area not covered
+    // by the blue bumper
+    .inner {
+      position: absolute;
+      right: $bumper-width;
+      top: 7px;
+      display: flex;
+      align-items: center;
+      width: max-content;
+      margin-left: auto;
+      background-color: transparent;
+
+      // clear button
+      .clearButton {
+        color: $dark-blue;
+        cursor: pointer;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+      }
+    }
+
+    // bumper is the blue cap on the right end of the bar
+    .bumper {
+      border-radius: 0 $big-radius $big-radius 0;
+      background-color: $blue;
+      width: 50px;
+      position: absolute;
+      height: calc(100% + 4px);
+      top: -2px;
+      right: -2px;
+      cursor: default;
+
+      // magnifying glass icon
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        color: white;
+        font-size: 2rem;
+      }
+    }
+    input {
+      background-color: white;
+      border-radius: $big-radius;
+      font-weight: 600;
+      font-size: 1.2rem;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 15px 10px;
+      border: none;
+      &:active,
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-style: italic;
+        color: $light-blue;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .sortByRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    .resultsText {
+      color: $light-blue;
+    }
+    .sortBy {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      @include spaceItemsHoriz(10px);
+      > div {
+        @include center();
+      }
+    }
+  }
+
+  .results {
+    @include spaceItemsVert(20px);
+    .item {
+      cursor: pointer;
+      &.expanded {
+        .header {
+          background-color: darken($light-gray, 10%);
+          &:hover {
+            background-color: darken($light-gray, 15%);
+          }
+        }
+        .resultContainer {
+          background-color: darken($light-gray, 10%);
+        }
+      }
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $light-gray;
+        padding: 20px;
+        border-radius: $big-radius;
+        font-size: 1.2rem;
+        &.bigContainer {
+          border-radius: $big-radius $big-radius 0px 0px;
+        }
+        &:hover {
+          background-color: darken($light-gray, 5%);
+        }
+      }
+      .name {
+        color: $dark-blue;
+        font-weight: 500;
+      }
+      .details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .caret {
+          margin-left: 10px;
+          i {
+            font-size: 1.8rem;
+            &.open {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+      .count {
+        color: $light-blue;
+      }
+      .resultContainer {
+        background-color: $light-gray;
+        padding: 0px 20px 20px 20px;
+        border-radius: 0px 0px $big-radius $big-radius;
+      }
+      .nestedResults {
+        padding: 0px 20px 20px 20px;
+        background-color: white;
+      }
+    }
+  }
+  // space out the left and right sections consistently
+  .sections {
+    // for large screens show search on the right and options on the left
+    display: flex;
+    flex-direction: column;
+  }
+}

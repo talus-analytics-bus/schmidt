@@ -1,8 +1,6 @@
 @import '../../../assets/styles/vars.scss';
-$box-border: 1px $dark-gray solid;
 .stickyHeaderWrapper {
   // background-color: white;
-  // border-bottom: $box-border;
   z-index: 10;
   width: 100%;
   display: flex;
@@ -20,20 +18,8 @@ $box-border: 1px $dark-gray solid;
     justify-content: space-between;
     text-align: left;
     padding: 20px;
-    .countryName {
-      font-size: 2.4rem;
-      color: #062738;
-      font-family: 'Rawline', sans-serif;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      img {
-        margin-right: 10px;
-      }
-    }
 
     .scrollToTop {
-      font-family: 'Rawline', 'sans-serif';
       font-size: 1.1rem;
       cursor: pointer;
       display: flex;
@@ -43,7 +29,7 @@ $box-border: 1px $dark-gray solid;
       position: fixed;
       right: 20px;
       bottom: -100%;
-      background-color: #c4c4c4;
+      background-color: $light-blue;
       color: white;
       @include boxShadow();
       padding: 6px 10px;
@@ -68,7 +54,7 @@ $box-border: 1px $dark-gray solid;
       align-items: center;
       height: 80px;
       background-color: white;
-      border-top: 2px solid #333;
+      border-top: 2px solid $dark-blue;
       .logo {
         width: 220px;
       }

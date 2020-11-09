@@ -30,8 +30,8 @@
     // secondary buttons have different and less emphasizing styling
     &.secondary {
       background: white;
-      color: #333;
-      border-color: $navy-blue;
+      color: $dark-blue;
+      border-color: $blue;
       &:hover {
         background: darken(white, 5%);
       }
@@ -42,25 +42,32 @@
       border: none;
       margin: 0;
       padding: 0;
-      color: $selected-blue;
+      color: $light-blue;
       &:hover {
         text-decoration: underline;
       }
       &:active,
       &:focus {
-        color: darken($selected-blue, 10%);
+        color: darken($light-blue, 10%);
       }
     }
   }
   // simple version: just an icon
   &.simple {
-    position: relative;
-    right: 0;
-    // margin-bottom: 20px;
-    height: 0;
     i {
-      color: $navy-blue;
-      font-size: 3rem;
+      color: $blue;
+      font-size: 3.5rem;
+      @media #{$breakpoint-one} {
+        font-size: 2.1rem;
+      }
+      @media #{$phone-narrow} {
+        font-size: 1.8rem;
+      }
     }
   }
+  // &.detail {
+  //   i {
+  //     color: $orange;
+  //   }
+  // }
 }

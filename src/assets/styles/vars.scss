@@ -1,54 +1,33 @@
 // VARIABLES
 // Project colors
-$teal: #529fa0;
-$soft-blue: #005b89;
-$navy-blue: #005b89;
-$theme-green: #06777c;
+$dark-blue: #2b2d42;
+$blue: #404263;
+$light-blue: #8d99ae;
+// $orange: #ef233c;
+// $orange: #ef2e45;
+// $orange: #f14156;
+$orange: #be0e23; //firebrick. ellie liked this one the most
+//$orange: #ab0d1f; //one shade darker
+$light-gray: #edf2f4;
+$gray: #e3e6e8;
 
-// general colors
-$light-blue: #95cbee;
-$light-blue-2: #abdaf4;
-$light-blue-3: #d4eef9;
-$gray: #999999;
-$light-gray: #f7f7f7;
-$light-gray-2: #f1f1f1;
-$dark-gray: #333;
-$dark-blue: #053061;
-$light-red: #dcc4cb;
-$red: #67001f;
-$green: darkgreen;
-$white: #fff;
+// General colors:
+$lighter-gray: #f2f2f2;
+$very-light-gray: #f7f7f7;
+$btn: $light-blue;
 $cyan: #53aadd;
-$light-cyan: #d9edf8;
-$blue: $cyan;
-$very-dark-blue: #062738;
-$dark-moderate-red: #942d3c;
-$dark-moderate-green: #2d7447;
-$light-gray-3: #e8e8e8;
+$light-blue-2: #abdaf4;
 
 // functional colors
-$selected-blue: #2d89ad;
-$dark-selected-blue: $dark-blue;
-$no-data-gray: #d9d9da;
-$highlighted: lighten(#db5800, 30%);
+$highlighted: lighten($orange, 30%);
 
 // general styles
-$border: 1px solid #ccc;
+$border: 1px solid #8d99ae;
 $border-radius: 5px;
+$big-radius: 10px;
 $overviews-bottom-margin: 40px;
 
 // MIXINS // ---------—---------—---------—---------—---------—---------—--- //
-@mixin header() {
-  color: $navy-blue;
-  font-family: 'Rawline', serif;
-  font-weight: bold;
-  font-size: 2.15rem;
-  margin: 0 0 30px 0;
-  padding-top: 20px;
-  border-top: 5px $navy-blue solid;
-  width: 100%;
-}
-
 @mixin sticky($top: 0) {
   position: -webkit-sticky; /* Safari */
   position: sticky;
@@ -113,19 +92,9 @@ $overviews-bottom-margin: 40px;
   box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.3);
 }
-
-@mixin gradientBlue() {
-  background: -moz-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -ms-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -o-linear-gradient(top, #425379 0%, #213561 100%);
-  background: -webkit-linear-gradient(top, #425379 0%, #213561 100%);
-}
-
-@mixin gradientLanding() {
-  background: -moz-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -ms-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -o-linear-gradient(top, #425379 0%, #005b89 100%);
-  background: -webkit-linear-gradient(top, rgba(#005b89, 0.3) 0%, #ffffff 80%);
+@mixin noShadow() {
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 @mixin gradientGray($dir: top) {
@@ -135,20 +104,41 @@ $overviews-bottom-margin: 40px;
   background: -webkit-linear-gradient($dir, #ffffff 0%, #e4e4e4 100%);
 }
 
+// @mixin btn-primary($hover: true) {
+//   border: 2px solid $blue;
+//   border-radius: 6px;
+//   background: -moz-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -ms-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -o-linear-gradient(top, $btn 0%, $blue 100%);
+//   background: -webkit-linear-gradient(top, $btn 0%, $blue 100%);
+
+//   @if $hover {
+//     &:hover,
+//     &:active {
+//       background: white;
+//       color: $blue;
+//       border-color: $blue;
+//     }
+//     &:active {
+//       @include boxShadow();
+//     }
+//   }
+// }
+
 @mixin btn-primary($hover: true) {
   border: 2px solid transparent;
-  border-radius: 8px;
-  background: -moz-linear-gradient(top, #425379 0%, $navy-blue 100%);
-  background: -ms-linear-gradient(top, #425379 0%, $navy-blue 100%);
-  background: -o-linear-gradient(top, #425379 0%, $navy-blue 100%);
-  background: -webkit-linear-gradient(top, #425379 0%, $navy-blue 100%);
+  border-radius: 6px;
+  background: -moz-linear-gradient(top, #425379 0%, $blue 100%);
+  background: -ms-linear-gradient(top, #425379 0%, $blue 100%);
+  background: -o-linear-gradient(top, #425379 0%, $blue 100%);
+  background: -webkit-linear-gradient(top, #425379 0%, $blue 100%);
 
   @if $hover {
     &:hover,
     &:active {
       background: white;
-      color: $navy-blue;
-      border-color: $navy-blue;
+      color: $blue;
+      border-color: $blue;
     }
     &:active {
       @include boxShadow();
@@ -180,8 +170,18 @@ $overviews-bottom-margin: 40px;
   align-items: center;
 }
 
+@mixin noSelect() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
+}
 // GLOBAL CONSTANTS // ---------—---------—---------—---------—---------—--- //
 $breakpoint-one: 'screen and (max-width: 1150px)';
+$breakpoint-two: 'screen and (max-width: 1000px)';
 $phone: 'screen and (max-width: 812px)';
 $phone-narrow: 'screen and (max-width: 500px)';
 $not-phone: 'screen and (min-width: 813px)';
@@ -196,14 +196,12 @@ $bin-width: 86.5px; // usual bin width for score percentage qual. scale bins
 //   white: $white;
 //   cyan: $cyan;
 //   lightcyan: $light-cyan;
-//   noDataGray: $no-data-gray;
-//   gray: $gray;
-//   darkSelectedBlue: $dark-selected-blue;
+//   noDataGray: $light-gray;
+//   gray: $light-blue;
 //   softYellow2: $soft-yellow-2;
-//   softBlue: $soft-blue;
-//   grayishCyan: $grayish-cyan;
+//   softBlue: $blue;
+//   grayishCyan: $light-blueish-cyan;
 //   darkTeal: $dark-teal;
 //   phone: $phone;
 //   phoneNarrow: $phone-narrow;
-//   lightGray3: $light-gray-3;
 // }

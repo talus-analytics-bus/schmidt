@@ -4,20 +4,24 @@
     z-index: 1;
     background-color: $light-gray;
     width: 100%;
-    height: 100%;
     padding: 20px;
     border: 1px solid transparent;
     transition: all ease 0.25s;
     position: relative;
+    font-size: 1rem;
     &:not(.detail) {
       &:hover {
-        border-color: #333;
+        border-color: $dark-blue;
         @include boxShadowStrong();
         cursor: pointer;
       }
       &:active {
-        background-color: darken($light-gray, 5%);
+        background-color: darken($light-gray, 6%);
       }
+    }
+    &.detail,
+    &.related {
+      background-color: white;
     }
 
     $max-height: 150px;
@@ -40,8 +44,9 @@
     }
 
     // let details and actions column use full width
-    .col:last-child {
+    .col.contentCol {
       width: 100%;
+      height: 100%;
     }
 
     // non-detail thumbnails: normal size
@@ -50,21 +55,21 @@
       display: flex;
       justify-content: center;
       img {
-        border: 1px solid #365194;
+        border: 1px solid $blue;
         max-height: $max-height;
         max-width: $letter-width;
       }
       &.placeholder {
         position: relative;
         // placeholder thumbnail shown if no file is available
-        border: 1px solid #365194;
+        border: 1px solid $blue;
         height: $max-height; // like a letter page
         width: $letter-width;
         background-color: white;
         // format text in placeholder rectangle
         text-align: center;
         align-items: center;
-        color: $gray;
+        color: $light-blue;
         img {
           border: none;
           position: absolute;
@@ -74,7 +79,6 @@
         }
         font-size: 3rem;
         font-weight: 600;
-        font-family: 'rawline', serif;
       }
     }
 
@@ -82,7 +86,8 @@
     &.detail {
       padding: 20px;
       grid-template-columns: max-content $letter-width-lg auto;
-      background-color: white;
+      border: $orange 3px solid;
+      border-bottom-width: 0px;
       .resultNumber {
         display: none;
       }
@@ -97,6 +102,7 @@
         img {
           max-height: $max-height-lg;
           max-width: $letter-width-lg;
+          border-color: $blue;
         }
         &.placeholder {
           height: $max-height-lg; // like a letter page
@@ -106,134 +112,190 @@
       .noData {
         color: gray;
       }
+      .contentCol {
+        .main {
+          .top {
+            .headerAndTitle {
+              .title {
+                .text {
+                  color: $orange;
+                }
+              }
+            }
+          }
+          .detailsAndDownloads {
+            display: grid;
+            grid-template-columns: 1fr 40%;
+            border-color: $blue;
+            .downloads {
+              border-color: $blue;
+            }
+          }
+        }
+      }
     }
 
     .resultNumber {
       margin-right: 10px;
-      font-family: 'rawline', serif;
       font-weight: bold;
+      font-size: 1.5rem;
     }
-    .main {
-      width: 100%;
-      margin-left: 10px;
-      padding-right: 10px;
-
-      .header {
+    .contentCol {
+      .main {
         width: 100%;
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        .type {
-          text-transform: uppercase;
-          font-family: 'rawline', serif;
-          cursor: pointer;
-        }
-      }
-      .title {
-        .text {
-          max-width: 88%;
-          font-size: 1.6rem;
-          line-height: 1.25;
-          font-weight: 600;
-          &,
-          .highlighted {
-            color: $theme-green;
-          }
-        }
-      }
-      .detailsAndActions {
-        display: flex;
-        @include spaceItemsHoriz(20px);
-        margin-top: 20px;
+        margin-left: 10px;
+        padding-right: 20px;
 
-        .details {
+        .top {
           display: grid;
+          grid-gap: 0 20px;
           grid-template-columns: 1fr auto;
-          grid-gap: 0 10px;
-          align-items: center;
+          align-items: flex-start;
 
-          // color details icons navy blue
-          i {
-            color: $navy-blue;
+          .headerAndTitle {
+            .header {
+              width: 100%;
+              position: relative;
+              display: flex;
+              justify-content: space-between;
+              font-weight: 500;
+              margin-bottom: 2px;
+              // report, goverment action, etc. displayed just above title
+              .type {
+                text-transform: uppercase;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: 400;
+                color: $blue;
+              }
+            }
+            .title {
+              .text {
+                max-width: 85%;
+                margin-top: 10px;
+                font-size: 1.6rem;
+                line-height: 1.45;
+                font-weight: 500;
+                color: $dark-blue;
+                &.noTopMargin {
+                  margin-top: 0px;
+                }
+              }
+            }
           }
-
-          // alignment for individual detail items
-          .authOrg,
-          .date {
-            @include spaceItemsHoriz(5px);
+          // quick actions in the upper right corner of the card to bookmark or
+          // to open in new tab
+          .quickActions {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            right: -3px;
           }
-          .authOrgList {
-            span {
-              // cursor: pointer;
+        }
+        .detailsAndDownloads {
+          display: flex;
+          margin-top: 15px;
+          padding-bottom: 20px;
+          border-bottom: 1px $light-blue solid;
+
+          .details {
+            display: flex;
+            flex-direction: column;
+            @include spaceItemsVert(10px);
+            // color details icons navy blue
+            i {
+              color: $blue;
+            }
+
+            // alignment for individual detail items
+            .authOrg,
+            .date {
+              @include spaceItemsHoriz(8px);
+              display: flex;
+              align-items: center;
+            }
+            .authOrgList,
+            .date {
+              font-size: 1rem;
             }
           }
         }
 
+        // actions below main card info to preview file or view popup
         .actions {
+          width: 100%;
           display: flex;
-          margin-left: auto;
-          @include spaceItemsHoriz(10px);
+          flex-direction: row;
+          justify-content: flex-end;
+          margin-top: 20px;
+          @include spaceItemsHoriz(8px);
           div {
             @include center();
           }
-        }
-      }
-
-      // description snippet, if any text matched, with a few words around the
-      // matched text
-      .descriptionSnippet {
-        margin-top: 20px;
-        color: #333;
-        font-size: 1.3rem;
-        line-height: 1.5;
-      }
-
-      // tag snippets: including an icon and some matched text
-      .tagSnippets {
-        border-top: 1px solid $gray;
-        margin-top: 10px;
-        padding-top: 10px;
-        display: flex;
-        flex-flow: column;
-        @include spaceItemsVert(5px);
-
-        .tagSnippet {
-          display: flex;
-          @include spaceItemsHoriz(5px);
-          align-items: center;
-          i {
-            color: $navy-blue;
+          .mobilePreviewButton {
+            display: none;
           }
-          .iconSnippet {
+        }
+        // description snippet, if any text matched, with a few words around the
+        // matched text
+        .descriptionSnippet {
+          margin-top: 20px;
+          color: $blue;
+          line-height: 1.5;
+          display: flex;
+          flex-direction: row;
+          .descripLabel {
+            font-weight: 500;
+            margin-right: 10px;
+          }
+        }
+
+        // tag snippets: including an icon and some matched text
+        .tagSnippets {
+          padding-top: 20px;
+          display: flex;
+          flex-flow: column;
+          @include spaceItemsVert(10px);
+          line-height: 1.5;
+          &.topBorder {
+            margin-top: 20px;
+            border-top: 1px $light-blue solid;
+          }
+          .tagSnippetsHeader {
+            font-weight: 500;
+          }
+
+          .tagSnippet {
             display: flex;
-            flex-flow: wrap;
+            @include spaceItemsHoriz(8px);
+            align-items: center;
+            i {
+              color: $blue;
+            }
+            .iconSnippet {
+              display: flex;
+              flex-flow: wrap;
+            }
           }
         }
       }
     }
-
     // style highlighted text
     .highlighted {
       // text-decoration: underline;
       // text-decoration-color: underline;
-      box-shadow: inset 0 -2px 0 white, inset 0 -10px 0 $highlighted;
+      box-shadow: inset 0 -10px 0 $highlighted;
       &.small {
-        box-shadow: inset 0 -2px 0 white, inset 0 -5px 0 $highlighted;
+        box-shadow: inset 0 -5px 0 $highlighted;
       }
-      color: #333;
+      color: $dark-blue;
     }
     .link {
-      color: $selected-blue;
-      :not(.highlighted) {
-        &:hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
-      .highlighted {
-        cursor: default;
+      color: $blue;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
 
@@ -242,7 +304,7 @@
       .link {
         .highlighted {
           box-shadow: none;
-          color: $selected-blue;
+          color: $light-blue;
           &:hover {
             text-decoration: underline;
             cursor: pointer;
@@ -254,7 +316,7 @@
     // if detail card: reformat to suit the details page
     &.detail {
       // hide actions since they are shown elsewhere
-      .detailsAndActions {
+      .detailsAndDownloads {
         .actions {
           display: none;
         }
@@ -268,23 +330,33 @@
 
     // Downloads list
     .downloads {
-      margin-top: 20px;
       width: auto;
+      border-left: 1px $light-blue solid;
+      padding-left: 40px;
+      margin-left: 40px;
       i {
         position: relative;
         left: -5px;
       }
       .downloadItem {
-        display: grid;
-        grid-template-columns: 1fr auto;
-
-        > :first-child {
-          > div {
-            width: auto;
-          }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        a {
+          color: $blue;
+        }
+        > i {
+          margin-left: 4px;
+        }
+        > div {
+          margin-left: 8px;
+          white-space: normal;
+          word-break: break-all;
         }
         > :last-child {
-          white-space: nowrap;
+          .noBreak {
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -303,6 +375,16 @@
         pointer-events: none;
       }
     }
+  }
+
+  // reasons why related, for related items
+  .why {
+    margin-left: auto;
+    font-style: italic;
+    display: flex;
+    justify-content: flex-end;
+    color: $dark-blue;
+    margin-top: 30px;
   }
 }
 

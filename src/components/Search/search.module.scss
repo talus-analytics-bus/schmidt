@@ -1,3 +1,4 @@
+@import '../../assets/styles/vars.scss';
 .search {
   // debug: pink
   // background-color: pink;
@@ -17,25 +18,7 @@
   // space out the left and right sections consistently
   .sections {
     // for large screens show search on the right and options on the left
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 400px 1fr;
-    height: 100%;
-
-    // for small screens show search on top, options as collapsible modal
-    // TODO
-    > div {
-      height: 100%;
-      margin: 0 30px;
-      &:first-child {
-        margin: 0;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  > :last-child {
+    display: flex;
+    flex-direction: column;
   }
 }

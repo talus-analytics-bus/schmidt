@@ -1,12 +1,206 @@
-.about {
+@import '../../assets/styles/vars.scss';
+.container {
   // standard: max width of screen is 1300px
   // center content in that view
   // TODO pull up in scope to master SCSS file
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px 20px;
   width: 100%;
   height: 100%;
   font-size: 1rem;
   min-height: 90vh;
+  h1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    i {
+      margin-right: 8px;
+      margin-bottom: -5px;
+      color: $blue;
+    }
+  }
+  $b-width: 3px;
+  $b: solid $b-width $light-blue;
+  .toggleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .tabs {
+      @include spaceItemsHoriz(10px);
+      display: flex;
+      .tab {
+        padding: 10px 20px 20px 20px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1.7rem;
+        @include center();
+        flex-direction: column;
+        border-radius: $big-radius;
+        &:hover {
+          background-color: $light-gray;
+          .selectedRectangle {
+            width: 60px;
+            transition: 0.5s;
+          }
+        }
+        .selectedRectangle {
+          background-color: $orange;
+          border-radius: $border-radius;
+          margin-top: 10px;
+          height: 8px;
+          width: 0px;
+
+          &.selected {
+            width: 60px;
+          }
+        }
+      }
+    }
+  }
+  .content {
+    padding: 20px;
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+    }
+    h2 {
+      font-weight: 600;
+      font-size: 2.1rem;
+      padding-bottom: 10px;
+      border-bottom: 5px solid $light-blue;
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 40px 0px 20px 0px;
+    }
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 40px 0px 20px 0px;
+      border-bottom: 3px solid $light-blue;
+      padding-bottom: 5px;
+    }
+    .doc {
+      $lh: 1.8rem;
+      li {
+        line-height: $lh;
+        p {
+          line-height: $lh;
+        }
+        &:not(:first-of-type) {
+          margin-top: 20px;
+        }
+        &.noTopMargin {
+          margin-top: 0px;
+        }
+      }
+    }
+    .indent {
+      margin-left: 3%;
+    }
+    .over {
+      .members {
+        font-size: 1.2rem;
+        ul {
+          padding-left: 25px;
+        }
+        li {
+          margin-top: 8px;
+        }
+      }
+    }
+    .contributors {
+      &:not(:last-child) {
+        margin-bottom: 60px;
+      }
+      .contributor {
+        display: grid;
+        grid-template-columns: 1.3fr 3fr;
+        column-gap: 5%;
+        background-color: $very-light-gray;
+        border-radius: $big-radius;
+        border: darken($very-light-gray, 5%) 2px solid;
+        &:not(:first-of-type) {
+          margin-top: 20px;
+        }
+        img {
+          width: 100%;
+          padding: 20px;
+          &.talus {
+            width: 85%;
+          }
+          &.schmidt {
+            width: 80%;
+          }
+        }
+        .team {
+          padding: 20px;
+          margin: 20px;
+          font-size: 1.5rem;
+          background-color: darken($very-light-gray, 5%);
+          border-radius: $big-radius;
+          .header {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .endnotes {
+      border-top: $border;
+      padding-top: 30px;
+      margin-top: 30px;
+    }
+    .endnote {
+      width: 70%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      //force urls to break
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+      > a {
+        min-width: 25px;
+      }
+      > p {
+        margin: 0;
+        font-size: 1rem;
+      }
+    }
+
+    [data-type*='ref'],
+    [data-type*='endnote'] {
+      vertical-align: baseline;
+      position: relative;
+      top: -0.4rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+
+      // sep multiple refs with commas
+      + [data-type*='ref']:before {
+        content: ', ';
+      }
+    }
+    .endnotes {
+      [data-type*='endnote'] {
+        top: 0.3rem;
+      }
+    }
+  }
 }

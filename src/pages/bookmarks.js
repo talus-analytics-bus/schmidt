@@ -18,6 +18,7 @@ import {
 
 // local utility functions
 import ItemsQuery from '../components/misc/ItemsQuery'
+import ToExcelQuery from '../components/misc/ToExcelQuery'
 import {
   execute,
   withBookmarkedIds,
@@ -27,6 +28,7 @@ import {
 
 // styles and assets
 import styles from '../components/Bookmarks/bookmarks.module.scss'
+import loadingGif from '../assets/icons/loading.gif'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -51,6 +53,9 @@ const Bookmarks = ({}) => {
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
   const [showScrollToTop, setShowScrollToTop] = useState(false)
+
+  // for setting download button loading gif
+  const [isDownloading, setIsDownloading] = useState(false)
 
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
@@ -214,7 +219,41 @@ const Bookmarks = ({}) => {
           />
           <Panel
             {...{
-              title: <h2>Bookmarked items</h2>,
+              title: (
+                <>
+                  <h1>Bookmarked items</h1>
+                  {someBookmarks && (
+                    <div
+                      className={styles.actions}
+                      data-for="searchHighlightInfo"
+                      data-tip="Download an Excel file (.xlsx) with metadata for your bookmarks"
+                    >
+                      <PrimaryButton
+                        {...{
+                          label: !isDownloading ? (
+                            'Download metadata'
+                          ) : (
+                            <div className={styles.downloading}>
+                              Downloading...
+                              <img src={loadingGif} alt="loading" />
+                            </div>
+                          ),
+                          isSecondary: true,
+                          isSmall: true,
+                          iconName: !isDownloading ? 'get_app' : null,
+                          onClick: async () => {
+                            setIsDownloading(true)
+                            const response = await ToExcelQuery({
+                              ids: bookmarkedIds,
+                            })
+                            setIsDownloading(false)
+                          },
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
+              ),
               iconName: 'bookmark',
               secondary: false,
               heading: true,
@@ -224,12 +263,12 @@ const Bookmarks = ({}) => {
               <>
                 {!someBookmarks && (
                   <>
-                    <div className={styles.noBookmarksInstructions}>
+                    <p className={styles.noBookmarksInstructions}>
                       You have no bookmarked items yet. Click the{' '}
                       <i className={'material-icons'}>bookmark_border</i>
-                      bookmark icon on any search result to save one.{'  '}
+                      {'  '}bookmark icon on any search result to save one.
                       &nbsp;
-                    </div>
+                    </p>
                     <PrimaryButton
                       {...{
                         label: 'Go to search page',
@@ -241,19 +280,6 @@ const Bookmarks = ({}) => {
                 )}
                 {showPaginator && someBookmarks && (
                   <>
-                    <Paginator
-                      {...{
-                        curPage,
-                        setCurPage,
-                        nTotalRecords: bookmarkedItemData.total,
-                        pagesize,
-                        setPagesize,
-                        showCounter: true, // TODO
-                        // showCounter: bookmarkedItemData.data.length > 0,
-                        noun: 'item',
-                        nouns: 'items',
-                      }}
-                    />
                     <CardList
                       {...{
                         start,
@@ -277,6 +303,19 @@ const Bookmarks = ({}) => {
                             : false,
                       }}
                     />
+                    <Paginator
+                      {...{
+                        curPage,
+                        setCurPage,
+                        nTotalRecords: bookmarkedItemData.total,
+                        pagesize,
+                        setPagesize,
+                        showCounter: true, // TODO
+                        // showCounter: bookmarkedItemData.data.length > 0,
+                        noun: 'item',
+                        nouns: 'items',
+                      }}
+                    />
                   </>
                 )}
               </>
@@ -296,6 +335,7 @@ const Bookmarks = ({}) => {
                 setBookmarkedIds,
                 simpleHeaderRef,
                 bookmark: true,
+                floating: true,
               }}
             />
           )}

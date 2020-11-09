@@ -1,21 +1,111 @@
 @import '../../../assets/styles/vars.scss';
+.resultsContainer {
+  position: relative;
+}
 .results {
   height: 100%;
   // margin-top: 20px !important; // TODO elegantly
   display: flex;
   flex-flow: column;
-  @include spaceItemsVert(20px);
+  visibility: visible;
 
-  .sortByAndSearchBar {
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+  .sortByRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 20px 0px;
+    .resultsText {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      color: $light-blue;
+      button {
+        margin-left: 10px;
+      }
+    }
     .sortBy {
       display: flex;
-      align-items: flex-end;
-      @include spaceItemsHoriz(5px);
+      flex-direction: row;
+      align-items: center;
+      @include spaceItemsHoriz(10px);
+      > div {
+        @include center();
+      }
+    }
+  }
+  .downloading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-left: 10px;
     }
   }
 }
-@import './responsive.module.scss';
+
+.loadingSvg {
+  position: absolute;
+  top: 0px;
+  display: none;
+  &.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 813px) {
+  .toggleOptions {
+    display: none;
+  }
+}
+@media #{$phone} {
+  .results {
+    .sortByRow {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      margin-bottom: 0px;
+      .toggleOptions {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        background-color: $very-light-gray;
+        @include boxShadow();
+      }
+      .optionsRow {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+@media #{$phone-narrow} {
+  .results {
+    .sortByRow {
+      .optionsRow {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .sortBy {
+        margin-top: 20px;
+      }
+      .toggleOptions {
+        // width: 100%;
+      }
+    }
+  }
+}

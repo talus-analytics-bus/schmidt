@@ -38,6 +38,12 @@ export const FilterSection = ({
   // open or collapsed?
   const [open, setOpen] = useState(defaultOpen)
 
+  // search text for filters
+  const [filterSearchText, setFilterSearchText] = useState('')
+
+  let wrapperRef = useRef(null)
+  let contentRef = useRef(null)
+
   // EFFECT HOOKS // ------------------------------------------------------- //
   // when collapse all clicked, set open to false
   useEffect(() => {
@@ -57,12 +63,33 @@ export const FilterSection = ({
     setTriggerExpandAll(false)
   }, [triggerExpandAll])
 
+  // on click anywhere but in popup, and popup is shown, close popup; otherwise
+  // do nothing
+  useEffect(() => {
+    if (open)
+      document.getElementById('___gatsby').onclick = e => {
+        if (wrapperRef === null || wrapperRef.current === null) return
+        const wrapper = wrapperRef.current
+        if (wrapper && wrapper.contains(e.target)) {
+          return
+        } else {
+          setOpen(false)
+        }
+      }
+  }, [open])
+
+  // update search text
+  const updateFilterSearchText = e => {
+    setFilterSearchText(e.target.value)
+  }
+
   /**
    * Return JSX for filter section with expand/collapse bar, icon, label, and
    * filter options as checkboxes or radio buttons
    */
   return (
     <div
+      ref={wrapperRef}
       className={classNames(styles.filterSection, {
         hide,
         [styles.open]: open,
@@ -79,12 +106,13 @@ export const FilterSection = ({
             setNumOpen(numOpen - 1)
           } else setNumOpen(numOpen + 1)
         }}
-        className={styles.bar}
+        className={classNames(styles.bar, { [styles.open]: open })}
       >
-        {icon}
+        <div className={styles.icon}>{icon}</div>
         <span className={styles.label}>
-          <span>{filterDefs.label}&nbsp;</span>
-          {
+          <span>{filterDefs.label}</span>
+          <i className={'material-icons'}>arrow_drop_up</i>
+          {/* {
             <span className={styles.numSelected}>
               {numSelected && (
                 <>
@@ -92,9 +120,9 @@ export const FilterSection = ({
                 </>
               )}
             </span>
-          }
+          } */}
         </span>
-        {numSelected && (
+        {/* {numSelected && (
           <div className={styles.clearButton}>
             <PrimaryButton
               {...{
@@ -109,21 +137,65 @@ export const FilterSection = ({
               }}
             />
           </div>
-        )}
-        <i className={'material-icons'}>expand_less</i>
-      </div>
-      <div className={styles.content}>
-        <FilterSet
-          {...{
-            checkboxes: true,
-            filterDefs: [{ [filterDefs.field]: filterDefs }],
-            noToggle: true,
-            filters,
-            setFilters,
-            showSelectedFilters: false,
-            vertical: true,
+        )} */}
+        <div
+          onClick={e => {
+            e.stopPropagation()
           }}
-        />
+          className={classNames(
+            styles.content,
+            {
+              [styles.rightAlign]:
+                filterDefs.label == 'Document type' ||
+                filterDefs.label == 'Funder',
+            },
+            {
+              [styles.lower]: label == 'author_types' || label == 'authors',
+            }
+          )}
+          ref={contentRef}
+        >
+          {field !== 'years' && (
+            <div className={styles.searchContainer}>
+              <div className={styles.searchBar}>
+                <input
+                  onChange={updateFilterSearchText}
+                  type="text"
+                  placeholder={`Search`}
+                  value={filterSearchText}
+                />
+                <div className={styles.inner}>
+                  {filterSearchText !== '' && (
+                    <i
+                      onClick={() => setFilterSearchText('')}
+                      className={classNames(
+                        'material-icons',
+                        styles.clearButton
+                      )}
+                    >
+                      clear
+                    </i>
+                  )}
+                </div>
+                <div className={styles.bumper}>
+                  <i className={'material-icons'}>search</i>
+                </div>
+              </div>
+            </div>
+          )}
+          <FilterSet
+            {...{
+              searchText: filterSearchText,
+              checkboxes: true,
+              filterDefs: [{ [filterDefs.field]: filterDefs }],
+              noToggle: true,
+              filters,
+              setFilters,
+              showSelectedFilters: false,
+              vertical: true,
+            }}
+          />
+        </div>
       </div>
     </div>
   )

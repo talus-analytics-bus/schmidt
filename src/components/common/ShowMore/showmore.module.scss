@@ -1,9 +1,12 @@
-.styles {
+@import '../../../assets/styles/vars.scss';
+.container {
+  font-size: 1rem;
+  line-height: 1.5;
+  display: block;
   .toggle {
-    color: #57bbff;
+    color: $light-blue;
     text-decoration: underline;
     font-style: italic;
-    font-size: 0.8em;
     cursor: pointer;
     white-space: nowrap;
   }

@@ -3,10 +3,27 @@ import ReactTooltip from 'react-tooltip'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 import classNames from 'classnames'
+import { navigate } from 'gatsby'
 
-// project-specific assets
+// project-specific assets - icons
+// network blob
 import events from '../../assets/icons/events.svg'
 import events_disabled from '../../assets/icons/events_disabled.svg'
+
+// speech bubble
+import speech from '../../assets/icons/speech.svg'
+import speech_orange from '../../assets/icons/speech_orange.svg'
+import speech_disabled from '../../assets/icons/speech_disabled.svg'
+
+// caution sign
+import caution from '../../assets/icons/caution.svg'
+import caution_orange from '../../assets/icons/caution_orange.svg'
+import caution_disabled from '../../assets/icons/caution_disabled.svg'
+
+// rings sign
+import rings from '../../assets/icons/rings.svg'
+import rings_orange from '../../assets/icons/rings_orange.svg'
+import rings_disabled from '../../assets/icons/rings_disabled.svg'
 
 // Utility functions and data.
 const Util = {}
@@ -1183,21 +1200,51 @@ export const removeBookmark = ({ id, callback }) => {
 
 // define icon names to use for each section
 export const iconNamesByField = {
-  key_topics: 'device_hub',
+  // key_topics: 'device_hub',
+  key_topics: 'topic',
+  // key_topics: 'speech',
+  // key_topics: 'speech_orange',
   authors: 'person',
   author_types: 'apartment',
   years: 'event',
-  funders: 'payments',
+  funders: 'monetization_on',
   types_of_record: 'insert_drive_file',
-  events: 'outbreak_events',
+  // events: 'outbreak_events',
+  // events: 'rings',
+  // events: 'rings_orange',
+  events: 'caution',
+  // events: 'caution_orange',
 }
 
 // return icon JSX by name
-export const getIconByName = ({ iconName, styles = {}, disabled = false }) => {
+export const getIconByName = ({
+  field = undefined,
+  iconName = iconNamesByField[field],
+  styles = {},
+  disabled = false,
+}) => {
   // special icon?
   const specialIcons = {
+    // network blob
     outbreak_events: events,
     outbreak_events_disabled: events_disabled,
+
+    // speech bubble
+    speech,
+    speech_orange,
+    speech_disabled,
+
+    // caution sign
+    caution,
+    caution_orange,
+    caution_disabled,
+    caution_orange_disabled: caution_disabled,
+
+    // rings
+    rings,
+    rings_orange,
+    rings_orange_disabled: rings_disabled,
+    rings_disabled,
   }
   const specialIcon = specialIcons[iconName + (disabled ? '_disabled' : '')]
   const icon =
@@ -1231,8 +1278,6 @@ export const toggleFilter = ({
   openNewPage = false,
   alwaysStartNew = false,
 }) => {
-  console.log('alwaysStartNew')
-  console.log(alwaysStartNew)
   e.stopPropagation()
 
   const thisVal = getFilterVal(datum).toString()
@@ -1240,8 +1285,15 @@ export const toggleFilter = ({
   // if on a page other than search, open a new search page
   if (openNewPage) {
     if (typeof window !== 'undefined') {
-      window.location.assign(
-        `/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=`
+      navigate(
+        `/search/?filters={"${filterKey}":["${thisVal}"]}&search_text=&show_overlay=false`,
+        {
+          state: {
+            filters: { [filterKey]: [thisVal] },
+            searchText: '',
+            showOverlay: false,
+          },
+        }
       )
     }
   } else {
@@ -1419,4 +1471,74 @@ export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
     // }
   }
   return getTooltipText
+}
+
+// default context
+export const defaultContext = {
+  data: { filterCounts: undefined, items: {} },
+  setData: () => '',
+}
+
+// filter defs
+export const filterDefs = {
+  years: {
+    field: 'years',
+    key: 'years',
+    label: 'Year',
+    resultLabel: 'year',
+    choices: [],
+    custom: true,
+  },
+  key_topics: {
+    field: 'key_topics',
+    key: 'key_topics',
+    label: 'Topic area',
+    resultLabel: 'topic area',
+    choices: [],
+  },
+  author_types: {
+    field: 'author.type_of_authoring_organization',
+    key: 'author_types',
+    label: (
+      <div>
+        Publishing
+        <br /> org. type
+      </div>
+    ),
+    resultLabel: 'publishing organization type',
+    choices: [],
+  },
+  authors: {
+    field: 'author.id',
+    key: 'authors',
+    label: (
+      <div>
+        Publishing
+        <br /> organization
+      </div>
+    ),
+    resultLabel: 'publishing organization',
+    choices: [],
+  },
+  events: {
+    field: 'event.name',
+    key: 'events',
+    label: 'Event',
+    resultLabel: 'event',
+    choices: [],
+  },
+  funders: {
+    field: 'funder.name',
+    key: 'funders',
+    label: 'Funder',
+    resultLabel: 'funder',
+    choices: [],
+  },
+  types_of_record: {
+    field: 'type_of_record',
+    key: 'types_of_record',
+    label: 'Document type',
+    resultLabel: 'document type',
+    choices: [],
+  },
 }

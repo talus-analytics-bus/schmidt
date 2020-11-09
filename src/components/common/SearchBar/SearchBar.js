@@ -200,7 +200,7 @@ export const SearchBar = ({
         ref={searchRef}
         onChange={updateSearchText}
         type="text"
-        placeholder={'Search library'}
+        placeholder={'Search for documents'}
       />
       <div className={styles.inner}>
         <img

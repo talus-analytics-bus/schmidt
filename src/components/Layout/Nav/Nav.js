@@ -7,8 +7,9 @@ import { InfoTooltip } from '../../common'
 import { comma } from '../../misc/Util'
 
 // assets
-import logo from '../../../assets/images/logo.svg'
-import loadingSvg from '../../../assets/images/loading-blue.svg'
+import logo from '../../../assets/images/white-logo.svg'
+import loadingSvg from '../../../assets/images/loading.svg'
+import flag from '../../../assets/images/header-test.png'
 
 const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
@@ -35,20 +36,23 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   return (
     <div
       className={classNames(styles.navWrapper, {
-        [styles.static]: page === 'country' || page === 'compare',
-        [styles.wide]: page === 'map',
         [styles.showMobileMenu]: showMobileMenu,
+        [styles.static]: page === 'index',
       })}
     >
-      <div className={styles.nav}>
-        <Link to={'/'}>
+      <div
+        className={classNames(styles.nav, {
+          [styles.landing]: page === 'index',
+        })}
+      >
+        <Link to={'/'} className={page === 'index' ? styles.hidden : ''}>
           <img src={logo} />
-          <img
+          {/* <img
             className={classNames(styles.loading, {
               [styles.showLoading]: loading,
             })}
             src={loadingSvg}
-          />
+          /> */}
         </Link>
         <div className={styles.menu}>
           <button ref={hamburgerRef} className={styles.hamburger}>
@@ -69,10 +73,23 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 setShowMobileMenu(false)
               }}
               className={classNames(
+                page === 'browse' ? styles.active : '',
+                styles.linkText
+              )}
+              to={'/browse/'}
+            >
+              <i className={'material-icons'}>explore</i>
+              <span>Explore</span>
+            </Link>
+            <Link
+              onClick={() => {
+                setShowMobileMenu(false)
+              }}
+              className={classNames(
                 page === 'search' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/search'}
+              to={'/search/'}
             >
               <i className={'material-icons'}>search</i>
               <span>Search</span>
@@ -85,7 +102,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'bookmarks' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/bookmarks'}
+              to={'/bookmarks/'}
             >
               <i className={'material-icons'}>bookmark</i>
               <span>
@@ -100,7 +117,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'about' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/about'}
+              to={'/about/'}
             >
               <i className={'material-icons'}>info</i>
               <span>About</span>
@@ -111,22 +128,17 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               }}
               className={classNames(
                 page === 'contact' ? styles.active : '',
-                styles.contactDrape
+                styles.linkText
               )}
-              to={'/contact'}
+              to={'/contact/'}
             >
-              {showMobileMenu ? (
-                'Contact us'
-              ) : (
-                <div>
-                  <i className={'material-icons'}>mail</i>
-                  <span>contact us</span>
-                </div>
-              )}
+              <i className={'material-icons'}>mail</i>
+              <span>Contact Us</span>
             </Link>
           </div>
         </div>
       </div>
+      {/* <img className={styles.smallFlag} src={flag}></img> */}
     </div>
   )
 }

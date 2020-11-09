@@ -1,12 +1,41 @@
 @import '../../../assets/styles/vars.scss';
 .panel {
   &.secondary {
-    background-color: $light-gray;
+    background-color: white;
     padding: 20px;
+  }
+  &.expandable {
+    // background-color: lighten($orange, 55%);
+    background-color: $light-gray;
+  }
+  .title,
+  .titleContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .title {
+    width: 100%;
+  }
+  .text {
+    width: 100%;
   }
   &.heading {
     .title {
       margin: 20px 0;
+      display: flex;
+
+      &,
+      .titleContent {
+        display: flex;
+        align-items: center;
+      }
+
+      .text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 
@@ -15,10 +44,7 @@
     margin-bottom: 10px;
     align-items: center;
     .text {
-      font-size: 1.5rem;
-      font-family: 'rawline', serif;
-      text-transform: uppercase;
-      font-weight: 600;
+      font-size: 1.3rem;
       h2 {
         text-transform: none;
         margin-bottom: 0;
@@ -27,7 +53,10 @@
     }
     i {
       font-size: 2rem;
-      color: $navy-blue;
+      color: $blue;
+    }
+    i,
+    img {
       margin-right: 3px;
     }
 
@@ -41,5 +70,36 @@
   }
   .content {
     @include spaceItemsVert(20px);
+  }
+  &.expandable {
+    padding: 15px;
+    height: min-content;
+    .title {
+      cursor: pointer;
+      @include noSelect();
+      &:hover {
+        .ddIcon {
+          background-color: darken($light-gray, 5%);
+          transition: 0.5s;
+        }
+      }
+      margin-bottom: 0px;
+      .titleContent {
+        position: relative;
+      }
+      .text {
+        margin-left: 5px;
+      }
+      .ddIcon {
+        @include center();
+        border-radius: 50%;
+        i {
+          margin-right: 0px;
+        }
+      }
+    }
+    .content {
+      margin-top: 10px;
+    }
   }
 }

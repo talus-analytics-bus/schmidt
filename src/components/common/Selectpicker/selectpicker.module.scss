@@ -1,24 +1,28 @@
 @import '../../../assets/styles/vars.scss';
 
 .selectpicker {
-  font-family: 'Open Sans', sans-serif;
   .label {
-    margin-bottom: 5px;
     font-weight: 600;
   }
 
   select {
-    font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     max-width: 200px;
-    height: 36px;
+    height: 34px;
+    border: 2px $blue solid;
+    color: $blue;
+    border-radius: $border-radius;
     cursor: pointer;
+    width: max-content;
+    &:hover {
+      background-color: lighten($light-gray, 3%);
+    }
   }
 
   &.disabled {
-    color: gray;
     select {
-      background-color: $light-gray;
+      color: $light-blue;
+      border-color: $light-blue;
     }
     pointer-events: none;
   }

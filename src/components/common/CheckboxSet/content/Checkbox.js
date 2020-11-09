@@ -45,10 +45,18 @@ const Checkbox = ({
     >
       <form>
         <label
+          className={custom !== undefined ? styles.noMargin : null}
           style={{ color: curChecked === true ? darkModerateBlue : '' }}
           onClick={callback ? onChange : undefined}
           for={label}
         >
+          <span
+            className={classNames(styles.check, {
+              [styles.visible]: curChecked,
+            })}
+          >
+            <i class="material-icons">done</i>
+          </span>
           <input
             type="checkbox"
             name={label}
@@ -56,14 +64,14 @@ const Checkbox = ({
             checked={curChecked === true}
             disabled={props.disabled ? 'disabled' : ''}
           />
-          <span>
+          <div className={styles.label}>
             {label}
             {count !== null && count > 0 && <> ({comma(count)})</>}
             {
               // count !== null && curChecked === true && <> ({comma(count)})</>
             }
             {custom !== undefined && custom}
-          </span>
+          </div>
         </label>
       </form>
     </div>

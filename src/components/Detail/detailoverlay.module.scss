@@ -1,4 +1,11 @@
 @import '../../assets/styles/vars.scss';
+
+@mixin sectionHeader() {
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
 .detailOverlay {
   display: flex;
   margin: 0 auto;
@@ -10,19 +17,36 @@
     .container {
       z-index: 9; // above header
       position: absolute;
-      top: 0;
-      transition: opacity 0.25s;
+      top: -10px; // TODO elegantly, get value from search.module.scss
+      transition: opacity 0.5s;
 
       .band {
         display: flex;
+        border-radius: $big-radius $big-radius 0px 0px;
+      }
+      .relatedItems {
+        border-radius: 0px 0px $big-radius $big-radius;
       }
     }
+    .card {
+      padding-bottom: 20px;
+      margin: 0px 20px;
+    }
   }
+
   .container {
     .relatedItems {
-      margin-left: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #333;
+      background-color: $light-gray;
+      padding: 20px;
+      .similarHeader {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        @include sectionHeader();
+        .similarText {
+          margin-left: 10px;
+        }
+      }
     }
     // standard: max width of screen is 1300px
     // center content in that view
@@ -35,7 +59,7 @@
     font-size: 1rem;
 
     .link {
-      color: $selected-blue;
+      color: $light-blue;
       cursor: pointer;
 
       &:hover {
@@ -53,26 +77,30 @@
 
     .band {
       display: none;
-      border-right: 2px solid #5c5c5c;
-
-      padding: 20px;
-      background-color: #5c5c5c;
+      padding: 20px 15px 10px 20px;
+      background-color: $light-gray;
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .recordType {
+        @include sectionHeader();
+      }
       .closeButton {
-        margin-left: auto;
-        background-color: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 100%;
         padding: 3px;
         cursor: pointer;
         i {
-          color: $navy-blue;
+          color: $blue;
           font-weight: bold;
+          font-size: 2.5rem;
         }
         &:hover {
-          background-color: darken(white, 5%);
+          background-color: darken($light-gray, 5%);
+          border-radius: 50%;
         }
         &:active {
           @include boxShadow();
@@ -83,19 +111,20 @@
     transition: opacity 0.25s;
 
     .content {
-      border-left: 2px solid #5c5c5c;
-      border-bottom: 2px solid #5c5c5c;
-
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 300px;
-      background-color: white;
+      background-color: $light-gray;
+      border-radius: 0px 0px $big-radius $big-radius;
 
       .sideBar {
-        background-color: $light-gray;
         @include spaceItemsVert(10px);
-        margin-left: 20px;
-        border-right: 2px solid #5c5c5c;
+        padding: 20px;
+        background-color: white;
+        border: $orange 3px solid;
+        border-top-width: 0px;
+        &.wide {
+        }
 
         .keyTopics {
           @include spaceItemsVert(10px);
@@ -108,26 +137,25 @@
             span {
               color: unset;
             }
-            .colorBlock {
-              height: 30px;
-              background-color: #e5e5e5;
-            }
             cursor: pointer;
             &:hover {
               text-decoration: underline;
             }
-            &.active {
-              color: $selected-blue;
-              font-weight: 600;
-              .colorBlock {
-                background-color: $navy-blue;
-              }
+            color: $light-blue;
+            .colorBlock {
+              background-color: $blue;
+              height: 8px;
+              width: 8px;
+              transform: rotate(45deg);
             }
+          }
+          .placeholder {
+            color: $light-blue;
           }
         }
 
         .authors {
-          @include borderItemsVert(40px);
+          @include borderItemsVert(30px);
 
           .author {
             border-width: 4px;
@@ -135,7 +163,7 @@
               font-weight: 600;
               font-size: 1.2rem;
               margin-bottom: 20px;
-              color: $selected-blue;
+              color: $light-blue;
               cursor: pointer;
               &:hover {
                 text-decoration: underline;
@@ -146,7 +174,6 @@
               .infoItem {
                 .field {
                   text-transform: uppercase;
-                  font-family: 'rawline', serif;
                   font-size: 0.8rem;
                   margin-bottom: 2px;
                 }
@@ -163,14 +190,14 @@
           }
         }
         .govAuth {
-          border: 3px solid $navy-blue;
+          border: 1px solid $blue;
           padding: 10px;
           &.yes {
-            background-color: #dae0f1;
+            // background-color: #dae0f1;
             font-weight: 600;
           }
           &.notAvail {
-            border-color: $gray;
+            border-color: $light-blue;
           }
         }
 
@@ -190,7 +217,54 @@
     }
     .noData {
       font-style: italic;
-      color: $gray;
+      color: $light-blue;
+    }
+  }
+  &.page {
+    .container {
+      padding: 0px;
+      max-width: 1440px;
+      .content {
+        .card {
+          padding: 0px 20px;
+        }
+        .sideBar {
+          margin: 0px;
+          padding: 0px 20px 20px 20px;
+        }
+      }
+    }
+  }
+  // wide view: sidebar goes under the card
+  // non-wide view: sidebar goes along the right gutter
+  &.wide {
+    .content {
+      grid-template-columns: unset;
+      .sideBar {
+        display: grid;
+        grid-gap: 10px;
+        justify-content: space-between;
+        grid-template-columns: repeat(auto-fit, minmax(auto, 280px));
+        > div {
+          border: none !important;
+          margin: 0 !important;
+          // width: max-content;
+          &:first-child {
+            // width: 300px;
+          }
+        }
+      }
+      // Using flex
+      // .sideBar {
+      //   background-color: $very-light-gray;
+      //   display: flex;
+      //   flex-flow: wrap;
+      //   > div {
+      //     border: none !important;
+      //     margin: 0 !important;
+      //     width: max-content;
+      //   }
+      // }
     }
   }
 }

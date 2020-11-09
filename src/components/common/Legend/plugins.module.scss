@@ -4,7 +4,6 @@
   .name {
     // max-width: 370px;
     > div {
-      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 600;
     }
@@ -14,7 +13,6 @@
       margin-right: auto;
       .quantized {
         $border-radius: 5px;
-        font-family: 'Raleway', serif;
         font-weight: bold;
         grid-gap: 0;
         // &.notRounded {

@@ -1,29 +1,99 @@
 @import '../../../assets/styles/vars.scss';
 .options {
-  border-right: 2px $soft-blue solid;
-  height: 100%;
-  min-height: 90vh;
-  > h2 {
-    margin-top: 0;
-  }
   .sortBy {
     display: flex;
     align-items: flex-end;
     @include spaceItemsHoriz(10px);
   }
-  .content {
-    @include spaceItemsVert(20px);
+  .filters {
+    background-color: $light-gray;
+    border-radius: $big-radius;
+    padding: 20px;
+    margin-top: 30px;
+    border: 2px solid $blue;
+    h2 {
+      margin-top: 0px;
+      font-size: 1.7rem;
+    }
+    .filterSections {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .customYearRange {
+      display: flex;
+      align-items: center;
+      @include spaceItemsHoriz(10px);
+    }
+    .selectedFilters {
+      padding: 15px 15px 0px 15px;
+      background-color: white;
+      .selectedHeader {
+        font-size: 1.4rem;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .clearButton {
+          margin-left: 20px;
+        }
+      }
+      .selectedFiltersList {
+        padding-top: 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .badge {
+          @include noSelect();
+          margin-right: 20px;
+          margin-bottom: 15px;
+          padding: 10px 15px;
+          background-color: $gray;
+          border-radius: $border-radius;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .value {
+            font-weight: 600;
+          }
+          .closeButton {
+            font-size: 1.1rem;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 3px;
+            &:hover {
+              background-color: lighten($gray, 5%);
+            }
+          }
+        }
+      }
+    }
   }
-  .customYearRange {
-    display: flex;
-    align-items: center;
-    @include spaceItemsHoriz(10px);
-  }
-
-  .collapseOrExpandAll {
-    display: flex;
-    @include spaceItemsHoriz(10px);
-  }
+  // &.mobile {
+  //   height: 100%;
+  //   width: 100%;
+  //   position: absolute;
+  //   top: -1px;
+  //   left: 0px;
+  //   padding: 0px 20px;
+  //   background-color: white;
+  //   border-right: 0px $blue solid;
+  //   z-index: 5;
+  //   .header {
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: space-between;
+  //     align-items: center;
+  //     h2 {
+  //       font-size: 1.4rem;
+  //       margin: 10px 0px;
+  //     }
+  //   }
+  //   .collapseOrExpandAll {
+  //     margin-top: 10px;
+  //   }
+  // }
 }
-
-@import './responsive.module.scss';
