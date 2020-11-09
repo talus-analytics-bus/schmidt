@@ -111,4 +111,39 @@ $margin-left: 116px;
   }
 }
 
-@import './homepage-responsive.module.scss';
+@media screen and (max-width: 1150px) {
+  .home {
+    .main {
+      .upper {
+        .textWrapShape {
+          $w: 100%;
+          $h: 400px;
+          $shape: polygon(0px 0px, $w 0px, $w $h, 0px 250px);
+          shape-outside: $shape;
+          clip-path: $shape;
+          width: 30%;
+          height: $h;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .home {
+    .main {
+      .upper {
+        .mainLogo {
+          height: 80px;
+        }
+        .landingText {
+          margin-left: 78px;
+        }
+        .controls {
+          margin-left: 78px;
+        }
+      }
+    }
+  }
+}
+@import './mobile.module.scss';
