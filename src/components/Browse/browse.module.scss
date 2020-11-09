@@ -170,6 +170,17 @@
     @include spaceItemsVert(20px);
     .item {
       cursor: pointer;
+      &.expanded {
+        .header {
+          background-color: darken($light-gray, 10%);
+          &:hover {
+            background-color: darken($light-gray, 15%);
+          }
+        }
+        .resultContainer {
+          background-color: darken($light-gray, 10%);
+        }
+      }
       .header {
         display: flex;
         flex-direction: row;

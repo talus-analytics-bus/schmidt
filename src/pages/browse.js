@@ -501,7 +501,11 @@ const Browse = ({ setPage }) => {
     const name = content[0]
     const count = content[1]
     return (
-      <div className={styles.item}>
+      <div
+        className={classNames(styles.item, {
+          [styles.expanded]: clickedItem === name,
+        })}
+      >
         <div
           className={classNames(styles.header, {
             [styles.bigContainer]: clickedItem === name,
