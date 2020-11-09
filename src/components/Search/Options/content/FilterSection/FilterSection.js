@@ -146,7 +146,7 @@ export const FilterSection = ({
             styles.content,
             {
               [styles.rightAlign]:
-                filterDefs.label == 'Record type' ||
+                filterDefs.label == 'Document type' ||
                 filterDefs.label == 'Funder',
             },
             {

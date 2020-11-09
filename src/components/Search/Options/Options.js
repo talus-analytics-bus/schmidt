@@ -119,8 +119,8 @@ export const Options = ({
     types_of_record: {
       field: 'type_of_record',
       key: 'types_of_record',
-      label: 'Record type',
-      resultLabel: 'record type',
+      label: 'Document type',
+      resultLabel: 'document type',
       choices: [],
     },
   }
@@ -366,7 +366,7 @@ export const Options = ({
         label = 'Funder'
         break
       case 'type_of_record':
-        label = 'Record type'
+        label = 'Document type'
         break
       case 'author.id':
         label = 'Author'
