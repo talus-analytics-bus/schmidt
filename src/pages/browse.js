@@ -181,13 +181,15 @@ const Browse = ({ setPage }) => {
   }
 
   // FORMAT LIST OF RESULTS TO DISPLAY
-  // filter out any unspecified items since that's a weird category for browsing
+  // filter out any unspecified, other, etc. items since those are weird categories for browsing
   let rawList = browseList.filter(
     item =>
       item[0] !== 'Unspecified' &&
       item[0] !== '' &&
       item[0] !== undefined &&
-      item[0] !== null
+      item[0] !== null &&
+      item[0] !== 'Other' &&
+      item[0] !== 'Authoring organization is presumed to be the funder'
   )
   // sort list
   let listToDisplay
