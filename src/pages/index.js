@@ -136,16 +136,19 @@ const IndexPage = () => {
               ></img>
               <div className={styles.textWrapShape}></div>
               <p className={styles.landingText}>
-                Welcome to the Georgetown University Global Health Security
-                Library, a publicly accessible, centralized database of
-                warnings, evaluations, oversight efforts, strategies, and other
-                documents that relate to pandemics prior to 2020. This is a
-                coded and searchable database that enables access to documents
-                written about pandemic risk and related issues.
+                Welcome to the Health Security Library, a publicly accessible,
+                centralized library with over 2,000 documents. Prior to the
+                COVID-19 pandemic in 2020, there was a wealth of work -
+                research, government reviews, panels, and briefings - that
+                provided information on how to prepare, plan, respond to, and
+                recover from a pandemic. This Library provides access to that
+                body of work: the warnings, evaluations, oversight efforts,
+                strategies, and other documents related to pandemics and
+                pandemic risk prior to 2020.
               </p>
               <p className={styles.landingText}>
                 Using this tool, you can search for specific documents using
-                keywords and filters, or browse by category, authoring
+                keywords and filters, or browse by category, publishing
                 organization, specific event, and more. Documents can be
                 bookmarked to view later or downloaded directly from this site
                 (where available).
