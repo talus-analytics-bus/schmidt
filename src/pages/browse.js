@@ -701,7 +701,7 @@ const Browse = ({ setPage }) => {
                   className={styles.tooltip}
                   src={info}
                   alt="info icon"
-                  data-for="tooltips"
+                  data-for="tooltip"
                   data-tip={`Some documents in the library may not be associated with a${
                     resultText === 'event' ? 'n' : ''
                   } ${resultText}`}
