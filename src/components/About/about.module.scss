@@ -110,10 +110,11 @@
       .members {
         font-size: 1.2rem;
         ul {
-          padding-left: 25px;
+          padding-left: 0px;
         }
         li {
           margin-top: 8px;
+          list-style-type: none;
         }
       }
     }
