@@ -33,6 +33,7 @@ import {
 
 // styles and assets
 import styles from '../components/Browse/browse.module.scss'
+import info from '../assets/icons/info.svg'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -690,16 +691,22 @@ const Browse = ({ setPage }) => {
           {/* Sort by row */}
           <div className={styles.sortByRow}>
             {browseList !== null && (
-              <p className={styles.resultsText}>
-                {filteredList.length} {resultText}
-                {filteredList.length !== 1 ? 's' : ''}
-                {` (${numDocuments} total documents)`}
-                <InfoTooltip
-                  text={`Some documents in the library may not be associated with a${
+              <div className={styles.resultsText}>
+                <p>
+                  {filteredList.length} {resultText}
+                  {filteredList.length !== 1 ? 's' : ''}
+                  {` (${numDocuments} total documents)`}
+                </p>
+                <img
+                  className={styles.tooltip}
+                  src={info}
+                  alt="info icon"
+                  data-for="tooltips"
+                  data-tip={`Some documents in the library may not be associated with a${
                     resultText === 'event' ? 'n' : ''
                   } ${resultText}`}
                 />
-              </p>
+              </div>
             )}
             <div className={styles.sortBy}>
               <p className={styles.sortHeader}>Sort by</p>
@@ -791,13 +798,18 @@ const Browse = ({ setPage }) => {
         </div>
         <MobileDisclaimer />
         <ReactTooltip
-          id={'searchHighlightInfo'}
+          id="searchHighlightInfo"
           type="light"
           effect="float"
           delayHide={0}
           delayShow={500}
           scrollHide={true}
-          getContent={content => content}
+        />
+        <ReactTooltip
+          id="tooltip"
+          type="light"
+          effect="float"
+          scrollHide={true}
         />
       </Layout>
       <LoadingSpinner loading={!initialized} />

@@ -148,18 +148,24 @@
   }
 
   .sortByRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
     margin-bottom: 20px;
     .resultsText {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       color: $light-blue;
+      p {
+        width: max-content;
+      }
     }
     .sortBy {
       display: flex;
       flex-direction: row;
       align-items: center;
       @include spaceItemsHoriz(10px);
+      margin-left: 20px;
       > div {
         @include center();
       }
@@ -182,10 +188,12 @@
         }
       }
       .header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: space-between;
+        // align-items: center;
+        display: grid;
+        grid-template-columns: 1fr auto;
         background-color: $light-gray;
         padding: 20px;
         border-radius: $big-radius;
@@ -200,11 +208,15 @@
       .name {
         color: $dark-blue;
         font-weight: 500;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
       }
       .details {
         display: flex;
         flex-direction: row;
         align-items: center;
+        margin-left: 20px;
         .caret {
           margin-left: 10px;
           i {
@@ -234,6 +246,22 @@
     // for large screens show search on the right and options on the left
     display: flex;
     flex-direction: column;
+  }
+  .tooltip {
+    width: 15px;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .browse {
+    .browseSelection {
+      .browseButton {
+        .buttonLabel {
+          font-size: 1.2rem;
+        }
+      }
+    }
   }
 }
 
