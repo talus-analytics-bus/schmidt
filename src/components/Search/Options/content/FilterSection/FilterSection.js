@@ -145,9 +145,10 @@ export const FilterSection = ({
           className={classNames(
             styles.content,
             {
-              [styles.rightAlign]:
-                filterDefs.label == 'Document type' ||
-                filterDefs.label == 'Funder',
+              [styles.last]: filterDefs.label === 'Document type',
+              [styles.secondLast]: filterDefs.label === 'Funder',
+              [styles.thirdLast]: filterDefs.label === 'Event',
+              [styles.fourthLast]: filterDefs.key === 'authors',
             },
             {
               [styles.lower]: label == 'author_types' || label == 'authors',
