@@ -118,7 +118,7 @@
       border-radius: 0px 0px $big-radius $big-radius;
 
       .sideBar {
-        @include spaceItemsVert(10px);
+        // @include spaceItemsVert(10px);
         padding: 20px;
         background-color: white;
         border: $orange 3px solid;
@@ -241,16 +241,32 @@
     .content {
       grid-template-columns: unset;
       .sideBar {
-        display: grid;
-        grid-gap: 10px;
+        display: flex;
         justify-content: space-between;
-        grid-template-columns: repeat(auto-fit, minmax(auto, 280px));
+        flex-direction: row;
+        flex-wrap: wrap;
+        // display: grid;
+        // grid-gap: 10px;
+        // justify-content: space-between;
+        // grid-template-columns: repeat(auto-fit, minmax(auto, 280px));
         > div {
           border: none !important;
-          margin: 0 !important;
-          // width: max-content;
+          width: 280px;
+          margin-bottom: 10px;
           &:first-child {
             // width: 300px;
+          }
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+        @media screen and (max-width: 1275px) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 10px;
+          > div {
+            width: 100%;
+            margin-right: 0px;
           }
         }
       }

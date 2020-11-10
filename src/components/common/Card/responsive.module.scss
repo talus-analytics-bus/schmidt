@@ -40,6 +40,39 @@
   }
 }
 
+@media screen and (max-width: 1250px) {
+  .cardContainer {
+    .card {
+      .contentCol {
+        .main {
+          .detailsAndDownloads {
+          }
+          .actions {
+            margin-top: 10px;
+          }
+        }
+      }
+      &.detail {
+        .contentCol {
+          .main {
+            .detailsAndDownloads {
+              grid-template-columns: 1fr;
+              .downloads {
+                margin: 20px 0px 0px 0px;
+                padding: 20px 0px 0px 0px;
+                border-top: 1px $blue solid;
+                border-left: unset;
+              }
+            }
+            .actions {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media #{$phone} {
   .cardContainer {
     .card {
