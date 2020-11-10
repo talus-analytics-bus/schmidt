@@ -9,6 +9,7 @@ import SEO from '../components/seo'
 import Nav from '../components/Layout/Nav/Nav'
 import Footer from '../components/Layout/Footer/Footer'
 import Collection from '../components/Home/content/Collection/Collection'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   PrimaryButton,
   FloatButton,
@@ -217,13 +218,7 @@ const IndexPage = () => {
             </div> */}
           </article>
         </div>
-        <div className={styles.mobile}>
-          <div className={styles.disclaimer}>
-            Welcome to the Health Security Library. This website is currently
-            only viewable on larger screens. Please return using a desktop
-            browser, or maximize your browser window, and content will appear.
-          </div>
-        </div>
+        <MobileDisclaimer page="index" />
         <ReactTooltip
           id={'searchHighlightInfo'}
           type="light"

@@ -11,6 +11,7 @@ import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   StickyHeader,
   LoadingSpinner,
@@ -788,6 +789,7 @@ const Browse = ({ setPage }) => {
             </div>
           )}
         </div>
+        <MobileDisclaimer />
         <ReactTooltip
           id={'searchHighlightInfo'}
           type="light"

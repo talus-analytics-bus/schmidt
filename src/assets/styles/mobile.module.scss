@@ -6,7 +6,12 @@
 }
 @media #{$phone} {
   .largeFlag,
-  .home {
+  .home,
+  .container,
+  .browse,
+  .search,
+  .bookmarks,
+  .contact {
     display: none;
   }
   .mobile {
@@ -17,6 +22,9 @@
       font-size: 1.2rem;
       line-height: 1.8rem;
       text-align: center;
+    }
+    &.shiftDown {
+      margin-top: 100px;
     }
   }
 }

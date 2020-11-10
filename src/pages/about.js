@@ -8,6 +8,7 @@ import SEO from '../components/seo'
 import { PrimaryButton } from '../components/common'
 import Overview from '../components/About/Overview'
 import Documentation from '../components/About/Documentation'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // styles and assets
 import styles from '../components/About/about.module.scss'
@@ -110,6 +111,7 @@ const About = ({}) => {
             )
         )}
       </div>
+      <MobileDisclaimer />
     </Layout>
   )
 }

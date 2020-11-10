@@ -6,6 +6,7 @@ import axios from 'axios'
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import { PrimaryButton } from '../components/common'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // local utility functions
 import { withBookmarkedIds } from '../components/misc/Util'
@@ -139,6 +140,7 @@ const Contact = ({}) => {
           <div className={styles.formRow}>{successMessage}</div>
         </form>
       </div>
+      <MobileDisclaimer />
     </Layout>
   )
 }

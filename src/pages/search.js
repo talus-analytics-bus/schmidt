@@ -12,6 +12,7 @@ import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
 import { StickyHeader, LoadingSpinner } from '../components/common'
 import { appContext } from '../components/misc/ContextProvider'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // local utility functions
 import SearchQuery from '../components/misc/SearchQuery'
@@ -476,6 +477,7 @@ const Search = ({ setPage }) => {
             />
           </div>
         </div>
+        <MobileDisclaimer />
         <ReactTooltip
           id={'searchHighlightInfo'}
           type="light"
