@@ -505,7 +505,9 @@ const Browse = ({ setPage }) => {
             <div className={styles.buttonLabel}>
               <div>{filterDefs[type].label}</div>
               <img
-                className={styles.tooltip}
+                className={classNames(styles.tooltip, {
+                  [styles.left]: type === 'authors',
+                })}
                 src={info}
                 alt="info icon"
                 data-for={type}

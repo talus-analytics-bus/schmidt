@@ -54,9 +54,12 @@
         font-weight: 600;
         display: flex;
         flex-direction: row;
-        align-items: flex-end;
+        align-items: flex-start;
         .tooltip {
-          margin-bottom: 7px;
+          margin-top: 5px;
+          &.left {
+            margin-left: -13px;
+          }
         }
       }
       .selectedRectangle {
