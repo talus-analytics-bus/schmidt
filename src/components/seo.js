@@ -52,8 +52,24 @@ function SEO({ description, lang, meta, title }) {
           content: `website`,
         },
         {
+          property: 'og:image',
+          content: '/social.png',
+        },
+        {
+          property: 'og:image:width',
+          content: '1200',
+        },
+        {
+          property: 'og:image:height',
+          content: '768',
+        },
+        {
+          property: 'og:image:type',
+          content: 'image/png',
+        },
+        {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
@@ -67,6 +83,10 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: 'twitter:image',
+          content: `https://healthsecuritynet.org/social.png`,
+        },
       ].concat(meta)}
     />
   )
@@ -75,7 +95,7 @@ function SEO({ description, lang, meta, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
+  description: `The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic.`,
 }
 
 SEO.propTypes = {

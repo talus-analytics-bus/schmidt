@@ -124,7 +124,10 @@ const IndexPage = () => {
     const collectionsData = data.slice(0, numCollectionsLoaded) // DEBUG
     return (
       <>
-        <SEO title="Home" description="Health Security Net landing page" />
+        <SEO
+          title="Home"
+          description="The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic."
+        />
         <Nav bookmarkCount={bookmarkedIds.length} page="index" />
         <img className={styles.largeFlag} src={flag}></img>
         <div className={styles.home}>

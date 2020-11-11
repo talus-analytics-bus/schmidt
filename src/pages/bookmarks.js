@@ -208,7 +208,7 @@ const Bookmarks = ({}) => {
         loading={loading}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Search results" />
+        <SEO title="Bookmarks" />
         <div className={styles.bookmarks}>
           <StickyHeader
             {...{
