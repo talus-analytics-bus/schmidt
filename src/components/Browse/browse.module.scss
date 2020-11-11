@@ -52,6 +52,12 @@
         text-align: center;
         font-size: 1.5rem;
         font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        .tooltip {
+          margin-bottom: 7px;
+        }
       }
       .selectedRectangle {
         background-color: $orange;
@@ -250,6 +256,20 @@
   .tooltip {
     width: 15px;
     margin-left: 5px;
+    z-index: 99;
+    margin-bottom: 1px;
+  }
+  [class*='__react_component_tooltip'] {
+    &[class*='type-light'] {
+      max-width: unset;
+    }
+  }
+}
+[class*='__react_component_tooltip'] {
+  &[class*='type-light'] {
+    &[id='tooltip'] {
+      max-width: 500px;
+    }
   }
 }
 

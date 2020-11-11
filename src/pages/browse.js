@@ -38,6 +38,18 @@ import info from '../assets/icons/info.svg'
 // constants
 const API_URL = process.env.GATSBY_API_URL
 
+// definitions for tooltips
+const tooltipDefs = {
+  key_topics: 'Key topics addressed in the work',
+  authors: 'Organization that published the work or led the effort',
+  author_types: 'Type of organization responsible for publishing the work',
+  funders:
+    'Organization or entity that provided funding for the research effort or publication',
+  years: 'Date the publication was published',
+  events:
+    'Specific events referenced in or to which the document directly relates',
+}
+
 const Browse = ({ setPage }) => {
   // CONTEXT
   const context = useContext(appContext) || defaultContext
@@ -478,24 +490,41 @@ const Browse = ({ setPage }) => {
       return null
     } else {
       return (
-        <div
-          className={classNames(styles.browseButton, {
-            [styles.selected]: browseSection == type,
-          })}
-          onClick={() => {
-            setBrowseSection(type)
-          }}
-        >
-          <div className={styles.buttonIcon}>
-            {getIconByName({ iconName: icon })}
-          </div>
-          <div className={styles.buttonLabel}>{filterDefs[type].label}</div>
+        <>
           <div
-            className={classNames(styles.selectedRectangle, {
+            className={classNames(styles.browseButton, {
               [styles.selected]: browseSection == type,
             })}
-          ></div>
-        </div>
+            onClick={() => {
+              setBrowseSection(type)
+            }}
+          >
+            <div className={styles.buttonIcon}>
+              {getIconByName({ iconName: icon })}
+            </div>
+            <div className={styles.buttonLabel}>
+              <div>{filterDefs[type].label}</div>
+              <img
+                className={styles.tooltip}
+                src={info}
+                alt="info icon"
+                data-for={type}
+                data-tip={tooltipDefs[type]}
+              />
+            </div>
+            <div
+              className={classNames(styles.selectedRectangle, {
+                [styles.selected]: browseSection == type,
+              })}
+            ></div>
+          </div>
+          <ReactTooltip
+            id={type}
+            type="light"
+            effect="float"
+            scrollHide={true}
+          />
+        </>
       )
     }
   }
