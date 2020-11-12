@@ -45,9 +45,8 @@ const tooltipDefs = {
   author_types: 'Type of organization responsible for publishing the work',
   funders:
     'Organization or entity that provided funding for the research effort or publication',
-  years: 'Date the publication was published',
-  events:
-    'Specific events referenced in or to which the document directly relates',
+  years: 'Year the publication was published',
+  events: 'Specific event to which the document directly relates',
 }
 
 const Browse = ({ setPage }) => {
@@ -728,15 +727,18 @@ const Browse = ({ setPage }) => {
                   {filteredList.length !== 1 ? 's' : ''}
                   {` (${numDocuments} total documents)`}
                 </p>
-                <img
-                  className={styles.tooltip}
-                  src={info}
-                  alt="info icon"
-                  data-for="tooltip"
-                  data-tip={`Some documents in the library may not be associated with a${
-                    resultText === 'event' ? 'n' : ''
-                  } ${resultText}`}
-                />
+                {(browseSection === 'events' ||
+                  browseSection === 'funders') && (
+                  <img
+                    className={styles.tooltip}
+                    src={info}
+                    alt="info icon"
+                    data-for="tooltip"
+                    data-tip={`Some documents in the library may not be associated with a${
+                      resultText === 'event' ? 'n' : ''
+                    } ${resultText}`}
+                  />
+                )}
               </div>
             )}
             <div className={styles.sortBy}>
