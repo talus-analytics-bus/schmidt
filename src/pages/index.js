@@ -93,91 +93,85 @@ const IndexPage = () => {
   }, [simpleHeaderRef])
 
   // JSX // -----------------------------------------------------------------//
-  if (loading) return <div />
-  else {
-    // CONSTANTS
-    // define collections to show
-    return (
-      <>
-        <SEO
-          title="Home"
-          description="The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic."
-        />
-        <Nav bookmarkCount={bookmarkedIds.length} page="index" />
-        <img
-          className={styles.largeFlag}
-          src={flag}
-          alt="scientist in a lab"
-        ></img>
-        <div className={styles.home}>
-          <article className={styles.main}>
-            <div className={styles.upper}>
-              <img
-                className={styles.mainLogo}
-                src={logo}
-                alt={'Health Security Net logo'}
-              ></img>
-              <div className={styles.textWrapShape}></div>
-              <p className={styles.landingText}>
-                Welcome to the Health Security Library, a publicly accessible,
-                centralized library with over 2,000 documents. Prior to the
-                COVID-19 pandemic in 2020, there was a wealth of work -
-                research, government reviews, panels, and briefings - that
-                provided information on how to prepare, plan, respond to, and
-                recover from a pandemic. This Library provides access to that
-                body of work: the warnings, evaluations, oversight efforts,
-                strategies, and other documents related to pandemics and
-                pandemic risk prior to 2020.
-              </p>
-              <p className={styles.landingText}>
-                Using this tool, you can search for specific documents using
-                keywords and filters, or browse by category, publishing
-                organization, specific event, and more. Documents can be
-                bookmarked to view later or downloaded directly from this site
-                (where available).
-              </p>
-              <div className={styles.controls}>
-                <div className={styles.mainButton}>
-                  <PrimaryButton
-                    {...{
-                      label: 'Browse documents',
-                      url: '/browse',
-                    }}
-                  />
-                </div>
-                <div className={styles.searchBar}>
-                  <SearchBar
-                    {...{
-                      searchText,
-                      setSearchText,
-                      isSearchingText,
-                      setIsSearchingText,
-                      setFreezeDataUpdates,
-                      setOrderBy,
-                      setIsDesc,
-                      previewResults: searchResults,
-                      right: false,
-                    }}
-                  />
-                </div>
+  return (
+    <>
+      <SEO
+        title="Home"
+        description="The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic."
+      />
+      <Nav bookmarkCount={loading ? 0 : bookmarkedIds.length} page="index" />
+      <img
+        className={styles.largeFlag}
+        src={flag}
+        alt="scientist in a lab"
+      ></img>
+      <div className={styles.home}>
+        <article className={styles.main}>
+          <div className={styles.upper}>
+            <img
+              className={styles.mainLogo}
+              src={logo}
+              alt={'Health Security Net logo'}
+            ></img>
+            <div className={styles.textWrapShape}></div>
+            <p className={styles.landingText}>
+              Welcome to the Health Security Library, a publicly accessible,
+              centralized library with over 2,000 documents. Prior to the
+              COVID-19 pandemic in 2020, there was a wealth of work - research,
+              government reviews, panels, and briefings - that provided
+              information on how to prepare, plan, respond to, and recover from
+              a pandemic. This Library provides access to that body of work: the
+              warnings, evaluations, oversight efforts, strategies, and other
+              documents related to pandemics and pandemic risk prior to 2020.
+            </p>
+            <p className={styles.landingText}>
+              Using this tool, you can search for specific documents using
+              keywords and filters, or browse by category, publishing
+              organization, specific event, and more. Documents can be
+              bookmarked to view later or downloaded directly from this site
+              (where available).
+            </p>
+            <div className={styles.controls}>
+              <div className={styles.mainButton}>
+                <PrimaryButton
+                  {...{
+                    label: 'Browse documents',
+                    url: '/browse',
+                  }}
+                />
+              </div>
+              <div className={styles.searchBar}>
+                <SearchBar
+                  {...{
+                    searchText,
+                    setSearchText,
+                    isSearchingText,
+                    setIsSearchingText,
+                    setFreezeDataUpdates,
+                    setOrderBy,
+                    setIsDesc,
+                    previewResults: searchResults,
+                    right: false,
+                  }}
+                />
               </div>
             </div>
-          </article>
-        </div>
-        <MobileDisclaimer page="index" />
-        <ReactTooltip
-          id={'searchHighlightInfo'}
-          type="light"
-          effect="float"
-          delayHide={0}
-          delayShow={500}
-          scrollHide={true}
-          getContent={content => content}
-        />
-        <Footer />
-      </>
-    )
-  }
+          </div>
+        </article>
+      </div>
+      <MobileDisclaimer page="index" />
+      <ReactTooltip
+        id={'searchHighlightInfo'}
+        type="light"
+        effect="float"
+        delayHide={0}
+        delayShow={500}
+        scrollHide={true}
+        getContent={content => content}
+      />
+      <Footer />
+    </>
+  )
 }
 
 export default IndexPage
