@@ -1,22 +1,13 @@
 // 3rd party components
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { Link } from 'gatsby'
-import axios from 'axios'
 
 // local components
 import SEO from '../components/seo'
 import Nav from '../components/Layout/Nav/Nav'
 import Footer from '../components/Layout/Footer/Footer'
-import Collection from '../components/Home/content/Collection/Collection'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
-import {
-  PrimaryButton,
-  FloatButton,
-  StickyHeader,
-  SearchBar,
-} from '../components/common'
-import { appContext } from '../components/misc/ContextProvider'
+import { PrimaryButton, SearchBar } from '../components/common'
 
 // local utility functions
 import { withBookmarkedIds, execute } from '../components/misc/Util'
@@ -28,24 +19,14 @@ import logo from '../assets/images/logo.svg'
 import flag from '../assets/images/landing-test.png'
 
 // constants
-const API_URL = process.env.GATSBY_API_URL
 
 const IndexPage = () => {
-  // CONTEXT
-  const context = useContext(appContext)
-
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
 
   // ids of bookmarked items to count for nav
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
-
-  // track which collections to show: most items to least
-  const [baselineFilterCounts, setBaselineFilterCounts] = useState(null)
-
-  // track how many collections have been loaded
-  const [numCollectionsLoaded, setNumCollectionsLoaded] = useState(1)
 
   // show scroll to top?
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
@@ -66,12 +47,7 @@ const IndexPage = () => {
   // FUNCTIONS
   // get basic page data
   const getData = async () => {
-    const queries = {}
-    queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
-    const results = await execute({ queries })
-    setData(
-      results.filterCountsQuery.data.data.key_topics.filter(d => d[1] > 0)
-    )
+    setData()
     setLoading(false)
   }
 
@@ -121,7 +97,6 @@ const IndexPage = () => {
   else {
     // CONSTANTS
     // define collections to show
-    const collectionsData = data.slice(0, numCollectionsLoaded) // DEBUG
     return (
       <>
         <SEO
@@ -129,7 +104,11 @@ const IndexPage = () => {
           description="The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic."
         />
         <Nav bookmarkCount={bookmarkedIds.length} page="index" />
-        <img className={styles.largeFlag} src={flag}></img>
+        <img
+          className={styles.largeFlag}
+          src={flag}
+          alt="scientist in a lab"
+        ></img>
         <div className={styles.home}>
           <article className={styles.main}>
             <div className={styles.upper}>
@@ -183,42 +162,6 @@ const IndexPage = () => {
                 </div>
               </div>
             </div>
-            {/* <div className={styles.divider} />
-            <div className={styles.lower}>
-              <div className={styles.collectionSection}>
-                <h1>Browse topic collections</h1>
-                <div className={styles.collections}>
-                  {collectionsData.map(
-                    ([name, count]) =>
-                      count > 0 && (
-                        <Collection
-                          {...{
-                            key: name,
-                            name,
-                            value: name,
-                            type: 'key_topics',
-                            bookmarkedIds,
-                            setBookmarkedIds,
-                          }}
-                        />
-                      )
-                  )}
-                </div>
-                {numCollectionsLoaded < data.length - 1 && (
-                  <div className={styles.showAnotherButton}>
-                    <FloatButton
-                      {...{
-                        label: 'Show another topic',
-                        icon: <i className={'material-icons'}>expand_less</i>,
-                        noOnToggle: true,
-                        onClick: () =>
-                          setNumCollectionsLoaded(numCollectionsLoaded + 1),
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            </div> */}
           </article>
         </div>
         <MobileDisclaimer page="index" />
