@@ -110,10 +110,17 @@
       .members {
         font-size: 1.2rem;
         ul {
-          padding-left: 25px;
+          padding-left: 0px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 5%;
+          @media screen and (max-width: 1000px) {
+            grid-template-columns: 1fr;
+          }
         }
         li {
           margin-top: 8px;
+          list-style-type: none;
         }
       }
     }
@@ -204,3 +211,5 @@
     }
   }
 }
+
+@import '../../assets/styles/mobile.module.scss';

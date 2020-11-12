@@ -1,4 +1,9 @@
 @import '../../../../../assets/styles/vars.scss';
+
+@mixin right() {
+  right: 1px;
+  left: unset;
+}
 .filterSection {
   margin-bottom: 10px;
   .bar {
@@ -82,9 +87,26 @@
     overflow: auto;
     left: 1px;
     top: 105px;
-    &.rightAlign {
-      right: 1px;
-      left: unset;
+    //these next rules are to prevent the filter choices from flowing off the screen
+    &.last {
+      @media screen and (min-width: 1153px) {
+        @include right();
+      }
+    }
+    &.secondLast {
+      @media screen and (min-width: 952px) {
+        @include right();
+      }
+    }
+    &.thirdLast {
+      @media screen and (min-width: 822px) and (max-width: 1050px) {
+        @include right();
+      }
+    }
+    &.fourthLast {
+      @media screen and (max-width: 900px) {
+        @include right();
+      }
     }
     &.lower {
       top: 120px;

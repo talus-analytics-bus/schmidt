@@ -35,10 +35,21 @@ module.exports = {
     {
       resolve: `gatsby-plugin-s3`,
       options: {
-        bucketName: 'schmidt-prod',
+        bucketName: 'schmidt-preview',
         protocol: 'http',
-        hostname: 'schmidt-prod.s3-website-us-east-1.amazonaws.com',
+        hostname: 'schmidt-preview.s3-website-us-east-1.amazonaws.com',
         generateRoutingRules: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-gtag`,
+      options: {
+        // your google analytics tracking id
+        trackingId: `G-KHMJG9CZYH`,
+        // Puts tracking script in the head instead of the body
+        head: false,
+        // enable ip anonymization
+        anonymize: true,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

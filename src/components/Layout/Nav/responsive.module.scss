@@ -14,6 +14,20 @@
   }
 }
 
+@media screen and (max-width: 1000px) {
+  .navWrapper {
+    .nav {
+      .menu {
+        .links {
+          i {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media #{$phone} {
   .navWrapper {
     z-index: 102;
@@ -43,7 +57,14 @@
     .nav {
       padding: 20px 5%;
 
+      .linkText {
+        color: $orange;
+      }
+      .hidden {
+        visibility: visible;
+      }
       .menu {
+        display: none;
         .links {
           margin-top: unset;
           opacity: 0;
@@ -87,28 +108,11 @@
           background: none;
           border: none;
           cursor: pointer;
-          display: unset;
+          display: none; //hide on mobile for now
           padding: 0;
           i {
             font-size: 2rem;
           }
-        }
-      }
-      .countryPicker {
-        $left: -20px;
-        .tabContainer {
-          right: unset;
-          left: $left;
-          top: 7px;
-          .tab {
-            padding: 5px 20px 10px 20px;
-          }
-        }
-        .content {
-          left: $left;
-          background-color: white;
-          width: 262px;
-          border-radius: 0px 5px 5px 5px;
         }
       }
     }

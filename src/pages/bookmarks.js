@@ -8,6 +8,7 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import Panel from '../components/Detail/content/Panel'
 import DetailOverlay from '../components/Detail/DetailOverlay'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   StickyHeader,
   LoadingSpinner,
@@ -207,7 +208,7 @@ const Bookmarks = ({}) => {
         loading={loading}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Search results" />
+        <SEO title="Bookmarks" />
         <div className={styles.bookmarks}>
           <StickyHeader
             {...{
@@ -340,6 +341,7 @@ const Bookmarks = ({}) => {
             />
           )}
         </div>
+        <MobileDisclaimer />
         <ReactTooltip
           id={'searchHighlightInfo'}
           type="light"

@@ -11,6 +11,7 @@ import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
 import Options from '../components/Search/Options/Options'
+import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   StickyHeader,
   LoadingSpinner,
@@ -32,9 +33,21 @@ import {
 
 // styles and assets
 import styles from '../components/Browse/browse.module.scss'
+import info from '../assets/icons/info.svg'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
+
+// definitions for tooltips
+const tooltipDefs = {
+  key_topics: 'Key topics addressed in the work',
+  authors: 'Organization that published the work or led the effort',
+  author_types: 'Type of organization responsible for publishing the work',
+  funders:
+    'Organization or entity that provided funding for the research effort or publication',
+  years: 'Year the publication was published',
+  events: 'Specific event to which the document directly relates',
+}
 
 const Browse = ({ setPage }) => {
   // CONTEXT
@@ -476,24 +489,43 @@ const Browse = ({ setPage }) => {
       return null
     } else {
       return (
-        <div
-          className={classNames(styles.browseButton, {
-            [styles.selected]: browseSection == type,
-          })}
-          onClick={() => {
-            setBrowseSection(type)
-          }}
-        >
-          <div className={styles.buttonIcon}>
-            {getIconByName({ iconName: icon })}
-          </div>
-          <div className={styles.buttonLabel}>{filterDefs[type].label}</div>
+        <>
           <div
-            className={classNames(styles.selectedRectangle, {
+            className={classNames(styles.browseButton, {
               [styles.selected]: browseSection == type,
             })}
-          ></div>
-        </div>
+            onClick={() => {
+              setBrowseSection(type)
+            }}
+          >
+            <div className={styles.buttonIcon}>
+              {getIconByName({ iconName: icon })}
+            </div>
+            <div className={styles.buttonLabel}>
+              <div>{filterDefs[type].label}</div>
+              <img
+                className={classNames(styles.tooltip, {
+                  [styles.left]: type === 'authors',
+                })}
+                src={info}
+                alt="info icon"
+                data-for={type}
+                data-tip={tooltipDefs[type]}
+              />
+            </div>
+            <div
+              className={classNames(styles.selectedRectangle, {
+                [styles.selected]: browseSection == type,
+              })}
+            ></div>
+          </div>
+          <ReactTooltip
+            id={type}
+            type="light"
+            effect="float"
+            scrollHide={true}
+          />
+        </>
       )
     }
   }
@@ -689,16 +721,25 @@ const Browse = ({ setPage }) => {
           {/* Sort by row */}
           <div className={styles.sortByRow}>
             {browseList !== null && (
-              <p className={styles.resultsText}>
-                {filteredList.length} {resultText}
-                {filteredList.length !== 1 ? 's' : ''}
-                {` (${numDocuments} total documents)`}
-                <InfoTooltip
-                  text={`Some documents in the library may not be associated with a${
-                    resultText === 'event' ? 'n' : ''
-                  } ${resultText}`}
-                />
-              </p>
+              <div className={styles.resultsText}>
+                <p>
+                  {filteredList.length} {resultText}
+                  {filteredList.length !== 1 ? 's' : ''}
+                  {` (${numDocuments} total documents)`}
+                </p>
+                {(browseSection === 'events' ||
+                  browseSection === 'funders') && (
+                  <img
+                    className={styles.tooltip}
+                    src={info}
+                    alt="info icon"
+                    data-for="tooltip"
+                    data-tip={`Some documents in the library may not be associated with a${
+                      resultText === 'event' ? 'n' : ''
+                    } ${resultText}`}
+                  />
+                )}
+              </div>
             )}
             <div className={styles.sortBy}>
               <p className={styles.sortHeader}>Sort by</p>
@@ -788,14 +829,20 @@ const Browse = ({ setPage }) => {
             </div>
           )}
         </div>
+        <MobileDisclaimer />
         <ReactTooltip
-          id={'searchHighlightInfo'}
+          id="searchHighlightInfo"
           type="light"
           effect="float"
           delayHide={0}
           delayShow={500}
           scrollHide={true}
-          getContent={content => content}
+        />
+        <ReactTooltip
+          id="tooltip"
+          type="light"
+          effect="float"
+          scrollHide={true}
         />
       </Layout>
       <LoadingSpinner loading={!initialized} />

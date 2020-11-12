@@ -1,0 +1,31 @@
+@import '../../assets/styles/vars.scss';
+@media screen and (min-width: 813px) {
+  .mobile {
+    display: none;
+  }
+}
+@media #{$phone} {
+  .largeFlag,
+  .home,
+  .container,
+  .browse,
+  .search,
+  .bookmarks,
+  .contact {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+    align-items: center;
+    padding: 10%;
+    min-height: calc(100vh - 100px - 150px);
+    .disclaimer {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      text-align: center;
+    }
+    &.shiftDown {
+      margin-top: 100px;
+    }
+  }
+}
