@@ -1,13 +1,105 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
+
 orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+  aws-cli: circleci/aws-cli@0.1.13
+
+jobs:
+  deploy-prod:
+    working_directory: ~/repo
+
+    docker:
+      - image: cimg/node:14.4
+
+    steps:
+      - checkout
+
+      - run:
+          name: Installing Deployment Dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get -y install python3-pip python3-dev g++ build-essential
+            pip3 install --upgrade pip
+            sudo apt-get remove python-pip
+            pip3 install --upgrade setuptools pytz
+            pip3 install awsebcli==3.10.0
+            pip3 install boto3
+
+      - aws-cli/install
+      - aws-cli/configure
+
+      - run:
+          name: yarn install
+          command: yarn install --network-timeout 1000000
+
+      - run:
+          name: gatsby build
+          command: yarn build;
+
+      - run:
+          name: deploy
+          command: aws s3 sync public/ s3://schmidt-prod --delete --acl public-read
+
+      - run:
+          name: cloudfront invalidation
+          command: aws cloudfront create-invalidation \
+            --distribution-id E3KCF50FO8RLIK \
+            --paths "/*"
+
+  deploy-test:
+    working_directory: ~/repo
+
+    docker:
+      - image: cimg/node:14.4
+
+    steps:
+      - checkout
+
+      - run:
+          name: Installing Deployment Dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get -y install python3-pip python3-dev g++ build-essential
+            pip3 install --upgrade pip
+            sudo apt-get remove python-pip
+            pip3 install --upgrade setuptools pytz
+            pip3 install awsebcli==3.10.0
+            pip3 install boto3
+
+      - aws-cli/install
+      - aws-cli/configure
+
+      - run:
+          name: yarn install
+          command: yarn install --network-timeout 1000000
+
+      - run:
+          name: gatsby build
+          command: yarn build;
+
+      - run:
+          name: deploy
+          command: aws s3 sync public/ s3://schmidt-preview --delete --acl public-read
+
+      - run:
+          name: cloudfront invalidation
+          command: aws cloudfront create-invalidation \
+            --distribution-id E6J9FWVEWFDBG \
+            --paths "/*"
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  version: 2
+  build:
     jobs:
-      - welcome/run
+      - deploy-prod:
+          filters:
+            branches:
+              only:
+                - master
+
+      - deploy-test:
+          filters:
+            branches:
+              only:
+                - dev
