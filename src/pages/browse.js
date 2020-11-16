@@ -202,7 +202,8 @@ const Browse = ({ setPage }) => {
       item[0] !== undefined &&
       item[0] !== null &&
       item[0] !== 'Other' &&
-      item[0] !== 'Authoring organization is presumed to be the funder'
+      item[0] !== 'Authoring organization is presumed to be the funder' &&
+      item[0] !== 'Publishing organization is presumed to be the funder'
   )
   // sort list
   let listToDisplay
