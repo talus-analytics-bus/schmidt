@@ -62,7 +62,7 @@ const Browse = ({ setPage }) => {
 
   // section currently being browsed
   const [browseSection, setBrowseSection] = useState('key_topics')
-  const [browseList, setBrowseList] = useState([])
+  const [browseList, setBrowseList] = useState({ unique: 0, by_value: [] })
 
   // search text for filters
   const [filterSearchText, setFilterSearchText] = useState('')
@@ -195,15 +195,18 @@ const Browse = ({ setPage }) => {
 
   // FORMAT LIST OF RESULTS TO DISPLAY
   // filter out any unspecified, other, etc. items since those are weird categories for browsing
-  let rawList = browseList.filter(
-    item =>
-      item[0] !== 'Unspecified' &&
-      item[0] !== '' &&
-      item[0] !== undefined &&
-      item[0] !== null &&
-      item[0] !== 'Other' &&
-      item[0] !== 'Authoring organization is presumed to be the funder'
-  )
+  console.log('browseList')
+  console.log(browseList)
+  let rawList = browseList.by_value
+  // let rawList = browseList.by_value.filter(
+  //   item =>
+  //     item[0] !== 'Unspecified' &&
+  //     item[0] !== '' &&
+  //     item[0] !== undefined &&
+  //     item[0] !== null &&
+  //     item[0] !== 'Other' &&
+  //     item[0] !== 'Authoring organization is presumed to be the funder'
+  // )
   // sort list
   let listToDisplay
   if (sortBy === 'name') {
@@ -285,10 +288,24 @@ const Browse = ({ setPage }) => {
     })
 
     // get filter counts if not yet retrieved
-    const getFilterCounts = context.data.filterCounts === undefined
+    // NOTE: For "Browse" page, filter counts must always be retrieved because
+    // the `exclude` URL param. is used on this page but not on "Search" page
+    const getFilterCounts = true
     if (getFilterCounts) {
-      queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+      const filterCountsParams = new URLSearchParams()
+      const exclude = [
+        'Other',
+        'null',
+        'Unspecified',
+        'undefined',
+        'Publishing organization is presumed to be the funder',
+      ]
+      exclude.forEach(d => filterCountsParams.append('exclude', d))
+      queries.filterCountsQuery = axios.get(
+        `${API_URL}/get/filter_counts?${filterCountsParams.toString()}`
+      )
     }
+
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
     if (getFilterCounts) {
@@ -319,11 +336,6 @@ const Browse = ({ setPage }) => {
 
   // DEBUG
   const updateDataHistory = () => {
-    // // if the page has already initialized, then a search is being done
-    // setIsSearching(true)
-    //
-    // setSearchData(searchData)
-
     // update URL params to contain relevant options, unless this update was
     // triggered by a state pop in history
     if (!popstateTriggeredUpdate && initialized) {
@@ -331,11 +343,6 @@ const Browse = ({ setPage }) => {
     } else {
       setPopstateTriggeredUpdate(false)
     }
-
-    // // // set page to initialized so data retrieval from filters, etc. happens
-    // // if (!initialized) setInitialized(true)
-    // setIsSearching(false)
-    // setIsSearchingText(false)
   }
 
   // EFFECT HOOKS
@@ -352,10 +359,6 @@ const Browse = ({ setPage }) => {
         updateDataHistory()
       }
     }
-    // if (!popstateTriggeredUpdate && initialized) {
-    //   updateHistory({})
-    // }
-    // setIsSearching(showOverlay !== false)
   }, [showOverlay])
 
   // when update triggered by popstate, use those vars only
@@ -443,12 +446,12 @@ const Browse = ({ setPage }) => {
 
   // update list of items when different area is selected for browsing
   useEffect(() => {
-    setBrowseList([])
+    setBrowseList({ unique: 0, by_value: [] })
     setFilters({})
     if (context.data.filterCounts !== undefined) {
       setBrowseList(context.data.filterCounts[browseSection])
     } else {
-      setBrowseList([])
+      setBrowseList({ unique: 0, by_value: [] })
     }
     setClickedItem(null)
   }, [browseSection, initialized])
@@ -725,7 +728,7 @@ const Browse = ({ setPage }) => {
                 <p>
                   {filteredList.length} {resultText}
                   {filteredList.length !== 1 ? 's' : ''}
-                  {` (${numDocuments} total documents)`}
+                  {` (${browseList.unique} total documents)`}
                 </p>
                 {(browseSection === 'events' ||
                   browseSection === 'funders') && (

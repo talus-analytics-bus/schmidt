@@ -141,7 +141,7 @@ export const Options = ({
       } else {
         icon = iconNamesByField[field] || null
       }
-      const valueCounts = filterCounts[field]
+      const valueCounts = filterCounts[field].by_value
       const curFilterSectionData = {
         label: field, // TODO pretty,
         field,
@@ -168,7 +168,7 @@ export const Options = ({
         filterDefs[field].choices = curFilterSectionData.choices
         curFilterSectionData.key = filterDefs[field].field
         // add any "missing" values
-        baselineFilterCounts[field].forEach(([value, count, id]) => {
+        baselineFilterCounts[field].by_value.forEach(([value, count, id]) => {
           if (alreadySeenValues.includes(id || value)) return
           else {
             curFilterSectionData.choices.push({
@@ -370,7 +370,7 @@ export const Options = ({
         break
       case 'author.id':
         label = 'Author'
-        //translate author id into human readable author name
+        // translate author id into human readable author name
         if (filterSectionData !== null && filterSectionData !== undefined) {
           let authorObj = filterSectionData.filter(
             obj => obj.label === 'authors'

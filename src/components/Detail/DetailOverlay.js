@@ -63,7 +63,7 @@ const DetailOverlay = ({
   // STATE
   // key topics
   const initKeyTopics = context.data.filterCounts
-    ? context.data.filterCounts.key_topics.map(d => d[0])
+    ? context.data.filterCounts.key_topics.by_value.map(d => d[0])
     : []
   const [keyTopics, setKeyTopics] = useState(initKeyTopics)
 
@@ -228,13 +228,15 @@ const DetailOverlay = ({
       // if getting filter counts set them, or return them if already set
       if (getFilterCounts) {
         const filterCounts = results.filterCountsQuery.data.data
-        setKeyTopics(filterCounts.key_topics.map(d => d[0]) || [])
+        setKeyTopics(filterCounts.key_topics.by_value.map(d => d[0]) || [])
         newContextData = {
           ...newContextData,
           filterCounts,
         }
       } else {
-        setKeyTopics(context.data.filterCounts.key_topics.map(d => d[0]) || [])
+        setKeyTopics(
+          context.data.filterCounts.key_topics.by_value.map(d => d[0]) || []
+        )
       }
       context.setData(newContextData)
 
