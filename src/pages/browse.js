@@ -195,8 +195,6 @@ const Browse = ({ setPage }) => {
 
   // FORMAT LIST OF RESULTS TO DISPLAY
   // filter out any unspecified, other, etc. items since those are weird categories for browsing
-  console.log('browseList')
-  console.log(browseList)
   let rawList = browseList.by_value
   // let rawList = browseList.by_value.filter(
   //   item =>
