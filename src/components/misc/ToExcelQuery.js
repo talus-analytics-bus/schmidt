@@ -8,6 +8,7 @@ const ToExcelQuery = async ({
   is_desc = false,
   fromYear,
   toYear,
+  searchText,
 }) => {
   // prepare URL params
   const params = new URLSearchParams()
@@ -15,6 +16,7 @@ const ToExcelQuery = async ({
   // sorting params
   params.append('order_by', order_by)
   params.append('is_desc', is_desc)
+  if (searchText !== undefined) params.append('search_text', searchText)
 
   // use POST if filters provided, otherwise GET
   const method = filters === null ? 'GET' : 'POST'

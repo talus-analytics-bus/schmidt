@@ -99,29 +99,32 @@ export const Results = ({
                   data-for="searchHighlightInfo"
                   data-tip="Download an Excel file (.xlsx) with metadata for these results"
                 >
-                  <PrimaryButton
-                    {...{
-                      label: !isDownloading ? (
-                        'Download metadata'
-                      ) : (
-                        <div className={styles.downloading}>
-                          Downloading...
-                          <img src={loadingGif} alt="loading" />
-                        </div>
-                      ),
-                      isSecondary: true,
-                      iconName: !isDownloading ? 'get_app' : null,
-                      onClick: async () => {
-                        setIsDownloading(true)
-                        const response = await ToExcelQuery({
-                          filters,
-                          fromYear,
-                          toYear,
-                        })
-                        setIsDownloading(false)
-                      },
-                    }}
-                  />
+                  {searchData.total > 0 && (
+                    <PrimaryButton
+                      {...{
+                        label: !isDownloading ? (
+                          'Download metadata'
+                        ) : (
+                          <div className={styles.downloading}>
+                            Downloading...
+                            <img src={loadingGif} alt="loading" />
+                          </div>
+                        ),
+                        isSecondary: true,
+                        iconName: !isDownloading ? 'get_app' : null,
+                        onClick: async () => {
+                          setIsDownloading(true)
+                          const response = await ToExcelQuery({
+                            filters,
+                            fromYear,
+                            toYear,
+                            searchText,
+                          })
+                          setIsDownloading(false)
+                        },
+                      }}
+                    />
+                  )}
                 </div>
               </p>
             )}
