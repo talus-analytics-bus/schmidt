@@ -49,10 +49,24 @@ const CheckboxSet = ({
   // filter choices based on any search text
   let filteredChoices = choices.filter(item => {
     if (item.label !== null) {
-      return item.label
-        .toString()
-        .toLowerCase()
-        .includes(searchText.toLowerCase())
+      if (item.acronym !== undefined) {
+        // for publishing org
+        return (
+          item.label
+            .toString()
+            .toLowerCase()
+            .includes(searchText.toLowerCase()) ||
+          item.acronym
+            .toString()
+            .toLowerCase()
+            .includes(searchText.toLowerCase())
+        )
+      } else {
+        return item.label
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+      }
     } else if (item.custom) {
       return true
     } else {

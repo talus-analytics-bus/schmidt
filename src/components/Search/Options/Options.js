@@ -149,15 +149,27 @@ export const Options = ({
         iconName: icon,
       }
       const alreadySeenValues = []
-      valueCounts.forEach(([value, count, id]) => {
-        alreadySeenValues.push(id || value)
-        curFilterSectionData.choices.push({
-          value: id || value,
-          count,
-          label: value,
+      if (field == 'authors') {
+        // allow for acronym data attached to publishing org
+        valueCounts.forEach(([value, acronym, count, id]) => {
+          alreadySeenValues.push(id || value)
+          curFilterSectionData.choices.push({
+            acronym,
+            value: id || value,
+            count,
+            label: value,
+          })
         })
-      })
-
+      } else {
+        valueCounts.forEach(([value, count, id]) => {
+          alreadySeenValues.push(id || value)
+          curFilterSectionData.choices.push({
+            value: id || value,
+            count,
+            label: value,
+          })
+        })
+      }
       // if the filter has a defintion specified, update the chocies in that
       // definition object
       const filterHasDefinition = filterDefs[field] !== undefined
