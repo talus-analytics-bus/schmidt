@@ -77,7 +77,7 @@ jobs:
 
       - run:
           name: gatsby build
-          command: yarn build;
+          command: yarn build:preview;
 
       - run:
           name: deploy
