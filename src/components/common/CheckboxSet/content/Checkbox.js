@@ -39,7 +39,7 @@ const Checkbox = ({
   const checkboxJsx = !hide ? (
     <div
       className={classNames(styles.checkbox, {
-        [styles.gray]: count === 0,
+        // [styles.gray]: count === 0,
         [styles.hide]: !showZeros && count !== null && count === 0,
       })}
     >
@@ -66,7 +66,10 @@ const Checkbox = ({
           />
           <div className={styles.label}>
             {label}
-            {count !== null && count > 0 && <> ({comma(count)})</>}
+            {count !== null && <> ({comma(count)})</>}
+            {
+              // count !== null && count > 0 && <> ({comma(count)})</>
+            }
             {
               // count !== null && curChecked === true && <> ({comma(count)})</>
             }
