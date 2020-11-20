@@ -73,11 +73,13 @@ const CheckboxSet = ({
       return false
     }
   })
+
   const checkboxes = filteredChoices.map(
     ({ label, value, count = null, custom }) => (
       <Checkbox
         {...{
           label,
+          key: label + '_' + value.toString(),
           disabled: props.disabled,
           value,
           callback: v => {

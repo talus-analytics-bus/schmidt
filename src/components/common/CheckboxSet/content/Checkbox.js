@@ -38,6 +38,7 @@ const Checkbox = ({
   const hide = !showZeros && count !== null && count === 0
   const checkboxJsx = !hide ? (
     <div
+      key={label + '_' + value.toString()}
       className={classNames(styles.checkbox, {
         // [styles.gray]: count === 0,
         [styles.hide]: !showZeros && count !== null && count === 0,

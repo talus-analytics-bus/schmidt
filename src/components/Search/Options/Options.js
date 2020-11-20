@@ -152,19 +152,21 @@ export const Options = ({
       if (field == 'authors') {
         // allow for acronym data attached to publishing org
         valueCounts.forEach(([value, acronym, count, id]) => {
-          alreadySeenValues.push(id || value)
+          const valueToPush = id === undefined ? value : id
+          alreadySeenValues.push(valueToPush)
           curFilterSectionData.choices.push({
             acronym,
-            value: id || value,
+            value: valueToPush,
             count,
             label: value,
           })
         })
       } else {
         valueCounts.forEach(([value, count, id]) => {
-          alreadySeenValues.push(id || value)
+          const valueToPush = id === undefined ? value : id
+          alreadySeenValues.push(valueToPush)
           curFilterSectionData.choices.push({
-            value: id || value,
+            value: valueToPush,
             count,
             label: value,
           })
@@ -179,17 +181,38 @@ export const Options = ({
 
         filterDefs[field].choices = curFilterSectionData.choices
         curFilterSectionData.key = filterDefs[field].field
-        // add any "missing" values
-        baselineFilterCounts[field].by_value.forEach(([value, count, id]) => {
-          if (alreadySeenValues.includes(id || value)) return
-          else {
-            curFilterSectionData.choices.push({
-              value: id || value,
-              count: 0,
-              label: value,
-            })
-          }
-        })
+        if (field !== 'authors') {
+          // add any "missing" values
+          baselineFilterCounts[field].by_value.forEach(([value, count, id]) => {
+            const valueToPush = id === undefined ? value : id
+
+            if (alreadySeenValues.includes(valueToPush)) return
+            else {
+              curFilterSectionData.choices.push({
+                value: valueToPush,
+                count: 0,
+                label: value,
+              })
+            }
+          })
+        } else {
+          // add any "missing" values
+          baselineFilterCounts[field].by_value.forEach(
+            ([value, acronym, count, id]) => {
+              const valueToPush = id === undefined ? value : id
+
+              if (alreadySeenValues.includes(valueToPush)) return
+              else {
+                curFilterSectionData.choices.push({
+                  value: valueToPush,
+                  acronym,
+                  count: 0,
+                  label: value,
+                })
+              }
+            }
+          )
+        }
 
         const isCustom = filterDefs[field].custom === true
         if (isCustom) {
