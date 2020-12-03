@@ -5,7 +5,13 @@ import axios from 'axios'
 
 // local components
 import SEO from '../seo'
-import { Card, CardList, InfoTooltip, Paginator } from '../../components/common'
+import {
+  Card,
+  CardList,
+  InfoTooltip,
+  Paginator,
+  PrimaryButton,
+} from '../../components/common'
 import Panel from './content/Panel'
 import { appContext } from '../../components/misc/ContextProvider'
 
@@ -397,11 +403,24 @@ const DetailOverlay = ({
                 <div className={styles.recordType}>{recordType}</div>
               )}
               {floating && (
-                <div
-                  onClick={dismissFloatingOverlay}
-                  className={styles.closeButton}
-                >
-                  <i className={'material-icons'}>close</i>
+                <div className={styles.bandOptions}>
+                  <PrimaryButton
+                    {...{
+                      label: 'Open in new tab',
+                      iconName: 'launch',
+                      url: `/detail/?id=${id}`,
+                      urlIsExternal: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                      },
+                    }}
+                  />
+                  <div
+                    onClick={dismissFloatingOverlay}
+                    className={styles.closeButton}
+                  >
+                    <i className={'material-icons'}>close</i>
+                  </div>
                 </div>
               )}
             </div>

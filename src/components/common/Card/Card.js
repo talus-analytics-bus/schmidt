@@ -564,7 +564,7 @@ export const Card = ({
                   />
                 </div>
               )}
-              {(!detail || floating) && (
+              {!detail && !floating && (
                 <PrimaryButton
                   {...{
                     label: 'Open in new tab',

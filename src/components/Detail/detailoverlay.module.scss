@@ -23,6 +23,15 @@
       .band {
         display: flex;
         border-radius: $big-radius $big-radius 0px 0px;
+        .bandOptions {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+          .closeButton {
+            margin-left: 12px;
+          }
+        }
       }
       .relatedItems {
         border-radius: 0px 0px $big-radius $big-radius;
