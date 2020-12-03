@@ -285,11 +285,16 @@
     .highlighted {
       // text-decoration: underline;
       // text-decoration-color: underline;
-      box-shadow: inset 0 -10px 0 $highlighted;
+      box-shadow: inset 0 -5px 0 $highlighted;
       &.small {
-        box-shadow: inset 0 -5px 0 $highlighted;
+        box-shadow: inset 0 -3px 0 $highlighted;
       }
       color: $dark-blue;
+    }
+    .description {
+      .highlighted {
+        box-shadow: inset 0 -3px 0 $highlighted;
+      }
     }
     .link {
       color: $blue;

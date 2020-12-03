@@ -498,7 +498,7 @@ export const Card = ({
                 </div>
               )
             }
-            {!detail && !related && tagSnippets.length > 0 && (
+            {!detail && !related && !browse && tagSnippets.length > 0 && (
               <div
                 className={classNames(styles.tagSnippets, {
                   [styles.topBorder]: description !== '',
