@@ -491,9 +491,9 @@ export const Card = ({
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
-                {!detail && (
-                  <div className={styles.descripLabel}>Description:</div>
-                )}
+                {/* {!detail && ( */}
+                <div className={styles.descripLabel}>Description:</div>
+                {/* )} */}
                 <div className={styles.description}>{card.description}</div>
               </div>
             )}
