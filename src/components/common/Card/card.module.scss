@@ -12,6 +12,7 @@
     &:not(.detail) {
       &:hover {
         // border-color: $dark-blue;
+        background-color: darken($light-gray, 5%);
         @include boxShadowStrong();
         cursor: pointer;
       }
