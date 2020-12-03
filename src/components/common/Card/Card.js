@@ -275,6 +275,13 @@ export const Card = ({
         ))
         .map(asBulletDelimitedList)
 
+      // for matching publishing org type, need to grab special blue icon
+      let iconName
+      if (key == 'author_types') {
+        iconName = 'outbreak_events_blue'
+      } else {
+        iconName = iconNamesByField[key]
+      }
       // if showing, collate info JSX, unless special
       if (
         card.show[filterKey] &&
@@ -283,7 +290,7 @@ export const Card = ({
       ) {
         tagSnippets.push(
           <div className={styles.tagSnippet}>
-            {getIconByName({ iconName: iconNamesByField[key], styles })}
+            {getIconByName({ iconName, styles })}
             <div className={styles.iconSnippet}>{card[filterKey]}</div>
           </div>
         )
@@ -414,7 +421,7 @@ export const Card = ({
             <div className={styles.detailsAndDownloads}>
               <div className={styles.details}>
                 <div className={styles.authOrg}>
-                  <i className={'material-icons'}>person</i>
+                  <i className={'material-icons'}>apartment</i>
                   <div className={styles.authOrgList}>
                     {authors.length > 0 && card['author.id']}
                     {authors.length === 0 && (

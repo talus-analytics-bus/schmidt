@@ -105,7 +105,7 @@
       flex-flow: column;
       &:first-child {
         > .title:not(.noData) span {
-          color: $light-blue;
+          color: $blue;
           cursor: pointer;
           &:hover {
             text-decoration: underline;
@@ -128,7 +128,7 @@
         flex-flow: column;
         @include spaceItemsVert(10px);
         .suggestion {
-          color: $light-blue;
+          color: $blue;
           margin-left: calc(19px + 20px);
           cursor: pointer;
           &:hover {

@@ -117,6 +117,7 @@ export const SearchBar = ({
         entityName = getInitCap(entityName)
         let iconName, nameField, filterValueField, filterKey
         if (entityName === 'Author') {
+          entityName = 'Publishing organization' //account for user-facing language change from 'author' to 'publishing org'
           iconName = 'authors'
           nameField = 'authoring_organization'
           filterValueField = 'id'
