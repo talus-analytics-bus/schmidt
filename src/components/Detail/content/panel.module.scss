@@ -70,6 +70,7 @@
   }
   .content {
     @include spaceItemsVert(20px);
+    color: $blue;
   }
   &.expandable {
     padding: 15px;
