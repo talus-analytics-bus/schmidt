@@ -43,6 +43,12 @@
       flex-flow: column;
       align-items: center;
       @include spaceItemsVert(10px);
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include spaceItemsVert(10px);
+      }
     }
 
     // let details and actions column use full width
@@ -94,7 +100,7 @@
     &.detail {
       padding: 20px;
       grid-template-columns: max-content $letter-width-lg auto;
-      // border: $orange 3px solid;
+      //border: $orange 3px solid;
       border-bottom-width: 0px;
       .resultNumber {
         display: none;

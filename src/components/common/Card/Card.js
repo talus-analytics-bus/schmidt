@@ -359,18 +359,34 @@ export const Card = ({
           {
             // Show preview button under thumbnail on details page
             detail && files.length > 0 && (
-              <PrimaryButton
-                {...{
-                  label: 'Preview',
-                  iconName: 'preview',
-                  isSecondary: false,
-                  onClick: e => {
-                    e.stopPropagation()
-                    e.preventDefault()
-                    setShowPreview(true)
-                  },
-                }}
-              />
+              <div className={styles.buttons}>
+                <PrimaryButton
+                  {...{
+                    label: 'Preview',
+                    iconName: 'preview',
+                    isSecondary: true,
+                    onClick: e => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      setShowPreview(true)
+                    },
+                  }}
+                />
+                {files.map(({ id, num_bytes, filename }) => (
+                  <PrimaryButton
+                    {...{
+                      label: `Download (${bytesToMegabytes(num_bytes)})`,
+                      url: `${API_URL}/get/file/${title.replace(
+                        /\?/g,
+                        ''
+                      )}?id=${id}`,
+                      urlIsExternal: true,
+                      iconName: 'get_app',
+                      isSecondary: false,
+                    }}
+                  />
+                ))}
+              </div>
             )
           }
           {
@@ -431,17 +447,6 @@ export const Card = ({
                 </div>
                 <div className={styles.date}>
                   <i className={'material-icons'}>event</i>
-                  {
-                    // date !== null && (
-                    //   <span
-                    //     className={classNames(styles.small, {
-                    //       [styles.highlighted]: filters.years !== undefined,
-                    //     })}
-                    //   >
-                    //     {formatDate(date)}
-                    //   </span>
-                    // )
-                  }
                   {date !== null && (
                     <span className={classNames(styles.small)}>
                       {formatDate(date)}
@@ -450,7 +455,7 @@ export const Card = ({
                   {date === null && <span>Date unavailable</span>}
                 </div>
               </div>
-              {detail && files.length > 0 && (
+              {/* {detail && files.length > 0 && (
                 <div className={styles.downloads}>
                   <Panel
                     {...{
@@ -484,10 +489,9 @@ export const Card = ({
                         </div>
                       </div>
                     ))}
-                    {files.length === 0 && <div>None</div>}
                   </Panel>
                 </div>
-              )}
+              )} */}
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
