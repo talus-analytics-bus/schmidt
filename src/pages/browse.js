@@ -172,8 +172,9 @@ const Browse = ({ setPage }) => {
 
   // sorting, by number of results
   const resultsSort = (a, b) => {
-    a = a[1]
-    b = b[1]
+    const idx = browseSection === 'authors' ? 2 : 1
+    a = a[idx]
+    b = b[idx]
     let result
     if (a > b) result = 1
     if (a === b) result = 0
@@ -535,7 +536,7 @@ const Browse = ({ setPage }) => {
   // generate items in list
   const Item = ({ content, children }) => {
     const name = content[0]
-    const count = content[1]
+    const count = browseSection !== 'authors' ? content[1] : content[2]
     return (
       <div
         className={classNames(styles.item, {
@@ -551,7 +552,8 @@ const Browse = ({ setPage }) => {
             let id = null
             const arr = []
             if (browseSection === 'authors') {
-              id = content[2]
+              id = content[3]
+              debugger
             }
             let newFilters = {}
             switch (browseSection) {
