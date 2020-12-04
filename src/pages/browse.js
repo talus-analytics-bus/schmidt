@@ -553,7 +553,6 @@ const Browse = ({ setPage }) => {
             const arr = []
             if (browseSection === 'authors') {
               id = content[3]
-              debugger
             }
             let newFilters = {}
             switch (browseSection) {
