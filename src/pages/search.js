@@ -193,7 +193,17 @@ const Search = ({ setPage }) => {
     // get filter counts if not yet retrieved
     const getFilterCounts = context.data.filterCounts === undefined
     if (getFilterCounts) {
-      queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+      let urlParams = ''
+      if (
+        searchText !== null &&
+        searchText !== undefined &&
+        searchText.trim() !== ''
+      ) {
+        urlParams = '?search_text=' + searchText
+      }
+      queries.filterCountsQuery = axios.get(
+        `${API_URL}/get/filter_counts${urlParams}`
+      )
     }
     const results = await execute({ queries })
     setSearchData(results.searchQuery.data)
