@@ -149,7 +149,13 @@ export const Card = ({
     ],
     ['funders', funders, 'name', 'funder.name'],
     ['events', events, 'name', 'event.name', 'name'],
-    ['key_topics', key_topics],
+    [
+      'key_topics',
+      key_topics.map(d => {
+        return { name: d, id: d }
+      }),
+      'name',
+    ],
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
   ]
 
@@ -184,18 +190,24 @@ export const Card = ({
       const linkListEntries = variable
         .map(d => {
           const filterValues = filters[filterKey]
+
           const matchingTagExists =
             filterValues !== undefined
               ? filterValues.find(
                   fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
                 )
               : undefined
+
           const matchingTag = matchingTagExists ? getVal(d) : undefined
 
           const matchingSearchSnippet =
             snippets[key] !== undefined
-              ? snippets[key].find(dd => dd.id === d.id)
+              ? snippets[key].find(
+                  dd =>
+                    dd.id === d.id || dd.id === d || dd.id === d[linkTextField]
+                )
               : undefined
+          console.log(d)
 
           const matchingSnippet =
             matchingTag ||
@@ -210,6 +222,8 @@ export const Card = ({
             alreadySeenList.push(getVal(d))
 
             if (matchingSnippet) {
+              console.log(matchingSnippet)
+
               card.show[filterKey] = true
               return {
                 onClick: e =>
