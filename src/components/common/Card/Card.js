@@ -39,6 +39,7 @@ export const Card = ({
   description,
   date,
   authors,
+  sub_organizations,
   funders,
   key_topics,
   events,
@@ -436,6 +437,12 @@ export const Card = ({
 
             <div className={styles.detailsAndDownloads}>
               <div className={styles.details}>
+                {detail && sub_organizations !== '' && (
+                  <div className={styles.authOrg}>
+                    <i className={'material-icons'}>person</i>
+                    <div className={styles.authorList}>{sub_organizations}</div>
+                  </div>
+                )}
                 <div className={styles.authOrg}>
                   <i className={'material-icons'}>apartment</i>
                   <div className={styles.authOrgList}>
