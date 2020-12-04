@@ -11,7 +11,8 @@
     font-size: 1rem;
     &:not(.detail) {
       &:hover {
-        border-color: $dark-blue;
+        // border-color: $dark-blue;
+        background-color: darken($light-gray, 4%);
         @include boxShadowStrong();
         cursor: pointer;
       }
@@ -22,10 +23,13 @@
     &.detail,
     &.related {
       background-color: white;
+      &:hover {
+        background-color: white;
+      }
     }
-
-    $max-height: 150px;
-    $max-height-lg: 300px;
+    $frame: 15px;
+    $max-height: 180px;
+    $max-height-lg: 330px;
 
     // if detail page card, allow larger sizing
     $letter-width: $max-height/1.29;
@@ -33,6 +37,7 @@
 
     display: grid;
     grid-template-columns: max-content $letter-width auto;
+    column-gap: 20px;
     @include spaceItemsHoriz(20px);
 
     // make thumbnail col content centered and spaced
@@ -41,6 +46,12 @@
       flex-flow: column;
       align-items: center;
       @include spaceItemsVert(10px);
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include spaceItemsVert(10px);
+      }
     }
 
     // let details and actions column use full width
@@ -49,28 +60,34 @@
       height: 100%;
     }
 
+    // $thumbBorder: 10px solid white;
+    $thumbBorder: 1px solid $orange;
     // non-detail thumbnails: normal size
     .thumbnail {
       width: $letter-width;
       display: flex;
       justify-content: center;
       img {
-        border: 1px solid $blue;
+        border: $thumbBorder;
+        padding: $frame;
         max-height: $max-height;
         max-width: $letter-width;
+        background-color: white;
       }
       &.placeholder {
         position: relative;
         // placeholder thumbnail shown if no file is available
-        border: 1px solid $blue;
-        height: $max-height; // like a letter page
-        width: $letter-width;
+        border: $thumbBorder;
+        padding: $frame;
+        height: $max-height + 30px; // like a letter page
+        width: $letter-width + 30px;
         background-color: white;
         // format text in placeholder rectangle
         text-align: center;
         align-items: center;
         color: $light-blue;
         img {
+          padding: 0px;
           border: none;
           position: absolute;
           top: 5%;
@@ -86,7 +103,7 @@
     &.detail {
       padding: 20px;
       grid-template-columns: max-content $letter-width-lg auto;
-      border: $orange 3px solid;
+      //border: $orange 3px solid;
       border-bottom-width: 0px;
       .resultNumber {
         display: none;
@@ -102,7 +119,6 @@
         img {
           max-height: $max-height-lg;
           max-width: $letter-width-lg;
-          border-color: $blue;
         }
         &.placeholder {
           height: $max-height-lg; // like a letter page
@@ -118,14 +134,14 @@
             .headerAndTitle {
               .title {
                 .text {
-                  color: $orange;
+                  // color: $orange;
                 }
               }
             }
           }
           .detailsAndDownloads {
             display: grid;
-            grid-template-columns: 1fr 40%;
+            grid-template-columns: 1fr;
             border-color: $blue;
             .downloads {
               border-color: $blue;
@@ -139,6 +155,7 @@
       margin-right: 10px;
       font-weight: bold;
       font-size: 1.5rem;
+      color: $orange;
     }
     .contentCol {
       .main {
@@ -171,7 +188,7 @@
             }
             .title {
               .text {
-                max-width: 85%;
+                max-width: 95%;
                 margin-top: 10px;
                 font-size: 1.6rem;
                 line-height: 1.45;
@@ -219,6 +236,9 @@
             .date {
               font-size: 1rem;
             }
+            .authorList {
+              font-style: italic;
+            }
           }
         }
 
@@ -244,10 +264,10 @@
           color: $blue;
           line-height: 1.5;
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           .descripLabel {
             font-weight: 500;
-            margin-right: 10px;
+            margin-bottom: 2px;
           }
         }
 
@@ -285,11 +305,16 @@
     .highlighted {
       // text-decoration: underline;
       // text-decoration-color: underline;
-      box-shadow: inset 0 -10px 0 $highlighted;
+      box-shadow: inset 0 -5px 0 $highlighted;
       &.small {
-        box-shadow: inset 0 -5px 0 $highlighted;
+        box-shadow: inset 0 -3px 0 $highlighted;
       }
       color: $dark-blue;
+    }
+    .description {
+      .highlighted {
+        box-shadow: inset 0 -3px 0 $highlighted;
+      }
     }
     .link {
       color: $blue;

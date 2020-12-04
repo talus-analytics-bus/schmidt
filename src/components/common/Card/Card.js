@@ -39,6 +39,7 @@ export const Card = ({
   description,
   date,
   authors,
+  sub_organizations,
   funders,
   key_topics,
   events,
@@ -275,6 +276,13 @@ export const Card = ({
         ))
         .map(asBulletDelimitedList)
 
+      // for matching publishing org type, need to grab special blue icon
+      let iconName
+      if (key == 'author_types') {
+        iconName = 'outbreak_events_blue'
+      } else {
+        iconName = iconNamesByField[key]
+      }
       // if showing, collate info JSX, unless special
       if (
         card.show[filterKey] &&
@@ -283,7 +291,7 @@ export const Card = ({
       ) {
         tagSnippets.push(
           <div className={styles.tagSnippet}>
-            {getIconByName({ iconName: iconNamesByField[key], styles })}
+            {getIconByName({ iconName, styles })}
             <div className={styles.iconSnippet}>{card[filterKey]}</div>
           </div>
         )
@@ -352,18 +360,34 @@ export const Card = ({
           {
             // Show preview button under thumbnail on details page
             detail && files.length > 0 && (
-              <PrimaryButton
-                {...{
-                  label: 'Preview',
-                  iconName: 'preview',
-                  isSecondary: false,
-                  onClick: e => {
-                    e.stopPropagation()
-                    e.preventDefault()
-                    setShowPreview(true)
-                  },
-                }}
-              />
+              <div className={styles.buttons}>
+                <PrimaryButton
+                  {...{
+                    label: 'Preview',
+                    iconName: 'preview',
+                    isSecondary: true,
+                    onClick: e => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      setShowPreview(true)
+                    },
+                  }}
+                />
+                {files.map(({ id, num_bytes, filename }) => (
+                  <PrimaryButton
+                    {...{
+                      label: `Download (${bytesToMegabytes(num_bytes)})`,
+                      url: `${API_URL}/get/file/${title.replace(
+                        /\?/g,
+                        ''
+                      )}?id=${id}`,
+                      urlIsExternal: true,
+                      iconName: 'get_app',
+                      isSecondary: false,
+                    }}
+                  />
+                ))}
+              </div>
             )
           }
           {
@@ -413,8 +437,14 @@ export const Card = ({
 
             <div className={styles.detailsAndDownloads}>
               <div className={styles.details}>
+                {detail && sub_organizations !== '' && (
+                  <div className={styles.authOrg}>
+                    <i className={'material-icons'}>person</i>
+                    <div className={styles.authorList}>{sub_organizations}</div>
+                  </div>
+                )}
                 <div className={styles.authOrg}>
-                  <i className={'material-icons'}>person</i>
+                  <i className={'material-icons'}>apartment</i>
                   <div className={styles.authOrgList}>
                     {authors.length > 0 && card['author.id']}
                     {authors.length === 0 && (
@@ -424,17 +454,6 @@ export const Card = ({
                 </div>
                 <div className={styles.date}>
                   <i className={'material-icons'}>event</i>
-                  {
-                    // date !== null && (
-                    //   <span
-                    //     className={classNames(styles.small, {
-                    //       [styles.highlighted]: filters.years !== undefined,
-                    //     })}
-                    //   >
-                    //     {formatDate(date)}
-                    //   </span>
-                    // )
-                  }
                   {date !== null && (
                     <span className={classNames(styles.small)}>
                       {formatDate(date)}
@@ -443,7 +462,7 @@ export const Card = ({
                   {date === null && <span>Date unavailable</span>}
                 </div>
               </div>
-              {detail && files.length > 0 && (
+              {/* {detail && files.length > 0 && (
                 <div className={styles.downloads}>
                   <Panel
                     {...{
@@ -477,16 +496,15 @@ export const Card = ({
                         </div>
                       </div>
                     ))}
-                    {files.length === 0 && <div>None</div>}
                   </Panel>
                 </div>
-              )}
+              )} */}
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
-                {!detail && (
-                  <div className={styles.descripLabel}>Description:</div>
-                )}
+                {/* {!detail && ( */}
+                <div className={styles.descripLabel}>Description:</div>
+                {/* )} */}
                 <div className={styles.description}>{card.description}</div>
               </div>
             )}
@@ -498,7 +516,7 @@ export const Card = ({
                 </div>
               )
             }
-            {!detail && !related && tagSnippets.length > 0 && (
+            {!detail && !related && !browse && tagSnippets.length > 0 && (
               <div
                 className={classNames(styles.tagSnippets, {
                   [styles.topBorder]: description !== '',
@@ -557,7 +575,7 @@ export const Card = ({
                   />
                 </div>
               )}
-              {(!detail || floating) && (
+              {!detail && !floating && (
                 <PrimaryButton
                   {...{
                     label: 'Open in new tab',

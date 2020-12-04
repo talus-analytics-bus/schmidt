@@ -17,6 +17,9 @@ export const Panel = ({
   expandable = false,
 }) => {
   // CONSTANTS
+  if (iconName === 'caution') {
+    iconName = 'caution_orange'
+  }
   const icon = getIconByName({ iconName, styles })
   const [expanded, setExpanded] = useState(true)
 

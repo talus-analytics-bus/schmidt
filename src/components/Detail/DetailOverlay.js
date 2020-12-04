@@ -5,7 +5,13 @@ import axios from 'axios'
 
 // local components
 import SEO from '../seo'
-import { Card, CardList, InfoTooltip, Paginator } from '../../components/common'
+import {
+  Card,
+  CardList,
+  InfoTooltip,
+  Paginator,
+  PrimaryButton,
+} from '../../components/common'
 import Panel from './content/Panel'
 import { appContext } from '../../components/misc/ContextProvider'
 
@@ -360,7 +366,7 @@ const DetailOverlay = ({
             [styles.notAvail]: status === null,
           })}
         >
-          {message}{' '}
+          <span>{message}</span>
           <InfoTooltip
             text={
               'This field captures whether the publishing organization(s) have governance authority over the topic, recommendations, or other content of the product developed. For example, the US Congress has governance over US biosecurity policy but a US think tank does not. Intergovernmental organizations will have governance authority that depends on the context and topic of the product. '
@@ -397,11 +403,24 @@ const DetailOverlay = ({
                 <div className={styles.recordType}>{recordType}</div>
               )}
               {floating && (
-                <div
-                  onClick={dismissFloatingOverlay}
-                  className={styles.closeButton}
-                >
-                  <i className={'material-icons'}>close</i>
+                <div className={styles.bandOptions}>
+                  <PrimaryButton
+                    {...{
+                      label: 'Open in new tab',
+                      iconName: 'launch',
+                      url: `/detail/?id=${id}`,
+                      urlIsExternal: true,
+                      onClick: e => {
+                        e.stopPropagation()
+                      },
+                    }}
+                  />
+                  <div
+                    onClick={dismissFloatingOverlay}
+                    className={styles.closeButton}
+                  >
+                    <i className={'material-icons'}>close</i>
+                  </div>
                 </div>
               )}
             </div>
