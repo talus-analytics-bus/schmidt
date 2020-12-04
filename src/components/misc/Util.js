@@ -8,6 +8,7 @@ import { navigate } from 'gatsby'
 // project-specific assets - icons
 // network blob
 import events from '../../assets/icons/events.svg'
+import events_blue from '../../assets/icons/events_blue.svg'
 import events_disabled from '../../assets/icons/events_disabled.svg'
 
 // speech bubble
@@ -1204,8 +1205,9 @@ export const iconNamesByField = {
   key_topics: 'topic',
   // key_topics: 'speech',
   // key_topics: 'speech_orange',
-  authors: 'person',
-  author_types: 'apartment',
+  //authors: 'person',
+  authors: 'apartment', // this is actually the icon for publishing org
+  author_types: 'outbreak_events',
   years: 'event',
   funders: 'monetization_on',
   types_of_record: 'insert_drive_file',
@@ -1227,6 +1229,7 @@ export const getIconByName = ({
   const specialIcons = {
     // network blob
     outbreak_events: events,
+    outbreak_events_blue: events_blue,
     outbreak_events_disabled: events_disabled,
 
     // speech bubble

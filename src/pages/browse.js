@@ -508,6 +508,7 @@ const Browse = ({ setPage }) => {
               <img
                 className={classNames(styles.tooltip, {
                   [styles.left]: type === 'authors',
+                  [styles.manualFix]: type === 'key_topics',
                 })}
                 src={info}
                 alt="info icon"

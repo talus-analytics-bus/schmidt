@@ -404,7 +404,7 @@ export const Options = ({
         label = 'Document type'
         break
       case 'author.id':
-        label = 'Author'
+        label = 'Publishing organization'
         // translate author id into human readable author name
         if (filterSectionData !== null && filterSectionData !== undefined) {
           let authorObj = filterSectionData.filter(
@@ -422,7 +422,7 @@ export const Options = ({
         }
         break
       case 'author.type_of_authoring_organization':
-        label = 'Author type'
+        label = 'Publishing org. type'
         break
       case 'key_topics':
         label = 'Topic'

@@ -23,6 +23,15 @@
       .band {
         display: flex;
         border-radius: $big-radius $big-radius 0px 0px;
+        .bandOptions {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+          .closeButton {
+            margin-left: 12px;
+          }
+        }
       }
       .relatedItems {
         border-radius: 0px 0px $big-radius $big-radius;
@@ -59,7 +68,7 @@
     font-size: 1rem;
 
     .link {
-      color: $light-blue;
+      // color: $light-blue;
       cursor: pointer;
 
       &:hover {
@@ -120,8 +129,9 @@
       .sideBar {
         // @include spaceItemsVert(10px);
         padding: 20px;
+        padding-top: 10px;
         background-color: white;
-        border: $orange 3px solid;
+        // border: $orange 3px solid;
         border-top-width: 0px;
         &.wide {
         }
@@ -135,7 +145,7 @@
             align-items: center;
             color: #898989;
             span {
-              color: unset;
+              color: $blue;
             }
             cursor: pointer;
             &:hover {
@@ -163,7 +173,7 @@
               font-weight: 600;
               font-size: 1.2rem;
               margin-bottom: 20px;
-              color: $light-blue;
+              color: $blue;
               cursor: pointer;
               &:hover {
                 text-decoration: underline;
@@ -182,7 +192,7 @@
                   align-items: center;
                   img {
                     height: 20px;
-                    margin-right: 3px;
+                    margin-right: 5px;
                   }
                 }
               }
@@ -190,11 +200,8 @@
           }
         }
         .govAuth {
-          border: 1px solid $blue;
-          padding: 10px;
-          &.yes {
-            // background-color: #dae0f1;
-            font-weight: 600;
+          span {
+            font-style: italic;
           }
           &.notAvail {
             border-color: $light-blue;
