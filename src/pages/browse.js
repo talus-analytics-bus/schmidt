@@ -196,19 +196,7 @@ const Browse = ({ setPage }) => {
 
   // FORMAT LIST OF RESULTS TO DISPLAY
   let rawList = browseList.by_value
-  console.log(rawList)
-  // manually hide blank row under "Publishing org type" - there shouldn't be any but currently are in Airtable
-  rawList = rawList.filter(item => item[0] !== '')
-  // filter out any unspecified, other, etc. items since those are weird categories for browsing
-  // let rawList = browseList.by_value.filter(
-  //   item =>
-  //     item[0] !== 'Unspecified' &&
-  //     item[0] !== '' &&
-  //     item[0] !== undefined &&
-  //     item[0] !== null &&
-  //     item[0] !== 'Other' &&
-  //     item[0] !== 'Authoring organization is presumed to be the funder'
-  // )
+
   // sort list
   let listToDisplay
   if (sortBy === 'name') {
@@ -300,6 +288,9 @@ const Browse = ({ setPage }) => {
         'Unspecified',
         'undefined',
         'Publishing organization is presumed to be the funder',
+        '',
+        'Funder not specified',
+        'None',
       ]
       exclude.forEach(d => filterCountsParams.append('exclude', d))
       queries.filterCountsQuery = axios.get(
