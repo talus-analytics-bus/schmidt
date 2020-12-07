@@ -195,8 +195,11 @@ const Browse = ({ setPage }) => {
   }
 
   // FORMAT LIST OF RESULTS TO DISPLAY
-  // filter out any unspecified, other, etc. items since those are weird categories for browsing
   let rawList = browseList.by_value
+  console.log(rawList)
+  // manually hide blank row under "Publishing org type" - there shouldn't be any but currently are in Airtable
+  rawList = rawList.filter(item => item[0] !== '')
+  // filter out any unspecified, other, etc. items since those are weird categories for browsing
   // let rawList = browseList.by_value.filter(
   //   item =>
   //     item[0] !== 'Unspecified' &&
@@ -281,7 +284,6 @@ const Browse = ({ setPage }) => {
       fromYear,
       toYear,
       order_by: orderBy,
-      is_desc: isDesc,
       is_desc: isDesc,
       explain_results: true,
     })

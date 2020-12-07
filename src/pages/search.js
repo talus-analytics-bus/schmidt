@@ -186,7 +186,6 @@ const Search = ({ setPage }) => {
       toYear,
       order_by: orderBy,
       is_desc: isDesc,
-      is_desc: isDesc,
       explain_results: true,
     })
 
