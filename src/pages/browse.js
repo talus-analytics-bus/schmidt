@@ -643,7 +643,7 @@ const Browse = ({ setPage }) => {
         loading={isSearching && !isSearchingText && initialized}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Browse library" />
+        <SEO title="Explore library" />
 
         <div className={styles.browse}>
           {showOverlay !== false && showOverlay !== 'false' && (
@@ -676,7 +676,7 @@ const Browse = ({ setPage }) => {
               img: null,
             }}
           />
-          <h1>Browse library</h1>
+          <h1>Explore library</h1>
           <p>
             Explore documents by topic area, event, publishing organization,
             year published, and more.

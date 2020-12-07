@@ -135,7 +135,7 @@ const IndexPage = () => {
               <div className={styles.mainButton}>
                 <PrimaryButton
                   {...{
-                    label: 'Browse documents',
+                    label: 'Explore library',
                     url: '/browse',
                   }}
                 />
