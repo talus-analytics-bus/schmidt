@@ -486,7 +486,9 @@ export const Card = ({
                         // for records tagged in Airtable with "YEAR", the month isn't necessarily accurate so we want to hide the month and only show the year
                         formatDate(
                           date,
-                          internal_research_note.includes('YEAR')
+                          internal_research_note !== undefined
+                            ? internal_research_note.includes('YEAR')
+                            : false
                         )
                       }
                     </span>
@@ -534,9 +536,6 @@ export const Card = ({
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
-                {/* {!detail && ( */}
-                <div className={styles.descripLabel}>Description:</div>
-                {/* )} */}
                 <div className={styles.description}>{card.description}</div>
               </div>
             )}
