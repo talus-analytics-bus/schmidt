@@ -412,7 +412,7 @@ export const Card = ({
               <div className={styles.noData}>Preview unavailable</div>
             )
           }
-          {detail && exclude_pdf_from_site && (
+          {detail && (exclude_pdf_from_site || files.length === 0) && (
             <PrimaryButton
               {...{
                 label: `not available for download`,
