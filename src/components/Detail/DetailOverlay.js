@@ -450,7 +450,7 @@ const DetailOverlay = ({
                 <div className={classNames(styles.sideBar, styles.wide)}>
                   <Panel
                     {...{
-                      title: 'Topic areas',
+                      title: 'Topic area',
                       iconName: iconNamesByField.key_topics,
                       expandable: true,
                     }}
@@ -479,7 +479,6 @@ const DetailOverlay = ({
                               }
                               className={classNames(styles.keyTopic)}
                             >
-                              <div className={styles.colorBlock}></div>
                               <span>
                                 {highlightTag({
                                   displayName: value,
@@ -493,7 +492,7 @@ const DetailOverlay = ({
                       })}
                       {topicCount === 0 && (
                         <i className={styles.placeholder}>
-                          No matching topic areas
+                          No matching topic area
                         </i>
                       )}
                     </div>
@@ -565,7 +564,7 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: 'Related events',
+                      title: 'Linked outbreak event',
                       iconName: iconNamesByField.events,
                       expandable: true,
                     }}
@@ -581,7 +580,7 @@ const DetailOverlay = ({
                         )
                         .map(asBulletDelimitedList)}
                       {itemData.events.length === 0 && (
-                        <div className={styles.noData}>Data not available</div>
+                        <div className={styles.noData}>No linked event</div>
                       )}
                     </div>
                   </Panel>
