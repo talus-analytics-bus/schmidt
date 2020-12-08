@@ -283,7 +283,7 @@ const Browse = ({ setPage }) => {
     if (getFilterCounts) {
       const filterCountsParams = new URLSearchParams()
       const exclude = [
-        'Other',
+        // 'Other',
         'null',
         'Unspecified',
         'undefined',
