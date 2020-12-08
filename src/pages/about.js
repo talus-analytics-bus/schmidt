@@ -92,7 +92,7 @@ const About = ({}) => {
           </div>
           <PrimaryButton
             {...{
-              label: 'Download all data',
+              label: 'Download all document data',
               isSecondary: false,
               isSmall: true,
               iconName: 'get_app',

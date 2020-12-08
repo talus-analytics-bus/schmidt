@@ -3,7 +3,7 @@
   // standard: max width of screen is 1300px
   // center content in that view
   // TODO pull up in scope to master SCSS file
-  max-width: 1440px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px 20px;
   width: 100%;
@@ -63,7 +63,7 @@
     padding: 20px;
     p {
       font-size: 1.2rem;
-      line-height: 1.8rem;
+      line-height: 2rem;
 
       &:not(:first-child) {
         margin-top: 20px;
@@ -89,7 +89,7 @@
       padding-bottom: 5px;
     }
     .doc {
-      $lh: 1.8rem;
+      $lh: 2rem;
       li {
         line-height: $lh;
         p {
@@ -130,7 +130,7 @@
       }
       .contributor {
         display: grid;
-        grid-template-columns: 1.3fr 3fr;
+        grid-template-columns: 1fr 1fr;
         column-gap: 5%;
         background-color: $very-light-gray;
         border-radius: $big-radius;
