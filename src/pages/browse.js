@@ -40,13 +40,13 @@ const API_URL = process.env.GATSBY_API_URL
 
 // definitions for tooltips
 const tooltipDefs = {
-  key_topics: 'Key topics addressed in the work',
+  key_topics: 'Key topic addressed by the work',
   authors: 'Organization that published the work or led the effort',
   author_types: 'Type of organization responsible for publishing the work',
   funders:
     'Organization or entity that provided funding for the research effort or publication',
   years: 'Year the publication was published',
-  events: 'Specific event to which the document directly relates',
+  events: 'Specific outbreak event covered by the record',
 }
 
 const Browse = ({ setPage }) => {
