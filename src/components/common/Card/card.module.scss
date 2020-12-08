@@ -126,7 +126,8 @@
         }
       }
       .noData {
-        color: gray;
+        color: $light-blue;
+        font-style: italic;
       }
       .contentCol {
         .main {

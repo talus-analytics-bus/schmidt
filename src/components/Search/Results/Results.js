@@ -103,7 +103,7 @@ export const Results = ({
                     <PrimaryButton
                       {...{
                         label: !isDownloading ? (
-                          'Download metadata'
+                          'Download results'
                         ) : (
                           <div className={styles.downloading}>
                             Downloading...

@@ -40,13 +40,13 @@ const API_URL = process.env.GATSBY_API_URL
 
 // definitions for tooltips
 const tooltipDefs = {
-  key_topics: 'Key topics addressed in the work',
+  key_topics: 'Key topic addressed by the work',
   authors: 'Organization that published the work or led the effort',
   author_types: 'Type of organization responsible for publishing the work',
   funders:
     'Organization or entity that provided funding for the research effort or publication',
   years: 'Year the publication was published',
-  events: 'Specific event to which the document directly relates',
+  events: 'Specific outbreak event covered by the record',
 }
 
 const Browse = ({ setPage }) => {
@@ -283,7 +283,7 @@ const Browse = ({ setPage }) => {
     if (getFilterCounts) {
       const filterCountsParams = new URLSearchParams()
       const exclude = [
-        'Other',
+        // 'Other',
         'null',
         'Unspecified',
         'undefined',
@@ -643,7 +643,7 @@ const Browse = ({ setPage }) => {
         loading={isSearching && !isSearchingText && initialized}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Browse library" />
+        <SEO title="Explore library" />
 
         <div className={styles.browse}>
           {showOverlay !== false && showOverlay !== 'false' && (
@@ -676,7 +676,7 @@ const Browse = ({ setPage }) => {
               img: null,
             }}
           />
-          <h1>Browse library</h1>
+          <h1>Explore library</h1>
           <p>
             Explore documents by topic area, event, publishing organization,
             year published, and more.

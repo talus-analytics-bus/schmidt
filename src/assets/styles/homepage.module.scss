@@ -15,10 +15,14 @@ $margin-left: 116px;
   position: relative;
   .main {
     margin: 0 auto;
-    max-width: 1440px;
+    max-width: unset; //removing max-width here so that landing page won't appear unbalanced at very large screen sizes
     padding: 0px 20px;
     .upper {
       padding: $vertical-spacing;
+      padding-left: 20px;
+      @media screen and (min-width: 1700px) {
+        padding-left: 60px;
+      }
       //   position: relative;
       //   display: flex;
       //   flex-direction: column;

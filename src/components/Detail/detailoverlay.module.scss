@@ -139,10 +139,8 @@
         .keyTopics {
           @include spaceItemsVert(10px);
           .keyTopic {
-            display: grid;
-            grid-template-columns: 15px 1fr;
-            grid-gap: 0 5px;
-            align-items: center;
+            display: flex;
+            flex-direction: row;
             color: #898989;
             span {
               color: $blue;
@@ -258,11 +256,8 @@
         // grid-template-columns: repeat(auto-fit, minmax(auto, 280px));
         > div {
           border: none !important;
-          width: 280px;
+          width: 290px;
           margin-bottom: 10px;
-          &:first-child {
-            // width: 300px;
-          }
           &:not(:last-child) {
             margin-right: 10px;
           }

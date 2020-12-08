@@ -45,56 +45,38 @@ const Overview = ({}) => {
       <div className={styles.contributors}>
         <h3>Contributors</h3>
         <div className={styles.contributor}>
-          <a href={'https://ghss.georgetown.edu/'} target="_blank">
+          <a
+            href={'https://ghss.georgetown.edu/'}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img
               className={styles.georgetown}
               src={georgetown}
               alt="Georgetown University Center for Global Health Science and Security logo"
             ></img>
           </a>
-          <div className={styles.team}>
-            <div className={styles.header}>Team</div>
-            <div className={styles.members}>
-              <ul>
-                <li>Ellen P. Carlin (Principal Investigator)</li>
-                <li>Madison Alvarez</li>
-                <li>Maydha Dhanuka</li>
-                <li>Jessica Highland</li>
-                <li>Rebecca Katz</li>
-                <li>Andrew Meshnick</li>
-                <li>Allie Reichert</li>
-                <li>Ryan Remmel</li>
-                <li>Siobahn Robinson-Marshall</li>
-                <li>Claire Standley</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className={styles.contributor}>
-          <a href={'https://talusanalytics.com/'} target="_blank">
+          <a
+            href={'https://talusanalytics.com/'}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img
               className={styles.talus}
               src={talus}
               alt="Talus Analytics logo"
             ></img>
           </a>
-          <div className={styles.team}>
-            <div className={styles.header}>Team</div>
-            <div className={styles.members}>
-              <ul>
-                <li>Ellie Graeden (Principal Investigator)</li>
-                <li>Nate Bennett</li>
-                <li>Alaina Case</li>
-                <li>Michael Van Maele</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
       <div className={styles.contributors}>
         <h3>Funder</h3>
         <div className={styles.contributor}>
-          <a href={'https://schmidtfutures.com/'} target="_blank">
+          <a
+            href={'https://schmidtfutures.com/'}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img
               className={styles.schmidt}
               src={schmidt}

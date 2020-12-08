@@ -93,8 +93,16 @@
   // TODO full styling for buttons, only link is done so far
   &.disabled {
     button.button.link {
-      color: gray;
+      color: $light-blue;
       pointer-events: none;
+    }
+    button {
+      &.secondary {
+        font-style: italic;
+        color: $light-blue;
+        border-color: darken($light-blue, 5%);
+        pointer-events: none;
+      }
     }
   }
 }

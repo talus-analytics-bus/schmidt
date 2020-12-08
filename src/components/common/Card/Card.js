@@ -61,6 +61,8 @@ export const Card = ({
   getTooltipText = null,
   alwaysStartNew,
   browse = false,
+  exclude_pdf_from_site,
+  internal_research_note,
   ...props
 }) => {
   // CONSTANTS
@@ -410,6 +412,16 @@ export const Card = ({
               <div className={styles.noData}>Preview unavailable</div>
             )
           }
+          {detail && (exclude_pdf_from_site || files.length === 0) && (
+            <PrimaryButton
+              {...{
+                label: `not available for download`,
+                disabled: true,
+                iconName: 'get_app',
+                isSecondary: true,
+              }}
+            />
+          )}
         </div>
         <div className={classNames(styles.col, styles.contentCol)}>
           <div className={styles.main}>
@@ -470,7 +482,15 @@ export const Card = ({
                   <i className={'material-icons'}>event</i>
                   {date !== null && (
                     <span className={classNames(styles.small)}>
-                      {formatDate(date)}
+                      {
+                        // for records tagged in Airtable with "YEAR", the month isn't necessarily accurate so we want to hide the month and only show the year
+                        formatDate(
+                          date,
+                          internal_research_note !== undefined
+                            ? internal_research_note.includes('YEAR')
+                            : false
+                        )
+                      }
                     </span>
                   )}
                   {date === null && <span>Date unavailable</span>}
@@ -516,9 +536,6 @@ export const Card = ({
             </div>
             {description !== '' && (
               <div className={styles.descriptionSnippet}>
-                {/* {!detail && ( */}
-                <div className={styles.descripLabel}>Description:</div>
-                {/* )} */}
                 <div className={styles.description}>{card.description}</div>
               </div>
             )}
