@@ -16,7 +16,7 @@ import SearchQuery from '../components/misc/SearchQuery'
 // assets and styles
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
-import flag from '../assets/images/landing-test.png'
+import flag from '../assets/images/landing-image.png'
 
 // constants
 
