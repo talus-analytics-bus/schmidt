@@ -369,7 +369,7 @@ const DetailOverlay = ({
           <span>{message}</span>
           <InfoTooltip
             text={
-              'This field captures whether the convening body has governance authority over the topic, recommendations, or other content of the product developed. For example, the US Congress has governance over US biosecurity policy but a US think tank does not. Intergovernmental organizations will have governance authority that depends on the context and topic of the product.'
+              'Indication of whether the Publishing Organization has governance authority in the sense of whether it can act on the information contained in the record. Intergovernmental organizations may have governance authority depending on the context and topic of the product.'
             }
           />
         </div>
