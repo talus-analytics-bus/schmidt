@@ -73,7 +73,7 @@ const FilterSet = ({
         const notThisTypeSelected =
           enabledFilterKeys.length > 0 && !enabledFilterKeys.includes(v.field)
         // const showZeros = !moreThanOneTypeSelected && !notThisTypeSelected
-        const showZeros = false
+        const showZeros = true
         filterGroupComponents.push(
           <FilterCheckbox
             {...{
