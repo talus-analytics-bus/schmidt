@@ -1,0 +1,50 @@
+@import '../../assets/styles/vars.scss';
+
+.note {
+  font-size: 0.9rem;
+
+  + .note:before {
+    content: ', ';
+  }
+}
+
+.endnotes {
+  border-top: $border;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+
+.endnote {
+  // width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  // justify-content: flex-start;
+  //force urls to break
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  > a {
+    min-width: 25px;
+  }
+
+  p.endnoteParagraph {
+    margin: 0;
+    font-size: 1rem;
+    margin-top: 0;
+    padding-right: 25%;
+
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+  }
+}
