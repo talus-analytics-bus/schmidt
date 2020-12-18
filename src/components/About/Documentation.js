@@ -7,6 +7,8 @@ import { PrimaryButton } from '../common'
 // styles and assets
 import styles from './about.module.scss'
 
+import ToExcelQuery from '../misc/ToExcelQuery'
+
 import * as Endnotes from '../Endnotes/Endnotes'
 
 const Documentation = ({}) => {
@@ -45,6 +47,7 @@ const Documentation = ({}) => {
         </p>
         <br />
         <p>The site includes:</p>
+        <br />
         <ol>
           <li>
             A searchable, filterable database of all documents in the dataset.
@@ -68,11 +71,49 @@ const Documentation = ({}) => {
           <a href="https://healthsecuritynet.org/about/">on this site</a>.
         </p>
         <br />
+        <br />
+        <p>
+          <strong>This Documentation Covers</strong>
+        </p>
+        <br />
         <ol>
-          <li>The Library and the methodology used to populate it</li>
-          <li>The data coding process</li>
-          <li>The glossary of terms as applied to the Library</li>
+          <li>
+            <a
+              href="#library"
+              onClick={e => {
+                e.preventDefault()
+                document.getElementById(`library`).scrollIntoView()
+              }}
+            >
+              The Library and the methodology used to populate it
+            </a>
+          </li>
+          <li>
+            <a
+              href="#datacoding"
+              onClick={e => {
+                e.preventDefault()
+                document.getElementById(`datacoding`).scrollIntoView()
+              }}
+            >
+              The data coding process
+            </a>
+          </li>
+          <li>
+            <a
+              href="#glossary"
+              onClick={e => {
+                e.preventDefault()
+                document.getElementById(`glossary`).scrollIntoView()
+              }}
+            >
+              The glossary of terms as applied to the Library
+            </a>
+          </li>
         </ol>
+        <br />
+        <br />
+        <div id="library" style={{ position: 'relative', top: -100 }} />
         <p>
           <strong>Library</strong>
         </p>
@@ -368,13 +409,15 @@ const Documentation = ({}) => {
             <br />
             In addition to their inclusion in the library, the list of included
             hearings has also been made available as a supplemental file
-            containing additional metadata &nbsp;In this document, witness names
-            and affiliations for each hearing were noted from the CR and other
-            sources, including official committee reports available at
-            www.govinfo.gov and committee websites. Witness names were manually
-            standardized to resolve spelling or other discrepancies. Each
-            hearing was tagged as having occurred during either Democrat or
-            Republican control of a given chamber.
+            containing additional metadata.
+            {/* ADD LINK */}
+            In this document, witness names and affiliations for each hearing
+            were noted from the CR and other sources, including official
+            committee reports available at www.govinfo.gov and committee
+            websites. Witness names were manually standardized to resolve
+            spelling or other discrepancies. Each hearing was tagged as having
+            occurred during either Democrat or Republican control of a given
+            chamber.
             <Endnotes.Note>
               United States House of Representatives Office of the Historian
               website. Institution page. Party Divisions of the House of
@@ -689,17 +732,28 @@ const Documentation = ({}) => {
           </li>
         </ol>
         <br />
+        <div id="datacoding" style={{ position: 'relative', top: -100 }} />
         <p>
           <strong>Data coding</strong>
         </p>
         <p>
           The team developed a custom data taxonomy and data dictionary to
           define key metadata and organize the dataset. The data were populated
-          into Airtable and transferred&nbsp;<em>via</em>&nbsp;API into a
-          database on Amazon Web Services. &nbsp;The complete dataset can be
-          downloaded &nbsp; The Glossary below provides the guidance that
-          researchers used to code the data.
+          into Airtable and transferred via API into a database on Amazon Web
+          Services. {/* The data dictionary with complete description of all */}
+          {/* metadata fields can be downloaded as an Excel file here.  */}
+          The complete dataset can be downloaded{' '}
+          <a
+            onClick={() => {
+              ToExcelQuery({})
+            }}
+          >
+            here
+          </a>
+          . The Glossary below provides the guidance that researchers used to
+          code the data.
         </p>
+        <div id="glossary" style={{ position: 'relative', top: -100 }} />
         <p>
           <strong>Glossary</strong>
         </p>
