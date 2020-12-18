@@ -30,17 +30,15 @@ const Overview = ({}) => {
         policies for the future.
       </p>
       <p>
-        The data library reflects both global and national sources of
-        information. The library includes resources published by governments,
-        intergovernmental organizations, and the private sector. Global sources
+        The library reflects both global and national sources of information. It
+        includes resources published by governments, intergovernmental
+        organizations, and the private and non-profit sectors. Global sources
         are the Food and Agriculture Organization, United Nations General
-        Assembly, United Nations Security Council, World Organisation for Animal
-        Health, and World Health Organization. National sources include the
-        United States and five African countries—Egypt, Ethiopia, Kenya,
-        Nigeria, and South Africa; some additional entries point to other
-        nations, but they were not explicitly researched. The peer-reviewed
-        literature as it relates to coronaviruses as a global infectious disease
-        threat is also represented.
+        Assembly, United Nations Security Council, World Organization for Animal
+        Health, and World Health Organization (including the World Health
+        Assembly). National sources to date include the United States. The
+        academic journal literature as it relates to the global risk of
+        coronaviruses is also represented.
       </p>
       <div className={styles.contributors}>
         <h3>Contributors</h3>
@@ -56,6 +54,33 @@ const Overview = ({}) => {
               alt="Georgetown University Center for Global Health Science and Security logo"
             ></img>
           </a>
+        </div>
+        <p>
+          The Georgetown University Center for Global Health Science and
+          Security (GHSS) led the policy research effort, including development
+          of methodology, data collection, curation, and coding.
+        </p>
+        <p>
+          Ellen P. Carlin (Principal Investigator)
+          <br />
+          Maydha Dhanuka
+          <br />
+          Jessica Highland
+          <br />
+          Rebecca Katz
+          <br />
+          Andrew Meshnick
+          <br />
+          Allie Reichert
+          <br />
+          Ryan Remmel
+          <br />
+          Siobahn Robinson-Marshall
+          <br />
+          Claire Standley
+          <br />
+        </p>
+        <div className={styles.contributor}>
           <a
             href={'https://talusanalytics.com/'}
             target="_blank"
@@ -68,6 +93,11 @@ const Overview = ({}) => {
             ></img>
           </a>
         </div>
+        <p>
+          Talus Analytics developed the taxonomy and ontologies for the
+          documentation, integration with the epidemiological data and analysis,
+          and designed, built, and maintains the interactive Library site.
+        </p>
       </div>
       <div className={styles.contributors}>
         <h3>Funder</h3>
