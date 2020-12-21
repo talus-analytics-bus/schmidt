@@ -160,55 +160,55 @@
         }
       }
     }
-    .endnotes {
-      border-top: $border;
-      padding-top: 30px;
-      margin-top: 30px;
-    }
-    .endnote {
-      width: 70%;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: flex-start;
-      //force urls to break
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      word-break: break-word;
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      -webkit-hyphens: auto;
-      hyphens: auto;
-      &:not(:last-child) {
-        margin-bottom: 20px;
-      }
-      > a {
-        min-width: 25px;
-      }
-      > p {
-        margin: 0;
-        font-size: 1rem;
-      }
-    }
+    // .endnotes {
+    //   border-top: $border;
+    //   padding-top: 30px;
+    //   margin-top: 30px;
+    // }
+    // .endnote {
+    //   width: 70%;
+    //   display: flex;
+    //   flex-direction: row;
+    //   align-items: flex-start;
+    //   justify-content: flex-start;
+    //   //force urls to break
+    //   overflow-wrap: break-word;
+    //   word-wrap: break-word;
+    //   word-break: break-word;
+    //   -ms-hyphens: auto;
+    //   -moz-hyphens: auto;
+    //   -webkit-hyphens: auto;
+    //   hyphens: auto;
+    //   &:not(:last-child) {
+    //     margin-bottom: 20px;
+    //   }
+    //   > a {
+    //     min-width: 25px;
+    //   }
+    //   > p {
+    //     margin: 0;
+    //     font-size: 1rem;
+    //   }
+    // }
 
-    [data-type*='ref'],
-    [data-type*='endnote'] {
-      vertical-align: baseline;
-      position: relative;
-      top: -0.4rem;
-      font-size: 0.9rem;
-      cursor: pointer;
+    // [data-type*='ref'],
+    // [data-type*='endnote'] {
+    //   vertical-align: baseline;
+    //   position: relative;
+    //   top: -0.4rem;
+    //   font-size: 0.9rem;
+    //   cursor: pointer;
 
-      // sep multiple refs with commas
-      + [data-type*='ref']:before {
-        content: ', ';
-      }
-    }
-    .endnotes {
-      [data-type*='endnote'] {
-        top: 0.3rem;
-      }
-    }
+    //   // sep multiple refs with commas
+    //   + [data-type*='ref']:before {
+    //     content: ', ';
+    //   }
+    // }
+    // .endnotes {
+    //   [data-type*='endnote'] {
+    //     top: 0.3rem;
+    //   }
+    // }
   }
 }
 
