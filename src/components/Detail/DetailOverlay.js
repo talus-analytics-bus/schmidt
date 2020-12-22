@@ -135,7 +135,7 @@ const DetailOverlay = ({
           d.if_national_iso2_of_authoring_org !== null ? (
             <img
               key={d.if_national_iso2_of_authoring_org}
-              src={`https://www.countryflags.io/${d.if_national_iso2_of_authoring_org.toLowerCase()}/shiny/64.png`}
+              src={`https://flags.talusanalytics.com/shiny_100px/${d.if_national_iso2_of_authoring_org.toLowerCase()}.png`}
             />
           ) : null
         return (
