@@ -20,21 +20,26 @@ const Overview = ({}) => {
   return (
     <div className={styles.over}>
       <p>
-        The Global Health Security Library is a publicly accessible, centralized
-        database of warnings, evaluations, oversight efforts, strategies, and
-        other documents that relate to pandemics prior to 2020. It provides a
-        readily available source of information for policymakers, researchers,
+        Health Security Net is a publicly accessible, centralized database of
+        warnings, evaluations, oversight efforts, strategies, and other
+        documents that relate to pandemics prior to 2020. It provides a readily
+        available source of information for policymakers, researchers,
         journalists, the general public, and other interested parties to access
         documents written about pandemic risk in the past; unearth patterns that
         reveal why response may be insufficient to date; and develop improved
-        policies for the future.
+        policies for the future. The library is a work in progress and continues
+        to be updated as additional resources are identified. Please contact us
+        with any questions or additions at{' '}
+        <a href="mailto:outbreaks@georgetown.edu" rel="noreferrer">
+          outbreaks@georgetown.edu.
+        </a>
       </p>
       <p>
         The library reflects both global and national sources of information. It
         includes resources published by governments, intergovernmental
         organizations, and the private and non-profit sectors. Global sources
         are the Food and Agriculture Organization, United Nations General
-        Assembly, United Nations Security Council, World Organization for Animal
+        Assembly, United Nations Security Council, World Organisation for Animal
         Health, and World Health Organization (including the World Health
         Assembly). National sources to date include the United States. The
         academic journal literature as it relates to the global risk of
@@ -59,26 +64,6 @@ const Overview = ({}) => {
           The Georgetown University Center for Global Health Science and
           Security (GHSS) led the policy research effort, including development
           of methodology, data collection, curation, and coding.
-        </p>
-        <p>
-          Ellen P. Carlin (Principal Investigator)
-          <br />
-          Maydha Dhanuka
-          <br />
-          Jessica Highland
-          <br />
-          Rebecca Katz
-          <br />
-          Andrew Meshnick
-          <br />
-          Allie Reichert
-          <br />
-          Ryan Remmel
-          <br />
-          Siobahn Robinson-Marshall
-          <br />
-          Claire Standley
-          <br />
         </p>
         <div className={styles.contributor}>
           <a
