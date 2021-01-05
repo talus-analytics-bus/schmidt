@@ -12,6 +12,7 @@ import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // styles and assets
 import styles from '../components/About/about.module.scss'
+import loadingGif from '../assets/icons/loading.gif'
 
 // local utility functions
 import { withBookmarkedIds } from '../components/misc/Util'
@@ -22,6 +23,9 @@ const About = ({}) => {
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
+
+  // for spinner on download button
+  const [isDownloading, setIsDownloading] = useState(false)
 
   // simple header/footer reference
   const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
@@ -117,12 +121,21 @@ const About = ({}) => {
           <div className={styles.buttons}>
             <PrimaryButton
               {...{
-                label: 'Download complete dataset',
+                label: !isDownloading ? (
+                  'Download complete dataset'
+                ) : (
+                  <div className={styles.downloading}>
+                    Downloading...
+                    <img src={loadingGif} alt="loading" />
+                  </div>
+                ),
                 isSecondary: false,
                 isSmall: true,
-                iconName: 'get_app',
-                onClick: () => {
-                  ToExcelQuery({})
+                iconName: !isDownloading ? 'get_app' : null,
+                onClick: async () => {
+                  setIsDownloading(true)
+                  const response = await ToExcelQuery({})
+                  setIsDownloading(false)
                 },
               }}
             />

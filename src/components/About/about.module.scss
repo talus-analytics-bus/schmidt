@@ -223,6 +223,15 @@
     //   }
     // }
   }
+  .downloading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-left: 10px;
+    }
+  }
 }
 
 @import '../../assets/styles/mobile.module.scss';
