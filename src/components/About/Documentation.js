@@ -1,5 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import { Link } from 'gatsby'
 
 // local components
 import { PrimaryButton } from '../common'
@@ -17,19 +18,34 @@ const Documentation = ({}) => {
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
 
   // JSX
+  // external link convenience component
+  const ExtLink = ({ url, children }) => (
+    <a href={url} rel="noreferrer" target="_blank">
+      {children}
+    </a>
+  )
   return (
     <Endnotes.Provider offset={-100}>
       <div className={styles.doc}>
         <p>
-          The Global Infectious Disease Library is one of a{' '}
-          <a href="https://gida.ghscosting.org/">suite of free resources</a>{' '}
-          from the Center for Global Health Science and Security that makes data
-          and information about pandemic planning and oversight centralized and
-          publicly accessible. This library is a searchable and filterable
-          database designed to enable ready access to warnings, evaluations,
-          oversight efforts, strategies, and other documents concerning pandemic
-          risk and related issues, including documents from governmental,
-          international, and non-governmental organizations.
+          Health Security Net is one of a{' '}
+          <ExtLink url={'https://gida.ghscosting.org/'}>
+            suite of free resources
+          </ExtLink>{' '}
+          from the Georgetown University Center for Global Health Science and
+          Security that makes data and information about pandemic planning and
+          oversight centralized and publicly accessible. Built on an integrated
+          data architecture to support cross-platform analysis, this global
+          health security library is a searchable and filterable database
+          designed to enable ready access to warnings, evaluations, oversight
+          efforts, strategies, and other documents concerning pandemic risk and
+          related issues, including documents from governmental, international,
+          and non-governmental organizations. The library is a work in progress
+          and continues to be updated as additional resources are identified.
+          Please contact us with any questions or additions at{' '}
+          <a href="mailto:outbreaks@georgetown.edu" rel="noreferrer">
+            outbreaks@georgetown.edu.
+          </a>
         </p>
         <br />
         <p>
@@ -51,8 +67,8 @@ const Documentation = ({}) => {
         <ol>
           <li>
             A searchable, filterable database of all documents in the dataset.
-            The complete can be downloaded in an Excel file format directly from
-            the site.
+            The complete dataset can be downloaded in an Excel file format
+            directly from the site.
           </li>
           <li>
             A written analysis from the Georgetown University Center for Global
@@ -63,17 +79,18 @@ const Documentation = ({}) => {
         <br />
         <p>
           This work and underlying dataset is available for use under the
-          <a href="https://creativecommons.org/licenses/by/4.0/">
-            Creative Commons Attribution 4.0 International Public License
-          </a>
-          , with appropriate reference and acknowledgement of the original
+          Creative Commons Attribution 4.0 International Public License (
+          <ExtLink url={'https://creativecommons.org/licenses/by/4.0/'}>
+            https://creativecommons.org/licenses/by/4.0/
+          </ExtLink>
+          ), with appropriate reference and acknowledgement of the original
           research teams, as listed{' '}
-          <a href="https://healthsecuritynet.org/about/">on this site</a>.
+          <ExtLink url="/about/">on this site</ExtLink>.
         </p>
         <br />
         <br />
         <p>
-          <strong>This Documentation Covers</strong>
+          <strong>This documentation includes:</strong>
         </p>
         <br />
         <ol>
@@ -141,9 +158,8 @@ const Documentation = ({}) => {
           <u>Global</u>
         </p>
         <p>
-          The Georgetown University Center for Global Health Science and
-          Security (Center) team has collected documents online from multiple
-          global sources and excluded those meeting any of the following
+          The research team collected documents online from multiple global
+          sources and excluded those meeting any of the following
           criteria:&nbsp;
         </p>
         <br />
@@ -175,7 +191,7 @@ const Documentation = ({}) => {
           strategy varied among them, for instance depending on the
           sophistication of their websites&rsquo; search functionality, or
           whether the site provided its own relevant terms for grouping. Global
-          sources incorporated into the library are:&nbsp;
+          sources currently included in Health Security Net include:
         </p>
         <ol>
           <li>
@@ -186,15 +202,15 @@ const Documentation = ({}) => {
             provide guidance for Member States on health-related activities.
             Resolutions and decisions from each conference are published in the
             conference report at{' '}
-            <a href="http://www.fao.org/unfao/govbodies/gsbhome/conference/conference-reports/en/">
+            <ExtLink url="http://www.fao.org/unfao/govbodies/gsbhome/conference/conference-reports/en/">
               http://www.fao.org/unfao/govbodies/gsbhome/conference/conference-reports/en/
-            </a>
+            </ExtLink>
             . Because resolutions and decisions are not published separately
             from the full conference report and the search function is not
             sufficiently advanced to search only for terms within the
             resolutions and decisions, the research team was unable to employ
             the comprehensive list of search terms used for other entities
-            (e.g., see United States hearing section). The research tea,
+            (e.g., see United States hearing section). The research team
             therefore reviewed the table of contents of each report from
             1995-2019 for the titles of the resolutions and decisions to
             determine their relevance to pandemics. If the title included the
@@ -206,12 +222,12 @@ const Documentation = ({}) => {
           <li>
             <em>United Nations General Assembly (UNGA)</em>: The United Nations
             Digital Library (
-            <a href="https://digitallibrary.un.org/?ln=en&amp;as=1">
-              https://digitallibrary.un.org/?ln=en&amp;as=1
-            </a>
+            <ExtLink url="https://digitallibrary.un.org/?ln=en&as=1">
+              https://digitallibrary.un.org/?ln=en&as=1
+            </ExtLink>
             ) was searched in the primary search field for
             &ldquo;pandemic&rdquo; using <em>All of the words</em> and{' '}
-            <em>Any Field</em>. Full Text search was by default not toggled on,
+            <em>any field</em>. Full text search was by default not toggled on,
             resulting in 142 hits for UNGA; despite this, the search appeared to
             capture documents with the search term in the body of the document,
             not just the title. This search methodology as applied to the
@@ -238,9 +254,9 @@ const Documentation = ({}) => {
             annual conferences to discuss and review programs and provide
             guidance for Member States on health-related activities. Resolutions
             and decisions from each conference are published at{' '}
-            <a href="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
+            <ExtLink url="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
               https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/
-            </a>
+            </ExtLink>
             . Because resolutions and decisions are not published separately
             from the full conference report and the search function is not
             sufficiently advanced to search only for terms within the
@@ -260,9 +276,9 @@ const Documentation = ({}) => {
             to discuss and review programs and provide guidance for Member
             States on health-related activities. Resolutions and decisions from
             each conference are published at{' '}
-            <a href="https://apps.who.int/gb/index.html">
+            <ExtLink url="https://apps.who.int/gb/index.html">
               https://apps.who.int/gb/index.html
-            </a>
+            </ExtLink>
             . Because resolutions and decisions are not published separately
             from the full conference report and the search function is not
             sufficiently advanced to search only for terms within the
@@ -281,7 +297,9 @@ const Documentation = ({}) => {
             <em>World Health Organization (WHO)</em>: WHO documents located in
             the Institutional Repository for Information Sharing (IRIS) database
             were searched (
-            <a href="https://apps.who.int/iris/">https://apps.who.int/iris/</a>
+            <ExtLink url="https://apps.who.int/iris/">
+              https://apps.who.int/iris/
+            </ExtLink>
             ). Because many of our desired search terms (see United
             State&mdash;Hearings section below) returned thousands of results,
             and IRIS can only export 500 at a time, the research team instead
@@ -338,7 +356,7 @@ const Documentation = ({}) => {
           <em>United States</em>
         </p>
         <p>
-          The Center team researched United States documentation in the form of
+          The research team compiled United States documentation in the form of
           congressional hearings, government reports and other documents, and
           third party reports and other documents. In most cases, a list of 25
           search terms were deployed to capture a broad array of hits relevant
@@ -362,11 +380,13 @@ const Documentation = ({}) => {
         <p>The research term sought information from the following sources:</p>
         <ol>
           <li>
-            <em>Hearings: </em>The website www.congress.gov was used as a
-            primary source of information on congressional activity by way of
-            the Congressional Record (CR). The CR captures committee activity in
-            the form of committee hearings, briefings, and business meetings.
-            Records were sought using the following keyword searches:
+            <em>Hearings: </em>The website{' '}
+            <ExtLink url="https://www.congress.gov/">www.congress.gov</ExtLink>{' '}
+            was used as a primary source of information on congressional
+            activity by way of the Congressional Record (CR). The CR captures
+            committee activity in the form of committee hearings, briefings, and
+            business meetings. Records were sought using the following keyword
+            searches:
             <br />
             <br />
             biodefense; biological threat; biopreparedness; biosurveillance;
@@ -398,26 +418,33 @@ const Documentation = ({}) => {
             readiness&rdquo; more broadly than this library is meant to capture;
             these were excluded. When the search occasionally resulted in an
             announcement for a hearing but no actual notice confirming that the
-            hearing took place, additional research through www.congress.gov,
-            www.gpo.gov, or committee websites was undertaken to find a notice
-            confirming that the hearing was held. Rarely no such notice can be
-            found, and these hearings were excluded on the presumption that they
-            were cancelled. On occasion when the research team was aware of
-            relevant hearings not captured by any of the keywords, these were
-            included for comprehensiveness. All hearing titles were copied from
-            the relevant hearing report.
-            <br />
-            In addition to their inclusion in the library, the list of included
+            hearing took place, additional research through{' '}
+            <ExtLink url="https://www.congress.gov/">
+              www.congress.gov
+            </ExtLink>,{' '}
+            <ExtLink url="https://www.gpo.gov/">www.gpo.gov</ExtLink>, or
+            committee websites was undertaken to find a notice confirming that
+            the hearing was held. Rarely no such notice can be found, and these
+            hearings were excluded on the presumption that they were cancelled.
+            On occasion when the research team was aware of relevant hearings
+            not captured by any of the keywords, these were included for
+            comprehensiveness. All hearing titles were copied from the relevant
+            hearing report.
+            {/* OMITTING THIS PARAGRAPH UNTIL WE HAVE LINK TO SUPPLEMENTAL FILE */}
+            {/* <br /> */}
+            {/* <br /> */}
+            {/* In addition to their inclusion in the library, the list of included
             hearings has also been made available as a supplemental file
-            containing additional metadata.
-            {/* ADD LINK */}
-            In this document, witness names and affiliations for each hearing
-            were noted from the CR and other sources, including official
-            committee reports available at www.govinfo.gov and committee
-            websites. Witness names were manually standardized to resolve
-            spelling or other discrepancies. Each hearing was tagged as having
-            occurred during either Democrat or Republican control of a given
-            chamber.
+            containing additional metadata. In this document, witness names and
+            affiliations for each hearing were noted from the CR and other
+            sources, including official committee reports available at{' '}
+            <ExtLink url="https://www.govinfo.gov/">
+              www.govinfo.gov
+            </ExtLink>{' '}
+            and committee websites. Witness names were manually standardized to
+            resolve spelling or other discrepancies. Each hearing was tagged as
+            having occurred during either Democrat or Republican control of a
+            given chamber.
             <Endnotes.Note>
               United States House of Representatives Office of the Historian
               website. Institution page. Party Divisions of the House of
@@ -426,9 +453,9 @@ const Documentation = ({}) => {
             <Endnotes.Note>
               United States Senate website. Art and History page. Party
               Division.{' '}
-              <a href="https://www.senate.gov/history/partydiv.htm">
+              <ExtLink url="https://www.senate.gov/history/partydiv.htm">
                 https://www.senate.gov/history/partydiv.htm
-              </a>
+              </ExtLink>
               . Accessed June 27, 2020.
             </Endnotes.Note>{' '}
             <span>
@@ -438,14 +465,14 @@ const Documentation = ({}) => {
             </span>
             <Endnotes.Note>
               Congress.gov website. Committees webpage. Committee Name History.{' '}
-              <a href="https://www.congress.gov/help/field-values/current-committees">
+              <ExtLink url="https://www.congress.gov/help/field-values/current-committees">
                 https://www.congress.gov/help/field-values/current-committees
-              </a>
+              </ExtLink>
               . Accessed June 27, 2020.
             </Endnotes.Note>{' '}
             Two hearings were held jointly by multiple committees; for analysis
             purposes, these were treated as though they were held by separate,
-            unique committees.
+            unique committees. */}
           </li>
           <li>
             <em>Government reports.</em> The research team sought reports from
@@ -498,9 +525,9 @@ const Documentation = ({}) => {
               U.S. Department of Health and Human Services. Office of Inspector
               General. Infectious Disease Preparedness and Response. Available
               from:
-              <a href="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
+              <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
                 https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp
-              </a>
+              </ExtLink>
               . Accessed June 16, 2020.
             </Endnotes.Note>{' '}
             USAID presents its reports by category; from the &ldquo;Global
@@ -527,14 +554,14 @@ const Documentation = ({}) => {
             Government Accountability Office (GAO). The same search terms and
             date parameters used for hearings were applied. For CRS, the primary
             search bar in the public database (
-            <a href="http://crsreports.congress.gov/">
+            <ExtLink url="http://crsreports.congress.gov/">
               crsreports.congress.gov
-            </a>
+            </ExtLink>
             ) was employed, and for GAO, the primary search bar on its website (
-            <a href="http://www.gao.gov">www.gao.gov</a>) was used. CRS reports
-            are sometimes updated and re-released at a later date; in these
-            cases, we documented the most recent date and uploaded the most
-            recent report.
+            <ExtLink url="http://www.gao.gov">www.gao.gov</ExtLink>) was used.
+            CRS reports are sometimes updated and re-released at a later date;
+            in these cases, we documented the most recent date and uploaded the
+            most recent report.
             <br />
             <br />
             We also sought to identify relevant federal strategies and
@@ -547,9 +574,9 @@ const Documentation = ({}) => {
               U.S. Department of Health and Human Services. Office of the
               Assistant Secretary for Preparedness and Response. Medical
               Countermeasures Strategies and Reports. Available from:{' '}
-              <a href="https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx">
+              <ExtLink url="https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx">
                 https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx
-              </a>
+              </ExtLink>
               . Accessed July 7, 2020.
             </Endnotes.Note>{' '}
             <span>
@@ -560,9 +587,9 @@ const Documentation = ({}) => {
             <Endnotes.Note>
               Homeland Security Digital Library. National Strategy Documents.
               Available from:{' '}
-              <a href="https://www.hsdl.org/?collection&id=4#Pandemics">
+              <ExtLink url="https://www.hsdl.org/?collection&id=4#Pandemics">
                 https://www.hsdl.org/?collection&id=4#Pandemics
-              </a>
+              </ExtLink>
               . Accessed July 8, 2020.
             </Endnotes.Note>
             <Endnotes.Note>
@@ -571,6 +598,8 @@ const Documentation = ({}) => {
               Efforts. Table 2 (p. 14). Washington, DC: Blue Ribbon Study Panel
               on Biodefense. Hudson Institute, October 2015.
             </Endnotes.Note>{' '}
+            <br />
+            <br />
             In a small number of cases, the researchers became aware of reports
             that were not captured by the search strategy, for instance, when a
             captured GAO testimony is based on a series of prior GAO reports,
@@ -589,9 +618,9 @@ const Documentation = ({}) => {
               University of Pennsylvania Think Tanks and Civil Societies
               Programs. TTCSP Global Go To Think Tank Index Reports, 2008-2019.
               Available from:{' '}
-              <a href="https://repository.upenn.edu/think_tanks/">
+              <ExtLink url="https://repository.upenn.edu/think_tanks/">
                 https://repository.upenn.edu/think_tanks/
-              </a>
+              </ExtLink>
               . Accessed September 8, 2020.
             </Endnotes.Note>{' '}
             From this list, we excluded the Pew Research Center, the National
@@ -633,7 +662,8 @@ const Documentation = ({}) => {
             <br />
             <br />
             For the National Academies of Sciences, Engineering, and Medicine
-            (NASEM), the National Academies Press reports (www.nap.edu) were
+            (NASEM), the National Academies Press reports (
+            <ExtLink url="https://www.nap.edu/">www.nap.edu</ExtLink>) were
             searched within the topics &ldquo;Biology and Life Sciences&rdquo;
             and &ldquo;Heath and Medicine,&rdquo; dated from 1995-2019; the same
             search terms and date parameters used for hearings were applied. The
@@ -680,23 +710,26 @@ const Documentation = ({}) => {
           <li>
             <em>Academic journal literature. </em>Journal literature was
             searched using Ovid Medline (
-            <a href="https://ovidsp.ovid.com/">https://ovidsp.ovid.com/</a>).
-            The following Boolean search was performed using the Advanced Search
-            tool: (exp Coronavirus Infections/ or exp Coronavirus) AND (exp Risk
-            Assessment) as limited to articles in English published between
-            January 1, 1995 and December 31, 2019. The research team reviewed
-            each article to exclude any that met the following exclusion
-            criteria (in addition to the standing exclusion criteria) regarding
-            article focus: clinical management; non-human species; bioterrorism;
-            or biowarfare. Articles behind paywalls were not posted; open access
-            articles were posted if the research team received permission to do
-            so. When the paper was unavailable or behind a paywall, the research
-            team reviewed the piece and summarized the item to reflect the
-            comprehensive search results. On occasion, journal articles were
-            also captured through other means&mdash;specifically, as a result of
-            the search of the WHO IRIS database (see Global Step 6), or when a
-            journal record was an editorial that flagged one or more relevant
-            papers on coronavirus within that issue.
+            <ExtLink url="https://ovidsp.ovid.com/">
+              https://ovidsp.ovid.com/
+            </ExtLink>
+            ). The following Boolean search was performed using the Advanced
+            Search tool: (exp Coronavirus Infections/ or exp Coronavirus) AND
+            (exp Risk Assessment) as limited to articles in English published
+            between January 1, 1995 and December 31, 2019. The research team
+            reviewed each article to exclude any that met the following
+            exclusion criteria (in addition to the standing exclusion criteria)
+            regarding article focus: clinical management; non-human species;
+            bioterrorism; or biowarfare. Articles behind paywalls were not
+            posted; open access articles were posted if the research team
+            received permission to do so. When the paper was unavailable or
+            behind a paywall, the research team reviewed the piece and
+            summarized the item to reflect the comprehensive search results. On
+            occasion, journal articles were also captured through other
+            means&mdash;specifically, as a result of the search of the WHO IRIS
+            database (see Global Step 6), or when a journal record was an
+            editorial that flagged one or more relevant papers on coronavirus
+            within that issue.
           </li>
           <li>
             <em>Simulations and exercises</em>. Databases and other sources that
@@ -710,18 +743,20 @@ const Documentation = ({}) => {
             and ideally provided a report-out. Through this method, key
             databases were identified, such as the&nbsp;Homeland Security
             Digital Library (
-            <a href="https://www.hsdl.org/c/">https://www.hsdl.org/c/</a>) and
-            the National Institute of Health Emergency and Disaster Response
-            Training Exercises (
-            <a href="https://dr2.nlm.nih.gov/training-exercises">
+            <ExtLink url="https://www.hsdl.org/c/">
+              https://www.hsdl.org/c/
+            </ExtLink>
+            ) and the National Institute of Health Emergency and Disaster
+            Response Training Exercises (
+            <ExtLink url="https://dr2.nlm.nih.gov/training-exercises">
               https://dr2.nlm.nih.gov/training-exercises
-            </a>
+            </ExtLink>
             ). The same keyword searches were performed in these databases and
             the hits reviewed for relevance. To review for any potentially
             missed records, the Department of Homeland Security website (
-            <a href="https://www.dhs.gov/">https://www.dhs.gov/</a>) was
-            examined via performed a parallel search in its primary search bar.
-            The exercise summaries for those exercises mentioned in Maxmen and
+            <ExtLink url="https://www.dhs.gov/">https://www.dhs.gov/</ExtLink>)
+            was examined via a parallel search in its primary search bar. The
+            exercise summaries for those exercises mentioned in Maxmen and
             Tollefson 2020
             <Endnotes.Note>
               Maxmen, Amy, and Jeff Tollefson. “Two Decades of Pandemic War
@@ -740,10 +775,10 @@ const Documentation = ({}) => {
           The team developed a custom data taxonomy and data dictionary to
           define key metadata and organize the dataset. The data were populated
           into Airtable and transferred via API into a database on Amazon Web
-          Services. {/* The data dictionary with complete description of all */}
-          {/* metadata fields can be downloaded as an Excel file here.  */}
-          The complete dataset can be downloaded{' '}
+          Services. The complete dataset including definitions and a glossary of
+          terms can be downloaded{' '}
           <a
+            style={{ cursor: 'pointer' }}
             onClick={() => {
               ToExcelQuery({})
             }}
@@ -895,7 +930,7 @@ const Documentation = ({}) => {
             category.
           </li>
           <li>
-            <em>Government Action</em>: An item that reflects a decisive
+            <em>Government action</em>: An item that reflects a decisive
             oversight, strategic, or other action taken on the part of a
             national government or an intergovernmental body; may include
             hearings, strategies, plans, resolutions, decisions, etc.
@@ -906,7 +941,7 @@ const Documentation = ({}) => {
             operationalized training activities.
           </li>
           <li>
-            <em>Journal Paper</em>: An item published in a professional journal;
+            <em>Journal paper</em>: An item published in a professional journal;
             may reflect original research, literature reviews, commentaries,
             editorials, letters, and news items; may or may not be
             peer-reviewed.
