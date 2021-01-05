@@ -62,11 +62,23 @@ export const Card = ({
   alwaysStartNew,
   browse = false,
   exclude_pdf_from_site,
+  link,
   internal_research_note,
   ...props
 }) => {
   // CONSTANTS
   const openNewPage = bookmark || single || browse
+  const showLinkButton =
+    exclude_pdf_from_site === true && link !== null && link !== undefined
+  const linkButtonProps = {
+    label: 'Go to link',
+    iconName: 'link',
+    urlIsExternal: true,
+    url: link,
+    onClick: e => {
+      e.stopPropagation()
+    },
+  }
 
   // STATE
   // card's left css property
@@ -409,21 +421,30 @@ export const Card = ({
             )
           }
           {
+            // Show external link button if PDF is not licensed to be
+            // distributed
+            detail && showLinkButton && (
+              <PrimaryButton {...{ ...linkButtonProps }} />
+            )
+          }
+          {
             // Show preview button under thumbnail on details page
-            detail && files.length === 0 && (
+            detail && !showLinkButton && files.length === 0 && (
               <div className={styles.noData}>Preview unavailable</div>
             )
           }
-          {detail && (exclude_pdf_from_site || files.length === 0) && (
-            <PrimaryButton
-              {...{
-                label: `not available for download`,
-                disabled: true,
-                iconName: 'get_app',
-                isSecondary: true,
-              }}
-            />
-          )}
+          {detail &&
+            !showLinkButton &&
+            (exclude_pdf_from_site || files.length === 0) && (
+              <PrimaryButton
+                {...{
+                  label: `not available for download`,
+                  disabled: true,
+                  iconName: 'get_app',
+                  isSecondary: true,
+                }}
+              />
+            )}
         </div>
         <div className={classNames(styles.col, styles.contentCol)}>
           <div className={styles.main}>
@@ -562,6 +583,9 @@ export const Card = ({
               </div>
             )}
             <div className={styles.actions}>
+              {!detail && showLinkButton && (
+                <PrimaryButton {...{ ...linkButtonProps, isSecondary: true }} />
+              )}
               {!detail && files.length > 0 && (
                 <>
                   <div className={styles.previewButton}>
