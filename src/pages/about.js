@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
-import { PrimaryButton } from '../components/common'
+import { PrimaryButton, StickyHeader } from '../components/common'
 import Overview from '../components/About/Overview'
 import Documentation from '../components/About/Documentation'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
@@ -22,6 +22,10 @@ const About = ({}) => {
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
+
+  // simple header/footer reference
+  const [simpleHeaderRef, setSimpleHeaderRef] = useState({ current: null })
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   // set content by tab
   const [view, setView] = useState('overview')
@@ -59,6 +63,18 @@ const About = ({}) => {
     setLoading(false)
   }, [bookmarkedIds])
 
+  // set scroll event to show "scroll to top" as appropriate
+  useEffect(() => {
+    const displayThresh = 20
+    if (simpleHeaderRef.current !== null) {
+      if (typeof window !== 'undefined')
+        window.addEventListener('scroll', () => {
+          if (typeof window !== 'undefined')
+            setShowScrollToTop(window.scrollY > displayThresh)
+        })
+    }
+  }, [simpleHeaderRef])
+
   // JSX
   return (
     <Layout
@@ -67,6 +83,14 @@ const About = ({}) => {
       bookmarkCount={loading ? null : bookmarkedIds.length}
     >
       <SEO title="About" />
+      <StickyHeader
+        {...{
+          show: showScrollToTop,
+          name: 'Name',
+          setSimpleHeaderRef,
+          img: null,
+        }}
+      />
       <div className={styles.container}>
         {/* <h1 className={styles.title}>
           <i className={'material-icons'}>info</i>About
