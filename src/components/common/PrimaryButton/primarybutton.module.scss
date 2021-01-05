@@ -12,6 +12,9 @@
     color: white;
     &:not(.link) {
       @include btn-primary();
+      &:hover {
+        background-color: lighten($light-gray, 1%);
+      }
     }
     padding: 5px 10px;
     font-size: 1.1rem;
@@ -31,7 +34,7 @@
       color: $blue;
       border-color: $blue;
       &:hover {
-        background-color: lighten($light-gray, 3%);
+        background-color: lighten($light-gray, 1%);
       }
     }
 

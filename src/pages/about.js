@@ -90,17 +90,27 @@ const About = ({}) => {
               // </Link>
             ))}
           </div>
-          <PrimaryButton
-            {...{
-              label: 'Download all document data',
-              isSecondary: false,
-              isSmall: true,
-              iconName: 'get_app',
-              onClick: () => {
-                ToExcelQuery({})
-              },
-            }}
-          />
+          <div className={styles.buttons}>
+            <PrimaryButton
+              {...{
+                label: 'Download complete dataset',
+                isSecondary: false,
+                isSmall: true,
+                iconName: 'get_app',
+                onClick: () => {
+                  ToExcelQuery({})
+                },
+              }}
+            />
+            <PrimaryButton
+              {...{
+                label: 'Download user guide',
+                isSecondary: true,
+                isSmall: true,
+                iconName: 'get_app',
+              }}
+            />
+          </div>
         </div>
         {tabs.map(
           d =>

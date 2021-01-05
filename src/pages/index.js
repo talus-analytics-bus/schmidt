@@ -134,11 +134,19 @@ const IndexPage = () => {
               (where available).
             </p>
             <div className={styles.controls}>
-              <div className={styles.mainButton}>
+              <div className={styles.mainButtons}>
                 <PrimaryButton
                   {...{
                     label: 'Explore library',
                     url: '/browse',
+                  }}
+                />
+                <PrimaryButton
+                  {...{
+                    label: 'Download user guide',
+                    isSecondary: true,
+                    isSmall: true,
+                    iconName: 'get_app',
                   }}
                 />
               </div>
