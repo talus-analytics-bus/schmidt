@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 const API_URL = process.env.GATSBY_API_URL
 
 const ToExcelQuery = async ({
@@ -63,9 +64,8 @@ const ToExcelQuery = async ({
   const url = window.URL.createObjectURL(new Blob([res.data]))
   const link = document.createElement('a')
   link.href = url
-  const dateString = ''
-  // const dateString = moment().format('YYYY-MM-DD')
-  const fn = `Health Security Net - Data Export.xlsx`
+  const dateString = moment().format('YYYY-MM-DD')
+  const fn = `Health Security Net - Data Download - ${dateString}.xlsx`
   link.setAttribute('download', fn)
   document.body.appendChild(link)
   link.click()
