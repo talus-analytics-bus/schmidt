@@ -60,7 +60,7 @@ const About = ({}) => {
       ),
     },
     {
-      name: 'User Guide',
+      name: 'User guide',
       slug: 'user_guide',
       content: (
         <div className={styles.bodyContainer}>
