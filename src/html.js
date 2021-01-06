@@ -81,7 +81,7 @@ export default function HTML(props) {
               }
             },
             autoOpen: true,
-            position: "bottom-right",
+            position: "bottom-left",
             type: "opt-in",
             content: {
               message:

@@ -30,8 +30,8 @@ const Overview = ({}) => {
         policies for the future. The library is a work in progress and continues
         to be updated as additional resources are identified. Please contact us
         with any questions or additions at{' '}
-        <a href="mailto:outbreaks@georgetown.edu" rel="noreferrer">
-          outbreaks@georgetown.edu.
+        <a href="mailto:healthsecuritynet@georgetown.edu" rel="noreferrer">
+          healthsecuritynet@georgetown.edu.
         </a>
       </p>
       <p>
