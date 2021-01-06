@@ -12,9 +12,15 @@ const MobileDisclaimer = props => {
       })}
     >
       <div className={styles.disclaimer}>
-        Welcome to the Health Security Library. This website is currently only
-        viewable on larger screens. Please return using a desktop browser, or
-        maximize your browser window, and content will appear.
+        <p>
+          Welcome to Health Security Net, a publicly accessible, centralized
+          library housing decades of documents related to pandemics.
+        </p>
+        <p>
+          This website is currently only viewable on larger screens. Please
+          return using a desktop browser, or maximize your browser window, and
+          content will appear.
+        </p>
       </div>
     </div>
   )

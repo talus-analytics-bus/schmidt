@@ -27,5 +27,11 @@
     &.shiftDown {
       margin-top: 100px;
     }
+    p {
+      font-size: 1.25rem;
+      &:not(:last-child) {
+        margin-bottom: 5vw;
+      }
+    }
   }
 }
