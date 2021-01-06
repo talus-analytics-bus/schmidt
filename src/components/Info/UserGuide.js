@@ -48,9 +48,9 @@ const UserGuide = ({}) => {
         /> */}
       </div>
       <p>
-        Welcome to the Global Health Security Library, a publicly accessible,
-        centralized library housing decades of documents, published prior to
-        2020, related to threat and risk awareness for pandemic-prone diseases.
+        Welcome to Health Security Net, a publicly accessible, centralized
+        library housing decades of documents, published prior to 2020, related
+        to threat and risk awareness for pandemic-prone diseases.
       </p>
       <p>
         Learn what guidance decision makers used, prior to the 2020 COVID-19
