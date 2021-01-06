@@ -8,6 +8,7 @@ import SEO from '../components/seo'
 import { PrimaryButton, StickyHeader } from '../components/common'
 import Overview from '../components/About/Overview'
 import Documentation from '../components/About/Documentation'
+import UserGuide from '../components/About/UserGuide'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // styles and assets
@@ -55,6 +56,15 @@ const About = ({}) => {
       content: (
         <div className={styles.bodyContainer}>
           <Documentation />
+        </div>
+      ),
+    },
+    {
+      name: 'User Guide',
+      slug: 'user_guide',
+      content: (
+        <div className={styles.bodyContainer}>
+          <UserGuide />
         </div>
       ),
     },
@@ -139,14 +149,14 @@ const About = ({}) => {
                 },
               }}
             />
-            <PrimaryButton
+            {/* <PrimaryButton
               {...{
                 label: 'Download user guide',
                 isSecondary: true,
                 isSmall: true,
                 iconName: 'get_app',
               }}
-            />
+            /> */}
           </div>
         </div>
         {tabs.map(

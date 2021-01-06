@@ -173,6 +173,28 @@
         }
       }
     }
+    .user {
+      .placeholder {
+        font-size: 3rem;
+        color: $orange;
+        font-weight: bold;
+        margin: 50px;
+      }
+      .screenCap {
+        max-height: 30px;
+      }
+      p {
+        > .screenCap {
+          position: relative;
+          top: 8px;
+          margin: 0px 5px;
+        }
+      }
+    }
+    .anchor {
+      position: relative;
+      top: -120px;
+    }
     // .endnotes {
     //   border-top: $border;
     //   padding-top: 30px;
