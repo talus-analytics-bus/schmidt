@@ -20,6 +20,14 @@ import dnld from '../../assets/images/dnld.png'
 import print from '../../assets/images/print.png'
 import preview from '../../assets/images/preview.png'
 
+// gifs
+import searchGif from '../../assets/images/search.gif'
+import previewGif from '../../assets/images/preview.gif'
+import bookmarkGif from '../../assets/images/bookmark.gif'
+import viewGif from '../../assets/images/view.gif'
+import downloadGif from '../../assets/images/download.gif'
+import browseGif from '../../assets/images/browse.gif'
+
 const UserGuide = ({}) => {
   // STATE  // --------------------------------------------------------------//
 
@@ -30,14 +38,14 @@ const UserGuide = ({}) => {
     <div className={styles.user}>
       <div className={styles.header}>
         <h1>Using the site</h1>
-        <PrimaryButton
+        {/* <PrimaryButton
           {...{
             label: 'Download this user guide',
             isSecondary: true,
             isSmall: true,
             iconName: 'get_app',
           }}
-        />
+        /> */}
       </div>
       <p>
         Welcome to the Global Health Security Library, a publicly accessible,
@@ -65,8 +73,9 @@ const UserGuide = ({}) => {
         Documents can be bookmarked to view later or downloaded directly (where
         available).
       </p>
-      <p className={styles.placeholder}>INSERT IMAGE HERE</p>
-      <h1>Learn to use the Global Health Security Library</h1>
+      <h1 className={styles.marginHeader}>
+        Learn to use the Global Health Security Library
+      </h1>
       <p>
         <ol>
           <li>
@@ -186,7 +195,7 @@ const UserGuide = ({}) => {
             </li>
           </ul>
         </p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={searchGif} alt={'Gif'} />
       </div>
       <div className={styles.userGuideSection}>
         <div id="browseSection" className={styles.anchor} />
@@ -208,7 +217,7 @@ const UserGuide = ({}) => {
             alt={'Sorting controls'}
           />
         </p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={browseGif} alt={'Gif'} />
       </div>
       <div className={styles.userGuideSection}>
         <div id="downloadSection" className={styles.anchor} />
@@ -231,7 +240,7 @@ const UserGuide = ({}) => {
           An excel sheet will download to your computer containing all of the
           available metadata for the filtered documents.
         </p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={downloadGif} alt={'Gif'} />
       </div>
       <div className={styles.userGuideSection}>
         <div id="viewSection" className={styles.anchor} />
@@ -263,7 +272,7 @@ const UserGuide = ({}) => {
           Scrolling down the document details popup or page will reveal
           suggestions for similar items that might be of interest.
         </p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={viewGif} alt={'Gif'} />
       </div>
       <div className={styles.userGuideSection}>
         <div id="bookmarkSection" className={styles.anchor} />
@@ -309,7 +318,7 @@ const UserGuide = ({}) => {
           />{' '}
           icon again.
         </p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={bookmarkGif} alt={'Gif'} />
       </div>
       <div className={styles.userGuideSection}>
         <div id="previewSection" className={styles.anchor} />
@@ -341,7 +350,7 @@ const UserGuide = ({}) => {
           document, respectively.
         </p>
         <p>Note: Some documents are not available for preview or download.</p>
-        <p className={styles.placeholder}>INSERT IMAGE HERE</p>
+        <img className={styles.gif} src={previewGif} alt={'Gif'} />
       </div>
     </div>
   )
