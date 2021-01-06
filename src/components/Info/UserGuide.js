@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { PrimaryButton } from '../common'
 
 // styles and assets
-import styles from './about.module.scss'
+import styles from './info.module.scss'
 import clear from '../../assets/images/clear.png'
 import sort from '../../assets/images/sort.png'
 import download from '../../assets/images/download.png'

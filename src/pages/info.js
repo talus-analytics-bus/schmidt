@@ -6,13 +6,13 @@ import classNames from 'classnames'
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import { PrimaryButton, StickyHeader } from '../components/common'
-import Overview from '../components/About/Overview'
-import Documentation from '../components/About/Documentation'
-import UserGuide from '../components/About/UserGuide'
+import Overview from '../components/Info/Overview'
+import Documentation from '../components/Info/Documentation'
+import UserGuide from '../components/Info/UserGuide'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 
 // styles and assets
-import styles from '../components/About/about.module.scss'
+import styles from '../components/Info/info.module.scss'
 import loadingGif from '../assets/icons/loading.gif'
 
 // local utility functions
@@ -20,7 +20,7 @@ import { withBookmarkedIds } from '../components/misc/Util'
 import ToExcelQuery from '../components/misc/ToExcelQuery'
 import { style } from 'd3'
 
-const About = ({}) => {
+const Info = ({}) => {
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
@@ -96,7 +96,7 @@ const About = ({}) => {
       loading={loading}
       bookmarkCount={loading ? null : bookmarkedIds.length}
     >
-      <SEO title="About" />
+      <SEO title="Info" />
       <StickyHeader
         {...{
           show: showScrollToTop,
@@ -107,12 +107,11 @@ const About = ({}) => {
       />
       <div className={styles.container}>
         {/* <h1 className={styles.title}>
-          <i className={'material-icons'}>info</i>About
+          <i className={'material-icons'}>info</i>Info
         </h1> */}
         <div className={styles.toggleContainer}>
           <div className={styles.tabs}>
             {tabs.map(d => (
-              // <Link to={'/about/' + d.slug}>
               <div
                 key={d.slug}
                 onClick={() => setView(d.slug)}
@@ -173,4 +172,4 @@ const About = ({}) => {
   )
 }
 
-export default About
+export default Info
