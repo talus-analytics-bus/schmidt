@@ -889,8 +889,12 @@ const Documentation = ({}) => {
             common interest.
           </li>
           <li>
-            <em>National/federal government</em> : A governing body within a
+            <em>National/federal government</em>: A governing body within a
             country, operating at the national or federal level.
+          </li>
+          <li>
+            <em>Local government</em>: A subnational governing body within a
+            country.
           </li>
           <li>
             <em>Non-governmental organization (NGO)</em>: An organization
