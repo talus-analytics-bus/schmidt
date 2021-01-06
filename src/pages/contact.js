@@ -107,30 +107,31 @@ const Contact = ({}) => {
           </div>
           <div className={styles.formRow}>
             <label className={styles.firstName} htmlFor="First_Name">
-              First name*
+              First name
               <input type="text" id="First_Name" name="First_Name" />
             </label>
             <label className={styles.lastName} htmlFor="Last_Name">
-              Last name*
+              Last name
               <input type="text" id="Last_Name" name="Last_Name" />
             </label>
           </div>
 
           <div className={styles.formRow}>
             <label className={styles.email} htmlFor="Email">
-              Email*
+              Email
               <input type="email" id="Email" name="Email" />
             </label>
             <label className={styles.org} htmlFor="Organization">
-              Organization*
+              Organization
               <input type="text" id="Organization" name="Organization" />
             </label>
           </div>
           <div className={styles.formRow}>
             <label className={styles.body} htmlFor="body">
-              Comment or question*
+              Comment or question
               <textarea type="text" id="body" name="body" maxLength="1200" />
               <p className={styles.lengthHint}>200 Words</p>
+              <p className={styles.lengthHint}>200 words</p>
             </label>
           </div>
           <div className={styles.formRow}>

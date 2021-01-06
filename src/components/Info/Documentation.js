@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { PrimaryButton } from '../common'
 
 // styles and assets
-import styles from './about.module.scss'
+import styles from './info.module.scss'
 
 import ToExcelQuery from '../misc/ToExcelQuery'
 
@@ -85,8 +85,8 @@ const Documentation = ({}) => {
             https://creativecommons.org/licenses/by/4.0/
           </ExtLink>
           ), with appropriate reference and acknowledgement of the original
-          research teams, as listed{' '}
-          <ExtLink url="/about/">on this site</ExtLink>.
+          research teams, as listed <ExtLink url="/info/">on this site</ExtLink>
+          .
         </p>
         <p>
           <strong>This documentation includes:</strong>

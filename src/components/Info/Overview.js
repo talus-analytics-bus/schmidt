@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { PrimaryButton } from '../common'
 
 // styles and assets
-import styles from './about.module.scss'
+import styles from './info.module.scss'
 import talus from '../../assets/images/talus.png'
 import georgetown from '../../assets/images/georgetown.png'
 import schmidt from '../../assets/images/schmidt.svg'

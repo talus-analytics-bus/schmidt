@@ -114,13 +114,13 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 setShowMobileMenu(false)
               }}
               className={classNames(
-                page === 'about' ? styles.active : '',
+                page === 'info' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/about/'}
+              to={'/info/'}
             >
               <i className={'material-icons'}>info</i>
-              <span>About</span>
+              <span>Information</span>
             </Link>
             <Link
               onClick={() => {
