@@ -43,7 +43,11 @@ const Documentation = ({}) => {
           and non-governmental organizations. The library is a work in progress
           and continues to be updated as additional resources are identified.
           Please contact us with any questions or additions at{' '}
-          <a href="mailto:healthsecuritynet@georgetown.edu" rel="noreferrer">
+          <a
+            target="_blank"
+            href="mailto:healthsecuritynet@georgetown.edu"
+            rel="noreferrer"
+          >
             healthsecuritynet@georgetown.edu.
           </a>
         </p>
@@ -885,8 +889,12 @@ const Documentation = ({}) => {
             common interest.
           </li>
           <li>
-            <em>National/federal government</em> : A governing body within a
+            <em>National/federal government</em>: A governing body within a
             country, operating at the national or federal level.
+          </li>
+          <li>
+            <em>Local government</em>: A subnational governing body within a
+            country.
           </li>
           <li>
             <em>Non-governmental organization (NGO)</em>: An organization

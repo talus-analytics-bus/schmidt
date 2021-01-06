@@ -2,6 +2,9 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
+// local components
+import ReactTooltip from 'react-tooltip'
+
 // third party packages
 import { Link } from 'gatsby'
 
@@ -40,8 +43,12 @@ export const PrimaryButton = ({
   // if true: button is simply the icon itself with no other styling
   isIcon = false,
 
+  // if string defined, then tooltip text to show on hover
+  tooltip = null,
+
   // if true: disabled class applied
   disabled = false,
+  ...props
 }) => {
   const icon =
     iconName !== null ? <i className={'material-icons'}>{iconName}</i> : null
@@ -79,13 +86,20 @@ export const PrimaryButton = ({
     button = unwrappedButton
   }
 
+  const id = 'buttonTip-' + Math.random().toString()
+
   // JSX // ---------------------------------------------------------------- //
   return (
-    <div
-      className={classNames(styles.wrapper, { [styles.disabled]: disabled })}
-    >
-      {button}
-    </div>
+    <>
+      <div
+        data-tip={tooltip}
+        data-for={tooltip !== null ? id : null}
+        className={classNames(styles.wrapper, { [styles.disabled]: disabled })}
+      >
+        {button}
+      </div>
+      {tooltip !== null && <ReactTooltip {...{ id, delayShow: 500 }} />}
+    </>
   )
 }
 

@@ -12,15 +12,8 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <link
-          rel="preload"
-          href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
-          as="style"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
-        />
+        <link rel="preload" href="/cookieconsent.min.css" as="style" />
+        <link rel="stylesheet" href="/cookieconsent.min.css" />
         {props.headComponents}
         <script
           async
@@ -28,7 +21,7 @@ export default function HTML(props) {
         ></script>
         <script
           dangerouslySetInnerHTML={{
-            __html: ` 
+            __html: `
               window.dataLayer = window.dataLayer || [];
               window["ga-disable-G-KHMJG9CZYH"] = true;`,
           }}
@@ -42,10 +35,7 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <script
-          src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-          data-cfasync="false"
-        ></script>
+        <script src="/cookieconsent.min.js"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -133,7 +133,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               to={'/contact/'}
             >
               <i className={'material-icons'}>mail</i>
-              <span>Contact Us</span>
+              <span>Contact us</span>
             </Link>
           </div>
         </div>

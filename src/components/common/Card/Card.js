@@ -75,6 +75,7 @@ export const Card = ({
     iconName: 'link',
     urlIsExternal: true,
     url: link,
+    tooltip: link,
     onClick: e => {
       e.stopPropagation()
     },
@@ -221,7 +222,6 @@ export const Card = ({
                     dd.id === d.id || dd.id === d || dd.id === d[linkTextField]
                 )
               : undefined
-          console.log(d)
 
           const matchingSnippet =
             matchingTag ||
@@ -236,8 +236,6 @@ export const Card = ({
             alreadySeenList.push(getVal(d))
 
             if (matchingSnippet) {
-              console.log(matchingSnippet)
-
               card.show[filterKey] = true
               return {
                 onClick: e =>

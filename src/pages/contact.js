@@ -91,7 +91,7 @@ const Contact = ({}) => {
         <form
           className={styles.main}
           onSubmit={handleSubmit}
-          aria-label="Contact Us"
+          aria-label="Contact us"
         >
           <div className={styles.formRow}>
             <div className={styles.accessibility}>
@@ -107,11 +107,11 @@ const Contact = ({}) => {
           </div>
           <div className={styles.formRow}>
             <label className={styles.firstName} htmlFor="First_Name">
-              First Name*
+              First name*
               <input type="text" id="First_Name" name="First_Name" />
             </label>
             <label className={styles.lastName} htmlFor="Last_Name">
-              Last Name*
+              Last name*
               <input type="text" id="Last_Name" name="Last_Name" />
             </label>
           </div>
