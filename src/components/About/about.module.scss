@@ -27,6 +27,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    border-bottom: 2px solid $blue;
+    padding-bottom: 20px;
     .tabs {
       @include spaceItemsHoriz(10px);
       display: flex;
@@ -174,6 +176,12 @@
       }
     }
     .user {
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
       .placeholder {
         font-size: 3rem;
         color: $orange;

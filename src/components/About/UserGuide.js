@@ -28,14 +28,17 @@ const UserGuide = ({}) => {
   // JSX
   return (
     <div className={styles.user}>
-      <PrimaryButton
-        {...{
-          label: 'Download this user guide',
-          isSecondary: true,
-          isSmall: true,
-          iconName: 'get_app',
-        }}
-      />
+      <div className={styles.header}>
+        <h1>Using the site</h1>
+        <PrimaryButton
+          {...{
+            label: 'Download this user guide',
+            isSecondary: true,
+            isSmall: true,
+            iconName: 'get_app',
+          }}
+        />
+      </div>
       <p>
         Welcome to the Global Health Security Library, a publicly accessible,
         centralized library housing decades of documents, published prior to

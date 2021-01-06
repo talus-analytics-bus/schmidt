@@ -27,6 +27,7 @@ const Documentation = ({}) => {
   return (
     <Endnotes.Provider offset={-100}>
       <div className={styles.doc}>
+        <h1>Documentation</h1>
         <p>
           Health Security Net is one of a{' '}
           <ExtLink url={'https://gida.ghscosting.org/'}>
