@@ -184,9 +184,9 @@ const Documentation = ({}) => {
         </p>
         <ol>
           <li>
-            <em>
+            <strong>
               Food and Agriculture Organization of the United Nations (FAO)
-            </em>
+            </strong>
             : FAO holds biennial conferences to discuss and review programs and
             provide guidance for Member States on health-related activities.
             Resolutions and decisions from each conference are published in the
@@ -209,8 +209,8 @@ const Documentation = ({}) => {
             exclusion.&nbsp;
           </li>
           <li>
-            <em>United Nations General Assembly (UNGA)</em>: The United Nations
-            Digital Library (
+            <strong>United Nations General Assembly (UNGA)</strong>: The United
+            Nations Digital Library (
             <ExtLink url="https://digitallibrary.un.org/?ln=en&as=1">
               https://digitallibrary.un.org/?ln=en&as=1
             </ExtLink>
@@ -228,8 +228,8 @@ const Documentation = ({}) => {
             all.) Once the dataset was ready, exclusion criteria were applied.
           </li>
           <li>
-            <em>United Nations Security Council (UNSC)</em>: Based on the
-            experience and judgement of Center faculty, the following UNSC
+            <strong>United Nations Security Council (UNSC)</strong>: Based on
+            the experience and judgement of Center faculty, the following UNSC
             resolutions were deemed relevant to global health security within
             the years 1995&ndash;2019: 1308, 1983, 2177, and 2439. Each of these
             was logged into the database. The text of each was also reviewed for
@@ -239,8 +239,8 @@ const Documentation = ({}) => {
             database.)
           </li>
           <li>
-            <em>World Organisation for Animal Health (OIE)</em>: OIE holds
-            annual conferences to discuss and review programs and provide
+            <strong>World Organisation for Animal Health (OIE)</strong>: OIE
+            holds annual conferences to discuss and review programs and provide
             guidance for Member States on health-related activities. Resolutions
             and decisions from each conference are published at{' '}
             <ExtLink url="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
@@ -261,10 +261,10 @@ const Documentation = ({}) => {
             exclusion.&nbsp;
           </li>
           <li>
-            <em>World Health Assembly (WHA)</em>: WHA holds annual conferences
-            to discuss and review programs and provide guidance for Member
-            States on health-related activities. Resolutions and decisions from
-            each conference are published at{' '}
+            <strong>World Health Assembly (WHA)</strong>: WHA holds annual
+            conferences to discuss and review programs and provide guidance for
+            Member States on health-related activities. Resolutions and
+            decisions from each conference are published at{' '}
             <ExtLink url="https://apps.who.int/gb/index.html">
               https://apps.who.int/gb/index.html
             </ExtLink>
@@ -283,9 +283,9 @@ const Documentation = ({}) => {
             or exclusion.
           </li>
           <li>
-            <em>World Health Organization (WHO)</em>: WHO documents located in
-            the Institutional Repository for Information Sharing (IRIS) database
-            were searched (
+            <strong>World Health Organization (WHO)</strong>: WHO documents
+            located in the Institutional Repository for Information Sharing
+            (IRIS) database were searched (
             <ExtLink url="https://apps.who.int/iris/">
               https://apps.who.int/iris/
             </ExtLink>
@@ -365,7 +365,7 @@ const Documentation = ({}) => {
         <p>The research term sought information from the following sources:</p>
         <ol>
           <li>
-            <em>Hearings: </em>The website{' '}
+            <strong>Hearings: </strong>The website{' '}
             <ExtLink url="https://www.congress.gov/">www.congress.gov</ExtLink>{' '}
             was used as a primary source of information on congressional
             activity by way of the Congressional Record (CR). The CR captures
@@ -460,12 +460,13 @@ const Documentation = ({}) => {
             unique committees. */}
           </li>
           <li>
-            <em>Government reports.</em> The research team sought reports from
-            sources to which decision-makers in the Executive and/or Legislative
-            branches could or should reliably be exposed. Three primary groups
-            were considered: independent advisory bodies such as federal
-            advisory committees; departments and agencies with significant
-            operational jurisdiction over and spending on EID-relevant activity;
+            <strong>Government reports.</strong> The research team sought
+            reports from sources to which decision-makers in the Executive
+            and/or Legislative branches could or should reliably be exposed.
+            Three primary groups were considered: independent advisory bodies
+            such as federal advisory committees; departments and agencies with
+            significant operational jurisdiction over and spending on
+            EID-relevant activity;
             <Endnotes.Note>
               Watson C, Watson M, Gastfriend D, Sell TK. Federal Funding for
               Health Security in FY2019. Health Secur. 2018;16(5):281-303. Epub
@@ -592,7 +593,7 @@ const Documentation = ({}) => {
             included for comprehensiveness.
           </li>
           <li>
-            <em>Third-party reports</em>. This category includes
+            <strong>Third-party reports</strong>. This category includes
             non-governmental organization, academic, and private sector reports.
             Researchers consulted the University of Pennsylvania TTSCP Global
             Think Tank Index, published annually, to compile a list of all
@@ -667,8 +668,8 @@ const Documentation = ({}) => {
             elsewhere.
           </li>
           <li>
-            <em>Other methods</em>. To capture additional relevant documents
-            that were not already captured by other methods, documents
+            <strong>Other methods</strong>. To capture additional relevant
+            documents that were not already captured by other methods, documents
             referenced by GAO reports already included in the Library (see U.S.
             Step 3) were reviewed. We used document titles and, if needed,
             document contents to assess relevancy. In addition to the standing
@@ -690,7 +691,7 @@ const Documentation = ({}) => {
         <h3>Other</h3>
         <ol>
           <li>
-            <em>Academic journal literature. </em>Journal literature was
+            <strong>Academic journal literature</strong>. Journal literature was
             searched using Ovid Medline (
             <ExtLink url="https://ovidsp.ovid.com/">
               https://ovidsp.ovid.com/
@@ -714,9 +715,9 @@ const Documentation = ({}) => {
             within that issue.
           </li>
           <li>
-            <em>Simulations and exercises</em>. Databases and other sources that
-            might have records of simulations or exercises were initially
-            identified by a Google search of the keywords
+            <strong>Simulations and exercises</strong>. Databases and other
+            sources that might have records of simulations or exercises were
+            initially identified by a Google search of the keywords
             &ldquo;infectious,&rdquo; &ldquo;disease,&rdquo;
             &ldquo;tabletop,&rdquo; &ldquo;exercise,&rdquo;
             &ldquo;report,&rdquo; and &ldquo;readout&rdquo; in various
