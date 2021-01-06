@@ -848,32 +848,48 @@ const Documentation = ({}) => {
         </p>
         <ul>
           <li>
-            <em>Academic</em>: An institution of higher learning.
+            <span className={styles.medBold}>Academic</span>:{' '}
+            <em>An institution of higher learning.</em>
           </li>
           <li>
-            <em>Academic journal</em>: A scientific journal or other scholarly
-            publication.
+            <span className={styles.medBold}>Academic journal</span>:{' '}
+            <em>A scientific journal or other scholarly publication.</em>
           </li>
           <li>
-            <em>Intergovernmental organization</em>: An entity typically created
-            by treaty, involving two or more nations, to work on issues of
-            common interest.
+            <span className={styles.medBold}>
+              Intergovernmental organization
+            </span>
+            :{' '}
+            <em>
+              An entity typically created by treaty, involving two or more
+              nations, to work on issues of common interest.
+            </em>
           </li>
           <li>
-            <em>National/federal government</em>: A governing body within a
-            country, operating at the national or federal level.
+            <span className={styles.medBold}>National/federal government</span>:{' '}
+            <em>
+              A governing body within a country, operating at the national or
+              federal level.
+            </em>
           </li>
           <li>
-            <em>Local government</em>: A subnational governing body within a
-            country.
+            <span className={styles.medBold}>Local government</span>:{' '}
+            <em>A subnational governing body within a country.</em>
           </li>
           <li>
-            <em>Non-governmental organization (NGO)</em>: An organization
-            independent of government and distinct from industry or academia;
-            NGOs are usually non-profit or not-for-profit entities.
+            <span className={styles.medBold}>
+              Non-governmental organization (NGO)
+            </span>
+            :{' '}
+            <em>
+              An organization independent of government and distinct from
+              industry or academia; NGOs are usually non-profit or
+              not-for-profit entities.
+            </em>
           </li>
           <li>
-            <em>Private</em>: A private sector company, usually for-profit.
+            <span className={styles.medBold}>Private</span>:{' '}
+            <em>A private sector company, usually for-profit.</em>
           </li>
         </ul>
         <p>
@@ -902,27 +918,36 @@ const Documentation = ({}) => {
         </p>
         <ul>
           <li>
-            <em>Report</em>: An item presented as a reporting of findings; may
-            include written documentation of studies, meetings, investigations,
-            etc. Guidance and technical guidelines are also included in this
-            category.
+            <span className={styles.medBold}>Report</span>:{' '}
+            <em>
+              An item presented as a reporting of findings; may include written
+              documentation of studies, meetings, investigations, etc. Guidance
+              and technical guidelines are also included in this category.
+            </em>
           </li>
           <li>
-            <em>Government action</em>: An item that reflects a decisive
-            oversight, strategic, or other action taken on the part of a
-            national government or an intergovernmental body; may include
-            hearings, strategies, plans, resolutions, decisions, etc.
+            <span className={styles.medBold}>Government action</span>:{' '}
+            <em>
+              An item that reflects a decisive oversight, strategic, or other
+              action taken on the part of a national government or an
+              intergovernmental body; may include hearings, strategies, plans,
+              resolutions, decisions, etc.
+            </em>
           </li>
           <li>
-            <em>Simulation or Exercise</em>: An item about simulations or
-            exercises held, where simulations and exercises can be table-top or
-            operationalized training activities.
+            <span className={styles.medBold}>Simulation or Exercise</span>:{' '}
+            <em>
+              An item about simulations or exercises held, where simulations and
+              exercises can be table-top or operationalized training activities.
+            </em>
           </li>
           <li>
-            <em>Journal paper</em>: An item published in a professional journal;
-            may reflect original research, literature reviews, commentaries,
-            editorials, letters, and news items; may or may not be
-            peer-reviewed.
+            <span className={styles.medBold}>Journal paper</span>:{' '}
+            <em>
+              An item published in a professional journal; may reflect original
+              research, literature reviews, commentaries, editorials, letters,
+              and news items; may or may not be peer-reviewed.
+            </em>
           </li>
         </ul>
         <p>
@@ -937,46 +962,68 @@ const Documentation = ({}) => {
         </p>
         <ul>
           <li>
-            <em>Threat/risk awareness</em>: An item primarily about
-            intelligence, identification of threats, identification of risks,
-            threat and/or risk assessments (where risk includes threats,
-            vulnerabilities, and/or consequences), etc.
+            <span className={styles.medBold}>Threat/risk awareness</span>:{' '}
+            <em>
+              An item primarily about intelligence, identification of threats,
+              identification of risks, threat and/or risk assessments (where
+              risk includes threats, vulnerabilities, and/or consequences), etc.
+            </em>
           </li>
           <li>
-            <em>Surveillance/detection</em>: An item primarily describing the
-            detection and identification of infectious diseases (and relevant
-            systems, technologies, challenges, etc.).
+            <span className={styles.medBold}>Surveillance/detection</span>:{' '}
+            <em>
+              An item primarily describing the detection and identification of
+              infectious diseases (and relevant systems, technologies,
+              challenges, etc.).
+            </em>
           </li>
           <li>
-            <em>Medical preparedness/emergency response</em>: An item primarily
-            addressing medical readiness, which is wide-ranging and may include:
-            medical countermeasures, non-pharmaceutical interventions, medical
-            training and workforce, state or local infectious disease
-            preparedness, hospital preparedness, clinical responses, etc.; or
-            items concerning the response to a public health emergency
-            (emergency services capacity, biohazard training, hospital surge
-            capacity, etc.). Response to agricultural disease outbreaks is
-            generally not included in this category.
+            <span className={styles.medBold}>
+              Medical preparedness/emergency response
+            </span>
+            :{' '}
+            <em>
+              An item primarily addressing medical readiness, which is
+              wide-ranging and may include: medical countermeasures,
+              non-pharmaceutical interventions, medical training and workforce,
+              state or local infectious disease preparedness, hospital
+              preparedness, clinical responses, etc.; or items concerning the
+              response to a public health emergency (emergency services
+              capacity, biohazard training, hospital surge capacity, etc.).
+              Response to agricultural disease outbreaks is generally not
+              included in this category.
+            </em>
           </li>
           <li>
-            <em>International aid/collaboration</em>: An item primarily about
-            bilateral or multilateral international aid (fiscal, personnel,
-            etc.) or about bilateral or multilateral collaborations (information
-            sharing, sample sharing, capacity building, etc).
+            <span className={styles.medBold}>
+              International aid/collaboration
+            </span>
+            :{' '}
+            <em>
+              An item primarily about bilateral or multilateral international
+              aid (fiscal, personnel, etc.) or about bilateral or multilateral
+              collaborations (information sharing, sample sharing, capacity
+              building, etc).
+            </em>
           </li>
           <li>
-            <em>Strategic planning</em>: A strategic plan or an implementation
-            plan; also, items primarily about planning, the need for plans,
-            recommendations for exercises, recommendations for strategic
-            frameworks, etc. May include items addressing need for policy
-            reforms.
+            <span className={styles.medBold}>Strategic planning</span>:{' '}
+            <em>
+              A strategic plan or an implementation plan; also, items primarily
+              about planning, the need for plans, recommendations for exercises,
+              recommendations for strategic frameworks, etc. May include items
+              addressing need for policy reforms.
+            </em>
           </li>
           <li>
-            <em>Other</em>: Any topic that does not fall into the defined key
-            topics; may include reports on a variety of important topics, such
-            as laboratory research, research and development, critical
-            infrastructure protection, or economic impacts of pandemics. Such
-            reports may address key topics, but in a minor or tangential way.
+            <span className={styles.medBold}>Other</span>:{' '}
+            <em>
+              Any topic that does not fall into the defined key topics; may
+              include reports on a variety of important topics, such as
+              laboratory research, research and development, critical
+              infrastructure protection, or economic impacts of pandemics. Such
+              reports may address key topics, but in a minor or tangential way.
+            </em>
           </li>
         </ul>
         <Endnotes.Endnotes />
