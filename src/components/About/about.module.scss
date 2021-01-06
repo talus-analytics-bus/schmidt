@@ -72,6 +72,13 @@
           margin-top: 10px;
         }
       }
+      @media screen and (max-width: 1000px) {
+        padding: 20px 0px 0px 0px;
+        // margin: 0px auto;
+      }
+    }
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
     }
   }
   .content {
@@ -200,6 +207,9 @@
       }
       .marginHeader {
         margin-top: 40px;
+      }
+      .gif {
+        max-width: 100%;
       }
     }
     .anchor {
