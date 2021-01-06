@@ -232,7 +232,7 @@ const Bookmarks = ({}) => {
                       <PrimaryButton
                         {...{
                           label: !isDownloading ? (
-                            'Download results'
+                            'Download bookmarks'
                           ) : (
                             <div className={styles.downloading}>
                               Downloading...
