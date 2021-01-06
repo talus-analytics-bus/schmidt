@@ -37,10 +37,11 @@
     min-width: 25px;
   }
 
-  p.endnoteParagraph {
+  div.endnoteParagraph {
     margin: 0;
     font-size: 1rem;
     margin-top: 0;
+    line-height: 1.8rem;
     // padding-right: 25%;
 
     &:not(:first-child) {

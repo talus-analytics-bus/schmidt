@@ -28,7 +28,7 @@ const Documentation = ({}) => {
     <Endnotes.Provider offset={-100}>
       <div className={styles.doc}>
         <h1>Documentation</h1>
-        <p>
+        <p className={styles.noTopMargin}>
           Health Security Net is one of a{' '}
           <ExtLink url={'https://gida.ghscosting.org/'}>
             suite of free resources
@@ -52,7 +52,6 @@ const Documentation = ({}) => {
             healthsecuritynet@georgetown.edu.
           </a>
         </p>
-        <br />
         <p>
           As of its launch in January 2021, the library includes documents from
           global and national-level sources dated from 1995-2019. Global sources
@@ -66,9 +65,7 @@ const Documentation = ({}) => {
           be updated to reflect pre-1995 or post-2019 sources, additional
           countries, and other elements.
         </p>
-        <br />
         <p>The site includes:</p>
-        <br />
         <ol>
           <li>
             A searchable, filterable database of all documents in the dataset.
@@ -81,7 +78,6 @@ const Documentation = ({}) => {
             dataset.
           </li>
         </ol>
-        <br />
         <p>
           This work and underlying dataset is available for use under the
           Creative Commons Attribution 4.0 International Public License (
@@ -92,12 +88,9 @@ const Documentation = ({}) => {
           research teams, as listed{' '}
           <ExtLink url="/about/">on this site</ExtLink>.
         </p>
-        <br />
-        <br />
         <p>
           <strong>This documentation includes:</strong>
         </p>
-        <br />
         <ol>
           <li>
             <a
@@ -133,15 +126,9 @@ const Documentation = ({}) => {
             </a>
           </li>
         </ol>
-        <br />
-        <br />
         <div id="library" style={{ position: 'relative', top: -100 }} />
-        <p>
-          <strong>Library</strong>
-        </p>
-        <p>
-          <strong>Data collection</strong>
-        </p>
+        <h1>Library</h1>
+        <h2>Data collection</h2>
         <p>
           The modern biothreat can be viewed as a tripartite construct that
           consists of intentional acts, emerging infectious diseases (EID) from
@@ -159,15 +146,12 @@ const Documentation = ({}) => {
           preparedness and infectious disease. The library includes items
           published from January 1, 1995 &ndash; December 31, 2019.
         </p>
-        <p>
-          <u>Global</u>
-        </p>
+        <h3>Global</h3>
         <p>
           The research team collected documents online from multiple global
           sources and excluded those meeting any of the following
           criteria:&nbsp;
         </p>
-        <br />
         <ul>
           <li>
             Items published outside of January 1, 1995 &ndash; December 31,
@@ -353,10 +337,7 @@ const Documentation = ({}) => {
             judgement were irrelevant to health security were also excluded.
           </li>
         </ol>
-        <br />
-        <p>
-          <u>National</u>
-        </p>
+        <h3>National</h3>
         <p>
           <em>United States</em>
         </p>
@@ -368,7 +349,6 @@ const Documentation = ({}) => {
           to pandemics (see details below). The team excluded documents meeting
           any of the following criteria:
         </p>
-        <br />
         <ul>
           <li>Items outside of January 1, 1995 &ndash; December 31, 2019.</li>
           <li>
@@ -707,10 +687,7 @@ const Documentation = ({}) => {
           the researchers&rsquo; expert judgement were irrelevant to health
           security and/or pandemics were excluded.
         </p>
-        <br />
-        <p>
-          <u>Other</u>
-        </p>
+        <h3>Other</h3>
         <ol>
           <li>
             <em>Academic journal literature. </em>Journal literature was
@@ -771,11 +748,8 @@ const Documentation = ({}) => {
             were also sought.
           </li>
         </ol>
-        <br />
         <div id="datacoding" style={{ position: 'relative', top: -100 }} />
-        <p>
-          <strong>Data coding</strong>
-        </p>
+        <h2>Data coding</h2>
         <p>
           The team developed a custom data taxonomy and data dictionary to
           define key metadata and organize the dataset. The data were populated
@@ -794,9 +768,7 @@ const Documentation = ({}) => {
           code the data.
         </p>
         <div id="glossary" style={{ position: 'relative', top: -100 }} />
-        <p>
-          <strong>Glossary</strong>
-        </p>
+        <h2>Glossary</h2>
         <p>
           This glossary is designed to provide the user with key information to
           understand the way items were coded and the meaning ascribed to them
@@ -851,9 +823,7 @@ const Documentation = ({}) => {
           </em>
         </p>
         <p>
-          <strong>
-            <em>Publishing sub-organization</em>
-          </strong>
+          <strong>Publishing sub-organization</strong>
         </p>
         <p>
           <em>
@@ -875,7 +845,6 @@ const Documentation = ({}) => {
             work:
           </em>
         </p>
-        <br />
         <ul>
           <li>
             <em>Academic</em>: An institution of higher learning.
@@ -930,7 +899,6 @@ const Documentation = ({}) => {
             viewed above the report title in the detailed view of a record:
           </em>
         </p>
-        <br />
         <ul>
           <li>
             <em>Report</em>: An item presented as a reporting of findings; may
@@ -966,7 +934,6 @@ const Documentation = ({}) => {
             topical areas, but only one topic is chosen:
           </em>
         </p>
-        <br />
         <ul>
           <li>
             <em>Threat/risk awareness</em>: An item primarily about
@@ -1011,10 +978,6 @@ const Documentation = ({}) => {
             reports may address key topics, but in a minor or tangential way.
           </li>
         </ul>
-        <br />
-        <br />
-        <br />
-
         <Endnotes.Endnotes />
       </div>
     </Endnotes.Provider>

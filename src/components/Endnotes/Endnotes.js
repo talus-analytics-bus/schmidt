@@ -120,7 +120,7 @@ export const Endnotes = props => {
       >
         {id}
       </a>
-      <p className={styles.endnoteParagraph}>{note}</p>
+      <div className={styles.endnoteParagraph}>{note}</div>
     </div>
   ))
 
