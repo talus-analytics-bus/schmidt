@@ -208,8 +208,9 @@
       .marginHeader {
         margin-top: 40px;
       }
-      .gif {
-        max-width: 100%;
+      .gif,
+      video {
+        width: 100%;
       }
     }
     .anchor {

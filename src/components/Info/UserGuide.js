@@ -21,18 +21,28 @@ import print from '../../assets/images/print.png'
 import preview from '../../assets/images/preview.png'
 
 // gifs
-import searchGif from '../../assets/images/search.gif'
-import previewGif from '../../assets/images/preview.gif'
-import bookmarkGif from '../../assets/images/bookmark.gif'
-import viewGif from '../../assets/images/view.gif'
-import downloadGif from '../../assets/images/download.gif'
-import browseGif from '../../assets/images/browse.gif'
+import searchVid from '../../assets/images/search.mp4'
+import previewVid from '../../assets/images/preview.mp4'
+import bookmarkVid from '../../assets/images/bookmark.mp4'
+import viewVid from '../../assets/images/view.mp4'
+import downloadVid from '../../assets/images/download.mp4'
+import browseVid from '../../assets/images/browse.mp4'
 
 const UserGuide = ({}) => {
   // STATE  // --------------------------------------------------------------//
 
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
 
+  // CONSTANTS
+  // video component
+  const Video = src => {
+    return (
+      <video controls muted preload>
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    )
+  }
   // JSX
   return (
     <div className={styles.user}>
@@ -195,7 +205,7 @@ const UserGuide = ({}) => {
             </li>
           </ul>
         </p>
-        <img className={styles.gif} src={searchGif} alt={'Gif'} />
+        {Video(searchVid)}
       </div>
       <div className={styles.userGuideSection}>
         <div id="browseSection" className={styles.anchor} />
@@ -217,7 +227,7 @@ const UserGuide = ({}) => {
             alt={'Sorting controls'}
           />
         </p>
-        <img className={styles.gif} src={browseGif} alt={'Gif'} />
+        {Video(browseVid)}
       </div>
       <div className={styles.userGuideSection}>
         <div id="downloadSection" className={styles.anchor} />
@@ -240,7 +250,7 @@ const UserGuide = ({}) => {
           An excel sheet will download to your computer containing all of the
           available metadata for the filtered documents.
         </p>
-        <img className={styles.gif} src={downloadGif} alt={'Gif'} />
+        {Video(downloadVid)}
       </div>
       <div className={styles.userGuideSection}>
         <div id="viewSection" className={styles.anchor} />
@@ -272,7 +282,7 @@ const UserGuide = ({}) => {
           Scrolling down the document details popup or page will reveal
           suggestions for similar items that might be of interest.
         </p>
-        <img className={styles.gif} src={viewGif} alt={'Gif'} />
+        {Video(viewVid)}
       </div>
       <div className={styles.userGuideSection}>
         <div id="bookmarkSection" className={styles.anchor} />
@@ -318,7 +328,7 @@ const UserGuide = ({}) => {
           />{' '}
           icon again.
         </p>
-        <img className={styles.gif} src={bookmarkGif} alt={'Gif'} />
+        {Video(bookmarkVid)}
       </div>
       <div className={styles.userGuideSection}>
         <div id="previewSection" className={styles.anchor} />
@@ -350,7 +360,7 @@ const UserGuide = ({}) => {
           document, respectively.
         </p>
         <p>Note: Some documents are not available for preview or download.</p>
-        <img className={styles.gif} src={previewGif} alt={'Gif'} />
+        {Video(previewVid)}
       </div>
     </div>
   )
