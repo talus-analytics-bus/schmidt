@@ -75,6 +75,7 @@ export const Card = ({
     iconName: 'link',
     urlIsExternal: true,
     url: link,
+    tooltip: link,
     onClick: e => {
       e.stopPropagation()
     },
