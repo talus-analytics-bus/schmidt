@@ -43,7 +43,11 @@ const Documentation = ({}) => {
           and non-governmental organizations. The library is a work in progress
           and continues to be updated as additional resources are identified.
           Please contact us with any questions or additions at{' '}
-          <a href="mailto:healthsecuritynet@georgetown.edu" rel="noreferrer">
+          <a
+            target="_blank"
+            href="mailto:healthsecuritynet@georgetown.edu"
+            rel="noreferrer"
+          >
             healthsecuritynet@georgetown.edu.
           </a>
         </p>
