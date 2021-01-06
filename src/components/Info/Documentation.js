@@ -770,262 +770,274 @@ const Documentation = ({}) => {
         </p>
         <div id="glossary" style={{ position: 'relative', top: -100 }} />
         <h2>Glossary</h2>
-        <p>
-          This glossary is designed to provide the user with key information to
-          understand the way items were coded and the meaning ascribed to them
-          by the research team. Other explanations are available throughout the
-          above methodological discussion, and through the tooltips available
-          throughout the website.
-        </p>
-        <p>
-          <strong>Event</strong>
-        </p>
-        <p>
-          <em>
-            A select list of outbreak events to which an item may directly
-            relate. This list is not comprehensive; it is a narrow usage that
-            applies to records directly related to a specific, select outbreak.
-            It does not address records that may be about the same infectious
-            disease, or about other outbreaks that pathogen caused.
-          </em>
-        </p>
-        <p>
-          <strong>Funder</strong>
-        </p>
-        <p>
-          <em>
-            The entity that provided the financial support for the item. Where a
-            document specifies the funder of the work (or in some cases, the
-            funder of the group that produced the work), the entity or entities
-            are listed. Where the document specifies that funding received was
-            &ldquo;None,&rdquo; this is indicated as such. Where no funder is
-            offered, this is indicated as "Funder not specified.&rdquo;
-          </em>
-        </p>
-        <p>
-          <strong>Organization has governance authority</strong>
-        </p>
-        <p>
-          <em>
-            Captures whether the Publishing Organization has governance
-            authority over the topic, recommendations, or other content of the
-            item in the sense of whether it can act on the information contained
-            in the record. Intergovernmental organizations may have governance
-            authority depending on the context and topic of the product.
-          </em>
-        </p>
-        <p>
-          <strong>Publishing organization</strong>
-        </p>
-        <p>
-          <em>
-            The group that published the work or led the effort (such as a
-            tabletop exercise).
-          </em>
-        </p>
-        <p>
-          <strong>Publishing sub-organization</strong>
-        </p>
-        <p>
-          <em>
-            When applicable, a more granular level of detail for the Publishing
-            Organization. This field is generally populated only when the
-            sub-organization is deemed particularly relevant to understanding
-            the importance of the report&mdash;for instance, the subcommittee of
-            a full congressional committee, or the Inspector General of a
-            federal department. The indication can be found beneath the
-            Publishing Organization on the View Details page of the record.
-          </em>
-        </p>
-        <p>
-          <strong>Publishing organization type</strong>
-        </p>
-        <p>
-          <em>
-            Reflects the category of publishing organization that issued the
-            work:
-          </em>
-        </p>
-        <ul>
-          <li>
-            <span className={styles.medBold}>Academic</span>:{' '}
-            <em>An institution of higher learning.</em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Academic journal</span>:{' '}
-            <em>A scientific journal or other scholarly publication.</em>
-          </li>
-          <li>
-            <span className={styles.medBold}>
-              Intergovernmental organization
-            </span>
-            :{' '}
+        <div className={styles.glossary}>
+          <p>
+            This glossary is designed to provide the user with key information
+            to understand the way items were coded and the meaning ascribed to
+            them by the research team. Other explanations are available
+            throughout the above methodological discussion, and through the
+            tooltips available throughout the website.
+          </p>
+          <p>
+            <strong>Event</strong>
+          </p>
+          <div>
             <em>
-              An entity typically created by treaty, involving two or more
-              nations, to work on issues of common interest.
+              A select list of outbreak events to which an item may directly
+              relate. This list is not comprehensive; it is a narrow usage that
+              applies to records directly related to a specific, select
+              outbreak. It does not address records that may be about the same
+              infectious disease, or about other outbreaks that pathogen caused.
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>National/federal government</span>:{' '}
+          </div>
+          <p>
+            <strong>Funder</strong>
+          </p>
+          <p>
             <em>
-              A governing body within a country, operating at the national or
-              federal level.
+              The entity that provided the financial support for the item. Where
+              a document specifies the funder of the work (or in some cases, the
+              funder of the group that produced the work), the entity or
+              entities are listed. Where the document specifies that funding
+              received was &ldquo;None,&rdquo; this is indicated as such. Where
+              no funder is offered, this is indicated as "Funder not
+              specified.&rdquo;
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Local government</span>:{' '}
-            <em>A subnational governing body within a country.</em>
-          </li>
-          <li>
-            <span className={styles.medBold}>
-              Non-governmental organization (NGO)
-            </span>
-            :{' '}
+          </p>
+          <p>
+            <strong>Organization has governance authority</strong>
+          </p>
+          <p>
             <em>
-              An organization independent of government and distinct from
-              industry or academia; NGOs are usually non-profit or
-              not-for-profit entities.
+              Captures whether the Publishing Organization has governance
+              authority over the topic, recommendations, or other content of the
+              item in the sense of whether it can act on the information
+              contained in the record. Intergovernmental organizations may have
+              governance authority depending on the context and topic of the
+              product.
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Private</span>:{' '}
-            <em>A private sector company, usually for-profit.</em>
-          </li>
-        </ul>
-        <p>
-          <strong>Title</strong>
-        </p>
-        <p>
-          <em>
-            The title of the work as listed on the document. In a small number
-            of cases, the title reflects that in the database from which the
-            work came, not the title on the document itself. In a small number
-            of cases, a document has no title, for instance, a report provided
-            in the form of a letter. In these cases the researchers used titles
-            as listed elsewhere (e.g., the National Biodefense Science Board
-            letters are given "titles" by the Department of Health and Human
-            Services on its website).
-          </em>
-        </p>
-        <p>
-          <strong>Type of record</strong>
-        </p>
-        <p>
-          <em>
-            Reflects a high-level categorization of the form of the record;
-            viewed above the report title in the detailed view of a record:
-          </em>
-        </p>
-        <ul>
-          <li>
-            <span className={styles.medBold}>Report</span>:{' '}
+          </p>
+          <p>
+            <strong>Publishing organization</strong>
+          </p>
+          <p>
             <em>
-              An item presented as a reporting of findings; may include written
-              documentation of studies, meetings, investigations, etc. Guidance
-              and technical guidelines are also included in this category.
+              The group that published the work or led the effort (such as a
+              tabletop exercise).
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Government action</span>:{' '}
+          </p>
+          <p>
+            <strong>Publishing sub-organization</strong>
+          </p>
+          <p>
             <em>
-              An item that reflects a decisive oversight, strategic, or other
-              action taken on the part of a national government or an
-              intergovernmental body; may include hearings, strategies, plans,
-              resolutions, decisions, etc.
+              When applicable, a more granular level of detail for the
+              Publishing Organization. This field is generally populated only
+              when the sub-organization is deemed particularly relevant to
+              understanding the importance of the report&mdash;for instance, the
+              subcommittee of a full congressional committee, or the Inspector
+              General of a federal department. The indication can be found
+              beneath the Publishing Organization on the View Details page of
+              the record.
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Simulation or Exercise</span>:{' '}
+          </p>
+          <p>
+            <strong>Publishing organization type</strong>
+          </p>
+          <p>
             <em>
-              An item about simulations or exercises held, where simulations and
-              exercises can be table-top or operationalized training activities.
+              Reflects the category of publishing organization that issued the
+              work:
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Journal paper</span>:{' '}
+          </p>
+          <ul>
+            <li>
+              <span className={styles.medBold}>Academic</span>:{' '}
+              <em>An institution of higher learning.</em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Academic journal</span>:{' '}
+              <em>A scientific journal or other scholarly publication.</em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Intergovernmental organization
+              </span>
+              :{' '}
+              <em>
+                An entity typically created by treaty, involving two or more
+                nations, to work on issues of common interest.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                National/federal government
+              </span>
+              :{' '}
+              <em>
+                A governing body within a country, operating at the national or
+                federal level.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Local government</span>:{' '}
+              <em>A subnational governing body within a country.</em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Non-governmental organization (NGO)
+              </span>
+              :{' '}
+              <em>
+                An organization independent of government and distinct from
+                industry or academia; NGOs are usually non-profit or
+                not-for-profit entities.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Private</span>:{' '}
+              <em>A private sector company, usually for-profit.</em>
+            </li>
+          </ul>
+          <p>
+            <strong>Title</strong>
+          </p>
+          <p>
             <em>
-              An item published in a professional journal; may reflect original
-              research, literature reviews, commentaries, editorials, letters,
-              and news items; may or may not be peer-reviewed.
+              The title of the work as listed on the document. In a small number
+              of cases, the title reflects that in the database from which the
+              work came, not the title on the document itself. In a small number
+              of cases, a document has no title, for instance, a report provided
+              in the form of a letter. In these cases the researchers used
+              titles as listed elsewhere (e.g., the National Biodefense Science
+              Board letters are given "titles" by the Department of Health and
+              Human Services on its website).
             </em>
-          </li>
-        </ul>
-        <p>
-          <strong>Topic area</strong>
-        </p>
-        <p>
-          <em>
-            Reflects the major topic the report addresses, chosen from a set of
-            six selected by the research team; some reports may cover multiple
-            topical areas, but only one topic is chosen:
-          </em>
-        </p>
-        <ul>
-          <li>
-            <span className={styles.medBold}>Threat/risk awareness</span>:{' '}
+          </p>
+          <p>
+            <strong>Type of record</strong>
+          </p>
+          <p>
             <em>
-              An item primarily about intelligence, identification of threats,
-              identification of risks, threat and/or risk assessments (where
-              risk includes threats, vulnerabilities, and/or consequences), etc.
+              Reflects a high-level categorization of the form of the record;
+              viewed above the report title in the detailed view of a record:
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Surveillance/detection</span>:{' '}
+          </p>
+          <ul>
+            <li>
+              <span className={styles.medBold}>Report</span>:{' '}
+              <em>
+                An item presented as a reporting of findings; may include
+                written documentation of studies, meetings, investigations, etc.
+                Guidance and technical guidelines are also included in this
+                category.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Government action</span>:{' '}
+              <em>
+                An item that reflects a decisive oversight, strategic, or other
+                action taken on the part of a national government or an
+                intergovernmental body; may include hearings, strategies, plans,
+                resolutions, decisions, etc.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Simulation or Exercise</span>:{' '}
+              <em>
+                An item about simulations or exercises held, where simulations
+                and exercises can be table-top or operationalized training
+                activities.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Journal paper</span>:{' '}
+              <em>
+                An item published in a professional journal; may reflect
+                original research, literature reviews, commentaries, editorials,
+                letters, and news items; may or may not be peer-reviewed.
+              </em>
+            </li>
+          </ul>
+          <p>
+            <strong>Topic area</strong>
+          </p>
+          <p>
             <em>
-              An item primarily describing the detection and identification of
-              infectious diseases (and relevant systems, technologies,
-              challenges, etc.).
+              Reflects the major topic the report addresses, chosen from a set
+              of six selected by the research team; some reports may cover
+              multiple topical areas, but only one topic is chosen:
             </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>
-              Medical preparedness/emergency response
-            </span>
-            :{' '}
-            <em>
-              An item primarily addressing medical readiness, which is
-              wide-ranging and may include: medical countermeasures,
-              non-pharmaceutical interventions, medical training and workforce,
-              state or local infectious disease preparedness, hospital
-              preparedness, clinical responses, etc.; or items concerning the
-              response to a public health emergency (emergency services
-              capacity, biohazard training, hospital surge capacity, etc.).
-              Response to agricultural disease outbreaks is generally not
-              included in this category.
-            </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>
-              International aid/collaboration
-            </span>
-            :{' '}
-            <em>
-              An item primarily about bilateral or multilateral international
-              aid (fiscal, personnel, etc.) or about bilateral or multilateral
-              collaborations (information sharing, sample sharing, capacity
-              building, etc).
-            </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Strategic planning</span>:{' '}
-            <em>
-              A strategic plan or an implementation plan; also, items primarily
-              about planning, the need for plans, recommendations for exercises,
-              recommendations for strategic frameworks, etc. May include items
-              addressing need for policy reforms.
-            </em>
-          </li>
-          <li>
-            <span className={styles.medBold}>Other</span>:{' '}
-            <em>
-              Any topic that does not fall into the defined key topics; may
-              include reports on a variety of important topics, such as
-              laboratory research, research and development, critical
-              infrastructure protection, or economic impacts of pandemics. Such
-              reports may address key topics, but in a minor or tangential way.
-            </em>
-          </li>
-        </ul>
+          </p>
+          <ul>
+            <li>
+              <span className={styles.medBold}>Threat/risk awareness</span>:{' '}
+              <em>
+                An item primarily about intelligence, identification of threats,
+                identification of risks, threat and/or risk assessments (where
+                risk includes threats, vulnerabilities, and/or consequences),
+                etc.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Surveillance/detection</span>:{' '}
+              <em>
+                An item primarily describing the detection and identification of
+                infectious diseases (and relevant systems, technologies,
+                challenges, etc.).
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Medical preparedness/emergency response
+              </span>
+              :{' '}
+              <em>
+                An item primarily addressing medical readiness, which is
+                wide-ranging and may include: medical countermeasures,
+                non-pharmaceutical interventions, medical training and
+                workforce, state or local infectious disease preparedness,
+                hospital preparedness, clinical responses, etc.; or items
+                concerning the response to a public health emergency (emergency
+                services capacity, biohazard training, hospital surge capacity,
+                etc.). Response to agricultural disease outbreaks is generally
+                not included in this category.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                International aid/collaboration
+              </span>
+              :{' '}
+              <em>
+                An item primarily about bilateral or multilateral international
+                aid (fiscal, personnel, etc.) or about bilateral or multilateral
+                collaborations (information sharing, sample sharing, capacity
+                building, etc).
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Strategic planning</span>:{' '}
+              <em>
+                A strategic plan or an implementation plan; also, items
+                primarily about planning, the need for plans, recommendations
+                for exercises, recommendations for strategic frameworks, etc.
+                May include items addressing need for policy reforms.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Other</span>:{' '}
+              <em>
+                Any topic that does not fall into the defined key topics; may
+                include reports on a variety of important topics, such as
+                laboratory research, research and development, critical
+                infrastructure protection, or economic impacts of pandemics.
+                Such reports may address key topics, but in a minor or
+                tangential way.
+              </em>
+            </li>
+          </ul>
+        </div>
         <Endnotes.Endnotes />
       </div>
     </Endnotes.Provider>

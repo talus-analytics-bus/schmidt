@@ -92,7 +92,7 @@ const Info = ({}) => {
   // JSX
   return (
     <Layout
-      page={'about'}
+      page={'info'}
       loading={loading}
       bookmarkCount={loading ? null : bookmarkedIds.length}
     >
