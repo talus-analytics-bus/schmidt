@@ -73,12 +73,12 @@
         }
       }
       @media screen and (max-width: 1000px) {
-        padding: 20px 0px 0px 0px;
+        padding: 0px 0px 20px 0px;
         // margin: 0px auto;
       }
     }
     @media screen and (max-width: 1000px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
   }
   .content {
