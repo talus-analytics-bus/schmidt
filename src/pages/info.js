@@ -30,10 +30,10 @@ const Info = ({ location }) => {
     console.log('pathname')
     console.log(pathname)
     if (pathname === '/info/' && typeof window !== 'undefined')
-      navigate('/info/overview')
+      navigate('/info/overview/')
     else {
       const pathnameArr = pathname.split('/')
-      const view = pathnameArr[pathnameArr.length - 1]
+      const view = pathnameArr[pathnameArr.length - 2]
       return view
     }
     return ''
@@ -138,7 +138,7 @@ const Info = ({ location }) => {
           <div className={styles.tabs}>
             {tabs.map(d => (
               <Link
-                to={'/info/' + d.slug}
+                to={'/info/' + d.slug + '/'}
                 className={styles.tabLink}
                 state={{ bookmarkedIds }}
               >
