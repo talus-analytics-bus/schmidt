@@ -46,9 +46,8 @@ const UserGuide = ({}) => {
   // JSX
   return (
     <div className={styles.user}>
-      <div className={styles.header}>
-        <h1>Using the site</h1>
-        {/* <PrimaryButton
+      <h1>Using the site</h1>
+      {/* <PrimaryButton
           {...{
             label: 'Download this user guide',
             isSecondary: true,
@@ -56,7 +55,6 @@ const UserGuide = ({}) => {
             iconName: 'get_app',
           }}
         /> */}
-      </div>
       <p>
         Welcome to Health Security Net, a publicly accessible, centralized
         library housing decades of documents, published prior to 2020, related

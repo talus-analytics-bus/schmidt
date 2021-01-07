@@ -8,7 +8,7 @@
   padding: 20px 20px;
   width: 100%;
   height: 100%;
-  font-size: 1rem;
+  font-size: 1.2rem;
   min-height: 90vh;
   h1 {
     display: flex;
@@ -73,12 +73,12 @@
         }
       }
       @media screen and (max-width: 1000px) {
-        padding: 20px 0px 0px 0px;
+        padding: 0px 0px 20px 0px;
         // margin: 0px auto;
       }
     }
     @media screen and (max-width: 1000px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
   }
   .content {
@@ -91,15 +91,18 @@
         margin-top: 20px;
       }
     }
+    h1 {
+      &:not(:first-child) {
+        margin-top: 50px;
+      }
+    }
     h2 {
       font-weight: 600;
-      font-size: 2.1rem;
       padding-bottom: 10px;
       border-bottom: 5px solid $light-blue;
       margin-top: 40px;
     }
     h3 {
-      font-size: 1.7rem;
       font-weight: 600;
       margin: 40px 0px 20px 0px;
     }
@@ -117,11 +120,35 @@
         p {
           line-height: $lh;
         }
-        &:not(:first-of-type) {
-          margin-top: 20px;
-        }
+        // &:not(:first-of-type) {
+        margin-top: 10px;
+        // }
         &.noTopMargin {
           margin-top: 0px;
+        }
+      }
+      p {
+        &:not(:first-child) {
+          margin-top: 30px;
+        }
+        &.noTopMargin {
+          margin-top: 20px;
+        }
+      }
+      .medBold {
+        font-weight: 700;
+      }
+      .glossary {
+        line-height: 2rem;
+      }
+      .spacedOutList {
+        li {
+          margin-top: 30px;
+        }
+        p {
+          &:not(:first-child) {
+            margin-top: 20px;
+          }
         }
       }
     }
@@ -154,15 +181,15 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         column-gap: 5%;
-        background-color: $very-light-gray;
-        border-radius: $big-radius;
-        border: darken($very-light-gray, 5%) 2px solid;
+        // background-color: $very-light-gray;
+        // border-radius: $big-radius;
+        // border: darken($very-light-gray, 5%) 2px solid;
         &:not(:first-of-type) {
           margin-top: 20px;
         }
         img {
           width: 100%;
-          padding: 20px;
+          // padding: 20px;
           &.talus {
             width: 85%;
           }
@@ -181,14 +208,11 @@
           }
         }
       }
+      p {
+        margin-top: 0px;
+      }
     }
     .user {
-      .header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
       .placeholder {
         font-size: 3rem;
         color: $orange;
@@ -211,6 +235,9 @@
       .gif,
       video {
         width: 100%;
+      }
+      li {
+        margin-top: 10px;
       }
     }
     .anchor {

@@ -64,13 +64,6 @@ const Overview = ({}) => {
               alt="Georgetown University Center for Global Health Science and Security logo"
             ></img>
           </a>
-        </div>
-        <p>
-          The Georgetown University Center for Global Health Science and
-          Security (GHSS) led the policy research effort, including development
-          of methodology, data collection, curation, and coding.
-        </p>
-        <div className={styles.contributor}>
           <a
             href={'https://talusanalytics.com/'}
             target="_blank"
@@ -84,9 +77,12 @@ const Overview = ({}) => {
           </a>
         </div>
         <p>
-          Talus Analytics developed the taxonomy and ontologies for the
-          documentation, integration with the epidemiological data and analysis,
-          and designed, built, and maintains the interactive Library site.
+          The Georgetown University Center for Global Health Science and
+          Security (GHSS) led the policy research effort, including development
+          of methodology, data collection, curation, and coding. Talus Analytics
+          developed the taxonomy and ontologies for the documentation,
+          integration with the epidemiological data and analysis, and designed,
+          built, and maintains the interactive Library site.
         </p>
       </div>
       <div className={styles.contributors}>
