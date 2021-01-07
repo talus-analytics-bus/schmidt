@@ -130,7 +130,6 @@ const Contact = ({}) => {
             <label className={styles.body} htmlFor="body">
               Comment or question
               <textarea type="text" id="body" name="body" maxLength="1200" />
-              <p className={styles.lengthHint}>200 Words</p>
               <p className={styles.lengthHint}>200 words</p>
             </label>
           </div>
