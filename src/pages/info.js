@@ -48,7 +48,7 @@ const Info = ({ location }) => {
 
   // ids of bookmarked items to count for nav
   const initBookmarkedIds =
-    location.state !== undefined
+    location.state !== undefined && location.state !== null
       ? location.state.bookmarkedIds !== undefined
         ? location.state.bookmarkedIds
         : null
