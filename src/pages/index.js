@@ -147,7 +147,7 @@ const IndexPage = () => {
                       label: 'Go to User Guide',
                       isSecondary: true,
                       isSmall: true,
-                      url: '/info/user_guide',
+                      url: '/info/user_guide/',
                     }}
                   />
                 }
