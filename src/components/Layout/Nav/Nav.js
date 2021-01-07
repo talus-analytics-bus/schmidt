@@ -117,7 +117,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
                 page === 'info' ? styles.active : '',
                 styles.linkText
               )}
-              to={'/info/overview'}
+              to={'/info/overview/'}
             >
               <i className={'material-icons'}>info</i>
               <span>Information</span>
