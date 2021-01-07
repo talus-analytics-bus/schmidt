@@ -196,7 +196,7 @@ const Info = ({ location }) => {
         </div>
         {tabs.map(
           d =>
-            d.slug === view && (
+            d.selected === true && (
               <div key={d.slug + '-content'} className={styles.content}>
                 {d.content}
               </div>
