@@ -27,7 +27,8 @@ const Info = ({ location }) => {
 
   const getView = () => {
     const pathname = location.pathname ? location.pathname : ''
-    if (pathname === '/info/') navigate('/info/overview')
+    if (pathname === '/info/' && typeof window !== 'undefined')
+      navigate('/info/overview')
     else {
       const pathnameArr = pathname.split('/')
       const view = pathnameArr[pathnameArr.length - 1]
