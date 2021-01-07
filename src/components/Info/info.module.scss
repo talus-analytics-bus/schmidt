@@ -32,30 +32,34 @@
     .tabs {
       @include spaceItemsHoriz(10px);
       display: flex;
-      .tab {
-        padding: 10px 20px 20px 20px;
-        font-weight: 600;
-        cursor: pointer;
-        font-size: 1.7rem;
-        @include center();
-        flex-direction: column;
-        border-radius: $big-radius;
-        &:hover {
-          background-color: $light-gray;
-          .selectedRectangle {
-            width: 60px;
-            transition: 0.5s;
+      .tabLink {
+        color: unset;
+        text-decoration: unset;
+        .tab {
+          padding: 10px 20px 20px 20px;
+          font-weight: 600;
+          cursor: pointer;
+          font-size: 1.7rem;
+          @include center();
+          flex-direction: column;
+          border-radius: $big-radius;
+          &:hover {
+            background-color: $light-gray;
+            .selectedRectangle {
+              width: 60px;
+              transition: 0.5s;
+            }
           }
-        }
-        .selectedRectangle {
-          background-color: $orange;
-          border-radius: $border-radius;
-          margin-top: 10px;
-          height: 8px;
-          width: 0px;
+          .selectedRectangle {
+            background-color: $orange;
+            border-radius: $border-radius;
+            margin-top: 10px;
+            height: 8px;
+            width: 0px;
 
-          &.selected {
-            width: 60px;
+            &.selected {
+              width: 60px;
+            }
           }
         }
       }

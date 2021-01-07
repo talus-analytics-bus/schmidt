@@ -1,6 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
-import { navigate } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { Router } from '@reach/router'
 import classNames from 'classnames'
 
@@ -24,8 +24,6 @@ import { style } from 'd3'
 
 const Info = ({ location }) => {
   // STATE  // --------------------------------------------------------------//
-  // is page loaded yet? show nothing until it is
-  const [loading, setLoading] = useState(true)
 
   const getView = () => {
     const pathname = location.pathname ? location.pathname : ''
@@ -49,7 +47,16 @@ const Info = ({ location }) => {
   const [view, setView] = useState(getView())
 
   // ids of bookmarked items to count for nav
-  const [bookmarkedIds, setBookmarkedIds] = useState(null)
+  const initBookmarkedIds =
+    location.state !== undefined
+      ? location.state.bookmarkedIds !== undefined
+        ? location.state.bookmarkedIds
+        : null
+      : null
+  const [bookmarkedIds, setBookmarkedIds] = useState(initBookmarkedIds)
+
+  // is page loaded yet? show nothing until it is
+  const [loading, setLoading] = useState(initBookmarkedIds === null)
 
   // CONSTANTS // -----------------------------------------------------------//
   // define tabs and content
@@ -85,9 +92,10 @@ const Info = ({ location }) => {
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
   // get bookmarked ids initially
   useEffect(() => {
-    if (bookmarkedIds === null)
+    if (bookmarkedIds === null) {
       withBookmarkedIds({ callback: setBookmarkedIds })
-    setLoading(false)
+      setLoading(false)
+    }
   }, [bookmarkedIds])
 
   // set scroll event to show "scroll to top" as appropriate
@@ -125,19 +133,20 @@ const Info = ({ location }) => {
         <div className={styles.toggleContainer}>
           <div className={styles.tabs}>
             {tabs.map(d => (
-              <div
-                key={d.slug}
-                onClick={() => navigate('/info/' + d.slug)}
-                className={classNames(styles.tab)}
+              <Link
+                to={'/info/' + d.slug}
+                className={styles.tabLink}
+                state={{ bookmarkedIds }}
               >
-                <div className={styles.label}>{d.name}</div>
-                <div
-                  className={classNames(styles.selectedRectangle, {
-                    [styles.selected]: d.slug === view,
-                  })}
-                ></div>
-              </div>
-              // </Link>
+                <div key={d.slug} className={classNames(styles.tab)}>
+                  <div className={styles.label}>{d.name}</div>
+                  <div
+                    className={classNames(styles.selectedRectangle, {
+                      [styles.selected]: d.slug === view,
+                    })}
+                  ></div>
+                </div>
+              </Link>
             ))}
           </div>
           <div className={styles.buttons}>
