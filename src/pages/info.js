@@ -116,6 +116,9 @@ const Info = ({ location }) => {
         })
     }
   }, [simpleHeaderRef])
+  const activeTab = tabs.find(d => d.selected)
+  console.log('activeTab')
+  console.log(activeTab.slug)
 
   // JSX
   return (
