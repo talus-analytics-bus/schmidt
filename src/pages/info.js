@@ -68,6 +68,7 @@ const Info = ({ location }) => {
     {
       name: 'Overview',
       slug: 'overview',
+      selected: view === 'overview',
       content: (
         <div className={styles.bodyContainer}>
           <Overview />
@@ -77,6 +78,7 @@ const Info = ({ location }) => {
     {
       name: 'Documentation',
       slug: 'documentation',
+      selected: view === 'documentation',
       content: (
         <div className={styles.bodyContainer}>
           <Documentation />
@@ -86,6 +88,7 @@ const Info = ({ location }) => {
     {
       name: 'User Guide',
       slug: 'user_guide',
+      selected: view === 'user_guide',
       content: (
         <div className={styles.bodyContainer}>
           <UserGuide />
@@ -150,7 +153,7 @@ const Info = ({ location }) => {
                   <div className={styles.label}>{d.name}</div>
                   <div
                     className={classNames(styles.selectedRectangle, {
-                      [styles.selected]: d.slug === view,
+                      [styles.selected]: d.selected,
                     })}
                   ></div>
                 </div>
