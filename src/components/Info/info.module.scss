@@ -181,15 +181,15 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         column-gap: 5%;
-        background-color: $very-light-gray;
-        border-radius: $big-radius;
-        border: darken($very-light-gray, 5%) 2px solid;
+        // background-color: $very-light-gray;
+        // border-radius: $big-radius;
+        // border: darken($very-light-gray, 5%) 2px solid;
         &:not(:first-of-type) {
           margin-top: 20px;
         }
         img {
           width: 100%;
-          padding: 20px;
+          // padding: 20px;
           &.talus {
             width: 85%;
           }
@@ -207,6 +207,9 @@
             font-weight: 600;
           }
         }
+      }
+      p {
+        margin-top: 0px;
       }
     }
     .user {
