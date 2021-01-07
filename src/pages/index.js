@@ -96,7 +96,7 @@ const IndexPage = () => {
   return (
     <>
       <SEO
-        title="Home"
+        title="Health Security Net"
         description="Health Security Net is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic."
       />
       <Nav bookmarkCount={loading ? 0 : bookmarkedIds.length} page="index" />
