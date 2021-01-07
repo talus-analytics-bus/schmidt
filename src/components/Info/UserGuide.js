@@ -244,7 +244,7 @@ const UserGuide = ({}) => {
         <div id="viewSection" className={styles.anchor} />
         <h2>View document details and similar documents</h2>
         <p>
-          To view more information of a document resulting from your search
+          To view more information about a document resulting from your search
           query, click one of two buttons to expand the document detail.
         </p>
         <p>
@@ -276,8 +276,9 @@ const UserGuide = ({}) => {
         <div id="bookmarkSection" className={styles.anchor} />
         <h2>Bookmark a document</h2>
         <p>
-          If you want to save documents to the site to access later, bookmark an
-          item to access it later on the ​<strong>Bookmarks</strong> ​page.
+          If you want to save documents to the site to view another time,
+          bookmark an item to access it later on the ​<strong>Bookmarks</strong>{' '}
+          ​page.
         </p>
         <p>
           To bookmark an item, click the{' '}
