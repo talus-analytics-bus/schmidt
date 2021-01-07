@@ -144,7 +144,7 @@ const IndexPage = () => {
                 {
                   <PrimaryButton
                     {...{
-                      label: 'Go to user guide',
+                      label: 'Go to User Guide',
                       isSecondary: true,
                       isSmall: true,
                       url: '/info/user_guide',

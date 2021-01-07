@@ -84,7 +84,7 @@ const Info = ({ location }) => {
       ),
     },
     {
-      name: 'User guide',
+      name: 'User Guide',
       slug: 'user_guide',
       content: (
         <div className={styles.bodyContainer}>
