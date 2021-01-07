@@ -27,6 +27,8 @@ const Info = ({ location }) => {
 
   const getView = () => {
     const pathname = location.pathname ? location.pathname : ''
+    console.log('pathname')
+    console.log(pathname)
     if (pathname === '/info/' && typeof window !== 'undefined')
       navigate('/info/overview')
     else {
@@ -46,7 +48,8 @@ const Info = ({ location }) => {
 
   // set content by tab
   const [view, setView] = useState(getView())
-
+  console.log('view')
+  console.log(view)
   // ids of bookmarked items to count for nav
   const initBookmarkedIds =
     location.state !== undefined && location.state !== null
