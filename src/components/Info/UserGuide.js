@@ -37,8 +37,8 @@ const UserGuide = ({}) => {
   // video component
   const Video = src => {
     return (
-      <video controls muted preload>
-        <source src={src} type="video/mp4" />
+      <video controls>
+        <source src={src} type={'video/mp4'} />
         Your browser does not support the video tag.
       </video>
     )
