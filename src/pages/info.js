@@ -141,8 +141,12 @@ const Info = ({ location }) => {
                 to={'/info/' + d.slug + '/'}
                 className={styles.tabLink}
                 state={{ bookmarkedIds }}
+                key={d.slug + '-' + 'link'}
               >
-                <div key={d.slug} className={classNames(styles.tab)}>
+                <div
+                  key={d.slug + '-' + 'tab'}
+                  className={classNames(styles.tab)}
+                >
                   <div className={styles.label}>{d.name}</div>
                   <div
                     className={classNames(styles.selectedRectangle, {
