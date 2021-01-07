@@ -1,32 +1,25 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+import path from 'path'
 
-// // OPTO turn off type inference
-// export const createSchemaCustomization = ({ actions }) => {
-//   actions.createTypes(`
-//     type SitePage implements Node @dontInfer {
-//       path: String!
-//     }
-//   `)
-// }
-
-/**
- * Create all pages in site except Map page using data returned from API calls
- * @method createPages
- * @param  {[type]}    actions [description]
- * @return {Promise}           [description]
- */
-export const createPages = async ({ actions: { createPage } }) => {
-
-  // createPage({
-  //   path: `/path/for/route`,
-  //   component: require.resolve('./path/to/js'),
-  //   context: {},
-  // })
+export const onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  console.log('Page - ' + page.path)
+  if (page.path.match(/^\/info/)) {
+    createPage({
+      path: '/info/overview',
+      matchPath: '/info/overview',
+      component: path.resolve('src/pages/info.js'),
+    })
+    createPage({
+      path: '/info/documentation',
+      matchPath: '/info/documentation',
+      component: path.resolve('src/pages/info.js'),
+    })
+    createPage({
+      path: '/info/user_guide',
+      matchPath: '/info/user_guide',
+      component: path.resolve('src/pages/info.js'),
+    })
+  }
 }
 
-
-export default createPages
+export default onCreatePage

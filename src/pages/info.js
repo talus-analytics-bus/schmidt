@@ -1,5 +1,7 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
+import { navigate } from 'gatsby'
+import { Router } from '@reach/router'
 import classNames from 'classnames'
 
 // local components
@@ -20,10 +22,21 @@ import { withBookmarkedIds } from '../components/misc/Util'
 import ToExcelQuery from '../components/misc/ToExcelQuery'
 import { style } from 'd3'
 
-const Info = ({}) => {
+const Info = ({ location }) => {
   // STATE  // --------------------------------------------------------------//
   // is page loaded yet? show nothing until it is
   const [loading, setLoading] = useState(true)
+
+  const getView = () => {
+    const pathname = location.pathname ? location.pathname : ''
+    if (pathname === '/info/') navigate('/info/overview')
+    else {
+      const pathnameArr = pathname.split('/')
+      const view = pathnameArr[pathnameArr.length - 1]
+      return view
+    }
+    return ''
+  }
 
   // for spinner on download button
   const [isDownloading, setIsDownloading] = useState(false)
@@ -33,7 +46,7 @@ const Info = ({}) => {
   const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   // set content by tab
-  const [view, setView] = useState('overview')
+  const [view, setView] = useState(getView())
 
   // ids of bookmarked items to count for nav
   const [bookmarkedIds, setBookmarkedIds] = useState(null)
@@ -114,7 +127,7 @@ const Info = ({}) => {
             {tabs.map(d => (
               <div
                 key={d.slug}
-                onClick={() => setView(d.slug)}
+                onClick={() => navigate('/info/' + d.slug)}
                 className={classNames(styles.tab)}
               >
                 <div className={styles.label}>{d.name}</div>
@@ -167,6 +180,7 @@ const Info = ({}) => {
             )
         )}
       </div>
+
       <MobileDisclaimer />
     </Layout>
   )
