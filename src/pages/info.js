@@ -47,7 +47,7 @@ const Info = ({ location }) => {
   const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   // set content by tab
-  const [view, setView] = useState(getView())
+  const view = getView()
   console.log('view')
   console.log(view)
   // ids of bookmarked items to count for nav
