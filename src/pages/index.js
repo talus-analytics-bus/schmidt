@@ -1,6 +1,7 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
+import { Link } from 'gatsby'
 
 // local components
 import SEO from '../components/seo'
@@ -116,15 +117,17 @@ const IndexPage = () => {
             <div className={styles.textWrapShape}></div>
             <p className={styles.landingText}>
               Welcome to Health Security Net, a publicly accessible, centralized
-              library housing decades of documents related to pandemics. Prior
-              to the 2020 COVID-19 pandemic, a wealth of work—research,
-              government reviews, expert analyses, and hearings—had provided
-              information for decisionmakers and others on threat and risk
-              awareness for pandemic-prone diseases, and offered guidance on how
-              to prepare for, plan, respond to, and recover from pandemics. This
-              Library provides access to that body of work: the warnings,
-              evaluations, oversight efforts, strategies, and other documents
-              related to pandemics and pandemic risk prior to 2020.
+              library housing decades of documents related to pandemics. For
+              help using the library, view the{' '}
+              <Link to={'/info/user_guide'}>user guide</Link>. Prior to the 2020
+              COVID-19 pandemic, a wealth of work—research, government reviews,
+              expert analyses, and hearings—had provided information for
+              decisionmakers and others on threat and risk awareness for
+              pandemic-prone diseases, and offered guidance on how to prepare
+              for, plan, respond to, and recover from pandemics. This Library
+              provides access to that body of work: the warnings, evaluations,
+              oversight efforts, strategies, and other documents related to
+              pandemics and pandemic risk prior to 2020.
             </p>
             <p className={styles.landingText}>
               Using this tool, you can search for specific documents using
