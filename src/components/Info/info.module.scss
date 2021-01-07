@@ -138,6 +138,19 @@
       .medBold {
         font-weight: 700;
       }
+      .glossary {
+        line-height: 2rem;
+      }
+      .spacedOutList {
+        li {
+          margin-top: 30px;
+        }
+        p {
+          &:not(:first-child) {
+            margin-top: 20px;
+          }
+        }
+      }
     }
     .indent {
       margin-left: 3%;

@@ -11,6 +11,7 @@ import styles from './info.module.scss'
 import ToExcelQuery from '../misc/ToExcelQuery'
 
 import * as Endnotes from '../Endnotes/Endnotes'
+import { style } from 'd3'
 
 const Documentation = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -182,7 +183,7 @@ const Documentation = ({}) => {
           whether the site provided its own relevant terms for grouping. Global
           sources currently included in Health Security Net include:
         </p>
-        <ol>
+        <ol className={styles.spacedOutList}>
           <li>
             <strong>
               Food and Agriculture Organization of the United Nations (FAO)
@@ -283,64 +284,64 @@ const Documentation = ({}) => {
             or exclusion.
           </li>
           <li>
-            <strong>World Health Organization (WHO)</strong>: WHO documents
-            located in the Institutional Repository for Information Sharing
-            (IRIS) database were searched (
-            <ExtLink url="https://apps.who.int/iris/">
-              https://apps.who.int/iris/
-            </ExtLink>
-            ). Because many of our desired search terms (see United
-            State&mdash;Hearings section below) returned thousands of results,
-            and IRIS can only export 500 at a time, the research team instead
-            used the &ldquo;MeSH&rdquo; subject categories that IRIS uses to
-            organize its topics. In the IRIS database, we manually searched the
-            &ldquo;MeSH subjects&rdquo; category and chose relevant subjects
-            (number of records in parentheses): Coronavirus Infections (133);
-            Ebola Vaccines (24); Ebolavirus (430); Epidemics (138);
-            Epidemiological Monitoring (1284)&mdash;in English, 519; Infectious
-            Disease; Medicine (2); Infectious Disease Transmission,
-            Patient-to-Professional (16); Infectious Disease Transmission,
-            Professional-to-Patient (6); Infectious Disease Transmission,
-            Vertical (280);Infectious hazards (1); infectious hazards (1);
-            Infectious mononucleosis (1); Influenza (3); Influenza A virus (60);
-            Influenza A Virus, H1N1 Subtype (183); Influenza A Virus, H1N2
-            Subtype (6); Influenza A Virus, H3N2 Subtype (4); Influenza A Virus,
-            H5N1 Subtype (5); Influenza A Virus, H5N2 Subtype (3); Influenza A
-            Virus, H7N9 Subtype (5); Influenza B virus (36); Influenza Vaccines
-            (455); Influenza, Human (971); Influenza, Human A virus (1);
-            Influenza, Human vaccine (1); Influenza Humanvirus B (1);
-            Influenzavirus A (12); Influenzavirus B (10); Medical Waste (31);
-            Medical Waste Disposal (43); Middle East Respiratory Syndrome
-            Coronavirus (41); Public Health Surveillance (488); and SARS Virus
-            (35).
-            <br />
-            <br />
-            The following terms from the team&rsquo;s broad list of terms (see
-            United States section) appeared as MeSH terms (number of records in
-            parentheses): biosurveillance&nbsp;(1); coronavirus&nbsp;(10);
-            influenza&nbsp;(1); pandemics&nbsp;(760); Severe Acute Respiratory
-            Syndrome&nbsp;(103). In addition to these MeSH search terms, we also
-            searched for these specific situation reports: 2001 anthrax attacks
-            (Amerithrax); 2003 SARS; 2005 H5N1; 2009 H1N1; 2013 MERS; 2014-2016
-            Ebola (i.e., West Africa); 2016 Zika; 2018-2020 Ebola (i.e.,
-            Democratic Republic of the Congo).&nbsp;We entered these terms into
-            the IRIS search bar within quotations. &ldquo;All of IRIS&rdquo; was
-            selected in the search bar. The following filters were added:
-            Subject MeSH&mdash;Contains&mdash;&ldquo;term&rdquo;;
-            Language&mdash;Equals English; Date issued&mdash;Not
-            equals&mdash;2020. We repeated these steps for each MeSH term.
-            <br />
-            <br />
-            &ldquo;Weekly Update&rdquo; reports and country-specific items were
-            excluded from the captured sources; regionally-oriented WHO reports
-            were included. Others that in the researchers&rsquo; expert
-            judgement were irrelevant to health security were also excluded.
+            <p>
+              <strong>World Health Organization (WHO)</strong>: WHO documents
+              located in the Institutional Repository for Information Sharing
+              (IRIS) database were searched (
+              <ExtLink url="https://apps.who.int/iris/">
+                https://apps.who.int/iris/
+              </ExtLink>
+              ). Because many of our desired search terms (see United
+              State&mdash;Hearings section below) returned thousands of results,
+              and IRIS can only export 500 at a time, the research team instead
+              used the &ldquo;MeSH&rdquo; subject categories that IRIS uses to
+              organize its topics. In the IRIS database, we manually searched
+              the &ldquo;MeSH subjects&rdquo; category and chose relevant
+              subjects (number of records in parentheses): Coronavirus
+              Infections (133); Ebola Vaccines (24); Ebolavirus (430); Epidemics
+              (138); Epidemiological Monitoring (1284)&mdash;in English, 519;
+              Infectious Disease; Medicine (2); Infectious Disease Transmission,
+              Patient-to-Professional (16); Infectious Disease Transmission,
+              Professional-to-Patient (6); Infectious Disease Transmission,
+              Vertical (280);Infectious hazards (1); infectious hazards (1);
+              Infectious mononucleosis (1); Influenza (3); Influenza A virus
+              (60); Influenza A Virus, H1N1 Subtype (183); Influenza A Virus,
+              H1N2 Subtype (6); Influenza A Virus, H3N2 Subtype (4); Influenza A
+              Virus, H5N1 Subtype (5); Influenza A Virus, H5N2 Subtype (3);
+              Influenza A Virus, H7N9 Subtype (5); Influenza B virus (36);
+              Influenza Vaccines (455); Influenza, Human (971); Influenza, Human
+              A virus (1); Influenza, Human vaccine (1); Influenza Humanvirus B
+              (1); Influenzavirus A (12); Influenzavirus B (10); Medical Waste
+              (31); Medical Waste Disposal (43); Middle East Respiratory
+              Syndrome Coronavirus (41); Public Health Surveillance (488); and
+              SARS Virus (35).
+            </p>
+            <p>
+              The following terms from the team&rsquo;s broad list of terms (see
+              United States section) appeared as MeSH terms (number of records
+              in parentheses): biosurveillance&nbsp;(1); coronavirus&nbsp;(10);
+              influenza&nbsp;(1); pandemics&nbsp;(760); Severe Acute Respiratory
+              Syndrome&nbsp;(103). In addition to these MeSH search terms, we
+              also searched for these specific situation reports: 2001 anthrax
+              attacks (Amerithrax); 2003 SARS; 2005 H5N1; 2009 H1N1; 2013 MERS;
+              2014-2016 Ebola (i.e., West Africa); 2016 Zika; 2018-2020 Ebola
+              (i.e., Democratic Republic of the Congo).&nbsp;We entered these
+              terms into the IRIS search bar within quotations. &ldquo;All of
+              IRIS&rdquo; was selected in the search bar. The following filters
+              were added: Subject MeSH&mdash;Contains&mdash;&ldquo;term&rdquo;;
+              Language&mdash;Equals English; Date issued&mdash;Not
+              equals&mdash;2020. We repeated these steps for each MeSH term.
+            </p>
+            <p>
+              &ldquo;Weekly Update&rdquo; reports and country-specific items
+              were excluded from the captured sources; regionally-oriented WHO
+              reports were included. Others that in the researchers&rsquo;
+              expert judgement were irrelevant to health security were also
+              excluded.
+            </p>
           </li>
         </ol>
-        <h3>National</h3>
-        <p>
-          <em>United States</em>
-        </p>
+        <h3>National (United States)</h3>
         <p>
           The research team compiled United States documentation in the form of
           congressional hearings, government reports and other documents, and
@@ -363,62 +364,68 @@ const Documentation = ({}) => {
           <li>Fact sheets on diseases.</li>
         </ul>
         <p>The research term sought information from the following sources:</p>
-        <ol>
+        <ol className={styles.spacedOutList}>
           <li>
-            <strong>Hearings: </strong>The website{' '}
-            <ExtLink url="https://www.congress.gov/">www.congress.gov</ExtLink>{' '}
-            was used as a primary source of information on congressional
-            activity by way of the Congressional Record (CR). The CR captures
-            committee activity in the form of committee hearings, briefings, and
-            business meetings. Records were sought using the following keyword
-            searches:
-            <br />
-            <br />
-            biodefense; biological threat; biopreparedness; biosurveillance;
-            biothreat; CBRN; chemical, biological, radiological, and nuclear;
-            coronavirus; Ebola; emerging infectious disease; global infectious
-            disease; health security; infectious disease epidemic; influenza;
-            MCM; medical countermeasure; medical preparedness; medical
-            readiness; medical supply chain security; MERS; middle east
-            respiratory syndrome; pandemic; public health response; SARS; severe
-            acute respiratory syndrome
-            <br />
-            <br />
-            Hits were reviewed for the two types of records that contain
-            information on committee activity, the Daily Digest and Senate
-            Committee Meetings. Each record was reviewed and the activity it
-            represented categorized as a hearing, briefing, or business meeting.
-            Hearings were the primary unit of interest, as they represent one of
-            the most public forms of congressional oversight and
-            information-gathering. Briefings, of which only a small minority are
-            noticed in the CR, and business meetings, which almost always
-            represent markups of legislation, were excluded. Exclusion criteria
-            were applied after all hearings consistent with the search terms
-            were identified. Some hearings used the topic of bioterrorism to
-            discuss broader preparedness efforts also relevant to pandemics, and
-            these were included. Some hearings identified from early in the
-            timeframe parameters related to Department of Defense (DoD) budgets
-            use terms like &ldquo;health security&rdquo; in a way different from
-            the contemporary usage, or cover the topic of &ldquo;health
-            readiness&rdquo; more broadly than this library is meant to capture;
-            these were excluded. When the search occasionally resulted in an
-            announcement for a hearing but no actual notice confirming that the
-            hearing took place, additional research through{' '}
-            <ExtLink url="https://www.congress.gov/">
-              www.congress.gov
-            </ExtLink>,{' '}
-            <ExtLink url="https://www.gpo.gov/">www.gpo.gov</ExtLink>, or
-            committee websites was undertaken to find a notice confirming that
-            the hearing was held. Rarely no such notice can be found, and these
-            hearings were excluded on the presumption that they were cancelled.
-            On occasion when the research team was aware of relevant hearings
-            not captured by any of the keywords, these were included for
-            comprehensiveness. All hearing titles were copied from the relevant
-            hearing report.
-            {/* OMITTING THIS PARAGRAPH UNTIL WE HAVE LINK TO SUPPLEMENTAL FILE */}
-            {/* <br /> */}
-            {/* <br /> */}
-            {/* In addition to their inclusion in the library, the list of included
+            <p>
+              <strong>Hearings: </strong>The website{' '}
+              <ExtLink url="https://www.congress.gov/">
+                www.congress.gov
+              </ExtLink>{' '}
+              was used as a primary source of information on congressional
+              activity by way of the Congressional Record (CR). The CR captures
+              committee activity in the form of committee hearings, briefings,
+              and business meetings. Records were sought using the following
+              keyword searches:
+            </p>
+            <p>
+              <em>
+                biodefense; biological threat; biopreparedness; biosurveillance;
+                biothreat; CBRN; chemical, biological, radiological, and
+                nuclear; coronavirus; Ebola; emerging infectious disease; global
+                infectious disease; health security; infectious disease
+                epidemic; influenza; MCM; medical countermeasure; medical
+                preparedness; medical readiness; medical supply chain security;
+                MERS; middle east respiratory syndrome; pandemic; public health
+                response; SARS; severe acute respiratory syndrome
+              </em>
+            </p>
+            <p>
+              Hits were reviewed for the two types of records that contain
+              information on committee activity, the Daily Digest and Senate
+              Committee Meetings. Each record was reviewed and the activity it
+              represented categorized as a hearing, briefing, or business
+              meeting. Hearings were the primary unit of interest, as they
+              represent one of the most public forms of congressional oversight
+              and information-gathering. Briefings, of which only a small
+              minority are noticed in the CR, and business meetings, which
+              almost always represent markups of legislation, were excluded.
+              Exclusion criteria were applied after all hearings consistent with
+              the search terms were identified. Some hearings used the topic of
+              bioterrorism to discuss broader preparedness efforts also relevant
+              to pandemics, and these were included. Some hearings identified
+              from early in the timeframe parameters related to Department of
+              Defense (DoD) budgets use terms like &ldquo;health security&rdquo;
+              in a way different from the contemporary usage, or cover the topic
+              of &ldquo;health readiness&rdquo; more broadly than this library
+              is meant to capture; these were excluded. When the search
+              occasionally resulted in an announcement for a hearing but no
+              actual notice confirming that the hearing took place, additional
+              research through{' '}
+              <ExtLink url="https://www.congress.gov/">
+                www.congress.gov
+              </ExtLink>
+              , <ExtLink url="https://www.gpo.gov/">www.gpo.gov</ExtLink>, or
+              committee websites was undertaken to find a notice confirming that
+              the hearing was held. Rarely no such notice can be found, and
+              these hearings were excluded on the presumption that they were
+              cancelled. On occasion when the research team was aware of
+              relevant hearings not captured by any of the keywords, these were
+              included for comprehensiveness. All hearing titles were copied
+              from the relevant hearing report.
+              {/* OMITTING THIS PARAGRAPH UNTIL WE HAVE LINK TO SUPPLEMENTAL FILE */}
+              {/* </p>
+            <p> */}
+              {/* In addition to their inclusion in the library, the list of included
             hearings has also been made available as a supplemental file
             containing additional metadata. In this document, witness names and
             affiliations for each hearing were noted from the CR and other
@@ -458,139 +465,144 @@ const Documentation = ({}) => {
             Two hearings were held jointly by multiple committees; for analysis
             purposes, these were treated as though they were held by separate,
             unique committees. */}
+            </p>
           </li>
           <li>
-            <strong>Government reports.</strong> The research team sought
-            reports from sources to which decision-makers in the Executive
-            and/or Legislative branches could or should reliably be exposed.
-            Three primary groups were considered: independent advisory bodies
-            such as federal advisory committees; departments and agencies with
-            significant operational jurisdiction over and spending on
-            EID-relevant activity;
-            <Endnotes.Note>
-              Watson C, Watson M, Gastfriend D, Sell TK. Federal Funding for
-              Health Security in FY2019. Health Secur. 2018;16(5):281-303. Epub
-              2018/10/20. doi: 10.1089/hs.2018.0077. PubMed PMID: 30339096.
-            </Endnotes.Note>
-            <Endnotes.Note>
-              Michaud J, Moss K, Kates J. The U.S. Government and Global Health
-              Security. Kaiser Family Foundation, December 19, 2020.
-            </Endnotes.Note>{' '}
-            and government bodies whose specific role is to advise
-            decision-makers.
-            <br />
-            <br />
-            Rosters of federal advisory committees for the Department of Health
-            and Human Services (HHS) (specifically for the Centers for Disease
-            Control and Prevention, National Institutes of Health, and Office of
-            the Assistant Secretary for Preparedness and Response), the
-            Department of Homeland Security (DHS), and DoD were reviewed; those
-            with some responsibility for biodefense were further researched for
-            all published reports, and those consistent with the same parameters
-            used for hearing adjudication were retained. Reports issued by the
-            President&rsquo;s Council of Advisors on Science and Technology were
-            included in the same manner. Because the body of work issued by each
-            of these entities is relatively small and not contained in
-            searchable databases, we did not apply the hearing search terms but
-            rather examined the available report titles, and content where
-            necessary, to judge whether reports were relevant.
-            <br />
-            <br />
-            All Worldwide Threat Assessments issued by the Director of National
-            Intelligence (and their precursors by a different name) were
-            identified; those that reported an infectious disease threat or risk
-            were included. Reports from Inspectors General (IG) of DHS, DoD,
-            HHS, U.S. Agency for International Development (USAID), and
-            Department of Veterans Affairs (VA) were sought on their respective
-            websites; the search terms (same as those used for hearings) were
-            input into the search bar for DHS, DoD, HHS, and VA. The HHS IG
-            additionally provides a pre-populated category of &ldquo;emerging
-            infectious disease preparedness and response&rdquo; reports and
-            these reports were also captured.
-            <Endnotes.Note>
-              U.S. Department of Health and Human Services. Office of Inspector
-              General. Infectious Disease Preparedness and Response. Available
-              from:
-              <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
-                https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp
+            <p>
+              <strong>Government reports.</strong> The research team sought
+              reports from sources to which decision-makers in the Executive
+              and/or Legislative branches could or should reliably be exposed.
+              Three primary groups were considered: independent advisory bodies
+              such as federal advisory committees; departments and agencies with
+              significant operational jurisdiction over and spending on
+              EID-relevant activity;
+              <Endnotes.Note>
+                Watson C, Watson M, Gastfriend D, Sell TK. Federal Funding for
+                Health Security in FY2019. Health Secur. 2018;16(5):281-303.
+                Epub 2018/10/20. doi: 10.1089/hs.2018.0077. PubMed PMID:
+                30339096.
+              </Endnotes.Note>
+              <Endnotes.Note>
+                Michaud J, Moss K, Kates J. The U.S. Government and Global
+                Health Security. Kaiser Family Foundation, December 19, 2020.
+              </Endnotes.Note>{' '}
+              and government bodies whose specific role is to advise
+              decision-makers.
+            </p>
+            <p>
+              Rosters of federal advisory committees for the Department of
+              Health and Human Services (HHS) (specifically for the Centers for
+              Disease Control and Prevention, National Institutes of Health, and
+              Office of the Assistant Secretary for Preparedness and Response),
+              the Department of Homeland Security (DHS), and DoD were reviewed;
+              those with some responsibility for biodefense were further
+              researched for all published reports, and those consistent with
+              the same parameters used for hearing adjudication were retained.
+              Reports issued by the President&rsquo;s Council of Advisors on
+              Science and Technology were included in the same manner. Because
+              the body of work issued by each of these entities is relatively
+              small and not contained in searchable databases, we did not apply
+              the hearing search terms but rather examined the available report
+              titles, and content where necessary, to judge whether reports were
+              relevant.
+            </p>
+            <p>
+              All Worldwide Threat Assessments issued by the Director of
+              National Intelligence (and their precursors by a different name)
+              were identified; those that reported an infectious disease threat
+              or risk were included. Reports from Inspectors General (IG) of
+              DHS, DoD, HHS, U.S. Agency for International Development (USAID),
+              and Department of Veterans Affairs (VA) were sought on their
+              respective websites; the search terms (same as those used for
+              hearings) were input into the search bar for DHS, DoD, HHS, and
+              VA. The HHS IG additionally provides a pre-populated category of
+              &ldquo;emerging infectious disease preparedness and
+              response&rdquo; reports and these reports were also captured.
+              <Endnotes.Note>
+                U.S. Department of Health and Human Services. Office of
+                Inspector General. Infectious Disease Preparedness and Response.
+                Available from:
+                <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
+                  https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp
+                </ExtLink>
+                . Accessed June 16, 2020.
+              </Endnotes.Note>{' '}
+              USAID presents its reports by category; from the &ldquo;Global
+              Health&rdquo; page we manually reviewed all entries to extract
+              relevant reports. The HHS Public Health Emergency Medical
+              Countermeasures Enterprise (PHEMCE) collates and makes a variety
+              of reports available on its website, and from these we pulled the
+              organization&rsquo;s multi-year budgets. For all of these
+              searches, the standing exclusion criteria were applied; those
+              deemed topically irrelevant or focused on areas like expenditure
+              audits were also omitted.
+            </p>
+            <p>
+              While these and other departments and agencies have issued many
+              other EID-relevant reports throughout the timeframe of interest,
+              these reports are often one-offs and are not available in any
+              systematized fashion to the authors&rsquo; knowledge. The research
+              team captured some of these by the methods outlined in United
+              States Step 3.
+            </p>
+            <p>
+              Two legislative branch agencies that provide analyses to Congress
+              were also included: the Congressional Research Service (CRS) and
+              the Government Accountability Office (GAO). The same search terms
+              and date parameters used for hearings were applied. For CRS, the
+              primary search bar in the public database (
+              <ExtLink url="http://crsreports.congress.gov/">
+                crsreports.congress.gov
               </ExtLink>
-              . Accessed June 16, 2020.
-            </Endnotes.Note>{' '}
-            USAID presents its reports by category; from the &ldquo;Global
-            Health&rdquo; page we manually reviewed all entries to extract
-            relevant reports. The HHS Public Health Emergency Medical
-            Countermeasures Enterprise (PHEMCE) collates and makes a variety of
-            reports available on its website, and from these we pulled the
-            organization&rsquo;s multi-year budgets. For all of these searches,
-            the standing exclusion criteria were applied; those deemed topically
-            irrelevant or focused on areas like expenditure audits were also
-            omitted.
-            <br />
-            <br />
-            While these and other departments and agencies have issued many
-            other EID-relevant reports throughout the timeframe of interest,
-            these reports are often one-offs and are not available in any
-            systematized fashion to the authors&rsquo; knowledge. The research
-            team captured some of these by the methods outlined in United States
-            Step 3.
-            <br />
-            <br />
-            Two legislative branch agencies that provide analyses to Congress
-            were also included: the Congressional Research Service (CRS) and the
-            Government Accountability Office (GAO). The same search terms and
-            date parameters used for hearings were applied. For CRS, the primary
-            search bar in the public database (
-            <ExtLink url="http://crsreports.congress.gov/">
-              crsreports.congress.gov
-            </ExtLink>
-            ) was employed, and for GAO, the primary search bar on its website (
-            <ExtLink url="http://www.gao.gov">www.gao.gov</ExtLink>) was used.
-            CRS reports are sometimes updated and re-released at a later date;
-            in these cases, we documented the most recent date and uploaded the
-            most recent report.
-            <br />
-            <br />
-            We also sought to identify relevant federal strategies and
-            implementation plans. We aimed to keep these related as narrowly as
-            possible to biothreats, excluding broader works like national
-            defense or national security strategies. We used the following
-            sources for this information: the HHS Public Health Emergency
-            website,
-            <Endnotes.Note>
-              U.S. Department of Health and Human Services. Office of the
-              Assistant Secretary for Preparedness and Response. Medical
-              Countermeasures Strategies and Reports. Available from:{' '}
-              <ExtLink url="https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx">
-                https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx
-              </ExtLink>
-              . Accessed July 7, 2020.
-            </Endnotes.Note>{' '}
-            <span>
-              which compiles several relevant strategies and plans, and two
-              published collations of key strategies, executive orders, and
-              related documents.
-            </span>
-            <Endnotes.Note>
-              Homeland Security Digital Library. National Strategy Documents.
-              Available from:{' '}
-              <ExtLink url="https://www.hsdl.org/?collection&id=4#Pandemics">
-                https://www.hsdl.org/?collection&id=4#Pandemics
-              </ExtLink>
-              . Accessed July 8, 2020.
-            </Endnotes.Note>
-            <Endnotes.Note>
-              Blue Ribbon Study Panel on Biodefense. A National Blueprint for
-              Biodefense: Leadership and Major Reform Needed to Optimize
-              Efforts. Table 2 (p. 14). Washington, DC: Blue Ribbon Study Panel
-              on Biodefense. Hudson Institute, October 2015.
-            </Endnotes.Note>{' '}
-            <br />
-            <br />
-            In a small number of cases, the researchers became aware of reports
-            that were not captured by the search strategy, for instance, when a
-            captured GAO testimony is based on a series of prior GAO reports,
-            some of which may not themselves have been captured; these were then
-            included for comprehensiveness.
+              ) was employed, and for GAO, the primary search bar on its website
+              (<ExtLink url="http://www.gao.gov">www.gao.gov</ExtLink>) was
+              used. CRS reports are sometimes updated and re-released at a later
+              date; in these cases, we documented the most recent date and
+              uploaded the most recent report.
+            </p>
+            <p>
+              We also sought to identify relevant federal strategies and
+              implementation plans. We aimed to keep these related as narrowly
+              as possible to biothreats, excluding broader works like national
+              defense or national security strategies. We used the following
+              sources for this information: the HHS Public Health Emergency
+              website,
+              <Endnotes.Note>
+                U.S. Department of Health and Human Services. Office of the
+                Assistant Secretary for Preparedness and Response. Medical
+                Countermeasures Strategies and Reports. Available from:{' '}
+                <ExtLink url="https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx">
+                  https://www.phe.gov/Preparedness/mcm/Pages/strategies-reports.aspx
+                </ExtLink>
+                . Accessed July 7, 2020.
+              </Endnotes.Note>{' '}
+              <span>
+                which compiles several relevant strategies and plans, and two
+                published collations of key strategies, executive orders, and
+                related documents.
+              </span>
+              <Endnotes.Note>
+                Homeland Security Digital Library. National Strategy Documents.
+                Available from:{' '}
+                <ExtLink url="https://www.hsdl.org/?collection&id=4#Pandemics">
+                  https://www.hsdl.org/?collection&id=4#Pandemics
+                </ExtLink>
+                . Accessed July 8, 2020.
+              </Endnotes.Note>
+              <Endnotes.Note>
+                Blue Ribbon Study Panel on Biodefense. A National Blueprint for
+                Biodefense: Leadership and Major Reform Needed to Optimize
+                Efforts. Table 2 (p. 14). Washington, DC: Blue Ribbon Study
+                Panel on Biodefense. Hudson Institute, October 2015.
+              </Endnotes.Note>{' '}
+            </p>
+            <p>
+              In a small number of cases, the researchers became aware of
+              reports that were not captured by the search strategy, for
+              instance, when a captured GAO testimony is based on a series of
+              prior GAO reports, some of which may not themselves have been
+              captured; these were then included for comprehensiveness.
+            </p>
           </li>
           <li>
             <strong>Third-party reports</strong>. This category includes
@@ -689,7 +701,7 @@ const Documentation = ({}) => {
           security and/or pandemics were excluded.
         </p>
         <h3>Other</h3>
-        <ol>
+        <ol className={styles.spacedOutList}>
           <li>
             <strong>Academic journal literature</strong>. Journal literature was
             searched using Ovid Medline (
@@ -793,7 +805,7 @@ const Documentation = ({}) => {
           <p>
             <strong>Funder</strong>
           </p>
-          <p>
+          <div>
             <em>
               The entity that provided the financial support for the item. Where
               a document specifies the funder of the work (or in some cases, the
@@ -803,11 +815,11 @@ const Documentation = ({}) => {
               no funder is offered, this is indicated as "Funder not
               specified.&rdquo;
             </em>
-          </p>
+          </div>
           <p>
             <strong>Organization has governance authority</strong>
           </p>
-          <p>
+          <div>
             <em>
               Captures whether the Publishing Organization has governance
               authority over the topic, recommendations, or other content of the
@@ -816,20 +828,20 @@ const Documentation = ({}) => {
               governance authority depending on the context and topic of the
               product.
             </em>
-          </p>
+          </div>
           <p>
             <strong>Publishing organization</strong>
           </p>
-          <p>
+          <div>
             <em>
               The group that published the work or led the effort (such as a
               tabletop exercise).
             </em>
-          </p>
+          </div>
           <p>
             <strong>Publishing sub-organization</strong>
           </p>
-          <p>
+          <div>
             <em>
               When applicable, a more granular level of detail for the
               Publishing Organization. This field is generally populated only
@@ -840,16 +852,16 @@ const Documentation = ({}) => {
               beneath the Publishing Organization on the View Details page of
               the record.
             </em>
-          </p>
+          </div>
           <p>
             <strong>Publishing organization type</strong>
           </p>
-          <p>
+          <div>
             <em>
               Reflects the category of publishing organization that issued the
               work:
             </em>
-          </p>
+          </div>
           <ul>
             <li>
               <span className={styles.medBold}>Academic</span>:{' '}
@@ -902,7 +914,7 @@ const Documentation = ({}) => {
           <p>
             <strong>Title</strong>
           </p>
-          <p>
+          <div>
             <em>
               The title of the work as listed on the document. In a small number
               of cases, the title reflects that in the database from which the
@@ -913,16 +925,16 @@ const Documentation = ({}) => {
               Board letters are given "titles" by the Department of Health and
               Human Services on its website).
             </em>
-          </p>
+          </div>
           <p>
             <strong>Type of record</strong>
           </p>
-          <p>
+          <div>
             <em>
               Reflects a high-level categorization of the form of the record;
               viewed above the report title in the detailed view of a record:
             </em>
-          </p>
+          </div>
           <ul>
             <li>
               <span className={styles.medBold}>Report</span>:{' '}
@@ -962,13 +974,13 @@ const Documentation = ({}) => {
           <p>
             <strong>Topic area</strong>
           </p>
-          <p>
+          <div>
             <em>
               Reflects the major topic the report addresses, chosen from a set
               of six selected by the research team; some reports may cover
               multiple topical areas, but only one topic is chosen:
             </em>
-          </p>
+          </div>
           <ul>
             <li>
               <span className={styles.medBold}>Threat/risk awareness</span>:{' '}
