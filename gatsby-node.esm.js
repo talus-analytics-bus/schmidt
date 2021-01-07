@@ -2,7 +2,6 @@ import path from 'path'
 
 export const onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
-  console.log('Page - ' + page.path)
   if (page.path.match(/^\/info/)) {
     createPage({
       path: '/info/overview',
