@@ -51,7 +51,7 @@
   "license": "MIT",
   "scripts": {
     "build": "GATSBY_ENV=production && gatsby build",
-    "build:preview": "GATSBY_API_URL=https://schmidt-api-test.talusanalytics.com && gatsby build",
+    "build:preview": "GATSBY_API_URL=https://api-preview.healthsecuritynet.org && gatsby build",
     "develop": "GATSBY_ENV=development && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
