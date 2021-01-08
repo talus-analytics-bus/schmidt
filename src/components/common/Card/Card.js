@@ -88,9 +88,6 @@ export const Card = ({
   // show preview or hide?
   const [showPreview, setShowPreview] = useState(false)
 
-  // image
-  const [thumbnail, setThumbnail] = useState(null)
-
   // CONSTANTS
   // get array of bookmark ids
   const bookmarkedIdsArr =
