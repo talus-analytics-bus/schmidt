@@ -88,9 +88,6 @@ export const Card = ({
   // show preview or hide?
   const [showPreview, setShowPreview] = useState(false)
 
-  // image
-  const [thumbnail, setThumbnail] = useState(null)
-
   // CONSTANTS
   // get array of bookmark ids
   const bookmarkedIdsArr =
@@ -369,7 +366,7 @@ export const Card = ({
           <div className={styles.resultNumber}>{resultNumber}</div>
         </div>
         <div className={classNames(styles.col, styles.thumbnailCol)}>
-          {files.length > 0 && (
+          {files.length > 0 && files[0].has_thumb && (
             <div className={styles.thumbnail}>
               <img
                 key={files[0].id}
@@ -377,7 +374,7 @@ export const Card = ({
               />
             </div>
           )}
-          {files.length === 0 && (
+          {(files.length === 0 || !files[0].has_thumb) && (
             <div className={classNames(styles.thumbnail, styles.placeholder)}>
               {title.charAt(0)}
               <img src={logoIcon} />
