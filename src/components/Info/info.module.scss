@@ -197,9 +197,6 @@
           &.talus {
             width: 85%;
           }
-          &.schmidt {
-            width: 80%;
-          }
         }
         .team {
           padding: 20px;
@@ -209,6 +206,14 @@
           border-radius: $big-radius;
           .header {
             font-weight: 600;
+          }
+        }
+      }
+      .funder {
+        img {
+          &.schmidt {
+            width: 100%;
+            margin-top: 10px;
           }
         }
       }
