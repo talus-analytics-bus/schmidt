@@ -74,9 +74,12 @@ const Documentation = ({}) => {
             directly from the site.
           </li>
           <li>
-            A written analysis from the Georgetown University Center for Global
-            Health Science and Security reflecting key observations about the
-            dataset.
+            A{' '}
+            <ExtLink url="/Health_Security_Net_Report.pdf">
+              written analysis
+            </ExtLink>{' '}
+            from the Georgetown University Center for Global Health Science and
+            Security reflecting key observations about the dataset.
           </li>
         </ol>
         <p>
