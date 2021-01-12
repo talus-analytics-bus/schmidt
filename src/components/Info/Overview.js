@@ -9,7 +9,7 @@ import { PrimaryButton } from '../common'
 import styles from './info.module.scss'
 import talus from '../../assets/images/talus.png'
 import georgetown from '../../assets/images/georgetown.png'
-import schmidt from '../../assets/images/schmidt.svg'
+import schmidt from '../../assets/images/schmidt.png'
 
 const Overview = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -87,7 +87,7 @@ const Overview = ({}) => {
       </div>
       <div className={styles.contributors}>
         <h3>Funder</h3>
-        <div className={styles.contributor}>
+        <div className={styles.funder}>
           <a
             href={'https://schmidtfutures.com/'}
             target="_blank"
