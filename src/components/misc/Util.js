@@ -1123,10 +1123,10 @@ export const sortBySpecificAdoptionStatus = (a, b, order) => {
   return b - a // desc
 }
 
-export const formatDate = (input, year = false) => {
-  if (year) return moment(input).format('YYYY')
-  else return moment(input).format('MMM YYYY')
-  // return moment(input).format('MMM D, YYYY')
+export const formatDate = (input, dateType) => {
+  if (dateType === 0 || dateType === 1) return moment(input).format('MMM YYYY')
+  else if (dateType === 2) return moment(input).format('YYYY')
+  else return null
 }
 
 /**
