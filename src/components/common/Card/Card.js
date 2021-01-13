@@ -38,6 +38,7 @@ export const Card = ({
   title,
   description,
   date,
+  date_type,
   authors,
   sub_organizations,
   funders,
@@ -502,12 +503,7 @@ export const Card = ({
                     <span className={classNames(styles.small)}>
                       {
                         // for records tagged in Airtable with "YEAR", the month isn't necessarily accurate so we want to hide the month and only show the year
-                        formatDate(
-                          date,
-                          internal_research_note !== undefined
-                            ? internal_research_note.includes('YEAR')
-                            : false
-                        )
+                        formatDate(date, date_type)
                       }
                     </span>
                   )}
