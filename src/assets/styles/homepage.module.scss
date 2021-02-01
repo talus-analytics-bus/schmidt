@@ -1,7 +1,7 @@
 @import '../../assets/styles/vars.scss';
 $icon-size: 60px;
 $vertical-spacing: 60px;
-$margin-left: 116px;
+$margin-left: 142px;
 .largeFlag {
   position: absolute;
   right: -1px;
@@ -33,18 +33,18 @@ $margin-left: 116px;
       }
       .textWrapShape {
         $w: 100%;
-        $h: 600px;
-        $shape: polygon(0px 0px, $w 0px, $w $h, 0px 250px);
+        $h: 700px;
+        $shape: polygon(0px 0px, $w 0px, $w $h, 0px 180px);
         float: right;
         shape-outside: $shape;
         clip-path: $shape;
-        width: 50%;
+        width: 60%;
         height: $h;
         // background-color: red;
       }
       .landingText {
         margin-left: $margin-left;
-        margin-top: 80px;
+        margin-top: 50px;
         max-width: 70%;
         font-size: 1.25rem;
         text-align: left;
@@ -121,18 +121,24 @@ $margin-left: 116px;
   }
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1500px) {
   .home {
     .main {
       .upper {
         .textWrapShape {
-          $w: 100%;
-          $h: 400px;
-          $shape: polygon(0px 0px, $w 0px, $w $h, 0px 250px);
-          shape-outside: $shape;
-          clip-path: $shape;
-          width: 30%;
-          height: $h;
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .home {
+    .main {
+      .upper {
+        .textWrapShape {
+          width: 40%;
         }
       }
     }
@@ -147,10 +153,10 @@ $margin-left: 116px;
           height: 80px;
         }
         .landingText {
-          margin-left: 78px;
+          margin-left: 95px;
         }
         .controls {
-          margin-left: 78px;
+          margin-left: 95px;
         }
       }
     }
