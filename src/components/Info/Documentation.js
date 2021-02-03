@@ -31,7 +31,7 @@ const Documentation = ({}) => {
         <h1>Documentation</h1>
         <p className={styles.noTopMargin}>
           Health Security Net is one of a{' '}
-          <ExtLink url={'https://gida.ghscosting.org/'}>
+          <ExtLink url={'https://ghssidea.org/'}>
             suite of free resources
           </ExtLink>{' '}
           from the Georgetown University Center for Global Health Science and
