@@ -425,49 +425,50 @@ const Documentation = ({}) => {
               relevant hearings not captured by any of the keywords, these were
               included for comprehensiveness. All hearing titles were copied
               from the relevant hearing report.
-              {/* OMITTING THIS PARAGRAPH UNTIL WE HAVE LINK TO SUPPLEMENTAL FILE */}
-              {/* </p>
-            <p> */}
-              {/* In addition to their inclusion in the library, the list of included
-            hearings has also been made available as a supplemental file
-            containing additional metadata. In this document, witness names and
-            affiliations for each hearing were noted from the CR and other
-            sources, including official committee reports available at{' '}
-            <ExtLink url="https://www.govinfo.gov/">
-              www.govinfo.gov
-            </ExtLink>{' '}
-            and committee websites. Witness names were manually standardized to
-            resolve spelling or other discrepancies. Each hearing was tagged as
-            having occurred during either Democrat or Republican control of a
-            given chamber.
-            <Endnotes.Note>
-              United States House of Representatives Office of the Historian
-              website. Institution page. Party Divisions of the House of
-              Representatives, 1789 to Present.
-            </Endnotes.Note>
-            <Endnotes.Note>
-              United States Senate website. Art and History page. Party
-              Division.{' '}
-              <ExtLink url="https://www.senate.gov/history/partydiv.htm">
-                https://www.senate.gov/history/partydiv.htm
+            </p>
+            <p>
+              In addition to their inclusion in the library, the list of
+              included hearings has also been made available as a{' '}
+              <ExtLink url="/HealthSecurityNetCongressionalHearingsSupplement.csv">
+                supplemental file containing additional metadata
               </ExtLink>
-              . Accessed June 27, 2020.
-            </Endnotes.Note>{' '}
-            <span>
-              Some committee names changed across the data capture period; these
-              were grouped with their current names to permit proper
-              committee-level analysis of activity.
-            </span>
-            <Endnotes.Note>
-              Congress.gov website. Committees webpage. Committee Name History.{' '}
-              <ExtLink url="https://www.congress.gov/help/field-values/current-committees">
-                https://www.congress.gov/help/field-values/current-committees
-              </ExtLink>
-              . Accessed June 27, 2020.
-            </Endnotes.Note>{' '}
-            Two hearings were held jointly by multiple committees; for analysis
-            purposes, these were treated as though they were held by separate,
-            unique committees. */}
+              . In this document, witness names and affiliations for each
+              hearing were noted from the CR and other sources, including
+              official committee reports available at{' '}
+              <ExtLink url="https://www.govinfo.gov/">www.govinfo.gov</ExtLink>{' '}
+              and committee websites. Witness names were manually standardized
+              to resolve spelling or other discrepancies. Each hearing was
+              tagged as having occurred during either Democrat or Republican
+              control of a given chamber.
+              <Endnotes.Note>
+                United States House of Representatives Office of the Historian
+                website. Institution page. Party Divisions of the House of
+                Representatives, 1789 to Present.
+              </Endnotes.Note>
+              <Endnotes.Note>
+                United States Senate website. Art and History page. Party
+                Division.{' '}
+                <ExtLink url="https://www.senate.gov/history/partydiv.htm">
+                  https://www.senate.gov/history/partydiv.htm
+                </ExtLink>
+                . Accessed June 27, 2020.
+              </Endnotes.Note>{' '}
+              <span>
+                Some committee names changed across the data capture period;
+                these were grouped with their current names to permit proper
+                committee-level analysis of activity.
+              </span>
+              <Endnotes.Note>
+                Congress.gov website. Committees webpage. Committee Name
+                History.{' '}
+                <ExtLink url="https://www.congress.gov/help/field-values/current-committees">
+                  https://www.congress.gov/help/field-values/current-committees
+                </ExtLink>
+                . Accessed June 27, 2020.
+              </Endnotes.Note>{' '}
+              Two hearings were held jointly by multiple committees; for
+              analysis purposes, these were treated as though they were held by
+              separate, unique committees.
             </p>
           </li>
           <li>
