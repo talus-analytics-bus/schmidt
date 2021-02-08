@@ -12,21 +12,28 @@ import styles from './footer.module.scss'
 import classNames from 'classnames'
 
 // assets
-import logo from '../../../assets/images/logo.svg'
-import talus from '../../../assets/images/talus.png'
-import georgetown from '../../../assets/images/georgetown.png'
+import talus from '../../../assets/images/logo-talus.png'
+import georgetown from '../../../assets/images/logo-georgetown.png'
+import idea from '../../../assets/images/logo-title.png'
 
 const Footer = () => {
   return (
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
-        <div className={styles.logos}>
+        <div className={styles.content}>
+          <a href={'https://ghssidea.org'} target="_blank">
+            <img
+              src={idea}
+              alt={
+                'International Disease and Events Analysis'
+              }
+            ></img>
+          </a>
           <a href={'https://ghss.georgetown.edu/'} target="_blank">
             <img
-              className={styles.georgetown}
               src={georgetown}
               alt={
-                'Georgetown Center for Global Health Science and Security logo'
+                'Georgetown University Center for Global Health Science and Security'
               }
             ></img>
           </a>
@@ -34,7 +41,7 @@ const Footer = () => {
             <img
               className={styles.talus}
               src={talus}
-              alt={'Talus Analytics logo'}
+              alt={'Talus Analytics'}
             ></img>
           </a>
         </div>

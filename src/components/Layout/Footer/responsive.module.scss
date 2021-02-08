@@ -1,21 +1,27 @@
 @import '../../../assets/styles/vars.scss';
 
-@media #{$phone} {
-  .footerContainer {
-    .footer {
-      .logos {
-        width: 400px;
-      }
-    }
+@media (max-width: 1000px) {
+  .footer {
+    justify-content: flex-start;
   }
 }
-
-@media #{$phone-narrow} {
-  .footerContainer {
-    .footer {
-      .logos {
-        width: 100%;
-        padding: 20px 0px 60px 0px;
+@media (max-width: 812px) {
+  .footer {
+    height: unset;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 10px 0px;
+    justify-content: center;
+    .content {
+      flex-direction: column;
+      a {
+        &:not(:last-child) {
+          border-right: 0px solid $black;
+        }
+      }
+      img {
+        height: 70px;
+        padding: 15px 0px;
       }
     }
   }

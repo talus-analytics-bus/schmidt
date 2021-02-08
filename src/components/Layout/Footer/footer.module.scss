@@ -1,32 +1,38 @@
 @import '../../../assets/styles/vars.scss';
 
-.footerContainer {
+$black: #303434;
+.footer {
+  margin-top: 80px;
+  height: 90px;
   width: 100%;
-  border-top: 3px $blue solid;
-  .footer {
-    // standard: max width of screen is 1300px
-    // center content in that view
-    // TODO pull up in scope to master SCSS file
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 20px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $black;
+  .content {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    .logos {
-      width: 500px;
-      display: grid;
-      grid-template-columns: 1fr 0.75fr;
-      column-gap: 20px;
-      padding: 20px 0px 50px 0px;
-      a {
-        @include center();
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:not(:last-child) {
+        border-right: 1px solid $black;
       }
-      img {
-        max-width: 100%;
+      &:nth-child(2) {
+        //bump the height of GU logo slightly
+        img {
+          height: 50px;
+        }
       }
+    }
+    img {
+      height: 40px;
+      padding: 0px 40px;
     }
   }
 }
+
 
 @import './responsive.module.scss';
