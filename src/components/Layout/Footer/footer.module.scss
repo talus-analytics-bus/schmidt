@@ -2,6 +2,7 @@
 
 $black: #303434;
 .footer {
+  margin-top: -2px; //attempt at removing weird ghost CSS line on preview site
   height: 90px;
   width: 100%;
   background-color: white;
