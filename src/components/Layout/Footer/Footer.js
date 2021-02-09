@@ -34,12 +34,17 @@ const Footer = () => {
             }
           ></img>
         </a>
-        <a href={'https://talusanalytics.com/'} target="_blank">
+        <a
+          href={'https://talusanalytics.com/'}
+          target="_blank"
+          className={styles.talusLogo}
+        >
           <img
             className={styles.talus}
             src={talus}
             alt={'Talus Analytics'}
           ></img>
+          <div className={styles.builtBy}>Built by</div>
         </a>
       </div>
     </div>

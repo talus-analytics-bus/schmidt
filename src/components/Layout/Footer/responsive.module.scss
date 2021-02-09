@@ -18,11 +18,20 @@
         &:not(:last-child) {
           border-right: 0px solid $black;
         }
+        &:nth-child(2) {
+          //bump the height of GU logo slightly
+          img {
+            height: 70px;
+          }
+        }
       }
       img {
         height: 70px;
         padding: 15px 0px;
       }
+    }
+    .builtBy {
+      display: none;
     }
   }
 }
