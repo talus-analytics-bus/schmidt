@@ -15,3 +15,6 @@ node_modules
 
 # DS Store files
 .DS_STORE
+
+# visual studio code
+.vscode
