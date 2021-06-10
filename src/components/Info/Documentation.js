@@ -54,17 +54,19 @@ const Documentation = ({}) => {
           </a>
         </p>
         <p>
-          As of its launch in January 2021, the library includes documents from
-          global and national-level sources dated from 1995-2019. Global sources
-          are the Food and Agriculture Organization, United Nations General
-          Assembly, United Nations Security Council, World Organisation for
-          Animal Health, and World Health Organization (including the World
-          Health Assembly). National sources as of January 2021 are drawn from
-          the United States. Academic journal literature as it relates to
-          coronaviruses as a global infectious disease threat is also
-          represented. This is an ongoing research project and the library may
-          be updated to reflect pre-1995 or post-2019 sources, additional
-          countries, and other elements.
+          As of its most recent update in June 2021, the library includes
+          documents from global and national-level sources dated from 1995-2019.
+          Global sources are the Food and Agriculture Organization, United
+          Nations General Assembly, United Nations Security Council, World
+          Organisation for Animal Health, and World Health Organization
+          (including the World Health Assembly). National sources as of January
+          2021 are drawn from the United States, with additional sources
+          reflecting Presidential Directives and Executive Orders added in June
+          2021. Academic journal literature as it relates to coronaviruses as a
+          global infectious disease threat is also represented. This is an
+          ongoing research project and the library may be updated to reflect
+          pre-1995 or post-2019 sources, additional countries, and other
+          elements.
         </p>
         <p>The site includes:</p>
         <ol>
@@ -162,22 +164,24 @@ const Documentation = ({}) => {
             2019.
           </li>
           <li>
-            Items strictly about bioterrorism and/or biosafety/biological
-            accidents.
-          </li>
-          <li>
             Items solely focused on endemic diseases or those typically
             addressed by the global health (as opposed to global health
             security) community, e.g., HIV, TB, malaria, and noncommunicable
             diseases.
           </li>
-          <li>
-            Items focused on a single country (e.g., country-level Joint
-            External Evaluation mission reports; reports published by a World
-            Health Organization regional office).
-          </li>
           <li>Fact sheets on diseases.</li>
-          <li>Items not in English.</li>
+          <li>
+            The following items were also excluded except where noted in this
+            Documentation:
+            <ul>
+              <li>
+                Items strictly about bioterrorism and/or biosafety/biological
+                accidents.
+              </li>
+              <li>Items focused on a single country.</li>
+              <li>Items not in English.</li>
+            </ul>
+          </li>
         </ul>
         <p>
           Global sources were reviewed for relevant documents. The search
@@ -295,29 +299,28 @@ const Documentation = ({}) => {
                 https://apps.who.int/iris/
               </ExtLink>
               ). Because many of our desired search terms (see United
-              State&mdash;Hearings section below) returned thousands of results,
-              and IRIS can only export 500 at a time, the research team instead
-              used the &ldquo;MeSH&rdquo; subject categories that IRIS uses to
-              organize its topics. In the IRIS database, we manually searched
-              the &ldquo;MeSH subjects&rdquo; category and chose relevant
-              subjects (number of records in parentheses): Coronavirus
+              States&mdash;Hearings section below) returned thousands of
+              results, and IRIS can only export 500 at a time, the research team
+              instead used the &ldquo;MeSH&rdquo; subject categories that IRIS
+              uses to organize its topics. In the IRIS database, we manually
+              searched the &ldquo;MeSH subjects&rdquo; category and chose
+              relevant subjects (number of records in parentheses): Coronavirus
               Infections (133); Ebola Vaccines (24); Ebolavirus (430); Epidemics
               (138); Epidemiological Monitoring (1284)&mdash;in English, 519;
               Infectious Disease; Medicine (2); Infectious Disease Transmission,
               Patient-to-Professional (16); Infectious Disease Transmission,
               Professional-to-Patient (6); Infectious Disease Transmission,
-              Vertical (280);Infectious hazards (1); infectious hazards (1);
-              Infectious mononucleosis (1); Influenza (3); Influenza A virus
-              (60); Influenza A Virus, H1N1 Subtype (183); Influenza A Virus,
-              H1N2 Subtype (6); Influenza A Virus, H3N2 Subtype (4); Influenza A
-              Virus, H5N1 Subtype (5); Influenza A Virus, H5N2 Subtype (3);
-              Influenza A Virus, H7N9 Subtype (5); Influenza B virus (36);
-              Influenza Vaccines (455); Influenza, Human (971); Influenza, Human
-              A virus (1); Influenza, Human vaccine (1); Influenza Humanvirus B
-              (1); Influenzavirus A (12); Influenzavirus B (10); Medical Waste
-              (31); Medical Waste Disposal (43); Middle East Respiratory
-              Syndrome Coronavirus (41); Public Health Surveillance (488); and
-              SARS Virus (35).
+              Vertical (280); Infectious hazards (1); infectious hazards (1);
+              Influenza (3); Influenza A virus (60); Influenza A Virus, H1N1
+              Subtype (183); Influenza A Virus, H1N2 Subtype (6); Influenza A
+              Virus, H3N2 Subtype (4); Influenza A Virus, H5N1 Subtype (5);
+              Influenza A Virus, H5N2 Subtype (3); Influenza A Virus, H7N9
+              Subtype (5); Influenza B virus (36); Influenza Vaccines (455);
+              Influenza, Human (971); Influenza, Human A virus (1); Influenza,
+              Human vaccine (1); Influenza Humanvirus B (1); Influenzavirus A
+              (12); Influenzavirus B (10); Medical Waste (31); Medical Waste
+              Disposal (43); Middle East Respiratory Syndrome Coronavirus (41);
+              Public Health Surveillance (488); and SARS Virus (35).
             </p>
             <p>
               The following terms from the team&rsquo;s broad list of terms (see
@@ -338,9 +341,13 @@ const Documentation = ({}) => {
             <p>
               &ldquo;Weekly Update&rdquo; reports and country-specific items
               were excluded from the captured sources; regionally-oriented WHO
-              reports were included. Others that in the researchers&rsquo;
-              expert judgement were irrelevant to health security were also
-              excluded.
+              reports were excluded in the first round of data collection.
+              Others that in the researchers&rsquo; expert judgement were
+              irrelevant to health security were also excluded. During our data
+              collection starting February 2021, we gathered WHO regional
+              organization documents using the same methodology. We used all of
+              the same MeSH terms and filters, with the addition of one filter:
+              Author—contains—Regional Office.
             </p>
           </li>
         </ol>
@@ -348,7 +355,7 @@ const Documentation = ({}) => {
         <p>
           The research team compiled United States documentation in the form of
           congressional hearings, government reports and other documents, and
-          third party reports and other documents. In most cases, a list of 25
+          third-party reports and other documents. In most cases, a list of 25
           search terms were deployed to capture a broad array of hits relevant
           to pandemics (see details below). The team excluded documents meeting
           any of the following criteria:
@@ -356,15 +363,15 @@ const Documentation = ({}) => {
         <ul>
           <li>Items outside of January 1, 1995 &ndash; December 31, 2019.</li>
           <li>
-            Items strictly about bioterrorism and/or biosafety/biological
-            accidents.
-          </li>
-          <li>
             Items solely focused on endemic diseases or those typically
             addressed by the global health (as opposed to global health
             security) community, e.g., HIV, TB, malaria.
           </li>
           <li>Fact sheets on diseases.</li>
+          <li>
+            Items strictly about bioterrorism and/or biosafety/biological
+            accidents were excluded except where noted in this Documentation.
+          </li>
         </ul>
         <p>The research term sought information from the following sources:</p>
         <ol className={styles.spacedOutList}>
@@ -525,7 +532,7 @@ const Documentation = ({}) => {
               <Endnotes.Note>
                 U.S. Department of Health and Human Services. Office of
                 Inspector General. Infectious Disease Preparedness and Response.
-                Available from:
+                Available from:{' '}
                 <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
                   https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp
                 </ExtLink>
@@ -547,7 +554,7 @@ const Documentation = ({}) => {
               these reports are often one-offs and are not available in any
               systematized fashion to the authors&rsquo; knowledge. The research
               team captured some of these by the methods outlined in United
-              States Step 3.
+              States Step 5.
             </p>
             <p>
               Two legislative branch agencies that provide analyses to Congress
@@ -677,11 +684,53 @@ const Documentation = ({}) => {
             Medicine&rdquo; as the publishing organization.
             <br />
             <br />
-            In some cases, the publishers of third party reports do not provide
+            In some cases, the publishers of third-party reports do not provide
             permission for posting the report on other websites; in these cases,
             information about the report was still provided for
             comprehensiveness, along with a hyperlink for accessing it
             elsewhere.
+          </li>
+          <li>
+            <strong>Executive Orders and Presidential Directives</strong>. This
+            category includes presidential review directives, presidential
+            decision directives, and executive orders issued by the president of
+            the United States. For this category of documents alone, we expanded
+            our inclusion criteria to also include documents that (1) only
+            directly discussed biological events of intentional and/or
+            accidental origin, but (2) nevertheless provided insight to the
+            priorities and frameworks guiding American health security policy at
+            the time.
+            <br />
+            <br />
+            To gather executive orders, we consulted the Federal Register, which
+            provides an online archive of all executive orders issued since
+            1994.
+            <Endnotes.Note>
+              Federal Register. Executive Orders. Available from:{' '}
+              <ExtLink url="https://www.federalregister.gov/presidential-documents/executive-orders">
+                https://www.federalregister.gov/presidential-documents/executive-orders
+              </ExtLink>
+              . Accessed April 4, 2021.
+            </Endnotes.Note>{' '}
+            We examined the titles and, where necessary, the full texts of all
+            executive orders issued from 1995-2019 to determine relevancy.
+            <br />
+            <br />
+            To gather presidential directives, we consulted the online
+            collection of unclassified and declassified presidential directives
+            maintained by the Federation of American Scientists (FAS).
+            <Endnotes.Note>
+              Federation of American Scientists. Presidential Directives and
+              Executive Orders. Available from:{' '}
+              <ExtLink url="https://fas.org/irp/offdocs/direct.htm">
+                https://fas.org/irp/offdocs/direct.htm
+              </ExtLink>
+              . Accessed March 22, 2021.
+            </Endnotes.Note>{' '}
+            For each review directive and decision directive issued from
+            1995-2019 for which the FAS had obtained a declassified or
+            unclassified copy, we reviewed the title and, where necessary, the
+            full text to determine relevancy.
           </li>
           <li>
             <strong>Other methods</strong>. To capture additional relevant
@@ -736,19 +785,35 @@ const Documentation = ({}) => {
             initially identified by a Google search of the keywords
             &ldquo;infectious,&rdquo; &ldquo;disease,&rdquo;
             &ldquo;tabletop,&rdquo; &ldquo;exercise,&rdquo;
-            &ldquo;report,&rdquo; and &ldquo;readout&rdquo; in various
-            combinations. The research team looked for records that described a
-            national or international simulation or exercise that was conducted,
-            and ideally provided a report-out. Through this method, key
-            databases were identified, such as the&nbsp;Homeland Security
-            Digital Library (
+            &ldquo;report,&rdquo; &ldquo;readout,&rdquo; and
+            &ldquo;simulation&rdquo; in various combinations. The research team
+            looked for records that described a national or international
+            simulation or exercise that was conducted, and ideally provided a
+            read-out. Exercises were dated according to the date the exercise
+            itself was conducted, rather than according to the date the read-out
+            was released. The team additionally collected infectious disease
+            tabletop exercise toolkits or templates. These toolkits were coded
+            as “Report.”
+            <br />
+            <br />
+            Through this method, key databases were identified, such as
+            the&nbsp;Homeland Security Digital Library (
             <ExtLink url="https://www.hsdl.org/c/">
               https://www.hsdl.org/c/
             </ExtLink>
-            ) and the National Institute of Health Emergency and Disaster
-            Response Training Exercises (
+            ), the National Institute of Health Emergency and Disaster Response
+            Training Exercises (
             <ExtLink url="https://dr2.nlm.nih.gov/training-exercises">
               https://dr2.nlm.nih.gov/training-exercises
+            </ExtLink>
+            ), the Health and Human Services TRACIE website (
+            <ExtLink url="https://asprtracie.hhs.gov/technical-resources/7/exercise-program/1#after-action-reports">
+              https://asprtracie.hhs.gov/technical-resources/7/exercise-program/1#after-action-reports
+            </ExtLink>
+            ) and the United Nations Office for Disarmament Affairs’ list of
+            current activities involving the Implementation Support Unit (
+            <ExtLink url="https://www.un.org/disarmament/biological-weapons/implementation-support-unit/relevant-activities-overseen-by-the-isu">
+              https://www.un.org/disarmament/biological-weapons/implementation-support-unit/relevant-activities-overseen-by-the-isu
             </ExtLink>
             ). The same keyword searches were performed in these databases and
             the hits reviewed for relevance. To review for any potentially
@@ -763,6 +828,20 @@ const Documentation = ({}) => {
               7819, 4 Aug. 2020, pp. 26–29., doi:10.1038/d41586-020-02277-6.
             </Endnotes.Note>{' '}
             were also sought.
+            <br />
+            <br />
+            Subject matter experts within the Center for Global Health Science
+            and Security provided suggestions for additional websites and
+            exercises to review. This included the UN Geneva website (
+            <ExtLink url="https://www.ungeneva.org/en">
+              https://www.ungeneva.org/en
+            </ExtLink>
+            ), within which the team performed a search for any mention of
+            “simulation” or “tabletop exercise” and identified relevant
+            exercises that conformed with Health Security Net’s criteria. The
+            research team additionally performed explicit searches to find
+            specific exercises it had learned about from the experts or through
+            online reading.
           </li>
         </ol>
         <div id="datacoding" style={{ position: 'relative', top: -100 }} />
@@ -914,6 +993,13 @@ const Documentation = ({}) => {
               <span className={styles.medBold}>Private</span>:{' '}
               <em>A private sector company, usually for-profit.</em>
             </li>
+            <li>
+              <span className={styles.medBold}>Other</span>:{' '}
+              <em>
+                An organization that does not fit neatly into one of the other
+                categories.
+              </em>
+            </li>
           </ul>
           <p>
             <strong>Title</strong>
@@ -941,12 +1027,12 @@ const Documentation = ({}) => {
           </div>
           <ul>
             <li>
-              <span className={styles.medBold}>Report</span>:{' '}
+              <span className={styles.medBold}>Executive order</span>:{' '}
               <em>
-                An item presented as a reporting of findings; may include
-                written documentation of studies, meetings, investigations, etc.
-                Guidance and technical guidelines are also included in this
-                category.
+                A published directive from the President of the United States to
+                direct the activity of one or more entities of the federal
+                government. Includes presidential review directives,
+                presidential decision directives, and executive orders.
               </em>
             </li>
             <li>
@@ -959,6 +1045,23 @@ const Documentation = ({}) => {
               </em>
             </li>
             <li>
+              <span className={styles.medBold}>Journal paper</span>:{' '}
+              <em>
+                An item published in a professional journal; may reflect
+                original research, literature reviews, commentaries, editorials,
+                letters, and news items; may or may not be peer-reviewed.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Report</span>:{' '}
+              <em>
+                An item presented as a reporting of findings; may include
+                written documentation of studies, meetings, investigations, etc.
+                Guidance and technical guidelines are also included in this
+                category.
+              </em>
+            </li>
+            <li>
               <span className={styles.medBold}>Simulation or Exercise</span>:{' '}
               <em>
                 An item about simulations or exercises held, where simulations
@@ -967,11 +1070,29 @@ const Documentation = ({}) => {
               </em>
             </li>
             <li>
-              <span className={styles.medBold}>Journal paper</span>:{' '}
+              <span className={styles.medBold}>Situation report</span>:{' '}
               <em>
-                An item published in a professional journal; may reflect
-                original research, literature reviews, commentaries, editorials,
-                letters, and news items; may or may not be peer-reviewed.
+                A report from the World Health Organization that reflects recent
+                development about an outbreak or other health situation, usually
+                on a daily or weekly basis.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Strategy/Implementation Plan
+              </span>
+              :{' '}
+              <em>
+                A record in the database that has been titled by the Publishing
+                Organization as either a strategy and/or an implementation plan.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>UN process document</span>:{' '}
+              <em>
+                A record in the database from an organ of the United Nations;
+                may be a letter, note, resolution, report, agenda item, or other
+                kind of U.N. document.
               </em>
             </li>
           </ul>
@@ -1029,7 +1150,7 @@ const Documentation = ({}) => {
                 An item primarily about bilateral or multilateral international
                 aid (fiscal, personnel, etc.) or about bilateral or multilateral
                 collaborations (information sharing, sample sharing, capacity
-                building, etc).
+                building, etc.).
               </em>
             </li>
             <li>
