@@ -684,6 +684,60 @@ const Documentation = ({}) => {
             Medicine&rdquo; as the publishing organization.
             <br />
             <br />
+            To capture additional influential reports from non-governmental
+            organizations, researchers compiled a list of non-governmental
+            organizations who had published at least one document already
+            included in the database, but whose sites had not yet been fully
+            searched. (These organizations’ documents had been included through
+            the methods described in <strong>5: Other methods</strong> and{' '}
+            <strong>2: Simulations and exercises</strong> below.). The resulting
+            list consisted of the following organizations: the American Hospital
+            Association, the Association of Public Health Laboratories, the
+            Association of State and Territorial Health Officials, the Bill and
+            Melinda Gates Foundation, the Center for Transatlantic Relations at
+            Johns Hopkins University, the Council of State and Territorial
+            Epidemiologists, the Institute for Defense Analyses, the Johns
+            Hopkins Center for Civilian Biodefense Studies, the Johns Hopkins
+            University Center for Health Security, the Memorial Institute for
+            the Prevention of Terrorism, the National Association of County and
+            City Health Officials, the National Governors Association, The Lewin
+            Group, the Transatlantic Biosecurity Network, Trust for America's
+            Health, and the World Economic Forum. The team consulted the website
+            of each listed organization to view its published reports, if any
+            were publicly available.
+            <br />
+            <br />
+            For the majority of sites that featured publicly available reports,
+            we manually reviewed all reports in relevant topic categories
+            provided by the website. For the Johns Hopkins University Center for
+            Health Security, we manually reviewed all reports. For the Institute
+            for Defense Analyses, we searched “pandemic” and “infectious
+            disease” and reviewed the search results. For the Association of
+            State and Territorial Health Officials, we reviewed all reports in
+            the category of “infectious disease,” and also searched for
+            “pandemic” and reviewed the search results. For the World Economic
+            Forum, we reviewed all reports in the category of “Shaping the
+            Future of Health and Healthcare,” and also searched for “pandemic”
+            and “infectious disease” and reviewed the search results. In all
+            cases when reviewing reports, we first reviewed report titles, and
+            then full texts where needed to determine relevancy. In addition to
+            the standing exclusion criteria, we excluded commentaries, blog
+            posts, and other informal products (as opposed to formal reports).
+            We also excluded links to works published elsewhere (for example,
+            links to academic journal articles), and also excluded congressional
+            testimonies, in order to avoid duplication of existing information
+            on congressional hearings (see <strong>1: Hearings</strong> above).
+            <br />
+            <br />
+            Conducting these searches and manual reviews and applying exclusion
+            criteria led to document inclusion from the following institutions:
+            the Association of Public Health Laboratories, the Association of
+            State and Territorial Health Officials, the Institute for Defense
+            Analyses, the Johns Hopkins University Center for Health Security,
+            the National Governors Association, Trust for America’s Health, and
+            the World Economic Forum.
+            <br />
+            <br />
             In some cases, the publishers of third-party reports do not provide
             permission for posting the report on other websites; in these cases,
             information about the report was still provided for
