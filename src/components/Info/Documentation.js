@@ -20,7 +20,7 @@ const Documentation = ({}) => {
 
   // JSX
   // external link convenience component
-  const ExtLink = ({ url, children }) => (
+  const ExtLink = ({ url, children = url }) => (
     <a href={url} rel="noreferrer" target="_blank">
       {children}
     </a>
@@ -490,8 +490,11 @@ const Documentation = ({}) => {
               <Endnotes.Note>
                 Watson C, Watson M, Gastfriend D, Sell TK. Federal Funding for
                 Health Security in FY2019. Health Secur. 2018;16(5):281-303.
-                Epub 2018/10/20. doi: 10.1089/hs.2018.0077. PubMed PMID:
-                30339096.
+                Epub 2018/10/20.{' '}
+                <ExtLink url={'https://doi.org/10.1089/hs.2018.0077'}>
+                  doi: 10.1089/hs.2018.0077
+                </ExtLink>
+                . PubMed PMID: 30339096.
               </Endnotes.Note>
               <Endnotes.Note>
                 Michaud J, Moss K, Kates J. The U.S. Government and Global
@@ -533,9 +536,7 @@ const Documentation = ({}) => {
                 U.S. Department of Health and Human Services. Office of
                 Inspector General. Infectious Disease Preparedness and Response.
                 Available from:{' '}
-                <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp">
-                  https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp
-                </ExtLink>
+                <ExtLink url="https://oig.hhs.gov/reports-and-publications/featured-topics/infectious-disease/index.asp" />
                 . Accessed June 16, 2020.
               </Endnotes.Note>{' '}
               USAID presents its reports by category; from the &ldquo;Global
@@ -879,7 +880,11 @@ const Documentation = ({}) => {
             <Endnotes.Note>
               Maxmen, Amy, and Jeff Tollefson. “Two Decades of Pandemic War
               Games Failed to Account for Donald Trump.” Nature, vol. 584, no.
-              7819, 4 Aug. 2020, pp. 26–29., doi:10.1038/d41586-020-02277-6.
+              7819, 4 Aug. 2020, pp. 26–29.,{' '}
+              <ExtLink url={'http://doi.org/10.1038/d41586-020-02277-6'}>
+                doi:10.1038/d41586-020-02277-6
+              </ExtLink>
+              .
             </Endnotes.Note>{' '}
             were also sought.
             <br />
@@ -896,6 +901,142 @@ const Documentation = ({}) => {
             research team additionally performed explicit searches to find
             specific exercises it had learned about from the experts or through
             online reading.
+          </li>
+          <li>
+            <strong>National pandemic influenza plans</strong>. National and
+            regional pandemic plans were sought using the following sources and
+            methods:
+            <ul>
+              <li>
+                Plans were identified in the research paper “Inclusion of
+                Veterinary Services in national emergency management plans,
+                <Endnotes.Note>
+                  Nasim, A et al. “Inclusion of Veterinary Services in national
+                  emergency management plans.” Rev Sci Tech 39 (2) (2020):
+                  359-371.{' '}
+                  <ExtLink url={'https://doi.org/10.20506/rst.39.2.3087'}>
+                    doi:10.20506/rst.39.2.3087
+                  </ExtLink>
+                </Endnotes.Note>{' '}
+                which contained a compiled list of all national emergency plans
+                from OIE member countries.
+              </li>
+              <li>
+                An archived WHO influenza plan repository
+                <Endnotes.Note>
+                  National Plans for Pandemic Preparedness and Risk Management.
+                  World Health Organization, 2020,{' '}
+                  <ExtLink
+                    url={
+                      'https://web.archive.org/web/20201126121154/https://extranet.who.int/sph/influenza-plan'
+                    }
+                  />
+                  . Accessed June 2021 via Wayback Machine.
+                </Endnotes.Note>{' '}
+                was used to search for additional plans and countries that may
+                not have been included in that resource; previously unidentified
+                plans were then manually searched for via Google. The public
+                availability of these plans was determined by searching “Country
+                X pandemic influenza plan” into the Google search bar to see if
+                it yielded an appropriate link within the first three search
+                result pages.
+              </li>
+              <li>
+                WHO regional offices (Africa, Americas, South-East Asia, Europe,
+                Eastern Mediterranean, and Western Pacific) were each reviewed
+                for a list or repository of publicly available pandemic
+                influenza plans of their Member Countries. For offices that
+                listed plans but did not have proper links to them, the records
+                were sought online via the same methodology described above.
+              </li>
+              <li>
+                Additional plans were gathered from pandemic and avian influenza
+                plan repositories provided by the European Centre for Disease
+                Prevention and Control
+                <Endnotes.Note>
+                  Influenza Pandemic Preparedness Plans.{' '}
+                  <em>European Centre for Disease Prevention and Control</em>,
+                  European Centre for Disease Prevention and Control, 2 Feb.
+                  2021,{' '}
+                  <ExtLink
+                    url={
+                      'https://www.ecdc.europa.eu/en/seasonal-influenza/preparedness/influenza-pandemic-preparedness-plans'
+                    }
+                  />
+                  .
+                </Endnotes.Note>{' '}
+                and the Asia-Pacific Alliance for the Control of Influenza.
+                <Endnotes.Note>
+                  Pandemic Preparedness Plans for the Asia-Pacific Region.{' '}
+                  <em>APACI</em>, APACI, 2014,{' '}
+                  <ExtLink
+                    url={
+                      'https://www.apaci.asia/influenza/pandemic-preparedness/pandemic-preparedness-plans-for-the-asia-pacific-region'
+                    }
+                  />
+                </Endnotes.Note>
+              </li>
+              <li>
+                Academic literature analyzing national influenza plans
+                <Endnotes.Note>
+                  Coker, R., Mounier-Jack, S. “Pandemic influenza preparedness
+                  in the Asia-Pacific region.” <em>Lancet (London, England)</em>
+                  368(9538) (2006): 886-9.{' '}
+                  <ExtLink
+                    url={'https://doi.org/10.1016/S0140-6736(06)69209-X'}
+                  >
+                    doi:10.1016/S0140-6736(06)69209-X
+                  </ExtLink>
+                </Endnotes.Note>
+                <Endnotes.Note>
+                  Droogers, M et al. (2019). “European Pandemic Influenza
+                  Preparedness Planning: A Review of National Plans.”{' '}
+                  <em>Disaster Medicine and Public Health Preparedness</em>,
+                  13(3), July 2016, pp.582-592.{' '}
+                  <ExtLink url={'https://doi.org/10.1017/dmp.2018.60'}>
+                    doi:10.1017/dmp.2018.60
+                  </ExtLink>
+                </Endnotes.Note>
+                <Endnotes.Note>
+                  Ortu, G., Mounier-Jack, S., Coker, R. “Pandemic influenza
+                  preparedness in Africa is a profound challenge for an already
+                  distressed region: analysis of national preparedness plans,”{' '}
+                  <em>Health Policy and Planning</em>, 23(3), May 2008, pp.
+                  161–169
+                </Endnotes.Note>
+                <Endnotes.Note>
+                  Nicoll, A., Kaiser, R. “Limitations of recently published
+                  review of national influenza pandemic plans in Europe.” Euro
+                  Surveill. 11(17) (2006)
+                </Endnotes.Note>
+                <Endnotes.Note>
+                  Sambala, E et al. “Pandemic influenza preparedness in the WHO
+                  African region: are we ready yet?”{' '}
+                  <em>BMC infectious diseases</em>. 18(1), 14 Nov. 2018, pp. 567{' '}
+                  <ExtLink url={'https://doi.org/10.1186/s12879-018-3466-1'} />
+                </Endnotes.Note>
+                <Endnotes.Note>
+                  Uscher-Pines L, Omer, S., Barnett, D., Burke, T., Balicer, R.
+                  (2006) “Priority Setting for Pandemic Influenza: An Analysis
+                  of National Preparedness Plans.” PLoS Med, 3(10) (2006)
+                </Endnotes.Note>{' '}
+                was reviewed to capture the titles of additional plans, which
+                were sought online via the previously described methodology.
+              </li>
+            </ul>
+            <p>
+              In cases when a country produced an updated plan some time after
+              an original plan had been published, the most recent plan was used
+              to create the record; these cases are noted in the record’s
+              description. If a plan addressed influenza plus other infectious
+              diseases, it was included. Only documents written in English were
+              selected, but additional reports in other languages may be added
+              at a later date. If the plan stated that it was developed in
+              direct response to 2005 H5N1 or 2009 H1N1, it was coded as being
+              tied to these outbreak events. Pandemic planning documents for the
+              United States were captured via search strategies delineated in
+              the “Domestic” section of this methodology.
+            </p>
           </li>
         </ol>
         <div id="datacoding" style={{ position: 'relative', top: -100 }} />
