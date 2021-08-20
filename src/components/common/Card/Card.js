@@ -397,22 +397,22 @@ export const Card = ({
                     },
                   }}
                 />
-                {files.map(({ id, num_bytes, filename }) => (
+                {files.length > 0 && (
                   <PrimaryButton
                     {...{
                       label: `Open and download (${bytesToMegabytes(
-                        num_bytes
+                        files[0].num_bytes
                       )})`,
                       url: `${API_URL}/get/file/${title.replace(
                         /\?/g,
                         ''
-                      )}?id=${id}`,
+                      )}?id=${files[0].id}`,
                       urlIsExternal: true,
                       iconName: 'get_app',
                       isSecondary: false,
                     }}
                   />
-                ))}
+                )}
               </div>
             )
           }
