@@ -965,7 +965,9 @@ const Documentation = ({}) => {
                   />
                   .
                 </Endnotes.Note>{' '}
-                and the Asia-Pacific Alliance for the Control of Influenza.
+                <span>
+                  and the Asia-Pacific Alliance for the Control of Influenza.
+                </span>
                 <Endnotes.Note>
                   Pandemic Preparedness Plans for the Asia-Pacific Region.{' '}
                   <em>APACI</em>, APACI, 2014,{' '}
