@@ -909,7 +909,7 @@ const Documentation = ({}) => {
             <ul>
               <li>
                 Plans were identified in the research paper “Inclusion of
-                Veterinary Services in national emergency management plans,
+                Veterinary Services in national emergency management plans,"
                 <Endnotes.Note>
                   Nasim, A et al. “Inclusion of Veterinary Services in national
                   emergency management plans.” Rev Sci Tech 39 (2) (2020):
