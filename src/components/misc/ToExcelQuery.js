@@ -46,6 +46,8 @@ const ToExcelQuery = async ({
     method === 'GET' ? {} : { filters: { ...filters, ...filtersForReq } }
 
   // prepare request
+  const randomInt = Math.ceil(Math.random() * 1000000).toString()
+  params.append('n', randomInt) // prevent browser cache reloading
   const req = axios({
     url: `${API_URL}/${method.toLowerCase()}/export/excel`,
     method,
