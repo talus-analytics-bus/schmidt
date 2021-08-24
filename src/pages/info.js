@@ -1,7 +1,6 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
-import { Router } from '@reach/router'
 import classNames from 'classnames'
 
 // local components
@@ -20,7 +19,6 @@ import loadingGif from '../assets/icons/loading.gif'
 // local utility functions
 import { withBookmarkedIds } from '../components/misc/Util'
 import ToExcelQuery from '../components/misc/ToExcelQuery'
-import { style } from 'd3'
 
 const Info = ({ location }) => {
   // STATE  // --------------------------------------------------------------//
