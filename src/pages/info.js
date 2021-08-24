@@ -46,8 +46,7 @@ const Info = ({ location }) => {
 
   // set content by tab
   const view = getView()
-  console.log('view')
-  console.log(view)
+
   // ids of bookmarked items to count for nav
   const initBookmarkedIds =
     location.state !== undefined && location.state !== null
