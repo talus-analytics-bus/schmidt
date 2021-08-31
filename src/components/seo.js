@@ -98,7 +98,7 @@ function SEO({ description, lang, meta, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: `The Health Security Library is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic.`,
+  description: `The Health Security Net is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic.`,
 }
 
 SEO.propTypes = {
