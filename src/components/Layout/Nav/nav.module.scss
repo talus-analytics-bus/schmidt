@@ -50,6 +50,25 @@
         > :not(:last-child) {
           margin-right: 3rem;
         }
+        /* 
+          Using psuedo-elements here prevents Google's scrapers from
+          picking up the material icon names in search results
+        */
+        .explore::after {
+          content: 'explore';
+        }
+        .search::after {
+          content: 'search';
+        }
+        .bookmark::after {
+          content: 'bookmark';
+        }
+        .info::after {
+          content: 'info';
+        }
+        .mail::after {
+          content: 'mail';
+        }
       }
       .hamburger {
         display: none;

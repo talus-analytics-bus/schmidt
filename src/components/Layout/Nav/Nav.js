@@ -34,7 +34,7 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
   }, [showMobileMenu])
 
   return (
-    <div
+    <nav
       className={classNames(styles.navWrapper, {
         [styles.showMobileMenu]: showMobileMenu,
         [styles.static]: page === 'index',
@@ -78,7 +78,11 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               )}
               to={'/browse/'}
             >
-              <i className={'material-icons'}>explore</i>
+              <i
+                className={classNames('material-icons', styles.explore)}
+                role="img"
+                aria-hidden="true"
+              ></i>
               <span>Explore</span>
             </Link>
             <Link
@@ -91,7 +95,11 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               )}
               to={'/search/'}
             >
-              <i className={'material-icons'}>search</i>
+              <i
+                className={classNames('material-icons', styles.search)}
+                role="img"
+                aria-hidden="true"
+              ></i>
               <span>Search</span>
             </Link>
             <Link
@@ -104,7 +112,11 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               )}
               to={'/bookmarks/'}
             >
-              <i className={'material-icons'}>bookmark</i>
+              <i
+                className={classNames('material-icons', styles.bookmark)}
+                role="img"
+                aria-hidden="true"
+              ></i>
               <span>
                 Bookmarks {bookmarkCount > 0 && <>({comma(bookmarkCount)})</>}
               </span>
@@ -119,7 +131,11 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               )}
               to={'/info/overview/'}
             >
-              <i className={'material-icons'}>info</i>
+              <i
+                className={classNames('material-icons', styles.info)}
+                role="img"
+                aria-hidden="true"
+              ></i>
               <span>Information</span>
             </Link>
             <Link
@@ -132,14 +148,18 @@ const Nav = ({ page, loading, bookmarkCount, ...props }) => {
               )}
               to={'/contact/'}
             >
-              <i className={'material-icons'}>mail</i>
+              <i
+                className={classNames('material-icons', styles.mail)}
+                role="img"
+                aria-hidden="true"
+              ></i>
               <span>Contact us</span>
             </Link>
           </div>
         </div>
       </div>
       {/* <img className={styles.smallFlag} src={flag}></img> */}
-    </div>
+    </nav>
   )
 }
 
