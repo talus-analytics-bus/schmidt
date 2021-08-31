@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "health-security-net",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "The Health Security Net is a publicly accessible, centralized library with documents providing information on how to prepare, plan, respond to, and recover from a pandemic.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Talus",
   "dependencies": {
     "@kenshooui/react-multi-select": "^1.1.6",
     "browser-monads": "^1.0.0",
