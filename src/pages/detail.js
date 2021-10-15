@@ -1,16 +1,14 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
 // local components
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
-import { StickyHeader, LoadingSpinner } from '../components/common'
+import { LoadingSpinner } from '../components/common'
 
 // local utility functions
-import SearchQuery from '../components/misc/SearchQuery'
-import { execute, withBookmarkedIds } from '../components/misc/Util'
+import { withBookmarkedIds } from '../components/misc/Util'
 
 // styles and assets
 import styles from '../components/Detail/detail.module.scss'
