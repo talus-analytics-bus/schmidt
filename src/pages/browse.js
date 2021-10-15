@@ -29,6 +29,7 @@ import {
   filterDefs,
   getIconByName,
   iconNamesByField,
+  sortByFilterOrder,
 } from '../components/misc/Util'
 
 // styles and assets
@@ -471,12 +472,8 @@ const Browse = ({ setPage }) => {
     context.data.filterCounts !== undefined
       ? Object.keys(context.data.filterCounts)
       : []
-  // Order browse button icons so that they are consistent with order of filter categories on search page
-  // TODO: Make this less hacky
-  let ev = filterOptions.splice(1, 1)
-  let auth = filterOptions.splice(2, 1)
-  filterOptions.splice(3, 0, auth[0], ev[0])
 
+  filterOptions.sort(sortByFilterOrder)
   // generate buttons to browse by topic, event, year, etc.
   const BrowseButton = ({ type }) => {
     let icon

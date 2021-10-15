@@ -16,7 +16,12 @@ import {
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
+import {
+  getIntArray,
+  iconNamesByField,
+  isEmpty,
+  sortByFilterOrder,
+} from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -126,7 +131,7 @@ export const Options = ({
   }
 
   // get list of keys of filters
-  const filterKeys = Object.keys(filterDefs)
+  const filterKeys = Object.keys(filterDefs).sort(sortByFilterOrder)
 
   // define filter section component data
   // TODO link to a filterset and filters

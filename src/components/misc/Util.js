@@ -1492,6 +1492,7 @@ export const filterDefs = {
     resultLabel: 'year',
     choices: [],
     custom: true,
+    order: 0,
   },
   key_topics: {
     field: 'key_topics',
@@ -1511,6 +1512,7 @@ export const filterDefs = {
     ),
     resultLabel: 'publishing organization type',
     choices: [],
+    order: 3,
   },
   authors: {
     field: 'author.id',
@@ -1523,6 +1525,7 @@ export const filterDefs = {
     ),
     resultLabel: 'publishing organization',
     choices: [],
+    order: 4,
   },
   events: {
     field: 'event.name',
@@ -1530,6 +1533,7 @@ export const filterDefs = {
     label: 'Event',
     resultLabel: 'event',
     choices: [],
+    order: 5,
   },
   funders: {
     field: 'funder.name',
@@ -1537,6 +1541,7 @@ export const filterDefs = {
     label: 'Funder',
     resultLabel: 'funder',
     choices: [],
+    order: 6,
   },
   types_of_record: {
     field: 'type_of_record',
@@ -1544,5 +1549,20 @@ export const filterDefs = {
     label: 'Document type',
     resultLabel: 'document type',
     choices: [],
+    order: 7,
   },
+}
+
+/**
+ * Orders filter keys based on their order values in `filterDefs`
+ * @param {string} a First filter name
+ * @param {string} b Second filter name
+ * @returns The order value
+ */
+export const sortByFilterOrder = function (a, b) {
+  const aRank = filterDefs[a].order
+  const bRank = filterDefs[b].order
+  if (aRank > bRank) return 1
+  if (bRank > aRank) return -1
+  else return 0
 }
