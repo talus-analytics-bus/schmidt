@@ -87,7 +87,7 @@ export const SearchBar = ({
   // when search reference updates, update search text
 
   useEffect(() => {
-    if (searchText === '' || searchText === undefined || searchText === null) {
+    if (searchTextIsNotEmpty(searchText)) {
       // if search text is blank, ensure the input value is set to blank,
       // in case search was cleared by another component
       searchRef.current.value = ''
@@ -95,6 +95,14 @@ export const SearchBar = ({
       searchRef.current.value = searchText
     }
   }, [searchText])
+
+  useEffect(() => {
+    if (searchRef.current !== null) {
+      searchRef.current.focus()
+      if (typeof window !== 'undefined' && searchTextIsNotEmpty(searchText))
+        window.scrollTo(0, 0)
+    }
+  }, [searchRef])
 
   // JSX
   return (
@@ -286,4 +294,7 @@ const getSuggestions = ({ previewResults, searchText }) => {
     })
     return sections
   }
+}
+function searchTextIsNotEmpty(searchText) {
+  return searchText === '' || searchText === undefined || searchText === null
 }
