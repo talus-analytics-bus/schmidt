@@ -3,11 +3,10 @@ import React, { useState, useEffect, useRef } from 'react'
 
 // assets and styles
 import styles from './search.module.scss'
-import classNames from 'classnames'
 
 /**
  * @method Search
- * Handle custom pagination for `Table` component
+ * Search bar with results popup
  */
 export const Search = ({ onChangeFunc = val => {}, searchText, ...props }) => {
   const [curTimeout, setCurTimeout] = useState(null)
