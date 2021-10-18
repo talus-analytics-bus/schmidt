@@ -54,14 +54,17 @@ export const SearchBar = ({
   }
   const handleOnKeyUp = useCallback(
     e => {
-      doIfEnter(e, () => {
-        if (
-          suggestions !== null &&
-          suggestions.length > 0 &&
-          !suggestions.noData
-        )
-          suggestions[0].onClick()
-      })
+      if (e.key === 'Escape') {
+        setSearchText('')
+      } else
+        doIfEnter(e, () => {
+          if (
+            suggestions !== null &&
+            suggestions.length > 0 &&
+            !suggestions.noData
+          )
+            suggestions[0].onClick()
+        })
     },
     [suggestions]
   )
@@ -110,7 +113,7 @@ export const SearchBar = ({
       <input
         ref={searchRef}
         onChange={updateSearchText}
-        onKeyPress={handleOnKeyUp}
+        onKeyUp={handleOnKeyUp}
         type="text"
         placeholder={'Search for documents'}
       />
