@@ -29,6 +29,8 @@ export const SearchBar = ({
   setIsDesc,
   previewResults = null,
   right = true,
+  onDoubleEsc,
+  onEnter,
   ...props
 }) => {
   // STATE
@@ -55,7 +57,11 @@ export const SearchBar = ({
   const handleOnKeyUp = useCallback(
     e => {
       if (e.key === 'Escape') {
-        setSearchText('')
+        if (searchTextIsNotEmpty(searchText)) {
+          setSearchText('')
+        } else if (onDoubleEsc !== undefined) {
+          onDoubleEsc()
+        }
       } else
         doIfEnter(e, () => {
           if (
@@ -64,9 +70,10 @@ export const SearchBar = ({
             !suggestions.noData
           )
             suggestions[0].onClick()
+          if (onEnter !== undefined) onEnter()
         })
     },
-    [suggestions]
+    [searchText, setSearchText, onDoubleEsc, onEnter, suggestions]
   )
 
   // update search text state when appropriate
@@ -93,9 +100,9 @@ export const SearchBar = ({
     if (searchTextIsNotEmpty(searchText)) {
       // if search text is blank, ensure the input value is set to blank,
       // in case search was cleared by another component
-      searchRef.current.value = ''
-    } else {
       searchRef.current.value = searchText
+    } else {
+      searchRef.current.value = ''
     }
   }, [searchText])
 
@@ -299,5 +306,5 @@ const getSuggestions = ({ previewResults, searchText }) => {
   }
 }
 function searchTextIsNotEmpty(searchText) {
-  return searchText === '' || searchText === undefined || searchText === null
+  return !(searchText === '' || searchText === undefined || searchText === null)
 }
