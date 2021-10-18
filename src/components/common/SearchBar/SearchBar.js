@@ -41,8 +41,9 @@ export const SearchBar = ({
   const [showSuggestions, setShowSuggestions] = useState(true) // DEBUG
 
   // REFS
-  // track search bar input
+  // track search bar input and results
   const searchRef = useRef(null)
+  const resultsRef = useRef(null)
 
   // CONSTANTS
   // preview results, if applicable
@@ -95,7 +96,6 @@ export const SearchBar = ({
 
   // EFFECT HOOKS
   // when search reference updates, update search text
-
   useEffect(() => {
     if (searchTextIsNotEmpty(searchText)) {
       // if search text is blank, ensure the input value is set to blank,
@@ -106,13 +106,24 @@ export const SearchBar = ({
     }
   }, [searchText])
 
+  // when search reference updates, focus on it and scroll to top if no input
   useEffect(() => {
     if (searchRef.current !== null) {
       searchRef.current.focus()
-      if (typeof window !== 'undefined' && searchTextIsNotEmpty(searchText))
+      if (typeof window !== 'undefined' && !searchTextIsNotEmpty(searchText)) {
         window.scrollTo(0, 0)
+      }
     }
   }, [searchRef])
+
+  // when results ref updates, scroll results into view if they're ready
+  useEffect(() => {
+    if (resultsRef.current !== null) {
+      if (typeof window !== 'undefined' && searchTextIsNotEmpty(searchText)) {
+        resultsRef.current.scrollIntoView()
+      }
+    }
+  }, [searchText, resultsRef, suggestions])
 
   // JSX
   return (
@@ -144,7 +155,11 @@ export const SearchBar = ({
         <i className={'material-icons'}>search</i>
       </div>
       {suggestions && !isSearchingText && searchText !== '' && (
-        <div key={previewResults.search_text} className={styles.suggestions}>
+        <div
+          ref={resultsRef}
+          key={previewResults.search_text}
+          className={styles.suggestions}
+        >
           {suggestions.map(d => (
             <div
               key={previewResults.search_text + '-results'}
@@ -165,9 +180,9 @@ export const SearchBar = ({
                 </span>
               </div>
               {d.list.length > 0 && (
-                <div className={styles.suggestionList}>
+                <div key={d.name} className={styles.suggestionList}>
                   {d.list.map(dd => (
-                    <div className={styles.suggestion}>
+                    <div key={dd.name} className={styles.suggestion}>
                       <span
                         tabIndex={0}
                         onKeyUp={e => doIfEnter(e, dd.onClick)}
