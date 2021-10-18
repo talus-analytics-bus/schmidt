@@ -1,14 +1,10 @@
 // 3rd party components
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
-import { Link } from 'gatsby'
-import ReactTooltip from 'react-tooltip'
 
 // local components
 import {
-  InfoTooltip,
   Selectpicker,
-  FloatButton,
   CheckboxSet,
   PrimaryButton,
   SearchBar,
@@ -20,7 +16,6 @@ import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
-import { lab } from 'd3'
 
 export const Options = ({
   showFilterSections,
