@@ -127,6 +127,11 @@ export const SearchBar = ({
           nameField = 'name'
           filterValueField = 'name'
           filterKey = 'key_topics'
+        } else if (entityName === 'Tag') {
+          iconName = 'covid_tags'
+          nameField = 'name'
+          filterValueField = 'name'
+          filterKey = 'covid_tags'
         } else if (entityName === 'Event') {
           iconName = 'events'
           nameField = 'name'

@@ -83,6 +83,13 @@ export const Options = ({
       resultLabel: 'topic area',
       choices: [],
     },
+    covid_tags: {
+      field: 'covid_tags',
+      key: 'covid_tags',
+      label: 'Tags',
+      resultLabel: 'covid_tags',
+      choices: [],
+    },
     author_types: {
       field: 'author.type_of_authoring_organization',
       key: 'author_types',
@@ -140,11 +147,9 @@ export const Options = ({
     filterKeys.forEach(field => {
       // for (const [field, valueCounts] of Object.entries(filterCounts)) {
       // different icon color only on filters pages
-      let icon
-      if (field == 'events') {
-        icon = 'caution_orange'
-      } else {
-        icon = iconNamesByField[field] || null
+      let icon = iconNamesByField[field] || null
+      if (['events', 'covid_tags'].includes(field)) {
+        icon += '_orange'
       }
       const valueCounts = filterCounts[field].by_value
       const curFilterSectionData = {
@@ -431,6 +436,9 @@ export const Options = ({
         break
       case 'key_topics':
         label = 'Topic'
+        break
+      case 'covid_tags':
+        label = 'Tag'
         break
       case 'years':
         label = 'Year'

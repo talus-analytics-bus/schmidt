@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactTooltip from 'react-tooltip'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -25,6 +24,11 @@ import caution_disabled from '../../assets/icons/caution_disabled.svg'
 import rings from '../../assets/icons/rings.svg'
 import rings_orange from '../../assets/icons/rings_orange.svg'
 import rings_disabled from '../../assets/icons/rings_disabled.svg'
+
+// covid_tags
+import covid_tags from '../../assets/icons/covid_tags.svg'
+import covid_tags_orange from '../../assets/icons/covid_tags_orange.svg'
+import covid_tags_disabled from '../../assets/icons/covid_tags_disabled.svg'
 
 // Utility functions and data.
 const Util = {}
@@ -1204,6 +1208,8 @@ export const removeBookmark = ({ id, callback }) => {
 export const iconNamesByField = {
   // key_topics: 'device_hub',
   key_topics: 'topic',
+  covid_tags: 'covid_tags',
+  // covid_tags: 'topic',
   // key_topics: 'speech',
   // key_topics: 'speech_orange',
   //authors: 'person',
@@ -1249,6 +1255,12 @@ export const getIconByName = ({
     rings_orange,
     rings_orange_disabled: rings_disabled,
     rings_disabled,
+
+    // covid_tags
+    covid_tags,
+    covid_tags_orange,
+    covid_tags_orange_disabled: covid_tags_disabled,
+    covid_tags_disabled,
   }
   const specialIcon = specialIcons[iconName + (disabled ? '_disabled' : '')]
   const icon =
@@ -1500,6 +1512,15 @@ export const filterDefs = {
     label: 'Topic area',
     resultLabel: 'topic area',
     choices: [],
+    order: 1,
+  },
+  covid_tags: {
+    field: 'covid_tags',
+    key: 'covid_tags',
+    label: 'Tags',
+    resultLabel: 'tag',
+    choices: [],
+    order: 2,
   },
   author_types: {
     field: 'author.type_of_authoring_organization',

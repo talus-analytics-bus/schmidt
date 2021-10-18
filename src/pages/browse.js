@@ -10,13 +10,11 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
-import Options from '../components/Search/Options/Options'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   StickyHeader,
   LoadingSpinner,
   Selectpicker,
-  InfoTooltip,
 } from '../components/common'
 import { appContext } from '../components/misc/ContextProvider'
 
@@ -42,6 +40,8 @@ const API_URL = process.env.GATSBY_API_URL
 // definitions for tooltips
 const tooltipDefs = {
   key_topics: 'Key topic addressed by the work',
+  covid_tags:
+    'Granular topics, policy types, populations, or impacts addressed',
   authors: 'Organization that published the work or led the effort',
   author_types: 'Type of organization responsible for publishing the work',
   funders:
@@ -476,12 +476,8 @@ const Browse = ({ setPage }) => {
   filterOptions.sort(sortByFilterOrder)
   // generate buttons to browse by topic, event, year, etc.
   const BrowseButton = ({ type }) => {
-    let icon
-    if (type == 'events') {
-      icon = 'caution_orange'
-    } else {
-      icon = iconNamesByField[type] || null
-    }
+    let icon = iconNamesByField[type] || null
+    if (['events', 'covid_tags'].includes(type)) icon += '_orange'
     if (type === 'types_of_record') {
       return null
     } else {
@@ -578,6 +574,10 @@ const Browse = ({ setPage }) => {
               case 'events':
                 arr.push(name)
                 newFilters['event.name'] = arr
+                break
+              case 'covid_tags':
+                arr.push(name)
+                newFilters['covid_tags'] = arr
                 break
               default:
             }

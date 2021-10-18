@@ -43,6 +43,7 @@ export const Card = ({
   sub_organizations,
   funders,
   key_topics,
+  covid_tags,
   events,
   files,
   why = [],
@@ -164,9 +165,20 @@ export const Card = ({
     ['events', events, 'name', 'event.name', 'name'],
     [
       'key_topics',
-      key_topics.map(d => {
-        return { name: d, id: d }
-      }),
+      key_topics !== undefined
+        ? key_topics.map(d => {
+            return { name: d, id: d }
+          })
+        : [],
+      'name',
+    ],
+    [
+      'covid_tags',
+      covid_tags !== undefined
+        ? covid_tags.map(d => {
+            return { name: d, id: d }
+          })
+        : [],
       'name',
     ],
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
@@ -290,6 +302,7 @@ export const Card = ({
       card[filterKey] = linkListEntries
         .map(d => (
           <span
+            key={d.text}
             onClick={d.onClick}
             className={styles.link}
             data-for={'searchHighlightInfo'}

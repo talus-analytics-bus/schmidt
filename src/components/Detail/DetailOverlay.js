@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import axios from 'axios'
 
 // local components
-import SEO from '../seo'
 import {
   Card,
   CardList,
@@ -37,16 +36,6 @@ const API_URL = process.env.GATSBY_API_URL
 const DetailOverlay = ({
   // item data
   id = 1,
-  type_of_record = 'Test item',
-  title = 'Title title',
-  description,
-  date = '2020-01-01',
-  authors = [],
-  funders = [],
-  key_topics = [],
-  files = [],
-  authoring_organization_has_governance_authority = null,
-
   // other data
   filters = {},
   setFilters = () => '',
@@ -78,13 +67,7 @@ const DetailOverlay = ({
   const [loaded, setLoaded] = useState(false)
 
   // current page and pagesize of paginator
-  // const pageStr = !initialized ? urlParams.get('page') || '1' : '1'
-  // const [curPage, setCurPage] = useState(+pageStr)
   const [curPage, setCurPage] = useState(1)
-
-  // const [pagesize, setPagesize] = useState(
-  //   !initialized ? urlParams.get('pagesize') || 10 : 10
-  // )
   const [pagesize, setPagesize] = useState(10)
 
   // item and related items data
@@ -94,6 +77,12 @@ const DetailOverlay = ({
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
+  const geo_specificity =
+    itemData === null
+      ? null
+      : (itemData.geo_specificity === 'US'
+          ? 'United States of America'
+          : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -115,15 +104,6 @@ const DetailOverlay = ({
     setOpacity(0)
     setTimeout(close, 250)
   }
-  // key topics
-  // TODO move up in scope and use throughout site, and/or get from API call
-  // const keyTopics = [
-  //   { displayName: 'Biosurveillance' },
-  //   { displayName: 'Emerging/epidemic infectious disease' },
-  //   { displayName: 'Health security (other)' },
-  //   { displayName: 'Intentional biological attacks' },
-  //   { displayName: 'Medical preparedness and MCMs' },
-  // ]
   // author fields
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type', link: true },
@@ -135,14 +115,17 @@ const DetailOverlay = ({
           d.if_national_iso2_of_authoring_org !== null ? (
             <img
               key={d.if_national_iso2_of_authoring_org}
-              src={`https://flags.talusanalytics.com/shiny_100px/${d.if_national_iso2_of_authoring_org.toLowerCase()}.png`}
+              src={
+                `https://flags.talusanalytics.com/shiny_100px/` +
+                `${d.if_national_iso2_of_authoring_org.toLowerCase()}.png`
+              }
             />
           ) : null
         return (
-          <>
+          <span style={{ display: 'flex', alignItems: 'center' }}>
             {flag}
             {d.if_national_country_of_authoring_org || 'International'}
-          </>
+          </span>
         )
       },
       field: 'if_national_country_of_authoring_org',
@@ -152,8 +135,6 @@ const DetailOverlay = ({
 
   // FUNCTIONS
   // get tooltip text depending on type of card
-  const detail = true
-  const related = false
   const getTooltipText = getTooltipTextFunc({
     detail: true,
     bookmark,
@@ -164,6 +145,7 @@ const DetailOverlay = ({
   const highlightTag = ({ displayName, filterValue, filterKey }) => {
     return (
       <span
+        key={[displayName, filterValue, filterKey].join('__')}
         onClick={e =>
           toggleFilter({
             e,
@@ -369,7 +351,11 @@ const DetailOverlay = ({
           <span>{message}</span>
           <InfoTooltip
             text={
-              'Indication of whether the Publishing Organization has governance authority in the sense of whether it can act on the information contained in the record. Intergovernmental organizations may have governance authority depending on the context and topic of the product.'
+              'Indication of whether the Publishing Organization has' +
+              ' governance authority in the sense of whether it can act on' +
+              ' the information contained in the record. Intergovernmental' +
+              ' organizations may have governance authority depending on' +
+              ' the context and topic of the product.'
             }
           />
         </div>
@@ -450,51 +436,107 @@ const DetailOverlay = ({
                 <div className={classNames(styles.sideBar, styles.wide)}>
                   <Panel
                     {...{
-                      title: 'Topic area',
+                      title: 'Subject matter',
                       iconName: iconNamesByField.key_topics,
                       expandable: true,
                     }}
                   >
-                    <div className={styles.keyTopics}>
-                      {keyTopics.map(value => {
-                        if (itemData.key_topics.includes(value))
-                          topicCount = topicCount + 1
-                        return itemData.key_topics.includes(value) ? (
-                          <>
-                            <div
-                              onClick={e =>
-                                toggleFilter({
-                                  openNewPage,
-                                  e,
-                                  getFilterVal: () => value,
-                                  filters,
-                                  filterKey: 'key_topics',
-                                  setFilters: v => {
-                                    dismissFloatingOverlay()
-                                    setFilters(v)
-                                  },
-                                  setSearchText,
-                                  alwaysStartNew: true,
-                                })
-                              }
-                              className={classNames(styles.keyTopic)}
-                            >
-                              <span>
-                                {highlightTag({
-                                  displayName: value,
-                                  filterValue: value,
-                                  filterKey: 'key_topics',
-                                })}
-                              </span>
+                    <div className={styles.authors}>
+                      <div className={styles.author}>
+                        <div className={styles.authorInfo}>
+                          <div className={styles.infoItem}>
+                            <div className={styles.field}>Topic area</div>
+                            <div className={styles.value}>
+                              {keyTopics.map(value => {
+                                if (itemData.key_topics.includes(value))
+                                  topicCount = topicCount + 1
+                                return itemData.key_topics.includes(value) ? (
+                                  <>
+                                    <div
+                                      onClick={e =>
+                                        toggleFilter({
+                                          openNewPage,
+                                          e,
+                                          getFilterVal: () => value,
+                                          filters,
+                                          filterKey: 'key_topics',
+                                          setFilters: v => {
+                                            dismissFloatingOverlay()
+                                            setFilters(v)
+                                          },
+                                          setSearchText,
+                                          alwaysStartNew: true,
+                                        })
+                                      }
+                                      className={classNames(styles.keyTopic)}
+                                    >
+                                      <span>
+                                        {highlightTag({
+                                          displayName: value,
+                                          filterValue: value,
+                                          filterKey: 'key_topics',
+                                        })}
+                                      </span>
+                                    </div>
+                                  </>
+                                ) : null
+                              })}
+                              {topicCount === 0 && (
+                                <i className={styles.placeholder}>
+                                  No matching topic area
+                                </i>
+                              )}
                             </div>
-                          </>
-                        ) : null
-                      })}
-                      {topicCount === 0 && (
-                        <i className={styles.placeholder}>
-                          No matching topic area
-                        </i>
-                      )}
+                          </div>
+                          <div className={styles.infoItem}>
+                            <div className={styles.field}>Tags</div>
+                            <div className={styles.values}>
+                              {itemData.covid_tags.map(value => (
+                                <div
+                                  onClick={e =>
+                                    toggleFilter({
+                                      openNewPage,
+                                      e,
+                                      getFilterVal: () => value,
+                                      filters,
+                                      filterKey: 'covid_tags',
+                                      setFilters: v => {
+                                        dismissFloatingOverlay()
+                                        setFilters(v)
+                                      },
+                                      setSearchText,
+                                      alwaysStartNew: true,
+                                    })
+                                  }
+                                  className={classNames(styles.covidTag)}
+                                >
+                                  <span>
+                                    {highlightTag({
+                                      displayName: value,
+                                      filterValue: value,
+                                      filterKey: 'covid_tags',
+                                    })}
+                                  </span>
+                                </div>
+                              ))}
+                              {itemData.covid_tags.length === 0 && (
+                                <i className={styles.noData}>None</i>
+                              )}
+                            </div>
+                          </div>
+                          <div className={styles.infoItem}>
+                            <div className={styles.field}>Applicability</div>
+                            <div className={styles.value}>
+                              {geo_specificity !== null && (
+                                <span>{geo_specificity}</span>
+                              )}
+                              {geo_specificity === null && (
+                                <i className={styles.noData}>Unspecified</i>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Panel>
                   {
@@ -510,7 +552,7 @@ const DetailOverlay = ({
                     }}
                   >
                     <div className={styles.authors}>
-                      {itemData.authors.map((d, i) => (
+                      {itemData.authors.map(d => (
                         <div className={styles.author}>
                           <div className={styles.authorName}>
                             {highlightTag({
