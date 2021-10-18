@@ -40,8 +40,7 @@ const API_URL = process.env.GATSBY_API_URL
 // definitions for tooltips
 const tooltipDefs = {
   key_topics: 'Key topic addressed by the work',
-  covid_tags:
-    'Granular topics, policy types, populations, or impacts addressed',
+  covid_tags: 'Key subject, policy type, population, impact, etc. addressed',
   authors: 'Organization that published the work or led the effort',
   author_types: 'Type of organization responsible for publishing the work',
   funders:
