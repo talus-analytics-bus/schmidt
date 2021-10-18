@@ -1,9 +1,6 @@
 // 3rd party components
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
-import { Link } from 'gatsby'
-import ReactTooltip from 'react-tooltip'
-import { InfoTooltip } from '../../common'
 
 // local assets and styling
 import styles from './results.module.scss'
@@ -13,13 +10,7 @@ import loadingGif from '../../../assets/icons/loading.gif'
 // local components
 import ToExcelQuery from '../../misc/ToExcelQuery'
 import { getTooltipTextFunc, isEmpty } from '../../misc/Util'
-import {
-  SearchBar,
-  Paginator,
-  CardList,
-  Selectpicker,
-  PrimaryButton,
-} from '../../common'
+import { Paginator, CardList, Selectpicker, PrimaryButton } from '../../common'
 
 export const Results = ({
   searchData,
@@ -29,25 +20,20 @@ export const Results = ({
   setPagesize,
   searchText,
   setSearchText,
-  isSearchingText,
-  setIsSearchingText,
   filters,
   setFilters,
-  setShowOverlay,
   onViewDetails,
-  setFreezeDataUpdates,
   orderBy,
   setOrderBy,
   isDesc,
   setIsDesc,
   bookmarkedIds,
   setBookmarkedIds,
-  setOptionsVisible,
   loading,
   browse = false,
   fromYear,
   toYear,
-  ...props
+  setOnEnter,
 }) => {
   // STATE // -------------------------------------------------------------- //
   const [isDownloading, setIsDownloading] = useState(false)

@@ -21,9 +21,7 @@ export const Options = ({
   showFilterSections,
   filterCounts,
   baselineFilterCounts,
-  orderBy,
   setOrderBy,
-  isDesc,
   setIsDesc,
   searchText,
   setSearchText,
@@ -34,11 +32,11 @@ export const Options = ({
   toYear,
   setToYear,
   mobile,
-  setOptionsVisible,
   isSearchingText,
   setIsSearchingText,
   setFreezeDataUpdates,
-  ...props
+  searchData,
+  setShowOverlay,
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
   // num filter sections shown open by default
@@ -508,6 +506,20 @@ export const Options = ({
           onDoubleEsc: useCallback(() => {
             setFilters({})
           }, [setFilters]),
+          onEnter: useCallback(() => {
+            if (
+              searchText !== null &&
+              searchText !== undefined &&
+              searchText !== '' &&
+              searchData !== null &&
+              searchData.data !== undefined &&
+              searchData.data !== null &&
+              searchData.data.length > 0
+            ) {
+              setShowOverlay(searchData.data[0].id)
+              if (typeof document !== 'undefined') document.activeElement.blur()
+            }
+          }, [searchData, setShowOverlay]),
         }}
       />
       <div className={styles.filters}>
