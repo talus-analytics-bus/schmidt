@@ -10,7 +10,8 @@ const API_URL = process.env.GATSBY_API_URL
  */
 function useMetadata(): Metadatum[] {
   const context = useContext<any>(cp.appContext)
-  const [metadata, setMetadata] = useState<Metadatum[]>(context.data.metadata)
+  const initMetadata: Metadatum[] = context.data?.metadata || []
+  const [metadata, setMetadata] = useState<Metadatum[]>(initMetadata)
   useEffect(() => {
     if (metadata.length === 0)
       axios.get(`${API_URL}/get/metadata`).then(async res => {
