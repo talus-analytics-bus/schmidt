@@ -193,7 +193,7 @@ const Search = ({ setPage }) => {
     })
 
     // get filter counts if not yet retrieved
-    const getFilterCounts = context.data.filterCounts === undefined
+    const getFilterCounts = true
     if (getFilterCounts) {
       let urlParams = ''
       if (

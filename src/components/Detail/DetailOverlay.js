@@ -1,7 +1,12 @@
 // 3rd party components
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react'
 import classNames from 'classnames'
-import axios from 'axios'
 
 // local components
 import {
@@ -13,6 +18,8 @@ import {
 } from '../../components/common'
 import Panel from './content/Panel'
 import { appContext } from '../../components/misc/ContextProvider'
+import useMetadata from '../../hooks/useMetadata'
+import useTooltipDefs from '../../hooks/useTooltipDefs'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
@@ -29,9 +36,7 @@ import {
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
-
-// constants
-const API_URL = process.env.GATSBY_API_URL
+import ReactTooltip from 'react-tooltip'
 
 const DetailOverlay = ({
   // item data
@@ -53,14 +58,13 @@ const DetailOverlay = ({
   browse = false,
 }) => {
   // CONTEXT
-  const context = useContext(appContext) || defaultContext
+  const context = useContext(appContext)
+
+  // HOOKS
+  const tooltipDefs = useTooltipDefs(context)
 
   // STATE
-  // key topics
-  const initKeyTopics = context.data.filterCounts
-    ? context.data.filterCounts.key_topics.by_value.map(d => d[0])
-    : []
-  const [keyTopics, setKeyTopics] = useState(initKeyTopics)
+  const [keyTopics] = useState([])
 
   // opacity control
   const [opacity, setOpacity] = useState(0)
@@ -191,11 +195,11 @@ const DetailOverlay = ({
           page: curPage,
         })
 
-      // get filter counts if not yet retrieved
-      const getFilterCounts = context.data.filterCounts === undefined
-      if (getFilterCounts) {
-        queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
-      }
+      // // get filter counts if not yet retrieved
+      // const getFilterCounts = context.data.filterCounts === undefined
+      // if (getFilterCounts) {
+      //   queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+      // }
       const results = await execute({ queries })
 
       let newContextData = { ...context.data }
@@ -214,19 +218,20 @@ const DetailOverlay = ({
       }
 
       // if getting filter counts set them, or return them if already set
-      if (getFilterCounts) {
-        const filterCounts = results.filterCountsQuery.data.data
-        setKeyTopics(filterCounts.key_topics.by_value.map(d => d[0]) || [])
-        newContextData = {
-          ...newContextData,
-          filterCounts,
-        }
-      } else {
-        setKeyTopics(
-          context.data.filterCounts.key_topics.by_value.map(d => d[0]) || []
-        )
-      }
-      context.setData(newContextData)
+      // if (getFilterCounts) {
+      //   const filterCounts = results.filterCountsQuery.data.data
+      //   setKeyTopics(filterCounts.key_topics.by_value.map(d => d[0]) || [])
+      //   newContextData = {
+      //     ...newContextData,
+      //     filterCounts,
+      //   }
+      // }
+      // else {
+      //   setKeyTopics(
+      //     context.data.filterCounts.key_topics.by_value.map(d => d[0]) || []
+      //   )
+      // }
+      // context.setData(newContextData)
 
       // trigger on loaded callback func
       onLoaded()
@@ -238,6 +243,11 @@ const DetailOverlay = ({
   const wrapperRef = useRef(null)
 
   // EFFECT HOOKS
+  // rebuild tooltips when defs fetched
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [tooltipDefs])
+
   // fetch data when ID is set
   useEffect(() => {
     // reset similar items page number if not one
@@ -376,7 +386,10 @@ const DetailOverlay = ({
         <div className={floating ? styles.shadow : null} />
         <div
           ref={wrapperRef}
-          style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
+          style={{
+            opacity,
+            pointerEvents: opacity === 0 ? 'none' : 'all',
+          }}
           className={classNames(styles.detailOverlay, {
             [styles.floating]: floating,
             [styles.page]: !floating,
@@ -445,9 +458,12 @@ const DetailOverlay = ({
                       <div className={styles.author}>
                         <div className={styles.authorInfo}>
                           <div className={styles.infoItem}>
-                            <div className={styles.field}>Topic area</div>
+                            <TooltippedHeader
+                              label={'Topic area'}
+                              tooltip={tooltipDefs['Item.key_topics']}
+                            />
                             <div className={styles.value}>
-                              {keyTopics.map(value => {
+                              {itemData.key_topics.map(value => {
                                 if (itemData.key_topics.includes(value))
                                   topicCount = topicCount + 1
                                 return itemData.key_topics.includes(value) ? (
@@ -489,7 +505,10 @@ const DetailOverlay = ({
                             </div>
                           </div>
                           <div className={styles.infoItem}>
-                            <div className={styles.field}>Tags</div>
+                            <TooltippedHeader
+                              label={'Tags'}
+                              tooltip={tooltipDefs['Item.covid_tags']}
+                            />
                             <div className={styles.values}>
                               {itemData.covid_tags.map(value => (
                                 <div
@@ -525,7 +544,10 @@ const DetailOverlay = ({
                             </div>
                           </div>
                           <div className={styles.infoItem}>
-                            <div className={styles.field}>Applicability</div>
+                            <TooltippedHeader
+                              label={'Applicability (US or global)'}
+                              tooltip={tooltipDefs['Item.geo_specificity']}
+                            />
                             <div className={styles.value}>
                               {geo_specificity !== null && (
                                 <span>{geo_specificity}</span>
@@ -570,7 +592,12 @@ const DetailOverlay = ({
                                 link = false,
                               }) => (
                                 <div className={styles.infoItem}>
-                                  <div className={styles.field}>{name}</div>
+                                  <TooltippedHeader
+                                    label={name}
+                                    tooltip={
+                                      tooltipDefs['Item.Author.' + field]
+                                    }
+                                  />
                                   {!link && (
                                     <div className={styles.value}>
                                       {formatter(d) || (
@@ -609,6 +636,7 @@ const DetailOverlay = ({
                       title: 'Linked outbreak event',
                       iconName: iconNamesByField.events,
                       expandable: true,
+                      tooltip: tooltipDefs['Item.Event.name'],
                     }}
                   >
                     <div className={styles.events}>
@@ -634,6 +662,7 @@ const DetailOverlay = ({
                       title: 'Funders',
                       iconName: 'monetization_on',
                       expandable: true,
+                      tooltip: tooltipDefs['Item.Funder.name'],
                     }}
                   >
                     <div className={styles.funders}>
@@ -717,6 +746,26 @@ const DetailOverlay = ({
       </>
     )
   }
+}
+
+/**
+ *
+ * @param {Object} props Value of tooltip and label to display.
+ * @returns A header for a data field with `tooltip` and
+ * display text `label`.
+ */
+const TooltippedHeader = ({ tooltip, label }) => {
+  console.log('tooltip')
+  console.log(tooltip)
+  return (
+    <div
+      data-for={'searchHighlightInfo'}
+      data-tip={tooltip}
+      className={styles.field}
+    >
+      {label}
+    </div>
+  )
 }
 
 export default DetailOverlay

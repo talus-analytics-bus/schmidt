@@ -15,6 +15,7 @@ export const Panel = ({
   secondary = true,
   heading = false,
   expandable = false,
+  tooltip,
 }) => {
   // CONSTANTS
   if (iconName === 'caution') {
@@ -25,6 +26,8 @@ export const Panel = ({
 
   return (
     <div
+      data-for={tooltip !== undefined ? 'searchHighlightInfo' : undefined}
+      data-tip={tooltip}
       className={classNames(styles.panel, {
         [styles.secondary]: secondary,
         [styles.heading]: heading,

@@ -1491,8 +1491,10 @@ export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
 
 // default context
 export const defaultContext = {
-  data: { filterCounts: undefined, items: {} },
-  setData: () => '',
+  data: { filterCounts: undefined, items: {}, defs: [], metadata: [] },
+  setData: () => {
+    throw new Error('Context setter undefined')
+  },
 }
 
 // filter defs
