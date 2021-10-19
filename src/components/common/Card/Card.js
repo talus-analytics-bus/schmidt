@@ -9,8 +9,13 @@ import styles from './card.module.scss'
 import logoIcon from '../../../assets/images/logo-icon.svg'
 
 // local components
-import { PrimaryButton, BookmarkToggle, ShowMore, PreviewOverlay } from '../'
-import Panel from '../../Detail/content/Panel'
+import {
+  PrimaryButton,
+  BookmarkToggle,
+  ShowMore,
+  PreviewOverlay,
+  InfoTooltip,
+} from '../'
 
 // local utility functions
 import {
@@ -22,6 +27,7 @@ import {
   toggleFilter,
   getHighlightSegments,
 } from '../../misc/Util'
+import FileDownloadList from './FileDownloadList'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -424,6 +430,24 @@ export const Card = ({
                       iconName: 'get_app',
                       isSecondary: false,
                     }}
+                  />
+                )}
+                {files.length > 1 && (
+                  <FileDownloadList
+                    label={
+                      <span>
+                        Additional files{' '}
+                        <InfoTooltip
+                          id={'FileDownloadListInfo'}
+                          text={
+                            'Related documents such as hearing opening' +
+                            ' statements and testimonies'
+                          }
+                        />
+                      </span>
+                    }
+                    files={files.slice(1, files.length)}
+                    baseURL={`${API_URL}/get/file/${title.replace(/\?/g, '')}`}
                   />
                 )}
               </div>

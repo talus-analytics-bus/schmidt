@@ -1,0 +1,16 @@
+.FileDownloadList {
+    .label + ul.fileList {
+        margin-top: 0.5em;
+    }
+    ul.fileList {
+        // list-style: none;
+        margin: 0;
+        padding-left: 1.75em;
+        li {
+            font-size: 0.9em;
+            &:not(:last-child) {
+                margin-bottom: 0.5em;
+            }
+        }
+    }
+}
