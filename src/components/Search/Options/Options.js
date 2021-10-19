@@ -1,14 +1,10 @@
 // 3rd party components
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import classNames from 'classnames'
-import { Link } from 'gatsby'
-import ReactTooltip from 'react-tooltip'
 
 // local components
 import {
-  InfoTooltip,
   Selectpicker,
-  FloatButton,
   CheckboxSet,
   PrimaryButton,
   SearchBar,
@@ -25,15 +21,12 @@ import {
 
 // local assets and styling
 import styles from './options.module.scss'
-import { lab } from 'd3'
 
 export const Options = ({
   showFilterSections,
   filterCounts,
   baselineFilterCounts,
-  orderBy,
   setOrderBy,
-  isDesc,
   setIsDesc,
   searchText,
   setSearchText,
@@ -44,11 +37,11 @@ export const Options = ({
   toYear,
   setToYear,
   mobile,
-  setOptionsVisible,
   isSearchingText,
   setIsSearchingText,
   setFreezeDataUpdates,
-  ...props
+  searchData,
+  setShowOverlay,
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
   // num filter sections shown open by default
@@ -523,6 +516,23 @@ export const Options = ({
           setFreezeDataUpdates,
           setOrderBy,
           setIsDesc,
+          onDoubleEsc: useCallback(() => {
+            setFilters({})
+          }, [setFilters]),
+          onEnter: useCallback(() => {
+            if (
+              searchText !== null &&
+              searchText !== undefined &&
+              searchText !== '' &&
+              searchData !== null &&
+              searchData.data !== undefined &&
+              searchData.data !== null &&
+              searchData.data.length > 0
+            ) {
+              setShowOverlay(searchData.data[0].id)
+              if (typeof document !== 'undefined') document.activeElement.blur()
+            }
+          }, [searchData, setShowOverlay]),
         }}
       />
       <div className={styles.filters}>

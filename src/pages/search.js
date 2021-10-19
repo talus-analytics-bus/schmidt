@@ -52,6 +52,9 @@ const Search = ({ setPage }) => {
   const [isSearching, setIsSearching] = useState(false)
   const [isSearchingText, setIsSearchingText] = useState(false)
 
+  // callback for pressing enter key on search
+  const [onEnter, setOnEnter] = useState()
+
   // get URL params to parse for filters, search text, pagination settings,
   // and sorting settings
   let urlParams
@@ -419,6 +422,8 @@ const Search = ({ setPage }) => {
                 setToYear,
                 mobile: true,
                 setOptionsVisible,
+                searchData,
+                setShowOverlay,
               }}
             />
           )}
@@ -455,6 +460,8 @@ const Search = ({ setPage }) => {
                 isSearchingText,
                 setIsSearchingText,
                 setFreezeDataUpdates,
+                searchData,
+                setShowOverlay,
               }}
             />
             <Results
@@ -482,6 +489,7 @@ const Search = ({ setPage }) => {
                 loading: (isSearching && initialized) || isSearchingText,
                 fromYear,
                 toYear,
+                setOnEnter,
               }}
             />
           </div>
