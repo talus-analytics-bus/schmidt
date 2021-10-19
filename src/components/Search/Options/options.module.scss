@@ -1,4 +1,4 @@
-@import '../../../assets/styles/vars.scss';
+@import "../../../assets/styles/vars.scss";
 .options {
   .sortBy {
     display: flex;
@@ -17,11 +17,9 @@
     }
     .filterSections {
       margin-top: 20px;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      flex-flow: wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
+
       @media screen and (max-width: 1160px) {
         justify-content: flex-start;
       }
