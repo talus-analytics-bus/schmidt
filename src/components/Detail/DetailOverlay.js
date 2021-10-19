@@ -77,7 +77,9 @@ const DetailOverlay = ({
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
   const initItem =
-    context.data.items !== undefined ? context.data.items[itemKey] : undefined
+    context?.data?.items !== undefined
+      ? context?.data?.items[itemKey]
+      : undefined
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
@@ -187,7 +189,7 @@ const DetailOverlay = ({
 
       // if item has been loaded before, use that data, otherwise get interval
       const itemKey = `${id}-${pagesize}-${curPage}`
-      const getItem = context.data.items[itemKey] === undefined
+      const getItem = context?.data?.items[itemKey] === undefined
       if (getItem)
         queries.itemData = ItemQuery({
           id,
@@ -210,11 +212,11 @@ const DetailOverlay = ({
         setRelatedItemsData(results.itemData.data)
         newContextData = {
           ...newContextData,
-          items: { ...context.data.items, [itemKey]: { ...item } },
+          items: { ...context?.data?.items, [itemKey]: { ...item } },
         }
       } else {
-        setItemData(context.data.items[itemKey].data)
-        setRelatedItemsData(context.data.items[itemKey])
+        setItemData(context?.data?.items[itemKey].data)
+        setRelatedItemsData(context?.data?.items[itemKey])
       }
 
       // if getting filter counts set them, or return them if already set

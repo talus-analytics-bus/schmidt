@@ -214,7 +214,7 @@ const Search = ({ setPage }) => {
       setBaselineFilterCounts(filterCounts)
       context.setData({ ...context.data, filterCounts })
     } else {
-      setBaselineFilterCounts(context.data.filterCounts)
+      setBaselineFilterCounts(context?.data?.filterCounts)
     }
 
     // update URL params to contain relevant options, unless this update was

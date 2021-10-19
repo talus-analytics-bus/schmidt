@@ -529,7 +529,7 @@ const Browse = () => {
         )
       }
     },
-    [context.data.metadata, tooltipDefs]
+    [context?.data?.metadata, tooltipDefs]
   )
 
   // generate items in list
