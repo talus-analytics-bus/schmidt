@@ -436,7 +436,7 @@ export const Card = ({
                   <FileDownloadList
                     label={
                       <span>
-                        Additional files{' '}
+                        Additional files ({files.length - 1}){' '}
                         <InfoTooltip
                           id={'FileDownloadListInfo'}
                           text={
