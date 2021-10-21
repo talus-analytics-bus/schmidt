@@ -1,11 +1,5 @@
 // 3rd party components
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import classNames from 'classnames'
 
 // local components
@@ -18,7 +12,6 @@ import {
 } from '../../components/common'
 import Panel from './content/Panel'
 import { appContext } from '../../components/misc/ContextProvider'
-import useMetadata from '../../hooks/useMetadata'
 import useTooltipDefs from '../../hooks/useTooltipDefs'
 
 // local utility functions
@@ -29,7 +22,6 @@ import {
   getHighlightSegments,
   getTooltipTextFunc,
   execute,
-  defaultContext,
   iconNamesByField,
   getIconByName,
 } from '../../components/misc/Util'
@@ -62,9 +54,6 @@ const DetailOverlay = ({
 
   // HOOKS
   const tooltipDefs = useTooltipDefs(context)
-
-  // STATE
-  const [keyTopics] = useState([])
 
   // opacity control
   const [opacity, setOpacity] = useState(0)
