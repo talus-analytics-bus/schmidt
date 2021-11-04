@@ -258,16 +258,18 @@ const getSuggestions = ({ previewResults, searchText }) => {
         nameField = 'name'
         filterValueField = 'name'
         filterKey = 'key_topics'
+      } else if (entityName === 'Tag') {
+        iconName = 'covid_tags'
+        nameField = 'name'
+        filterValueField = 'name'
+        filterKey = 'covid_tags'
       } else if (entityName === 'Event') {
         iconName = 'events'
         nameField = 'name'
         filterValueField = 'name'
         filterKey = 'event.name'
       } else {
-        iconName = 'key_topics'
-        nameField = 'name'
-        filterValueField = 'name'
-        filterKey = 'unknown'
+        throw new Error('Unsupported entity name: ' + entityName)
       }
       let phrase = null
       if (instances.length === 0) {
