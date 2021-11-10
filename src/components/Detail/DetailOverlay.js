@@ -1,10 +1,8 @@
 // 3rd party components
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import classNames from 'classnames'
-import axios from 'axios'
 
 // local components
-import SEO from '../seo'
 import {
   Card,
   CardList,
@@ -14,6 +12,7 @@ import {
 } from '../../components/common'
 import Panel from './content/Panel'
 import { appContext } from '../../components/misc/ContextProvider'
+import useTooltipDefs from '../../hooks/useTooltipDefs'
 
 // local utility functions
 import ItemQuery from '../../components/misc/ItemQuery'
@@ -23,30 +22,17 @@ import {
   getHighlightSegments,
   getTooltipTextFunc,
   execute,
-  defaultContext,
   iconNamesByField,
   getIconByName,
 } from '../../components/misc/Util'
 
 // styles and assets
 import styles from './detailoverlay.module.scss'
-
-// constants
-const API_URL = process.env.GATSBY_API_URL
+import ReactTooltip from 'react-tooltip'
 
 const DetailOverlay = ({
   // item data
   id = 1,
-  type_of_record = 'Test item',
-  title = 'Title title',
-  description,
-  date = '2020-01-01',
-  authors = [],
-  funders = [],
-  key_topics = [],
-  files = [],
-  authoring_organization_has_governance_authority = null,
-
   // other data
   filters = {},
   setFilters = () => '',
@@ -64,36 +50,34 @@ const DetailOverlay = ({
   browse = false,
 }) => {
   // CONTEXT
-  const context = useContext(appContext) || defaultContext
+  const context = useContext(appContext)
 
-  // STATE
-  // key topics
-  const initKeyTopics = context.data.filterCounts
-    ? context.data.filterCounts.key_topics.by_value.map(d => d[0])
-    : []
-  const [keyTopics, setKeyTopics] = useState(initKeyTopics)
+  // HOOKS
+  const tooltipDefs = useTooltipDefs(context)
 
   // opacity control
   const [opacity, setOpacity] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
   // current page and pagesize of paginator
-  // const pageStr = !initialized ? urlParams.get('page') || '1' : '1'
-  // const [curPage, setCurPage] = useState(+pageStr)
   const [curPage, setCurPage] = useState(1)
-
-  // const [pagesize, setPagesize] = useState(
-  //   !initialized ? urlParams.get('pagesize') || 10 : 10
-  // )
   const [pagesize, setPagesize] = useState(10)
 
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
   const initItem =
-    context.data.items !== undefined ? context.data.items[itemKey] : undefined
+    context?.data?.items !== undefined
+      ? context?.data?.items[itemKey]
+      : undefined
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
+  const geo_specificity =
+    itemData === null
+      ? null
+      : (itemData.geo_specificity === 'US'
+          ? 'United States of America'
+          : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -115,15 +99,6 @@ const DetailOverlay = ({
     setOpacity(0)
     setTimeout(close, 250)
   }
-  // key topics
-  // TODO move up in scope and use throughout site, and/or get from API call
-  // const keyTopics = [
-  //   { displayName: 'Biosurveillance' },
-  //   { displayName: 'Emerging/epidemic infectious disease' },
-  //   { displayName: 'Health security (other)' },
-  //   { displayName: 'Intentional biological attacks' },
-  //   { displayName: 'Medical preparedness and MCMs' },
-  // ]
   // author fields
   const authorFields = [
     { field: 'type_of_authoring_organization', name: 'Type', link: true },
@@ -135,14 +110,17 @@ const DetailOverlay = ({
           d.if_national_iso2_of_authoring_org !== null ? (
             <img
               key={d.if_national_iso2_of_authoring_org}
-              src={`https://flags.talusanalytics.com/shiny_100px/${d.if_national_iso2_of_authoring_org.toLowerCase()}.png`}
+              src={
+                `https://flags.talusanalytics.com/shiny_100px/` +
+                `${d.if_national_iso2_of_authoring_org.toLowerCase()}.png`
+              }
             />
           ) : null
         return (
-          <>
+          <span style={{ display: 'flex', alignItems: 'center' }}>
             {flag}
             {d.if_national_country_of_authoring_org || 'International'}
-          </>
+          </span>
         )
       },
       field: 'if_national_country_of_authoring_org',
@@ -152,8 +130,6 @@ const DetailOverlay = ({
 
   // FUNCTIONS
   // get tooltip text depending on type of card
-  const detail = true
-  const related = false
   const getTooltipText = getTooltipTextFunc({
     detail: true,
     bookmark,
@@ -164,6 +140,7 @@ const DetailOverlay = ({
   const highlightTag = ({ displayName, filterValue, filterKey }) => {
     return (
       <span
+        key={[displayName, filterValue, filterKey].join('__')}
         onClick={e =>
           toggleFilter({
             e,
@@ -201,7 +178,7 @@ const DetailOverlay = ({
 
       // if item has been loaded before, use that data, otherwise get interval
       const itemKey = `${id}-${pagesize}-${curPage}`
-      const getItem = context.data.items[itemKey] === undefined
+      const getItem = context?.data?.items[itemKey] === undefined
       if (getItem)
         queries.itemData = ItemQuery({
           id,
@@ -209,11 +186,11 @@ const DetailOverlay = ({
           page: curPage,
         })
 
-      // get filter counts if not yet retrieved
-      const getFilterCounts = context.data.filterCounts === undefined
-      if (getFilterCounts) {
-        queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
-      }
+      // // get filter counts if not yet retrieved
+      // const getFilterCounts = context.data.filterCounts === undefined
+      // if (getFilterCounts) {
+      //   queries.filterCountsQuery = axios.get(`${API_URL}/get/filter_counts`)
+      // }
       const results = await execute({ queries })
 
       let newContextData = { ...context.data }
@@ -224,27 +201,28 @@ const DetailOverlay = ({
         setRelatedItemsData(results.itemData.data)
         newContextData = {
           ...newContextData,
-          items: { ...context.data.items, [itemKey]: { ...item } },
+          items: { ...context?.data?.items, [itemKey]: { ...item } },
         }
       } else {
-        setItemData(context.data.items[itemKey].data)
-        setRelatedItemsData(context.data.items[itemKey])
+        setItemData(context?.data?.items[itemKey].data)
+        setRelatedItemsData(context?.data?.items[itemKey])
       }
 
       // if getting filter counts set them, or return them if already set
-      if (getFilterCounts) {
-        const filterCounts = results.filterCountsQuery.data.data
-        setKeyTopics(filterCounts.key_topics.by_value.map(d => d[0]) || [])
-        newContextData = {
-          ...newContextData,
-          filterCounts,
-        }
-      } else {
-        setKeyTopics(
-          context.data.filterCounts.key_topics.by_value.map(d => d[0]) || []
-        )
-      }
-      context.setData(newContextData)
+      // if (getFilterCounts) {
+      //   const filterCounts = results.filterCountsQuery.data.data
+      //   setKeyTopics(filterCounts.key_topics.by_value.map(d => d[0]) || [])
+      //   newContextData = {
+      //     ...newContextData,
+      //     filterCounts,
+      //   }
+      // }
+      // else {
+      //   setKeyTopics(
+      //     context.data.filterCounts.key_topics.by_value.map(d => d[0]) || []
+      //   )
+      // }
+      // context.setData(newContextData)
 
       // trigger on loaded callback func
       onLoaded()
@@ -256,6 +234,11 @@ const DetailOverlay = ({
   const wrapperRef = useRef(null)
 
   // EFFECT HOOKS
+  // rebuild tooltips when defs fetched
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [tooltipDefs])
+
   // fetch data when ID is set
   useEffect(() => {
     // reset similar items page number if not one
@@ -369,7 +352,11 @@ const DetailOverlay = ({
           <span>{message}</span>
           <InfoTooltip
             text={
-              'Indication of whether the Publishing Organization has governance authority in the sense of whether it can act on the information contained in the record. Intergovernmental organizations may have governance authority depending on the context and topic of the product.'
+              'Indication of whether the Publishing Organization has' +
+              ' governance authority in the sense of whether it can act on' +
+              ' the information contained in the record. Intergovernmental' +
+              ' organizations may have governance authority depending on' +
+              ' the context and topic of the product.'
             }
           />
         </div>
@@ -390,7 +377,10 @@ const DetailOverlay = ({
         <div className={floating ? styles.shadow : null} />
         <div
           ref={wrapperRef}
-          style={{ opacity, pointerEvents: opacity === 0 ? 'none' : 'all' }}
+          style={{
+            opacity,
+            pointerEvents: opacity === 0 ? 'none' : 'all',
+          }}
           className={classNames(styles.detailOverlay, {
             [styles.floating]: floating,
             [styles.page]: !floating,
@@ -450,51 +440,116 @@ const DetailOverlay = ({
                 <div className={classNames(styles.sideBar, styles.wide)}>
                   <Panel
                     {...{
-                      title: 'Topic area',
+                      title: 'Subject matter',
                       iconName: iconNamesByField.key_topics,
                       expandable: true,
                     }}
                   >
-                    <div className={styles.keyTopics}>
-                      {keyTopics.map(value => {
-                        if (itemData.key_topics.includes(value))
-                          topicCount = topicCount + 1
-                        return itemData.key_topics.includes(value) ? (
-                          <>
-                            <div
-                              onClick={e =>
-                                toggleFilter({
-                                  openNewPage,
-                                  e,
-                                  getFilterVal: () => value,
-                                  filters,
-                                  filterKey: 'key_topics',
-                                  setFilters: v => {
-                                    dismissFloatingOverlay()
-                                    setFilters(v)
-                                  },
-                                  setSearchText,
-                                  alwaysStartNew: true,
-                                })
-                              }
-                              className={classNames(styles.keyTopic)}
-                            >
-                              <span>
-                                {highlightTag({
-                                  displayName: value,
-                                  filterValue: value,
-                                  filterKey: 'key_topics',
-                                })}
-                              </span>
+                    <div className={styles.authors}>
+                      <div className={styles.author}>
+                        <div className={styles.authorInfo}>
+                          <div className={styles.infoItem}>
+                            <TooltippedHeader
+                              label={'Topic area'}
+                              tooltip={tooltipDefs['Item.key_topics']}
+                            />
+                            <div className={styles.value}>
+                              {itemData.key_topics.map(value => {
+                                if (itemData.key_topics.includes(value))
+                                  topicCount = topicCount + 1
+                                return itemData.key_topics.includes(value) ? (
+                                  <>
+                                    <div
+                                      onClick={e =>
+                                        toggleFilter({
+                                          openNewPage,
+                                          e,
+                                          getFilterVal: () => value,
+                                          filters,
+                                          filterKey: 'key_topics',
+                                          setFilters: v => {
+                                            dismissFloatingOverlay()
+                                            setFilters(v)
+                                          },
+                                          setSearchText,
+                                          alwaysStartNew: true,
+                                        })
+                                      }
+                                      className={classNames(styles.keyTopic)}
+                                    >
+                                      <span>
+                                        {highlightTag({
+                                          displayName: value,
+                                          filterValue: value,
+                                          filterKey: 'key_topics',
+                                        })}
+                                      </span>
+                                    </div>
+                                  </>
+                                ) : null
+                              })}
+                              {topicCount === 0 && (
+                                <i className={styles.placeholder}>
+                                  No matching topic area
+                                </i>
+                              )}
                             </div>
-                          </>
-                        ) : null
-                      })}
-                      {topicCount === 0 && (
-                        <i className={styles.placeholder}>
-                          No matching topic area
-                        </i>
-                      )}
+                          </div>
+                          <div className={styles.infoItem}>
+                            <TooltippedHeader
+                              label={'Tags'}
+                              tooltip={tooltipDefs['Item.covid_tags']}
+                            />
+                            <div className={styles.values}>
+                              {itemData.covid_tags.map(value => (
+                                <div
+                                  onClick={e =>
+                                    toggleFilter({
+                                      openNewPage,
+                                      e,
+                                      getFilterVal: () => value,
+                                      filters,
+                                      filterKey: 'covid_tags',
+                                      setFilters: v => {
+                                        dismissFloatingOverlay()
+                                        setFilters(v)
+                                      },
+                                      setSearchText,
+                                      alwaysStartNew: true,
+                                    })
+                                  }
+                                  className={classNames(styles.covidTag)}
+                                >
+                                  <span>
+                                    {highlightTag({
+                                      displayName: value,
+                                      filterValue: value,
+                                      filterKey: 'covid_tags',
+                                    })}
+                                  </span>
+                                </div>
+                              ))}
+                              {itemData.covid_tags.length === 0 && (
+                                <i className={styles.noData}>None</i>
+                              )}
+                            </div>
+                          </div>
+                          <div className={styles.infoItem}>
+                            <TooltippedHeader
+                              label={'Applicability (US or global)'}
+                              tooltip={tooltipDefs['Item.geo_specificity']}
+                            />
+                            <div className={styles.value}>
+                              {geo_specificity !== null && (
+                                <span>{geo_specificity}</span>
+                              )}
+                              {geo_specificity === null && (
+                                <i className={styles.noData}>Unspecified</i>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Panel>
                   {
@@ -510,7 +565,7 @@ const DetailOverlay = ({
                     }}
                   >
                     <div className={styles.authors}>
-                      {itemData.authors.map((d, i) => (
+                      {itemData.authors.map(d => (
                         <div className={styles.author}>
                           <div className={styles.authorName}>
                             {highlightTag({
@@ -528,7 +583,12 @@ const DetailOverlay = ({
                                 link = false,
                               }) => (
                                 <div className={styles.infoItem}>
-                                  <div className={styles.field}>{name}</div>
+                                  <TooltippedHeader
+                                    label={name}
+                                    tooltip={
+                                      tooltipDefs['Item.Author.' + field]
+                                    }
+                                  />
                                   {!link && (
                                     <div className={styles.value}>
                                       {formatter(d) || (
@@ -567,6 +627,7 @@ const DetailOverlay = ({
                       title: 'Linked outbreak event',
                       iconName: iconNamesByField.events,
                       expandable: true,
+                      tooltip: tooltipDefs['Item.Event.name'],
                     }}
                   >
                     <div className={styles.events}>
@@ -592,6 +653,7 @@ const DetailOverlay = ({
                       title: 'Funders',
                       iconName: 'monetization_on',
                       expandable: true,
+                      tooltip: tooltipDefs['Item.Funder.name'],
                     }}
                   >
                     <div className={styles.funders}>
@@ -675,6 +737,26 @@ const DetailOverlay = ({
       </>
     )
   }
+}
+
+/**
+ *
+ * @param {Object} props Value of tooltip and label to display.
+ * @returns A header for a data field with `tooltip` and
+ * display text `label`.
+ */
+const TooltippedHeader = ({ tooltip, label }) => {
+  console.log('tooltip')
+  console.log(tooltip)
+  return (
+    <div
+      data-for={'searchHighlightInfo'}
+      data-tip={tooltip}
+      className={styles.field}
+    >
+      {label}
+    </div>
+  )
 }
 
 export default DetailOverlay

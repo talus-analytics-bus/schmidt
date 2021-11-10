@@ -1,22 +1,28 @@
 // 3rd party components
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from 'react'
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 import { navigate } from 'gatsby'
 import classNames from 'classnames'
 
 // local components
+import useTooltipDefs from '../hooks/useTooltipDefs'
+import useMetadata from '../hooks/useMetadata'
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import DetailOverlay from '../components/Detail/DetailOverlay'
 import Results from '../components/Search/Results/Results'
-import Options from '../components/Search/Options/Options'
 import MobileDisclaimer from '../components/MobileDisclaimer/MobileDisclaimer'
 import {
   StickyHeader,
   LoadingSpinner,
   Selectpicker,
-  InfoTooltip,
 } from '../components/common'
 import { appContext } from '../components/misc/ContextProvider'
 
@@ -29,6 +35,7 @@ import {
   filterDefs,
   getIconByName,
   iconNamesByField,
+  sortByFilterOrder,
 } from '../components/misc/Util'
 
 // styles and assets
@@ -38,20 +45,15 @@ import info from '../assets/icons/info.svg'
 // constants
 const API_URL = process.env.GATSBY_API_URL
 
-// definitions for tooltips
-const tooltipDefs = {
-  key_topics: 'Key topic addressed by the work',
-  authors: 'Organization that published the work or led the effort',
-  author_types: 'Type of organization responsible for publishing the work',
-  funders:
-    'Organization or entity that provided funding for the research effort or publication',
-  years: 'Year the publication was published',
-  events: 'Specific outbreak event covered by the record',
-}
-
-const Browse = ({ setPage }) => {
+const Browse = () => {
   // CONTEXT
   const context = useContext(appContext) || defaultContext
+
+  // get metadata
+  // useMetadata(context)
+
+  // definitions for tooltips
+  const tooltipDefs = useTooltipDefs(context)
 
   // STATE
   // card and filter counts data from API response to search query
@@ -62,7 +64,10 @@ const Browse = ({ setPage }) => {
 
   // section currently being browsed
   const [browseSection, setBrowseSection] = useState('key_topics')
-  const [browseList, setBrowseList] = useState({ unique: 0, by_value: [] })
+  const [browseList, setBrowseList] = useState({
+    unique: 0,
+    by_value: [],
+  })
 
   // search text for filters
   const [filterSearchText, setFilterSearchText] = useState('')
@@ -99,7 +104,6 @@ const Browse = ({ setPage }) => {
 
   // order by parameters
   const [orderBy, setOrderBy] = useState(urlParams.get('order_by') || 'date')
-  const isDescStr = urlParams.get('is_desc') || 'true'
   const [isDesc, setIsDesc] = useState(false)
   const [listDesc, setListDesc] = useState(urlParams.get('list_desc') || 'true')
   const [sortBy, setSortBy] = useState('results')
@@ -182,8 +186,6 @@ const Browse = ({ setPage }) => {
     return result
   }
 
-  const resultsHaveLoaded = searchData !== null
-
   // fire when view details buttons are pressed to display the detail overlay
   const onViewDetails = ({ newId, related = false }) => {
     if (typeof window !== undefined && !related) {
@@ -252,7 +254,10 @@ const Browse = ({ setPage }) => {
       if (initialized && !popstateTriggeredUpdate) {
         // provide scroll Y pos. so that it can be persisted after `navigate`
         navigate(newUrl, {
-          state: { ...newState, scrollY: window.scrollY || 0 },
+          state: {
+            ...newState,
+            scrollY: window.scrollY || 0,
+          },
         })
       }
     }
@@ -303,9 +308,6 @@ const Browse = ({ setPage }) => {
     if (getFilterCounts) {
       const filterCounts = results.filterCountsQuery.data.data
       setBaselineFilterCounts(filterCounts)
-      context.setData({ ...context.data, filterCounts })
-    } else {
-      setBaselineFilterCounts(context.data.filterCounts)
     }
 
     // update URL params to contain relevant options, unless this update was
@@ -320,10 +322,6 @@ const Browse = ({ setPage }) => {
     if (!initialized) setInitialized(true)
     setIsSearching(false)
     setIsSearchingText(false)
-  }
-
-  const updateFilterSearchText = e => {
-    setFilterSearchText(e.target.value)
   }
 
   // DEBUG
@@ -341,7 +339,9 @@ const Browse = ({ setPage }) => {
   // get bookmarked ids initially
   useEffect(() => {
     if (bookmarkedIds === null)
-      withBookmarkedIds({ callback: setBookmarkedIds })
+      withBookmarkedIds({
+        callback: setBookmarkedIds,
+      })
   }, [bookmarkedIds])
 
   // when overlay is changed, store new state
@@ -407,7 +407,7 @@ const Browse = ({ setPage }) => {
                 ],
               ]
               // update all state variables and then trigger a data fetch
-              toCheck.forEach(([key, updateFunc, curVal, fallbackFunc]) => {
+              toCheck.forEach(([key, updateFunc, , fallbackFunc]) => {
                 if (state[key] !== undefined) {
                   const newVal = state[key]
                   updateFunc(newVal)
@@ -440,8 +440,8 @@ const Browse = ({ setPage }) => {
   useEffect(() => {
     setBrowseList({ unique: 0, by_value: [] })
     setFilters({})
-    if (context.data.filterCounts !== undefined) {
-      setBrowseList(context.data.filterCounts[browseSection])
+    if (baselineFilterCounts !== undefined && baselineFilterCounts !== null) {
+      setBrowseList(baselineFilterCounts[browseSection])
     } else {
       setBrowseList({ unique: 0, by_value: [] })
     }
@@ -458,7 +458,9 @@ const Browse = ({ setPage }) => {
   // adjust scroll when new item is clicked
   useEffect(() => {
     if (clickedItem !== null && clickedRef.current) {
-      clickedRef.current.scrollIntoView(true, { behavior: 'smooth' })
+      clickedRef.current.scrollIntoView(true, {
+        behavior: 'smooth',
+      })
       window.scrollBy(0, -110)
     }
   }, [clickedItem])
@@ -467,69 +469,68 @@ const Browse = ({ setPage }) => {
   const bookmarkArr =
     bookmarkedIds !== null ? bookmarkedIds.filter(d => d !== '') : []
 
-  const filterOptions =
-    context.data.filterCounts !== undefined
-      ? Object.keys(context.data.filterCounts)
-      : []
-  // Order browse button icons so that they are consistent with order of filter categories on search page
-  // TODO: Make this less hacky
-  let ev = filterOptions.splice(1, 1)
-  let auth = filterOptions.splice(2, 1)
-  filterOptions.splice(3, 0, auth[0], ev[0])
+  const filterOptions = ![undefined, null].includes(baselineFilterCounts)
+    ? Object.keys(baselineFilterCounts)
+    : []
 
+  filterOptions.sort(sortByFilterOrder)
   // generate buttons to browse by topic, event, year, etc.
-  const BrowseButton = ({ type }) => {
-    let icon
-    if (type == 'events') {
-      icon = 'caution_orange'
-    } else {
-      icon = iconNamesByField[type] || null
-    }
-    if (type === 'types_of_record') {
-      return null
-    } else {
-      return (
-        <>
-          <div
-            className={classNames(styles.browseButton, {
-              [styles.selected]: browseSection == type,
-            })}
-            onClick={() => {
-              setBrowseSection(type)
-            }}
-          >
-            <div className={styles.buttonIcon}>
-              {getIconByName({ iconName: icon })}
-            </div>
-            <div className={styles.buttonLabel}>
-              <div>{filterDefs[type].label}</div>
-              <img
-                className={classNames(styles.tooltip, {
-                  [styles.left]: type === 'authors',
-                  [styles.manualFix]: type === 'key_topics',
-                })}
-                src={info}
-                alt="info icon"
-                data-for={type}
-                data-tip={tooltipDefs[type]}
-              />
-            </div>
+  const BrowseButton = useCallback(
+    ({ type }) => {
+      let icon = iconNamesByField[type] || null
+      if (['events', 'covid_tags'].includes(type)) icon += '_orange'
+      if (type === 'types_of_record') {
+        return null
+      } else {
+        const dataTip = tooltipDefs[type]
+        return (
+          <>
             <div
-              className={classNames(styles.selectedRectangle, {
+              className={classNames(styles.browseButton, {
                 [styles.selected]: browseSection == type,
               })}
-            ></div>
-          </div>
-          <ReactTooltip
-            id={type}
-            type="light"
-            effect="float"
-            scrollHide={true}
-          />
-        </>
-      )
-    }
-  }
+              onClick={() => {
+                setBrowseSection(type)
+              }}
+            >
+              <div className={styles.buttonIcon}>
+                {getIconByName({
+                  iconName: icon,
+                })}
+              </div>
+              <div className={styles.buttonLabel}>
+                <div>{filterDefs[type].label}</div>
+                {dataTip !== undefined && (
+                  <img
+                    className={classNames(styles.tooltip, {
+                      [styles.left]: type === 'authors',
+                      [styles.manualFix]: type === 'key_topics',
+                    })}
+                    src={info}
+                    alt="info icon"
+                    data-for={type}
+                    data-tip={dataTip}
+                  />
+                )}
+              </div>
+              <div
+                className={classNames(styles.selectedRectangle, {
+                  [styles.selected]: browseSection == type,
+                })}
+              ></div>
+            </div>
+            <ReactTooltip
+              id={type}
+              type="light"
+              effect="float"
+              scrollHide={true}
+            />
+          </>
+        )
+      }
+    },
+    [context?.data?.metadata, tooltipDefs]
+  )
 
   // generate items in list
   const Item = ({ content, children }) => {
@@ -582,6 +583,10 @@ const Browse = ({ setPage }) => {
                 arr.push(name)
                 newFilters['event.name'] = arr
                 break
+              case 'covid_tags':
+                arr.push(name)
+                newFilters['covid_tags'] = arr
+                break
               default:
             }
             setFilters(newFilters)
@@ -596,7 +601,8 @@ const Browse = ({ setPage }) => {
           <div className={styles.details}>
             {clickedItem !== name && (
               <div className={styles.count}>
-                {count} document{count == 1 ? '' : 's'}
+                {count} document
+                {count == 1 ? '' : 's'}
               </div>
             )}
             <div className={styles.caret}>
@@ -648,7 +654,7 @@ const Browse = ({ setPage }) => {
         loading={isSearching && !isSearchingText && initialized}
         bookmarkCount={bookmarkArr.length}
       >
-        <SEO title="Explore library" />
+        <SEO title={'Explore library'} />
 
         <div className={styles.browse}>
           {showOverlay !== false && showOverlay !== 'false' && (
@@ -688,10 +694,16 @@ const Browse = ({ setPage }) => {
           </p>
 
           {/* Browse buttons */}
-          {context.data.filterCounts !== undefined && (
+          {baselineFilterCounts !== undefined && (
             <div className={styles.browseSelection}>
               {filterOptions.map((item, index) => {
-                return <BrowseButton key={`${item} - ${index}`} type={item} />
+                return <>{BrowseButton({ type: item })}</>
+                return (
+                  <BrowseButton
+                    key={`${item} - ${index} - ${tooltipDefs[item]}`}
+                    type={item}
+                  />
+                )
               })}
             </div>
           )}

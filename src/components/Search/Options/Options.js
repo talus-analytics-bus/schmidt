@@ -1,14 +1,10 @@
 // 3rd party components
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import classNames from 'classnames'
-import { Link } from 'gatsby'
-import ReactTooltip from 'react-tooltip'
 
 // local components
 import {
-  InfoTooltip,
   Selectpicker,
-  FloatButton,
   CheckboxSet,
   PrimaryButton,
   SearchBar,
@@ -16,19 +12,21 @@ import {
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import { getIntArray, iconNamesByField, isEmpty } from '../../misc/Util'
+import {
+  getIntArray,
+  iconNamesByField,
+  isEmpty,
+  sortByFilterOrder,
+} from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
-import { lab } from 'd3'
 
 export const Options = ({
   showFilterSections,
   filterCounts,
   baselineFilterCounts,
-  orderBy,
   setOrderBy,
-  isDesc,
   setIsDesc,
   searchText,
   setSearchText,
@@ -39,11 +37,11 @@ export const Options = ({
   toYear,
   setToYear,
   mobile,
-  setOptionsVisible,
   isSearchingText,
   setIsSearchingText,
   setFreezeDataUpdates,
-  ...props
+  searchData,
+  setShowOverlay,
 }) => {
   // CONSTANTS // ---------------------------------------------------------- //
   // num filter sections shown open by default
@@ -76,6 +74,13 @@ export const Options = ({
       key: 'key_topics',
       label: 'Topic area',
       resultLabel: 'topic area',
+      choices: [],
+    },
+    covid_tags: {
+      field: 'covid_tags',
+      key: 'covid_tags',
+      label: 'Tags',
+      resultLabel: 'covid_tags',
       choices: [],
     },
     author_types: {
@@ -126,7 +131,7 @@ export const Options = ({
   }
 
   // get list of keys of filters
-  const filterKeys = Object.keys(filterDefs)
+  const filterKeys = Object.keys(filterDefs).sort(sortByFilterOrder)
 
   // define filter section component data
   // TODO link to a filterset and filters
@@ -135,11 +140,9 @@ export const Options = ({
     filterKeys.forEach(field => {
       // for (const [field, valueCounts] of Object.entries(filterCounts)) {
       // different icon color only on filters pages
-      let icon
-      if (field == 'events') {
-        icon = 'caution_orange'
-      } else {
-        icon = iconNamesByField[field] || null
+      let icon = iconNamesByField[field] || null
+      if (['events', 'covid_tags'].includes(field)) {
+        icon += '_orange'
       }
       const valueCounts = filterCounts[field].by_value
       const curFilterSectionData = {
@@ -427,6 +430,9 @@ export const Options = ({
       case 'key_topics':
         label = 'Topic'
         break
+      case 'covid_tags':
+        label = 'Tag'
+        break
       case 'years':
         label = 'Year'
         break
@@ -510,6 +516,23 @@ export const Options = ({
           setFreezeDataUpdates,
           setOrderBy,
           setIsDesc,
+          onDoubleEsc: useCallback(() => {
+            setFilters({})
+          }, [setFilters]),
+          onEnter: useCallback(() => {
+            if (
+              searchText !== null &&
+              searchText !== undefined &&
+              searchText !== '' &&
+              searchData !== null &&
+              searchData.data !== undefined &&
+              searchData.data !== null &&
+              searchData.data.length > 0
+            ) {
+              setShowOverlay(searchData.data[0].id)
+              if (typeof document !== 'undefined') document.activeElement.blur()
+            }
+          }, [searchData, setShowOverlay]),
         }}
       />
       <div className={styles.filters}>

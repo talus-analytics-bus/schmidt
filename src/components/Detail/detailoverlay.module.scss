@@ -1,4 +1,4 @@
-@import '../../assets/styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 @mixin sectionHeader() {
   font-size: 1.8rem;
@@ -185,12 +185,18 @@
                   font-size: 0.8rem;
                   margin-bottom: 2px;
                 }
-                .value {
+                .value,
+                .values {
                   display: flex;
-                  align-items: center;
+                  flex-flow: column;
                   img {
                     height: 25px;
                     margin-right: 5px;
+                  }
+                }
+                .values {
+                  > div {
+                    margin-bottom: 0.5em;
                   }
                 }
               }

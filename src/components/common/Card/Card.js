@@ -9,8 +9,13 @@ import styles from './card.module.scss'
 import logoIcon from '../../../assets/images/logo-icon.svg'
 
 // local components
-import { PrimaryButton, BookmarkToggle, ShowMore, PreviewOverlay } from '../'
-import Panel from '../../Detail/content/Panel'
+import {
+  PrimaryButton,
+  BookmarkToggle,
+  ShowMore,
+  PreviewOverlay,
+  InfoTooltip,
+} from '../'
 
 // local utility functions
 import {
@@ -22,6 +27,7 @@ import {
   toggleFilter,
   getHighlightSegments,
 } from '../../misc/Util'
+import FileDownloadList from './FileDownloadList'
 
 // constants
 const API_URL = process.env.GATSBY_API_URL
@@ -43,6 +49,7 @@ export const Card = ({
   sub_organizations,
   funders,
   key_topics,
+  covid_tags,
   events,
   files,
   why = [],
@@ -164,9 +171,20 @@ export const Card = ({
     ['events', events, 'name', 'event.name', 'name'],
     [
       'key_topics',
-      key_topics.map(d => {
-        return { name: d, id: d }
-      }),
+      key_topics !== undefined
+        ? key_topics.map(d => {
+            return { name: d, id: d }
+          })
+        : [],
+      'name',
+    ],
+    [
+      'covid_tags',
+      covid_tags !== undefined
+        ? covid_tags.map(d => {
+            return { name: d, id: d }
+          })
+        : [],
       'name',
     ],
     ['types_of_record', [type_of_record], undefined, 'type_of_record'],
@@ -290,6 +308,7 @@ export const Card = ({
       card[filterKey] = linkListEntries
         .map(d => (
           <span
+            key={d.text}
             onClick={d.onClick}
             className={styles.link}
             data-for={'searchHighlightInfo'}
@@ -411,6 +430,24 @@ export const Card = ({
                       iconName: 'get_app',
                       isSecondary: false,
                     }}
+                  />
+                )}
+                {files.length > 1 && (
+                  <FileDownloadList
+                    label={
+                      <span>
+                        Additional files ({files.length - 1}){' '}
+                        <InfoTooltip
+                          id={'FileDownloadListInfo'}
+                          text={
+                            'Related documents such as hearing opening' +
+                            ' statements and testimonies'
+                          }
+                        />
+                      </span>
+                    }
+                    files={files.slice(1, files.length)}
+                    baseURL={`${API_URL}/get/file/${title.replace(/\?/g, '')}`}
                   />
                 )}
               </div>

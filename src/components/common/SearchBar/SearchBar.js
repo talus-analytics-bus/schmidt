@@ -1,5 +1,6 @@
 // 3rd party packages
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { navigate } from 'gatsby'
 import classNames from 'classnames'
 
 // local utility functions
@@ -16,6 +17,7 @@ import loading from './loading.svg'
 
 /**
  * @method SearchBar
+ * Search bar with dynamic results popup
  */
 export const SearchBar = ({
   searchText,
@@ -27,6 +29,8 @@ export const SearchBar = ({
   setIsDesc,
   previewResults = null,
   right = true,
+  onDoubleEsc,
+  onEnter,
   ...props
 }) => {
   // STATE
@@ -37,10 +41,42 @@ export const SearchBar = ({
   const [showSuggestions, setShowSuggestions] = useState(true) // DEBUG
 
   // REFS
-  // track search bar input
+  // track search bar input and results
   const searchRef = useRef(null)
+  const resultsRef = useRef(null)
+
+  // CONSTANTS
+  // preview results, if applicable
+  const suggestions = getSuggestions({ previewResults, searchText })
 
   // FUNCTIONS
+  // handle on key down
+
+  const doIfEnter = (e, func) => {
+    if (e.key === 'Enter' && func !== undefined) func()
+  }
+  const handleOnKeyUp = useCallback(
+    e => {
+      if (e.key === 'Escape') {
+        if (searchTextIsNotEmpty(searchText)) {
+          setSearchText('')
+        } else if (onDoubleEsc !== undefined) {
+          onDoubleEsc()
+        }
+      } else
+        doIfEnter(e, () => {
+          if (
+            suggestions !== null &&
+            suggestions.length > 0 &&
+            !suggestions.noData
+          )
+            suggestions[0].onClick()
+          if (onEnter !== undefined) onEnter()
+        })
+    },
+    [searchText, setSearchText, onDoubleEsc, onEnter, suggestions]
+  )
+
   // update search text state when appropriate
   const updateSearchText = e => {
     clearTimeout(searchDelay)
@@ -60,139 +96,34 @@ export const SearchBar = ({
 
   // EFFECT HOOKS
   // when search reference updates, update search text
-
   useEffect(() => {
-    if (searchText === '' || searchText === undefined || searchText === null) {
+    if (searchTextIsNotEmpty(searchText)) {
       // if search text is blank, ensure the input value is set to blank,
       // in case search was cleared by another component
-      searchRef.current.value = ''
-    } else {
       searchRef.current.value = searchText
+    } else {
+      searchRef.current.value = ''
     }
   }, [searchText])
 
-  // CONSTANTS
-  // format preview results as search suggestions
-  const getSuggestions = ({ previewResults }) => {
-    if (previewResults === null || previewResults.length === 0) return null
-    else {
-      const sections = []
-      const phrase =
-        previewResults.n_items !== 0 ? (
-          <span>
-            Items matching <b>"{searchText}"</b> (
-            {comma(previewResults.n_items)} item
-            {previewResults.n_items === 1 ? '' : 's'})
-          </span>
-        ) : (
-          <span className={styles.noData}>
-            No items matched <b>"{searchText}"</b>
-          </span>
-        )
-      // always push the items section
-      sections.push({
-        section: phrase,
-        icon: getIconByName({
-          iconName: iconNamesByField.types_of_record,
-          styles,
-          disabled: previewResults.n_items === 0,
-        }),
-        list: [],
-        noData: previewResults.n_items === 0,
-        onClick: () => {
-          if (typeof window !== 'undefined') {
-            window.location.assign(
-              `/search/?search_text=${searchText}&order_by=relevance`
-            )
-          }
-        },
-        forSort: 999999,
-      })
-
-      // push additional sections
-      for (const [entityName, instances] of Object.entries(
-        previewResults.other_instances
-      )) {
-        entityName = entityName.replace(/_/g, ' ')
-        entityName = getInitCap(entityName)
-        let iconName, nameField, filterValueField, filterKey
-        if (entityName === 'Author') {
-          entityName = 'Publishing organization' //account for user-facing language change from 'author' to 'publishing org'
-          iconName = 'authors'
-          nameField = 'authoring_organization'
-          filterValueField = 'id'
-          filterKey = 'author.id'
-        } else if (entityName === 'Key topic') {
-          iconName = 'key_topics'
-          nameField = 'name'
-          filterValueField = 'name'
-          filterKey = 'key_topics'
-        } else if (entityName === 'Event') {
-          iconName = 'events'
-          nameField = 'name'
-          filterValueField = 'name'
-          filterKey = 'event.name'
-        } else {
-          iconName = 'key_topics'
-          nameField = 'name'
-          filterValueField = 'name'
-          filterKey = 'unknown'
-        }
-        let phrase = null
-        if (instances.length === 0) {
-          phrase = (
-            <span className={styles.noData}>
-              No {entityName.toLowerCase()} matched <b>"{searchText}"</b>
-            </span>
-          )
-        } else {
-          phrase = (
-            <span>
-              {entityName}s matching <b>"{searchText}"</b> (
-              {comma(instances.length)})
-            </span>
-          )
-        }
-        const section = {
-          section: phrase,
-          icon: getIconByName({
-            iconName: iconNamesByField[iconName],
-            styles,
-            disabled: instances.length === 0,
-          }),
-          list: [],
-          forSort: instances.length,
-          noData: instances.length === 0,
-        }
-        if (instances.length > 0) {
-          instances.forEach(d => {
-            section.list.push({
-              name: d[nameField],
-              count: d.n_items,
-              onClick: () => {
-                if (typeof window !== 'undefined') {
-                  const filters = {
-                    [filterKey]: [d[filterValueField].toString()],
-                  }
-                  window.location.assign(
-                    `/search/?filters=${JSON.stringify(filters)}`
-                  )
-                }
-              },
-            })
-          })
-        }
-        sections.push(section)
+  // when search reference updates, focus on it and scroll to top if no input
+  useEffect(() => {
+    if (searchRef.current !== null) {
+      searchRef.current.focus()
+      if (typeof window !== 'undefined' && !searchTextIsNotEmpty(searchText)) {
+        window.scrollTo(0, 0)
       }
-      sections.sort(function (a, b) {
-        if (a.forSort > b.forSort) return -1
-        else return 1
-      })
-      return sections
     }
-  }
-  // preview results, if applicable
-  const suggestions = getSuggestions({ previewResults })
+  }, [searchRef])
+
+  // when results ref updates, scroll results into view if they're ready
+  useEffect(() => {
+    if (resultsRef.current !== null) {
+      if (typeof window !== 'undefined' && searchTextIsNotEmpty(searchText)) {
+        resultsRef.current.scrollIntoView()
+      }
+    }
+  }, [searchText, resultsRef, suggestions])
 
   // JSX
   return (
@@ -200,6 +131,7 @@ export const SearchBar = ({
       <input
         ref={searchRef}
         onChange={updateSearchText}
+        onKeyUp={handleOnKeyUp}
         type="text"
         placeholder={'Search for documents'}
       />
@@ -223,7 +155,11 @@ export const SearchBar = ({
         <i className={'material-icons'}>search</i>
       </div>
       {suggestions && !isSearchingText && searchText !== '' && (
-        <div key={previewResults.search_text} className={styles.suggestions}>
+        <div
+          ref={resultsRef}
+          key={previewResults.search_text}
+          className={styles.suggestions}
+        >
           {suggestions.map(d => (
             <div
               key={previewResults.search_text + '-results'}
@@ -235,15 +171,23 @@ export const SearchBar = ({
                 })}
               >
                 {d.icon}
-                <span onClick={d.onClick ? d.onClick : () => ''}>
+                <span
+                  tabIndex={d.list.length === 0 && !d.noData ? 0 : undefined}
+                  onKeyUp={e => doIfEnter(e, d.onClick)}
+                  onClick={d.onClick ? d.onClick : () => ''}
+                >
                   {d.section}
                 </span>
               </div>
               {d.list.length > 0 && (
-                <div className={styles.suggestionList}>
+                <div key={d.name} className={styles.suggestionList}>
                   {d.list.map(dd => (
-                    <div className={styles.suggestion}>
-                      <span onClick={dd.onClick ? dd.onClick : () => ''}>
+                    <div key={dd.name} className={styles.suggestion}>
+                      <span
+                        tabIndex={0}
+                        onKeyUp={e => doIfEnter(e, dd.onClick)}
+                        onClick={dd.onClick ? dd.onClick : () => ''}
+                      >
                         {dd.name} ({comma(dd.count)} item
                         {dd.count === 1 ? '' : 's'})
                       </span>
@@ -260,3 +204,124 @@ export const SearchBar = ({
 }
 
 export default SearchBar
+
+// format preview results as search suggestions
+const getSuggestions = ({ previewResults, searchText }) => {
+  if (previewResults === null || previewResults.length === 0) return null
+  else {
+    const sections = []
+    const phrase =
+      previewResults.n_items !== 0 ? (
+        <span>
+          Items matching <b>"{searchText}"</b> ({comma(previewResults.n_items)}{' '}
+          item
+          {previewResults.n_items === 1 ? '' : 's'})
+        </span>
+      ) : (
+        <span className={styles.noData}>
+          No items matched <b>"{searchText}"</b>
+        </span>
+      )
+    // always push the items section
+    sections.push({
+      section: phrase,
+      icon: getIconByName({
+        iconName: iconNamesByField.types_of_record,
+        styles,
+        disabled: previewResults.n_items === 0,
+      }),
+      list: [],
+      noData: previewResults.n_items === 0,
+      onClick: () => {
+        if (typeof window !== 'undefined') {
+          navigate(`/search/?search_text=${searchText}&order_by=relevance`)
+        }
+      },
+      forSort: 999999,
+    })
+
+    // push additional sections
+    for (const [entityName, instances] of Object.entries(
+      previewResults.other_instances
+    )) {
+      entityName = entityName.replace(/_/g, ' ')
+      entityName = getInitCap(entityName)
+      let iconName, nameField, filterValueField, filterKey
+      if (entityName === 'Author') {
+        entityName = 'Publishing organization' //account for user-facing language change from 'author' to 'publishing org'
+        iconName = 'authors'
+        nameField = 'authoring_organization'
+        filterValueField = 'id'
+        filterKey = 'author.id'
+      } else if (entityName === 'Key topic') {
+        iconName = 'key_topics'
+        nameField = 'name'
+        filterValueField = 'name'
+        filterKey = 'key_topics'
+      } else if (entityName === 'Tag') {
+        iconName = 'covid_tags'
+        nameField = 'name'
+        filterValueField = 'name'
+        filterKey = 'covid_tags'
+      } else if (entityName === 'Event') {
+        iconName = 'events'
+        nameField = 'name'
+        filterValueField = 'name'
+        filterKey = 'event.name'
+      } else {
+        throw new Error('Unsupported entity name: ' + entityName)
+      }
+      let phrase = null
+      if (instances.length === 0) {
+        phrase = (
+          <span className={styles.noData}>
+            No {entityName.toLowerCase()} matched <b>"{searchText}"</b>
+          </span>
+        )
+      } else {
+        phrase = (
+          <span>
+            {entityName}s matching <b>"{searchText}"</b> (
+            {comma(instances.length)})
+          </span>
+        )
+      }
+      const section = {
+        section: phrase,
+        icon: getIconByName({
+          iconName: iconNamesByField[iconName],
+          styles,
+          disabled: instances.length === 0,
+        }),
+        list: [],
+        forSort: instances.length,
+        noData: instances.length === 0,
+      }
+      if (instances.length > 0) {
+        instances.forEach(d => {
+          section.list.push({
+            name: d[nameField],
+            count: d.n_items,
+            onClick: () => {
+              if (typeof window !== 'undefined') {
+                const filters = {
+                  [filterKey]: [d[filterValueField].toString()],
+                }
+                navigate(`/search/?filters=${JSON.stringify(filters)}`)
+              }
+            },
+          })
+        })
+      }
+      sections.push(section)
+    }
+    sections.sort(function (a, b) {
+      if (a.forSort > b.forSort) return -1
+      else return 1
+    })
+    return sections
+  }
+}
+function searchTextIsNotEmpty(searchText) {
+  return !(searchText === '' || searchText === undefined || searchText === null)
+}

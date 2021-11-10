@@ -10,11 +10,8 @@ const ContextProvider = ({ children }) => {
   const [data, setData] = useState(defaultContext.data)
   const [modalShown, setModalShown] = useState(false)
   const initialContext = { data, setData }
-  const close = () => {
-    setModalShown(true)
-  }
   // function to return modal content for unsupported browser modal
-  const browserModal = browser => (
+  const browserModal = () => (
     <Modal
       position="top center"
       on="click"
@@ -62,10 +59,10 @@ const ContextProvider = ({ children }) => {
   const modalToShow = {
     chrome: () => null,
     firefox: () => null,
-    safari: browser => null,
-    edge: browser => browserModal('Edge'),
-    ie: browser => browserModal('Internet Explorer'),
-    opera: browser => browserModal('Opera'),
+    safari: () => null,
+    edge: () => browserModal('Edge'),
+    ie: () => browserModal('Internet Explorer'),
+    opera: () => browserModal('Opera'),
     default: () => null,
   }
 

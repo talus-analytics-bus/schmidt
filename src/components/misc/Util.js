@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactTooltip from 'react-tooltip'
 import * as d3 from 'd3/dist/d3.min'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -25,6 +24,11 @@ import caution_disabled from '../../assets/icons/caution_disabled.svg'
 import rings from '../../assets/icons/rings.svg'
 import rings_orange from '../../assets/icons/rings_orange.svg'
 import rings_disabled from '../../assets/icons/rings_disabled.svg'
+
+// covid_tags
+import covid_tags from '../../assets/icons/covid_tags.svg'
+import covid_tags_orange from '../../assets/icons/covid_tags_orange.svg'
+import covid_tags_disabled from '../../assets/icons/covid_tags_disabled.svg'
 
 // Utility functions and data.
 const Util = {}
@@ -1204,6 +1208,8 @@ export const removeBookmark = ({ id, callback }) => {
 export const iconNamesByField = {
   // key_topics: 'device_hub',
   key_topics: 'topic',
+  covid_tags: 'covid_tags',
+  // covid_tags: 'topic',
   // key_topics: 'speech',
   // key_topics: 'speech_orange',
   //authors: 'person',
@@ -1249,6 +1255,12 @@ export const getIconByName = ({
     rings_orange,
     rings_orange_disabled: rings_disabled,
     rings_disabled,
+
+    // covid_tags
+    covid_tags,
+    covid_tags_orange,
+    covid_tags_orange_disabled: covid_tags_disabled,
+    covid_tags_disabled,
   }
   const specialIcon = specialIcons[iconName + (disabled ? '_disabled' : '')]
   const icon =
@@ -1479,8 +1491,10 @@ export const getTooltipTextFunc = ({ detail, bookmark, related }) => {
 
 // default context
 export const defaultContext = {
-  data: { filterCounts: undefined, items: {} },
-  setData: () => '',
+  data: { filterCounts: undefined, items: {}, defs: [], metadata: [] },
+  setData: () => {
+    throw new Error('Context setter undefined')
+  },
 }
 
 // filter defs
@@ -1492,6 +1506,7 @@ export const filterDefs = {
     resultLabel: 'year',
     choices: [],
     custom: true,
+    order: 0,
   },
   key_topics: {
     field: 'key_topics',
@@ -1499,6 +1514,15 @@ export const filterDefs = {
     label: 'Topic area',
     resultLabel: 'topic area',
     choices: [],
+    order: 1,
+  },
+  covid_tags: {
+    field: 'covid_tags',
+    key: 'covid_tags',
+    label: 'Tags',
+    resultLabel: 'tag',
+    choices: [],
+    order: 2,
   },
   author_types: {
     field: 'author.type_of_authoring_organization',
@@ -1511,6 +1535,7 @@ export const filterDefs = {
     ),
     resultLabel: 'publishing organization type',
     choices: [],
+    order: 3,
   },
   authors: {
     field: 'author.id',
@@ -1523,6 +1548,7 @@ export const filterDefs = {
     ),
     resultLabel: 'publishing organization',
     choices: [],
+    order: 4,
   },
   events: {
     field: 'event.name',
@@ -1530,6 +1556,7 @@ export const filterDefs = {
     label: 'Event',
     resultLabel: 'event',
     choices: [],
+    order: 5,
   },
   funders: {
     field: 'funder.name',
@@ -1537,6 +1564,7 @@ export const filterDefs = {
     label: 'Funder',
     resultLabel: 'funder',
     choices: [],
+    order: 6,
   },
   types_of_record: {
     field: 'type_of_record',
@@ -1544,5 +1572,20 @@ export const filterDefs = {
     label: 'Document type',
     resultLabel: 'document type',
     choices: [],
+    order: 7,
   },
+}
+
+/**
+ * Orders filter keys based on their order values in `filterDefs`
+ * @param {string} a First filter name
+ * @param {string} b Second filter name
+ * @returns The order value
+ */
+export const sortByFilterOrder = function (a, b) {
+  const aRank = filterDefs[a].order
+  const bRank = filterDefs[b].order
+  if (aRank > bRank) return 1
+  if (bRank > aRank) return -1
+  else return 0
 }
