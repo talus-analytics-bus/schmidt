@@ -157,7 +157,7 @@ const Documentation = ({}) => {
         <ul>
           <li>
             Items published prior to January 1, 1995, except where expert review
-            judged the item founational to the development and understanding of
+            judged the item foundational to the development and understanding of
             global health security efforts.
           </li>
           <li>
@@ -168,7 +168,7 @@ const Documentation = ({}) => {
           </li>
           <li>Fact sheets on diseases.</li>
           <li>
-            Items stricly about bioterrorism and/or biosafety/biological
+            Items strictly about bioterrorism and/or biosafety/biological
             accidents, except where noted in this Documentation.
           </li>
         </ul>
