@@ -54,19 +54,15 @@ const Documentation = ({}) => {
           </a>
         </p>
         <p>
-          As of its most recent update in June 2021, the library includes
-          documents from global and national-level sources dated from 1995-2019.
-          Global sources are the Food and Agriculture Organization, United
-          Nations General Assembly, United Nations Security Council, World
-          Organisation for Animal Health, and World Health Organization
-          (including the World Health Assembly). National sources as of January
-          2021 are drawn from the United States, with additional sources
-          reflecting Presidential Directives and Executive Orders added in June
-          2021. Academic journal literature as it relates to coronaviruses as a
-          global infectious disease threat is also represented. This is an
-          ongoing research project and the library may be updated to reflect
-          pre-1995 or post-2019 sources, additional countries, and other
-          elements.
+          As of its most recent update in November 2021, the library includes
+          documents from global, regional, and national-level sources dated from
+          1972-present. National sources are mostly drawn from the United
+          States, with additional sources reflecting national pandemic influenza
+          planning from other countries. Academic journal literature as it
+          relates to coronaviruses as a global infectious disease threat is also
+          represented. This is an ongoing research project and the library may
+          be updated to further reflect pre-1995 sources, additional countries,
+          and other elements.
         </p>
         <p>The site includes:</p>
         <ol>
@@ -146,11 +142,11 @@ const Documentation = ({}) => {
           naturally-occurring pandemic threat and the risk from that threat. The
           researchers did not specifically seek information related to
           intentional acts and biological accidents, but did not exclude such
-          documents where they were relevant to pandemic preparedness in
-          general. All-hazards items captured by the search were included only
-          if they also directly addressed the nexus between all-hazards
-          preparedness and infectious disease. The library includes items
-          published from January 1, 1995 &ndash; December 31, 2019.
+          documents where they were relevant to global health security and
+          pandemic preparedness. All-hazards items captured by the search were
+          included only if they also directly addressed the nexus between
+          all-hazards preparedness and infectious disease. The library includes
+          items published from 1972 &ndash; present.
         </p>
         <h3>Global</h3>
         <p>
@@ -160,8 +156,9 @@ const Documentation = ({}) => {
         </p>
         <ul>
           <li>
-            Items published outside of January 1, 1995 &ndash; December 31,
-            2019.
+            Items published prior to January 1, 1995, except where expert review
+            judged the item foundational to the development and understanding of
+            global health security efforts.
           </li>
           <li>
             Items solely focused on endemic diseases or those typically
@@ -171,16 +168,8 @@ const Documentation = ({}) => {
           </li>
           <li>Fact sheets on diseases.</li>
           <li>
-            The following items were also excluded except where noted in this
-            Documentation:
-            <ul>
-              <li>
-                Items strictly about bioterrorism and/or biosafety/biological
-                accidents.
-              </li>
-              <li>Items focused on a single country.</li>
-              <li>Items not in English.</li>
-            </ul>
+            Items strictly about bioterrorism and/or biosafety/biological
+            accidents, except where noted in this Documentation.
           </li>
         </ul>
         <p>
@@ -357,11 +346,15 @@ const Documentation = ({}) => {
           congressional hearings, government reports and other documents, and
           third-party reports and other documents. In most cases, a list of 25
           search terms were deployed to capture a broad array of hits relevant
-          to pandemics (see details below). The team excluded documents meeting
-          any of the following criteria:
+          to health emergency preparedness (see details below). The team
+          excluded documents meeting any of the following criteria:
         </p>
         <ul>
-          <li>Items outside of January 1, 1995 &ndash; December 31, 2019.</li>
+          <li>
+            Items prior to January 1, 1995, except where expert review judged
+            the item foundational to the development and understanding of global
+            health security efforts.
+          </li>
           <li>
             Items solely focused on endemic diseases or those typically
             addressed by the global health (as opposed to global health
@@ -373,7 +366,7 @@ const Documentation = ({}) => {
             accidents were excluded except where noted in this Documentation.
           </li>
         </ul>
-        <p>The research term sought information from the following sources:</p>
+        <p>The research team sought information from the following sources:</p>
         <ol className={styles.spacedOutList}>
           <li>
             <p>
@@ -573,10 +566,8 @@ const Documentation = ({}) => {
               uploaded the most recent report.
             </p>
             <p>
-              We also sought to identify relevant federal strategies and
-              implementation plans. We aimed to keep these related as narrowly
-              as possible to biothreats, excluding broader works like national
-              defense or national security strategies. We used the following
+              We also sought to identify federal strategies and implementation
+              plans relevant to possible biothreats. We used the following
               sources for this information: the HHS Public Health Emergency
               website,
               <Endnotes.Note>
@@ -768,7 +759,7 @@ const Documentation = ({}) => {
               . Accessed April 4, 2021.
             </Endnotes.Note>{' '}
             We examined the titles and, where necessary, the full texts of all
-            executive orders issued from 1995-2019 to determine relevancy.
+            executive orders issued from 1995-2021 to determine relevancy.
             <br />
             <br />
             To gather presidential directives, we consulted the online
@@ -783,7 +774,7 @@ const Documentation = ({}) => {
               . Accessed March 22, 2021.
             </Endnotes.Note>{' '}
             For each review directive and decision directive issued from
-            1995-2019 for which the FAS had obtained a declassified or
+            1995-2021 for which the FAS had obtained a declassified or
             unclassified copy, we reviewed the title and, where necessary, the
             full text to determine relevancy.
           </li>
@@ -819,19 +810,19 @@ const Documentation = ({}) => {
             ). The following Boolean search was performed using the Advanced
             Search tool: (exp Coronavirus Infections/ or exp Coronavirus) AND
             (exp Risk Assessment) as limited to articles in English published
-            between January 1, 1995 and December 31, 2019. The research team
-            reviewed each article to exclude any that met the following
-            exclusion criteria (in addition to the standing exclusion criteria)
-            regarding article focus: clinical management; non-human species;
-            bioterrorism; or biowarfare. Articles behind paywalls were not
-            posted; open access articles were posted if the research team
-            received permission to do so. When the paper was unavailable or
-            behind a paywall, the research team reviewed the piece and
-            summarized the item to reflect the comprehensive search results. On
-            occasion, journal articles were also captured through other
-            means&mdash;specifically, as a result of the search of the WHO IRIS
-            database (see Global Step 6), or when a journal record was an
-            editorial that flagged one or more relevant papers on coronavirus
+            prior to January 1, 1995. The research team reviewed each article to
+            exclude any that met the following exclusion criteria (in addition
+            to the standing exclusion criteria) regarding article focus:
+            clinical management; non-human species; bioterrorism; or biowarfare.
+            Articles behind paywalls were not posted; open access articles were
+            posted if the research team received permission to do so. When the
+            paper was unavailable or behind a paywall, the research team
+            reviewed the piece and summarized the item to reflect the
+            comprehensive search results. On occasion, journal articles were
+            also captured through other means&mdash;specifically, as a result of
+            the search of the WHO IRIS database (see Global Step 6), CDC
+            Morbidity and Mortality Weekly Report, or when a journal record was
+            an editorial that flagged one or more relevant papers on coronavirus
             within that issue.
           </li>
           <li>
@@ -1040,6 +1031,105 @@ const Documentation = ({}) => {
               the “Domestic” section of this methodology.
             </p>
           </li>
+          <li>
+            <strong>Non-WHO Regional Organizations</strong>. This category
+            includes records from regional organizations that collaborate
+            through multilateral action. The organizations searched encompassed
+            Council of Ministers of Health of Central America and the Dominican
+            Republic (COMISCA), the Caribbean Public Health Agency (CARPHA),
+            Southern Common Market (MERCOSUR), Central American Integration
+            System (SICA), Caribbean Community (CARICOM), African Union,
+            European Union, Council of Europe, Association of Southeast Asian
+            Nations (ASEAN), Community of Latina American and Caribbean States
+            (CELAC), Pacific Alliance, Arab League, Pacific Islanders Forum
+            (PIF), Organization of American States (OAS), and Economic Community
+            of West African States (ECOWAS). Documents matching search criteria
+            were only found on COMISCA’s and ASEAN’s websites. Each
+            organization’s website was manually searched using the same search
+            terms described above to identify documents, each of which was
+            manually scanned to ensure that the terms were not only brief
+            mentions but reflected records relevant to the library; those that
+            met exclusion criteria were omitted from further analysis.
+          </li>
+          <li>
+            <strong>Emergency declarations for COVID-19</strong>. National
+            emergency declarations from the United States and member states of
+            the European Union and state-level emergency declarations from the
+            United States with regard to the COVID-19 pandemic were captured
+            using the following sources and methods:
+            <ul>
+              <li>
+                Initial state and federal declarations were identified via
+                COVID-AMP, using the policy category filter with "Emergency
+                delarations" selected. Extensions of the original policies,
+                amendments, and termination documents were also collected where
+                applicable.
+              </li>
+              <li>
+                For states and countries whose emergency declarations were not
+                accessible on COVID-AMP, the relevant governmnet's official
+                website and online legal archives were reviewed for the
+                document.
+              </li>
+              <li>
+                Where possible, both English and official language copies were
+                captured. If an English version was not available, the
+                researcher attempted to find an English-language press release
+                announcing the emergency declaration.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Risk and policy communication for COVID-19 response</strong>
+            . Several response initiatives specific to COVID-19 in the United
+            States were captured in an effort to document what information was
+            made public and which actions were taken, in the context of what
+            scientific evidence was available at the time. The categories of
+            documents for inclusion were brainstormed by the research team.
+            Items were captured via manual review of U.S. governmental and
+            third-party websites, including statements from public officials in
+            cities with initial outbreaks; evolving guidance from the CDC about
+            disease transmission and protective measures for the public; travel
+            restrictions and repatriation efforts; Strategic National Stockpile
+            mobilization; Centers for Medicare and Medicaid Services Emergency
+            Rules and policies related to coverage of costs of testing and
+            medical care; press releases and guidance from the American Hospital
+            Association and American Academy of Pediatrics; industry guidance
+            from the International Air Transport Association, International
+            Civil Aviation Organization, and American Society of Heating,
+            Refrigerating, and Air-Condition Engineers; handbooks from the
+            Department of Education on school re-openings; National Governor’s
+            Association public health guidance; CDC Advisory Committee on
+            Immunization Practices guidance and FDA Emergency Use
+            Authorizations; U.S. state vaccination incentive programs; and
+            employer rules and regulations related to masking, testing, and
+            vaccination.
+          </li>
+          <li>
+            <strong>Investigative journalism on COVID-19</strong>. High-impact
+            investigativejournalism on key topics throughout the pandemic were
+            captured to fill gaps in how the outbreak unfolded. Investigative
+            journalism was defined by the research team as pieces that primarily
+            reported on information that was not easily accessible or publicly
+            available, or that attempted to expose flaws in preparedness or
+            response to the pandemic based on what was previously available.
+            <br />
+            <br />
+            Investigative journalism pieces were identified by manually
+            reviewing websites with thorough coverage of the COVID-19 pandemic
+            dating back to January 2020, including the New York Times, the
+            Atlantic, STAT News, the New Yorker, and the Washington Post.
+            Articles from AP, Politico, and other sites were included as well if
+            they were the first to release an exclusive investigation. While
+            capturing investigative reports was highly subjective and there are
+            thousands of impactful pieces available, key topics that were
+            searched for included supply chain shortages, healthcare system
+            preparedness, health disparities and disproportionate impacts on
+            vulnerable groups, masking and testing guidance, and intelligence
+            failures. The pieces selected may critique government figures, but
+            on the basis of their response to the pandemic or actions that
+            impacted its trajectory, rather than partisan objections.
+          </li>
         </ol>
         <div id="datacoding" style={{ position: 'relative', top: -100 }} />
         <h2>Data coding</h2>
@@ -1246,7 +1336,8 @@ const Documentation = ({}) => {
               <em>
                 An item published in a professional journal; may reflect
                 original research, literature reviews, commentaries, editorials,
-                letters, and news items; may or may not be peer-reviewed.
+                letters, textbooks, and news items; may or may not be
+                peer-reviewed.
               </em>
             </li>
             <li>
@@ -1314,7 +1405,10 @@ const Documentation = ({}) => {
               </em>
             </li>
             <li>
-              <span className={styles.medBold}>Surveillance/detection</span>:{' '}
+              <span className={styles.medBold}>
+                Disease surveillance/detection
+              </span>
+              :{' '}
               <em>
                 An item primarily describing the detection and identification of
                 infectious diseases (and relevant systems, technologies,
@@ -1368,6 +1462,389 @@ const Documentation = ({}) => {
                 infrastructure protection, or economic impacts of pandemics.
                 Such reports may address key topics, but in a minor or
                 tangential way.
+              </em>
+            </li>
+          </ul>
+          <p>
+            <strong>Tags</strong>
+          </p>
+          <div>
+            <em>
+              A select list of more granular topic areas which an item may
+              address, designed to support filtering for documents that share a
+              specific health security topic, policy type, impacted population,
+              etc. Multiple tags may be selected to best reflect hte content
+              covered in the item.
+            </em>
+          </div>
+          <ul>
+            <li>
+              <span className={styles.medBold}>
+                Coverage of healthcare costs
+              </span>
+              :{' '}
+              <em>
+                Items about payment and/or reimbursement of medical costs
+                through insurance, governmental support, or other mechanisms.
+                Relevant medical costs include testing, treatment, or vaccine
+                administration.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Crisis standards of care</span>:{' '}
+              <em>
+                Items describing a substantial change in healthcare operations
+                due to the influx of patients in excess of a system or
+                facility’s baseline capacity. These may include formal
+                declarations of crisis standards of care, changes to resource
+                allocation, guidance for triage of life-sustaining
+                interventions, establishment of alternate care sites, or
+                provision of medical liability waivers.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Direct financial relief</span>:{' '}
+              <em>
+                Items about extending access to direct financing, funding, or
+                expense relief to individuals during a public health emergency.
+                These may include items such as stimulus payments to citizens,
+                individual tax credits, rental assistance, utility assistance,
+                and eviction or foreclosure delays.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Disease characteristics and outcomes
+              </span>
+              :{' '}
+              <em>
+                Items discussing the distribution and/or severity of disease,
+                including transmission, incidence, prevalence, health outcomes,
+                or other associated medical impacts. These may be reports or
+                academic studies.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Economic impacts and support
+              </span>
+              :{' '}
+              <em>
+                Items related to economic impact assessments or measures taken
+                to support the economy and businesses at a large-scale during a
+                public health emergency. These may include items such as
+                disaster assistance funding, anti-price gouging measures, or PPP
+                loans.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Employment regulations</span>:{' '}
+              <em>
+                Items describing changes to workers compensation and hazard pay,
+                emergency personnel designations, occupational safety
+                requirements and protections for workers, family and medical
+                leave, or unemployment eligibility and benefits during a public
+                health emergency.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                EUAs and medical authorizations
+              </span>
+              :{' '}
+              <em>
+                Items about expanding access to drugs, devices, PPE, medical or
+                facility licensing, telehealth permissions, and other necessary
+                provisions for emergency use during COVID-19 via emergency use
+                authorizations, additional marketing authorizations, or other
+                regulatory pathways designed to increase access.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Health disparities and disproportionate impacts
+              </span>
+              :{' '}
+              <em>
+                Items about the differential impacts of disease on certain
+                geographies, populations, industries, or groups. These may be
+                related to medical or non-medical/social aspects of health.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Healthcare capacity</span>:{' '}
+              <em>
+                Items describing the baseline status of health infrastructure,
+                skilled workforce development, or institutional resilience, and
+                how those capacities map to preparedness and response for a
+                public health emergency. These documents typically describe
+                healthcare systems broadly and may include capacity-building
+                measures, risk assessments, strategic plans, or response efforts
+                during a surge.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Healthcare worker impacts and support
+              </span>
+              :{' '}
+              <em>
+                Items about the short- and long-term implications of a public
+                health emergency on healthcare personnel, including risk of
+                workplace exposure, staffing shortages, shifting roles and
+                responsibilities, the need for emergency response training, and
+                mental health impacts.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Hospital-acquired infections
+              </span>
+              :{' '}
+              <em>
+                Items about infections that occur from within a healthcare
+                setting that are not present at time of admission to the
+                facility. Documents with this tag may also include infection
+                prevention control (IPC) guidance for hospital settings.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Intentional biological attacks
+              </span>
+              :{' '}
+              <em>
+                Items about the deliberate release of a pathogen or biotoxin
+                against humans, crops, or livestock. These documents may address
+                attacks by state or non-state actors, including bioterrorism,
+                biowarfare, and biodefense.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Intergovernmental policy and international governance
+              </span>
+              :{' '}
+              <em>
+                Items related to bilateral or multilateral policy and
+                guidelines, or measures taken by an intergovernmental entity or
+                international non-governmental organization with a focus on
+                governance efforts.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Key public health emergency response plans
+              </span>
+              :{' '}
+              <em>
+                Items that outline best practices for dealing with public health
+                emergencies, typically at a national level. While not
+                legally-binding, these guidelines provide specific responses to
+                dealing with emergency scenarios and promote coordination across
+                agencies.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Laboratory biosafety and biosecurity
+              </span>
+              :{' '}
+              <em>
+                Items about the containment principles, technologies, and
+                practices to prevent unintentional exposure to pathogens or
+                their accidental release within a laboratory setting.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Laboratory capacity</span>:{' '}
+              <em>
+                Items describing the baseline status of laboratory
+                infrastructure and how those capacities map to preparedness and
+                response for a public health emergency. These documents may
+                include specific recommendations about capacity-building
+                measures such as disease detection and surveillance, information
+                sharing, and rapid scale-up of diagnostic testing.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Legal frameworks for public health
+              </span>
+              :{' '}
+              <em>
+                Items that lay the rules of governance or otherwise regulate
+                decision-making at an intergovernmental, national, state, or
+                local level during public health emergencies. These frameworks
+                contain legally-binding requirements for response during the
+                period for which a public health emergency is declared.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Long term care facilities and nursing homes
+              </span>
+              :{' '}
+              <em>
+                Items about the operation of or impact to nursing homes and
+                other institutions providing living accommodations with
+                healthcare for elderly people during a public health emergency.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Medical countermeasures</span>:{' '}
+              <em>
+                Items about the products, drugs, devices, and other tools used
+                to diagnose, prevent, protect from, or treat individuals in the
+                event of a public health emergency. This may include research,
+                reports, or guidance about vaccines, antibodies, antibiotics,
+                therapeutics, or treatments.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Non-COVID health impacts</span>:{' '}
+              <em>
+                Items discussing the social, behavioral, financial, and other
+                non-medical health impacts due to a public health emergency.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Nonpharmaceutical interventions
+              </span>
+              :{' '}
+              <em>
+                Items describing or analyzing individual- or community-level
+                actions taken to slow the spread of disease, not including
+                vaccinations, diagnostic testing, or other medical
+                countermeasures.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Origin of SARS-CoV-2</span>:{' '}
+              <em>
+                Items with plans to investigate or evidence about origin
+                theories, documentation of initial human cases of a disease, or
+                attribution assessments for SARS-CoV-2.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Pandemic preparedness and history
+              </span>
+              :{' '}
+              <em>
+                Items analyzing or describing the evolution of pandemic response
+                and preparedness efforts, especially in the context of national
+                policy and governance. These may include lessons learned from
+                dealing with disease outbreaks, case studies on past outbreaks,
+                intelligence on emerging pathogens, and preparatory roundtable
+                exercises, evaluations, or training activities.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Prisons, correctional facilities, and jails
+              </span>
+              :{' '}
+              <em>
+                Items describing the operation of or impact to facilities in the
+                criminal justice system which hold incarcerated persons during a
+                public health emergency.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Public health data requirements and systems
+              </span>
+              :{' '}
+              <em>
+                Items related to efforts to collect data during a public health
+                crisis and the challenges associated with utilizing those
+                systems. Documents may include strategic plans for data
+                collection, legal or regulatory requirements invoked for
+                information-sharing or reporting, standards for data collection,
+                or publicly available and widely-used sources of data.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Response frameworks</span>:{' '}
+              <em>
+                Items describing how to respond to a crisis situation,
+                emergency, or disaster with specific details about activating
+                emergency processes and the roles and responsibilities of
+                individuals and organizations involved in emergency management.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Risk and policy communication
+              </span>
+              :{' '}
+              <em>
+                Items about public health messaging and other forms of risk
+                communication to relay outbreak information to the public during
+                an emergency. These may include public statements about disease
+                risk, announcements of formal/informal guidance from officials
+                or industry leaders, or review processes for those deciding what
+                to communicate and when.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                School closures and reopening
+              </span>
+              :{' '}
+              <em>
+                Items related to the closure, reopening, or general operation of
+                schools during a public health emergency. These may be about
+                childcare, K-12, or higher education.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Sub-national or local public health policies
+              </span>
+              :{' '}
+              <em>
+                Items about equipping sub-national, state, or local public
+                health systems and leaders to deal with a public health
+                emergency. These measures may be legislation, executive orders,
+                strategic planning documents, or publications reporting on
+                health preparedness initiatives.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Supply chain shortages and supply chain impacts
+              </span>
+              :{' '}
+              <em>
+                Items related to short- and long-term supply-chain disruptions.
+                These documents may discuss how manufacturers managed their
+                supply chains, analyze how different industries were affected,
+                evaluate alternative supply scenarios, quantify the impact on
+                emergency response, or assess risk on critical economic
+                functions.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Testing and contact tracing
+              </span>
+              :{' '}
+              <em>
+                Items about the distribution, financing, or logistics of
+                providing and obtaining diagnostic tests or organizing contact
+                tracing efforts.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Travel and repatriation</span>:{' '}
+              <em>
+                Items describing efforts to respond to a public health emergency
+                using travel restrictions, visa and immigration policy changes,
+                and repatriation programs.
               </em>
             </li>
           </ul>
