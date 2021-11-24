@@ -31,7 +31,7 @@ const CheckboxSet = ({
 
   const updateAllValues = v => {
     const newAllValues = []
-    checkboxes.forEach(d => {
+    allCheckboxes.forEach(d => {
       const wasAlreadyChecked = d.props.curChecked
       const matchesChangedCheckbox = d.props.value.toString() === v
       if (wasAlreadyChecked && matchesChangedCheckbox) return
@@ -72,7 +72,7 @@ const CheckboxSet = ({
     }
   })
 
-  const checkboxes = filteredChoices.map(
+  const allCheckboxes = choices.map(
     ({ label, value, count = null, custom }) => (
       <Checkbox
         {...{
@@ -90,6 +90,9 @@ const CheckboxSet = ({
         }}
       />
     )
+  )
+  const checkboxes = allCheckboxes.filter(cb =>
+    filteredChoices.some(fc => fc.label === cb.props.label)
   )
   if (sorted) {
     checkboxes.sort(function (a, b) {
