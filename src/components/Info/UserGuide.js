@@ -182,6 +182,10 @@ const UserGuide = ({}) => {
               <strong>Topic area:</strong>​ key topic addressed by the work
             </li>
             <li>
+              <strong>Tag:</strong>​ specific issue areas, populations, etc.
+              addressed by the work
+            </li>
+            <li>
               <strong>Publishing org type:</strong>​ type of organization
               responsible for publishing
             </li>
