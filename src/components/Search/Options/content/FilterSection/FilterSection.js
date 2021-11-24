@@ -1,11 +1,10 @@
 // 3rd party components
 import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
-import ReactTooltip from 'react-tooltip'
 
 // local components
-import { FilterSet, PrimaryButton } from '../../../../common'
-import { comma, getIconByName } from '../../../../misc/Util'
+import { FilterSet } from '../../../../common'
+import { getIconByName } from '../../../../misc/Util'
 
 // local assets and styling
 import styles from './filtersection.module.scss'

@@ -25,13 +25,11 @@ const CheckboxSet = ({
 
   // Trigger callback when all values or filters change
   React.useEffect(() => {
-    if (allValues.length > 0)
-      callback([...new Set(allValues.join(',').split(','))])
+    if (allValues.length > 0) callback([...new Set([...allValues])])
     else callback([])
   }, [allValues])
 
   const updateAllValues = v => {
-    // debug: test checkbox vals
     const newAllValues = []
     checkboxes.forEach(d => {
       const wasAlreadyChecked = d.props.curChecked

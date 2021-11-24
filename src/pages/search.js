@@ -178,7 +178,6 @@ const Search = ({ setPage }) => {
   const getData = async () => {
     // if the page has already initialized, then a search is being done
     setIsSearching(true)
-
     const queries = {}
     queries.searchQuery = SearchQuery({
       page: curPage,
