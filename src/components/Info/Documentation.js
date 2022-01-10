@@ -1061,7 +1061,7 @@ const Documentation = ({}) => {
               <li>
                 Initial state and federal declarations were identified via
                 COVID-AMP, using the policy category filter with "Emergency
-                delarations" selected. Extensions of the original policies,
+                declarations" selected. Extensions of the original policies,
                 amendments, and termination documents were also collected where
                 applicable.
               </li>
