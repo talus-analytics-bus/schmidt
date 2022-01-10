@@ -1107,7 +1107,7 @@ const Documentation = ({}) => {
           </li>
           <li>
             <strong>Investigative journalism on COVID-19</strong>. High-impact
-            investigativejournalism on key topics throughout the pandemic were
+            investigative journalism on key topics throughout the pandemic were
             captured to fill gaps in how the outbreak unfolded. Investigative
             journalism was defined by the research team as pieces that primarily
             reported on information that was not easily accessible or publicly
