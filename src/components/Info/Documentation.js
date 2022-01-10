@@ -1040,6 +1040,105 @@ const Documentation = ({}) => {
               the “Domestic” section of this methodology.
             </p>
           </li>
+          <li>
+            <strong>Non-WHO Regional Organizations</strong>. This category
+            includes records from regional organizations that collaborate
+            through multilateral action. The organizations searched encompassed
+            Council of Ministers of Health of Central America and the Dominican
+            Republic (COMISCA), the Caribbean Public Health Agency (CARPHA),
+            Southern Common Market (MERCOSUR), Central American Integration
+            System (SICA), Caribbean Community (CARICOM), African Union,
+            European Union, Council of Europe, Association of Southeast Asian
+            Nations (ASEAN), Community of Latina American and Caribbean States
+            (CELAC), Pacific Alliance, Arab League, Pacific Islanders Forum
+            (PIF), Organization of American States (OAS), and Economic Community
+            of West African States (ECOWAS). Documents matching search criteria
+            were only found on COMISCA’s and ASEAN’s websites. Each
+            organization’s website was manually searched using the same search
+            terms described above to identify documents, each of which was
+            manually scanned to ensure that the terms were not only brief
+            mentions but reflected records relevant to the library; those that
+            met exclusion criteria were omitted from further analysis.
+          </li>
+          <li>
+            <strong>Emergency declarations for COVID-19</strong>. National
+            emergency declarations from the United States and member states of
+            the European Union and state-level emergency declarations from the
+            United States with regard to the COVID-19 pandemic were captured
+            using the following sources and methods:
+            <ul>
+              <li>
+                Initial state and federal declarations were identified via
+                COVID-AMP, using the policy category filter with "Emergency
+                declarations" selected. Extensions of the original policies,
+                amendments, and termination documents were also collected where
+                applicable.
+              </li>
+              <li>
+                For states and countries whose emergency declarations were not
+                accessible on COVID-AMP, the relevant governmnet's official
+                website and online legal archives were reviewed for the
+                document.
+              </li>
+              <li>
+                Where possible, both English and official language copies were
+                captured. If an English version was not available, the
+                researcher attempted to find an English-language press release
+                announcing the emergency declaration.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Risk and policy communication for COVID-19 response</strong>
+            . Several response initiatives specific to COVID-19 in the United
+            States were captured in an effort to document what information was
+            made public and which actions were taken, in the context of what
+            scientific evidence was available at the time. The categories of
+            documents for inclusion were brainstormed by the research team.
+            Items were captured via manual review of U.S. governmental and
+            third-party websites, including statements from public officials in
+            cities with initial outbreaks; evolving guidance from the CDC about
+            disease transmission and protective measures for the public; travel
+            restrictions and repatriation efforts; Strategic National Stockpile
+            mobilization; Centers for Medicare and Medicaid Services Emergency
+            Rules and policies related to coverage of costs of testing and
+            medical care; press releases and guidance from the American Hospital
+            Association and American Academy of Pediatrics; industry guidance
+            from the International Air Transport Association, International
+            Civil Aviation Organization, and American Society of Heating,
+            Refrigerating, and Air-Condition Engineers; handbooks from the
+            Department of Education on school re-openings; National Governor’s
+            Association public health guidance; CDC Advisory Committee on
+            Immunization Practices guidance and FDA Emergency Use
+            Authorizations; U.S. state vaccination incentive programs; and
+            employer rules and regulations related to masking, testing, and
+            vaccination.
+          </li>
+          <li>
+            <strong>Investigative journalism on COVID-19</strong>. High-impact
+            investigative journalism on key topics throughout the pandemic were
+            captured to fill gaps in how the outbreak unfolded. Investigative
+            journalism was defined by the research team as pieces that primarily
+            reported on information that was not easily accessible or publicly
+            available, or that attempted to expose flaws in preparedness or
+            response to the pandemic based on what was previously available.
+            <br />
+            <br />
+            Investigative journalism pieces were identified by manually
+            reviewing websites with thorough coverage of the COVID-19 pandemic
+            dating back to January 2020, including the New York Times, the
+            Atlantic, STAT News, the New Yorker, and the Washington Post.
+            Articles from AP, Politico, and other sites were included as well if
+            they were the first to release an exclusive investigation. While
+            capturing investigative reports was highly subjective and there are
+            thousands of impactful pieces available, key topics that were
+            searched for included supply chain shortages, healthcare system
+            preparedness, health disparities and disproportionate impacts on
+            vulnerable groups, masking and testing guidance, and intelligence
+            failures. The pieces selected may critique government figures, but
+            on the basis of their response to the pandemic or actions that
+            impacted its trajectory, rather than partisan objections.
+          </li>
         </ol>
         <div id="datacoding" style={{ position: 'relative', top: -100 }} />
         <h2>Data coding</h2>
