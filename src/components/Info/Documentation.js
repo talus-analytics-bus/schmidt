@@ -1040,7 +1040,7 @@ const Documentation = ({}) => {
               <li>
                 Initial state and federal declarations were identified via
                 COVID-AMP, using the policy category filter with "Emergency
-                delarations" selected. Extensions of the original policies,
+                declarations" selected. Extensions of the original policies,
                 amendments, and termination documents were also collected where
                 applicable.
               </li>
@@ -1086,7 +1086,7 @@ const Documentation = ({}) => {
           </li>
           <li>
             <strong>Investigative journalism on COVID-19</strong>. High-impact
-            investigativejournalism on key topics throughout the pandemic were
+            investigative journalism on key topics throughout the pandemic were
             captured to fill gaps in how the outbreak unfolded. Investigative
             journalism was defined by the research team as pieces that primarily
             reported on information that was not easily accessible or publicly
