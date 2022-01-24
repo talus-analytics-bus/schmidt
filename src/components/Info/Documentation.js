@@ -293,37 +293,17 @@ const Documentation = ({}) => {
               instead used the &ldquo;MeSH&rdquo; subject categories that IRIS
               uses to organize its topics. In the IRIS database, we manually
               searched the &ldquo;MeSH subjects&rdquo; category and chose
-              relevant subjects (number of records in parentheses): Coronavirus
-              Infections (133); Ebola Vaccines (24); Ebolavirus (430); Epidemics
-              (138); Epidemiological Monitoring (1284)&mdash;in English, 519;
-              Infectious Disease; Medicine (2); Infectious Disease Transmission,
-              Patient-to-Professional (16); Infectious Disease Transmission,
-              Professional-to-Patient (6); Infectious Disease Transmission,
-              Vertical (280); Infectious hazards (1); infectious hazards (1);
-              Influenza (3); Influenza A virus (60); Influenza A Virus, H1N1
-              Subtype (183); Influenza A Virus, H1N2 Subtype (6); Influenza A
-              Virus, H3N2 Subtype (4); Influenza A Virus, H5N1 Subtype (5);
-              Influenza A Virus, H5N2 Subtype (3); Influenza A Virus, H7N9
-              Subtype (5); Influenza B virus (36); Influenza Vaccines (455);
-              Influenza, Human (971); Influenza, Human A virus (1); Influenza,
-              Human vaccine (1); Influenza Humanvirus B (1); Influenzavirus A
-              (12); Influenzavirus B (10); Medical Waste (31); Medical Waste
-              Disposal (43); Middle East Respiratory Syndrome Coronavirus (41);
-              Public Health Surveillance (488); and SARS Virus (35).
+              relevant subjects to review.
             </p>
             <p>
-              The following terms from the team&rsquo;s broad list of terms (see
-              United States section) appeared as MeSH terms (number of records
-              in parentheses): biosurveillance&nbsp;(1); coronavirus&nbsp;(10);
-              influenza&nbsp;(1); pandemics&nbsp;(760); Severe Acute Respiratory
-              Syndrome&nbsp;(103). In addition to these MeSH search terms, we
-              also searched for these specific situation reports: 2001 anthrax
-              attacks (Amerithrax); 2003 SARS; 2005 H5N1; 2009 H1N1; 2013 MERS;
-              2014-2016 Ebola (i.e., West Africa); 2016 Zika; 2018-2020 Ebola
-              (i.e., Democratic Republic of the Congo).&nbsp;We entered these
-              terms into the IRIS search bar within quotations. &ldquo;All of
-              IRIS&rdquo; was selected in the search bar. The following filters
-              were added: Subject MeSH&mdash;Contains&mdash;&ldquo;term&rdquo;;
+              In addition to MeSH search terms, we also searched for these
+              specific situation reports: 2001 anthrax attacks (Amerithrax);
+              2003 SARS; 2005 H5N1; 2009 H1N1; 2013 MERS; 2014-2016 Ebola (i.e.,
+              West Africa); 2016 Zika; 2018-2020 Ebola (i.e., Democratic
+              Republic of the Congo).&nbsp;We entered these terms into the IRIS
+              search bar within quotations. &ldquo;All of IRIS&rdquo; was
+              selected in the search bar. The following filters were added:
+              Subject MeSH&mdash;Contains&mdash;&ldquo;term&rdquo;;
               Language&mdash;Equals English; Date issued&mdash;Not
               equals&mdash;2020. We repeated these steps for each MeSH term.
             </p>
@@ -335,8 +315,7 @@ const Documentation = ({}) => {
               irrelevant to health security were also excluded. During our data
               collection starting February 2021, we gathered WHO regional
               organization documents using the same methodology. We used all of
-              the same MeSH terms and filters, with the addition of one filter:
-              Author—contains—Regional Office.
+              the same MeSH terms and filters.
             </p>
           </li>
         </ol>
