@@ -30,7 +30,6 @@ const Checkbox = ({
    * @return {[type]}   [description]
    */
   const onChange = e => {
-    console.log('click')
     const input = e.target.closest('label').querySelector('input')
     callback(input.value)
   }
