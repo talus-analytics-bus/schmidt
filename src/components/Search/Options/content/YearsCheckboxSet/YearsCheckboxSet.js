@@ -1,5 +1,6 @@
 import React from 'react'
 import { CheckboxSet, Selectpicker } from '../../../../common'
+import { Settings } from '../../../../Settings/Settings'
 import { getIntArray } from '../../../../misc/Util'
 
 const YearsCheckboxSet = ({
@@ -25,7 +26,14 @@ const YearsCheckboxSet = ({
             }),
       choices: curFilterSectionData.choices
         .filter(({ value }) => {
-          return ['2020', '2019', '2018'].includes(value)
+          const shownYearCheckboxes = getIntArray(
+            Settings.YEAR_MAX - 2,
+            Settings.YEAR_MAX
+          )
+          return shownYearCheckboxes
+            .reverse()
+            .map(v => v.toString())
+            .includes(value)
         })
         .sort(function (a, b) {
           if (a.value > b.value) return -1
@@ -55,7 +63,9 @@ const YearsCheckboxSet = ({
                       const newFilters = {
                         ...filters,
                         [field]: [
-                          `range_${v}_${toYear === 'null' ? 2020 : toYear}`,
+                          `range_${v}_${
+                            toYear === 'null' ? Settings.YEAR_MAX : toYear
+                          }`,
                         ],
                       }
                       setFilters(newFilters)
@@ -63,7 +73,10 @@ const YearsCheckboxSet = ({
                     curSelection: fromYear,
                     allOption: null,
                     label: null,
-                    optionList: getIntArray(1980, 2020)
+                    optionList: getIntArray(
+                      Settings.YEAR_MIN,
+                      Settings.YEAR_MAX
+                    )
                       .reverse()
                       .map(year => {
                         return {
@@ -85,7 +98,7 @@ const YearsCheckboxSet = ({
                         ...filters,
                         [field]: [
                           `range_${
-                            fromYear === 'null' ? '1980' : fromYear
+                            fromYear === 'null' ? 'Settings.YEAR_MIN' : fromYear
                           }_${v}`,
                         ],
                       }
@@ -95,7 +108,10 @@ const YearsCheckboxSet = ({
                     curSelection: toYear,
                     allOption: null,
                     label: null,
-                    optionList: getIntArray(1980, 2020)
+                    optionList: getIntArray(
+                      Settings.YEAR_MIN,
+                      Settings.YEAR_MAX
+                    )
                       .reverse()
                       .map(year => {
                         return {
@@ -131,14 +147,14 @@ const YearsCheckboxSet = ({
             const newFilters = {
               ...filters,
               [field]: [
-                `range_${fromYear === 'null' ? 1980 : fromYear}_${
-                  toYear === 'null' ? 2020 : toYear
+                `range_${fromYear === 'null' ? Settings.YEAR_MIN : fromYear}_${
+                  toYear === 'null' ? Settings.YEAR_MAX : toYear
                 }`,
               ],
             }
             setFilters(newFilters)
-            if (toYear === 'null') setToYear(2020)
-            if (fromYear === 'null') setFromYear(1980)
+            if (toYear === 'null') setToYear(Settings.YEAR_MAX)
+            if (fromYear === 'null') setFromYear(Settings.YEAR_MIN)
           } else if (specificYearReplacingRange) {
             setFilters({ ...filters, [field]: [v[0]] })
           } else {
