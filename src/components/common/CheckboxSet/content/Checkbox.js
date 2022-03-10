@@ -14,6 +14,7 @@ import { comma } from '../../../misc/Util'
  */
 const Checkbox = ({
   label,
+  hideLabel = false,
   value,
   curChecked,
   callback,
@@ -29,6 +30,7 @@ const Checkbox = ({
    * @return {[type]}   [description]
    */
   const onChange = e => {
+    console.log('click')
     const input = e.target.closest('label').querySelector('input')
     callback(input.value)
   }
@@ -56,17 +58,17 @@ const Checkbox = ({
               [styles.visible]: curChecked,
             })}
           >
-            <i class="material-icons">done</i>
+            <i className="material-icons">done</i>
           </span>
           <input
             type="checkbox"
             name={label}
             value={value}
-            checked={curChecked === true}
+            defaultChecked={curChecked === true}
             disabled={props.disabled ? 'disabled' : ''}
           />
           <div className={styles.label}>
-            {label}
+            {!hideLabel && <>{label}</>}
             {count !== null && <> ({comma(count)})</>}
             {
               // count !== null && count > 0 && <> ({comma(count)})</>

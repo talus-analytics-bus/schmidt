@@ -1,6 +1,7 @@
 import React from 'react'
 import { CheckboxSet, Selectpicker } from '../../../../common'
 import { getIntArray } from '../../../../misc/Util'
+
 const YearsCheckboxSet = ({
   styles,
   filters,
@@ -16,10 +17,15 @@ const YearsCheckboxSet = ({
     {...{
       name: null,
       sorted: false,
-      curVal: filters[field],
+      curVal:
+        filters[field] === undefined
+          ? undefined
+          : filters[field].map(v => {
+              return v.startsWith('range') ? 'custom' : v
+            }),
       choices: curFilterSectionData.choices
         .filter(({ value }) => {
-          return [2020, 2019, 2018].includes(value)
+          return ['2020', '2019', '2018'].includes(value)
         })
         .sort(function (a, b) {
           if (a.value > b.value) return -1
@@ -43,19 +49,14 @@ const YearsCheckboxSet = ({
                       setFromYear(v)
 
                       // set "to" year if irrational
-                      if (toYear < v) {
+                      if (toYear < parseInt(v)) {
                         setToYear(v)
                       }
-                      // if custom year not enabled, enable it and
-                      // disable other years
-                      //   const customYearDisabled =
-                      //     filters[field] === undefined ||
-                      //     (filters[field] !== undefined &&
-                      //       filters[field].length > 0 &&
-                      //       filters[field][0] !== 'custom')
                       const newFilters = {
                         ...filters,
-                        [field]: ['custom'],
+                        [field]: [
+                          `range_${v}_${toYear === 'null' ? 2020 : toYear}`,
+                        ],
                       }
                       setFilters(newFilters)
                     },
@@ -65,7 +66,10 @@ const YearsCheckboxSet = ({
                     optionList: getIntArray(1980, 2020)
                       .reverse()
                       .map(year => {
-                        return { label: year, value: year }
+                        return {
+                          label: year.toString(),
+                          value: year.toString(),
+                        }
                       }),
                   }}
                 />
@@ -77,16 +81,13 @@ const YearsCheckboxSet = ({
                       // set new to year
                       setToYear(v)
 
-                      // if custom year not enabled, enable it and
-                      // disable other years
-                      const customYearDisabled =
-                        filters[field] === undefined ||
-                        (filters[field] !== undefined &&
-                          filters[field].length > 0 &&
-                          filters[field][0] !== 'custom')
                       const newFilters = {
                         ...filters,
-                        [field]: ['custom'],
+                        [field]: [
+                          `range_${
+                            fromYear === 'null' ? '1980' : fromYear
+                          }_${v}`,
+                        ],
                       }
 
                       setFilters(newFilters)
@@ -97,23 +98,28 @@ const YearsCheckboxSet = ({
                     optionList: getIntArray(1980, 2020)
                       .reverse()
                       .map(year => {
-                        return { label: year, value: year }
+                        return {
+                          label: year.toString(),
+                          value: year.toString(),
+                        }
                       })
-                      .filter(d => d.value >= fromYear),
+                      .filter(d => parseInt(d.value) >= fromYear),
                   }}
                 />
               </div>
             ),
             value: 'custom',
             count: null,
-            label: null,
+            label: 'custom',
+            hideLabel: true,
           },
         ]),
       callback: v => {
         if (v.length > 0) {
           const alreadyCustom =
             filters.years !== undefined &&
-            filters.years[0] === 'custom' &&
+            (filters.years[0] === 'custom' ||
+              filters.years[0].startsWith('range_')) &&
             filters.years.length === 1
 
           const specificYearReplacingRange = alreadyCustom && v.length > 1
@@ -124,9 +130,15 @@ const YearsCheckboxSet = ({
           if (isCustom) {
             const newFilters = {
               ...filters,
-              [field]: ['custom'],
+              [field]: [
+                `range_${fromYear === 'null' ? 1980 : fromYear}_${
+                  toYear === 'null' ? 2020 : toYear
+                }`,
+              ],
             }
             setFilters(newFilters)
+            if (toYear === 'null') setToYear(2020)
+            if (fromYear === 'null') setFromYear(1980)
           } else if (specificYearReplacingRange) {
             setFilters({ ...filters, [field]: [v[0]] })
           } else {

@@ -73,7 +73,7 @@ const CheckboxSet = ({
   })
 
   const allCheckboxes = choices.map(
-    ({ label, value, count = null, custom }) => (
+    ({ label, value, count = null, custom, hideLabel = false }) => (
       <Checkbox
         {...{
           label,
@@ -87,6 +87,7 @@ const CheckboxSet = ({
           count,
           custom,
           showZeros,
+          hideLabel,
         }}
       />
     )

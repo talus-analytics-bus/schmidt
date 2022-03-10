@@ -8,12 +8,7 @@ import YearsCheckboxSet from './content/YearsCheckboxSet/YearsCheckboxSet'
 import FilterSection from './content/FilterSection/FilterSection'
 
 // local utility functions
-import {
-  getIntArray,
-  iconNamesByField,
-  isEmpty,
-  sortByFilterOrder,
-} from '../../misc/Util'
+import { iconNamesByField, isEmpty, sortByFilterOrder } from '../../misc/Util'
 
 // local assets and styling
 import styles from './options.module.scss'
@@ -218,11 +213,21 @@ export const Options = ({
           if (field === 'years') {
             filterDefs[field].custom = (
               <YearsCheckboxSet
+                curFilterSectionData={{
+                  ...curFilterSectionData,
+                  choices: curFilterSectionData.choices.map(c => {
+                    return {
+                      ...c,
+                      value: c.value === null ? null : c.value.toString(),
+                    }
+                  }),
+                }}
                 {...{
                   styles,
                   filters,
                   field,
-                  curFilterSectionData,
+                  fromYear,
+                  toYear,
                   setFromYear,
                   setToYear,
                   setFilters,
@@ -272,6 +277,7 @@ export const Options = ({
   const getBadge = (field, value) => {
     let label
     let authorValue = null
+    let tempValue = value
     switch (field) {
       case 'event.name':
         label = 'Event'
@@ -311,11 +317,13 @@ export const Options = ({
         break
       case 'years':
         label = 'Year'
+        tempValue = !tempValue.startsWith('range_')
+          ? tempValue
+          : tempValue.split('_').slice(1).join('-')
         break
       default:
         label = 'Filter'
     }
-    let tempValue = value
     if (tempValue === '') tempValue = 'Unspecified'
     return (
       <div className={styles.badge}>
