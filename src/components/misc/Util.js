@@ -42,7 +42,7 @@ Util.getInitLower = str => {
 Util.range1 = j => {
   const x = []
   let i = 1
-  while (x.push(i++) < j) {}
+  while (x.push(i++) < j) { }
   return x
 }
 
