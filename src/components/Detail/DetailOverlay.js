@@ -750,8 +750,6 @@ const DetailOverlay = ({
  * display text `label`.
  */
 const TooltippedHeader = ({ tooltip, label }) => {
-  console.log('tooltip')
-  console.log(tooltip)
   return (
     <div
       data-for={'searchHighlightInfo'}
