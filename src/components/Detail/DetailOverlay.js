@@ -68,10 +68,16 @@ const DetailOverlay = ({
   const initItem =
     context?.data?.items !== undefined
       ? context?.data?.items[itemKey]
-      : undefined
+      : null
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
+
+
+
+
+
+
   const geo_specificity =
     itemData === null
       ? null
