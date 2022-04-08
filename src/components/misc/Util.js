@@ -1275,10 +1275,12 @@ export const getIconByName = ({
 // return JSX of text array as a bullet-delimited list
 export function asBulletDelimitedList(d, i, all) {
   return (
-    <>
+    <React.Fragment
+      key={d}
+    >
       {d}
       {i !== all.length - 1 ? <span>&nbsp;•&nbsp;</span> : ''}
-    </>
+    </React.Fragment>
   )
 }
 
@@ -1397,6 +1399,7 @@ export const getHighlightSegments = ({
       if (highlightSegment) {
         newText.push(
           <span
+            key={d}
             data-for={'searchHighlightInfo'}
             data-tip={key !== 'title' ? getTooltipText('remove') : null}
             className={classNames(styles.highlighted, styles[type])}
@@ -1408,6 +1411,7 @@ export const getHighlightSegments = ({
         // push normal text if not a highlight snippet
         newText.push(
           <span
+            key={d}
             data-for={'searchHighlightInfo'}
             data-tip={key !== 'title' ? getTooltipText('add') : null}
           >
