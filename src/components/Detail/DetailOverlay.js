@@ -76,8 +76,8 @@ const DetailOverlay = ({
     itemData === null
       ? null
       : (itemData.geo_specificity === 'US'
-          ? 'United States of America'
-          : itemData.geo_specificity) || null
+        ? 'United States of America'
+        : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -557,9 +557,8 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: `Publishing org${
-                        itemData.authors.length > 1 ? 's' : ''
-                      }.`,
+                      title: `Publishing org${itemData.authors.length > 1 ? 's' : ''
+                        }.`,
                       iconName: iconNamesByField.authors,
                       expandable: true,
                     }}
@@ -706,11 +705,11 @@ const DetailOverlay = ({
                       setNextPage:
                         relatedItemsData.page !== relatedItemsData.num_pages
                           ? () => {
-                              setCurPage(curPage + 1)
-                              if (typeof window !== 'undefined') {
-                                window.scrollTo(0, 0)
-                              }
+                            setCurPage(curPage + 1)
+                            if (typeof window !== 'undefined') {
+                              window.scrollTo(0, 0)
                             }
+                          }
                           : false,
                       browse,
                     }}
@@ -746,8 +745,6 @@ const DetailOverlay = ({
  * display text `label`.
  */
 const TooltippedHeader = ({ tooltip, label }) => {
-  console.log('tooltip')
-  console.log(tooltip)
   return (
     <div
       data-for={'searchHighlightInfo'}
