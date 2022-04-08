@@ -82,8 +82,8 @@ const DetailOverlay = ({
     itemData === null
       ? null
       : (itemData.geo_specificity === 'US'
-          ? 'United States of America'
-          : itemData.geo_specificity) || null
+        ? 'United States of America'
+        : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -202,7 +202,9 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
+
         const item = results.itemData.data
+
         setItemData(item.data)
         setRelatedItemsData(results.itemData.data)
         newContextData = {
@@ -570,7 +572,7 @@ const DetailOverlay = ({
                   >
                     <div className={styles.authors}>
                       {itemData.authors.map(d => (
-                        <div className={styles.author}>
+                        <div key={d.id.toString()} className={styles.author}>
                           <div className={styles.authorName}>
                             {highlightTag({
                               displayName: d.authoring_organization,
@@ -586,7 +588,9 @@ const DetailOverlay = ({
                                 formatter = v => v[field],
                                 link = false,
                               }) => (
-                                <div className={styles.infoItem}>
+                                <div
+                                  key={field}
+                                  className={styles.infoItem}>
                                   <TooltippedHeader
                                     label={name}
                                     tooltip={
