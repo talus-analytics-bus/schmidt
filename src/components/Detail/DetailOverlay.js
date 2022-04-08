@@ -562,9 +562,8 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: `Publishing org${
-                        itemData.authors.length > 1 ? 's' : ''
-                      }.`,
+                      title: `Publishing org${itemData.authors.length > 1 ? 's' : ''
+                        }.`,
                       iconName: iconNamesByField.authors,
                       expandable: true,
                     }}
@@ -711,11 +710,11 @@ const DetailOverlay = ({
                       setNextPage:
                         relatedItemsData.page !== relatedItemsData.num_pages
                           ? () => {
-                              setCurPage(curPage + 1)
-                              if (typeof window !== 'undefined') {
-                                window.scrollTo(0, 0)
-                              }
+                            setCurPage(curPage + 1)
+                            if (typeof window !== 'undefined') {
+                              window.scrollTo(0, 0)
                             }
+                          }
                           : false,
                       browse,
                     }}
