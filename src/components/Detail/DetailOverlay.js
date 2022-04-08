@@ -464,34 +464,33 @@ const DetailOverlay = ({
                                 if (itemData.key_topics.includes(value))
                                   topicCount = topicCount + 1
                                 return itemData.key_topics.includes(value) ? (
-                                  <>
-                                    <div
-                                      onClick={e =>
-                                        toggleFilter({
-                                          openNewPage,
-                                          e,
-                                          getFilterVal: () => value,
-                                          filters,
-                                          filterKey: 'key_topics',
-                                          setFilters: v => {
-                                            dismissFloatingOverlay()
-                                            setFilters(v)
-                                          },
-                                          setSearchText,
-                                          alwaysStartNew: true,
-                                        })
-                                      }
-                                      className={classNames(styles.keyTopic)}
-                                    >
-                                      <span>
-                                        {highlightTag({
-                                          displayName: value,
-                                          filterValue: value,
-                                          filterKey: 'key_topics',
-                                        })}
-                                      </span>
-                                    </div>
-                                  </>
+                                  <div
+                                    key={value}
+                                    onClick={e =>
+                                      toggleFilter({
+                                        openNewPage,
+                                        e,
+                                        getFilterVal: () => value,
+                                        filters,
+                                        filterKey: 'key_topics',
+                                        setFilters: v => {
+                                          dismissFloatingOverlay()
+                                          setFilters(v)
+                                        },
+                                        setSearchText,
+                                        alwaysStartNew: true,
+                                      })
+                                    }
+                                    className={classNames(styles.keyTopic)}
+                                  >
+                                    <span>
+                                      {highlightTag({
+                                        displayName: value,
+                                        filterValue: value,
+                                        filterKey: 'key_topics',
+                                      })}
+                                    </span>
+                                  </div>
                                 ) : null
                               })}
                               {topicCount === 0 && (
