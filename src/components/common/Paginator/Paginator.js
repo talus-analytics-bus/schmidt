@@ -54,7 +54,7 @@ export const Paginator = ({
 
     // return page button
     return (
-      <button
+      <button key={label}
         className={classNames(styles.pageButton, customClassNames)}
         {...{ onClick }}
       >
@@ -186,7 +186,7 @@ export const Paginator = ({
             }}
           >
             {pagesizeOptions.map(d => (
-              <option value={d.value}>{d.label}</option>
+              <option key={d.value} value={d.value}>{d.label}</option>
             ))}
           </select>
           <label>items per page</label>
