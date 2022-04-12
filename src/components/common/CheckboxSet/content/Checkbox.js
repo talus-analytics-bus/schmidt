@@ -50,7 +50,7 @@ const Checkbox = ({
           className={custom !== undefined ? styles.noMargin : null}
           style={{ color: curChecked === true ? darkModerateBlue : '' }}
           onClick={callback ? onChange : undefined}
-          for={label}
+          htmlFor={label}
         >
           <span
             className={classNames(styles.check, {

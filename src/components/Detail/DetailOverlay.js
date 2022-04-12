@@ -68,10 +68,16 @@ const DetailOverlay = ({
   const initItem =
     context?.data?.items !== undefined
       ? context?.data?.items[itemKey]
-      : undefined
+      : null
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
+
+
+
+
+
+
   const geo_specificity =
     itemData === null
       ? null
@@ -196,7 +202,9 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
+
         const item = results.itemData.data
+
         setItemData(item.data)
         setRelatedItemsData(results.itemData.data)
         newContextData = {
@@ -458,34 +466,33 @@ const DetailOverlay = ({
                                 if (itemData.key_topics.includes(value))
                                   topicCount = topicCount + 1
                                 return itemData.key_topics.includes(value) ? (
-                                  <>
-                                    <div
-                                      onClick={e =>
-                                        toggleFilter({
-                                          openNewPage,
-                                          e,
-                                          getFilterVal: () => value,
-                                          filters,
-                                          filterKey: 'key_topics',
-                                          setFilters: v => {
-                                            dismissFloatingOverlay()
-                                            setFilters(v)
-                                          },
-                                          setSearchText,
-                                          alwaysStartNew: true,
-                                        })
-                                      }
-                                      className={classNames(styles.keyTopic)}
-                                    >
-                                      <span>
-                                        {highlightTag({
-                                          displayName: value,
-                                          filterValue: value,
-                                          filterKey: 'key_topics',
-                                        })}
-                                      </span>
-                                    </div>
-                                  </>
+                                  <div
+                                    key={value}
+                                    onClick={e =>
+                                      toggleFilter({
+                                        openNewPage,
+                                        e,
+                                        getFilterVal: () => value,
+                                        filters,
+                                        filterKey: 'key_topics',
+                                        setFilters: v => {
+                                          dismissFloatingOverlay()
+                                          setFilters(v)
+                                        },
+                                        setSearchText,
+                                        alwaysStartNew: true,
+                                      })
+                                    }
+                                    className={classNames(styles.keyTopic)}
+                                  >
+                                    <span>
+                                      {highlightTag({
+                                        displayName: value,
+                                        filterValue: value,
+                                        filterKey: 'key_topics',
+                                      })}
+                                    </span>
+                                  </div>
                                 ) : null
                               })}
                               {topicCount === 0 && (
@@ -565,7 +572,7 @@ const DetailOverlay = ({
                   >
                     <div className={styles.authors}>
                       {itemData.authors.map(d => (
-                        <div className={styles.author}>
+                        <div key={d.id.toString()} className={styles.author}>
                           <div className={styles.authorName}>
                             {highlightTag({
                               displayName: d.authoring_organization,
@@ -581,7 +588,9 @@ const DetailOverlay = ({
                                 formatter = v => v[field],
                                 link = false,
                               }) => (
-                                <div className={styles.infoItem}>
+                                <div
+                                  key={field}
+                                  className={styles.infoItem}>
                                   <TooltippedHeader
                                     label={name}
                                     tooltip={

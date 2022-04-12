@@ -1,7 +1,7 @@
 import axios from 'axios'
 const API_URL = process.env.GATSBY_API_URL
 
-interface ItemQueryProps {
+export interface ItemQueryProps {
   page?: number
   pagesize?: number
   id?: number | null
