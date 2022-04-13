@@ -240,7 +240,7 @@ const Documentation = ({ }) => {
             of research, OIE published a dedicated website with resolutions and
             decisions from each conference, which the research team used to
             access these records. This site is no longer available, but the
-            documents can still be accessed at
+            documents can still be accessed at{" "}
             <ExtLink url="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
               https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/
             </ExtLink>
