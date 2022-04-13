@@ -227,8 +227,8 @@ const Documentation = ({}) => {
           <li>
             <strong>United Nations Security Council (UNSC)</strong>: Based on
             the experience and judgement of Center faculty, the following UNSC
-            resolutions were deemed relevant to global health security within
-            the years 1995&ndash;2019: 1308, 1983, 2177, and 2439. Each of these
+            resolutions were deemed relevant to global health security: 620,
+            1308, 1540, 1673, 1810, 1977, 2176, 2177, and 2439. Each of these
             was logged into the database. The text of each was also reviewed for
             mentions of other resolutions, exclusion criteria were applied, and
             any that remained were captured into the database. (All such entries
@@ -238,8 +238,11 @@ const Documentation = ({}) => {
           <li>
             <strong>World Organisation for Animal Health (OIE)</strong>: OIE
             holds annual conferences to discuss and review programs and provide
-            guidance for Member States on health-related activities. Resolutions
-            and decisions from each conference are published at{' '}
+            guidance for Member States on health-related activities. At the time
+            of research, OIE published a dedicated website with resolutions and
+            decisions from each conference, which the research team used to
+            access these records. This site is no longer available, but the
+            documents can still be accessed at
             <ExtLink url="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
               https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/
             </ExtLink>
@@ -294,18 +297,6 @@ const Documentation = ({}) => {
               uses to organize its topics. In the IRIS database, we manually
               searched the &ldquo;MeSH subjects&rdquo; category and chose
               relevant subjects to review.
-            </p>
-            <p>
-              In addition to MeSH search terms, we also searched for these
-              specific situation reports: 2001 anthrax attacks (Amerithrax);
-              2003 SARS; 2005 H5N1; 2009 H1N1; 2013 MERS; 2014-2016 Ebola (i.e.,
-              West Africa); 2016 Zika; 2018-2020 Ebola (i.e., Democratic
-              Republic of the Congo).&nbsp;We entered these terms into the IRIS
-              search bar within quotations. &ldquo;All of IRIS&rdquo; was
-              selected in the search bar. The following filters were added:
-              Subject MeSH&mdash;Contains&mdash;&ldquo;term&rdquo;;
-              Language&mdash;Equals English; Date issued&mdash;Not
-              equals&mdash;2020. We repeated these steps for each MeSH term.
             </p>
             <p>
               &ldquo;Weekly Update&rdquo; reports and country-specific items
@@ -368,7 +359,7 @@ const Documentation = ({}) => {
                 epidemic; influenza; MCM; medical countermeasure; medical
                 preparedness; medical readiness; medical supply chain security;
                 MERS; middle east respiratory syndrome; pandemic; public health
-                response; SARS; severe acute respiratory syndrome
+                response; SARS; severe acute respiratory syndrome; zika
               </em>
             </p>
             <p>
