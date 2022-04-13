@@ -11,7 +11,7 @@ import ToExcelQuery from '../misc/ToExcelQuery'
 
 import * as Endnotes from '../Endnotes/Endnotes'
 
-const Documentation = ({}) => {
+const Documentation = ({ }) => {
   // STATE  // --------------------------------------------------------------//
 
   // EFFECT HOOKS // -------—-------—-------—-------—-------—-------—-------—//
