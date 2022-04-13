@@ -1,6 +1,5 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 
 // local components
 import { PrimaryButton } from '../common'
@@ -11,7 +10,6 @@ import styles from './info.module.scss'
 import ToExcelQuery from '../misc/ToExcelQuery'
 
 import * as Endnotes from '../Endnotes/Endnotes'
-import { style } from 'd3'
 
 const Documentation = ({}) => {
   // STATE  // --------------------------------------------------------------//
