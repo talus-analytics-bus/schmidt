@@ -1,6 +1,5 @@
 // 3rd party components
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 
 // local components
 import { PrimaryButton } from '../common'
@@ -11,7 +10,6 @@ import styles from './info.module.scss'
 import ToExcelQuery from '../misc/ToExcelQuery'
 
 import * as Endnotes from '../Endnotes/Endnotes'
-import { style } from 'd3'
 
 const Documentation = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -242,9 +240,9 @@ const Documentation = ({}) => {
             of research, OIE published a dedicated website with resolutions and
             decisions from each conference, which the research team used to
             access these records. This site is no longer available, but the
-            documents can still be accessed at
-            <ExtLink url="https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/">
-              https://www.oie.int/about-us/key-texts/resolutions-and-recommendations/resolutions-adopted-by-the-world-assembly-of-delegates-of-the-oie/
+            documents can still be accessed at{' '}
+            <ExtLink url="https://www.oie.int/en/who-we-are/structure/framework/#ui-id-4">
+              https://www.oie.int/en/who-we-are/structure/framework/#ui-id-4
             </ExtLink>
             . Because resolutions and decisions are not published separately
             from the full conference report and the search function is not
