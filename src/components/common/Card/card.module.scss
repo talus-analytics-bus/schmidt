@@ -32,8 +32,8 @@
     $max-height-lg: 330px;
 
     // if detail page card, allow larger sizing
-    $letter-width: $max-height/1.29;
-    $letter-width-lg: $max-height-lg/1.29;
+    $letter-width: calc($max-height/1.29);
+    $letter-width-lg: calc($max-height-lg/1.29);
 
     display: grid;
     grid-template-columns: max-content $letter-width auto;

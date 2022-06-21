@@ -56,7 +56,9 @@
   .style {
     display: unset;
   }
-  &.mobile {
+  // what does the & do here?
+  // &.mobile {
+  .mobile {
     display: none;
   }
 }
