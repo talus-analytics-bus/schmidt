@@ -145,16 +145,14 @@ const IndexPage = () => {
                     url: '/browse',
                   }}
                 />
-                {
-                  <PrimaryButton
-                    {...{
-                      label: 'Go to User Guide',
-                      isSecondary: true,
-                      isSmall: true,
-                      url: '/info/user_guide/',
-                    }}
-                  />
-                }
+                <PrimaryButton
+                  {...{
+                    label: 'Go to User Guide',
+                    isSecondary: true,
+                    isSmall: true,
+                    url: '/info/user_guide/',
+                  }}
+                />
               </div>
               <div className={styles.searchBar}>
                 <SearchBar
