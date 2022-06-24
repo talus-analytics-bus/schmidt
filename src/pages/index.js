@@ -17,6 +17,7 @@ import SearchQuery from '../components/misc/SearchQuery'
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
 import flag from '../assets/images/landing-image.png'
+import SurgeBanner from '../components/Layout/SurgeBanner/SurgeBanner'
 
 // constants
 
@@ -104,6 +105,7 @@ const IndexPage = () => {
         }
       />
       <Nav bookmarkCount={loading ? 0 : bookmarkedIds.length} page="index" />
+      <SurgeBanner />
       <img
         className={styles.largeFlag}
         src={flag}
