@@ -148,6 +148,7 @@ const IndexPage = () => {
                 <PrimaryButton
                   isSmall
                   isSecondary
+                  redborder
                   label="Go to Surge Capacity page"
                   // link with surge filters pre-selected
                   url='/search/?filters=%7B"covid_tags"%3A%5B"Surge+resilience+and+recovery"%2C"Medical+surge+capacity"%2C"Surge+supply+management"%2C"Health+system+surge+capacity"%5D%7D&page=1&pagesize=10&search_text=&show_overlay=false&order_by=date&is_desc=true'
