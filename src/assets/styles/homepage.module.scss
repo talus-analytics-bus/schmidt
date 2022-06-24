@@ -19,6 +19,7 @@ $margin-left: 142px;
     padding: 0px 20px;
     .upper {
       padding: $vertical-spacing;
+      padding-top: 70px;
       padding-left: 20px;
       @media screen and (min-width: 1700px) {
         padding-left: 60px;
@@ -44,7 +45,7 @@ $margin-left: 142px;
       }
       .landingText {
         margin-left: $margin-left;
-        margin-top: 50px;
+        margin-top: 40px;
         max-width: 70%;
         font-size: 1.25rem;
         text-align: left;
