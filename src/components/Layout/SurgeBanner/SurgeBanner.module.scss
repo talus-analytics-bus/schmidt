@@ -29,5 +29,12 @@
       text-decoration: underline;
       color: $dark-blue;
     }
+
+    @media screen and (max-width: 1050px) {
+      padding-left: 115px;
+    }
+  }
+  @media screen and (max-width: 813px) {
+    display: none;
   }
 }
