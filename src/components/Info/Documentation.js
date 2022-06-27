@@ -1555,6 +1555,19 @@ const Documentation = ({}) => {
             </li>
             <li>
               <span className={styles.medBold}>
+                Health system surge capacity
+              </span>
+              :{' '}
+              <em>
+                Resources describing, including but not limited to, preparedness
+                and/or rapid-response surge planning; institutional roles and
+                responsibilities at various levels and in diverse sectors;
+                procurement and supply chain; diagnostics and surveillance;
+                community mobilization; and whole community surge approaches.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
                 Healthcare worker impacts and support
               </span>
               :{' '}
@@ -1669,6 +1682,16 @@ const Documentation = ({}) => {
                 event of a public health emergency. This may include research,
                 reports, or guidance about vaccines, antibodies, antibiotics,
                 therapeutics, or treatments.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Medical surge capacity</span>:{' '}
+              <em>
+                Resources describing, including but not limited to, rapid
+                training of new health personnel; emergency task-sharing;
+                standard operating procedures (SOPs) for identifying medical
+                needs and moving clinical resources appropriately; and ensuring
+                the continuity of service delivery during surge approaches.
               </em>
             </li>
             <li>
@@ -1796,6 +1819,27 @@ const Documentation = ({}) => {
                 evaluate alternative supply scenarios, quantify the impact on
                 emergency response, or assess risk on critical economic
                 functions.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
+                Surge resilience and recovery
+              </span>
+              :{' '}
+              <em>
+                Resources describing how to develop surge resiliency, recovery
+                strategies, and guidance for communities and systems to
+                transition back to normalcy following a surge.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>Surge supply management</span>:{' '}
+              <em>
+                Resources describing emergency response financing; health
+                financing and multi-sectoral approaches; resource sharing
+                strategies; and financing the continuity of services.
+                Additionally, resources describing procurement and management of
+                essential supplies and materials during a surge.
               </em>
             </li>
             <li>
