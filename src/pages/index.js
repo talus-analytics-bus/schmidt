@@ -17,6 +17,7 @@ import SearchQuery from '../components/misc/SearchQuery'
 import styles from '../assets/styles/homepage.module.scss'
 import logo from '../assets/images/logo.svg'
 import flag from '../assets/images/landing-image.png'
+import SurgeBanner from '../components/Layout/SurgeBanner/SurgeBanner'
 
 // constants
 
@@ -104,6 +105,7 @@ const IndexPage = () => {
         }
       />
       <Nav bookmarkCount={loading ? 0 : bookmarkedIds.length} page="index" />
+      <SurgeBanner />
       <img
         className={styles.largeFlag}
         src={flag}
@@ -145,16 +147,22 @@ const IndexPage = () => {
                     url: '/browse',
                   }}
                 />
-                {
-                  <PrimaryButton
-                    {...{
-                      label: 'Go to User Guide',
-                      isSecondary: true,
-                      isSmall: true,
-                      url: '/info/user_guide/',
-                    }}
-                  />
-                }
+                <PrimaryButton
+                  isSmall
+                  isSecondary
+                  redborder
+                  label="Go to Surge Capacity page"
+                  // link with surge filters pre-selected
+                  url='/search/?filters=%7B"covid_tags"%3A%5B"Surge+resilience+and+recovery"%2C"Medical+surge+capacity"%2C"Surge+supply+management"%2C"Health+system+surge+capacity"%5D%7D&page=1&pagesize=10&search_text=&show_overlay=false&order_by=date&is_desc=true'
+                />
+                <PrimaryButton
+                  {...{
+                    label: 'Go to User Guide',
+                    isSecondary: true,
+                    isSmall: true,
+                    url: '/info/user_guide/',
+                  }}
+                />
               </div>
               <div className={styles.searchBar}>
                 <SearchBar

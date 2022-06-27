@@ -10,6 +10,7 @@ import styles from './info.module.scss'
 import talus from '../../assets/images/talus.png'
 import georgetown from '../../assets/images/georgetown.png'
 import schmidt from '../../assets/images/schmidt.png'
+import usaidLogo from '../../assets/images/usaid.png'
 
 const Overview = ({}) => {
   // STATE  // --------------------------------------------------------------//
@@ -99,6 +100,25 @@ const Overview = ({}) => {
               alt="Schmidt Futures logo"
             ></img>
           </a>
+        </div>
+        <div className={styles.funder}>
+          <a
+            href={'https://schmidtfutures.com/'}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              className={styles.usaid}
+              src={usaidLogo}
+              alt="Schmidt Futures logo"
+            ></img>
+          </a>
+          <p>
+            Schmidt Futures funded the original research effort and the design
+            and build for this site. USAID funded the addition of documents
+            relating to surge capacity and partners at Abt Associates
+            contributed to that research effort.
+          </p>
         </div>
       </div>
     </div>

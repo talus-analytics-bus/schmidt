@@ -32,7 +32,10 @@
       }
     }
   }
-  &.active {
+
+  // &.active {
+  // what does the & do here??
+  .active {
     .stickyHeader {
       a {
         bottom: 75px;

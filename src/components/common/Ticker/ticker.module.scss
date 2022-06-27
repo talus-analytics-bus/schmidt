@@ -33,7 +33,7 @@
 
           &.placeholder {
             position: relative;
-            width: $max-height/1.29;
+            width: calc($max-height/1.29);
             border: solid 1px gray;
             @include boxShadowStrong();
             display: flex;
