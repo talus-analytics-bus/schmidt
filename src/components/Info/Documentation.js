@@ -54,7 +54,7 @@ const Documentation = ({}) => {
           </a>
         </p>
         <p>
-          As of its most recent update in November 2021, the library includes
+          As of its most recent update in July 2022, the library includes
           documents from global, regional, and national-level sources dated from
           1972-present. National sources are mostly drawn from the United
           States, with additional sources reflecting national pandemic influenza
