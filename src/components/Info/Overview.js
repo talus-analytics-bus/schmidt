@@ -87,7 +87,7 @@ const Overview = ({}) => {
         </p>
       </div>
       <div className={styles.contributors}>
-        <h3>Funder</h3>
+        <h3>Funders</h3>
         <div className={styles.funder}>
           <a
             href={'https://schmidtfutures.com/'}
