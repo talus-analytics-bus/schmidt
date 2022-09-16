@@ -616,7 +616,7 @@ const DetailOverlay = ({
                         <div className={styles.noData}>Data not available</div>
                       )}
                     </div>
-                    {govAuthIndicator}
+                    {/*{govAuthIndicator}*/}
                   </Panel>
                   {
                     // Event info
