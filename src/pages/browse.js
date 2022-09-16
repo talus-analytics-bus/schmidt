@@ -476,7 +476,6 @@ const Browse = () => {
   filterOptions.sort(sortByFilterOrder)
   // generate buttons to browse by topic, event, year, etc.
   const BrowseButton = ({ type }) => {
-    console.log('BrowseButton')
     let icon = iconNamesByField[type] || null
     if (['events', 'covid_tags'].includes(type)) icon += '_orange'
     if (type === 'types_of_record') {
