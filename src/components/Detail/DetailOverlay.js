@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import {
   Card,
   CardList,
-  InfoTooltip,
+  // InfoTooltip,
   Paginator,
   PrimaryButton,
 } from '../../components/common'
@@ -71,12 +71,13 @@ const DetailOverlay = ({
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
 
-  const geo_specificity =
-    itemData === null
-      ? null
-      : (itemData.geo_specificity === 'US'
-          ? 'United States of America'
-          : itemData.geo_specificity) || null
+  // const geo_specificity =
+  //   itemData === null
+  //     ? null
+  //     : (itemData.geo_specificity === 'US'
+  //         ? 'United States of America'
+  //         : itemData.geo_specificity) || null
+
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -533,11 +534,11 @@ const DetailOverlay = ({
                               )}
                             </div>
                           </div>
-                          <div className={styles.infoItem}>
-                            <TooltippedHeader
+                          {/* <div className={styles.infoItem}>
+                             <TooltippedHeader
                               label={'Applicability (US or global)'}
                               tooltip={tooltipDefs['Item.geo_specificity']}
-                            />
+                            /> 
                             <div className={styles.value}>
                               {geo_specificity !== null && (
                                 <span>{geo_specificity}</span>
@@ -546,7 +547,7 @@ const DetailOverlay = ({
                                 <i className={styles.noData}>Unspecified</i>
                               )}
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
