@@ -66,24 +66,17 @@ const DetailOverlay = ({
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
   const initItem =
-    context?.data?.items !== undefined
-      ? context?.data?.items[itemKey]
-      : null
+    context?.data?.items !== undefined ? context?.data?.items[itemKey] : null
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
-
-
-
-
-
 
   const geo_specificity =
     itemData === null
       ? null
       : (itemData.geo_specificity === 'US'
-        ? 'United States of America'
-        : itemData.geo_specificity) || null
+          ? 'United States of America'
+          : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -202,7 +195,6 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
-
         const item = results.itemData.data
 
         setItemData(item.data)
@@ -564,8 +556,9 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: `Publishing org${itemData.authors.length > 1 ? 's' : ''
-                        }.`,
+                      title: `Publishing org${
+                        itemData.authors.length > 1 ? 's' : ''
+                      }.`,
                       iconName: iconNamesByField.authors,
                       expandable: true,
                     }}
@@ -588,9 +581,7 @@ const DetailOverlay = ({
                                 formatter = v => v[field],
                                 link = false,
                               }) => (
-                                <div
-                                  key={field}
-                                  className={styles.infoItem}>
+                                <div key={field} className={styles.infoItem}>
                                   <TooltippedHeader
                                     label={name}
                                     tooltip={
@@ -714,11 +705,11 @@ const DetailOverlay = ({
                       setNextPage:
                         relatedItemsData.page !== relatedItemsData.num_pages
                           ? () => {
-                            setCurPage(curPage + 1)
-                            if (typeof window !== 'undefined') {
-                              window.scrollTo(0, 0)
+                              setCurPage(curPage + 1)
+                              if (typeof window !== 'undefined') {
+                                window.scrollTo(0, 0)
+                              }
                             }
-                          }
                           : false,
                       browse,
                     }}
