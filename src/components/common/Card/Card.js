@@ -78,6 +78,7 @@ export const Card = ({
   const openNewPage = bookmark || single || browse
   const showLinkButton =
     exclude_pdf_from_site === true && link !== null && link !== undefined
+
   const linkButtonProps = {
     label: 'Go to link',
     iconName: 'link',
@@ -173,8 +174,8 @@ export const Card = ({
       'key_topics',
       key_topics !== undefined
         ? key_topics.map(d => {
-          return { name: d, id: d }
-        })
+            return { name: d, id: d }
+          })
         : [],
       'name',
     ],
@@ -182,8 +183,8 @@ export const Card = ({
       'covid_tags',
       covid_tags !== undefined
         ? covid_tags.map(d => {
-          return { name: d, id: d }
-        })
+            return { name: d, id: d }
+          })
         : [],
       'name',
     ],
@@ -225,8 +226,8 @@ export const Card = ({
           const matchingTagExists =
             filterValues !== undefined
               ? filterValues.find(
-                fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
-              )
+                  fv => fv === getFilterVal(d) || +fv === getFilterVal(d)
+                )
               : undefined
 
           const matchingTag = matchingTagExists ? getVal(d) : undefined
@@ -234,9 +235,9 @@ export const Card = ({
           const matchingSearchSnippet =
             snippets[key] !== undefined
               ? snippets[key].find(
-                dd =>
-                  dd.id === d.id || dd.id === d || dd.id === d[linkTextField]
-              )
+                  dd =>
+                    dd.id === d.id || dd.id === d || dd.id === d[linkTextField]
+                )
               : undefined
 
           const matchingSnippet =
