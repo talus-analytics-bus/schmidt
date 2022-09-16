@@ -76,8 +76,12 @@ export const Card = ({
 }) => {
   // CONSTANTS
   const openNewPage = bookmark || single || browse
+
+  // show link button if PDF is flagged as excluded
+  // or if the tool type is 'Technical guidance / Tool'
   const showLinkButton =
-    exclude_pdf_from_site === true && link !== null && link !== undefined
+    (type_of_record === 'Technical guidance / Tool' && link) ||
+    (exclude_pdf_from_site === true && link)
 
   const linkButtonProps = {
     label: 'Go to link',
