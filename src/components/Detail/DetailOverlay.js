@@ -327,42 +327,42 @@ const DetailOverlay = ({
   // JSX
   if (!loaded) return null
   else {
-    const getGovAuthIndicator = () => {
-      let message = ''
-      const status = itemData.authoring_organization_has_governance_authority
-      const plural =
-        itemData.authors.length > 1
-          ? ['Organizations', 'have', 'do not have']
-          : ['Organization', 'has', 'does not have']
-      if (status === true) {
-        message = `${plural[0]} ${plural[1]} governance authority`
-      } else if (status === false) {
-        message = `${plural[0]} ${plural[2]} governance authority`
-      } else {
-        message = 'Governance authority information is not available'
-      }
-      return (
-        <div
-          className={classNames(styles.govAuth, {
-            [styles.yes]: status === true,
-            [styles.no]: status === false,
-            [styles.notAvail]: status === null,
-          })}
-        >
-          <span>{message}</span>
-          <InfoTooltip
-            text={
-              'Indication of whether the Publishing Organization has' +
-              ' governance authority in the sense of whether it can act on' +
-              ' the information contained in the record. Intergovernmental' +
-              ' organizations may have governance authority depending on' +
-              ' the context and topic of the product.'
-            }
-          />
-        </div>
-      )
-    }
-    const govAuthIndicator = getGovAuthIndicator()
+    // const getGovAuthIndicator = () => {
+    //   let message = ''
+    //   const status = itemData.authoring_organization_has_governance_authority
+    //   const plural =
+    //     itemData.authors.length > 1
+    //       ? ['Organizations', 'have', 'do not have']
+    //       : ['Organization', 'has', 'does not have']
+    //   if (status === true) {
+    //     message = `${plural[0]} ${plural[1]} governance authority`
+    //   } else if (status === false) {
+    //     message = `${plural[0]} ${plural[2]} governance authority`
+    //   } else {
+    //     message = 'Governance authority information is not available'
+    //   }
+    //   return (
+    //     <div
+    //       className={classNames(styles.govAuth, {
+    //         [styles.yes]: status === true,
+    //         [styles.no]: status === false,
+    //         [styles.notAvail]: status === null,
+    //       })}
+    //     >
+    //       <span>{message}</span>
+    //       <InfoTooltip
+    //         text={
+    //           'Indication of whether the Publishing Organization has' +
+    //           ' governance authority in the sense of whether it can act on' +
+    //           ' the information contained in the record. Intergovernmental' +
+    //           ' organizations may have governance authority depending on' +
+    //           ' the context and topic of the product.'
+    //         }
+    //       />
+    //     </div>
+    //   )
+    // }
+    // const govAuthIndicator = getGovAuthIndicator()
 
     // get record type for header
     let recordType = 'Document'
@@ -616,7 +616,7 @@ const DetailOverlay = ({
                         <div className={styles.noData}>Data not available</div>
                       )}
                     </div>
-                    {/*{govAuthIndicator}*/}
+                    {/*{godAuthIndicator}*/}
                   </Panel>
                   {
                     // Event info
