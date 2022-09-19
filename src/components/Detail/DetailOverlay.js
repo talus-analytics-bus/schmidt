@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import {
   Card,
   CardList,
-  InfoTooltip,
+  // InfoTooltip,
   Paginator,
   PrimaryButton,
 } from '../../components/common'
@@ -66,24 +66,18 @@ const DetailOverlay = ({
   // item and related items data
   const itemKey = `${id}-${pagesize}-${curPage}`
   const initItem =
-    context?.data?.items !== undefined
-      ? context?.data?.items[itemKey]
-      : null
+    context?.data?.items !== undefined ? context?.data?.items[itemKey] : null
   const initItemData = initItem ? initItem.data : null
   const initRelatedItemsData = initItem ? initItem : null
   const [itemData, setItemData] = useState(initItemData)
 
+  // const geo_specificity =
+  //   itemData === null
+  //     ? null
+  //     : (itemData.geo_specificity === 'US'
+  //         ? 'United States of America'
+  //         : itemData.geo_specificity) || null
 
-
-
-
-
-  const geo_specificity =
-    itemData === null
-      ? null
-      : (itemData.geo_specificity === 'US'
-        ? 'United States of America'
-        : itemData.geo_specificity) || null
   const [relatedItemsData, setRelatedItemsData] = useState(initRelatedItemsData)
 
   // CONSTANTS
@@ -202,7 +196,6 @@ const DetailOverlay = ({
       let newContextData = { ...context.data }
 
       if (getItem) {
-
         const item = results.itemData.data
 
         setItemData(item.data)
@@ -335,42 +328,42 @@ const DetailOverlay = ({
   // JSX
   if (!loaded) return null
   else {
-    const getGovAuthIndicator = () => {
-      let message = ''
-      const status = itemData.authoring_organization_has_governance_authority
-      const plural =
-        itemData.authors.length > 1
-          ? ['Organizations', 'have', 'do not have']
-          : ['Organization', 'has', 'does not have']
-      if (status === true) {
-        message = `${plural[0]} ${plural[1]} governance authority`
-      } else if (status === false) {
-        message = `${plural[0]} ${plural[2]} governance authority`
-      } else {
-        message = 'Governance authority information is not available'
-      }
-      return (
-        <div
-          className={classNames(styles.govAuth, {
-            [styles.yes]: status === true,
-            [styles.no]: status === false,
-            [styles.notAvail]: status === null,
-          })}
-        >
-          <span>{message}</span>
-          <InfoTooltip
-            text={
-              'Indication of whether the Publishing Organization has' +
-              ' governance authority in the sense of whether it can act on' +
-              ' the information contained in the record. Intergovernmental' +
-              ' organizations may have governance authority depending on' +
-              ' the context and topic of the product.'
-            }
-          />
-        </div>
-      )
-    }
-    const govAuthIndicator = getGovAuthIndicator()
+    // const getGovAuthIndicator = () => {
+    //   let message = ''
+    //   const status = itemData.authoring_organization_has_governance_authority
+    //   const plural =
+    //     itemData.authors.length > 1
+    //       ? ['Organizations', 'have', 'do not have']
+    //       : ['Organization', 'has', 'does not have']
+    //   if (status === true) {
+    //     message = `${plural[0]} ${plural[1]} governance authority`
+    //   } else if (status === false) {
+    //     message = `${plural[0]} ${plural[2]} governance authority`
+    //   } else {
+    //     message = 'Governance authority information is not available'
+    //   }
+    //   return (
+    //     <div
+    //       className={classNames(styles.govAuth, {
+    //         [styles.yes]: status === true,
+    //         [styles.no]: status === false,
+    //         [styles.notAvail]: status === null,
+    //       })}
+    //     >
+    //       <span>{message}</span>
+    //       <InfoTooltip
+    //         text={
+    //           'Indication of whether the Publishing Organization has' +
+    //           ' governance authority in the sense of whether it can act on' +
+    //           ' the information contained in the record. Intergovernmental' +
+    //           ' organizations may have governance authority depending on' +
+    //           ' the context and topic of the product.'
+    //         }
+    //       />
+    //     </div>
+    //   )
+    // }
+    // const govAuthIndicator = getGovAuthIndicator()
 
     // get record type for header
     let recordType = 'Document'
@@ -541,11 +534,11 @@ const DetailOverlay = ({
                               )}
                             </div>
                           </div>
-                          <div className={styles.infoItem}>
-                            <TooltippedHeader
+                          {/* <div className={styles.infoItem}>
+                             <TooltippedHeader
                               label={'Applicability (US or global)'}
                               tooltip={tooltipDefs['Item.geo_specificity']}
-                            />
+                            /> 
                             <div className={styles.value}>
                               {geo_specificity !== null && (
                                 <span>{geo_specificity}</span>
@@ -554,7 +547,7 @@ const DetailOverlay = ({
                                 <i className={styles.noData}>Unspecified</i>
                               )}
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -564,8 +557,9 @@ const DetailOverlay = ({
                   }
                   <Panel
                     {...{
-                      title: `Publishing org${itemData.authors.length > 1 ? 's' : ''
-                        }.`,
+                      title: `Publishing org${
+                        itemData.authors.length > 1 ? 's' : ''
+                      }.`,
                       iconName: iconNamesByField.authors,
                       expandable: true,
                     }}
@@ -588,9 +582,7 @@ const DetailOverlay = ({
                                 formatter = v => v[field],
                                 link = false,
                               }) => (
-                                <div
-                                  key={field}
-                                  className={styles.infoItem}>
+                                <div key={field} className={styles.infoItem}>
                                   <TooltippedHeader
                                     label={name}
                                     tooltip={
@@ -625,7 +617,7 @@ const DetailOverlay = ({
                         <div className={styles.noData}>Data not available</div>
                       )}
                     </div>
-                    {govAuthIndicator}
+                    {/*{godAuthIndicator}*/}
                   </Panel>
                   {
                     // Event info
@@ -714,11 +706,11 @@ const DetailOverlay = ({
                       setNextPage:
                         relatedItemsData.page !== relatedItemsData.num_pages
                           ? () => {
-                            setCurPage(curPage + 1)
-                            if (typeof window !== 'undefined') {
-                              window.scrollTo(0, 0)
+                              setCurPage(curPage + 1)
+                              if (typeof window !== 'undefined') {
+                                window.scrollTo(0, 0)
+                              }
                             }
-                          }
                           : false,
                       browse,
                     }}

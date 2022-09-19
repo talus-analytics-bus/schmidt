@@ -475,62 +475,59 @@ const Browse = () => {
 
   filterOptions.sort(sortByFilterOrder)
   // generate buttons to browse by topic, event, year, etc.
-  const BrowseButton = useCallback(
-    ({ type }) => {
-      let icon = iconNamesByField[type] || null
-      if (['events', 'covid_tags'].includes(type)) icon += '_orange'
-      if (type === 'types_of_record') {
-        return null
-      } else {
-        const dataTip = tooltipDefs[type]
-        return (
-          <>
+  const BrowseButton = ({ type }) => {
+    let icon = iconNamesByField[type] || null
+    if (['events', 'covid_tags'].includes(type)) icon += '_orange'
+    if (type === 'types_of_record') {
+      return null
+    } else {
+      const dataTip = tooltipDefs[type]
+      return (
+        <>
+          <div
+            className={classNames(styles.browseButton, {
+              [styles.selected]: browseSection == type,
+            })}
+            onClick={() => {
+              setBrowseSection(type)
+            }}
+          >
+            <div className={styles.buttonIcon}>
+              {getIconByName({
+                iconName: icon,
+              })}
+            </div>
+            <div className={styles.buttonLabel}>
+              <div>{filterDefs[type].label}</div>
+              {dataTip !== undefined && (
+                <img
+                  className={classNames(styles.tooltip, {
+                    [styles.left]: type === 'authors',
+                    [styles.manualFix]: type === 'key_topics',
+                  })}
+                  src={info}
+                  alt="info icon"
+                  data-for={type}
+                  data-tip={dataTip}
+                />
+              )}
+            </div>
             <div
-              className={classNames(styles.browseButton, {
+              className={classNames(styles.selectedRectangle, {
                 [styles.selected]: browseSection == type,
               })}
-              onClick={() => {
-                setBrowseSection(type)
-              }}
-            >
-              <div className={styles.buttonIcon}>
-                {getIconByName({
-                  iconName: icon,
-                })}
-              </div>
-              <div className={styles.buttonLabel}>
-                <div>{filterDefs[type].label}</div>
-                {dataTip !== undefined && (
-                  <img
-                    className={classNames(styles.tooltip, {
-                      [styles.left]: type === 'authors',
-                      [styles.manualFix]: type === 'key_topics',
-                    })}
-                    src={info}
-                    alt="info icon"
-                    data-for={type}
-                    data-tip={dataTip}
-                  />
-                )}
-              </div>
-              <div
-                className={classNames(styles.selectedRectangle, {
-                  [styles.selected]: browseSection == type,
-                })}
-              ></div>
-            </div>
-            <ReactTooltip
-              id={type}
-              type="light"
-              effect="float"
-              scrollHide={true}
-            />
-          </>
-        )
-      }
-    },
-    [context?.data?.metadata, tooltipDefs]
-  )
+            ></div>
+          </div>
+          <ReactTooltip
+            id={type}
+            type="light"
+            effect="float"
+            scrollHide={true}
+          />
+        </>
+      )
+    }
+  }
 
   // generate items in list
   const Item = ({ content, children }) => {
