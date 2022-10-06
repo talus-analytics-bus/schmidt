@@ -52,15 +52,14 @@ const Documentation = ({}) => {
           </a>
         </p>
         <p>
-          As of its most recent update in July 2022, the library includes
-          documents from global, regional, and national-level sources dated from
-          1972-present. National sources are mostly drawn from the United
-          States, with additional sources reflecting national pandemic influenza
-          planning from other countries. Academic journal literature as it
-          relates to coronaviruses as a global infectious disease threat is also
-          represented. This is an ongoing research project and the library may
-          be updated to further reflect pre-1995 sources, additional countries,
-          and other elements.
+          The library includes documents from global, regional, and
+          national-level sources dated from 1972-present. National sources are
+          mostly drawn from the United States, with additional sources
+          reflecting national pandemic influenza planning from other countries.
+          Academic journal literature as it relates to coronaviruses as a global
+          infectious disease threat is also represented. This is an ongoing
+          research project and the library may be updated to further reflect
+          pre-1995 sources, additional countries, and other elements.
         </p>
         <p>The site includes:</p>
         <ol>
@@ -1344,6 +1343,14 @@ const Documentation = ({}) => {
               </em>
             </li>
             <li>
+              <span className={styles.medBold}>Technical guidance/Tool</span>:{' '}
+              <em>
+                An item published by an authoritative body that provides advice,
+                assistance, or training pertaining to initiation, operation, or
+                maintenance of specialized skills, equipment, or plans.
+              </em>
+            </li>
+            <li>
               <span className={styles.medBold}>UN process document</span>:{' '}
               <em>
                 A record in the database from an organ of the United Nations;
@@ -1448,6 +1455,18 @@ const Documentation = ({}) => {
           <ul>
             <li>
               <span className={styles.medBold}>
+                Antimicrobial resistance (AMR)
+              </span>
+              :{' '}
+              <em>
+                Resources about the emergence of pathogens that are resistant to
+                medication and treatment, or the impact of resistant organism
+                and genes on populations and health systems. Documents may also
+                address antibiotic resistance (ABR).
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>
                 Coverage of healthcare costs
               </span>
               :{' '}
@@ -1540,6 +1559,19 @@ const Documentation = ({}) => {
               </em>
             </li>
             <li>
+              <span className={styles.medBold}>
+                Health system surge capacity
+              </span>
+              :{' '}
+              <em>
+                Resources describing, including but not limited to, preparedness
+                and/or rapid-response surge planning; institutional roles and
+                responsibilities at various levels and in diverse sectors;
+                procurement and supply chain; diagnostics and surveillance;
+                community mobilization; and whole community surge approaches.
+              </em>
+            </li>
+            <li>
               <span className={styles.medBold}>Healthcare capacity</span>:{' '}
               <em>
                 Items describing the baseline status of health infrastructure,
@@ -1611,6 +1643,14 @@ const Documentation = ({}) => {
                 guidelines, or measures taken by an intergovernmental entity or
                 international non-governmental organization with a focus on
                 governance efforts.
+              </em>
+            </li>
+            <li>
+              <span className={styles.medBold}>International financing</span>:{' '}
+              <em>
+                Resources about bilateral or multilateral funding efforts for
+                sustained preparedness or emergency response, as related to
+                global health security.
               </em>
             </li>
             <li>

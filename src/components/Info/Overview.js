@@ -12,6 +12,14 @@ import georgetown from '../../assets/images/georgetown.png'
 import schmidt from '../../assets/images/schmidt.png'
 import usaidLogo from '../../assets/images/usaid.png'
 
+// JSX
+// external link convenience component
+const ExtLink = ({ url, children = url }) => (
+  <a href={url} rel="noreferrer" target="_blank">
+    {children}
+  </a>
+)
+
 const Overview = ({}) => {
   // STATE  // --------------------------------------------------------------//
 
@@ -49,7 +57,9 @@ const Overview = ({}) => {
         Health, and World Health Organization (including the World Health
         Assembly). National sources to date include the United States. The
         academic journal literature as it relates to the global risk of
-        coronaviruses is also represented.
+        coronaviruses is also represented. A paper describing this project is
+        available
+        <ExtLink url="https://doi.org/10.1089/hs.2021.0141"> here</ExtLink>.
       </p>
       <div className={styles.contributors}>
         <h3>Contributors</h3>
@@ -100,24 +110,29 @@ const Overview = ({}) => {
               alt="Schmidt Futures logo"
             ></img>
           </a>
+          <p>
+            {' '}
+            Schmidt Futures funded the original research effort and the design
+            and build for this site.{' '}
+          </p>
         </div>
         <div className={styles.funder}>
-          <a
-            href={'https://schmidtfutures.com/'}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={'https://usaid.gov/'} target="_blank" rel="noreferrer">
             <img
               className={styles.usaid}
               src={usaidLogo}
-              alt="Schmidt Futures logo"
+              alt="USAID logo"
             ></img>
           </a>
           <p>
-            Schmidt Futures funded the original research effort and the design
-            and build for this site. USAID funded the addition of documents
-            relating to surge capacity and partners at Abt Associates
-            contributed to that research effort.
+            The Local Health System Sustainability Project (LHSS) in partnership
+            with the Georgetown Center for Global Health Science & Security
+            collected and compiled surge capacity tools and actionable
+            frameworks. This work was made possible by the support of the
+            American people through the United States Agency for International
+            Development (USAID). The contents are the sole responsibility of the
+            authors and do not necessarily reflect the views of USAID or the
+            United States government.
           </p>
         </div>
       </div>
