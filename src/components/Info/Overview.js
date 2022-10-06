@@ -111,6 +111,7 @@ const Overview = ({}) => {
             ></img>
           </a>
           <p>
+            {' '}
             Schmidt Futures funded the original research effort and the design
             and build for this site.{' '}
           </p>
