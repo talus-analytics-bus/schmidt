@@ -111,6 +111,10 @@ const Overview = ({}) => {
             ></img>
           </a>
         </div>
+        <p>
+          Schmidt Futures funded the original research effort and the design and
+          build for this site.{' '}
+        </p>
         <div className={styles.funder}>
           <a
             href={'https://schmidtfutures.com/'}
@@ -120,13 +124,9 @@ const Overview = ({}) => {
             <img
               className={styles.usaid}
               src={usaidLogo}
-              alt="Schmidt Futures logo"
+              alt="USAID logo"
             ></img>
           </a>
-          <p>
-            Schmidt Futures funded the original research effort and the design
-            and build for this site.{' '}
-          </p>
           <p>
             The Local Health System Sustainability Project (LHSS) in partnership
             with the Georgetown Center for Global Health Science & Security
