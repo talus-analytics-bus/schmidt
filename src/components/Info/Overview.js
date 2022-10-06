@@ -49,7 +49,9 @@ const Overview = ({}) => {
         Health, and World Health Organization (including the World Health
         Assembly). National sources to date include the United States. The
         academic journal literature as it relates to the global risk of
-        coronaviruses is also represented.
+        coronaviruses is also represented. A paper describing this project is
+        available
+        <ExtLink url="https://doi.org/10.1089/hs.2021.0141"> here</ExtLink>.
       </p>
       <div className={styles.contributors}>
         <h3>Contributors</h3>
