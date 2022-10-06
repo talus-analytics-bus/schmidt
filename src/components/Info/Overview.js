@@ -12,6 +12,14 @@ import georgetown from '../../assets/images/georgetown.png'
 import schmidt from '../../assets/images/schmidt.png'
 import usaidLogo from '../../assets/images/usaid.png'
 
+// JSX
+// external link convenience component
+const ExtLink = ({ url, children = url }) => (
+  <a href={url} rel="noreferrer" target="_blank">
+    {children}
+  </a>
+)
+
 const Overview = ({}) => {
   // STATE  // --------------------------------------------------------------//
 
@@ -117,9 +125,17 @@ const Overview = ({}) => {
           </a>
           <p>
             Schmidt Futures funded the original research effort and the design
-            and build for this site. USAID funded the addition of documents
-            relating to surge capacity and partners at Abt Associates
-            contributed to that research effort.
+            and build for this site.{' '}
+          </p>
+          <p>
+            The Local Health System Sustainability Project (LHSS) in partnership
+            with the Georgetown Center for Global Health Science & Security
+            collected and compiled surge capacity tools and actionable
+            frameworks. This work was made possible by the support of the
+            American people through the United States Agency for International
+            Development (USAID). The contents are the sole responsibility of the
+            authors and do not necessarily reflect the views of USAID or the
+            United States government.
           </p>
         </div>
       </div>
