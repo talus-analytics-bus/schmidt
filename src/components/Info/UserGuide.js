@@ -28,6 +28,14 @@ import viewVid from '../../assets/images/view.mp4'
 import downloadVid from '../../assets/images/download.mp4'
 import browseVid from '../../assets/images/browse.mp4'
 
+// JSX
+// external link convenience component
+const ExtLink = ({ url, children = url }) => (
+  <a href={url} rel="noreferrer" target="_blank">
+    {children}
+  </a>
+)
+
 const UserGuide = ({}) => {
   // STATE  // --------------------------------------------------------------//
 
@@ -80,6 +88,17 @@ const UserGuide = ({}) => {
       <p>
         Documents can be bookmarked to view later or downloaded directly (where
         available).
+      </p>
+      <p>
+        A webinar highlighting the Health Security Net site, and particularly
+        the surge capacity research effort, is available{' '}
+        <ExtLink url="https://www.lhssproject.org/event/strengthening-health-system-resilience-and-security-curated-collection-surge-capacity-tools">
+          here
+        </ExtLink>
+        . The webinar features an overview to the project, methods for the
+        collection of surge capacity documents, and an introduction to how
+        country programs can benefit from the tool as evidenced by local leaders
+        in Tajikistan.
       </p>
       <h1 className={styles.marginHeader}>
         Learn to use the Global Health Security Library
