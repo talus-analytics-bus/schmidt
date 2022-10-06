@@ -1860,8 +1860,8 @@ const Documentation = ({}) => {
             <li>
               <span className={styles.medBold}>Surge supply management</span>:{' '}
               <em>
-                Resources describing particular emergency response financing;
-                health financing and multi-sectoral approaches; resource sharing
+                Resources describing emergency response financing; health
+                financing and multi-sectoral approaches; resource sharing
                 strategies; and financing the continuity of services.
                 Additionally, resources describing procurement and management of
                 surge essential supplies and materials.
