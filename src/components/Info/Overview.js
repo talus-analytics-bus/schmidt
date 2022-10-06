@@ -110,17 +110,13 @@ const Overview = ({}) => {
               alt="Schmidt Futures logo"
             ></img>
           </a>
+          <p>
+            Schmidt Futures funded the original research effort and the design
+            and build for this site.{' '}
+          </p>
         </div>
-        <p>
-          Schmidt Futures funded the original research effort and the design and
-          build for this site.{' '}
-        </p>
         <div className={styles.funder}>
-          <a
-            href={'https://schmidtfutures.com/'}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={'https://usaid.gov/'} target="_blank" rel="noreferrer">
             <img
               className={styles.usaid}
               src={usaidLogo}
