@@ -12,7 +12,6 @@ import styles from './footer.module.scss'
 import classNames from 'classnames'
 
 // assets
-import talus from '../../../assets/images/logo-talus.png'
 import georgetown from '../../../assets/images/logo-georgetown.png'
 import idea from '../../../assets/images/logo-title.png'
 
@@ -33,18 +32,6 @@ const Footer = () => {
               'Georgetown University Center for Global Health Science and Security'
             }
           ></img>
-        </a>
-        <a
-          href={'https://talusanalytics.com/'}
-          target="_blank"
-          className={styles.talusLogo}
-        >
-          <img
-            className={styles.talus}
-            src={talus}
-            alt={'Talus Analytics'}
-          ></img>
-          <div className={styles.builtBy}>Built by</div>
         </a>
       </div>
     </div>
